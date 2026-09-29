@@ -1,0 +1,1097 @@
+{
+  "meta": {
+    "version": 1,
+    "purpose": "Fake/dev seed data for GetFunnels SaaS. Every id is a fixed, stable UUID so tests and seeds are deterministic.",
+    "language": "fr",
+    "notes": [
+      "Load order matters: organizations → profiles → memberships → themes → templates → assets → decks → slides → sessions → session_events → ai_generations → usage_counters → subscriptions.",
+      "profiles.id must match an auth.users id. The seed script creates auth users via the Supabase admin API and inserts profiles with the same ids.",
+      "Demo passwords are NOT stored here. The seed script reads SEED_DEMO_PASSWORD from env (local dev only).",
+      "All slide content validates against docs/ai-generation.md (SlideSchema) and all theme tokens against ThemeTokensSchema."
+    ]
+  },
+
+  "organizations": [
+    {
+      "id": "50000000-0000-4000-8000-000000000001",
+      "name": "Digital Speak (démo)",
+      "slug": "digital-speak-demo",
+      "plan": "pro",
+      "stripe_customer_id": "cus_demo_0001",
+      "created_at": "2026-08-01T08:00:00Z",
+      "updated_at": "2026-09-18T09:00:00Z"
+    }
+  ],
+
+  "profiles": [
+    {
+      "id": "30000000-0000-4000-8000-000000000001",
+      "email": "marie.dupont@example.com",
+      "full_name": "Marie Dupont",
+      "avatar_url": null,
+      "locale": "fr",
+      "created_at": "2026-08-01T08:05:00Z"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000002",
+      "email": "yanis.benali@example.com",
+      "full_name": "Yanis Benali",
+      "avatar_url": null,
+      "locale": "fr",
+      "created_at": "2026-08-02T10:00:00Z"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000003",
+      "email": "claire.moreau@example.com",
+      "full_name": "Claire Moreau",
+      "avatar_url": null,
+      "locale": "fr",
+      "created_at": "2026-08-10T14:30:00Z"
+    }
+  ],
+
+  "memberships": [
+    {
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "user_id": "30000000-0000-4000-8000-000000000001",
+      "role": "owner",
+      "created_at": "2026-08-01T08:05:00Z"
+    },
+    {
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "user_id": "30000000-0000-4000-8000-000000000002",
+      "role": "editor",
+      "created_at": "2026-08-02T10:00:00Z"
+    },
+    {
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "user_id": "30000000-0000-4000-8000-000000000003",
+      "role": "viewer",
+      "created_at": "2026-08-10T14:30:00Z"
+    }
+  ],
+
+  "themes": [
+    {
+      "id": "40000000-0000-4000-8000-000000000001",
+      "org_id": null,
+      "name": "GetFunnels Dark",
+      "is_system": true,
+      "tokens": {
+        "id": "getfunnels-dark",
+        "name": "GetFunnels Dark",
+        "color": {
+          "bg": "#09090b",
+          "surface": "#111118",
+          "text": "#fafafa",
+          "muted": "#a1a1aa",
+          "primary": "#470c85",
+          "primaryFg": "#ffffff",
+          "accent": "#8b5cf6",
+          "success": "#34d399",
+          "danger": "#f87171"
+        },
+        "font": { "display": "Inter", "body": "Inter", "scale": "regular" },
+        "radius": "soft",
+        "motion": "subtle",
+        "background": "grid"
+      },
+      "created_at": "2026-08-01T08:00:00Z"
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000002",
+      "org_id": null,
+      "name": "GetFunnels Light",
+      "is_system": true,
+      "tokens": {
+        "id": "getfunnels-light",
+        "name": "GetFunnels Light",
+        "color": {
+          "bg": "#ffffff",
+          "surface": "#f4f4f5",
+          "text": "#18181b",
+          "muted": "#52525b",
+          "primary": "#470c85",
+          "primaryFg": "#ffffff",
+          "accent": "#6d28d9",
+          "success": "#059669",
+          "danger": "#dc2626"
+        },
+        "font": { "display": "Inter", "body": "Inter", "scale": "regular" },
+        "radius": "soft",
+        "motion": "subtle",
+        "background": "solid"
+      },
+      "created_at": "2026-08-01T08:00:00Z"
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000003",
+      "org_id": null,
+      "name": "Midnight Cyan",
+      "is_system": true,
+      "tokens": {
+        "id": "midnight-cyan",
+        "name": "Midnight Cyan",
+        "color": {
+          "bg": "#04121a",
+          "surface": "#0a1f2b",
+          "text": "#e6f7ff",
+          "muted": "#7ea8b8",
+          "primary": "#0e7490",
+          "primaryFg": "#ffffff",
+          "accent": "#22d3ee",
+          "success": "#2dd4bf",
+          "danger": "#fb7185"
+        },
+        "font": { "display": "Sora", "body": "Inter", "scale": "compact" },
+        "radius": "sharp",
+        "motion": "expressive",
+        "background": "gradient"
+      },
+      "created_at": "2026-08-01T08:00:00Z"
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000004",
+      "org_id": null,
+      "name": "Editorial Cream",
+      "is_system": true,
+      "tokens": {
+        "id": "editorial-cream",
+        "name": "Editorial Cream",
+        "color": {
+          "bg": "#faf7f2",
+          "surface": "#ffffff",
+          "text": "#1c1917",
+          "muted": "#57534e",
+          "primary": "#7c2d12",
+          "primaryFg": "#ffffff",
+          "accent": "#b45309",
+          "success": "#15803d",
+          "danger": "#b91c1c"
+        },
+        "font": { "display": "Playfair Display", "body": "Source Serif 4", "scale": "editorial" },
+        "radius": "round",
+        "motion": "subtle",
+        "background": "noise"
+      },
+      "created_at": "2026-08-01T08:00:00Z"
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000005",
+      "org_id": null,
+      "name": "Minimal Mono",
+      "is_system": true,
+      "tokens": {
+        "id": "minimal-mono",
+        "name": "Minimal Mono",
+        "color": {
+          "bg": "#0a0a0a",
+          "surface": "#141414",
+          "text": "#f5f5f5",
+          "muted": "#a3a3a3",
+          "primary": "#e5e5e5",
+          "primaryFg": "#0a0a0a",
+          "accent": "#737373",
+          "success": "#4ade80",
+          "danger": "#f87171"
+        },
+        "font": { "display": "IBM Plex Sans", "body": "IBM Plex Sans", "scale": "compact" },
+        "radius": "sharp",
+        "motion": "none",
+        "background": "solid"
+      },
+      "created_at": "2026-08-01T08:00:00Z"
+    }
+  ],
+
+  "templates": [
+    {
+      "id": "60000000-0000-4000-8000-000000000001",
+      "org_id": null,
+      "slug": "rdv-classique",
+      "name": "RDV Classique",
+      "category": "Diagnostic",
+      "description": "Funnel de prise de rendez-vous : opt-in, qualification, réservation, rappels, CRM.",
+      "theme_id": "40000000-0000-4000-8000-000000000001",
+      "slide_count": 22,
+      "is_system": true,
+      "config": {
+        "stages": [
+          "cover", "statement", "authority", "problem", "definition", "why", "objectives",
+          "flow", "architecture", "capture", "qualification", "automation", "channel",
+          "crm", "analytics", "gallery", "proof", "benefits", "kpi", "mistakes", "plan", "cta"
+        ],
+        "defaultSlideCount": 22
+      },
+      "created_at": "2026-08-01T08:00:00Z",
+      "updated_at": "2026-08-01T08:00:00Z"
+    },
+    {
+      "id": "60000000-0000-4000-8000-000000000002",
+      "org_id": null,
+      "slug": "vsl-funnel",
+      "name": "VSL Funnel",
+      "category": "Conversion",
+      "description": "Tunnel VSL : page d'inscription, vidéo de conviction, candidature qualifiée.",
+      "theme_id": "40000000-0000-4000-8000-000000000003",
+      "slide_count": 25,
+      "is_system": true,
+      "config": {
+        "stages": [
+          "cover", "statement", "authority", "problem", "definition", "why", "objectives",
+          "flow", "architecture", "capture", "qualification", "automation", "channel",
+          "crm", "analytics", "gallery", "proof", "benefits", "kpi", "mistakes", "plan", "cta"
+        ],
+        "defaultSlideCount": 25
+      },
+      "created_at": "2026-08-01T08:00:00Z",
+      "updated_at": "2026-08-01T08:00:00Z"
+    },
+    {
+      "id": "60000000-0000-4000-8000-000000000003",
+      "org_id": null,
+      "slug": "webinaire",
+      "name": "Webinaire",
+      "category": "Diagnostic",
+      "description": "Lancement par webinaire : inscription, rappels, sortie de session, closing.",
+      "theme_id": "40000000-0000-4000-8000-000000000002",
+      "slide_count": 24,
+      "is_system": true,
+      "config": {
+        "stages": [
+          "cover", "statement", "authority", "problem", "definition", "why", "objectives",
+          "flow", "architecture", "capture", "automation", "channel", "crm", "analytics",
+          "gallery", "proof", "benefits", "kpi", "mistakes", "plan", "cta"
+        ],
+        "defaultSlideCount": 24
+      },
+      "created_at": "2026-08-01T08:00:00Z",
+      "updated_at": "2026-08-01T08:00:00Z"
+    },
+    {
+      "id": "60000000-0000-4000-8000-000000000004",
+      "org_id": null,
+      "slug": "commercial",
+      "name": "Commercial",
+      "category": "Vente",
+      "description": "Deck de vente complet : fuites, preuves, méthode, offres, closing (44 slides).",
+      "theme_id": "40000000-0000-4000-8000-000000000001",
+      "slide_count": 44,
+      "is_system": true,
+      "config": {
+        "stages": [
+          "cover", "statement", "problem", "definition", "why", "proof", "comparison",
+          "benefits", "kpi", "plan", "pricing", "faq", "mistakes", "timeline", "team", "cta"
+        ],
+        "defaultSlideCount": 44
+      },
+      "created_at": "2026-08-01T08:00:00Z",
+      "updated_at": "2026-08-01T08:00:00Z"
+    }
+  ],
+
+  "assets": [
+    {
+      "id": "c0000000-0000-4000-8000-000000000001",
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "deck_id": null,
+      "kind": "logo",
+      "storage_path": "orgs/50000000-0000-4000-8000-000000000001/brand/logo-getfunnels.png",
+      "mime_type": "image/png",
+      "width": 512,
+      "height": 512,
+      "size_bytes": 48213,
+      "created_at": "2026-08-01T08:10:00Z"
+    }
+  ],
+
+  "decks": [
+    {
+      "id": "20000000-0000-4000-8000-000000000001",
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "owner_id": "30000000-0000-4000-8000-000000000001",
+      "title": "Diagnostic RDV — Acme Formation",
+      "description": "Diagnostic acquisition présenté à Acme Formation. Modèle RDV Classique.",
+      "theme_id": "40000000-0000-4000-8000-000000000001",
+      "template_id": "60000000-0000-4000-8000-000000000001",
+      "status": "ready",
+      "present_token": "K7fQ2mXp9Rt4Vb1Ns6Yc3Ld8Wz5Hj0",
+      "language": "fr",
+      "created_at": "2026-09-14T09:00:00Z",
+      "updated_at": "2026-09-18T08:55:00Z"
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000002",
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "owner_id": "30000000-0000-4000-8000-000000000002",
+      "title": "VSL — Coach Immobilier",
+      "description": "Proposition tunnel VSL pour un coach immobilier.",
+      "theme_id": "40000000-0000-4000-8000-000000000003",
+      "template_id": "60000000-0000-4000-8000-000000000002",
+      "status": "draft",
+      "present_token": "VslCoachImmo2026Xq8Mn3Bt7Rk1Wp5Z",
+      "language": "fr",
+      "created_at": "2026-09-10T13:20:00Z",
+      "updated_at": "2026-09-12T17:40:00Z"
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000003",
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "owner_id": "30000000-0000-4000-8000-000000000001",
+      "title": "Lancement SaaS B2B (brouillon IA)",
+      "description": "Deck généré par IA depuis un script de lancement — à retravailler.",
+      "theme_id": "40000000-0000-4000-8000-000000000005",
+      "template_id": null,
+      "status": "draft",
+      "present_token": "LancementSaasB2b7Yt2Kp9Vc4Nx6Qw3",
+      "language": "fr",
+      "created_at": "2026-09-16T15:10:00Z",
+      "updated_at": "2026-09-16T15:11:20Z"
+    }
+  ],
+
+  "slides": [
+    {
+      "id": "10000000-0000-4000-8000-000000000101",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 0,
+      "type": "cover",
+      "content": {
+        "kicker": "Diagnostic acquisition — Septembre 2026",
+        "title": "Acme Formation : transformer l’audience en rendez-vous qualifiés",
+        "subtitle": "Système d’acquisition RDV : 40 rendez-vous par mois, sans dépendre uniquement des publicités.",
+        "presenterName": "Marie Dupont"
+      },
+      "notes": "Accueil, rappel du contexte de l’audit, cadrage des 30 minutes.",
+      "script": "Bonjour et merci du temps accordé. Objectif de ce rendez-vous : vous montrer comment transformer votre audience actuelle en rendez-vous qualifiés, puis choisir le dispositif adapté. On garde 30 minutes, questions à la fin."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000102",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 1,
+      "type": "statement",
+      "content": {
+        "eyebrow": "Constat",
+        "headline": "Aujourd’hui, votre croissance dépend d’une seule source : les publicités.",
+        "highlight": "Une dépendance risquée",
+        "sub": "Quand le coût par lead augmente, tout le pipeline ralentit."
+      },
+      "notes": "Marquer une pause après le headline. Laisser le prospect réagir.",
+      "script": "On a regardé vos chiffres : 8 leads sur 10 viennent des ads. C’est efficace, mais fragile. Si le coût monte demain, votre pipeline s’arrête."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000103",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 2,
+      "type": "authority",
+      "content": {
+        "headline": "GetFunnels installe des systèmes d’acquisition mesurables",
+        "points": [
+          { "icon": "target", "title": "120+ funnels déployés", "text": "Pour des coachs, agences et formations en France et en Europe." },
+          { "icon": "route", "title": "Spécialistes RDV et VSL", "text": "Deux modèles, testés et mesurés sur plus de 40 marchés." },
+          { "icon": "chart", "title": "Résultats mesurés, pas promis", "text": "Chaque dispositif est piloté par des KPI contractuels." }
+        ]
+      },
+      "notes": "Crédibilité courte : 3 preuves maximum, en 45 secondes.",
+      "script": "En deux ans, on a déployé plus de 120 funnels. Notre spécialité : les systèmes à rendez-vous et les tunnels VSL. On ne vend pas des promesses, on pilote des chiffres."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000104",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 3,
+      "type": "problem",
+      "content": {
+        "headline": "Quatre fuites qui coûtent des rendez-vous chaque mois",
+        "intro": "Identifiées lors de l’audit de vos campagnes et de votre suivi commercial.",
+        "painPoints": [
+          { "icon": "filter", "title": "40 % de leads non qualifiés", "text": "Le commercial trie à la main des contacts qui ne correspondent pas à l’offre." },
+          { "icon": "calendar-x", "title": "1 rendez-vous sur 3 non honoré", "text": "Aucune séquence de rappels n’existe entre la réservation et le rendez-vous." },
+          { "icon": "megaphone", "title": "Dépendance totale aux publicités", "text": "Aucun canal organique ne génère de rendez-vous aujourd’hui." },
+          { "icon": "clipboard", "title": "Suivi commercial manuel", "text": "Les relances dépendent de la mémoire du commercial, pas d’un système." }
+        ]
+      },
+      "notes": "Laisser le prospect cocher mentalement chaque fuite. Ne pas défendre, écouter.",
+      "script": "Ces quatre points viennent de votre audit. Le plus coûteux, ce n’est pas le lead cher : c’est le rendez-vous oublié faute de relance. C’est exactement ce qu’on va corriger."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000105",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 4,
+      "type": "definition",
+      "content": {
+        "headline": "Un funnel RDV, c’est un chemin balisé du clic au rendez-vous",
+        "body": "Chaque étape a un objectif unique : capter l’intention, qualifier sans friction, réserver, puis garantir la présence. Rien n’est laissé au hasard ni à la mémoire.",
+        "pillars": [
+          { "icon": "magnet", "title": "Capturer l’intention", "text": "Une offre claire et une page qui convertit l’attention en contact." },
+          { "icon": "filter", "title": "Qualifier automatiquement", "text": "Trois questions suffisent à filtrer sans décourager." },
+          { "icon": "calendar-check", "title": "Réserver sans friction", "text": "Agenda connecté, confirmation immédiate, rappels automatiques." }
+        ]
+      },
+      "notes": "Définir le vocabulaire avant de vendre l’architecture.",
+      "script": "Un funnel RDV, ce n’est pas une landing page. C’est une chaîne : chaque maillon a une mission. Si un maillon casse, tout le système perd des rendez-vous."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000106",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 5,
+      "type": "why",
+      "content": {
+        "headline": "Pourquoi le modèle RDV bat l’appel direct",
+        "reasons": [
+          { "icon": "clock", "title": "Le prospect choisit son créneau", "text": "Il s’engage sur son agenda, pas sur le vôtre." },
+          { "icon": "shield", "title": "La qualification se fait avant l’appel", "text": "Le commercial parle uniquement à des prospects alignés avec l’offre." },
+          { "icon": "repeat", "title": "Les rappels réduisent le no-show", "text": "Trois points de contact automatiques font venir le prospect." },
+          { "icon": "chart", "title": "Tout est mesurable", "text": "Coût par lead, par RDV, taux de présence : le système s’optimise." }
+        ]
+      },
+      "notes": "Insister sur l’effet système : chaque brique renforce les autres.",
+      "script": "L’appel direct fonctionne, mais il ne passe pas à l’échelle. Le RDV inversé change la dynamique : le prospect s’engage, le commercial se concentre sur la vente."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000107",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 6,
+      "type": "objectives",
+      "content": {
+        "headline": "Objectifs du dispositif à 90 jours",
+        "goals": [
+          { "label": "Volume", "target": "40 RDV / mois", "text": "Répartis sur les deux offres phares d’Acme Formation." },
+          { "label": "Efficacité", "target": "Coût par RDV < 25 €", "text": "Coût complet incluant les publicités et les outils." },
+          { "label": "Présence", "target": "70 % de show-up", "text": "Grâce à la séquence de rappels multicanal." }
+        ]
+      },
+      "notes": "Ces trois chiffres deviennent les KPI du suivi hebdomadaire.",
+      "script": "Voilà les trois chiffres qu’on pilote. Si on les tient à 90 jours, le système est rentable et on peut passer à l’échelle."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000108",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 7,
+      "type": "flow",
+      "content": {
+        "headline": "Le parcours prospect, étape par étape",
+        "steps": [
+          { "label": "01", "title": "Opt-in", "text": "Le prospect découvre l’offre et laisse ses coordonnées.", "channel": "landing" },
+          { "label": "02", "title": "Qualification", "text": "Trois questions filtrent le budget, l’objectif et l’échéance.", "channel": "formulaire" },
+          { "label": "03", "title": "Réservation", "text": "L’agenda affiche les créneaux disponibles en temps réel.", "channel": "calendrier" },
+          { "label": "04", "title": "Rappels", "text": "Email, SMS et WhatsApp confirment puis rappellent le rendez-vous.", "channel": "multicanal" },
+          { "label": "05", "title": "Rendez-vous", "text": "Le commercial reçoit une fiche complète avant l’appel.", "channel": "CRM" }
+        ]
+      },
+      "notes": "C’est la slide la plus importante : le prospect doit se projeter.",
+      "script": "Suivons un prospect type. Il clique, répond à trois questions, choisit un créneau. Ensuite, le système travaille tout seul jusqu’au rendez-vous."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000109",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 8,
+      "type": "architecture",
+      "content": {
+        "headline": "L’architecture du système",
+        "layers": [
+          { "name": "Acquisition", "items": ["Publicités Meta", "Contenu organique", "Partenariats"] },
+          { "name": "Conversion", "items": ["Landing page", "Formulaire de qualification", "Agenda en ligne"] },
+          { "name": "Automatisation", "items": ["Emails", "SMS et WhatsApp", "Replanification"] },
+          { "name": "Pilotage", "items": ["CRM", "Tableau de bord", "Rapport hebdomadaire"] }
+        ]
+      },
+      "notes": "Montrer que chaque couche existe déjà chez eux, mais en silos.",
+      "script": "Vous avez déjà la moitié de ces briques. Le travail, c’est de les connecter pour que l’information circule sans intervention humaine."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000110",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 9,
+      "type": "capture",
+      "content": {
+        "headline": "Page d’opt-in : capter l’intention au bon moment",
+        "fields": [
+          { "label": "Prénom", "type": "text" },
+          { "label": "Email professionnel", "type": "email" },
+          { "label": "Téléphone", "type": "phone" }
+        ],
+        "ctaLabel": "Réserver mon diagnostic"
+      },
+      "notes": "Trois champs maximum. Chaque champ supplémentaire coûte 10 % de conversion.",
+      "script": "La page tient sur un écran, avec une seule action possible. On ne demande que ce qui sert à qualifier et à relancer."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000111",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 10,
+      "type": "qualification",
+      "content": {
+        "headline": "Trois questions pour qualifier sans friction",
+        "questions": [
+          { "question": "Quel est votre objectif principal ?", "options": ["Plus de clients", "Plus de rendez-vous", "Automatiser le suivi"] },
+          { "question": "Quel budget mensuel pouvez-vous investir ?", "options": ["Moins de 1 000 €", "1 000 à 3 000 €", "Plus de 3 000 €"] },
+          { "question": "Quand souhaitez-vous démarrer ?", "options": ["Ce mois-ci", "Dans 1 à 3 mois", "Je m’informe"] }
+        ]
+      },
+      "notes": "Les réponses alimentent le scoring CRM automatiquement.",
+      "script": "Ces questions ne bloquent personne : elles orientent. Un prospect qui répond « je m’informe » part dans une séquence de nurturing, pas chez le commercial."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000112",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 11,
+      "type": "automation",
+      "content": {
+        "headline": "Les automatisations qui travaillent pendant que vous dormez",
+        "items": [
+          { "trigger": "Formulaire soumis", "action": "Création de la fiche CRM et email de confirmation", "delay": "immédiat" },
+          { "trigger": "Aucune réservation sous 24 h", "action": "Relance email puis SMS", "delay": "24 h" },
+          { "trigger": "Rendez-vous réservé", "action": "Séquence de rappels WhatsApp", "delay": "J-2, J-1, H-2" },
+          { "trigger": "No-show constaté", "action": "Proposition automatique de replanification", "delay": "1 h" }
+        ]
+      },
+      "notes": "Le no-show est le poste de perte numéro un : insister sur la replanification.",
+      "script": "Chaque automatisation corrige une fuite identifiée à l’audit. La plus rentable : la replanification automatique des no-shows, qui récupère un rendez-vous sur quatre."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000113",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 12,
+      "type": "channel",
+      "content": {
+        "headline": "WhatsApp : le canal qui fait venir les gens au rendez-vous",
+        "channel": "whatsapp",
+        "scripts": [
+          { "moment": "Confirmation", "message": "Bonjour {{prénom}}, votre diagnostic avec Acme Formation est réservé le {{date}} à {{heure}}. Répondez OUI pour confirmer." },
+          { "moment": "Rappel J-1", "message": "Petit rappel : votre diagnostic est demain à {{heure}}. Préparez vos 2 questions les plus importantes." },
+          { "moment": "Replanification", "message": "Vous avez manqué votre créneau. Voici 3 nouveaux horaires disponibles : {{liens}}." }
+        ]
+      },
+      "notes": "Les messages doivent être personnalisés par variables, jamais génériques.",
+      "script": "WhatsApp a le meilleur taux de lecture. On l’utilise pour confirmer, rappeler et replanifier — avec des messages courts et personnalisés."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000114",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 13,
+      "type": "crm",
+      "content": {
+        "headline": "Un pipeline simple, tenu à jour automatiquement",
+        "pipelines": [
+          { "stage": "Nouveau lead", "definition": "Formulaire reçu, qualification en cours." },
+          { "stage": "Qualifié", "definition": "Budget et objectif validés, en attente de réservation." },
+          { "stage": "RDV planifié", "definition": "Créneau réservé, séquence de rappels active." },
+          { "stage": "RDV honoré", "definition": "Appel réalisé, proposition envoyée." },
+          { "stage": "Client", "definition": "Offre signée, suivi de production." }
+        ]
+      },
+      "notes": "Le pipeline doit rester lisible par un commercial en 5 secondes.",
+      "script": "Cinq étapes, pas quinze. Chaque changement d’étape est déclenché par le système, pas par une saisie manuelle."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000115",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 14,
+      "type": "analytics",
+      "content": {
+        "headline": "Ce qu’on mesure chaque semaine",
+        "metrics": [
+          { "name": "Coût par lead", "definition": "Dépense publicitaire divisée par le nombre de leads.", "target": "< 12 €" },
+          { "name": "Taux de qualification", "definition": "Part des leads qui passent le filtre des trois questions.", "target": "> 45 %" },
+          { "name": "Taux de présence", "definition": "Rendez-vous honorés sur rendez-vous planifiés.", "target": "> 70 %" },
+          { "name": "Coût par rendez-vous", "definition": "Coût total divisé par les rendez-vous honorés.", "target": "< 25 €" }
+        ]
+      },
+      "notes": "Un rapport hebdomadaire automatique suffit. Pas d’usine à gaz.",
+      "script": "Quatre métriques, un rapport par semaine. Si un chiffre décroche, on sait exactement quelle brique corriger."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000116",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 15,
+      "type": "proof",
+      "content": {
+        "headline": "Ils ont installé le système avant vous",
+        "items": [
+          { "quote": "En six semaines, on est passés de 12 à 38 rendez-vous par mois, sans augmenter le budget publicitaire.", "name": "Sophie Lambert", "role": "Dirigeante, Institut Formation Pro", "result": "+216 % de rendez-vous" },
+          { "quote": "Le taux de présence est monté à 74 % grâce aux rappels automatiques. Le commercial ne relance plus rien à la main.", "name": "Karim Haddad", "role": "Directeur commercial, BTP Academy", "result": "74 % de show-up" }
+        ]
+      },
+      "notes": "Choisir le témoignage le plus proche du secteur du prospect.",
+      "script": "Ces deux clients avaient exactement les mêmes fuites que vous. Le premier a triplé ses rendez-vous, le second a réglé le no-show en trois semaines."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000117",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 16,
+      "type": "kpi",
+      "content": {
+        "headline": "Les chiffres du dispositif",
+        "metrics": [
+          { "value": "40", "label": "RDV par mois", "delta": "+28 vs. aujourd’hui" },
+          { "value": "18 €", "label": "Coût par RDV", "delta": "-40 %" },
+          { "value": "70 %", "label": "Taux de présence", "delta": "+32 pts" }
+        ]
+      },
+      "notes": "Slide de respiration avant le plan et le prix.",
+      "script": "Voilà ce que le système produit une fois en régime : deux fois plus de rendez-vous, à moitié prix, avec un suivi qui tient tout seul."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000118",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 17,
+      "type": "plan",
+      "content": {
+        "headline": "Un déploiement en trois phases",
+        "phases": [
+          { "name": "Setup", "duration": "2 semaines", "deliverables": ["Landing page et formulaire", "Connexion agenda et CRM", "Séquences de rappels"] },
+          { "name": "Lancement", "duration": "4 semaines", "deliverables": ["Campagnes publicitaires", "Premiers rendez-vous", "Réglages hebdomadaires"] },
+          { "name": "Optimisation", "duration": "continu", "deliverables": ["Tests de messages", "Optimisation du coût par RDV", "Rapport mensuel"] }
+        ]
+      },
+      "notes": "Le prospect doit voir que la charge de son côté est minimale.",
+      "script": "Deux semaines de mise en place, un mois de lancement, puis de l’optimisation continue. Votre équipe fournit les accès et valide les messages, on s’occupe du reste."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000119",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 18,
+      "type": "pricing",
+      "content": {
+        "headline": "Choisissez votre niveau d’accompagnement",
+        "tiers": [
+          {
+            "name": "Système RDV",
+            "price": "2 900 € + 490 €/mois",
+            "features": ["Landing et formulaire", "CRM et automatisations", "Séquences WhatsApp", "Rapport mensuel"],
+            "highlight": false
+          },
+          {
+            "name": "Système RDV + Pilotage",
+            "price": "3 900 € + 890 €/mois",
+            "features": ["Tout le niveau Système", "Gestion des campagnes publicitaires", "Optimisation hebdomadaire", "Réunion de suivi dédiée"],
+            "highlight": true
+          }
+        ]
+      },
+      "notes": "Annoncer le prix sans excuse. Silence de 5 secondes après l’annonce.",
+      "script": "Le premier niveau installe le système. Le second ajoute le pilotage complet des campagnes. La plupart des clients démarrent avec le pilotage, puis internalisent progressivement."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000120",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "position": 19,
+      "type": "cta",
+      "content": {
+        "headline": "Prochaine étape : valider l’architecture ensemble",
+        "sub": "On réserve 45 minutes pour adapter le dispositif à votre offre et à votre agenda commercial.",
+        "actions": [{ "label": "Réserver le diagnostic", "kind": "calendar" }]
+      },
+      "notes": "Terminer par une seule action possible. Ne pas proposer d’alternative.",
+      "script": "On a vu le système, les chiffres et le plan. La prochaine étape, c’est de valider ensemble l’architecture lors d’un atelier de 45 minutes. Je vous envoie le lien juste après cet appel."
+    },
+
+    {
+      "id": "10000000-0000-4000-8000-000000000201",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "position": 0,
+      "type": "cover",
+      "content": {
+        "kicker": "Système VSL — Septembre 2026",
+        "title": "Coach Immobilier : vendre vos programmes avec une VSL qui filtre et convertit",
+        "subtitle": "Un tunnel VSL complet : audience froide, candidature qualifiée, appel à forte valeur.",
+        "presenterName": "Yanis Benali"
+      },
+      "notes": "Cadrer l’objectif : réduire les appels non qualifiés.",
+      "script": "Merci d’être là. On va voir comment une VSL peut remplacer la moitié de vos appels de découverte tout en qualifiant mieux les candidatures."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000202",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "position": 1,
+      "type": "statement",
+      "content": {
+        "eyebrow": "Constat",
+        "headline": "Vos prospects veulent vous écouter, mais pas remplir un formulaire de 12 champs.",
+        "highlight": "L’attention se gagne en 90 secondes",
+        "sub": "La VSL fait le travail de conviction avant l’appel."
+      },
+      "notes": "Pause après le headline.",
+      "script": "Votre audience vous suit déjà. Le problème n’est pas la confiance, c’est le parcours : trop de friction avant la valeur."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000203",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "position": 2,
+      "type": "problem",
+      "content": {
+        "headline": "Sans VSL, vous répétez le même appel 40 fois par semaine",
+        "intro": "Le temps du coach est la ressource la plus chère du business.",
+        "painPoints": [
+          { "icon": "phone", "title": "Appels non qualifiés", "text": "La moitié des appels découverte ne correspondent ni au budget ni au profil." },
+          { "icon": "clock", "title": "Temps perdu en répétition", "text": "La même présentation est répétée à chaque appel sans capitaliser." },
+          { "icon": "trending-down", "title": "Closing sous-optimal", "text": "Les prospects arrivent froids, sans avoir compris la méthode." }
+        ]
+      },
+      "notes": "Faire parler le client de son dernier appel découverte.",
+      "script": "Racontez-moi votre dernier appel découverte : combien de temps avant de comprendre que ce n’était pas le bon profil ? C’est exactement ce que la VSL élimine."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000204",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "position": 3,
+      "type": "why",
+      "content": {
+        "headline": "Pourquoi la VSL est le meilleur filtre avant l’appel",
+        "reasons": [
+          { "icon": "play", "title": "Conviction à froid", "text": "La vidéo porte la démonstration à votre place, 24 h sur 24." },
+          { "icon": "filter", "title": "Filtre naturel", "text": "Seuls les prospects sérieux vont au bout de la vidéo et candidatent." },
+          { "icon": "repeat", "title": "Scalabilité", "text": "Le même actif travaille pour tous les canaux, sans vous." },
+          { "icon": "chart", "title": "Coût par candidature bas", "text": "Un actif réutilisable fait baisser le coût d’acquisition mois après mois." }
+        ]
+      },
+      "notes": "Comparer avec le coût d’un appel découverte répété.",
+      "script": "Un appel découverte vous coûte 45 minutes. Une VSL convainc des centaines de prospects avec le même effort initial."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000205",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "position": 4,
+      "type": "flow",
+      "content": {
+        "headline": "Le parcours de candidature",
+        "steps": [
+          { "label": "01", "title": "Contenu", "text": "Un contenu court capte l’attention et promet une méthode.", "channel": "social" },
+          { "label": "02", "title": "VSL", "text": "La vidéo installe la méthode et traite les objections.", "channel": "page VSL" },
+          { "label": "03", "title": "Candidature", "text": "Un formulaire court recueille le contexte du projet.", "channel": "formulaire" },
+          { "label": "04", "title": "Qualification", "text": "Le scoring sépare les candidatures sérieuses du reste.", "channel": "automatisation" },
+          { "label": "05", "title": "Appel", "text": "L’appel devient une conversation de closing, pas une découverte.", "channel": "agenda" }
+        ]
+      },
+      "notes": "Insister sur l’inversion : l’appel devient un closing.",
+      "script": "Le prospect arrive à l’appel en ayant déjà compris la méthode et validé le budget. Votre temps est investi dans le closing, pas dans la pédagogie."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000206",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "position": 5,
+      "type": "architecture",
+      "content": {
+        "headline": "L’architecture du tunnel VSL",
+        "layers": [
+          { "name": "Trafic", "items": ["Contenu organique", "Publicités", "Partenariats"] },
+          { "name": "VSL & page", "items": ["Page d’inscription", "Vidéo structurée", "Preuves intégrées"] },
+          { "name": "Qualification & suivi", "items": ["Formulaire de candidature", "Scoring", "Séquences email"] }
+        ]
+      },
+      "notes": "Montrer la simplicité : trois couches suffisent.",
+      "script": "Trois couches, un seul objectif : que chaque candidature qui arrive à l’appel soit déjà prête à avancer."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000207",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "position": 6,
+      "type": "capture",
+      "content": {
+        "headline": "Page d’inscription : capter avant la VSL",
+        "fields": [
+          { "label": "Prénom", "type": "text" },
+          { "label": "Email", "type": "email" }
+        ],
+        "ctaLabel": "Voir la présentation"
+      },
+      "notes": "Deux champs seulement avant la vidéo.",
+      "script": "On capture juste l’email pour pouvoir relancer ceux qui ne terminent pas la vidéo. Le reste de la qualification se fait après."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000208",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "position": 7,
+      "type": "qualification",
+      "content": {
+        "headline": "Le formulaire qui filtre sans frustrer",
+        "questions": [
+          { "question": "Où en êtes-vous dans votre projet ?", "options": ["Je démarre", "J’ai déjà des clients", "Je veux déléguer"] },
+          { "question": "Quel est votre budget accompagnement ?", "options": ["Moins de 2 000 €", "2 000 à 5 000 €", "Plus de 5 000 €"] },
+          { "question": "Êtes-vous prêt à investir 5 h par semaine ?", "options": ["Oui", "Pas encore"] }
+        ]
+      },
+      "notes": "La dernière question filtre l’engagement, pas le budget.",
+      "script": "Ces questions filtrent autant le sérieux que le budget. Un prospect qui répond « pas encore » reçoit du contenu, pas un appel."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000209",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "position": 8,
+      "type": "automation",
+      "content": {
+        "headline": "Les automatisations du tunnel VSL",
+        "items": [
+          { "trigger": "Email saisi", "action": "Envoi de la page VSL et suivi d’ouverture", "delay": "immédiat" },
+          { "trigger": "Vidéo non terminée", "action": "Relance avec le chapitre manquant", "delay": "48 h" },
+          { "trigger": "Candidature envoyée", "action": "Scoring puis proposition de créneau si qualifié", "delay": "15 min" }
+        ]
+      },
+      "notes": "La relance sur chapitre manquant est le levier principal.",
+      "script": "Le système sait où le prospect s’est arrêté dans la vidéo et relance avec le chapitre exact qui manque. C’est là qu’on récupère le plus de candidatures."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000210",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "position": 9,
+      "type": "channel",
+      "content": {
+        "headline": "Email : la séquence qui réchauffe les indécis",
+        "channel": "email",
+        "scripts": [
+          { "moment": "J+1", "message": "Objet : la partie que 80 % des gens sautent. Voici le chapitre qui change tout dans votre projet." },
+          { "moment": "J+3", "message": "Objet : votre situation (et ce qu’on ferait à votre place). Répondez à cet email, on vous répond en 24 h." }
+        ]
+      },
+      "notes": "Deux emails suffisent. Au-delà, on fatigue l’audience.",
+      "script": "Deux emails, personnalisés, qui ramènent vers la vidéo ou l’appel. On mesure le taux de réponse, pas le taux d’ouverture."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000211",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "position": 10,
+      "type": "proof",
+      "content": {
+        "headline": "Résultats de nos clients coachs",
+        "items": [
+          { "quote": "Les appels découverte ont été divisés par deux et le taux de closing a doublé. La VSL filtre mieux que n’importe quel questionnaire.", "name": "Nadia Cherif", "role": "Coach business", "result": "Closing x2" },
+          { "quote": "Je ne refais plus la même présentation 30 fois par mois. La vidéo s’en charge, moi je vends.", "name": "Thomas Girard", "role": "Coach immobilier", "result": "-15 h de calls/mois" }
+        ]
+      },
+      "notes": "Le deuxième témoignage parle directement au temps gagné.",
+      "script": "Nadia a doublé son closing, Thomas a récupéré 15 heures par mois. Dans les deux cas, le point commun : la VSL fait la pédagogie."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000212",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "position": 11,
+      "type": "cta",
+      "content": {
+        "headline": "Prêt à installer votre VSL ?",
+        "sub": "On écrit, tourne et structure la VSL avec vous. Première version en 14 jours.",
+        "actions": [{ "label": "Réserver l’atelier VSL", "kind": "calendar" }]
+      },
+      "notes": "Une seule action, comme toujours.",
+      "script": "Si le principe vous parle, on réserve un atelier de 45 minutes pour cadrer le script et le plan de tournage. Je vous envoie le lien maintenant."
+    },
+
+    {
+      "id": "10000000-0000-4000-8000-000000000301",
+      "deck_id": "20000000-0000-4000-8000-000000000003",
+      "position": 0,
+      "type": "cover",
+      "content": {
+        "kicker": "Brouillon généré par IA",
+        "title": "Lancement SaaS B2B : orchestrer une sortie en 21 jours",
+        "subtitle": "Séquence de lancement : audience, contenu, conversion.",
+        "presenterName": "Marie Dupont"
+      },
+      "notes": "Deck généré depuis un script — vérifier les preuves avant présentation.",
+      "script": "Objectif de cette présentation : montrer la séquence de lancement en 21 jours, de la constitution de l’audience à la conversion."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000302",
+      "deck_id": "20000000-0000-4000-8000-000000000003",
+      "position": 1,
+      "type": "problem",
+      "content": {
+        "headline": "Un lancement sans orchestration laisse 70 % de la valeur sur la table",
+        "intro": "Les équipes produit lancent des fonctionnalités, pas des événements.",
+        "painPoints": [
+          { "icon": "users", "title": "Audience non préparée", "text": "Le jour J, personne n’attend la sortie." },
+          { "icon": "calendar-x", "title": "Pas de séquence", "text": "Un email d’annonce ne fait pas un lancement." },
+          { "icon": "trending-down", "title": "Conversion non mesurée", "text": "Sans jalons, impossible de savoir ce qui a fonctionné." }
+        ]
+      },
+      "notes": "Slide générée automatiquement — réécrire avec le vocabulaire client.",
+      "script": "La plupart des lancements échouent avant le jour J : l’audience n’a pas été préparée. On va voir comment structurer les 21 jours qui précèdent."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000303",
+      "deck_id": "20000000-0000-4000-8000-000000000003",
+      "position": 2,
+      "type": "definition",
+      "content": {
+        "headline": "Un lancement orchestré, c’est une séquence, pas un événement",
+        "body": "Trois semaines de préparation, une semaine de conversion, une semaine de suivi. Chaque jour a un objectif et une mesure.",
+        "pillars": [
+          { "icon": "users", "title": "Préparer", "text": "Constituer et chauffer l’audience avant l’annonce." },
+          { "icon": "megaphone", "title": "Annoncer", "text": "Créer l’événement et ouvrir la conversion." },
+          { "icon": "chart", "title": "Mesurer", "text": "Suivre les jalons et ajuster chaque semaine." }
+        ]
+      },
+      "notes": "Vérifier la cohérence avec l’offre réelle.",
+      "script": "Un lancement, c’est une séquence en trois temps : préparer, annoncer, mesurer. On détaille chaque semaine."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000304",
+      "deck_id": "20000000-0000-4000-8000-000000000003",
+      "position": 3,
+      "type": "flow",
+      "content": {
+        "headline": "Les 21 jours du lancement",
+        "steps": [
+          { "label": "J1-J7", "title": "Audience", "text": "Contenu de préparation et constitution de la liste d’attente.", "channel": "contenu" },
+          { "label": "J8-J14", "title": "Preuve", "text": "Études de cas, démonstrations et témoignages précoces.", "channel": "email" },
+          { "label": "J15-J18", "title": "Annonce", "text": "Ouverture officielle avec événement live.", "channel": "webinaire" },
+          { "label": "J19-J21", "title": "Conversion", "text": "Séquence d’urgence et closing des indécis.", "channel": "email + calls" }
+        ]
+      },
+      "notes": "Généré par IA : la durée réelle dépend de la taille de l’audience.",
+      "script": "Semaine 1 : on prépare. Semaine 2 : on prouve. Semaine 3 : on annonce et on convertit. Chaque étape a ses métriques."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000305",
+      "deck_id": "20000000-0000-4000-8000-000000000003",
+      "position": 4,
+      "type": "pricing",
+      "content": {
+        "headline": "Deux niveaux d’accompagnement",
+        "tiers": [
+          {
+            "name": "Lancement guidé",
+            "price": "1 900 €",
+            "features": ["Plan de lancement 21 jours", "Séquences email", "Tableau de bord des jalons"],
+            "highlight": false
+          },
+          {
+            "name": "Lancement clé en main",
+            "price": "3 900 €",
+            "features": ["Tout le niveau guidé", "Production des contenus", "Animation de l’événement live"],
+            "highlight": true
+          }
+        ]
+      },
+      "notes": "Prix générés par IA à valider avant toute présentation.",
+      "script": "Deux niveaux : guidé ou clé en main. Le choix dépend de votre capacité à produire les contenus en interne."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000306",
+      "deck_id": "20000000-0000-4000-8000-000000000003",
+      "position": 5,
+      "type": "cta",
+      "content": {
+        "headline": "On lance quand ?",
+        "sub": "Choisissez la date cible, on construit le rétroplanning ensemble.",
+        "actions": [{ "label": "Réserver le cadrage", "kind": "calendar" }]
+      },
+      "notes": "Brouillon — remplacer par l’offre réelle.",
+      "script": "Donnez-moi une date cible et on construit le rétroplanning des 21 jours lors du prochain échange."
+    }
+  ],
+
+  "sessions": [
+    {
+      "id": "90000000-0000-4000-8000-000000000001",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "presenter_id": "30000000-0000-4000-8000-000000000001",
+      "status": "live",
+      "present_token": "K7fQ2mXp9Rt4Vb1Ns6Yc3Ld8Wz5Hj0",
+      "started_at": "2026-09-18T09:00:00Z",
+      "ended_at": null,
+      "created_at": "2026-09-18T09:00:00Z"
+    },
+    {
+      "id": "90000000-0000-4000-8000-000000000002",
+      "deck_id": "20000000-0000-4000-8000-000000000002",
+      "presenter_id": "30000000-0000-4000-8000-000000000002",
+      "status": "ended",
+      "present_token": "VslCoachImmo2026Xq8Mn3Bt7Rk1Wp5Z",
+      "started_at": "2026-09-12T14:00:00Z",
+      "ended_at": "2026-09-12T14:41:00Z",
+      "created_at": "2026-09-12T14:00:00Z"
+    }
+  ],
+
+  "session_events": [
+    { "id": "b0000000-0000-4000-8000-000000000001", "session_id": "90000000-0000-4000-8000-000000000002", "slide_index": 0, "event_type": "slide_view", "duration_ms": 92000, "created_at": "2026-09-12T14:00:00Z" },
+    { "id": "b0000000-0000-4000-8000-000000000002", "session_id": "90000000-0000-4000-8000-000000000002", "slide_index": 1, "event_type": "slide_view", "duration_ms": 48000, "created_at": "2026-09-12T14:01:32Z" },
+    { "id": "b0000000-0000-4000-8000-000000000003", "session_id": "90000000-0000-4000-8000-000000000002", "slide_index": 3, "event_type": "slide_view", "duration_ms": 155000, "created_at": "2026-09-12T14:02:20Z" },
+    { "id": "b0000000-0000-4000-8000-000000000004", "session_id": "90000000-0000-4000-8000-000000000002", "slide_index": 4, "event_type": "slide_view", "duration_ms": 210000, "created_at": "2026-09-12T14:04:55Z" },
+    { "id": "b0000000-0000-4000-8000-000000000005", "session_id": "90000000-0000-4000-8000-000000000002", "slide_index": 10, "event_type": "slide_view", "duration_ms": 340000, "created_at": "2026-09-12T14:08:25Z" },
+    { "id": "b0000000-0000-4000-8000-000000000006", "session_id": "90000000-0000-4000-8000-000000000002", "slide_index": 11, "event_type": "slide_view", "duration_ms": 265000, "created_at": "2026-09-12T14:14:05Z" },
+    { "id": "b0000000-0000-4000-8000-000000000007", "session_id": "90000000-0000-4000-8000-000000000002", "slide_index": 11, "event_type": "deck_close", "duration_ms": 0, "created_at": "2026-09-12T14:41:00Z" },
+    { "id": "b0000000-0000-4000-8000-000000000008", "session_id": "90000000-0000-4000-8000-000000000001", "slide_index": 0, "event_type": "deck_open", "duration_ms": 0, "created_at": "2026-09-18T09:00:00Z" },
+    { "id": "b0000000-0000-4000-8000-000000000009", "session_id": "90000000-0000-4000-8000-000000000001", "slide_index": 0, "event_type": "slide_view", "duration_ms": 76000, "created_at": "2026-09-18T09:00:00Z" },
+    { "id": "b0000000-0000-4000-8000-000000000010", "session_id": "90000000-0000-4000-8000-000000000001", "slide_index": 4, "event_type": "slide_view", "duration_ms": 288000, "created_at": "2026-09-18T09:01:16Z" }
+  ],
+
+  "ai_generations": [
+    {
+      "id": "70000000-0000-4000-8000-000000000001",
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "user_id": "30000000-0000-4000-8000-000000000001",
+      "deck_id": "20000000-0000-4000-8000-000000000003",
+      "kind": "slides",
+      "model": "claude-sonnet-4-5",
+      "input_tokens": 8420,
+      "output_tokens": 5210,
+      "cost_cents": 6.42,
+      "status": "succeeded",
+      "error": null,
+      "duration_ms": 48200,
+      "created_at": "2026-09-16T15:10:40Z"
+    },
+    {
+      "id": "70000000-0000-4000-8000-000000000002",
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "user_id": "30000000-0000-4000-8000-000000000001",
+      "deck_id": "20000000-0000-4000-8000-000000000001",
+      "kind": "slide",
+      "model": "claude-sonnet-4-5",
+      "input_tokens": 1240,
+      "output_tokens": 480,
+      "cost_cents": 0.31,
+      "status": "succeeded",
+      "error": null,
+      "duration_ms": 6100,
+      "created_at": "2026-09-18T08:52:10Z"
+    },
+    {
+      "id": "70000000-0000-4000-8000-000000000003",
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "user_id": "30000000-0000-4000-8000-000000000002",
+      "deck_id": null,
+      "kind": "brief",
+      "model": "claude-haiku-4-5",
+      "input_tokens": 9800,
+      "output_tokens": 0,
+      "cost_cents": 0.0,
+      "status": "failed",
+      "error": "Provider timeout after retry — credits refunded",
+      "duration_ms": 30000,
+      "created_at": "2026-09-15T11:04:00Z"
+    }
+  ],
+
+  "usage_counters": [
+    {
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "period_start": "2026-08-01",
+      "ai_credits_used": 42,
+      "decks_created": 7
+    },
+    {
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "period_start": "2026-09-01",
+      "ai_credits_used": 14,
+      "decks_created": 3
+    }
+  ],
+
+  "subscriptions": [
+    {
+      "id": "80000000-0000-4000-8000-000000000001",
+      "org_id": "50000000-0000-4000-8000-000000000001",
+      "stripe_customer_id": "cus_demo_0001",
+      "stripe_subscription_id": "sub_demo_0001",
+      "plan": "pro",
+      "status": "active",
+      "current_period_start": "2026-09-01T00:00:00Z",
+      "current_period_end": "2026-10-01T00:00:00Z",
+      "cancel_at_period_end": false,
+      "created_at": "2026-08-01T08:20:00Z",
+      "updated_at": "2026-09-01T00:05:00Z"
+    }
+  ]
+}
