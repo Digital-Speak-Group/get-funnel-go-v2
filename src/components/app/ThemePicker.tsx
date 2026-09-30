@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { systemThemes, type ThemeTokens } from "@/lib/slides/theme";
-import { tokensToCssVars, getBackgroundStyles } from "@/lib/slides/theme";
+import { systemThemes, tokensToCssVars, getBackgroundStyles, type ThemeTokens } from "@/lib/slides/theme";
+import { type Slide } from "@/lib/slides/schema";
+import { SlideThumbnail } from "@/components/slides/SlideThumbnail";
 import { cn } from "@/lib/utils";
 
 interface ThemePickerProps {
@@ -12,15 +13,21 @@ interface ThemePickerProps {
   variant?: "grid" | "list";
 }
 
-function ThemeThumbnail({ theme }: { theme: ThemeTokens }) {
-  const cssVars = tokensToCssVars(theme);
-  const bgStyles = getBackgroundStyles(theme.background);
+const sampleSlide: Slide = {
+  id: "00000000-0000-4000-8000-000000000001",
+  position: 0,
+  type: "cover",
+  content: {
+    kicker: "GetFunnels",
+    title: "Votre prochain deck de vente",
+    subtitle: "Généré en quelques secondes",
+  },
+};
 
+function ThemeThumbnail({ theme }: { theme: ThemeTokens }) {
   return (
     <div
       style={{
-        ...cssVars,
-        ...bgStyles,
         position: "relative",
         width: "100%",
         aspectRatio: "16 / 9",
@@ -31,34 +38,7 @@ function ThemeThumbnail({ theme }: { theme: ThemeTokens }) {
         boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
       }}
     >
-      <div style={{ padding: "16px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-        <div
-          style={{
-            height: "24px",
-            background: theme.color.primary,
-            borderRadius: "4px",
-            width: "40%",
-            marginBottom: "8px",
-          }}
-        />
-        <div
-          style={{
-            height: "16px",
-            background: theme.color.muted,
-            borderRadius: "4px",
-            width: "60%",
-            marginBottom: "8px",
-          }}
-        />
-        <div
-          style={{
-            height: "16px",
-            background: theme.color.muted,
-            borderRadius: "4px",
-            width: "80%",
-          }}
-        />
-      </div>
+      <SlideThumbnail slide={sampleSlide} theme={theme} className="w-full h-full" />
     </div>
   );
 }

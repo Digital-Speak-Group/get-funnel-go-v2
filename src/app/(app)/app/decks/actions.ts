@@ -1,7 +1,13 @@
 "use server";
 
 import { getSession } from "@/lib/auth/session";
-import { listDecks, updateDeck as updateDeckRepo, softDeleteDeck, createDeck as createDeckRepo } from "@/server/services/decks";
+import {
+  listDecks,
+  updateDeck as updateDeckRepo,
+  softDeleteDeck,
+  createDeck as createDeckRepo,
+  duplicateDeck,
+} from "@/server/services/decks";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
@@ -16,13 +22,27 @@ const UpdateDeckSchema = z.object({
   id: z.string().uuid(),
   title: z.string().min(1).max(120).optional(),
   status: z.enum(["draft", "ready", "archived"]).optional(),
+  themeId: z.string().uuid().optional(),
 });
 
-export async function listDecksAction() {
+const ListDecksSchema = z.object({
+  search: z.string().max(100).optional(),
+  sort: z.enum(["updated_desc", "updated_asc", "title_asc", "title_desc"]).optional(),
+});
+
+const DeckIdSchema = z.string().uuid();
+
+export async function listDecksAction(raw?: unknown) {
   const session = await getSession();
   if (!session) return { error: "UNAUTHENTICATED" };
 
-  const result = await listDecks({ orgId: session.activeOrgId, userId: session.userId });
+  const parsed = ListDecksSchema.safeParse(raw ?? {});
+  if (!parsed.success) return { error: "INVALID_INPUT" };
+
+  const result = await listDecks(
+    { orgId: session.activeOrgId, userId: session.userId },
+    { search: parsed.data.search, sort: parsed.data.sort }
+  );
   return { decks: result.decks, total: result.total };
 }
 
@@ -47,9 +67,9 @@ export async function updateDeckAction(raw: unknown) {
 
   const { id, ...data } = parsed.data;
   const deck = await updateDeckRepo(id, data, { orgId: session.activeOrgId, userId: session.userId });
-  
+
   if (!deck) return { error: "NOT_FOUND" };
-  
+
   revalidatePath("/app");
   return { deck };
 }
@@ -58,8 +78,7 @@ export async function deleteDeckAction(deckId: string) {
   const session = await getSession();
   if (!session) return { error: "UNAUTHENTICATED" };
 
-  const schema = z.string().uuid();
-  const parsed = schema.safeParse(deckId);
+  const parsed = DeckIdSchema.safeParse(deckId);
   if (!parsed.success) return { error: "INVALID_ID" };
 
   const deleted = await softDeleteDeck(deckId, { orgId: session.activeOrgId, userId: session.userId });
@@ -73,10 +92,12 @@ export async function duplicateDeckAction(deckId: string) {
   const session = await getSession();
   if (!session) return { error: "UNAUTHENTICATED" };
 
-  const schema = z.string().uuid();
-  const parsed = schema.safeParse(deckId);
+  const parsed = DeckIdSchema.safeParse(deckId);
   if (!parsed.success) return { error: "INVALID_ID" };
 
+  const deck = await duplicateDeck(deckId, { orgId: session.activeOrgId, userId: session.userId });
+  if (!deck) return { error: "NOT_FOUND" };
+
   revalidatePath("/app");
-  return { success: true };
+  return { deck };
 }

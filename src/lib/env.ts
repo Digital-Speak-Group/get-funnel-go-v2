@@ -4,7 +4,7 @@ const serverSchema = z.object({
   DATABASE_URL: z.string().url(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
   AUTH_SECRET: z.string().min(32).optional(),
-  ANTHROPIC_API_KEY: z.string().min(1),
+  GROQ_API_KEY: z.string().min(1),
   AI_MODEL_FAST: z.string().min(1),
   AI_MODEL_QUALITY: z.string().min(1),
   STRIPE_SECRET_KEY: z.string().min(1),
@@ -18,6 +18,9 @@ const clientSchema = z.object({
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().min(1),
   NEXT_PUBLIC_APP_URL: z.string().url(),
+  NEXT_PUBLIC_POSTHOG_KEY: z.string().optional(),
+  NEXT_PUBLIC_POSTHOG_HOST: z.string().url().optional(),
+  NEXT_PUBLIC_SENTRY_DSN: z.string().url().optional(),
 });
 
 function validateEnv<T extends z.ZodTypeAny>(schema: T, env: Record<string, string | undefined>, prefix: string) {
@@ -32,8 +35,19 @@ function validateEnv<T extends z.ZodTypeAny>(schema: T, env: Record<string, stri
   return result.data;
 }
 
-const serverEnv = validateEnv(serverSchema, process.env, "");
-const clientEnv = validateEnv(clientSchema, process.env, "NEXT_PUBLIC_");
+const isServer = typeof window === "undefined" || process.env.NODE_ENV === "test";
+const serverEnv = isServer 
+  ? validateEnv(serverSchema, process.env, "") 
+  : ({} as z.infer<typeof serverSchema>);
+const clientEnv = validateEnv(clientSchema, {
+  NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+  NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+  NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+  NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+  NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,
+}, "");
 
 export const env = {
   ...serverEnv,

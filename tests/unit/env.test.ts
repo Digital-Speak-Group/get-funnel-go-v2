@@ -16,7 +16,7 @@ describe("env validation", () => {
     delete process.env.DATABASE_URL;
     delete process.env.SUPABASE_SERVICE_ROLE_KEY;
     delete process.env.AUTH_SECRET;
-    delete process.env.ANTHROPIC_API_KEY;
+    delete process.env.GROQ_API_KEY;
     delete process.env.AI_MODEL_FAST;
     delete process.env.AI_MODEL_QUALITY;
     delete process.env.STRIPE_SECRET_KEY;
@@ -30,7 +30,7 @@ describe("env validation", () => {
     process.env.DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/getfunnels";
     process.env.SUPABASE_SERVICE_ROLE_KEY = "test";
     process.env.AUTH_SECRET = "a".repeat(32);
-    process.env.ANTHROPIC_API_KEY = "test";
+    process.env.GROQ_API_KEY = "test";
     process.env.AI_MODEL_FAST = "claude-3-5-haiku-20241022";
     process.env.AI_MODEL_QUALITY = "claude-3-5-sonnet-20241022";
     process.env.STRIPE_SECRET_KEY = "test";
@@ -49,7 +49,7 @@ describe("env validation", () => {
     process.env.DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/getfunnels";
     process.env.SUPABASE_SERVICE_ROLE_KEY = "test";
     process.env.AUTH_SECRET = "a".repeat(32);
-    process.env.ANTHROPIC_API_KEY = "test";
+    process.env.GROQ_API_KEY = "test";
     process.env.AI_MODEL_FAST = "claude-3-5-haiku-20241022";
     process.env.AI_MODEL_QUALITY = "claude-3-5-sonnet-20241022";
     process.env.STRIPE_SECRET_KEY = "test";

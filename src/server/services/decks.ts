@@ -18,10 +18,12 @@ import {
   type CreateDeckInput,
   type UpdateDeckInput,
   type DeckWithRelations,
+  type DeckSort,
 } from "@/lib/db/repositories/decks";
 import {
   getSlidesByDeckId as getSlidesByDeckIdRepo,
   reorderSlides as reorderSlidesRepo,
+  type SlideWithDeck,
 } from "@/lib/db/repositories/slides";
 
 export interface DeckServiceContext {
@@ -101,6 +103,16 @@ export async function getDeckById(
   return getDeckByIdRepo(id, ctx);
 }
 
+export async function getDeckWithSlides(
+  id: string,
+  ctx: DeckServiceContext
+): Promise<{ deck: DeckWithRelations; slides: SlideWithDeck[] } | null> {
+  const deck = await getDeckByIdRepo(id, ctx);
+  if (!deck) return null;
+  const slides = await getSlidesByDeckIdRepo(id, ctx);
+  return { deck, slides };
+}
+
 export async function getDeckByPresentToken(
   presentToken: string
 ): Promise<DeckWithRelations | null> {
@@ -113,6 +125,8 @@ export async function listDecks(
     status?: "draft" | "ready" | "archived";
     limit?: number;
     offset?: number;
+    search?: string;
+    sort?: DeckSort;
   }
 ): Promise<{ decks: DeckWithRelations[]; total: number }> {
   const result = await listDecksRepo(ctx, options);

@@ -3,19 +3,31 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { themes } from "@/lib/db/schema";
 import { systemThemes } from "@/lib/slides/theme";
 
-const connectionString = process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/getfunnels";
+const SYSTEM_THEME_IDS: Record<string, string> = {
+  "getfunnels-dark": "40000000-0000-4000-8000-000000000001",
+  "getfunnels-light": "40000000-0000-4000-8000-000000000002",
+  midnight: "40000000-0000-4000-8000-000000000003",
+  editorial: "40000000-0000-4000-8000-000000000004",
+  minimal: "40000000-0000-4000-8000-000000000005",
+};
 
-const pool = new Pool({ connectionString });
-const db = drizzle({ client: pool, schema: { themes } });
+export async function seedThemes(connectionString?: string): Promise<void> {
+  const url = connectionString || process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/getfunnels";
+  const pool = new Pool({ connectionString: url });
+  const db = drizzle({ client: pool, schema: { themes } });
 
-export async function seedThemes() {
   console.log("Seeding system themes...");
 
   for (const theme of systemThemes) {
+    const id = SYSTEM_THEME_IDS[theme.id];
+    if (!id) {
+      throw new Error(`No canonical UUID mapped for system theme "${theme.id}"`);
+    }
+
     await db
       .insert(themes)
       .values({
-        id: theme.id,
+        id,
         orgId: null,
         name: theme.name,
         tokens: theme,
@@ -30,15 +42,16 @@ export async function seedThemes() {
           updatedAt: new Date(),
         },
       });
-    console.log(`  ✓ ${theme.name} (${theme.id})`);
+    console.log(`  ✓ ${theme.name} (${id})`);
   }
 
   console.log("System themes seeded!");
   await pool.end();
 }
 
-seedThemes().catch((err) => {
-  console.error("Seed themes failed:", err);
-  pool.end();
-  process.exit(1);
-});
+if (process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, "/").split("/").pop() ?? "")) {
+  seedThemes().catch((err) => {
+    console.error("Seed themes failed:", err);
+    process.exit(1);
+  });
+}

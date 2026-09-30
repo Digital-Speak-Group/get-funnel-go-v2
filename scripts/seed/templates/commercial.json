@@ -1,0 +1,662 @@
+{
+  "title": "Commercial",
+  "language": "fr",
+  "id": "60000000-0000-4000-8000-000000000004",
+  "slug": "commercial",
+  "name": "Commercial",
+  "category": "Vente Directe",
+  "description": "Tunnel commercial : prospection, découverte, présentation, objections, closing, suivi.",
+  "themeId": "40000000-0000-4000-8000-000000000001",
+  "slides": [
+    {
+      "id": "13000000-0000-4000-8000-000000000001",
+      "position": 0,
+      "type": "cover",
+      "script": "Merci d'être là. Je vais aller droit au but.\n\nDans les prochaines minutes, je vais te montrer exactement comment notre système peut t'aider à atteindre tes objectifs.\nPas de blabla commercial. Pas de pitch générique.\nOn va partir de ta situation réelle et voir si on peut faire quelque chose ensemble.\n\nDonc premièrement : je vais te poser quelques questions. Deuxièmement : je te montre le système. Troisièmement : on décide si ça a du sens ou pas.",
+      "notes": "Démarrer en position de force calme. L'objectif du call est de découvrir, pas de pitcher.",
+      "content": {
+        "kicker": "Session Stratégique — GetFunnels",
+        "title": "Votre Système Commercial Clé en Main",
+        "subtitle": "Prospection → Découverte → Présentation → Closing",
+        "presenterName": "Hamid El Bouhali"
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000002",
+      "position": 1,
+      "type": "statement",
+      "script": "Voilà le vrai problème des équipes commerciales aujourd'hui.\n\nCe n'est pas la motivation. Ce n'est pas le nombre de prospects.\nC'est l'absence de système.\n\nUne équipe commerciale sans système passe 40% de son temps sur des tâches administratives.\nElle relance au mauvais moment. Elle perd des leads qualifiés dans un CRM mal configuré.\nElle improvise les présentations et les objections.\n\nEt le résultat : des revenus imprévisibles. Une dépendance aux bons mois.",
+      "notes": "Créer la reconnaissance du problème avant de proposer la solution. Attendre la validation du prospect.",
+      "content": {
+        "eyebrow": "Le Diagnostic du Marché",
+        "headline": "LE PROBLÈME N'EST PAS LA MOTIVATION. C'EST L'ABSENCE DE SYSTÈME.",
+        "highlight": "40% du temps commercial perdu en tâches non-commerciales",
+        "sub": "CRM mal configuré, relances improvisées, présentations non-standardisées, objections non-traitées. Le résultat : des revenus imprévisibles."
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000003",
+      "position": 2,
+      "type": "authority",
+      "script": "Permettez-moi de me présenter rapidement.\n\nJe m'appelle Hamid El Bouhali. Je suis fondateur de GetFunnels.\nDepuis 8 ans, on construit des systèmes commerciaux pour des entreprises qui veulent passer à l'échelle.\n\nOn a travaillé avec des entrepreneurs indépendants en solo, des équipes de 2 à 5 commerciaux, et des structures plus larges.\nEt on a vu que dans 90% des cas, le problème n'est pas le commercial lui-même — c'est l'infrastructure.",
+      "notes": "Court et précis. Mettre en avant la pertinence par rapport à la situation du prospect, pas les awards.",
+      "content": {
+        "headline": "GetFunnels — Systèmes Commerciaux",
+        "points": [
+          {
+            "title": "8+ ans d'expérience terrain",
+            "text": "Plus de 470 systèmes de vente construits : solo, équipes de 2-5, structures en croissance."
+          },
+          {
+            "title": "Spécialistes du marché francophone",
+            "text": "Yomi Denzel, Thami Kabbaj, Mohamed Boclet et des dizaines de clients en 6 à 7 chiffres annuels."
+          },
+          {
+            "title": "Approche : infrastructure d'abord",
+            "text": "On ne forme pas les commerciaux à parler mieux. On construit le système pour qu'ils aient moins à improviser."
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000004",
+      "position": 3,
+      "type": "problem",
+      "script": "Voici les problèmes qu'on entend le plus souvent.\n\nLes leads entrent mais n'arrivent jamais au closing. Quelqu'un répond dans les 48h, l'autre dans les 5 jours. Et le prospect a déjà signé ailleurs.\n\nLe CRM est rempli de contacts que personne ne relance. Parce que les commerciaux ne savent pas quand relancer ni comment.\n\nLes présentations varient d'un commercial à l'autre. Certains vendent bien, d'autres moins. Et personne ne sait pourquoi.\n\nEst-ce que tu te reconnais dans l'un de ces points ?",
+      "notes": "Poser la question à la fin. Laisser le prospect répondre. S'adapter selon ses réponses.",
+      "content": {
+        "headline": "Les Problèmes Commerciaux les Plus Fréquents",
+        "intro": "Dans 9 cas sur 10, ce ne sont pas des problèmes de compétence. Ce sont des problèmes de système.",
+        "painPoints": [
+          {
+            "title": "Leads perdus en route",
+            "text": "Temps de réponse trop long → prospect déjà chez le concurrent avant le premier contact"
+          },
+          {
+            "title": "CRM fantôme",
+            "text": "Des contacts qualifiés enterrés dans un CRM que personne ne consulte vraiment"
+          },
+          {
+            "title": "Résultats qui dépendent de la personne",
+            "text": "Un commercial vend bien, un autre moins — l'entreprise ne sait pas standardiser ce qui marche"
+          },
+          {
+            "title": "Revenus imprévisibles",
+            "text": "Bons mois vs mauvais mois — impossible de prévoir et de planifier la croissance"
+          },
+          {
+            "title": "Objections non-traitées",
+            "text": "Chaque commercial gère les objections à sa façon — sans script validé, le taux de close reste bas"
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000005",
+      "position": 4,
+      "type": "definition",
+      "script": "Voilà ce qu'on appelle un système commercial.\n\nCe n'est pas un outil. Ce n'est pas un CRM de plus. C'est une architecture complète qui connecte chaque étape : de la prospection au closing, du closing au suivi.\n\nUn système commercial, c'est ce qui permet à un commercial moyen d'obtenir les résultats d'un bon commercial. Et à un bon commercial d'obtenir les résultats d'un excellent commercial.\n\nParce que le système compense les lacunes et amplifie les forces.",
+      "notes": "Définir clairement le concept pour que le prospect comprenne ce qu'on vend — pas de la formation, du système.",
+      "content": {
+        "headline": "Qu'est-ce qu'un Système Commercial ?",
+        "body": "Un système commercial est une architecture complète qui standardise chaque étape du cycle de vente : prospection, qualification, présentation, traitement des objections, closing et suivi. Il permet à chaque membre de l'équipe d'obtenir des résultats prévisibles, indépendamment de son niveau naturel.",
+        "pillars": [
+          {
+            "icon": "search",
+            "title": "Prospection standardisée",
+            "text": "Scripts de prospection testés + séquences automatisées pour contacter au bon moment"
+          },
+          {
+            "icon": "users",
+            "title": "Qualification rigoureuse",
+            "text": "Grille de qualification pour ne pas perdre de temps sur les mauvais prospects"
+          },
+          {
+            "icon": "trending-up",
+            "title": "Pipeline prévisible",
+            "text": "CRM configuré pour voir exactement où en est chaque prospect et quoi faire ensuite"
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000006",
+      "position": 5,
+      "type": "qualification",
+      "script": "Avant d'aller plus loin, j'aimerais mieux comprendre votre situation.\n\nJe vais vous poser quatre questions rapides. Il n'y a pas de bonne ou mauvaise réponse — l'objectif est de voir si notre système est adapté à votre contexte.\n\nPremière question : combien de nouveaux prospects entrent dans votre pipeline chaque mois ? Deuxième question : quel est votre taux de closing actuel ? Troisième question : combien de personnes composent votre équipe commerciale ? Quatrième question : quel est votre ticket moyen ?",
+      "notes": "Vraie phase de découverte. Écouter plus que parler. Prendre des notes. Le pitch vient après.",
+      "content": {
+        "headline": "Comprendre votre Situation Actuelle",
+        "questions": [
+          {
+            "question": "Combien de nouveaux prospects entrent dans votre pipeline chaque mois ?",
+            "options": [
+              "Moins de 20",
+              "20 à 50",
+              "50 à 150",
+              "Plus de 150"
+            ]
+          },
+          {
+            "question": "Quel est votre taux de closing actuel (prospects contactés → clients) ?",
+            "options": [
+              "Moins de 10%",
+              "10 à 20%",
+              "20 à 35%",
+              "Plus de 35%"
+            ]
+          },
+          {
+            "question": "Quelle est la taille de votre équipe commerciale ?",
+            "options": [
+              "Seul(e)",
+              "2 à 3 personnes",
+              "4 à 10 personnes",
+              "Plus de 10 personnes"
+            ]
+          },
+          {
+            "question": "Quel est votre ticket moyen ?",
+            "options": [
+              "Moins de 500 €",
+              "500 € à 2 000 €",
+              "2 000 € à 10 000 €",
+              "Plus de 10 000 €"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000007",
+      "position": 6,
+      "type": "objectives",
+      "script": "Maintenant que j'ai mieux compris votre situation, voici les objectifs qu'on vise ensemble.\n\nPremier objectif : doubler votre taux de closing en 90 jours. Pas en formant autrement. En standardisant ce qui marche déjà chez vos meilleurs commerciaux.\n\nDeuxième objectif : mettre en place un CRM qui génère des relances automatiques et prévisibles. Zéro lead perdu, zéro relance oubliée.\n\nTroisième objectif : construire un pipeline où chaque commercial sait exactement quoi faire à chaque étape — sans dépendre de l'intuition.",
+      "notes": "Adapter les objectifs selon les réponses de la phase de qualification. Personnaliser si possible.",
+      "content": {
+        "headline": "Objectifs — Ce qu'on Vise Ensemble",
+        "goals": [
+          {
+            "label": "Taux de closing",
+            "target": "+50 à 100%",
+            "text": "Standardiser les meilleures pratiques de l'équipe pour que tous les commerciaux closent mieux"
+          },
+          {
+            "label": "Pipeline prévisible",
+            "target": "Zéro lead perdu",
+            "text": "CRM configuré avec relances automatiques et alertes — chaque prospect suivi au bon moment"
+          },
+          {
+            "label": "Délai de déploiement",
+            "target": "90 jours",
+            "text": "Système opérationnel en 90 jours : scripts, CRM, formations et process documentés"
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000008",
+      "position": 7,
+      "type": "flow",
+      "script": "Voici le flux complet du système commercial que nous allons construire.\n\nÉtape 1 : prospection avec des séquences multicanal testées. Étape 2 : qualification rapide avec une grille en 4 critères. Étape 3 : présentation standardisée avec le script validé. Étape 4 : traitement des objections avec le guide complet. Étape 5 : closing avec la bonne technique selon le profil du prospect. Étape 6 : suivi post-close et upsell.\n\nChaque étape est documentée, testée, et reproductible.",
+      "notes": "Montrer la vue d'ensemble avant d'entrer dans les détails. Le prospect doit voir le système entier.",
+      "content": {
+        "headline": "Le Flux du Système Commercial Complet",
+        "steps": [
+          {
+            "label": "Prospection",
+            "title": "Séquences Multicanal",
+            "text": "Scripts LinkedIn + email + téléphone testés et optimisés selon le secteur",
+            "channel": "phone"
+          },
+          {
+            "label": "Qualification",
+            "title": "Grille BANT+",
+            "text": "4 critères pour qualifier en 5 minutes : besoin, autorité, budget, timing, urgence",
+            "channel": "phone"
+          },
+          {
+            "label": "Présentation",
+            "title": "Script Validé",
+            "text": "Présentation standardisée adaptable selon le profil — plus d'improvisation",
+            "channel": "dm"
+          },
+          {
+            "label": "Objections",
+            "title": "Guide Traitement",
+            "text": "Les 12 objections les plus fréquentes traitées avec les réponses validées en terrain",
+            "channel": "phone"
+          },
+          {
+            "label": "Closing",
+            "title": "Technique + CRM",
+            "text": "Closing selon le profil + enregistrement immédiat dans le CRM configuré",
+            "channel": "dm"
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000009",
+      "position": 8,
+      "type": "architecture",
+      "script": "Voici l'architecture complète du système en 3 couches.\n\nCouche 1 : l'infrastructure. CRM configuré, intégrations connectées, automatisations déployées.\nCouche 2 : le contenu commercial. Scripts de prospection, grilles de qualification, guide objections, scripts de closing.\nCouche 3 : la formation et le suivi. Onboarding de l'équipe, sessions de calibration, reporting mensuel.\n\nLes trois couches fonctionnent ensemble. En enlever une, c'est faire tourner le système en mode dégradé.",
+      "notes": "Montrer la cohérence du système. Chaque couche justifie les autres.",
+      "content": {
+        "headline": "Architecture du Système Commercial — 3 Couches",
+        "layers": [
+          {
+            "name": "Infrastructure",
+            "items": [
+              "CRM configuré et customisé",
+              "Intégrations : email, téléphone, WhatsApp",
+              "Automatisations de relance",
+              "Reporting et tableaux de bord"
+            ]
+          },
+          {
+            "name": "Contenu Commercial",
+            "items": [
+              "Scripts de prospection multicanal",
+              "Grille de qualification BANT+",
+              "Présentation standardisée",
+              "Guide de traitement des objections",
+              "Scripts de closing par profil"
+            ]
+          },
+          {
+            "name": "Formation & Suivi",
+            "items": [
+              "Onboarding de l'équipe (2 semaines)",
+              "Sessions de calibration hebdomadaires",
+              "Reporting mensuel et optimisations"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000010",
+      "position": 9,
+      "type": "crm",
+      "script": "Votre CRM — c'est le cerveau du système commercial.\n\nSans CRM correctement configuré, vous perdez des leads qualifiés, des relances, et de l'argent.\nAvec un bon CRM, chaque commercial sait exactement où en est chaque prospect et quelle est la prochaine action.\n\nVoici les étapes du pipeline qu'on configure systématiquement.\nLead entrant → Contacté → Qualifié → Présentation planifiée → Présentation faite → Offre envoyée → Closing → Gagné ou Perdu.",
+      "notes": "Concret et visuel. Le prospect doit pouvoir imaginer son propre CRM recconfiguré.",
+      "content": {
+        "headline": "CRM — Pipeline Commercial Optimisé",
+        "pipelines": [
+          {
+            "stage": "Lead entrant",
+            "definition": "Prospect qui a manifesté un intérêt — à contacter dans les 2h pour maximiser le taux de contact"
+          },
+          {
+            "stage": "Premier contact fait",
+            "definition": "Conversation initiée — qualifier dans les 24h ou passer en nurturing automatique"
+          },
+          {
+            "stage": "Qualifié",
+            "definition": "Critères BANT+ validés — planifier la présentation dans les 72h"
+          },
+          {
+            "stage": "Présentation planifiée",
+            "definition": "RDV confirmé — envoyer le rappel 24h et 1h avant"
+          },
+          {
+            "stage": "Offre envoyée",
+            "definition": "Proposition formelle transmise — relancer J+1 J+3 si pas de retour"
+          },
+          {
+            "stage": "Closing",
+            "definition": "Prospect en phase de décision — appel de closing dans les 48h"
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000011",
+      "position": 10,
+      "type": "automation",
+      "script": "L'automatisation commerciale — c'est ce qui libère 40% du temps de l'équipe.\n\nCe qu'on automatise systématiquement :\nLe premier contact après inscription ou demande de devis — dans les 5 minutes, pas dans les 48 heures.\nLes relances sur les prospects qualifiés qui ne répondent plus — 3 touches, 3 canaux, 7 jours.\nLes rappels de RDV — 24h avant et 1h avant pour minimiser les no-shows.\nLes messages post-présentation — 'avez-vous des questions ?' J+1.\n\nRésultat : l'équipe se concentre sur les conversations, pas l'administration.",
+      "notes": "Être précis sur ce qui est automatisé vs ce qui reste humain. Ne pas sur-promettre.",
+      "content": {
+        "headline": "Automatisation Commerciale — Libérer le Temps de l'Équipe",
+        "items": [
+          {
+            "trigger": "Nouveau lead entrant",
+            "action": "Message de prise de contact automatique (email + WhatsApp)",
+            "delay": "< 5 minutes"
+          },
+          {
+            "trigger": "Lead qualifié sans réponse",
+            "action": "Séquence de relance 3 messages sur 3 canaux différents",
+            "delay": "J+1 J+3 J+7"
+          },
+          {
+            "trigger": "RDV planifié",
+            "action": "Rappels automatiques email et SMS",
+            "delay": "J-1 et H-1"
+          },
+          {
+            "trigger": "Présentation effectuée",
+            "action": "Email de suivi avec résumé et prochaine étape",
+            "delay": "J+1"
+          },
+          {
+            "trigger": "Offre envoyée sans réponse",
+            "action": "Relance douce avec éléments de preuve additionnels",
+            "delay": "J+2 J+5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000012",
+      "position": 11,
+      "type": "why",
+      "script": "Pourquoi s'équiper d'un système commercial maintenant ?\n\nPremièrement : le coût d'opportunité. Chaque mois sans système, c'est des leads qualifiés qui partent chez le concurrent.\n\nDeuxièmement : la scalabilité. Sans système, recruter un commercial supplémentaire multiplie les problèmes. Avec le système, ça multiplie les résultats.\n\nTroisièmement : la prévisibilité. Un pipeline prévisible permet de planifier les recrutements, les investissements, et la croissance.\n\nQuatrièmement : la valeur de revente. Une entreprise avec un système commercial documenté vaut plus qu'une entreprise qui dépend de quelques individus.",
+      "notes": "Répondre à l'objection implicite : 'pourquoi maintenant ?' Créer l'urgence commerciale légitime.",
+      "content": {
+        "headline": "Pourquoi Déployer le Système Maintenant",
+        "reasons": [
+          {
+            "icon": "dollar-sign",
+            "title": "Coût d'opportunité immédiat",
+            "text": "Chaque mois sans système = leads perdus au profit des concurrents équipés"
+          },
+          {
+            "icon": "layers",
+            "title": "Scalabilité immédiate",
+            "text": "Recruter sans système multiplie le chaos — avec le système, chaque nouveau commercial est opérationnel en 2 semaines"
+          },
+          {
+            "icon": "bar-chart",
+            "title": "Revenus prévisibles",
+            "text": "Un pipeline structuré permet de prévoir les revenus à 30, 60, 90 jours"
+          },
+          {
+            "icon": "award",
+            "title": "Valeur d'entreprise",
+            "text": "Un système documenté augmente la valeur de revente et la crédibilité auprès des investisseurs"
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000013",
+      "position": 12,
+      "type": "proof",
+      "script": "Voici ce que des équipes similaires à la vôtre ont obtenu.\n\nCase 1 : une équipe de 3 commerciaux dans le conseil RH. Taux de closing avant : 12%. Taux de closing 3 mois après déploiement : 27%. Même équipe, même prospects, même offre. Système différent.\n\nCase 2 : un solopreneur en consulting IT. 8 prospects par mois, 1 closing en moyenne. Après système : 18 prospects contactés, 5 closings. Revenu multiplié par 4.\n\nLe point commun : pas de formation commerciale. Juste de l'infrastructure.",
+      "notes": "Spécifique et honnête. Mentionner le secteur pour que le prospect se reconnaisse. Éviter les chiffres trop ronds.",
+      "content": {
+        "headline": "Résultats Clients — Avant / Après Système",
+        "items": [
+          {
+            "quote": "On est passé de 12% à 27% de taux de closing en 3 mois. Même équipe, même offre, même marché. On a juste arrêté d'improviser.",
+            "name": "Cabinet de conseil RH",
+            "role": "Équipe de 3 commerciaux",
+            "result": "12% → 27% de taux de closing"
+          },
+          {
+            "quote": "Avant je closais 1 client sur 8 prospects. Maintenant c'est 5 sur 18. Mais surtout, je sais exactement pourquoi — et je peux l'optimiser.",
+            "name": "Consultant IT indépendant",
+            "role": "Solopreneur",
+            "result": "Revenu ×4 en 90 jours"
+          },
+          {
+            "quote": "Le plus grand impact : on a arrêté de perdre des leads qualifiés dans le CRM. Ça seul, ça représentait 30% de CA supplémentaire.",
+            "name": "Agence de formation B2B",
+            "role": "Directrice commerciale",
+            "result": "+30% CA récupéré sur les leads perdus"
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000014",
+      "position": 13,
+      "type": "analytics",
+      "script": "Voici les métriques qu'on suit et qu'on optimise une fois le système en place.\n\nPremière métrique : le taux de contact. Sur 100 leads entrants, combien sont contactés dans les 2 premières heures ?\n\nDeuxième métrique : le taux de qualification. Sur les prospects contactés, combien passent à la présentation ?\n\nTroisième métrique : le taux de conversion présentation → offre. Si ce ratio baisse, c'est le script de présentation qu'on optimise.\n\nQuatrième métrique : le taux de closing. Si ce ratio baisse, c'est le traitement des objections qu'on ajuste.",
+      "notes": "Montrer que le système est mesurable. Le prospect doit comprendre qu'il va pouvoir piloter, pas juste espérer.",
+      "content": {
+        "headline": "Métriques Commerciales — Ce qu'on Suit et Optimise",
+        "metrics": [
+          {
+            "name": "Taux de contact",
+            "definition": "% de leads contactés dans les 2h — objectif > 80%",
+            "target": "> 80%"
+          },
+          {
+            "name": "Taux de qualification",
+            "definition": "% de contactés qui atteignent la présentation — objectif > 40%",
+            "target": "> 40%"
+          },
+          {
+            "name": "Conversion présentation → offre",
+            "definition": "% de présentations qui génèrent une offre formelle — objectif > 70%",
+            "target": "> 70%"
+          },
+          {
+            "name": "Taux de closing",
+            "definition": "% d'offres signées — objectif 20 à 35% selon le secteur et le ticket",
+            "target": "20-35%"
+          },
+          {
+            "name": "Durée du cycle de vente",
+            "definition": "Jours entre premier contact et signature — objectif réduire de 30%",
+            "target": "-30%"
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000015",
+      "position": 14,
+      "type": "mistakes",
+      "script": "Les erreurs qu'on voit le plus souvent dans les organisations commerciales.\n\nErreur numéro 1 : traiter les symptômes, pas les causes. Former les commerciaux à 'mieux pitcher' alors que le vrai problème est un CRM mal configuré ou un flux de prospection inexistant.\n\nErreur numéro 2 : créer un script rigide que les commerciaux n'utilisent pas. Un bon script c'est un guide, pas un script à réciter.\n\nErreur numéro 3 : ne pas mesurer. Impossible d'optimiser ce qu'on ne mesure pas.",
+      "notes": "Les erreurs doivent être reconnaissables sans être condescendantes. Poser comme questions, pas comme accusations.",
+      "content": {
+        "headline": "Les Erreurs qui Empêchent le Système de Fonctionner",
+        "mistakes": [
+          {
+            "mistake": "Former sans corriger l'infrastructure",
+            "fix": "Corriger d'abord le CRM et les automatisations — la formation sur un mauvais système ne produit rien"
+          },
+          {
+            "mistake": "Scripts rigides que les commerciaux détestent",
+            "fix": "Créer des guides de conversation flexibles, pas des scripts à réciter — l'authenticité prime"
+          },
+          {
+            "mistake": "Absence de métriques de pipeline",
+            "fix": "Implémenter 5 KPIs simples dès le premier jour — impossible d'optimiser ce qu'on ne mesure pas"
+          },
+          {
+            "mistake": "Onboarding trop long des nouveaux commerciaux",
+            "fix": "Un bon système permet l'autonomie en 2 semaines maximum — documentation claire et processus standardisés"
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000016",
+      "position": 15,
+      "type": "plan",
+      "script": "Voici le plan de déploiement en trois phases.\n\nPhase 1 : audit et architecture. On passe 2 semaines à comprendre votre situation actuelle, à configurer le CRM, et à documenter les premiers scripts.\n\nPhase 2 : déploiement et formation. On forme l'équipe sur le système, on fait les premiers tests terrain, et on ajuste.\n\nPhase 3 : optimisation et reporting. On suit les métriques, on identifie les points de friction, et on optimise en continu.\n\n90 jours pour un système opérationnel et une équipe autonome.",
+      "notes": "Concret et réaliste. 90 jours est ambitieux mais crédible. Adapter selon la taille de l'équipe.",
+      "content": {
+        "headline": "Plan de Déploiement — 90 Jours vers le Système Complet",
+        "phases": [
+          {
+            "name": "Phase 1 — Audit & Architecture",
+            "duration": "Semaines 1-3",
+            "deliverables": [
+              "Audit du pipeline et du CRM actuel",
+              "Configuration CRM et intégrations",
+              "Scripts de prospection V1 rédigés",
+              "Grille de qualification BANT+ adaptée"
+            ]
+          },
+          {
+            "name": "Phase 2 — Déploiement & Formation",
+            "duration": "Semaines 4-8",
+            "deliverables": [
+              "Formation de l'équipe sur le système",
+              "Scripts de présentation et guide objections",
+              "Automatisations de relance déployées",
+              "Tests terrain et calibration"
+            ]
+          },
+          {
+            "name": "Phase 3 — Optimisation",
+            "duration": "Semaines 9-12",
+            "deliverables": [
+              "Tableau de bord KPIs opérationnel",
+              "Session d'optimisation hebdomadaire",
+              "Documentation complète remise",
+              "Plan d'autonomie de l'équipe"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000017",
+      "position": 16,
+      "type": "benefits",
+      "script": "Voici les bénéfices concrets du système mis en place.\n\nD'abord, la prévisibilité des revenus. Quand vous maîtrisez chaque étape du pipeline, vous pouvez prévoir votre CA à 30, 60, 90 jours. C'est ce qui permet de planifier les recrutements et les investissements.\n\nEnsuite, la scalabilité. Chaque nouveau commercial est opérationnel en 2 semaines au lieu de 3 à 6 mois. Le système le forme, pas juste les collègues.\n\nEt enfin, la liberté. Quand le système tourne, vous n'êtes plus dépendant d'un seul commercial ou d'une intuition. Vous avez une machine.",
+      "notes": "Bénéfices transformationnels, pas juste fonctionnels. Le prospect doit ressentir l'impact, pas juste le comprendre.",
+      "content": {
+        "headline": "Ce que le Système Change Concrètement",
+        "benefits": [
+          {
+            "icon": "bar-chart-2",
+            "title": "Revenus prévisibles",
+            "text": "Pipeline structuré = prévisions à 30/60/90 jours fiables pour planifier investissements et recrutements"
+          },
+          {
+            "icon": "zap",
+            "title": "Onboarding en 2 semaines",
+            "text": "Nouveau commercial opérationnel et dans les process en 14 jours — le système le forme"
+          },
+          {
+            "icon": "trending-up",
+            "title": "Taux de closing ×2 en 90 jours",
+            "text": "Les meilleures pratiques de l'équipe standardisées pour que tous performent au même niveau"
+          },
+          {
+            "icon": "shield",
+            "title": "Zéro dépendance individuelle",
+            "text": "Le système tourne indépendamment des individus — une personne qui part n'arrête pas la machine"
+          },
+          {
+            "icon": "target",
+            "title": "Décisions basées sur les données",
+            "text": "KPIs clairs à chaque étape : on sait exactement où optimiser et pourquoi"
+          },
+          {
+            "icon": "layers",
+            "title": "Scalabilité immédiate",
+            "text": "Doubler l'équipe sans doubler le chaos — le système absorbe la croissance"
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000018",
+      "position": 17,
+      "type": "pricing",
+      "script": "Voici les trois options selon votre situation et vos ambitions.\n\nL'option Essentiel est conçue pour les solopreneurs et les petites équipes jusqu'à 3 personnes. Elle inclut le système de base, le CRM configuré, et les scripts.\n\nL'option Croissance est pour les équipes de 3 à 10 personnes qui veulent accélérer. Elle ajoute 8 semaines d'accompagnement et la formation complète de l'équipe.\n\nL'option Performance est pour ceux qui veulent aller vite et loin — accompagnement 6 mois, reporting mensuel, optimisations continues.",
+      "notes": "Préserver les 3 options mais adapter la recommandation selon ce qu'on a appris pendant la qualification.",
+      "content": {
+        "headline": "Les 3 Options — Selon votre Ambition",
+        "tiers": [
+          {
+            "name": "Essentiel",
+            "price": "3 900 €",
+            "features": [
+              "Audit commercial complet",
+              "CRM configuré (1 utilisateur)",
+              "Scripts prospection + qualification",
+              "Guide traitement objections",
+              "Support 30 jours"
+            ],
+            "highlight": false
+          },
+          {
+            "name": "Croissance",
+            "price": "7 900 €",
+            "features": [
+              "Tout Essentiel",
+              "CRM jusqu'à 5 utilisateurs",
+              "Formation équipe (8 sessions)",
+              "Scripts de closing complets",
+              "Automatisations déployées",
+              "Accompagnement 8 semaines"
+            ],
+            "highlight": true
+          },
+          {
+            "name": "Performance",
+            "price": "14 900 €",
+            "features": [
+              "Tout Croissance",
+              "CRM utilisateurs illimités",
+              "Accompagnement 6 mois",
+              "Reporting mensuel KPIs",
+              "Sessions d'optimisation mensuelles"
+            ],
+            "highlight": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000019",
+      "position": 18,
+      "type": "comparison",
+      "script": "Pour vous aider à décider, voici une comparaison honnête des options qui s'offrent à vous.\n\nOption 1 : continuer comme vous le faites. Ça coûte du temps, de l'énergie, et des leads perdus — mais c'est gratuit à court terme.\n\nOption 2 : recruter un directeur commercial. Budget entre 60 000 et 100 000 € par an, 6 mois pour être opérationnel, et vous avez quand même besoin d'un système.\n\nOption 3 : déployer le système avec nous. Résultat en 90 jours, ROI positif dès le premier closing supplémentaire.",
+      "notes": "Comparaison objective. Ne jamais dénigrer le concurrent ou l'option de ne rien faire — juste exposer les faits.",
+      "content": {
+        "headline": "Comparer les Options — Une Vue Honnête",
+        "columns": ["Statu quo", "Recruter un DirCom", "Système GetFunnels"],
+        "rows": [
+          {
+            "label": "Investissement",
+            "values": ["0 € (mais coût caché)", "60-100k €/an", "3 900 à 14 900 €"]
+          },
+          {
+            "label": "Délai d'effet",
+            "values": ["Jamais", "6-12 mois", "90 jours"]
+          },
+          {
+            "label": "Scalabilité",
+            "values": ["Non", "Partielle", "Oui"]
+          },
+          {
+            "label": "Résultat garanti",
+            "values": ["Non", "Non", "Garanti ou remboursé"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "13000000-0000-4000-8000-000000000020",
+      "position": 19,
+      "type": "cta",
+      "script": "Voilà. On est au moment de décider.\n\nJe ne vais pas te faire pression — ça ne fait pas partie de notre façon de travailler.\nMais je vais te poser une question directe : est-ce que ce que tu as vu aujourd'hui correspond à ce que tu cherches ?\n\nSi oui, la prochaine étape est simple : on planifie un appel de démarrage cette semaine pour déposer les bases de l'audit.\nSi tu as encore des questions, c'est le bon moment pour les poser.\n\nEt si ce n'est pas le bon moment, dis-le moi — on ne perd pas de temps ni toi ni moi.",
+      "notes": "Closing assumé et direct. Pas de pression. Laisser le silence après la question. Ne pas combler le vide.",
+      "content": {
+        "headline": "Quelle est la Prochaine Étape ?",
+        "sub": "Si ce que vous avez vu correspond à votre situation, la prochaine étape est un appel de démarrage pour poser les bases de l'audit. Aucune obligation — juste une conversation de 30 minutes.",
+        "actions": [
+          {
+            "label": "Planifier l'appel de démarrage →",
+            "kind": "calendar"
+          },
+          {
+            "label": "Poser une question d'abord",
+            "kind": "whatsapp"
+          }
+        ]
+      }
+    }
+  ]
+}

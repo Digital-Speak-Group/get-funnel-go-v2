@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { MoreVertical, Edit, Trash2, Play, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,47 +14,88 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { SlideRenderer } from "@/components/slides/SlideRenderer";
-import { defaultTheme } from "@/lib/slides/theme";
+import { SlideThumbnail } from "@/components/slides/SlideThumbnail";
+import { defaultTheme, ThemeTokensSchema, type ThemeTokens } from "@/lib/slides/theme";
+import { SlideSchema, type Slide } from "@/lib/slides/schema";
 import { type DeckWithRelations } from "@/lib/db/repositories/decks";
-import { type Slide } from "@/lib/slides/schema";
+import {
+  updateDeckAction,
+  deleteDeckAction,
+  duplicateDeckAction,
+} from "@/app/(app)/app/decks/actions";
 
-interface DeckCardProps {
-  deck: DeckWithRelations;
-  onRename?: (id: string, newTitle: string) => Promise<void>;
-  onDelete?: (id: string) => Promise<void>;
-  onDuplicate?: (id: string) => Promise<void>;
+function resolveTheme(deck: DeckWithRelations): ThemeTokens {
+  if (!deck.theme) return defaultTheme;
+  const parsed = ThemeTokensSchema.safeParse(deck.theme.tokens);
+  return parsed.success ? parsed.data : defaultTheme;
 }
 
-export function DeckCard({ deck, onRename, onDelete, onDuplicate }: DeckCardProps) {
+function resolveFirstSlide(deck: DeckWithRelations): Slide | null {
+  if (!deck.firstSlide) return null;
+  const parsed = SlideSchema.safeParse({
+    ...deck.firstSlide,
+    notes: deck.firstSlide.notes ?? undefined,
+    script: deck.firstSlide.script ?? undefined,
+  });
+  return parsed.success ? parsed.data : null;
+}
+
+export function DeckCard({ deck }: { deck: DeckWithRelations }) {
+  const router = useRouter();
   const [isRenaming, setIsRenaming] = React.useState(false);
   const [renameValue, setRenameValue] = React.useState(deck.title);
   const [isDeleting, setIsDeleting] = React.useState(false);
   const [isDuplicating, setIsDuplicating] = React.useState(false);
 
-  const firstSlide = (deck.firstSlide ?? null) as Slide | null;
+  const [optimisticTitle, setOptimisticTitle] = React.useState(deck.title);
+
+  // Sync state if server updates
+  React.useEffect(() => {
+    setOptimisticTitle(deck.title);
+  }, [deck.title]);
+
+  const theme = React.useMemo(() => resolveTheme(deck), [deck]);
+  const firstSlide = React.useMemo(() => resolveFirstSlide(deck), [deck]);
 
   async function handleRename(e: React.FormEvent) {
     e.preventDefault();
-    if (!renameValue.trim() || renameValue === deck.title) {
+    const newTitle = renameValue.trim();
+    if (!newTitle || newTitle === deck.title) {
       setIsRenaming(false);
       return;
     }
-    await onRename?.(deck.id, renameValue.trim());
+    
+    // Optimistic update
+    setOptimisticTitle(newTitle);
+    
+    const result = await updateDeckAction({ id: deck.id, title: newTitle });
+    if ("error" in result && result.error) {
+      setRenameValue(deck.title);
+      setOptimisticTitle(deck.title);
+    }
     setIsRenaming(false);
+    React.startTransition(() => {
+      router.refresh();
+    });
   }
 
   async function handleDelete() {
     if (!confirm(`Supprimer "${deck.title}" ? Cette action est irréversible.`)) return;
     setIsDeleting(true);
-    await onDelete?.(deck.id);
-    setIsDeleting(false);
+    await deleteDeckAction(deck.id);
+    React.startTransition(() => {
+      setIsDeleting(false);
+      router.refresh();
+    });
   }
 
   async function handleDuplicate() {
     setIsDuplicating(true);
-    await onDuplicate?.(deck.id);
-    setIsDuplicating(false);
+    await duplicateDeckAction(deck.id);
+    React.startTransition(() => {
+      setIsDuplicating(false);
+      router.refresh();
+    });
   }
 
   return (
@@ -62,14 +104,12 @@ export function DeckCard({ deck, onRename, onDelete, onDuplicate }: DeckCardProp
         "group relative bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden transition-all duration-300",
         "hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10"
       )}
+      data-testid="deck-card"
+      data-deck-title={optimisticTitle}
     >
       <div className="relative aspect-video overflow-hidden">
         {firstSlide ? (
-          <SlideRenderer
-            slide={firstSlide}
-            theme={defaultTheme}
-            className="w-full h-full object-cover"
-          />
+          <SlideThumbnail slide={firstSlide} theme={theme} className="w-full h-full" />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-zinc-800">
             <svg
@@ -88,10 +128,10 @@ export function DeckCard({ deck, onRename, onDelete, onDuplicate }: DeckCardProp
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
+
         <div className="absolute bottom-3 left-3 right-3 flex justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
           <Link
-            href={`/app/decks/${deck.id}/present`}
+            href={`/present/${deck.id}`}
             className={cn(
               "ml-3 px-3 py-2 rounded-full bg-violet-600 text-white text-sm font-medium",
               "hover:bg-violet-500 transition-colors shadow-lg"
@@ -150,12 +190,18 @@ export function DeckCard({ deck, onRename, onDelete, onDuplicate }: DeckCardProp
               type="text"
               value={renameValue}
               onChange={(e) => setRenameValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  setRenameValue(deck.title);
+                  setIsRenaming(false);
+                }
+              }}
               className={cn(
                 "flex-1 px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg",
                 "text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500"
               )}
               autoFocus
-              onBlur={() => setIsRenaming(false)}
+              aria-label="Nouveau titre du deck"
             />
             <Button type="submit" size="sm" className="h-9">
               OK
@@ -176,7 +222,7 @@ export function DeckCard({ deck, onRename, onDelete, onDuplicate }: DeckCardProp
         ) : (
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
-              <h3 className="font-semibold text-white truncate">{deck.title}</h3>
+              <h2 className="font-semibold text-white truncate">{optimisticTitle}</h2>
               <div className="flex items-center gap-3 mt-1 text-xs text-zinc-400">
                 <span>{deck.slideCount} slides</span>
                 <span>•</span>

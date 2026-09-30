@@ -4,7 +4,7 @@ import path from "path";
 export default defineConfig({
   test: {
     environment: "jsdom",
-    include: ["tests/unit/**/*.test.ts", "tests/unit/**/*.test.tsx"],
+    include: ["tests/unit/**/*.test.ts", "tests/unit/**/*.test.tsx", "tests/ai/**/*.test.ts", "tests/integration/**/*.test.ts"],
     setupFiles: ["tests/setup.ts", "tests/setup-dom.ts"],
     globals: true,
     pool: "forks",

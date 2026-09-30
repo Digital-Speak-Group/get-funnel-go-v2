@@ -1,4 +1,4 @@
-import { pgTable, uuid, text, timestamp, pgEnum, boolean, jsonb, uniqueIndex, integer } from "drizzle-orm/pg-core";
+import { pgTable, uuid, text, timestamp, pgEnum, boolean, jsonb, uniqueIndex, integer, date } from "drizzle-orm/pg-core";
 
 export const roleEnum = pgEnum("role", ["owner", "admin", "editor", "viewer"]);
 export const statusEnum = pgEnum("status", ["draft", "ready", "archived"]);
@@ -142,20 +142,20 @@ export const aiGenerations = pgTable("ai_generations", {
   deckId: uuid("deck_id").references(() => decks.id, { onDelete: "set null" }),
   kind: kindEnum("kind").notNull(),
   model: text("model").notNull(),
-  inputTokens: text("input_tokens").notNull(),
-  outputTokens: text("output_tokens").notNull(),
-  costCents: text("cost_cents").notNull(),
+  inputTokens: integer("input_tokens").notNull(),
+  outputTokens: integer("output_tokens").notNull(),
+  costCents: integer("cost_cents").notNull(), // We use integer for cents
   status: generationStatusEnum("status").notNull(),
   error: text("error"),
-  durationMs: text("duration_ms").notNull(),
+  durationMs: integer("duration_ms").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
 export const usageCounters = pgTable("usage_counters", {
   orgId: uuid("org_id").references(() => organizations.id, { onDelete: "cascade" }).notNull(),
-  periodStart: text("period_start").notNull(),
-  aiCreditsUsed: text("ai_credits_used").notNull().default("0"),
-  decksCreated: text("decks_created").notNull().default("0"),
+  periodStart: date("period_start").notNull(),
+  aiCreditsUsed: integer("ai_credits_used").notNull().default(0),
+  decksCreated: integer("decks_created").notNull().default(0),
 }, (t) => ({
   pk: uniqueIndex("usage_counters_pk").on(t.orgId, t.periodStart),
 }));

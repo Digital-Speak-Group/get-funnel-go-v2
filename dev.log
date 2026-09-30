@@ -1,0 +1,397 @@
+
+> getfunnels@0.0.0 dev
+> next dev
+
+   ▲ Next.js 15.5.26
+   - Local:        http://localhost:3000
+   - Network:      http://172.19.0.1:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 3.3s
+ ○ Compiling /login ...
+ ✓ Compiled /login in 4.7s (828 modules)
+ GET /login 200 in 5887ms
+ GET /login 200 in 234ms
+ GET /login 200 in 150ms
+ ○ Compiling / ...
+ ✓ Compiled / in 864ms (833 modules)
+ GET / 200 in 1338ms
+ GET / 200 in 77ms
+ GET /login 200 in 437ms
+ GET /login 200 in 438ms
+ POST /login 200 in 1368ms
+ POST /login 200 in 1480ms
+ ○ Compiling /app ...
+ ✓ Compiled /app in 4.6s (1661 modules)
+ GET /app 200 in 8724ms
+ GET /app 200 in 2724ms
+ GET /app 200 in 2780ms
+ GET /app 200 in 8792ms
+ GET /app?sort=title_asc 200 in 958ms
+ GET /login 200 in 572ms
+ POST /app 200 in 2663ms
+ GET /app 200 in 1915ms
+ POST /login 200 in 584ms
+ GET /app 200 in 1194ms
+ GET /app 200 in 1091ms
+ GET /app 200 in 2080ms
+ POST /app 200 in 2304ms
+ GET /app 200 in 1728ms
+ GET /app?search=Deck+e2e+1790682277674+%E2%80%94+renomm%C3%A9 200 in 461ms
+ POST /app 200 in 1583ms
+ GET /app 200 in 1428ms
+ ○ Compiling /app/decks/[deckId] ...
+ ✓ Compiled /app/decks/[deckId] in 3.8s (1863 modules)
+ POST /app?search=Deck+e2e+1790682277674+%E2%80%94+renomm%C3%A9 200 in 5838ms
+ GET /app 200 in 1718ms
+ GET /app 200 in 6534ms
+ GET /app 200 in 915ms
+ GET /login 200 in 792ms
+ GET /app/decks/3399e4df-1941-4917-87d4-1b290f92beec 200 in 8028ms
+ POST /login 200 in 365ms
+ POST /app/decks/3399e4df-1941-4917-87d4-1b290f92beec 200 in 1726ms
+ GET /app 200 in 1495ms
+ GET /app 200 in 1662ms
+ POST /app/decks/3399e4df-1941-4917-87d4-1b290f92beec 200 in 268ms
+ GET /app 200 in 1922ms
+ POST /app/decks/3399e4df-1941-4917-87d4-1b290f92beec 200 in 609ms
+ POST /app/decks/3399e4df-1941-4917-87d4-1b290f92beec 200 in 623ms
+ GET /app/decks/3399e4df-1941-4917-87d4-1b290f92beec 200 in 896ms
+ POST /app 200 in 1873ms
+ GET /app 200 in 1600ms
+ GET /app/decks/f3d4178f-bad8-41dd-8216-b83b4273e828 200 in 542ms
+ POST /app/decks/f3d4178f-bad8-41dd-8216-b83b4273e828 200 in 273ms
+ POST /app/decks/f3d4178f-bad8-41dd-8216-b83b4273e828 200 in 212ms
+ GET /app/decks/f3d4178f-bad8-41dd-8216-b83b4273e828 200 in 663ms
+ GET / 200 in 105ms
+ ✓ Compiled in 401ms (522 modules)
+ ✓ Compiled in 364ms (522 modules)
+ GET / 200 in 123ms
+ GET / 200 in 143ms
+ GET /login 200 in 260ms
+ POST /login 200 in 704ms
+ GET /app 200 in 1528ms
+ GET /app 200 in 1828ms
+ GET /app 200 in 1945ms
+ POST /app 200 in 1621ms
+ GET /app 200 in 1533ms
+ GET /app/decks/1ecf0fd7-6eb4-460f-a510-dd6b2358fcec 200 in 481ms
+ POST /app/decks/1ecf0fd7-6eb4-460f-a510-dd6b2358fcec 200 in 640ms
+ POST /app/decks/1ecf0fd7-6eb4-460f-a510-dd6b2358fcec 200 in 229ms
+ POST /app/decks/1ecf0fd7-6eb4-460f-a510-dd6b2358fcec 200 in 278ms
+ POST /app/decks/1ecf0fd7-6eb4-460f-a510-dd6b2358fcec 200 in 486ms
+ GET /app/decks/1ecf0fd7-6eb4-460f-a510-dd6b2358fcec 200 in 732ms
+ ✓ Compiled in 475ms (522 modules)
+ GET / 200 in 83ms
+ GET / 200 in 83ms
+ GET /login 200 in 161ms
+ POST /login 200 in 487ms
+ GET /app 200 in 1254ms
+ GET /app 200 in 1338ms
+ GET /app 200 in 2073ms
+ POST /app 200 in 1752ms
+ GET /app 200 in 1549ms
+ GET /app/decks/07fe8306-2459-43dd-b817-f71984208160 200 in 480ms
+ POST /app/decks/07fe8306-2459-43dd-b817-f71984208160 200 in 691ms
+ POST /app/decks/07fe8306-2459-43dd-b817-f71984208160 200 in 307ms
+ ✓ Compiled in 2.4s (1873 modules)
+ ✓ Compiled in 310ms (522 modules)
+ ✓ Compiled / in 380ms (1355 modules)
+ GET / 200 in 764ms
+ GET / 200 in 63ms
+ GET /login 200 in 202ms
+ POST /login 200 in 629ms
+ GET /app 200 in 1987ms
+ GET /app 200 in 1594ms
+ GET /app 200 in 2444ms
+ POST /app 200 in 1993ms
+ GET /app 200 in 1844ms
+ GET /app/decks/e13a91b1-7711-4b73-8648-2530be74688d 200 in 571ms
+ POST /app/decks/e13a91b1-7711-4b73-8648-2530be74688d 200 in 1027ms
+ POST /app/decks/e13a91b1-7711-4b73-8648-2530be74688d 200 in 261ms
+ ✓ Compiled in 2.6s (1873 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 524ms (1355 modules)
+ GET / 200 in 890ms
+ GET / 200 in 56ms
+ GET /login 200 in 224ms
+ POST /login 200 in 945ms
+ GET /app 200 in 1609ms
+ GET /app 200 in 2149ms
+ GET /app 200 in 2715ms
+ GET /app 200 in 1819ms
+ POST /app 200 in 2191ms
+ GET /app/decks/f7909768-fc42-4862-af01-e5b2fc19f42f 200 in 561ms
+ POST /app/decks/f7909768-fc42-4862-af01-e5b2fc19f42f 200 in 1084ms
+ POST /app/decks/f7909768-fc42-4862-af01-e5b2fc19f42f 200 in 271ms
+ ✓ Compiled in 470ms (522 modules)
+ GET / 200 in 100ms
+ GET / 200 in 95ms
+ GET /login 200 in 294ms
+ GET /login 200 in 281ms
+ POST /login 200 in 476ms
+ POST /login 200 in 487ms
+ GET /app 200 in 2503ms
+ GET /app?sort=title_asc 200 in 978ms
+ GET /app 200 in 2259ms
+ GET /app 200 in 2699ms
+ GET /login 200 in 304ms
+ GET /app 200 in 2816ms
+ POST /login 200 in 305ms
+ POST /app 200 in 3104ms
+ GET /app 200 in 2753ms
+ GET /app 200 in 1097ms
+ GET /app 200 in 991ms
+ GET /app 200 in 2739ms
+ POST /app 200 in 2724ms
+ GET /app 200 in 2598ms
+ GET /app?search=Deck+e2e+1790682674311+%E2%80%94+renomm%C3%A9 200 in 427ms
+ POST /app 200 in 2649ms
+ POST /app?search=Deck+e2e+1790682674311+%E2%80%94+renomm%C3%A9 200 in 470ms
+ GET /app 200 in 2598ms
+ GET /app 200 in 571ms
+ GET /app 200 in 700ms
+ GET /login 200 in 310ms
+ GET /app/decks/4821af70-5665-4af8-9c87-3ff952afdfc3 200 in 763ms
+ POST /login 200 in 349ms
+ POST /app/decks/4821af70-5665-4af8-9c87-3ff952afdfc3 200 in 808ms
+ GET /app 200 in 1076ms
+ GET /app 200 in 960ms
+ POST /app/decks/4821af70-5665-4af8-9c87-3ff952afdfc3 200 in 292ms
+ POST /app/decks/4821af70-5665-4af8-9c87-3ff952afdfc3 200 in 302ms
+ POST /app/decks/4821af70-5665-4af8-9c87-3ff952afdfc3 200 in 597ms
+ GET /app/decks/4821af70-5665-4af8-9c87-3ff952afdfc3 200 in 995ms
+ GET /app 200 in 3291ms
+ GET / 200 in 104ms
+ GET /app 200 in 2298ms
+ POST /app 200 in 2674ms
+ GET /app/decks/0ff31d42-9404-46bb-bd37-15b6e958de52 200 in 543ms
+ POST /app/decks/0ff31d42-9404-46bb-bd37-15b6e958de52 200 in 476ms
+ POST /app/decks/0ff31d42-9404-46bb-bd37-15b6e958de52 200 in 227ms
+ GET /app/decks/0ff31d42-9404-46bb-bd37-15b6e958de52 200 in 664ms
+ ✓ Compiled in 382ms (522 modules)
+ ✓ Compiled in 1345ms (522 modules)
+ ✓ Compiled in 411ms (522 modules)
+ ✓ Compiled in 416ms (522 modules)
+ ✓ Compiled in 347ms (522 modules)
+ ✓ Compiled in 251ms (522 modules)
+ ✓ Compiled in 2.3s (522 modules)
+ ✓ Compiled in 427ms (522 modules)
+ ✓ Compiled in 4.3s (522 modules)
+ ✓ Compiled in 472ms (522 modules)
+ ✓ Compiled in 6.4s (522 modules)
+ ✓ Compiled in 286ms (522 modules)
+ ✓ Compiled in 541ms (522 modules)
+ ✓ Compiled in 286ms (522 modules)
+ ✓ Compiled in 524ms (522 modules)
+ ✓ Compiled in 288ms (522 modules)
+ ✓ Compiled in 488ms (522 modules)
+ ✓ Compiled in 499ms (522 modules)
+ ✓ Compiled in 285ms (522 modules)
+ ✓ Compiled in 1342ms (1859 modules)
+ ✓ Compiled in 215ms (522 modules)
+ ✓ Compiled in 1092ms (1859 modules)
+ ✓ Compiled in 1930ms (1873 modules)
+ ✓ Compiled in 1159ms (1873 modules)
+ ✓ Compiled in 1160ms (1873 modules)
+ ✓ Compiled in 287ms (522 modules)
+ ✓ Compiled in 771ms (1859 modules)
+ ✓ Compiled in 275ms (522 modules)
+ ✓ Compiled in 1406ms (1859 modules)
+ ✓ Compiled in 389ms (522 modules)
+ ✓ Compiled in 298ms (522 modules)
+ ✓ Compiled in 389ms (522 modules)
+ ✓ Compiled in 638ms (522 modules)
+ ✓ Compiled in 288ms (522 modules)
+ ✓ Compiled in 307ms (522 modules)
+ ✓ Compiled in 206ms (522 modules)
+ ✓ Compiled in 183ms (522 modules)
+ ✓ Compiled in 783ms (1859 modules)
+ ✓ Compiled in 2.1s (1873 modules)
+ ✓ Compiled in 331ms (522 modules)
+ ✓ Compiled in 261ms (522 modules)
+ ✓ Compiled in 349ms (522 modules)
+ ✓ Compiled in 295ms (522 modules)
+ ✓ Compiled in 1100ms (1859 modules)
+ ✓ Compiled in 265ms (522 modules)
+ ✓ Compiled in 324ms (522 modules)
+ ✓ Compiled in 267ms (522 modules)
+ ✓ Compiled in 251ms (522 modules)
+ ✓ Compiled in 369ms (522 modules)
+ ✓ Compiled in 259ms (522 modules)
+ ✓ Compiled in 239ms (522 modules)
+ ✓ Compiled in 316ms (522 modules)
+ ✓ Compiled in 279ms (522 modules)
+ ✓ Compiled in 415ms (522 modules)
+ ✓ Compiled in 205ms (522 modules)
+ ✓ Compiled in 838ms (1859 modules)
+ ✓ Compiled in 389ms (522 modules)
+ ✓ Compiled in 1912ms (1875 modules)
+ ✓ Compiled in 243ms (523 modules)
+ ✓ Compiled in 278ms (523 modules)
+ ✓ Compiled in 212ms (523 modules)
+ ✓ Compiled in 157ms (523 modules)
+ ✓ Compiled in 196ms (523 modules)
+ ✓ Compiled in 172ms (523 modules)
+ ✓ Compiled in 329ms (523 modules)
+ ✓ Compiled in 283ms (523 modules)
+ ✓ Compiled in 326ms (523 modules)
+ ✓ Compiled in 1066ms (1875 modules)
+ ✓ Compiled in 189ms (523 modules)
+ ✓ Compiled in 177ms (523 modules)
+ ✓ Compiled in 270ms (523 modules)
+ ✓ Compiled in 273ms (523 modules)
+ ✓ Compiled in 257ms (523 modules)
+ ✓ Compiled in 197ms (523 modules)
+ ✓ Compiled in 200ms (523 modules)
+ ✓ Compiled in 258ms (523 modules)
+ ✓ Compiled in 162ms (523 modules)
+ ✓ Compiled in 173ms (523 modules)
+ ✓ Compiled in 246ms (523 modules)
+ ✓ Compiled in 297ms (523 modules)
+ ✓ Compiled in 311ms (523 modules)
+ ✓ Compiled in 631ms (523 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 924ms (1356 modules)
+ GET / 200 in 1408ms
+ GET /login 200 in 316ms
+ GET /login?email=elbarryanwar37%40gmail.com&password=elbarryanwar37%40gmail.com 200 in 200ms
+ GET /login?email=elbarryanwar37%40gmail.com&password=elbarryanwar37%40gmail.com 200 in 168ms
+ GET /login?email=elbarryanwar37%40gmail.com&password=elbarryanwar37%40gmail.com 200 in 110ms
+ GET /login?email=elbarryanwar37%40gmail.com&password=elbarryanwar37%40gmail.com 200 in 116ms
+ GET /login?email=elbarryanwar37%40gmail.com&password=elbarryanwar37%40gmail.com 200 in 177ms
+ GET /login?email=elbarryanwar37%40gmail.com&password=elbarryanwar37%40gmail.com 200 in 165ms
+ GET /login?email=elbarryanwar37%40gmail.com&password=elbarryanwar37%40gmail.com 200 in 190ms
+ GET / 200 in 95ms
+   Reload env: .env
+ ✓ Compiled in 1197ms (1879 modules)
+ ✓ Compiled in 316ms (523 modules)
+   Reload env: .env
+ ✓ Compiled in 551ms (1879 modules)
+ ✓ Compiled in 406ms (523 modules)
+   Reload env: .env
+ ✓ Compiled in 635ms (1865 modules)
+ ✓ Compiled in 332ms (523 modules)
+ ✓ Compiled in 370ms (523 modules)
+   Reload env: .env
+ ✓ Compiled in 1072ms (1879 modules)
+   Reload env: .env
+ ✓ Compiled in 576ms (1865 modules)
+ ✓ Compiled in 185ms (523 modules)
+ ✓ Compiled in 892ms (1879 modules)
+ ✓ Compiled in 343ms (523 modules)
+ ✓ Compiled in 273ms (523 modules)
+ ✓ Compiled in 265ms (523 modules)
+ ✓ Compiled in 195ms (523 modules)
+ ✓ Compiled in 272ms (523 modules)
+ ✓ Compiled in 201ms (523 modules)
+ ✓ Compiled in 205ms (523 modules)
+ ✓ Compiled in 253ms (523 modules)
+ ✓ Compiled in 296ms (523 modules)
+ ✓ Compiled in 1059ms (1879 modules)
+ ✓ Compiled in 244ms (523 modules)
+ ✓ Compiled in 183ms (523 modules)
+ ✓ Compiled in 213ms (523 modules)
+ ✓ Compiled in 280ms (523 modules)
+ ✓ Compiled in 341ms (523 modules)
+ ✓ Compiled in 265ms (523 modules)
+ ✓ Compiled in 226ms (523 modules)
+ ✓ Compiled in 184ms (523 modules)
+ ✓ Compiled in 272ms (523 modules)
+ ✓ Compiled in 238ms (523 modules)
+ ✓ Compiled in 267ms (523 modules)
+ ✓ Compiled in 285ms (523 modules)
+ ✓ Compiled in 188ms (523 modules)
+ ✓ Compiled in 705ms (1865 modules)
+ ✓ Compiled in 297ms (523 modules)
+ ✓ Compiled in 289ms (523 modules)
+ ✓ Compiled in 185ms (523 modules)
+ ✓ Compiled in 183ms (523 modules)
+ ✓ Compiled in 1205ms (1865 modules)
+ ✓ Compiled in 304ms (523 modules)
+ ✓ Compiled in 215ms (523 modules)
+ ✓ Compiled in 190ms (523 modules)
+ ✓ Compiled in 1070ms (1879 modules)
+ ✓ Compiled in 361ms (523 modules)
+ ✓ Compiled in 309ms (523 modules)
+ ✓ Compiled in 336ms (523 modules)
+ ✓ Compiled in 434ms (523 modules)
+ ✓ Compiled in 2.5s (1879 modules)
+ ✓ Compiled in 1579ms (1879 modules)
+ ✓ Compiled in 270ms (523 modules)
+ ✓ Compiled in 272ms (523 modules)
+ ✓ Compiled in 245ms (523 modules)
+ ✓ Compiled in 2.3s (523 modules)
+ ✓ Compiled in 1281ms (523 modules)
+ ✓ Compiled in 3s (523 modules)
+ ✓ Compiled in 437ms (523 modules)
+ ✓ Compiled in 418ms (523 modules)
+ ✓ Compiled in 279ms (523 modules)
+ ✓ Compiled in 351ms (523 modules)
+ ✓ Compiled in 282ms (523 modules)
+ ✓ Compiled in 446ms (523 modules)
+ ✓ Compiled in 310ms (523 modules)
+ ✓ Compiled in 1522ms (523 modules)
+ ✓ Compiled in 1582ms (523 modules)
+ ✓ Compiled in 365ms (523 modules)
+ ✓ Compiled in 530ms (523 modules)
+ ✓ Compiled in 4.6s (523 modules)
+ ✓ Compiled in 313ms (523 modules)
+ ✓ Compiled in 506ms (523 modules)
+ ✓ Compiled in 339ms (523 modules)
+ ✓ Compiled in 258ms (523 modules)
+ ✓ Compiled in 417ms (523 modules)
+ ✓ Compiled in 398ms (523 modules)
+ ✓ Compiled in 499ms (523 modules)
+ ✓ Compiled in 1400ms (1865 modules)
+ ✓ Compiled in 1577ms (1865 modules)
+ ✓ Compiled in 346ms (523 modules)
+ ✓ Compiled in 326ms (523 modules)
+ ✓ Compiled in 318ms (523 modules)
+ ✓ Compiled in 5.8s (523 modules)
+ ✓ Compiled in 11.7s (1879 modules)
+ ✓ Compiled in 468ms (523 modules)
+ ✓ Compiled in 7.9s (523 modules)
+ ✓ Compiled in 1550ms (523 modules)
+ ✓ Compiled in 611ms (523 modules)
+ ✓ Compiled in 1029ms (523 modules)
+ ✓ Compiled in 490ms (523 modules)
+ ✓ Compiled in 513ms (523 modules)
+ ✓ Compiled in 558ms (523 modules)
+ ✓ Compiled in 1207ms (523 modules)
+   Reload env: .env
+ ✓ Compiled in 3.3s (1879 modules)
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 6.8s (1884 modules)
+ ✓ Compiled in 6.4s (523 modules)
+ ✓ Compiled in 384ms (523 modules)
+ ✓ Compiled in 382ms (523 modules)
+ ✓ Compiled in 1939ms (1879 modules)
+ ✓ Compiled in 314ms (523 modules)
+ ✓ Compiled in 339ms (523 modules)
+ ✓ Compiled in 752ms (1879 modules)
+ ✓ Compiled in 276ms (523 modules)
+ ✓ Compiled in 387ms (523 modules)
+ ✓ Compiled in 272ms (523 modules)
+ ✓ Compiled in 332ms (523 modules)
+ ✓ Compiled in 309ms (523 modules)
+ ✓ Compiled in 8.1s (523 modules)
+ ✓ Compiled in 1023ms (523 modules)
+ ✓ Compiled in 340ms (523 modules)
+ ✓ Compiled in 326ms (523 modules)
+ ✓ Compiled in 534ms (523 modules)
+ ✓ Compiled in 390ms (523 modules)
+ ✓ Compiled in 2.8s (1879 modules)
+ ✓ Compiled in 272ms (523 modules)
+ ✓ Compiled in 271ms (523 modules)
+ ✓ Compiled in 316ms (523 modules)
+ ✓ Compiled in 4s (523 modules)
+ ✓ Compiled in 460ms (523 modules)
+ ✓ Compiled in 391ms (523 modules)
+ ✓ Compiled in 1282ms (523 modules)
+ ✓ Compiled in 506ms (523 modules)
+ ✓ Compiled in 440ms (523 modules)
+ ✓ Compiled in 390ms (523 modules)
+ ✓ Compiled in 314ms (523 modules)
+ ✓ Compiled in 5.4s (523 modules)

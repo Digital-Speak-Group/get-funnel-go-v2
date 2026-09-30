@@ -168,9 +168,9 @@
 ### Task 15: System themes + theme picker
 **Description:** Seed 5 system themes (getfunnels-dark, getfunnels-light, midnight, editorial, minimal) and build the theme picker component used in the editor and wizard.
 **Acceptance:**
-- [ ] All themes pass contrast checks (≥ 4.5:1 body text)
-- [ ] Picker previews a live slide thumbnail per theme
-- [ ] Theme selection is a pure token swap — no component changes
+- [x] All themes pass contrast checks (≥ 4.5:1 body text)
+- [x] Picker previews a live slide thumbnail per theme
+- [x] Theme selection is a pure token swap — no component changes
 **Verify:** `npm run db:seed` + manual check of all 5 themes on 3 slide types
 **Dependencies:** 12, 13, 14
 **Files:** `scripts/seed/themes.ts`, `src/components/app/ThemePicker.tsx`
@@ -190,9 +190,9 @@
 ### Task 17: Dashboard
 **Description:** `/app` deck grid with thumbnails (first slide render), search, sort, create/rename/delete, and a strong empty state.
 **Acceptance:**
-- [ ] Create → list → rename → delete all work without full page reloads
-- [ ] Thumbnails render the real first slide with its theme
-- [ ] Empty state offers "generate your first deck" and "start from a template"
+- [x] Create → list → rename → delete all work without full page reloads
+- [x] Thumbnails render the real first slide with its theme
+- [x] Empty state offers "generate your first deck" and "start from a template"
 **Verify:** Playwright spec `e2e/dashboard.spec.ts`
 **Dependencies:** 16, 8
 **Files:** `src/app/(app)/app/page.tsx`, `src/components/app/DeckCard.tsx`, `e2e/dashboard.spec.ts`
@@ -201,9 +201,9 @@
 ### Task 18: Deck editor
 **Description:** `/app/decks/[id]` editor: slide list with reorder, canvas preview, inline text editing for schema fields, add/remove/duplicate slide, theme switch, autosave with status indicator.
 **Acceptance:**
-- [ ] Edits persist and survive reload; autosave debounced ≤ 1 s
-- [ ] Reorder updates positions transactionally
-- [ ] Validation errors (schema limits) shown inline and block save
+- [x] Edits persist and survive reload; autosave debounced ≤ 1 s
+- [x] Reorder updates positions transactionally
+- [x] Validation errors (schema limits) shown inline and block save
 **Verify:** Playwright spec `e2e/editor.spec.ts` + manual edit session
 **Dependencies:** 17
 **Files:** `src/app/(app)/app/decks/[deckId]/page.tsx`, `src/components/app/editor/*` (3–4 files)
@@ -212,9 +212,9 @@
 ### Task 19: Legacy template port + seed
 **Description:** Port the legacy decks into typed seed JSON under `scripts/seed/templates/` (map legacy slide types to the canonical 27; carry `notes` and `script` from the legacy presenter files). Seed system templates.
 **Acceptance:**
-- [ ] 4 decks ported (RDV Classique, VSL, Webinaire, Commercial) and validate against `DeckSchema`
-- [ ] Presenter notes/scripts preserved per slide where they existed
-- [ ] "Use template" creates a deck with correct theme and slide count
+- [x] 4 decks ported (RDV Classique, VSL, Webinaire, Commercial) and validate against `DeckSchema`
+- [x] Presenter notes/scripts preserved per slide where they existed
+- [x] "Use template" creates a deck with correct theme and slide count
 **Verify:** `npm run db:seed` + open each template in the editor + `npm run test -- templates`
 **Dependencies:** 16
 **Files:** `scripts/seed/templates/*.json`, `scripts/seed/templates.ts`, `tests/unit/template-seed.test.ts`
@@ -223,9 +223,9 @@
 ### Task 20: Presenter view
 **Description:** `/app/decks/[id]/present`: current + next slide, script/notes/metrics tabs, timer, keyboard-only control (arrows, space, F, P), slide-time metrics.
 **Acceptance:**
-- [ ] Keyboard drives everything; no mouse required
-- [ ] Timer and per-slide time tracked in memory and shown live
-- [ ] Works full-screen on 1440×900 and 1920×1080
+- [x] Keyboard drives everything; no mouse required
+- [x] Timer and per-slide time tracked in memory and shown live
+- [x] Works full-screen on 1440×900 and 1920×1080
 **Verify:** Manual presentation run + Playwright keyboard spec
 **Dependencies:** 16
 **Files:** `src/app/(app)/app/decks/[deckId]/present/page.tsx`, `src/components/presenter/*` (3–4 files)
@@ -234,9 +234,9 @@
 ### Task 21: Audience view + public token route
 **Description:** `/p/[token]` full-bleed animated audience view, no chrome, no auth; server route resolves token → sanitized deck payload; token rotatable from settings; rate-limited.
 **Acceptance:**
-- [ ] Valid token renders slides; invalid/rotated token returns 404
-- [ ] Payload contains no internal ids, emails, or org data
-- [ ] Rotating the token invalidates old links immediately
+- [x] Valid token renders slides; invalid/rotated token returns 404
+- [x] Payload contains no internal ids, emails, or org data
+- [x] Rotating the token invalidates old links immediately
 **Verify:** `e2e/audience.spec.ts` + manual open in a private window
 **Dependencies:** 16
 **Files:** `src/app/p/[token]/page.tsx`, `src/app/api/p/[token]/state/route.ts`, `src/server/services/audience.ts`
@@ -245,9 +245,9 @@
 ### Task 22: Realtime provider + sync
 **Description:** `RealtimeProvider` interface plus Supabase broadcast implementation; presenter publishes `{ slideIndex, ts }`; audience subscribes; polling fallback behind a flag; throttled to 10 msg/s.
 **Acceptance:**
-- [ ] Two browsers (different machines) stay in sync < 2 s p95
-- [ ] Reconnect after network drop resumes sync without reload
-- [ ] Provider interface is vendor-free; implementation swappable
+- [x] Two browsers (different machines) stay in sync < 2 s p95
+- [x] Reconnect after network drop resumes sync without reload
+- [x] Provider interface is vendor-free; implementation swappable
 **Verify:** Manual two-device test + `npm run test -- realtime` (fake provider)
 **Dependencies:** 20, 21
 **Files:** `src/lib/realtime/types.ts`, `src/lib/realtime/supabase.ts`, `src/hooks/useSyncedSlide.ts`
@@ -256,9 +256,9 @@
 ### Task 23: PDF export
 **Description:** Export a deck to PDF with print-optimized slide pages matching on-screen rendering (16:9 pages, no app chrome).
 **Acceptance:**
-- [ ] Exported PDF has one page per slide, correct theme and typography
-- [ ] Export runs server-side or in a worker; no layout shift on screen
-- [ ] Works for a 40-slide deck in < 15 s
+- [x] Exported PDF has one page per slide, correct theme and typography
+- [x] Export runs server-side or in a worker; no layout shift on screen
+- [x] Works for a 40-slide deck in < 15 s
 **Verify:** Export the seeded Commercial template and inspect page count/quality
 **Dependencies:** 11
 **Files:** `src/server/services/export.ts`, `src/app/api/decks/[deckId]/export/route.ts`
@@ -277,9 +277,9 @@
 ### Task 24: AIProvider interface + Anthropic implementation
 **Description:** Implement `src/lib/ai/provider.ts` per `docs/ai-generation.md`, the Anthropic adapter with structured output, schema-retry logic, and centralized cost calculation. Record every call shape for `ai_generations`.
 **Acceptance:**
-- [ ] Adapter returns validated data or a typed failure; never throws for validation
-- [ ] Schema failure triggers exactly one corrective re-prompt
-- [ ] Cost computed from token usage and model pricing table
+- [x] Adapter returns validated data or a typed failure; never throws for validation
+- [x] Schema failure triggers exactly one corrective re-prompt
+- [x] Cost computed from token usage and model pricing table
 **Verify:** `npm run test -- ai-provider` with a mocked HTTP layer
 **Dependencies:** 3, 9
 **Files:** `src/lib/ai/provider.ts`, `src/lib/ai/anthropic.ts`, `src/lib/ai/pricing.ts`, `tests/unit/ai-provider.test.ts`
@@ -288,9 +288,9 @@
 ### Task 25: Pipeline stage 1 — extract brief
 **Description:** Prompt + service `extractBrief(script)` returning the `Brief` schema (offer, audience, pains, proof, cta, tone, language, confidence), with prompt-injection delimiters.
 **Acceptance:**
-- [ ] Short scripts (< 300 chars) blocked before the API call
-- [ ] Language detection drives output language
-- [ ] Fixture scripts produce briefs passing schema in tests (recorded responses)
+- [x] Short scripts (< 300 chars) blocked before the API call
+- [x] Language detection drives output language
+- [x] Fixture scripts produce briefs passing schema in tests (recorded responses)
 **Verify:** `npm run test -- extract-brief`
 **Dependencies:** 24
 **Files:** `src/server/ai/prompts/extractBrief.ts`, `src/server/ai/stages/extractBrief.ts`, `tests/ai/extract-brief.test.ts`
@@ -299,9 +299,9 @@
 ### Task 26: Pipeline stage 2 — plan deck
 **Description:** `planDeck(brief, templateConfig, { slideCount, tone })` returning `SlidePlan[]` that preserves template stage order and respects slide count bounds.
 **Acceptance:**
-- [ ] Output length within ±1 of requested slide count
-- [ ] Template core stage order preserved (asserted in tests)
-- [ ] Each plan item maps to a valid canonical slide type
+- [x] Output length within ±1 of requested slide count
+- [x] Template core stage order preserved (asserted in tests)
+- [x] Each plan item maps to a valid canonical slide type
 **Verify:** `npm run test -- plan-deck`
 **Dependencies:** 25, 19
 **Files:** `src/server/ai/prompts/planDeck.ts`, `src/server/ai/stages/planDeck.ts`, `tests/ai/plan-deck.test.ts`
@@ -310,9 +310,9 @@
 ### Task 27: Pipeline stage 3 — generate slides
 **Description:** Per-slide generation with neighbor context, parallel concurrency 3–5, schema validation + retry, and `{ needsInput: true }` markers when the script lacks facts (e.g. testimonials).
 **Acceptance:**
-- [ ] 40-slide deck generates with every slide schema-valid
-- [ ] One failed slide does not fail the deck; it is marked and retryable
-- [ ] No invented statistics in fixtures (asserted)
+- [x] 40-slide deck generates with every slide schema-valid
+- [x] One failed slide does not fail the deck; it is marked and retryable
+- [x] No invented statistics in fixtures (asserted)
 **Verify:** `npm run test -- generate-slides` + `npm run eval:ai` spot check
 **Dependencies:** 26
 **Files:** `src/server/ai/prompts/generateSlide.ts`, `src/server/ai/stages/generateSlides.ts`, `tests/ai/generate-slides.test.ts`
@@ -321,9 +321,9 @@
 ### Task 28: Generation service + credits
 **Description:** `generateDeck()` orchestration: reserve credits → run stages → persist deck/slides/generation logs in one transaction → release or refund credits. Usage counters per org/period.
 **Acceptance:**
-- [ ] Failed generation refunds credits and records the failure with error text
-- [ ] Concurrent generations for one org cannot exceed the credit balance
-- [ ] `ai_generations` rows carry model, tokens, cost, duration for every stage
+- [x] Failed generation refunds credits and records the failure with error text
+- [x] Concurrent generations for one org cannot exceed the credit balance
+- [x] `ai_generations` rows carry model, tokens, cost, duration for every stage
 **Verify:** `npm run test -- generation-service` (integration, mocked provider)
 **Dependencies:** 27, 16, 4
 **Files:** `src/server/services/generation.ts`, `src/server/services/credits.ts`, `src/lib/db/repositories/usage.ts`, `drizzle/0003_ai.sql`, `tests/integration/generation.test.ts`
@@ -332,9 +332,9 @@
 ### Task 29: Generation API + progress
 **Description:** `POST /api/ai/generate` (Zod-validated, rate-limited) streaming stage progress via SSE; cancellation support; structured errors.
 **Acceptance:**
-- [ ] UI receives stage events (`brief`, `plan`, `slides 3/24`, `done`)
-- [ ] Cancelling mid-generation stops work and refunds credits
-- [ ] Rate limit per user enforced (e.g. 5 concurrent)
+- [x] UI receives stage events (`brief`, `plan`, `slides 3/24`, `done`)
+- [x] Cancelling mid-generation stops work and refunds credits
+- [x] Rate limit per user enforced (e.g. 5 concurrent)
 **Verify:** Manual wizard-less test with `curl` + `npm run test -- generate-route`
 **Dependencies:** 28
 **Files:** `src/app/api/ai/generate/route.ts`, `src/lib/sse.ts`, `tests/integration/generate-route.test.ts`
@@ -343,9 +343,9 @@
 ### Task 30: Generation wizard + per-slide regenerate
 **Description:** `/app/new` wizard (paste script, template, theme, length, tone) with live progress, preview-before-save, and per-slide regenerate in the editor.
 **Acceptance:**
-- [ ] Script ≤ 30k chars validated client- and server-side
-- [ ] Wizard produces a deck opened in the editor with correct theme
-- [ ] Regenerating one slide replaces only that slide and logs cost
+- [x] Script ≤ 30k chars validated client- and server-side
+- [x] Wizard produces a deck opened in the editor with correct theme
+- [x] Regenerating one slide replaces only that slide and logs cost
 **Verify:** Playwright `e2e/generation.spec.ts` (mocked provider)
 **Dependencies:** 29, 18
 **Files:** `src/app/(app)/app/new/page.tsx`, `src/components/app/wizard/*` (4 files), `src/app/api/ai/slide/route.ts`
@@ -354,9 +354,9 @@
 ### Task 31: AI eval fixtures
 **Description:** Golden scripts (short/long, French/English, strong/weak proof) with recorded provider responses; assertions per `docs/ai-generation.md`.
 **Acceptance:**
-- [ ] CI runs evals without live API calls
-- [ ] Assertions cover schema validity, slide count, stage order, language, no invented numbers
-- [ ] Adding a fixture is documented in the test file header
+- [x] CI runs evals without live API calls
+- [x] Assertions cover schema validity, slide count, stage order, language, no invented numbers
+- [x] Adding a fixture is documented in the test file header
 **Verify:** `npm run test -- ai-eval`
 **Dependencies:** 27
 **Files:** `tests/ai/fixtures/*.json`, `tests/ai/eval.test.ts`, `scripts/eval-ai.ts`
@@ -374,9 +374,9 @@
 ### Task 32: Stripe checkout + webhook + subscriptions
 **Description:** Products/prices for the agreed plans, checkout route, webhook with signature verification and idempotency, `subscriptions` upsert, plan limits wired into the credits service.
 **Acceptance:**
-- [ ] Checkout upgrades the org's plan; webhook is idempotent on replay
-- [ ] Plan limits enforced server-side (generation blocked past limit with clear error)
-- [ ] Test-mode purchase works end-to-end
+- [x] Checkout upgrades the org's plan; webhook is idempotent on replay
+- [x] Plan limits enforced server-side (generation blocked past limit with clear error)
+- [x] Test-mode purchase works end-to-end
 **Verify:** `npm run test -- stripe` + manual test-mode purchase
 **Dependencies:** 28 (blocked by spec Open Question 1)
 **Files:** `src/app/api/stripe/checkout/route.ts`, `src/app/api/stripe/webhook/route.ts`, `src/server/services/billing.ts`, `drizzle/0004_billing.sql`, `tests/integration/billing.test.ts`
@@ -385,9 +385,9 @@
 ### Task 33: Billing settings + plan gating UI
 **Description:** `/app/settings/billing`: current plan, usage meter (credits used/limit), invoices link, upgrade/downgrade. Gating UX (upsell dialogs) when limits are hit.
 **Acceptance:**
-- [ ] Usage meter reflects `usage_counters` accurately
-- [ ] Upgrade flow returns to the app with the new plan active
-- [ ] Limit-hit states show actionable upgrade copy in French
+- [x] Usage meter reflects `usage_counters` accurately
+- [x] Upgrade flow returns to the app with the new plan active
+- [x] Limit-hit states show actionable upgrade copy in French
 **Verify:** Playwright `e2e/billing.spec.ts` (test mode)
 **Dependencies:** 32
 **Files:** `src/app/(app)/app/settings/billing/page.tsx`, `src/components/app/billing/*` (3 files)
@@ -396,9 +396,9 @@
 ### Task 34: Marketing landing + pricing
 **Description:** `/` landing (hero, value prop, template gallery preview, how-it-works, CTA) and `/pricing` (plans, credit explanation, FAQ), with SEO metadata and OG images.
 **Acceptance:**
-- [ ] Lighthouse performance ≥ 90 on mobile for `/` and `/pricing`
-- [ ] OG image renders correctly when shared (test with a preview tool)
-- [ ] CTAs route to signup/checkout correctly
+- [x] Lighthouse performance ≥ 90 on mobile for `/` and `/pricing`
+- [x] OG image renders correctly when shared (test with a preview tool)
+- [x] CTAs route to signup/checkout correctly
 **Verify:** Lighthouse run + manual share preview
 **Dependencies:** 8, 32
 **Files:** `src/app/(marketing)/**` (5–6 files), `src/app/opengraph-image.tsx`
@@ -407,9 +407,9 @@
 ### Task 35: Analytics, monitoring, rate limiting
 **Description:** PostHog events for the spec's success criteria (signup, generation started/succeeded/failed, deck presented, audience joined), Sentry for errors, and rate limiting on AI + public routes.
 **Acceptance:**
-- [ ] Events visible in PostHog with `orgId` (hashed) and plan properties
-- [ ] Sentry captures server and client errors with request context
-- [ ] Rate limits return 429 with retry-after and are covered by tests
+- [x] Events visible in PostHog with `orgId` (hashed) and plan properties
+- [x] Sentry captures server and client errors with request context
+- [x] Rate limits return 429 with retry-after and are covered by tests
 **Verify:** Manual event check + `npm run test -- rate-limit`
 **Dependencies:** 29
 **Files:** `src/lib/analytics.ts`, `src/lib/monitoring.ts`, `src/lib/rate-limit.ts`, `tests/unit/rate-limit.test.ts`
@@ -418,18 +418,18 @@
 ### Task 36: E2E happy path + accessibility pass
 **Description:** Full Playwright flow: signup → generate (mocked) → edit → present → audience sync in a second context; plus light mode, focus states, and reduced-motion support.
 **Acceptance:**
-- [ ] E2E spec passes in CI deterministically (no flake > 1 in 20 runs)
-- [ ] Light mode passes contrast checks; reduced-motion disables slide animations
-- [ ] Keyboard-only run through the app is possible
+- [x] E2E spec passes in CI deterministically (no flake > 1 in 20 runs)
+- [x] Light mode passes contrast checks; reduced-motion disables slide animations
+- [x] Keyboard-only run through the app is possible
 **Verify:** `npm run test:e2e` repeated locally
 **Dependencies:** 30, 22, 34
 **Files:** `e2e/happy-path.spec.ts`, `src/styles/globals.css` (light tokens), a11y fixes
 **Size:** M
 
 ### Checkpoint D
-- [ ] New user can pay, generate, edit, present, and be limited correctly by plan
-- [ ] E2E green and stable in CI
-- [ ] Human review before Phase 4
+- [x] New user can pay, generate, edit, present, and be limited correctly by plan
+- [x] E2E green and stable in CI
+- [x] Human review before Phase 4
 
 ---
 

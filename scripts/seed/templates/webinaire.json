@@ -1,0 +1,581 @@
+{
+  "title": "Webinaire",
+  "language": "fr",
+  "id": "60000000-0000-4000-8000-000000000003",
+  "slug": "webinaire",
+  "name": "Webinaire",
+  "category": "Formation",
+  "description": "Funnel webinaire : inscription, contenu de valeur, offre live, replay limité, upsell.",
+  "themeId": "40000000-0000-4000-8000-000000000004",
+  "slides": [
+    {
+      "id": "12000000-0000-4000-8000-000000000001",
+      "position": 0,
+      "type": "cover",
+      "script": "Bienvenue. Avant de commencer, je veux juste te dire une chose.\n\nTu n'es pas là par hasard.\nTu t'es inscrit à ce webinaire parce que tu cherches quelque chose de précis.\nEt dans les prochaines minutes, je vais te montrer exactement comment on fait — pas en théorie, mais avec un système qui tourne.\n\nJe m'appelle Hamid El Bouhali. Fondateur de GetFunnels.\nEt ce soir, on attaque directement.",
+      "notes": "Démarrer avec énergie et conviction. Regarder la caméra. Ton chaud, direct.",
+      "content": {
+        "kicker": "Webinaire en direct — GetFunnels",
+        "title": "Le Système Webinaire Complet",
+        "subtitle": "De l'inscription à la vente — sans improvisation.",
+        "presenterName": "Hamid El Bouhali"
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000002",
+      "position": 1,
+      "type": "statement",
+      "script": "La vérité sur les webinaires que personne ne te dit.\n\nLa plupart des gens font des webinaires et ils appellent ça de la 'vente sans vente'.\nIls espèrent que le contenu seul va convertir.\n\nSauf que non. Un webinaire, c'est une architecture.\nIl y a un avant, un pendant, et un après.\nEt si tu rates l'un de ces trois moments, le reste ne compte pas.\n\nCe soir on couvre les trois.",
+      "notes": "Créer la rupture de pattern. Le prospect doit sentir que ce webinaire est différent.",
+      "content": {
+        "eyebrow": "La réalité du marché",
+        "headline": "UN WEBINAIRE QUI VEND N'EST PAS UN COURS EN LIGNE",
+        "highlight": "C'est une architecture de conviction",
+        "sub": "Avant, pendant, après : les trois moments du webinaire rentable. Rater l'un suffit à tout faire rater."
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000003",
+      "position": 2,
+      "type": "authority",
+      "script": "Pourquoi est-ce que tu devrais m'écouter ?\n\nJe m'appelle Hamid El Bouhali.\nDepuis plus de 8 ans, on construit des systèmes webinaire pour des entrepreneurs et des formateurs.\nOn a vu ce qui marche, ce qui ne marche pas, et pourquoi.\n\nEt les gens avec qui on a bossé — Yomi Denzel, Thami Kabbaj, Mohamed Boclet — utilisent tous le même principe de base.\nPas la même forme. Pas le même marché. Mais le même principe.",
+      "notes": "Crédibilité rapide. L'objectif n'est pas de se vanter, c'est d'établir le contexte.",
+      "content": {
+        "headline": "Hamid El Bouhali — GetFunnels",
+        "points": [
+          {
+            "title": "8+ ans sur le marché",
+            "text": "Plus de 470 systèmes webinaire et funnels de vente construits sur le marché francophone et anglophone."
+          },
+          {
+            "title": "Clients en 6 à 7 chiffres",
+            "text": "Yomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini — et des dizaines d'autres."
+          },
+          {
+            "title": "Un seul objectif ce soir",
+            "text": "Te donner une architecture claire et actionnable — pas de la théorie, du concret."
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000004",
+      "position": 3,
+      "type": "objectives",
+      "script": "Ce soir, voici ce qu'on fait ensemble.\n\nEn 60 minutes, tu vas repartir avec trois choses concrètes.\nPremièrement : tu comprends l'architecture complète d'un webinaire qui vend.\nDeuxièmement : tu sais exactement ce qu'il faut faire avant, pendant, et après.\nTroisièmement : tu as le plan d'action pour mettre ça en place dans les 7 prochains jours.",
+      "notes": "Poser les attentes. Le prospect doit savoir ce qu'il va gagner en restant jusqu'à la fin.",
+      "content": {
+        "headline": "Ce que tu vas repartir avec ce soir",
+        "goals": [
+          {
+            "label": "Architecture complète",
+            "target": "60 min",
+            "text": "L'architecture avant/pendant/après d'un webinaire qui convertit réellement."
+          },
+          {
+            "label": "Plan actionnable",
+            "target": "7 jours",
+            "text": "Un plan clair pour déployer ton premier (ou prochain) webinaire dès la semaine prochaine."
+          },
+          {
+            "label": "Offre irrésistible",
+            "target": "1 offre",
+            "text": "Comment structurer ton offre en live pour qu'elle se vende sans friction."
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000005",
+      "position": 4,
+      "type": "problem",
+      "script": "Voilà pourquoi la plupart des webinaires ne vendent pas.\n\nOn voit toujours les mêmes erreurs.\nLes gens s'inscrivent mais ne viennent pas. Ou ils viennent mais ils partent à mi-chemin.\nOu ils restent jusqu'à la fin mais ils n'achètent pas.\n\nEt ça, ce n'est pas un problème de contenu. C'est un problème d'architecture.\nLa page d'inscription ne filtre pas. Le contenu n'engage pas. L'offre est mal positionnée.\n\nRésultat : 3 à 5% de conversion en moyenne. Alors que le benchmark devrait être 15 à 30%.",
+      "notes": "Créer la douleur. Chaque point doit faire dire 'oui c'est moi' à au moins 30% des participants.",
+      "content": {
+        "headline": "Pourquoi 9 webinaires sur 10 ne vendent pas",
+        "intro": "Ce n'est pas un manque de contenu. C'est un manque de structure. Voici les 4 erreurs systématiques.",
+        "painPoints": [
+          {
+            "title": "Page d'inscription générique",
+            "text": "Elle n'attire pas le bon prospect — les inscrits ne sont pas qualifiés"
+          },
+          {
+            "title": "Contenu sans lien avec l'offre",
+            "text": "Le prospect apprend des choses mais ne comprend pas pourquoi acheter"
+          },
+          {
+            "title": "Offre présentée sans cadre",
+            "text": "Le pitch arrive sans transition — le prospect n'est pas prêt à décider"
+          },
+          {
+            "title": "Pas de relance post-webinaire",
+            "text": "La majorité des ventes se font J+1 à J+3 — sans suivi, l'argent part ailleurs"
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000006",
+      "position": 5,
+      "type": "definition",
+      "script": "Alors c'est quoi un webinaire qui vend ?\n\nC'est un événement en ligne qui a trois fonctions simultanées.\nPremière fonction : qualifier. Le contenu élimine les mauvais prospects et attire les bons.\nDeuxième fonction : convaincre. Le participant comprend pourquoi il a besoin de ta solution — pas en théorie, avec des exemples concrets.\nTroisième fonction : déclencher. L'offre arrive au bon moment, au bon prix, avec le bon cadre.\n\nTrois fonctions. Une architecture.",
+      "notes": "Créer le concept dans la tête du prospect. Il doit sortir de ce slide avec une nouvelle façon de voir les webinaires.",
+      "content": {
+        "headline": "Définition : Le Webinaire qui Vend",
+        "body": "Un webinaire qui vend n'est pas un cours en ligne gratuit. C'est un événement de vente structuré en trois actes : qualifier les participants, convaincre par la démonstration et la preuve, déclencher l'achat au bon moment avec le bon cadre.",
+        "pillars": [
+          {
+            "icon": "filter",
+            "title": "Qualifier",
+            "text": "Page d'inscription + contenu qui filtrent naturellement les mauvais prospects"
+          },
+          {
+            "icon": "star",
+            "title": "Convaincre",
+            "text": "Contenu de valeur qui démontre la méthode et génère du désir"
+          },
+          {
+            "icon": "zap",
+            "title": "Déclencher",
+            "text": "Offre positionnée au bon moment avec urgence et garantie"
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000007",
+      "position": 6,
+      "type": "flow",
+      "script": "Voici le flux complet du système webinaire.\n\nAvant le webinaire : page d'inscription qui qualifie, emails de confirmation qui préparent, rappels automatiques qui maximisent le taux de présence.\n\nPendant le webinaire : hook d'ouverture, contenu en 3 actes, transition vers l'offre, pitch en 15 minutes, Q&A et close.\n\nAprès le webinaire : replay limité, séquence email J+1 J+2 J+3, relance WhatsApp sur les non-acheteurs.\n\nC'est une machine. Pas un événement one-shot.",
+      "notes": "Expliquer le flux visuellement. Les gens ont besoin de voir la séquence pour comprendre la logique.",
+      "content": {
+        "headline": "Le Flux Complet du Webinaire Rentable",
+        "steps": [
+          {
+            "label": "Avant",
+            "title": "Inscription & Préparation",
+            "text": "Page de capture qualifiée, séquence de confirmation, rappels automatiques J-3 J-1 J-0",
+            "channel": "email"
+          },
+          {
+            "label": "Ouverture",
+            "title": "Hook & Autorité",
+            "text": "Accroche, promesse claire, agenda annoncé, engagement du groupe",
+            "channel": "live"
+          },
+          {
+            "label": "Contenu",
+            "title": "Valeur en 3 Actes",
+            "text": "Problème → méthode → preuve : chaque acte prépare le suivant",
+            "channel": "live"
+          },
+          {
+            "label": "Offre",
+            "title": "Pitch & Close",
+            "text": "Transition naturelle, présentation de l'offre, bonus, garantie, appel à l'action",
+            "channel": "live"
+          },
+          {
+            "label": "Après",
+            "title": "Replay & Relance",
+            "text": "Replay 48h, séquence email J+1 à J+3, suivi WhatsApp sur les non-acheteurs",
+            "channel": "email"
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000008",
+      "position": 7,
+      "type": "capture",
+      "script": "Voilà le formulaire d'inscription idéal pour un webinaire qualifié.\n\nPas juste un email. On veut qualifier dès l'inscription.\nPrénom et email bien sûr. Mais aussi : à quel stade en es-tu ? Quel est ton objectif principal ?\n\nCes deux questions font deux choses :\nElle filtrent les non-qualifiés. Et elle personnalisent les emails de relance.\n\nUne inscription bien faite, c'est déjà du travail de closing fait à l'avance.",
+      "notes": "Montrer l'exemple concret du formulaire. Expliquer pourquoi chaque champ est là.",
+      "content": {
+        "headline": "Page d'Inscription — Le Formulaire qui Qualifie",
+        "fields": [
+          {
+            "label": "Prénom",
+            "type": "text"
+          },
+          {
+            "label": "Adresse email",
+            "type": "email"
+          },
+          {
+            "label": "À quel stade en êtes-vous ?",
+            "type": "select"
+          },
+          {
+            "label": "Quel est votre objectif principal ?",
+            "type": "select"
+          }
+        ],
+        "ctaLabel": "Réserver ma place gratuite →"
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000009",
+      "position": 8,
+      "type": "automation",
+      "script": "L'automatisation avant le webinaire — c'est ce qui fait passer de 20% à 60% de taux de présence.\n\nVoici la séquence qu'on déploie systématiquement.\nJ-3 : email de bienvenue avec le lien + aperçu du contenu.\nJ-1 : rappel avec la promesse principale du webinaire.\nJ-0, 2 heures avant : rappel SMS ou WhatsApp. Court. Direct. Le lien et rien d'autre.\n\nEt pendant le webinaire : si quelqu'un ne s'est pas connecté dans les 10 premières minutes, un message automatique lui rappelle qu'il est encore temps.",
+      "notes": "Être précis sur les délais et les canaux. Les gens ont besoin de voir que c'est actionnable.",
+      "content": {
+        "headline": "Automatisation Pré-Webinaire : Maximiser la Présence",
+        "items": [
+          {
+            "trigger": "Inscription confirmée",
+            "action": "Email de bienvenue : lien + aperçu du programme",
+            "delay": "Immédiat"
+          },
+          {
+            "trigger": "J-3 avant le webinaire",
+            "action": "Email de rappel : la promesse principale + pourquoi venir",
+            "delay": "J-3"
+          },
+          {
+            "trigger": "J-1 avant le webinaire",
+            "action": "Email + SMS de rappel : ton webinaire c'est demain",
+            "delay": "J-1"
+          },
+          {
+            "trigger": "Jour J, 2h avant",
+            "action": "WhatsApp ou SMS : le lien direct, rien d'autre",
+            "delay": "J-0 H-2"
+          },
+          {
+            "trigger": "Webinaire commencé, absent détecté",
+            "action": "SMS d'alerte : 'On a commencé, il est encore temps de rejoindre'",
+            "delay": "H+10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000010",
+      "position": 9,
+      "type": "why",
+      "script": "Pourquoi le webinaire est le levier le plus puissant pour vendre une offre à fort ticket ?\n\nParce qu'il fait en 60 minutes ce que la pub ne peut pas faire en 30 secondes.\n\nIl crée de la confiance. Il démontre l'expertise. Il traite les objections en temps réel.\nEt il crée une urgence naturelle : l'offre est disponible maintenant, pas demain.\n\nAucun autre format ne réunit ces quatre ingrédients en même temps.",
+      "notes": "Renforcer la conviction que le webinaire est le bon choix. Préparer la vente.",
+      "content": {
+        "headline": "Pourquoi le Webinaire Bat Tous les Autres Formats de Vente",
+        "reasons": [
+          {
+            "icon": "shield",
+            "title": "Confiance accélérée",
+            "text": "60 minutes de valeur gratuite valent plus que 10 posts Instagram — le prospect te connaît avant d'acheter"
+          },
+          {
+            "icon": "eye",
+            "title": "Démonstration live",
+            "text": "Montrer en direct crée une preuve que personne ne peut réfuter"
+          },
+          {
+            "icon": "message-circle",
+            "title": "Objections traitées en temps réel",
+            "text": "Le Q&A efface les freins d'achat que tu n'aurais jamais anticipés"
+          },
+          {
+            "icon": "clock",
+            "title": "Urgence naturelle",
+            "text": "L'offre est disponible maintenant — pas demain. L'occasion ne se représente pas"
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000011",
+      "position": 10,
+      "type": "proof",
+      "script": "Voilà ce que nos clients obtiennent avec ce système.\n\nJe vais pas te balancer des screenshots de Stripe que tu ne peux pas vérifier.\nJe vais te donner des exemples précis avec des chiffres réels.\n\nLe premier : un coach en développement personnel. 347 inscrits, 198 présents, 23 ventes à 1 500 €. Soit 34 500 € en un soir.\nLe deuxième : une formatrice en nutrition. 189 inscrits, 127 présents, 18 ventes à 2 200 €. 39 600 €.\n\nDes résultats différents parce que les marchés sont différents. Mais la même architecture.",
+      "notes": "Être très spécifique. Les chiffres vagues ne convainquent personne. Préférer des exemples précis.",
+      "content": {
+        "headline": "Résultats Réels — Ce que le Système Produit",
+        "items": [
+          {
+            "quote": "347 inscrits → 198 présents → 23 ventes à 1 500 € = 34 500 € en un soir. Le système a tout automatisé, je n'ai fait que parler.",
+            "name": "Coach développement personnel",
+            "role": "Formateur indépendant",
+            "result": "34 500 € en 1 webinaire"
+          },
+          {
+            "quote": "Avant je faisais des lives Instagram sans vendre. Après la restructuration complète avec GetFunnels, premier webinaire : 39 600 €.",
+            "name": "Formatrice en nutrition",
+            "role": "Expert santé",
+            "result": "39 600 € premier webinaire"
+          },
+          {
+            "quote": "On a multiplié par 4 notre taux de conversion en changeant uniquement la séquence post-webinaire.",
+            "name": "Consultant en marketing digital",
+            "role": "Agence",
+            "result": "×4 taux de conversion"
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000012",
+      "position": 11,
+      "type": "pricing",
+      "script": "Voilà l'offre du soir.\n\nJ'ai conçu cette offre pour que tu puisses déployer ton premier webinaire rentable en 30 jours maximum.\nElle comprend tout le système clé en main, le support, et le suivi.\n\nIl y a deux options ce soir. La première te donne accès au système. La deuxième t'ajoute 4 semaines d'accompagnement direct avec mon équipe.\n\nEt parce que tu es là ce soir, tu as accès à un tarif spécial qui n'existe pas sur la page de vente.",
+      "notes": "Présenter l'offre avec calme et conviction. Pas de précipitation. Le prix n'est pas le problème, la valeur perçue l'est.",
+      "content": {
+        "headline": "L'Offre du Soir — Disponible ce Soir Uniquement",
+        "tiers": [
+          {
+            "name": "Système Webinaire",
+            "price": "997 €",
+            "features": [
+              "Architecture complète clé en main",
+              "Templates : pages, emails, scripts",
+              "Formation vidéo (6h)",
+              "Support email 30 jours",
+              "Accès à vie aux mises à jour"
+            ],
+            "highlight": false
+          },
+          {
+            "name": "Système Webinaire + Coaching",
+            "price": "1 997 €",
+            "features": [
+              "Tout le Système Webinaire",
+              "4 semaines d'accompagnement individuel",
+              "Revue de ta page d'inscription",
+              "Revue de ton script de webinaire",
+              "Appel de lancement personnalisé"
+            ],
+            "highlight": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000013",
+      "position": 12,
+      "type": "faq",
+      "script": "Je vais prendre les questions les plus fréquentes — celles que j'entends à chaque webinaire.\n\nPremière question : est-ce que ça marche si j'ai une petite audience ? Oui. On a eu des résultats excellents avec 50 inscrits seulement. La qualité prend le dessus sur la quantité.\n\nDeuxième question : est-ce que je dois déjà avoir une offre ? Pas forcément. On peut t'aider à la structurer pendant l'accompagnement.\n\nTroisième question : est-ce que c'est adapté à mon secteur ? Oui — si tu vends de l'expertise ou de la formation, le webinaire est universel.",
+      "notes": "Traiter les objections de façon naturelle, comme une vraie conversation. Pas défensif.",
+      "content": {
+        "headline": "Questions Fréquentes",
+        "questions": [
+          {
+            "q": "Est-ce que ça marche si j'ai une petite audience ?",
+            "a": "Oui. On a eu des résultats excellents avec 50 inscrits. La qualité prime sur la quantité : 50 prospects qualifiés valent mieux que 500 inscrits au hasard. Le taux de conversion est souvent plus élevé avec une petite audience engagée."
+          },
+          {
+            "q": "Je n'ai pas encore d'offre — est-ce que je peux quand même rejoindre ?",
+            "a": "Oui. La formule coaching inclut un module de structuration de l'offre. On t'aide à définir le bon positionnement, le bon prix, et la bonne garantie avant de lancer ton webinaire."
+          },
+          {
+            "q": "Est-ce que ce système s'adapte à mon secteur ?",
+            "a": "Le webinaire fonctionne dans tous les secteurs où tu vends de l'expertise : coaching, consulting, formation, immobilier, bien-être, marketing… Si tu transmets un savoir ou une méthode, le format webinaire est pertinent."
+          },
+          {
+            "q": "Combien de temps faut-il pour être prêt ?",
+            "a": "Avec le système complet, la plupart de nos clients lancent leur premier webinaire en 2 à 4 semaines. L'accompagnement t'aide à aller plus vite et à éviter les erreurs classiques."
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000014",
+      "position": 13,
+      "type": "kpi",
+      "script": "Voilà les chiffres que tu dois viser avec ce système.\n\nTaux de présence : 50 à 70% des inscrits présents le jour J, c'est réaliste avec la bonne séquence de rappel.\nTaux de conversion live : 10 à 20% des présents. C'est le benchmark pour une offre à 1 000-2 000 €.\nRevenu par participant : entre 150 et 400 € en moyenne. C'est le calcul qui te dit si ton webinaire scale.\n\nCes chiffres, c'est pas de la magie. C'est de l'ingénierie.",
+      "notes": "Ancrer les attentes avec des chiffres réalistes mais motivants. Pas sur-promettre.",
+      "content": {
+        "headline": "Les KPIs du Webinaire Rentable",
+        "metrics": [
+          {
+            "value": "60%",
+            "label": "Taux de présence moyen",
+            "delta": "vs 20-30% sans syst"
+          },
+          {
+            "value": "15%",
+            "label": "Conversion live (présents → acheteurs)",
+            "delta": "vs 3-5% classique"
+          },
+          {
+            "value": "250€",
+            "label": "Revenu moyen par inscrit",
+            "delta": "offres 1k-2k€"
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000015",
+      "position": 14,
+      "type": "channel",
+      "script": "Le suivi post-webinaire — c'est là que 40% des ventes se font.\n\nLa plupart des gens regardent le replay le lendemain. Ou ils ont des questions qu'ils n'ont pas posées en live.\nSi tu ne les relances pas, tu laisses de l'argent sur la table.\n\nVoici la séquence exacte qu'on utilise : J+1, J+2, J+3.\nTrois messages. Trois angles différents. Et sur WhatsApp pour ceux qui n'ont pas acheté.",
+      "notes": "Conclure la partie contenu avant de passer au close. Créer l'envie d'avoir le système complet.",
+      "content": {
+        "headline": "Séquence Post-Webinaire : Les 40% de Ventes Restantes",
+        "channel": "whatsapp",
+        "scripts": [
+          {
+            "moment": "J+1 — Replay",
+            "message": "Bonjour [prénom], le replay est disponible pour 48h seulement. Si tu n'as pas encore vu la partie offre, c'est à partir de 45:00. Lien : [replay]"
+          },
+          {
+            "moment": "J+2 — Témoignage",
+            "message": "Tu as vu le replay ? Voici ce qu'un de nos clients a obtenu en 30 jours avec le même système : [résultat]. La décision se prend maintenant ou jamais. [lien offre]"
+          },
+          {
+            "moment": "J+3 — Clôture",
+            "message": "Dernier rappel [prénom] — l'offre du webinaire ferme ce soir à minuit. Après ça, le prix augmente. Si tu as une question avant de décider, réponds à ce message."
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000016",
+      "position": 15,
+      "type": "mistakes",
+      "script": "Les erreurs qui tuent les webinaires — même les bons.\n\nPremière erreur : faire trop de contenu et pas assez de transition vers l'offre. Le prospect est noyé d'information et il n'achète pas parce qu'il n'a pas compris pourquoi.\n\nDeuxième erreur : présenter l'offre sans avoir d'abord créé le désir. L'offre doit arriver quand le prospect est au pic émotionnel — pas au bout de 90 minutes d'explications techniques.\n\nTroisième erreur : ne pas relancer. La majorité des ventes se font APRÈS le webinaire.",
+      "notes": "Les erreurs doivent être reconnaissables. Les participants doivent se dire 'ah oui, j'ai déjà fait ça'.",
+      "content": {
+        "headline": "Les 4 Erreurs qui Tuent les Webinaires Rentables",
+        "mistakes": [
+          {
+            "mistake": "Trop de contenu, pas assez de transition",
+            "fix": "Équilibrer : 60% contenu de valeur, 40% setup de l'offre — chaque partie prépare la suivante"
+          },
+          {
+            "mistake": "Pitcher sans avoir créé le désir",
+            "fix": "Construire le désir progressivement : problème → coût du statu quo → solution → preuve → offre"
+          },
+          {
+            "mistake": "Page d'inscription sans qualification",
+            "fix": "Ajouter 1 ou 2 questions de qualification pour filtrer et personnaliser les relances"
+          },
+          {
+            "mistake": "Zéro suivi post-webinaire",
+            "fix": "Déployer la séquence J+1 J+2 J+3 — 40% des ventes webinaire se font après le live"
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000017",
+      "position": 16,
+      "type": "timeline",
+      "script": "Voici le plan de déploiement en 30 jours.\n\nSemaine 1 : tu construis ton offre et ta page d'inscription.\nSemaine 2 : tu crées ton script de webinaire et tu automatises les rappels.\nSemaine 3 : tu fais un webinaire test avec une petite audience pour valider le script.\nSemaine 4 : tu lances le webinaire officiel et tu analyses les données.\n\n30 jours. Un système opérationnel. Une machine qui peut tourner en boucle.",
+      "notes": "Donner de la concrétude au plan. 30 jours c'est court — créer l'urgence d'agir maintenant.",
+      "content": {
+        "headline": "Plan de Déploiement : 30 Jours pour un Webinaire Rentable",
+        "milestones": [
+          {
+            "when": "Semaine 1",
+            "title": "Offre + Page d'inscription",
+            "text": "Structurer l'offre, créer la page de capture qualifiée, configurer l'outil de webinaire"
+          },
+          {
+            "when": "Semaine 2",
+            "title": "Script + Automatisations",
+            "text": "Rédiger le script en 3 actes, configurer la séquence email et les rappels automatiques"
+          },
+          {
+            "when": "Semaine 3",
+            "title": "Webinaire test",
+            "text": "Lancer un webinaire test avec 20-50 personnes pour valider le script et l'offre"
+          },
+          {
+            "when": "Semaine 4",
+            "title": "Lancement officiel",
+            "text": "Lancer le webinaire principal, collecter les données, optimiser pour la prochaine édition"
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000018",
+      "position": 17,
+      "type": "comparison",
+      "script": "Comparons les options qui s'offrent à toi.\n\nOption 1 : tu continues comme avant. Tu fais des posts, des lives, peut-être un webinaire de temps en temps. Résultat : 3 à 5% de conversion. Revenus irréguliers.\n\nOption 2 : tu construis le système webinaire seul. 3 à 6 mois pour comprendre ce qui marche, des erreurs coûteuses en chemin, et peut-être un résultat correct au bout d'un an.\n\nOption 3 : tu prends le système déjà validé. 30 jours pour déployer, des résultats dès le premier webinaire.",
+      "notes": "La comparaison ne doit jamais dénigrer le prospect. Juste montrer les options de façon objective.",
+      "content": {
+        "headline": "Tes Options — Une Comparaison Honnête",
+        "columns": ["Sans système", "Seul", "Avec GetFunnels"],
+        "rows": [
+          {
+            "label": "Délai de déploiement",
+            "values": ["Indéfini", "3-6 mois", "30 jours"]
+          },
+          {
+            "label": "Taux de conversion",
+            "values": ["3-5%", "Variable", "10-20%"]
+          },
+          {
+            "label": "Erreurs évitées",
+            "values": ["Non", "Non", "Oui"]
+          },
+          {
+            "label": "Système scalable",
+            "values": ["Non", "Possible", "Oui"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000019",
+      "position": 18,
+      "type": "plan",
+      "script": "Voilà exactement ce que tu vas construire avec le programme.\n\nPhase 1 : l'architecture. On pose les fondations. Offre, positionnement, page d'inscription.\nPhase 2 : le système. Script de webinaire, séquence email, automatisations de rappel et de relance.\nPhase 3 : le lancement. Premier webinaire, mesure, optimisation.\n\nTrois phases. Un résultat : un système webinaire qui tourne indépendamment de toi.",
+      "notes": "Donner de la clarté sur ce qui est inclus. Le prospect doit pouvoir visualiser son parcours.",
+      "content": {
+        "headline": "Ce que tu Construis avec le Programme",
+        "phases": [
+          {
+            "name": "Phase 1 — Architecture",
+            "duration": "Semaines 1-2",
+            "deliverables": [
+              "Offre structurée et positionnée",
+              "Page d'inscription optimisée",
+              "Outil de webinaire configuré"
+            ]
+          },
+          {
+            "name": "Phase 2 — Système",
+            "duration": "Semaines 2-3",
+            "deliverables": [
+              "Script de webinaire en 3 actes",
+              "Séquence email de rappel automatique",
+              "Séquence post-webinaire J+1 à J+3"
+            ]
+          },
+          {
+            "name": "Phase 3 — Lancement",
+            "duration": "Semaine 4",
+            "deliverables": [
+              "Webinaire test + retours",
+              "Lancement officiel",
+              "Analyse et premières optimisations"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000020",
+      "position": 19,
+      "type": "cta",
+      "script": "Voilà la question que je te pose maintenant.\n\nEst-ce que tu veux continuer à improviser chaque webinaire ? Ou est-ce que tu veux un système ?\n\nSi tu veux le système, c'est maintenant. L'offre du soir est disponible pendant les 15 prochaines minutes.\nClique sur le bouton dans le chat. Ou envoie-moi un message WhatsApp si tu as une question.\n\nOn a construit ce système pour que ça marche. Il ne reste plus qu'à décider.",
+      "notes": "Ton direct et calme. Pas d'urgence artificielle — l'urgence doit sembler naturelle. Regarder la caméra.",
+      "content": {
+        "headline": "Prêt à Déployer ton Système Webinaire ?",
+        "sub": "L'offre du soir est disponible maintenant. Rejoins les entrepreneurs qui ont déjà transformé leur webinaire en machine à vendre.",
+        "actions": [
+          {
+            "label": "Je rejoins le programme →",
+            "kind": "link"
+          },
+          {
+            "label": "J'ai une question sur WhatsApp",
+            "kind": "whatsapp"
+          }
+        ]
+      }
+    }
+  ]
+}

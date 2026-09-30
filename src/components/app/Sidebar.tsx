@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 const navigation = [
   { name: "Tableau de bord", href: "/app", icon: LayoutDashboard },
   { name: "Nouveau deck", href: "/app/new", icon: Plus },
-  { name: "Mes decks", href: "/app/decks", icon: FileText },
   { name: "Modèles", href: "/app/templates", icon: FileText },
 ];
 
@@ -68,7 +67,7 @@ export function Sidebar() {
         <div className="border-t border-zinc-800 p-3">
           {!collapsed && (
             <Link
-              href="/app/settings"
+              href="/app/settings/profile"
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
             >
               <Settings className="h-5 w-5 flex-shrink-0" aria-hidden="true" />

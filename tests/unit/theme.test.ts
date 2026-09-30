@@ -217,3 +217,56 @@ describe("ThemeTokens type", () => {
     expect(theme.color.primary).toBe("#470c85");
   });
 });
+
+function parseHex(hex: string): [number, number, number] {
+  const value = hex.replace("#", "");
+  return [
+    parseInt(value.slice(0, 2), 16),
+    parseInt(value.slice(2, 4), 16),
+    parseInt(value.slice(4, 6), 16),
+  ];
+}
+
+function relativeLuminance(hex: string): number {
+  const channels = parseHex(hex).map((c) => {
+    const s = c / 255;
+    return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+  });
+  const [r, g, b] = channels;
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrastRatio(fg: string, bg: string): number {
+  const l1 = relativeLuminance(fg);
+  const l2 = relativeLuminance(bg);
+  const [light, dark] = l1 >= l2 ? [l1, l2] : [l2, l1];
+  return (light + 0.05) / (dark + 0.05);
+}
+
+describe("contrast checks (WCAG AA >= 4.5:1 body text)", () => {
+  const MIN_RATIO = 4.5;
+
+  systemThemes.forEach((theme) => {
+    describe(theme.id, () => {
+      it("text on bg passes AA", () => {
+        expect(contrastRatio(theme.color.text, theme.color.bg)).toBeGreaterThanOrEqual(MIN_RATIO);
+      });
+
+      it("text on surface passes AA", () => {
+        expect(contrastRatio(theme.color.text, theme.color.surface)).toBeGreaterThanOrEqual(MIN_RATIO);
+      });
+
+      it("muted (secondary body text) on bg passes AA", () => {
+        expect(contrastRatio(theme.color.muted, theme.color.bg)).toBeGreaterThanOrEqual(MIN_RATIO);
+      });
+
+      it("muted (secondary body text) on surface passes AA", () => {
+        expect(contrastRatio(theme.color.muted, theme.color.surface)).toBeGreaterThanOrEqual(MIN_RATIO);
+      });
+
+      it("primaryFg on primary passes AA", () => {
+        expect(contrastRatio(theme.color.primaryFg, theme.color.primary)).toBeGreaterThanOrEqual(MIN_RATIO);
+      });
+    });
+  });
+});

@@ -1,8 +1,14 @@
 import "server-only";
 import { db } from "@/lib/db/client";
 import { decks, slides, themes, templates } from "@/lib/db/schema";
-import { eq, and, desc, isNull, count, asc } from "drizzle-orm";
+import { eq, and, desc, isNull, count, asc, ilike, inArray } from "drizzle-orm";
 import { nanoid } from "nanoid";
+
+export type DeckSort = "updated_desc" | "updated_asc" | "title_asc" | "title_desc";
+
+function escapeLike(value: string): string {
+  return value.replace(/[\\%_]/g, (m) => `\\${m}`);
+}
 
 export interface DeckRepositoryContext {
   orgId: string;
@@ -221,6 +227,7 @@ export async function listDecks(
     limit?: number;
     offset?: number;
     search?: string;
+    sort?: DeckSort;
   }
 ): Promise<{ decks: DeckWithRelations[]; total: number }> {
   const conditions = [eq(decks.orgId, ctx.orgId), isNull(decks.deletedAt)];
@@ -230,10 +237,17 @@ export async function listDecks(
   }
 
   if (options?.search) {
-    conditions.push(
-      // We'll handle search in application layer for simplicity
-    );
+    conditions.push(ilike(decks.title, `%${escapeLike(options.search)}%`));
   }
+
+  const orderBy =
+    options?.sort === "updated_asc"
+      ? asc(decks.updatedAt)
+      : options?.sort === "title_asc"
+        ? asc(decks.title)
+        : options?.sort === "title_desc"
+          ? desc(decks.title)
+          : desc(decks.updatedAt);
 
   const totalResult = await db
     .select({ count: count() })
@@ -246,7 +260,7 @@ export async function listDecks(
     .select()
     .from(decks)
     .where(and(...conditions))
-    .orderBy(desc(decks.updatedAt))
+    .orderBy(orderBy)
     .limit(options?.limit ?? 50)
     .offset(options?.offset ?? 0);
 
@@ -257,21 +271,21 @@ export async function listDecks(
   const firstSlides = new Map();
 
   if (deckIds.length > 0) {
+    const themeIds = [...new Set(deckResults.map((d) => d.themeId))];
     const themeResults = await db
       .select({ id: themes.id, name: themes.name, tokens: themes.tokens })
       .from(themes)
-      .where(
-        eq(themes.id, deckResults[0].themeId) // This is a simplification - in real code we'd batch query
-      );
+      .where(inArray(themes.id, themeIds));
     themeResults.forEach((t) => themesMap.set(t.id, t));
 
-    // Get templates
-    const templateIds = deckResults.filter((d) => d.templateId).map((d) => d.templateId!);
+    const templateIds = [
+      ...new Set(deckResults.map((d) => d.templateId).filter((id): id is string => id !== null)),
+    ];
     if (templateIds.length > 0) {
       const templateResults = await db
         .select({ id: templates.id, name: templates.name, slug: templates.slug })
         .from(templates)
-        .where(eq(templates.id, templateIds[0])); // Simplified
+        .where(inArray(templates.id, templateIds));
       templateResults.forEach((t) => templatesMap.set(t.id, t));
     }
 

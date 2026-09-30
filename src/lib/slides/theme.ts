@@ -178,7 +178,7 @@ export const minimalTheme: ThemeTokens = {
     bg: "#ffffff",
     surface: "#fafafa",
     text: "#171717",
-    muted: "#a3a3a3",
+    muted: "#737373",
     primary: "#171717",
     primaryFg: "#ffffff",
     accent: "#525252",

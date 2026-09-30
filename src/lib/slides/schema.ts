@@ -255,12 +255,15 @@ const content = {
   }),
 } as const;
 
+export const slideContentSchemas = content;
+
 const base = z.object({
   id: z.string().uuid(),
   position: z.number().int().min(0),
   type: z.enum(SLIDE_TYPES),
   notes: z.string().max(2000).optional(),
   script: z.string().max(4000).optional(),
+  needsInput: z.boolean().optional(),
 });
 
 const slideSchemas = SLIDE_TYPES.map((t) =>

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { confirmEmailAction } from "@/app/(auth)/actions";
 
 export function CallbackContent() {
   const router = useRouter();
