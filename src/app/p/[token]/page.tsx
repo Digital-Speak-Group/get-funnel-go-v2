@@ -1,5 +1,12 @@
 import { notFound } from "next/navigation";
+import { unstable_cache } from "next/cache";
 import { getAudiencePayload } from "@/server/services/audience";
+
+const getCachedAudiencePayload = unstable_cache(
+  async (token: string) => getAudiencePayload(token),
+  ['audience-payload'],
+  { tags: ['deck'], revalidate: 60 } // revalidate every 60s or on-demand
+);
 import { AudienceView } from "@/components/presenter/AudienceView";
 import type { Metadata } from "next";
 
@@ -11,7 +18,7 @@ export async function generateMetadata({
   params,
 }: AudiencePageProps): Promise<Metadata> {
   const { token } = await params;
-  const payload = await getAudiencePayload(token);
+  const payload = await getCachedAudiencePayload(token);
   if (!payload) return { title: "Présentation — GetFunnels" };
   return {
     title: `${payload.title} — GetFunnels`,
@@ -28,7 +35,7 @@ export default async function AudiencePage({ params }: AudiencePageProps) {
   const { token } = await params;
 
   // Rate limiting would be applied via middleware (edge) in production
-  const payload = await getAudiencePayload(token);
+  const payload = await getCachedAudiencePayload(token);
   if (!payload) notFound();
 
   const { analytics } = await import("@/lib/analytics");

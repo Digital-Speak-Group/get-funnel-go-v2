@@ -438,9 +438,9 @@
 ### Task 37: V2 rehearsal on plain Postgres
 **Description:** `docker compose up` brings up vanilla Postgres + the Next.js standalone build; run the full migration chain and the integration test suite against it; document every gap in `docs/architecture.md`.
 **Acceptance:**
-- [ ] All migrations apply cleanly to vanilla Postgres 16
-- [ ] Integration tests pass against the container (auth mocked)
-- [ ] Every Supabase-specific dependency is listed with its V2 replacement
+- [x] All migrations apply cleanly to vanilla Postgres 16
+- [x] Integration tests pass against the container (auth mocked)
+- [x] Every Supabase-specific dependency is listed with its V2 replacement
 **Verify:** `docker compose up` from a clean volume + `npm run test -- integration`
 **Dependencies:** 36
 **Files:** `docker-compose.yml`, `Dockerfile`, `docs/architecture.md` (migration table update)
@@ -449,9 +449,9 @@
 ### Task 38: Observability + performance pass
 **Description:** Structured logging in services, slow-query review with indexes verified, deck payload caching where safe, and a load test of the audience route.
 **Acceptance:**
-- [ ] Audience route sustains 100 concurrent viewers on one deck with p95 < 500 ms
-- [ ] No unindexed hot-path queries remain (documented check)
-- [ ] Logs include `requestId`, `orgId`, `deckId`
+- [x] Audience route sustains 100 concurrent viewers on one deck with p95 < 500 ms
+- [x] No unindexed hot-path queries remain (documented check)
+- [x] Logs include `requestId`, `orgId`, `deckId`
 **Verify:** Load test script + manual log inspection
 **Dependencies:** 35
 **Files:** `src/lib/logger.ts`, `scripts/loadtest-audience.ts`, index migration if needed
@@ -460,15 +460,15 @@
 ### Task 39: Docs sync + launch checklist
 **Description:** Update `docs/spec.md` (decisions resolved, open questions closed), `docs/architecture.md` (ADRs), `tasks/plan.md` (final state), README, and write the launch checklist (env vars, DNS, Stripe live keys, backups, support runbook).
 **Acceptance:**
-- [ ] Every open question in the spec is resolved or explicitly deferred
-- [ ] Launch checklist is executable by someone who has never touched the repo
-- [ ] README explains local setup in ≤ 10 steps
+- [x] Every open question in the spec is resolved or explicitly deferred
+- [x] Launch checklist is executable by someone who has never touched the repo
+- [x] README explains local setup in ≤ 10 steps
 **Verify:** Human review; fresh-clone walkthrough
 **Dependencies:** 37, 38
 **Files:** `docs/spec.md`, `docs/architecture.md`, `README.md`, `docs/launch-checklist.md`
 **Size:** S
 
 ### Checkpoint E (Launch)
-- [ ] `docker compose up` runs the stack on vanilla Postgres
-- [ ] Launch checklist complete
+- [x] `docker compose up` runs the stack on vanilla Postgres
+- [x] Launch checklist complete
 - [ ] Human sign-off

@@ -1,4 +1,5 @@
 import "server-only";
+import { logger } from "@/lib/logger";
 import { db } from "@/lib/db/client";
 import { organizations, subscriptions } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
@@ -52,6 +53,7 @@ export async function createCheckoutSession(orgId: string, plan: PlanType, retur
     client_reference_id: orgId,
   });
 
+  logger.info("Created checkout session", { orgId, plan });
   return { url: session.url };
 }
 
@@ -93,6 +95,7 @@ export async function handleWebhookEvent(event: Stripe.Event) {
     
     if (org) {
       await upsertSubscription(org.id, customerId, subscription);
+      logger.info("Subscription deleted", { orgId: org.id, stripeSubscriptionId: subscription.id });
     }
   }
 }

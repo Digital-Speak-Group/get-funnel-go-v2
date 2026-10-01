@@ -2,25 +2,35 @@
 
 Seed documentation for the new **Next.js** repository. These files are written to be handed to an AI coding agent (Kilo, Claude Code, Cursor, Copilot) as its operating context.
 
-## How to use
+## Local Setup (V1)
 
-1. Create the new repo (e.g. `getfunnels-saas`) — empty, `main` branch.
-2. Copy the **contents** of this folder into the new repo root:
-
-   ```
-   AGENTS.md
-   README.md
-   docs/
-   tasks/
-   scripts/
+1. **Clone and Install:**
+   ```bash
+   git clone <repo_url> getfunnels-saas
+   cd getfunnels-saas
+   npm install
    ```
 
-3. Commit everything.
-4. First prompt to the AI:
+2. **Environment Variables:**
+   Copy `.env.example` to `.env` and fill in:
+   - `DATABASE_URL` (Supabase Postgres or local Docker)
+   - `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET`
+   - `ANTHROPIC_API_KEY` (Claude API)
+   - `AUTH_SECRET` (For Auth.js or NextAuth)
 
-   > Read `AGENTS.md`, then `docs/spec.md`, `docs/architecture.md`, `docs/data-model.md`, `docs/ai-generation.md`, and `docs/design-system.md`. Then execute `tasks/todo.md` starting at Phase 0, following the workflow and boundaries in `AGENTS.md`. Stop at each checkpoint and ask for review.
+3. **Database Setup:**
+   Start your local database (if using Docker) or use Supabase:
+   ```bash
+   npm run db:generate
+   npm run db:migrate
+   npm run db:seed
+   ```
 
-5. Review at every checkpoint in `tasks/todo.md` before letting the agent continue.
+4. **Run the App:**
+   ```bash
+   npm run dev
+   ```
+   The app will be available at `http://localhost:3000`.
 
 ## Files
 

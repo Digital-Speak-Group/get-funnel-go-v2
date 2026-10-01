@@ -6,6 +6,7 @@ import {
   updateDeck as updateDeckRepo,
   softDeleteDeck,
   createDeck as createDeckRepo,
+  createDeckFromTemplate,
   duplicateDeck,
 } from "@/server/services/decks";
 import { revalidatePath } from "next/cache";
@@ -53,7 +54,25 @@ export async function createDeckAction(raw: unknown) {
   const parsed = CreateDeckSchema.safeParse(raw);
   if (!parsed.success) return { error: "INVALID_INPUT" };
 
-  const deck = await createDeckRepo(parsed.data, { orgId: session.activeOrgId, userId: session.userId });
+  const ctx = { orgId: session.activeOrgId, userId: session.userId };
+  let deck;
+
+  try {
+    if (parsed.data.templateId) {
+      deck = await createDeckFromTemplate({
+        title: parsed.data.title,
+        templateId: parsed.data.templateId,
+        themeId: parsed.data.themeId,
+        language: parsed.data.language,
+      }, ctx);
+    } else {
+      deck = await createDeckRepo(parsed.data, ctx);
+    }
+  } catch (err) {
+    console.error("Create deck failed:", err);
+    return { error: "INTERNAL_ERROR" };
+  }
+
   revalidatePath("/app");
   return { deck };
 }

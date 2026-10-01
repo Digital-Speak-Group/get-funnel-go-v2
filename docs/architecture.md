@@ -114,7 +114,11 @@ Plan limits are enforced **server-side** in `services/generation` and `services/
 | Deploy | Vercel | Docker + Caddy on VPS | `output: "standalone"`; no Vercel-only APIs (no Edge Config, no ISR-only features in app routes) |
 | Cron | Vercel Cron | systemd timers / cron | Jobs live in `src/server/jobs/*` as plain functions with a thin trigger |
 
-**Migration rehearsal** is a task in Phase 4: run migrations + app against a plain Postgres container and record every gap in this table.
+**Migration Rehearsal Findings (Gaps):**
+1. **Build-Time Environment Variables:** The Next.js standalone build requires `NEXT_PUBLIC_*` variables (like Supabase URLs/keys) to be present at build time to bake into static assets. In V2, dummy values or real values must be explicitly injected in the CI pipeline/Dockerfile.
+2. **Alpine Linux Compatibility:** Tailwind CSS v4's native `oxide` parser fails to install correctly on `node:18-alpine` with `npm ci`. The V2 Docker image must use a `slim` Debian base (e.g., `node:20-slim`) instead.
+3. **Database SSL Flag:** The current `client.ts` uses `.includes("localhost")` to disable DB SSL. In V2, a private network DB on a VPS won't be "localhost" but still shouldn't use SSL. We need an explicit `DATABASE_SSL=false` env variable instead.
+4. **Mocked Auth in Integration Tests:** Tests like `generate-api.test.ts` rely on mocked Auth. The Next.js container runs against a plain Postgres DB, which has no built-in Auth service (like Supabase Auth). In V2, the real Auth replacement must either be self-hosted alongside Postgres or thoroughly mocked at the boundary layer.
 
 ## ADRs (decisions to keep on record)
 
@@ -126,7 +130,7 @@ Plan limits are enforced **server-side** in `services/generation` and `services/
 | 4 | Slides as validated JSON, not components | Required for AI generation and user editing | Accepted |
 | 5 | Server-side AI only, `AIProvider` abstraction | Key safety, cost control, provider swap | Accepted |
 | 6 | Token-based public audience links | No accounts for viewers; replaces the hardcoded password gate | Accepted |
-| 7 | Stripe subscriptions + credit ledger in V1 | Monetization from launch; AI cost control | Accepted (pricing pending — see spec) |
+| 7 | Stripe subscriptions + credit ledger in V1 | Monetization from launch; AI cost control | Accepted |
 | 8 | French-first UI, i18n-ready | Existing market and content are French | Accepted |
 
 ## Performance Notes
@@ -136,6 +140,11 @@ Plan limits are enforced **server-side** in `services/generation` and `services/
 - Realtime messages carry only `{ slideIndex, ts }`.
 - Indexes required for hot paths are listed in `docs/data-model.md`.
 - Images: Next.js `<Image>` with Supabase Storage remote patterns; uploads pre-resized to ≤ 2000 px.
+
+## Observability and Performance (Phase 4)
+- **Structured Logging:** A lightweight JSON `logger` (`src/lib/logger.ts`) logs `orgId`, `deckId`, and other context across services (`generation`, `decks`, `billing`).
+- **Index Check:** The hot-path `getAudiencePayload` queries `decks.presentToken` (has unique index), `themes.id` (PK index), and `slides.deckId` (covered by `slides_deck_position_unique`). All hot paths are fully indexed.
+- **Payload Caching:** `getAudiencePayload` is cached via `unstable_cache` (60s revalidation).
 
 ## Observability
 

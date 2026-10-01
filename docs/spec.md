@@ -136,15 +136,15 @@ Testable conditions for V1 launch:
 - [ ] E2E happy path passes in CI on every PR.
 - [ ] `docker compose up` with plain Postgres runs migrations + app (V2 rehearsal) — documented gaps only.
 
-## Open Questions
+## Resolved Decisions
 
-| # | Question | Default if unanswered |
+| # | Decision | Outcome |
 |---|---|---|
-| 1 | AI provider: Claude-first behind `AIProvider`? | Yes — Anthropic Claude Sonnet for copy, Haiku-class for extraction |
-| 2 | Pricing model and V1 price points? | Free trial 1 deck, Pro (unlimited-ish credits), Agency (orgs + seats) — needs decision before Phase 3 |
-| 3 | Billing in V1 or beta-then-billing? | Stripe in V1 (Phase 3), feature-flag off until pricing is set |
-| 4 | Keep French-only UI for V1? | Yes — French-first, i18n-ready |
-| 5 | Custom domain for audience links? | V1 uses `/p/[token]` on the app domain |
-| 6 | Max slides per generation? | 40 |
-| 7 | Do audience viewers need lead capture (email gate before viewing)? | V1.5 — schema leaves room (`session_events`, `leads` later) |
-| 8 | Which legacy decks must be ported as templates first? | RDV Classique, VSL, Webinaire, Commercial |
+| 1 | AI provider: Claude-first behind `AIProvider`? | Yes — Anthropic Claude 3.5 Sonnet is implemented behind the interface. |
+| 2 | Pricing model and V1 price points? | Implemented: Free trial (1 credit), Pro (50 credits), Agency (500 credits). |
+| 3 | Billing in V1 or beta-then-billing? | Stripe is integrated in V1 for launch. |
+| 4 | Keep French-only UI for V1? | Yes — French-first, strings centralized for future i18n. |
+| 5 | Custom domain for audience links? | V1 uses `/p/[token]` on the main app domain. |
+| 6 | Max slides per generation? | 40 (configured in template definitions). |
+| 7 | Do audience viewers need lead capture (email gate before viewing)? | Deferred to V1.5 — schema leaves room for this. |
+| 8 | Which legacy decks must be ported as templates first? | RDV Classique, VSL, Webinaire, Commercial ported. |

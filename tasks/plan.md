@@ -98,13 +98,16 @@ Contract-first rule: before parallel work on any shared boundary (slide schema, 
 | Credit/billing bugs | High | Server-side enforcement only; idempotent webhooks; integration tests on the credit service |
 | Vercel-only APIs sneaking into services | Medium | Boundary rules in `AGENTS.md`; review checklist item |
 
-## Open Questions (blocking specific phases)
+### Checkpoint E (Launch)
+- [x] `docker compose up` runs migrations + app on vanilla Postgres
+- [x] Gaps documented in `docs/architecture.md` migration table
+- [x] Launch checklist complete
 
-| # | Question | Blocks |
-|---|---|---|
-| 1 | Pricing, plans, credit amounts | Phase 3 (Tasks 31–32) |
-| 2 | Which 4 legacy decks ship as system templates | Task 19 |
-| 3 | Light mode required at launch? | Task 36 |
-| 4 | Lead capture before audience viewing (V1.5?) | Phase 1 audience view design |
+## Resolved Questions
 
-Resolve each by updating `docs/spec.md` → Open Questions, then this plan.
+| # | Question | Blocks | Resolution |
+|---|---|---|---|
+| 1 | Pricing, plans, credit amounts | Phase 3 (Tasks 31–32) | Free, Pro, Agency implemented |
+| 2 | Which 4 legacy decks ship as system templates | Task 19 | RDV Classique, VSL, Webinaire, Commercial |
+| 3 | Light mode required at launch? | Task 36 | Deferred/not critical |
+| 4 | Lead capture before audience viewing (V1.5?) | Phase 1 audience view design | Deferred |

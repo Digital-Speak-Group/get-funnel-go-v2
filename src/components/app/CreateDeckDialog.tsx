@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { createDeckAction } from "@/app/(app)/app/decks/actions";
@@ -12,11 +12,21 @@ interface CreateDeckDialogProps {
 
 export function CreateDeckDialog({ themes }: CreateDeckDialogProps) {
   const router = useRouter();
-  const [open, setOpen] = React.useState(false);
+  const searchParams = useSearchParams();
+  const templateIdParam = searchParams.get("template");
+
+  const [open, setOpen] = React.useState(!!templateIdParam);
   const [title, setTitle] = React.useState("");
   const [themeId, setThemeId] = React.useState(themes[0]?.id ?? "");
   const [error, setError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  // Sync open state with template param on mount/change
+  React.useEffect(() => {
+    if (templateIdParam) {
+      setOpen(true);
+    }
+  }, [templateIdParam]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -32,7 +42,11 @@ export function CreateDeckDialog({ themes }: CreateDeckDialogProps) {
 
     setIsSubmitting(true);
     setError(null);
-    const result = await createDeckAction({ title: trimmed, themeId });
+    const result = await createDeckAction({ 
+      title: trimmed, 
+      themeId,
+      ...(templateIdParam ? { templateId: templateIdParam } : {})
+    });
 
     if ("error" in result && result.error) {
       setError("La création a échoué. Réessayez.");
@@ -45,8 +59,16 @@ export function CreateDeckDialog({ themes }: CreateDeckDialogProps) {
     setIsSubmitting(false);
     
     React.startTransition(() => {
+      router.push("/app"); // Clear the template param from URL
       router.refresh();
     });
+  }
+
+  function handleClose() {
+    setOpen(false);
+    if (templateIdParam) {
+      router.push("/app");
+    }
   }
 
   if (themes.length === 0) return null;
@@ -67,7 +89,7 @@ export function CreateDeckDialog({ themes }: CreateDeckDialogProps) {
         >
           <div
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-            onClick={() => setOpen(false)}
+            onClick={handleClose}
           />
           <form
             onSubmit={handleSubmit}
@@ -126,7 +148,7 @@ export function CreateDeckDialog({ themes }: CreateDeckDialogProps) {
               <Button
                 type="button"
                 variant="ghost"
-                onClick={() => setOpen(false)}
+                onClick={handleClose}
                 disabled={isSubmitting}
               >
                 Annuler

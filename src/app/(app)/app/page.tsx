@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 import { Suspense } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Filter, Sparkles, LayoutTemplate } from "lucide-react";
+import { Filter, Sparkles, LayoutTemplate, Plus } from "lucide-react";
 import { DeckCard } from "@/components/app/DeckCard";
 import { CreateDeckDialog } from "@/components/app/CreateDeckDialog";
 import { DashboardFilters } from "./DashboardFilters";
@@ -96,7 +96,9 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
           <h1 className="text-3xl font-bold text-white">Tableau de bord</h1>
           <p className="text-zinc-400 mt-1">Vos decks de présentation</p>
         </div>
-        <CreateDeckDialog themes={systemThemes.map(({ id, name }) => ({ id, name }))} />
+        <Suspense fallback={<Button className="gap-2"><Plus className="w-5 h-5" /> Nouveau deck</Button>}>
+          <CreateDeckDialog themes={systemThemes.map(({ id, name }) => ({ id, name }))} />
+        </Suspense>
       </div>
 
       <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-4 space-y-4">

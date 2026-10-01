@@ -1,4 +1,5 @@
 import "server-only";
+import { logger } from "@/lib/logger";
 import { db } from "@/lib/db/client";
 import {
   decks,
@@ -57,6 +58,7 @@ export async function createDeckFromTemplate(
     .where(and(eq(templates.id, input.templateId), eq(templates.isSystem, true)));
 
   if (!template) {
+    logger.warn("Template not found", { orgId: ctx.orgId, templateId: input.templateId });
     throw new Error("Template not found");
   }
 
@@ -93,6 +95,7 @@ export async function createDeckFromTemplate(
     }
   }
 
+  logger.info("Deck created from template", { orgId: ctx.orgId, deckId: deck.id, templateId: input.templateId });
   return getDeckById(deck.id, ctx) as Promise<DeckWithRelations>;
 }
 
@@ -146,7 +149,9 @@ export async function deleteDeck(
   id: string,
   ctx: DeckServiceContext
 ): Promise<boolean> {
-  return softDeleteDeckRepo(id, ctx);
+  const result = await softDeleteDeckRepo(id, ctx);
+  if (result) logger.info("Deck deleted", { orgId: ctx.orgId, deckId: id });
+  return result;
 }
 
 export async function softDeleteDeck(
@@ -188,6 +193,7 @@ export async function duplicateDeck(
     });
   }
 
+  logger.info("Deck duplicated", { orgId: ctx.orgId, sourceDeckId: id, newDeckId: newDeck.id });
   return getDeckById(newDeck.id, ctx);
 }
 
@@ -223,6 +229,7 @@ export async function publishDeck(
     createdBy: ctx.userId,
   });
 
+  logger.info("Deck published", { orgId: ctx.orgId, deckId: id, version });
   return updateDeckRepo(id, { status: "ready" }, ctx);
 }
 
@@ -269,6 +276,7 @@ export async function restoreVersion(
     });
   }
 
+  logger.info("Deck version restored", { orgId: ctx.orgId, deckId, version });
   return getDeckById(deckId, ctx);
 }
 
@@ -294,7 +302,9 @@ export async function rotatePresentToken(
   id: string,
   ctx: DeckServiceContext
 ): Promise<string | null> {
-  return rotatePresentTokenRepo(id, ctx);
+  const token = await rotatePresentTokenRepo(id, ctx);
+  if (token) logger.info("Present token rotated", { orgId: ctx.orgId, deckId: id });
+  return token;
 }
 
 export async function getDeckStats(ctx: DeckServiceContext): Promise<{

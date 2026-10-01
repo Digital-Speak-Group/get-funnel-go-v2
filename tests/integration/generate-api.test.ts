@@ -6,6 +6,7 @@ vi.mock("@/lib/env", () => ({
     GROQ_API_KEY: "test-key",
     AI_MODEL_FAST: "llama3-8b-8192",
     AI_MODEL_QUALITY: "llama3-70b-8192",
+    DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/getfunnels?schema=public",
   },
 }));
 

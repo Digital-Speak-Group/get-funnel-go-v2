@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger";
 import type { AIProvider } from "@/lib/ai/provider";
 import { reserveCredits, refundCredits } from "./credits";
 import { extractBrief } from "../ai/stages/extractBrief";
@@ -20,10 +21,12 @@ export async function generateDeckFromScript(
   options: { slideCount: number; tone?: string },
   onProgress?: (msg: string) => void
 ) {
+  logger.info("Starting deck generation", { orgId: ctx.orgId, templateId: templateConfig.id });
   // 1. Reserve credits
   if (onProgress) onProgress(JSON.stringify({ status: "RESERVING_CREDITS" }));
   const hasCredits = await reserveCredits(ctx, ESTIMATED_COST_CENTS);
   if (!hasCredits) {
+    logger.warn("Deck generation blocked: insufficient credits", { orgId: ctx.orgId });
     throw new Error("Insufficient AI credits");
   }
 
@@ -40,6 +43,7 @@ export async function generateDeckFromScript(
     briefData = briefRes.brief;
     const briefUsage = briefRes.usage ?? { costCents: 0, model: "unknown", inputTokens: 0, outputTokens: 0 };
     accumulatedCost += briefUsage.costCents;
+    logger.debug("Brief extracted", { orgId: ctx.orgId, costCents: briefUsage.costCents });
     await logGeneration(ctx, {
       kind: "brief",
       model: briefUsage.model,
@@ -57,6 +61,7 @@ export async function generateDeckFromScript(
     planData = planRes.plan;
     const planUsage = planRes.usage ?? { costCents: 0, model: "unknown", inputTokens: 0, outputTokens: 0 };
     accumulatedCost += planUsage.costCents;
+    logger.debug("Deck planned", { orgId: ctx.orgId, slideCount: planData.length });
     await logGeneration(ctx, {
       kind: "plan",
       model: planUsage.model,
@@ -77,6 +82,7 @@ export async function generateDeckFromScript(
     });
     slidesData = slidesRes.slides;
     accumulatedCost += slidesRes.usage.costCents;
+    logger.debug("Slides generated", { orgId: ctx.orgId, slideCount: slidesData.length });
     
     // Refund difference if we spent less than reserved
     if (accumulatedCost < ESTIMATED_COST_CENTS) {
@@ -135,9 +141,11 @@ export async function generateDeckFromScript(
     });
 
     if (onProgress) onProgress(JSON.stringify({ status: "DONE", deckId }));
-
+    
+    logger.info("Deck generation completed successfully", { orgId: ctx.orgId, deckId });
     return deckId;
   } catch (err: unknown) {
+    logger.error("Deck generation failed", err, { orgId: ctx.orgId });
     if (onProgress) onProgress(JSON.stringify({ status: "ERROR", error: err instanceof Error ? err.message : String(err) }));
     // Refund all reserved if failed early
     await refundCredits(ctx, ESTIMATED_COST_CENTS);
