@@ -63,7 +63,7 @@ Failure at any stage: refund reserved credits, record `ai_generations.status = '
 
 ```
 PresenterView (client)
-  → RealtimeProvider.publish(`deck:${deckId}`, { slideIndex, ts })
+  → RealtimeProvider.publish(`deck:${deckId}`, { slideIndex, ts, blanks? })
       ↳ Supabase Realtime broadcast channel (V1)
       ↳ WebSocket server (V2)
 
@@ -92,11 +92,14 @@ Plan limits are enforced **server-side** in `services/generation` and `services/
 
 | Concern | Control |
 |---|---|
-| Sessions | Supabase Auth, HTTP-only cookies via `@supabase/ssr`; middleware refreshes sessions |
-| Authorization | `memberships.role` (owner/admin/editor/viewer); checked in services, mirrored by RLS |
+| Sessions | Supabase Auth, HTTP-only cookies via `@supabase/ssr`; `src/middleware.ts` refreshes sessions (with a `src/` dir, Next.js only loads middleware from `src/`). `getSession()` is memoized **per request** with `React.cache` — never in module state, which is shared across users |
+| Route access | `src/lib/auth/route-access.ts` (unit-tested): pages redirect to `/login` unless public; `/api/*` is never redirected (handlers return 401 / verify Stripe signatures); `/p/*` is token-gated and rate-limited. Layouts re-check the session as a second layer |
+| Authorization | `memberships.role` (owner/admin/editor/viewer); checked in services, mirrored by RLS. Supabase only authenticates the user; org membership is read from `DATABASE_URL` via Drizzle (`repositories/memberships.ts`), and onboarding writes org + profile + owner membership in one Drizzle transaction (`services/onboarding.ts`) |
 | Tenant isolation | Every repository query filters `org_id`; RLS policies as second layer |
 | Secrets | Only `NEXT_PUBLIC_*` reach the client; service-role key is server-only and never used in repositories (RLS-compatible role instead) |
 | Audience links | `present_token` = 32-char nanoid; revocable + rotatable; rate-limited; no PII in payloads |
+| Embedded pages | `embed`/`showcase` slides frame only https pages on `EMBED_ALLOWED_DOMAINS` (`src/lib/slides/embed.ts`), checked in `SlideSchema` (every server write and AI output) and again before rendering. Sandbox `allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox` (decided 2026-10-09: the funnel pages render blank without same-origin; the pair is only unsafe for a page sharing our origin, and `isAllowedEmbedUrl` refuses the app's own host and its parent/sub-domains). No top navigation; `referrerpolicy=no-referrer`; thumbnails never load iframes. Pages that refuse framing (ClickFunnels sends `X-Frame-Options: SAMEORIGIN`) can be opened in a new tab from the address bar |
+| Slide images | Private bucket; `GET /api/assets/[id]` needs a session and the asset's org = active org; `GET /p/[token]/assets/[id]` (audience + PDF export) serves only assets the token's deck references — other org assets 404. Type sniffed from bytes (PNG/JPEG/WebP/GIF, no SVG), ≤ 4 MB, `nosniff` + deny-all CSP on responses. Audience images have their own rate-limit bucket (300/min/IP vs 20 for pages) |
 | AI input | Script treated as data, not instructions (prompt-injection note in `docs/ai-generation.md`); length caps; output schema-validated |
 | Uploads | Type/size validated server-side; served via signed URLs |
 | Stripe | Webhook signature verification; idempotency keys on event ids |
@@ -109,7 +112,7 @@ Plan limits are enforced **server-side** in `services/generation` and `services/
 | Postgres | Supabase Postgres | Postgres 16 in Docker | `DATABASE_URL` only; Drizzle migrations are plain SQL and already run on any Postgres |
 | Auth | Supabase Auth | Own JWT (Auth.js or custom) | `AuthService` interface in `src/lib/auth`; pages consume `getSession()` only |
 | Realtime | Supabase Realtime broadcast | WebSocket server (`ws`/uWS) | `RealtimeProvider` interface; both implementations ship side by side |
-| Storage | Supabase Storage | S3/MinIO | `StorageProvider` interface; only signed-URL shape is shared |
+| Storage | Supabase Storage (private bucket `slide-assets`) | S3/MinIO or filesystem | `StorageProvider` interface (`put`/`get`/`remove`, no vendor types); objects are streamed by our own routes, never linked from the vendor |
 | Email | Resend | Same or SMTP | `EmailProvider` interface |
 | Deploy | Vercel | Docker + Caddy on VPS | `output: "standalone"`; no Vercel-only APIs (no Edge Config, no ISR-only features in app routes) |
 | Cron | Vercel Cron | systemd timers / cron | Jobs live in `src/server/jobs/*` as plain functions with a thin trigger |
@@ -117,7 +120,7 @@ Plan limits are enforced **server-side** in `services/generation` and `services/
 **Migration Rehearsal Findings (Gaps):**
 1. **Build-Time Environment Variables:** The Next.js standalone build requires `NEXT_PUBLIC_*` variables (like Supabase URLs/keys) to be present at build time to bake into static assets. In V2, dummy values or real values must be explicitly injected in the CI pipeline/Dockerfile.
 2. **Alpine Linux Compatibility:** Tailwind CSS v4's native `oxide` parser fails to install correctly on `node:18-alpine` with `npm ci`. The V2 Docker image must use a `slim` Debian base (e.g., `node:20-slim`) instead.
-3. **Database SSL Flag:** The current `client.ts` uses `.includes("localhost")` to disable DB SSL. In V2, a private network DB on a VPS won't be "localhost" but still shouldn't use SSL. We need an explicit `DATABASE_SSL=false` env variable instead.
+3. **Database SSL Flag (resolved):** `DATABASE_SSL=true|false` controls DB SSL explicitly (`src/lib/db/ssl.ts`). Unset, it falls back to "SSL unless the host is localhost". `docker-compose.yml` sets `DATABASE_SSL=false` for the app container, whose DB host is `postgres`; a private-network DB on a VPS should do the same.
 4. **Mocked Auth in Integration Tests:** Tests like `generate-api.test.ts` rely on mocked Auth. The Next.js container runs against a plain Postgres DB, which has no built-in Auth service (like Supabase Auth). In V2, the real Auth replacement must either be self-hosted alongside Postgres or thoroughly mocked at the boundary layer.
 
 ## ADRs (decisions to keep on record)
@@ -137,9 +140,9 @@ Plan limits are enforced **server-side** in `services/generation` and `services/
 
 - Slides render in a fixed 1920×1080 design space, scaled with CSS `transform` — one layout math for every screen.
 - Deck payloads are cached per request with `unstable_cache`-style helpers only in `src/app` (never in services).
-- Realtime messages carry only `{ slideIndex, ts }`.
+- Realtime messages carry `{ slideIndex, ts }` plus, on a `blanks` slide, `blanks: { slideId, values }` — the figures the presenter types during the call (Task 60). They are never saved; the presenter resends them with every event and after a 300 ms typing pause. Anyone holding the token can publish on the channel, so the audience validates `blanks` (`parseBlanksPayload`: ≤ 6 values, ≤ 40 chars each) and renders it as text only.
 - Indexes required for hot paths are listed in `docs/data-model.md`.
-- Images: Next.js `<Image>` with Supabase Storage remote patterns; uploads pre-resized to ≤ 2000 px.
+- Images: plain `<img>` inside slides (fixed 1920×1080 design space, CSS-scaled, also in the PDF export), URL from `useAssetUrl()` — the app route by default, the token route under `AudienceAssetUrlProvider`. Uploads ≤ 4 MB (serverless body limit), pre-resized to ≤ 2000 px.
 
 ## Observability and Performance (Phase 4)
 - **Structured Logging:** A lightweight JSON `logger` (`src/lib/logger.ts`) logs `orgId`, `deckId`, and other context across services (`generation`, `decks`, `billing`).

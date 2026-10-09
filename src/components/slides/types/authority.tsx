@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { SlideIcon } from "../icons";
 
 interface AuthorityContent {
   headline: string;
@@ -28,6 +30,7 @@ export function AuthoritySlide({ content, theme }: { content: AuthorityContent; 
       <header style={{ marginBottom: "64px", textAlign: "center" }}>
         <h1
           style={{
+            ...headlineFill(theme, theme["--slide-text"]),
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
@@ -45,6 +48,7 @@ export function AuthoritySlide({ content, theme }: { content: AuthorityContent; 
           gridTemplateColumns: "repeat(2, 1fr)",
           gap: "32px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {points.map((point, index) => (
@@ -55,7 +59,7 @@ export function AuthoritySlide({ content, theme }: { content: AuthorityContent; 
                 flexDirection: "column",
                 gap: "12px",
                 padding: "24px",
-                background: theme["--slide-surface"],
+                ...cardSurface(theme),
                 borderRadius: theme["--slide-radius"],
                 border: `1px solid ${theme["--slide-muted"]}33`,
               }}
@@ -75,7 +79,7 @@ export function AuthoritySlide({ content, theme }: { content: AuthorityContent; 
                     borderRadius: "12px",
                   }}
                 >
-                  {point.icon}
+                  <SlideIcon name={point.icon} size={24} fallback="✓" />
                 </span>
               )}
               <h3

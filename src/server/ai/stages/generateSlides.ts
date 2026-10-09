@@ -1,6 +1,6 @@
 import type { AIProvider, CompletionUsage } from "@/lib/ai/provider";
 import type { Brief, SlidePlan } from "../schema";
-import { SlideSchema, type Slide } from "@/lib/slides/schema";
+import { SlideSchema, slideDraftSchema, type Slide } from "@/lib/slides/schema";
 import { GENERATE_SLIDE_SYSTEM_PROMPT } from "../prompts/generateSlide";
 
 export async function generateSlide(
@@ -29,21 +29,21 @@ ${script}
 `;
 
   try {
+    // Only this slide type's schema: the full union is ~10k tokens per request.
     const result = await provider.complete({
       tier: "quality",
       system: GENERATE_SLIDE_SYSTEM_PROMPT,
       input,
-      schema: SlideSchema,
+      schema: slideDraftSchema(planItem.type),
       temperature: 0.7, // Higher temp for copy generation
+      maxTokens: 1500,
     });
 
     if (!result.success) {
       return { slide: null, usage: result.usage ?? null, error: result.error };
     }
 
-    const slide = result.data;
-    slide.id = crypto.randomUUID();
-    slide.position = position;
+    const slide = SlideSchema.parse({ ...result.data, id: crypto.randomUUID(), position });
 
     return { slide, usage: result.usage };
   } catch (err: unknown) {

@@ -1,10 +1,14 @@
 export const dynamic = "force-dynamic";
 import { Suspense } from "react";
 import Link from "next/link";
+import { LayoutTemplate, SearchX, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Filter, Sparkles, LayoutTemplate, Plus } from "lucide-react";
-import { DeckCard } from "@/components/app/DeckCard";
-import { CreateDeckDialog } from "@/components/app/CreateDeckDialog";
+import { Skeleton } from "@/components/ui/skeleton";
+import { EmptyState } from "@/components/app/patterns/EmptyState";
+import { PageHeader } from "@/components/app/patterns/PageHeader";
+import { DeckCard } from "@/components/app/dashboard/DeckCard";
+import { CreateDeckDialog } from "@/components/app/dashboard/CreateDeckDialog";
+import { dashboardMessages as m } from "@/components/app/dashboard/messages";
 import { DashboardFilters } from "./DashboardFilters";
 import { listDecksAction } from "./decks/actions";
 import { listSystemThemes } from "@/lib/db/repositories/themes";
@@ -14,52 +18,26 @@ interface DashboardPageProps {
   searchParams: Promise<{ search?: string; sort?: string }>;
 }
 
+const GRID = "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4";
+
 async function getDecks(search?: string, sort?: string) {
   const result = await listDecksAction({ search, sort });
   if (result.error) return { decks: [] as DeckWithRelations[], total: 0 };
   return { decks: result.decks ?? [], total: result.total ?? 0 };
 }
 
-function DeckGrid({ decks }: { decks: DeckWithRelations[] }) {
-  if (decks.length === 0) return null;
-
+function DeckGridSkeleton() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {decks.map((deck) => (
-        <DeckCard key={deck.id} deck={deck} />
+    <div className={GRID} aria-hidden="true">
+      {Array.from({ length: 6 }, (_, i) => (
+        <div key={i} className="overflow-hidden rounded-lg border border-border bg-surface">
+          <Skeleton className="aspect-video rounded-none" />
+          <div className="space-y-2 p-3">
+            <Skeleton className="h-4 w-2/3" />
+            <Skeleton className="h-3 w-1/3" />
+          </div>
+        </div>
       ))}
-    </div>
-  );
-}
-
-function EmptyState() {
-  return (
-    <div
-      data-testid="dashboard-empty-state"
-      className="text-center py-16 border-2 border-dashed border-zinc-800 rounded-2xl"
-    >
-      <div className="mx-auto w-14 h-14 rounded-2xl bg-violet-600/15 flex items-center justify-center mb-4">
-        <Sparkles className="w-7 h-7 text-violet-400" />
-      </div>
-      <h2 className="text-xl font-semibold text-white">Votre tableau de bord est vide</h2>
-      <p className="text-zinc-400 mt-2 max-w-md mx-auto text-sm">
-        Collez un script et laissez l&apos;IA générer votre premier deck de vente, ou partez
-        d&apos;un cadre éprouvé avec un modèle.
-      </p>
-      <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-        <Link href="/app/new">
-          <Button className="gap-2 w-full sm:w-auto">
-            <Sparkles className="w-4 h-4" />
-            Générer votre premier deck
-          </Button>
-        </Link>
-        <Link href="/app/templates">
-          <Button variant="outline" className="gap-2 w-full sm:w-auto">
-            <LayoutTemplate className="w-4 h-4" />
-            Démarrer depuis un modèle
-          </Button>
-        </Link>
-      </div>
     </div>
   );
 }
@@ -67,19 +45,62 @@ function EmptyState() {
 async function DashboardDecks({ search, sort }: { search?: string; sort?: string }) {
   const { decks, total } = await getDecks(search, sort);
 
-  if (total === 0 && !search && !sort) {
-    return <EmptyState />;
+  if (total === 0 && !search) {
+    return (
+      <EmptyState
+        data-testid="dashboard-empty-state"
+        icon={Sparkles}
+        title={m.empty.title}
+        description={m.empty.description}
+        actions={
+          <>
+            <Button asChild>
+              <Link href="/app/new">
+                <Sparkles />
+                {m.empty.generate}
+              </Link>
+            </Button>
+            <Button variant="secondary" asChild>
+              <Link href="/app/templates">
+                <LayoutTemplate />
+                {m.empty.template}
+              </Link>
+            </Button>
+          </>
+        }
+      />
+    );
   }
 
   if (decks.length === 0) {
     return (
-      <div data-testid="dashboard-no-results" className="text-center py-12">
-        <p className="text-zinc-400">Aucun deck ne correspond à votre recherche.</p>
-      </div>
+      <EmptyState
+        data-testid="dashboard-no-results"
+        size="compact"
+        icon={SearchX}
+        title={m.noResults.title}
+        description={m.noResults.description}
+        actions={
+          <Button variant="secondary" size="sm" asChild>
+            <Link href={sort ? `/app?sort=${sort}` : "/app"}>{m.noResults.clear}</Link>
+          </Button>
+        }
+      />
     );
   }
 
-  return <DeckGrid decks={decks} />;
+  return (
+    <div className="space-y-3">
+      <p className="text-small text-faint" aria-live="polite">
+        {m.count(total)}
+      </p>
+      <div className={GRID}>
+        {decks.map((deck) => (
+          <DeckCard key={deck.id} deck={deck} />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default async function DashboardPage({ searchParams }: DashboardPageProps) {
@@ -90,47 +111,32 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   const systemThemes = await listSystemThemes();
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-white">Tableau de bord</h1>
-          <p className="text-zinc-400 mt-1">Vos decks de présentation</p>
-        </div>
-        <Suspense fallback={<Button className="gap-2"><Plus className="w-5 h-5" /> Nouveau deck</Button>}>
-          <CreateDeckDialog themes={systemThemes.map(({ id, name }) => ({ id, name }))} />
-        </Suspense>
-      </div>
+    <div className="mx-auto max-w-7xl space-y-6">
+      <PageHeader
+        title={m.title}
+        description={m.description}
+        actions={
+          <>
+            <Suspense fallback={null}>
+              <CreateDeckDialog themes={systemThemes.map(({ id, name }) => ({ id, name }))} />
+            </Suspense>
+            <Button asChild>
+              <Link href="/app/new">
+                <Sparkles />
+                {m.generate}
+              </Link>
+            </Button>
+          </>
+        }
+      />
 
-      <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-4 space-y-4">
-        <div className="flex flex-col sm:flex-row gap-4">
-          <DashboardFilters />
-          <div className="flex items-center gap-2">
-            <Link href="/app/templates">
-              <Button variant="outline" className="gap-2">
-                <Filter className="w-4 h-4" />
-                Modèles
-              </Button>
-            </Link>
-          </div>
-        </div>
+      <Suspense fallback={null}>
+        <DashboardFilters />
+      </Suspense>
 
-        <Suspense
-          key={`${search ?? ""}-${sort ?? ""}`}
-          fallback={
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="animate-pulse">
-                  <div className="aspect-video bg-zinc-800 rounded-xl mb-3" />
-                  <div className="h-6 bg-zinc-800 rounded w-3/4 mb-2" />
-                  <div className="h-4 bg-zinc-800 rounded w-1/2" />
-                </div>
-              ))}
-            </div>
-          }
-        >
-          <DashboardDecks search={search} sort={sort} />
-        </Suspense>
-      </div>
+      <Suspense key={`${search ?? ""}-${sort ?? ""}`} fallback={<DeckGridSkeleton />}>
+        <DashboardDecks search={search} sort={sort} />
+      </Suspense>
     </div>
   );
 }

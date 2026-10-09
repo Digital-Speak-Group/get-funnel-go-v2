@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface TeamContent {
   headline: string;
@@ -33,7 +34,7 @@ export function TeamSlide({ content, theme }: { content: TeamContent; theme: Rec
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -46,6 +47,7 @@ export function TeamSlide({ content, theme }: { content: TeamContent; theme: Rec
           gridTemplateColumns: `repeat(auto-fit, minmax(280px, 1fr))`,
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {members.map((member, index) => (
@@ -58,7 +60,7 @@ export function TeamSlide({ content, theme }: { content: TeamContent; theme: Rec
               textAlign: "center",
               gap: "16px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-muted"]}1a`,
             }}
@@ -95,7 +97,7 @@ export function TeamSlide({ content, theme }: { content: TeamContent; theme: Rec
                 style={{
                   fontSize: "15px",
                   fontWeight: 500,
-                  color: theme["--slide-primary"],
+                  color: theme["--slide-primary-text"],
                   margin: 0,
                 }}
               >

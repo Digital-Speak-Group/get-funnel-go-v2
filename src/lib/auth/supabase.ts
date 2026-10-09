@@ -2,6 +2,7 @@ import "server-only";
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { env } from "@/lib/env";
+import { getPrimaryMembership } from "@/lib/db/repositories/memberships";
 import type { AuthService, Session } from "@/lib/auth/types";
 
 export async function createSupabaseServerClient() {
@@ -37,43 +38,6 @@ export async function createSupabaseServerClient() {
   );
 }
 
-export function createSupabaseServiceRoleClient() {
-  return createServerClient(
-    env.NEXT_PUBLIC_SUPABASE_URL,
-    env.SUPABASE_SERVICE_ROLE_KEY,
-    {
-      cookies: {
-        get() {
-          return undefined;
-        },
-        set() {},
-        remove() {},
-      },
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false,
-      },
-    }
-  );
-}
-
-async function resolveActiveOrgId(
-  supabase: Awaited<ReturnType<typeof createSupabaseServerClient>>,
-  userId: string
-): Promise<string | null> {
-  const { data: memberships } = await supabase
-    .from("memberships")
-    .select("org_id, role")
-    .eq("user_id", userId)
-    .order("role", { ascending: true });
-
-  if (!memberships || memberships.length === 0) {
-    return null;
-  }
-
-  return memberships[0].org_id;
-}
-
 export const supabaseAuthService: AuthService = {
   async getSession(): Promise<Session | null> {
     const supabase = await createSupabaseServerClient();
@@ -85,23 +49,16 @@ export const supabaseAuthService: AuthService = {
       return null;
     }
 
-    const activeOrgId = await resolveActiveOrgId(supabase, user.id);
-
-    if (!activeOrgId) {
+    // Supabase only authenticates; org membership lives in our own database.
+    const membership = await getPrimaryMembership(user.id);
+    if (!membership) {
       return null;
     }
 
-    const { data: membership } = await supabase
-      .from("memberships")
-      .select("role")
-      .eq("user_id", user.id)
-      .eq("org_id", activeOrgId)
-      .single();
-
     return {
       userId: user.id,
-      activeOrgId,
-      role: membership?.role ?? "viewer",
+      activeOrgId: membership.orgId,
+      role: membership.role,
     };
   },
 

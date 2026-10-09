@@ -4,6 +4,8 @@ import * as React from "react";
 import { type Slide } from "@/lib/slides/schema";
 import { type ThemeTokens } from "@/lib/slides/theme";
 import { AutoScaledSlideRenderer } from "@/components/slides/SlideRenderer";
+import { AudienceAssetUrlProvider } from "@/components/slides/asset-url";
+import { LiveBlanksProvider } from "@/components/slides/render-context";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useAudienceSync } from "@/hooks/useSyncedSlide";
 
@@ -24,7 +26,12 @@ export function AudienceView({ slides, theme, presentToken, initialIndex = 0 }: 
   const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Follow presenter in realtime
-  const syncedIndex = useAudienceSync(presentToken);
+  // Values the presenter types into blanks slides (validated in the sync hook).
+  const [blankValues, setBlankValues] = React.useState<Record<string, string[]>>({});
+  const onBlanks = React.useCallback((slideId: string, values: string[]) => {
+    setBlankValues((prev) => ({ ...prev, [slideId]: values }));
+  }, []);
+  const syncedIndex = useAudienceSync(presentToken, true, onBlanks);
   React.useEffect(() => {
     if (syncedIndex !== null) {
       setCurrentIndex(Math.max(0, Math.min(syncedIndex, slides.length - 1)));
@@ -82,7 +89,12 @@ export function AudienceView({ slides, theme, presentToken, initialIndex = 0 }: 
     >
       {/* Slide canvas — full bleed */}
       <div className="w-full h-full">
-        <AutoScaledSlideRenderer slide={currentSlide} theme={theme} isActive />
+        {/* Images come through the token route: the audience has no session. */}
+        <AudienceAssetUrlProvider presentToken={presentToken}>
+          <LiveBlanksProvider values={blankValues}>
+            <AutoScaledSlideRenderer slide={currentSlide} theme={theme} isActive />
+          </LiveBlanksProvider>
+        </AudienceAssetUrlProvider>
       </div>
 
       {/* Progress bar at top */}

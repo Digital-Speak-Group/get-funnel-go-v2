@@ -1,6 +1,8 @@
 import { describe, it, expect, vi } from "vitest";
 import { generateSlides } from "@/server/ai/stages/generateSlides";
 import type { AIProvider } from "@/lib/ai/provider";
+import type { SlidePlan } from "@/server/ai/schema";
+import { buildDefaultContent } from "@/lib/slides/defaults";
 
 describe("Stage 3: generateSlides", () => {
   const mockProvider: AIProvider = {
@@ -18,7 +20,7 @@ describe("Stage 3: generateSlides", () => {
     confidence: 1.0,
   } as any;
 
-  const dummyPlan = [
+  const dummyPlan: SlidePlan[] = [
     { type: "cover", headline: "Intro", purpose: "Start" },
     { type: "problem", headline: "Problem", purpose: "Pain" },
     { type: "cta", headline: "CTA", purpose: "End" },
@@ -32,12 +34,7 @@ describe("Stage 3: generateSlides", () => {
 
       return {
         success: true,
-        data: {
-          id: "temp",
-          position: 0,
-          type: planItem.type,
-          content: {}, // minimal mock
-        },
+        data: { type: planItem.type, content: buildDefaultContent(planItem.type) },
         usage: { inputTokens: 10, outputTokens: 10, model: "test", costCents: 1 },
       } as any; // Cast as any because we aren't filling full schema constraints in mock
     });
@@ -61,7 +58,7 @@ describe("Stage 3: generateSlides", () => {
       }
       return {
         success: true,
-        data: { id: "temp", position: 0, type: "cover", content: {} },
+        data: { type: "cover", content: buildDefaultContent("cover") },
         usage: { inputTokens: 10, outputTokens: 10, model: "test", costCents: 1 },
       } as any;
     });

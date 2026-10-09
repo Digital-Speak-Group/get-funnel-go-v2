@@ -1,6 +1,6 @@
 import Groq from "groq-sdk";
-import { zodToJsonSchema } from "zod-to-json-schema";
 import { env } from "@/lib/env";
+import { toToolSchema } from "./tool-schema";
 import { calculateCostCents } from "./pricing";
 import type {
   AIProvider,
@@ -20,17 +20,14 @@ export class GroqProvider implements AIProvider {
 
   async complete<T>(args: CompletionArgs<T>): Promise<CompletionResult<T>> {
     const model = args.tier === "fast" ? env.AI_MODEL_FAST : env.AI_MODEL_QUALITY;
-    // @ts-expect-error zod-to-json-schema type mismatch on strict mode
-    const jsonSchema = zodToJsonSchema(args.schema, "OutputSchema");
+    const { parameters, unwrap } = toToolSchema(args.schema);
 
     const tool = {
       type: "function" as const,
       function: {
         name: "record_output",
         description: "Record the structured output matching the required schema.",
-        parameters: (jsonSchema as Record<string, unknown>).definitions
-          ? (jsonSchema as { definitions: { OutputSchema: unknown } }).definitions.OutputSchema
-          : jsonSchema,
+        parameters,
       },
     };
 
@@ -69,7 +66,7 @@ export class GroqProvider implements AIProvider {
       }
 
       // Validate against Zod schema
-      const parsed1 = args.schema.safeParse(JSON.parse(toolCall1.function.arguments));
+      const parsed1 = args.schema.safeParse(unwrap(JSON.parse(toolCall1.function.arguments)));
       if (parsed1.success) {
         return {
           success: true,
@@ -111,7 +108,7 @@ export class GroqProvider implements AIProvider {
         };
       }
 
-      const parsed2 = args.schema.safeParse(JSON.parse(toolCall2.function.arguments));
+      const parsed2 = args.schema.safeParse(unwrap(JSON.parse(toolCall2.function.arguments)));
       if (parsed2.success) {
         return {
           success: true,

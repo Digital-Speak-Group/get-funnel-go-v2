@@ -1,0 +1,1202 @@
+{
+  "title": "Pitch Commercial",
+  "language": "fr",
+  "id": "60000000-0000-4000-8000-000000000009",
+  "slug": "pitch-commercial",
+  "name": "Pitch Commercial",
+  "category": "Vente Directe",
+  "description": "Pitch commercial d'agence ou de consultant : de l'accroche aux fuites du business, histoire du fondateur, preuves, packs, méthode et FAQ, puis audit en direct, diagnostic chiffré, recommandation et proposition jusqu'au closing.",
+  "themeId": "40000000-0000-4000-8000-000000000006",
+  "slides": [
+    {
+      "id": "18000000-0000-4000-8000-000000000001",
+      "position": 0,
+      "type": "cover",
+      "needsInput": true,
+      "notes": "OUVERTURE · 30 sec. Laisser la slide respirer 3 secondes avant de parler. Visuel d'origine : logo de l'agence au centre avec halo lumineux rotatif, grand titre au nom de l'agence, baseline encadrée avec soulignement animé sous « transformer votre trafic en argent », URL du site en bas, particules flottantes et accents d'angle. Remplacer [Votre entreprise] par le nom de l'agence et afficher votre logo si disponible. L'URL du site d'origine a été retirée. Script rédigé lors du portage — à relire.",
+      "script": "On a un seul métier. Et c'est votre trafic.\n\nMerci d'être là.\nAvant de commencer, je vais être très clair sur ce qu'on fait chez [Votre entreprise].\nOn ne fait pas des sites.\nOn ne fait pas « un peu de tout ».\nNotre seul métier, c'est de transformer votre trafic en argent.\n\nDans les prochaines minutes, je vais vous montrer où votre business perd de l'argent aujourd'hui,\npourquoi ça arrive,\net comment on le règle.\n\nEt ensuite, on parlera de vous. De votre business. De vos chiffres.\n\nOn commence.",
+      "content": {
+        "kicker": "[Votre entreprise]",
+        "title": "Transformer votre trafic en argent.",
+        "subtitle": "L'agence francophone dont le seul métier est de transformer votre trafic en argent.",
+        "presenterName": "[Votre nom]"
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000002",
+      "position": 1,
+      "type": "problem",
+      "needsInput": true,
+      "notes": "LE PROBLÈME · 1 min. Eyebrow d'origine : « Le problème ». Marquer une pause après chaque fuite et chercher le hochement de tête. Visuel d'origine : sol en grille perspective, faisceau lumineux vertical, 3 cartes numérotées 01 / 02 / 03 qui apparaissent l'une après l'autre. Pied de slide d'origine : « [Votre entreprise] colmate ces fuites. Une par une. » Script rédigé lors du portage — à relire.",
+      "script": "Il y a trois fuites. Et vous en avez probablement les trois.\n\nJe vais vous dire un truc que la plupart des gens n'entendent jamais.\nLe problème, ce n'est pas votre produit.\nCe n'est pas non plus le manque de trafic.\n\nLe problème, ce sont trois fuites.\n\nLa première : votre trafic.\nVous payez pour amener des visiteurs… et 97% repartent sans laisser la moindre trace.\n\nLa deuxième : votre budget.\nVous dépensez en pub, en contenu, en relances… mais sans système pour que chaque euro investi travaille vraiment.\n\nLa troisième, et c'est souvent la plus douloureuse : votre temps.\nVous travaillez pour votre business, au lieu que votre business travaille pour vous.\n\nMême avec du trafic. Même avec un bon produit.\nNotre travail, c'est de colmater ces fuites. Une par une.",
+      "content": {
+        "headline": "3 fuites qui sabotent votre business",
+        "intro": "Même avec du trafic. Même avec un bon produit. [Votre entreprise] colmate ces fuites. Une par une.",
+        "painPoints": [
+          {
+            "icon": "trending-down",
+            "title": "01 · Votre trafic",
+            "text": "Vous payez pour amener des visiteurs. 97% repartent sans laisser de trace."
+          },
+          {
+            "icon": "wallet",
+            "title": "02 · Votre budget",
+            "text": "Vous dépensez en pub, en contenu, en relances… sans système pour maximiser chaque euro investi."
+          },
+          {
+            "icon": "clock",
+            "title": "03 · Votre temps",
+            "text": "Vous travaillez pour votre business au lieu que votre business travaille pour vous."
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000003",
+      "position": 2,
+      "type": "comparison",
+      "needsInput": true,
+      "notes": "LE CONSTAT · 1 min. Eyebrow d'origine : « Le constat » ; sous-titre : « L'un accueille. L'autre convertit. ». Visuel d'origine : deux cartes côte à côte — à gauche « Site brochure » en rouge avec une croix, à droite « Parcours [Votre entreprise] » en violet avec une coche. Laisser le prospect se situer lui-même dans la colonne de gauche. Script rédigé lors du portage — à relire.",
+      "script": "Un site, ça accueille. Un système, ça convertit.\n\nRegardez la différence.\n\nÀ gauche, le site brochure.\nOn arrive. On scrolle. On repart.\nVous avez payé pour amener ces gens… et vous les regardez partir.\n\nÀ droite, un vrai parcours.\nOn arrive. On comprend. On agit.\nChaque visiteur entre dans un système.\nEt ce système est conçu pour une seule chose : la décision.\n\nAlors je vous pose la question, honnêtement :\naujourd'hui, vous êtes plutôt à gauche… ou à droite ?",
+      "content": {
+        "headline": "La différence entre un site et un système de vente.",
+        "columns": [
+          "Site brochure",
+          "Parcours [Votre entreprise]"
+        ],
+        "rows": [
+          {
+            "label": "Le parcours",
+            "values": [
+              "On arrive → On scrolle → On repart",
+              "On arrive → On comprend → On agit"
+            ]
+          },
+          {
+            "label": "Le visiteur",
+            "values": [
+              "Vous avez payé pour les amener.",
+              "Chaque visiteur entre dans un système."
+            ]
+          },
+          {
+            "label": "Le résultat",
+            "values": [
+              "Vous les regardez partir.",
+              "Chaque système est conçu pour une seule chose : la décision."
+            ]
+          },
+          {
+            "label": "En une phrase",
+            "values": [
+              "L'un accueille.",
+              "L'autre convertit."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000004",
+      "position": 3,
+      "type": "comparison",
+      "notes": "LE REFRAME · 1 min 30. Eyebrow d'origine : « Le reframe ». Sous-titre d'origine : « La différence n'est ni le produit, ni le budget, ni l'audience. » Pied de slide : « La différence, c'est la structure. » Visuel d'origine : deux cartes Modèle A / Modèle B avec halo et scintillement. Laisser un silence après « un emploi déguisé en business ». Script rédigé lors du portage — à relire.",
+      "script": "La différence, ce n'est pas le produit. C'est la structure.\n\nPrenez deux business.\nMême marché. Même type d'offre.\nEt pourtant, des résultats complètement opposés.\n\nLe modèle A travaille pour son business.\nIl poste. Il relance. Et le jour où il s'arrête… le chiffre d'affaires s'arrête aussi.\nSoyons honnêtes : c'est un emploi déguisé en business.\n\nLe modèle B, c'est l'inverse : son business travaille pour lui.\nIl est 3h du matin, les leads continuent d'arriver.\nIl part en vacances, le système reste.\nÇa, c'est un actif.\n\nEt la différence entre les deux, ce n'est ni le produit, ni le budget, ni l'audience.\nLa différence, c'est la structure.",
+      "content": {
+        "headline": "Deux business. Même marché. Résultats opposés.",
+        "columns": [
+          "Modèle A",
+          "Modèle B"
+        ],
+        "rows": [
+          {
+            "label": "La posture",
+            "values": [
+              "Travaille pour son business.",
+              "Son business travaille pour lui."
+            ]
+          },
+          {
+            "label": "Au quotidien",
+            "values": [
+              "Il poste. Il relance.",
+              "3h du matin — les leads continuent."
+            ]
+          },
+          {
+            "label": "Quand il s'arrête",
+            "values": [
+              "Il s'arrête → le CA s'arrête.",
+              "Il part en vacances — le système reste."
+            ]
+          },
+          {
+            "label": "Ce que c'est",
+            "values": [
+              "Un emploi déguisé en business.",
+              "Un actif."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000005",
+      "position": 4,
+      "type": "kpi",
+      "notes": "LE CONTEXTE · 1 min 30. Eyebrow d'origine : « Le contexte » ; sous-titre : « Voici les chiffres. » ; pied de slide : « Les business qui gagnent ne sont pas les meilleurs — ce sont les mieux calibrés. » Visuel d'origine : 4 cartes animées — barres qui montent (+87%), anneau cassé à 60% (tracking perdu), compte à rebours de 8 secondes, points qui se multiplient (×3) — avec compteurs animés. Chiffres marché repris du deck d'origine : vérifier et actualiser les sources avant usage. Script rédigé lors du portage — à relire.",
+      "script": "Le marché a changé. Et il ne vous a pas prévenu.\n\nQuatre chiffres. Juste quatre.\n\nPlus 87% : c'est ce qu'a pris le coût de la pub en quatre ans.\n60% : c'est la part des campagnes Meta qui sont sous-trackées depuis iOS 14. Autrement dit, la plupart des gens pilotent à l'aveugle.\n8 secondes : c'est l'attention moyenne sur une landing page. Huit secondes pour convaincre.\nEt fois 3 : c'est la concurrence sur votre marché depuis 2020.\n\nDonc le marché ne vous attend pas. Il s'est déjà reconfiguré.\n\nEt dans ce marché-là, les business qui gagnent ne sont pas forcément les meilleurs.\nCe sont les mieux calibrés.",
+      "content": {
+        "headline": "Le marché ne vous attend pas. Il s'est déjà reconfiguré.",
+        "metrics": [
+          {
+            "value": "+87%",
+            "label": "Le coût de la pub en 4 ans"
+          },
+          {
+            "value": "60%",
+            "label": "Campagnes Meta sous-trackées post-iOS 14"
+          },
+          {
+            "value": "8 sec",
+            "label": "Attention moyenne sur une landing page"
+          },
+          {
+            "value": "×3",
+            "label": "Concurrence sur votre marché depuis 2020"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000006",
+      "position": 5,
+      "type": "statement",
+      "needsInput": true,
+      "notes": "HISTOIRE DU FONDATEUR · Chapitre 01 · 45 sec. Cadre de storytelling réutilisable : remplacer chaque placeholder par votre propre histoire, en gardant la structure (une croyance forte → « j'avais complètement tort » → ce que ça m'a coûté). Exemple de la version d'origine : un ingénieur persuadé que le marketing était réservé « aux gens qui ne savaient pas compter ». Visuel d'origine : deux sphères en orbite, « Ingénierie » et « Marketing », qui se rapprochent et entrent en collision au centre pour former « Fusion » (éclair) ; sol en grille perspective. Pied de slide : « La certitude de [votre métier d'origine] ». Script rédigé lors du portage — à relire.",
+      "script": "Je vais vous raconter comment j'en suis arrivé là. Parce que ce n'était pas prévu.\n\nPendant [X] ans, j'ai pensé que [votre ancienne croyance sur le marketing].\nJ'en étais convaincu.\n\nEt j'avais complètement tort.\n\nCette conviction-là m'a coûté [ce qu'elle vous a coûté].\nEt c'est justement pour ça que je vous la raconte :\nparce que beaucoup d'entrepreneurs ont exactement la même… sans le savoir.",
+      "content": {
+        "eyebrow": "Chapitre 01 — La certitude de [votre métier d'origine]",
+        "headline": "J'ai passé [X] ans à penser que [Votre ancienne croyance sur le marketing].",
+        "highlight": "J'avais complètement tort.",
+        "sub": "Et cette conviction m'a coûté [Ce qu'elle vous a coûté — ex. des années]."
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000007",
+      "position": 6,
+      "type": "authority",
+      "needsInput": true,
+      "notes": "HISTOIRE DU FONDATEUR · Chapitre 01 (suite) · 45 sec. Eyebrow d'origine : « Chapitre 01 — La certitude de l'ingénieur ». Raconté à la 3e personne dans la version d'origine — conserver ce recul narratif. Citation d'origine (structure à reprendre) : « Le marketing ? Des gens qui vendent de la fumée avec de beaux mots. Nous on avait les maths. On avait la rigueur. » Visuel d'origine : radar animé avec balayage, au centre les initiales du fondateur, et 4 nœuds qui s'allument un à un (les secteurs traversés). Pied de slide : « [Votre entreprise] — Histoire ». Script rédigé lors du portage — à relire.",
+      "script": "Le personnage de cette histoire, au départ, il méprisait le marketing.\n\n[Votre prénom] venait de [votre métier d'origine].\n[Vos secteurs] : des environnements sérieux, structurés, rigoureux.\n\nEt pour lui, le marketing, c'était simple :\n« [votre ancienne croyance, en une phrase choc]. »\nNous, on avait [votre force d'origine].\n\nSauf que [Votre prénom] allait apprendre quelque chose d'assez embarrassant.",
+      "content": {
+        "headline": "[Votre prénom] : celui qui méprisait le marketing.",
+        "points": [
+          {
+            "icon": "briefcase",
+            "title": "Le terrain d'origine",
+            "text": "[Votre métier d'origine] · [Vos secteurs — ex. banque, CRM, assurance, multinationales]"
+          },
+          {
+            "icon": "brain",
+            "title": "La conviction",
+            "text": "« [Votre ancienne croyance, en une phrase choc]. Nous, on avait [votre force d'origine]. »"
+          },
+          {
+            "icon": "lightbulb",
+            "title": "Le retournement",
+            "text": "[Votre prénom] allait apprendre quelque chose d'embarrassant."
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000008",
+      "position": 7,
+      "type": "kpi",
+      "needsInput": true,
+      "notes": "HISTOIRE DU FONDATEUR · Chapitre 02 — Le déclic · 1 min. Structure d'origine : une petite mission facturée peu cher, puis un appel du client qui annonce un résultat sans commune mesure. Citation à adapter : « Grâce à ce que tu m'as construit — j'ai généré [X €]. » Phrase de chute : « Le mépris venait de prendre une claque. » Visuel d'origine : carte « Ce qu'il a facturé » avec compteur animé, flèche de conversion, puis carte « Généré par le client — en [X] jours » avec compteur et gerbe d'étincelles. Script rédigé lors du portage — à relire.",
+      "script": "Et puis il y a eu le déclic.\n\nUne mission toute simple : [votre première mission client].\nFacturée [X €]. Pour [durée de la mission].\n\nQuelques jours plus tard, le téléphone sonne.\nC'est le client. Et il me dit :\n« Grâce à ce que tu m'as construit, j'ai généré [X €]. »\nEn [X] jours.\n\n[X €] facturés… et [X €] générés.\n\nLe mépris venait de prendre une claque.\nEt à ce moment-là, une seule question m'obsédait : pourquoi ça a marché ?",
+      "content": {
+        "headline": "Le déclic : [Votre première mission client]. Et un appel qui a tout changé.",
+        "metrics": [
+          {
+            "value": "[X €]",
+            "label": "Ce que vous avez facturé · [Durée de la mission]"
+          },
+          {
+            "value": "[X €]",
+            "label": "Ce que le client a généré · en [X] jours",
+            "delta": "×[X]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000009",
+      "position": 8,
+      "type": "definition",
+      "needsInput": true,
+      "notes": "HISTOIRE DU FONDATEUR · Chapitre 03 · 1 min. Structure d'origine : un échange gagnant-gagnant (expertise technique ↔ formation marketing) pendant [X] mois sur de vrais budgets, en 3 temps : Accord conclu → Immersion réelle → La révélation. Visuel d'origine : schéma d'échange animé (deux blocs reliés par des flèches courbes autour d'un cercle central « [X] mois · vrais budgets »), puis la phrase de révélation qui apparaît mot à mot, avec « [votre métier d'origine] » en dégradé. Script rédigé lors du portage — à relire.",
+      "script": "Je ne voulais pas devenir marketeur. Je voulais comprendre.\n\nAlors j'ai fait un deal.\n[Votre expertise], en échange de [ce que vous avez appris en échange].\n\nEt pendant [X] mois, j'ai été en immersion réelle.\nPas de théorie. De vrais budgets. De vrais résultats. De vraies erreurs.\n\nEt là, j'ai eu la révélation.\nLe marketing, ce n'est pas du bullshit.\nC'est de l'ingénierie appliquée à la psychologie humaine.\n\nEt ça, de l'ingénierie… c'était exactement mon terrain.",
+      "content": {
+        "headline": "[Votre prénom] ne voulait pas devenir marketeur. Il voulait comprendre pourquoi ça marchait.",
+        "body": "Le marketing n'est pas du bullshit. C'est de l'ingénierie appliquée à la psychologie humaine. Et [Votre prénom] — [votre métier d'origine].",
+        "pillars": [
+          {
+            "icon": "handshake",
+            "title": "Accord conclu",
+            "text": "[Votre expertise] contre [Ce que vous avez appris en échange — ex. une formation marketing terrain]."
+          },
+          {
+            "icon": "wallet",
+            "title": "Immersion réelle",
+            "text": "[X] mois sur de vrais budgets."
+          },
+          {
+            "icon": "lightbulb",
+            "title": "La révélation",
+            "text": "Le marketing, c'est de l'ingénierie appliquée à la psychologie humaine."
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000010",
+      "position": 9,
+      "type": "timeline",
+      "needsInput": true,
+      "notes": "HISTOIRE DU FONDATEUR · Chapitre 04 — La naissance de [Votre entreprise] · 1 min. Frise d'origine en 5 jalons : métier d'origine → le déclic → une première agence trop généraliste → création de l'agence spécialisée exclusivement → aujourd'hui (chiffre d'affaires généré + nombre de clients). Le dernier jalon est mis en avant (dégradé + point lumineux). Phrase de clôture d'origine : « Chaque client est arrivé parce que le précédent a obtenu ce qu'il cherchait. » Script rédigé lors du portage — à relire.",
+      "script": "[Année]. J'arrête tout. Et je reconstruis.\n\nJe reprends le fil rapidement.\n[Année] : [votre métier d'origine].\n[Année] : le déclic, [X €] qui deviennent [X €].\n[Année] : [votre premier essai]. Et je comprends vite que [ce qui ne marchait pas].\n\nAlors en [Année], je prends une décision radicale : [ce que vous avez arrêté pour vous lancer].\nEt je crée [Votre entreprise], avec une seule spécialité : [votre spécialité]. Exclusivement.\n\nNos premiers clients : [Client 1], [Client 2].\nEt aujourd'hui : [résultat chiffré], [X] clients.\n\nEt je vais vous dire ce dont je suis le plus fier :\nchaque client est arrivé parce que le précédent a obtenu ce qu'il cherchait.",
+      "content": {
+        "headline": "[Année]. [Votre prénom] arrête tout. Et reconstruit pour les meilleurs.",
+        "milestones": [
+          {
+            "when": "[Année]",
+            "title": "[Votre métier d'origine]",
+            "text": "Le point de départ."
+          },
+          {
+            "when": "[Année]",
+            "title": "[X €] → [X €] · Le déclic",
+            "text": "[Votre première mission client]"
+          },
+          {
+            "when": "[Année]",
+            "title": "[Votre premier essai] · [Ce qui ne marchait pas]",
+            "text": "Ex. une première structure trop généraliste."
+          },
+          {
+            "when": "[Année]",
+            "title": "[Votre entreprise] · [Votre spécialité] · Exclusivement",
+            "text": "[Ce que vous avez arrêté pour vous lancer]"
+          },
+          {
+            "when": "Aujourd'hui",
+            "title": "[Résultat chiffré] · [X] clients",
+            "text": "Premiers clients : [Client 1]. [Client 2]."
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000011",
+      "position": 10,
+      "type": "flow",
+      "needsInput": true,
+      "notes": "LE CIRCUIT · 1 min. Sous-titre d'origine : « Une machine de guerre optimisée pour la conversion à chaque étape. » La slide d'origine n'affichait que les 6 étapes (Acquisition → Page → Capture → Relance → RDV/Vente → Suivi CRM) reliées par des flèches animées ; les courtes descriptions de chaque étape ont été ajoutées lors du portage — à relire. Script rédigé lors du portage — à relire.",
+      "script": "On ne fait pas une page. On fait le circuit complet.\n\nVoilà ce qu'on construit, de bout en bout.\nL'acquisition : le bon trafic, au bon endroit.\nLa page : celle qui fait comprendre et qui donne envie d'agir.\nLa capture : chaque personne intéressée laisse une trace.\nLa relance : aucun lead ne disparaît.\nLe RDV ou la vente : au moment où le prospect est prêt.\nEt le suivi CRM : chaque client suivi, chaque chiffre mesuré.\n\nUne machine optimisée pour la conversion, à chaque étape.\nParce que si un seul maillon casse… toute la chaîne fuit.",
+      "content": {
+        "headline": "[Votre entreprise] : le circuit complet",
+        "steps": [
+          {
+            "label": "01",
+            "title": "Acquisition",
+            "text": "Le bon trafic, au bon endroit."
+          },
+          {
+            "label": "02",
+            "title": "Page",
+            "text": "Une page qui fait comprendre et donne envie d'agir."
+          },
+          {
+            "label": "03",
+            "title": "Capture",
+            "text": "Chaque visiteur intéressé laisse une trace."
+          },
+          {
+            "label": "04",
+            "title": "Relance",
+            "text": "Aucun lead ne disparaît dans la nature."
+          },
+          {
+            "label": "05",
+            "title": "RDV/Vente",
+            "text": "La conversion, au moment où le prospect est prêt."
+          },
+          {
+            "label": "06",
+            "title": "Suivi CRM",
+            "text": "Chaque client suivi, chaque chiffre mesuré."
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000012",
+      "position": 11,
+      "type": "why",
+      "needsInput": true,
+      "notes": "POURQUOI NOUS · 45 sec. Sous-titre d'origine : « Notre hyper-spécialisation est votre plus grande force. » Visuel d'origine : 3 cartes avec icônes (coche, médaille, gemme). Adapter la ligne « Expertise unique » à votre spécialité réelle. Script rédigé lors du portage — à relire.",
+      "script": "On ne fait qu'une chose. Et c'est pour ça qu'on la fait bien.\n\nVous vous demandez peut-être : pourquoi nous, et pas une agence « full service » qui fait tout ?\n\nTrois raisons.\nUne expertise unique : on fait seulement des tunnels de vente et de l'automation. Rien d'autre.\nUn focus résultats : on est obsédés par la conversion et par votre retour sur investissement.\nEt la précision : chaque élément qu'on construit a un objectif clair.\n\nNotre hyper-spécialisation, c'est votre plus grande force.",
+      "content": {
+        "headline": "Pourquoi [Votre entreprise] ? Et pas une autre agence « full service ».",
+        "reasons": [
+          {
+            "icon": "circle-check",
+            "title": "Expertise unique",
+            "text": "Seulement tunnels de vente et automation."
+          },
+          {
+            "icon": "award",
+            "title": "Focus résultats",
+            "text": "Obsession de la conversion et du ROI."
+          },
+          {
+            "icon": "star",
+            "title": "Précision",
+            "text": "Chaque élément est conçu pour un objectif clair."
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000013",
+      "position": 12,
+      "type": "statement",
+      "needsInput": true,
+      "notes": "PREUVE · 20 sec. Un seul chiffre plein écran : le chiffre d'affaires cumulé généré pour vos clients ([X €]). Ne rien ajouter — laisser le chiffre parler, puis enchaîner. Visuel d'origine : halo lumineux pulsé derrière le chiffre et icône étincelles. Script rédigé lors du portage — à relire.",
+      "script": "Un seul chiffre.\n\n[Résultat chiffré].\nGénérés pour nos clients.\n\nJe ne vais pas le commenter. Je vous laisse juste le regarder deux secondes.",
+      "content": {
+        "eyebrow": "Notre impact mesurable",
+        "headline": "[Résultat chiffré]",
+        "highlight": "Générés pour nos clients."
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000014",
+      "position": 13,
+      "type": "kpi",
+      "needsInput": true,
+      "notes": "PREUVE · 30 sec. Sous-titre d'origine : « Notre expérience et notre succès en quelques points clés. » Visuel d'origine : 4 cartes chiffrées avec icônes (commit, utilisateur validé, équipe, horloge). Script rédigé lors du portage — à relire.",
+      "script": "Et derrière ce chiffre, il y a du volume. Et de la répétition.\n\nPlus de [X] tunnels construits.\nPlus de [X] clients accompagnés.\nPlus de [X] experts en interne.\nEt [X] ans d'expertise exclusive.\n\nCe que ça veut dire pour vous ?\nQue votre problème, on l'a très probablement déjà vu. Et déjà réglé.",
+      "content": {
+        "headline": "Les chiffres qui parlent d'eux-mêmes",
+        "metrics": [
+          {
+            "value": "+[X]",
+            "label": "Tunnels construits"
+          },
+          {
+            "value": "+[X]",
+            "label": "Clients accompagnés"
+          },
+          {
+            "value": "+[X]",
+            "label": "Experts en interne"
+          },
+          {
+            "value": "[X] ans",
+            "label": "D'expertise exclusive"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000015",
+      "position": 14,
+      "type": "proof",
+      "needsInput": true,
+      "notes": "ÉTUDES DE CAS · 1 min. Sous-titre d'origine : « Pas en promesses. En résultats mesurés sur des projets réels. » Structure d'origine de chaque carte : profil + prix de l'offre → « Avant : … » → flèche → résultat chiffré (taux de conversion, coût par lead, revenus) → délai. Remplacer par vos propres cas clients, avec leur accord. Script rédigé lors du portage — à relire.",
+      "script": "Pas en promesses. En résultats mesurés.\n\nDeux exemples concrets.\n\n[Client 1], [secteur], une offre à [prix de l'offre].\nAvant : [situation de départ].\nAprès : [résultat chiffré]. En [X] jours.\n\n[Client 2], [secteur], une offre à [prix de l'offre].\nAvant : [point de blocage].\nAprès : [résultat chiffré].\nSur le même trafic. Sans toucher au budget pub.\n\nC'est ça, la puissance d'un système : on ne rajoute pas de trafic, on arrête de le perdre.",
+      "content": {
+        "headline": "Avant. Après. En chiffres.",
+        "items": [
+          {
+            "quote": "Avant : [Situation de départ — ex. landing statique · 0 relance · 0 tracking]",
+            "name": "[Client 1] · [Secteur]",
+            "role": "Offre à [Prix de l'offre]",
+            "result": "[Résultat chiffré] · en [X] jours"
+          },
+          {
+            "quote": "Avant : [Point de blocage — ex. abandon massif à l'étape paiement]",
+            "name": "[Client 2] · [Secteur]",
+            "role": "Offre à [Prix de l'offre]",
+            "result": "[Résultat chiffré] · sur le même trafic, sans toucher au budget pub"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000016",
+      "position": 15,
+      "type": "proof",
+      "needsInput": true,
+      "notes": "ÉTUDES DE CAS · 1 min. Sous-titre d'origine : « Le bon système change les chiffres — quel que soit le secteur. » Structure d'origine : un cas B2B (appels qualifiés, signatures, multiplication du CA) et un cas d'expert épuisé par le live, devenu autonome, avec une phrase humaine en conclusion (ex. « Il a repris sa vie. Le système a gardé son CA. »). Remplacer par vos propres cas clients, avec leur accord. Script rédigé lors du portage — à relire.",
+      "script": "Deux autres marchés. Et toujours la même constante.\n\n[Client 3], [secteur].\nAvant : [situation de départ].\nAprès : [X] appels qualifiés, [X] signatures, [résultat chiffré]. En [X] jours.\n\n[Client 4], [secteur].\nAvant : [situation de départ].\nAujourd'hui : un système 100% autonome. Zéro intervention. [Résultat chiffré].\n[Ce que ça a changé pour lui ou pour elle].\n\nLe bon système change les chiffres. Quel que soit le secteur.",
+      "content": {
+        "headline": "Deux cas. Deux marchés. Une constante.",
+        "items": [
+          {
+            "quote": "Avant : [Situation de départ — ex. 100% bouche-à-oreille · 0 système]",
+            "name": "[Client 3] · [Secteur]",
+            "role": "Offre à [Prix de l'offre]",
+            "result": "[X] appels qualifiés · [X] signatures · [Résultat chiffré] en [X] jours"
+          },
+          {
+            "quote": "Avant : [Situation de départ — ex. webinaire live chaque semaine · épuisement total]",
+            "name": "[Client 4] · [Secteur]",
+            "role": "Offre à [Prix de l'offre]",
+            "result": "Système 100% autonome · 0 intervention · [Résultat chiffré]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000017",
+      "position": 16,
+      "type": "gallery",
+      "needsInput": true,
+      "notes": "RÉFÉRENCES · 1 min 30. Fusion de 3 slides d'origine découpées pour la mise en page : (1) « Les plus exigeants du marché francophone ont un point commun. Ils avaient le choix. Ils avaient les moyens d'aller ailleurs. ILS ONT TOUS CHOISI [Votre entreprise]. » (2) « Les noms que vous connaissez. Les résultats que vous ne voyez pas — sauf derrière les scènes. » — grille de 12 noms, chacun avec une référence courte (résultat, titre, distinction), puis « + … et +[X] autres ». (3) « Ces personnes avaient des options. Des équipes. Des budgets. Des alternatives. Elles ont choisi ça. Prenez le temps d'y réfléchir. » Dérouler ces 3 temps à l'oral. Ajouter photos ou logos clients si disponibles, avec leur accord. Script rédigé lors du portage — à relire.",
+      "script": "Les plus exigeants du marché ont un point commun.\n\nIls avaient le choix.\nIls avaient les moyens d'aller ailleurs.\nEt ils ont tous choisi [Votre entreprise].\n\nDes noms que vous connaissez sûrement : [Client 1], [Client 2], [Client 3]…\nLes résultats, eux, vous ne les voyez pas. Ils se passent derrière les scènes.\nEt il y en a plus de [X] autres.\n\nCes personnes avaient des options.\nDes équipes. Des budgets. Des alternatives.\nElles ont choisi ça.\n\nJe vous laisse prendre le temps d'y réfléchir.",
+      "content": {
+        "headline": "Les plus exigeants du marché ont un point commun : ils ont tous choisi [Votre entreprise].",
+        "items": [
+          {
+            "caption": "[Client 1] — [Sa référence, ex. résultat ou titre reconnu]"
+          },
+          {
+            "caption": "[Client 2] — [Sa référence]"
+          },
+          {
+            "caption": "[Client 3] — [Sa référence]"
+          },
+          {
+            "caption": "[Client 4] — [Sa référence]"
+          },
+          {
+            "caption": "[Client 5] — [Sa référence]"
+          },
+          {
+            "caption": "[Client 6] — [Sa référence]"
+          },
+          {
+            "caption": "[Client 7] — [Sa référence]"
+          },
+          {
+            "caption": "+ [Client 8] · [Client 9] · et +[X] autres."
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000018",
+      "position": 17,
+      "type": "proof",
+      "needsInput": true,
+      "notes": "TÉMOIGNAGES · 1 min. Sous-titre d'origine : « Mais vous n'avez pas besoin de nous croire — vous pouvez les croire, eux. » La slide d'origine affichait 3 citations courtes (un classement « les meilleurs », une recommandation « à 1 000% », une différenciation face à la concurrence) et un QR code vers les témoignages vidéo, avec la phrase « → Regardez leurs yeux. Vous saurez que c'est réel. » Ajouter votre propre lien ou QR code vers vos témoignages vidéo. Script rédigé lors du portage — à relire.",
+      "script": "On pourrait vous dire qu'on est les meilleurs.\n\nMais vous n'avez pas besoin de nous croire.\nVous pouvez les croire, eux.\n\n[Client 1] : « [témoignage client 1]. »\n[Client 2] : « [témoignage client 2]. »\n[Client 3] : « [témoignage client 3]. »\n\nEt si vous voulez aller plus loin, scannez le QR code : ce sont des témoignages vidéo.\nRegardez leurs yeux. Vous saurez que c'est réel.",
+      "content": {
+        "headline": "Nous pourrions vous dire que nous sommes les meilleurs.",
+        "items": [
+          {
+            "quote": "« [Témoignage client 1 — une phrase forte] »",
+            "name": "[Client 1]",
+            "role": "[Son rôle]"
+          },
+          {
+            "quote": "« [Témoignage client 2 — une recommandation] »",
+            "name": "[Client 2]",
+            "role": "[Son rôle]"
+          },
+          {
+            "quote": "« [Témoignage client 3 — ce qui a changé pour son entreprise] »",
+            "name": "[Client 3]",
+            "role": "[Son rôle]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000019",
+      "position": 18,
+      "type": "gallery",
+      "needsInput": true,
+      "notes": "PORTFOLIO · 45 sec. Sous-titre d'origine : « Du lead magnet à 0 € au lancement orchestré à [X] chiffres. » La slide d'origine prévoyait une mosaïque de captures de tunnels clients ; insérer vos propres captures (avec l'accord des clients). Pied de slide : « Chaque tunnel est l'architecture exacte d'une offre précise pour une audience précise. » Script rédigé lors du portage — à relire.",
+      "script": "Plus de [X] tunnels. Et pas deux identiques.\n\nZéro template.\nDu lead magnet gratuit jusqu'au lancement orchestré à [X] chiffres.\n\nPourquoi aucun n'est identique ?\nParce que chaque tunnel, c'est l'architecture exacte d'une offre précise, pour une audience précise.\nVotre offre n'est pas celle de votre concurrent. Votre tunnel non plus.",
+      "content": {
+        "headline": "+[X] tunnels. Zéro identique. Zéro template.",
+        "items": [
+          {
+            "caption": "[Capture tunnel 1 — ex. lead magnet gratuit]"
+          },
+          {
+            "caption": "[Capture tunnel 2 — ex. VSL → RDV]"
+          },
+          {
+            "caption": "[Capture tunnel 3 — ex. webinaire]"
+          },
+          {
+            "caption": "[Capture tunnel 4 — ex. lancement orchestré]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000020",
+      "position": 19,
+      "type": "comparison",
+      "needsInput": true,
+      "notes": "FILTRE · 1 min. Sous-titre d'origine : « On préfère refuser que décevoir. La sélectivité est notre garantie de résultats. » Visuel d'origine : deux colonnes — critères acceptés (coches) et critères refusés (croix). Les intitulés de lignes et de colonnes ont été ajoutés lors du portage. Ton calme : on qualifie, on ne supplie pas. Script rédigé lors du portage — à relire.",
+      "script": "On n'est pas pour tout le monde. Et c'est volontaire.\n\nOn préfère refuser que décevoir.\nLa sélectivité, c'est notre garantie de résultats.\n\nC'est pour vous si : votre offre est prouvée et a une vraie marge,\nsi vous êtes prêt à investir sérieusement,\nsi vous cherchez un partenaire — pas un exécutant,\net si vous voulez un système — pas juste une jolie page.\n\nPar contre, ce n'est pas pour vous si votre offre n'est pas encore validée,\nsi vous cherchez le moins cher du marché,\nsi vous ne voulez pas vous impliquer dans le process,\nou si vous attendez des résultats sans donner accès aux données.\n\nJe vous laisse vous situer.",
+      "content": {
+        "headline": "[Votre entreprise] n'est pas pour tout le monde.",
+        "columns": [
+          "C'est pour vous si…",
+          "Ce n'est pas pour vous si…"
+        ],
+        "rows": [
+          {
+            "label": "L'offre",
+            "values": [
+              "Offre prouvée · marge réelle",
+              "Offre pas encore validée"
+            ]
+          },
+          {
+            "label": "L'investissement",
+            "values": [
+              "Prêt à investir sérieusement",
+              "Cherche le moins cher du marché"
+            ]
+          },
+          {
+            "label": "La relation",
+            "values": [
+              "Cherche un partenaire — pas un exécutant",
+              "Ne veut pas s'impliquer dans le process"
+            ]
+          },
+          {
+            "label": "L'objectif",
+            "values": [
+              "Veut un système — pas une jolie page",
+              "Attend des résultats sans donner accès aux données"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000021",
+      "position": 20,
+      "type": "pricing",
+      "needsInput": true,
+      "notes": "LES PACKS · 1 min. Sous-titre d'origine : « Un seul objectif : convertir. Le pack exact se définit après votre audit. » La version d'origine n'affichait AUCUN prix — le pack se définit après l'audit : retirer les prix si vous gardez cette logique. Les noms LAUNCH / GROWTH / SCALE sont une structure suggérée. Le pack GROWTH est mis en avant (badge « ★ Le plus choisi »). Visuel d'origine : icônes fusée, courbe de croissance, éclair. Script rédigé lors du portage — à relire.",
+      "script": "Trois niveaux d'entrée. Un seul objectif : convertir.\n\nLAUNCH, c'est poser les fondations : le parcours, la capture, les relances essentielles.\nGROWTH, c'est construire la machine : le parcours complet, le CRM, les automations, le tracking, et les itérations. C'est le plus choisi.\nEt SCALE, c'est dominer le marché : acquisition payante, retargeting, optimisation continue.\n\nMais je vous arrête tout de suite :\nle pack exact, on ne le choisit pas maintenant.\nIl se définit après votre audit. Parce qu'on ne prescrit pas avant d'avoir diagnostiqué.",
+      "content": {
+        "headline": "Trois niveaux d'entrée. Un seul objectif : convertir.",
+        "tiers": [
+          {
+            "name": "LAUNCH",
+            "price": "[Votre prix]",
+            "features": [
+              "Poser les fondations.",
+              "Parcours",
+              "Capture",
+              "Relances essentielles"
+            ]
+          },
+          {
+            "name": "GROWTH",
+            "price": "[Votre prix]",
+            "highlight": true,
+            "features": [
+              "Construire la machine.",
+              "★ Le plus choisi",
+              "Parcours complet",
+              "CRM",
+              "Automations",
+              "Tracking",
+              "Itérations"
+            ]
+          },
+          {
+            "name": "SCALE",
+            "price": "[Votre prix]",
+            "features": [
+              "Dominer le marché.",
+              "Acquisition paid",
+              "Retargeting",
+              "Optimisation continue"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000022",
+      "position": 21,
+      "type": "benefits",
+      "notes": "LES TYPES DE TUNNELS · 1 min 30. Sous-titre d'origine : « Le choix du tunnel se fait par psychologie client — pas par esthétique. » Visuel d'origine : grille de 6 cartes. Les fourchettes de prix sont indicatives : les adapter à votre marché. Script rédigé lors du portage — à relire.",
+      "script": "Le choix du tunnel, c'est là que tout se joue.\n\nRetenez cette phrase :\nle mauvais tunnel avec la bonne offre perd face au bon tunnel avec une offre moyenne.\n\nUne offre à moins de 500 euros, décision rapide : VSL vers paiement direct. Friction zéro.\nEntre 1 et 5 K€ : VSL vers RDV qualifié. On filtre les curieux, on garde les sérieux.\nDu high-ticket où il faut construire la confiance : le webinaire evergreen. 90 minutes d'autorité.\nUne grande audience : le lancement orchestré. Urgence réelle, 7 jours, panier fermé.\nAu-delà de 5 K€, en B2B : le RDV classique premium. Là, c'est le RDV qui est la conversion.\nEt pour scaler au maximum : l'evergreen automatisé. Zéro intervention, ça tourne seul.\n\nLe choix du tunnel se fait par psychologie client. Pas par esthétique.",
+      "content": {
+        "headline": "Le mauvais tunnel avec la bonne offre perd face au bon tunnel avec une offre moyenne.",
+        "benefits": [
+          {
+            "icon": "credit-card",
+            "title": "VSL → Paiement direct",
+            "text": "< 500 € · Décision rapide · Friction zéro"
+          },
+          {
+            "icon": "calendar-check",
+            "title": "VSL → RDV qualifié",
+            "text": "1-5 K€ · Filtre les curieux · Garde les sérieux"
+          },
+          {
+            "icon": "video",
+            "title": "Webinaire evergreen",
+            "text": "High-ticket · Confiance à construire · 90 min d'autorité"
+          },
+          {
+            "icon": "rocket",
+            "title": "Lancement orchestré",
+            "text": "Grande audience · Urgence réelle · 7 jours · Panier fermé"
+          },
+          {
+            "icon": "handshake",
+            "title": "RDV classique premium",
+            "text": "> 5 K€ · B2B · Le RDV est la conversion"
+          },
+          {
+            "icon": "infinity",
+            "title": "Evergreen automatisé",
+            "text": "Scalabilité max · 0 intervention · Tourne seul"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000023",
+      "position": 22,
+      "type": "team",
+      "needsInput": true,
+      "notes": "L'ÉQUIPE · 1 min 30. Fusion de 2 slides d'origine découpées pour la mise en page. (1) « Un atelier. Pas une agence fantôme. Chez [Votre entreprise], personne ne disparaît après la signature. » + emplacement photo d'équipe (à insérer) + « Chaque expert travaille en interne. Sur votre projet. Avec leur nom dessus. » + « +[X] experts. Zéro sous-traitance. Un seul interlocuteur. » (2) « Les personnes derrière vos résultats. Des noms. Des rôles. Des responsabilités réelles. » — grille de 12 membres avec initiale, prénom et rôle. Rôles d'origine non affichés ici (max 6 membres) : Développeur — Ce qui tourne sans bug ; Développeur — Technique au service de la performance ; Marketing Specialist — Le bon message au bon moment ; RH — L'équipe qui reste ; Coordinatrice — Rien ne tombe entre les mailles ; Assistante — Le liant qui rend tout fluide. Adapter à votre équipe réelle. Script rédigé lors du portage — à relire.",
+      "script": "Ici, personne ne disparaît après la signature.\n\nOn est un atelier. Pas une agence fantôme.\nChaque expert travaille en interne. Sur votre projet. Avec son nom dessus.\n\nJe vous présente les personnes derrière vos résultats.\n[Prénom 1], CEO : la vision et la stratégie.\n[Prénom 2], aux opérations : l'exécution sans faille.\n[Prénom 3], Product Manager Growth : ce qui fait monter les chiffres.\n[Prénom 4], projet et automation : vos systèmes en ordre de marche.\n[Prénom 5], media buyer : chaque euro de pub justifié.\n[Prénom 6], designer : beau ET performant.\nEt autour d'eux : développeurs, marketing, coordination…\n\nPlus de [X] experts. Zéro sous-traitance. Un seul interlocuteur.",
+      "content": {
+        "headline": "Un atelier. Pas une agence fantôme. Les personnes derrière vos résultats.",
+        "members": [
+          {
+            "name": "[Prénom 1]",
+            "role": "CEO",
+            "proof": "La vision et la stratégie"
+          },
+          {
+            "name": "[Prénom 2]",
+            "role": "Directeur·rice opérationnel·le",
+            "proof": "L'exécution sans faille"
+          },
+          {
+            "name": "[Prénom 3]",
+            "role": "Product Manager Growth",
+            "proof": "Ce qui fait monter les chiffres"
+          },
+          {
+            "name": "[Prénom 4]",
+            "role": "Project & Automation",
+            "proof": "Vos systèmes en ordre de marche"
+          },
+          {
+            "name": "[Prénom 5]",
+            "role": "Media Buyer",
+            "proof": "Chaque euro pub justifié"
+          },
+          {
+            "name": "[Prénom 6]",
+            "role": "Designer",
+            "proof": "Beau ET performant"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000024",
+      "position": 23,
+      "type": "flow",
+      "notes": "LA MÉTHODE · 1/3 · 1 min. Sous-titre d'origine : « 9 étapes. Dans l'ordre. Sans raccourci. » L'étape 03 s'appelait « Architecture Funnelytics » (outil de cartographie de tunnel) : nommer votre propre outil si besoin. Visuel d'origine : 3 cartes numérotées avec icônes (cible, ampoule, carte). Script rédigé lors du portage — à relire.",
+      "script": "On ne construit pas vite. On construit juste.\n\nNotre méthode, c'est 9 étapes. Dans l'ordre. Sans raccourci.\n\nÉtape 1 : l'onboarding et l'alignement.\nVotre offre, votre client, ses peurs, son langage exact.\nLes erreurs à cette étape coûtent des mois. Donc on ne les fait pas.\n\nÉtape 2 : le brainstorming stratégique.\nL'angle, le hook, la promesse qui arrête le scroll.\nC'est ici que tout se gagne… ou que tout se perd.\n\nÉtape 3 : l'architecture.\nLe parcours complet est cartographié et validé avec vous, avant même que le premier pixel soit posé.\nVous ne découvrez pas votre tunnel à la livraison.",
+      "content": {
+        "headline": "On ne construit pas vite. On construit juste. 9 étapes. Dans l'ordre.",
+        "steps": [
+          {
+            "label": "01",
+            "title": "Onboarding & alignement",
+            "text": "Votre offre. Votre client. Ses peurs. Son langage exact. Les erreurs ici coûtent des mois. On ne les fait pas."
+          },
+          {
+            "label": "02",
+            "title": "Brainstorming stratégique",
+            "text": "L'angle. Le hook. La promesse qui arrête le scroll. C'est ici que tout se gagne — ou se perd."
+          },
+          {
+            "label": "03",
+            "title": "Architecture du parcours",
+            "text": "Le parcours complet cartographié et validé. Avant que le premier pixel soit posé. Vous ne découvrez pas votre tunnel à la livraison."
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000025",
+      "position": 24,
+      "type": "flow",
+      "notes": "LA MÉTHODE · 2/3 · 1 min. Note d'origine de l'étape 06 : « On livre ce qui fonctionne. Pas ce qui a l'air de fonctionner. » (le dire à l'oral). Visuel d'origine : 3 cartes numérotées avec icônes (document, palette, code). Adapter la liste des plateformes à celles que vous maîtrisez. Script rédigé lors du portage — à relire.",
+      "script": "Du mot au pixel. Et toujours dans cet ordre.\n\nÉtape 4 : le copywriting, en collaboration avec vous.\nChaque mot a un objectif. Chaque ligne a une intention.\nOn écrit pour votre client. Pas pour impressionner.\n\nÉtape 5 : le maquettage, puis le design.\nLes wireframes d'abord, le design ensuite. Toujours.\nParce que chaque bloc a un rôle psychologique précis.\n\nÉtape 6 : l'intégration sur votre plateforme.\nGoHighLevel, ClickFunnels, Systeme.io, Webflow, WordPress…\nAvec un QA complet : mobile, desktop, paiement, emails, webhooks.\n\nOn livre ce qui fonctionne. Pas ce qui a l'air de fonctionner.",
+      "content": {
+        "headline": "Du mot au pixel. Dans l'ordre. Copywriting d'abord. Design ensuite. Toujours.",
+        "steps": [
+          {
+            "label": "04",
+            "title": "Copywriting & collaboration",
+            "text": "Chaque mot a un objectif. Chaque ligne a une intention. On écrit pour votre client — pas pour impressionner."
+          },
+          {
+            "label": "05",
+            "title": "Maquettage & design",
+            "text": "Wireframes d'abord. Design ensuite. Dans cet ordre. Toujours. Chaque bloc a un rôle psychologique précis."
+          },
+          {
+            "label": "06",
+            "title": "Intégration plateforme",
+            "text": "GoHighLevel · ClickFunnels · Systeme.io · Webflow · WordPress. QA complet : mobile · desktop · paiement · emails · webhooks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000026",
+      "position": 25,
+      "type": "flow",
+      "notes": "LA MÉTHODE · 3/3 · 1 min. Sous-titre d'origine : « Les trois étapes que la plupart des agences sautent. » Notes d'origine : 07 « Vous voyez exactement ce qui se passe — et pourquoi. » ; 08 « Zéro lead perdu dans la nature. » ; 09 « Un tunnel livré n'est pas un tunnel terminé. Il s'améliore après chaque cycle. » Visuel d'origine : 3 cartes numérotées avec icônes (graphique, base de données, courbe). Script rédigé lors du portage — à relire.",
+      "script": "Et maintenant, les trois étapes que la plupart des agences sautent.\n\nÉtape 7 : le tracking.\nGTM, GA4, Meta Pixel, Microsoft Clarity.\nHeatmaps, enregistrements de sessions, points de friction identifiés.\nVous voyez exactement ce qui se passe. Et surtout pourquoi.\n\nÉtape 8 : le CRM et la segmentation.\nUn pipeline structuré, des tags automatiques selon le comportement.\nLes leads chauds remontent, les froids sont nurturés.\nZéro lead perdu dans la nature.\n\nÉtape 9 : l'optimisation continue.\nA/B tests, data, itérations rapides.\nParce qu'un tunnel livré n'est pas un tunnel terminé.\nIl s'améliore après chaque cycle.",
+      "content": {
+        "headline": "Ce qui se voit. Ce qui se mesure. Ce qui s'améliore.",
+        "steps": [
+          {
+            "label": "07",
+            "title": "Tracking & Clarity",
+            "text": "GTM · GA4 · Meta Pixel · Microsoft Clarity. Heatmaps · Sessions · Points de friction identifiés. Vous voyez ce qui se passe — et pourquoi."
+          },
+          {
+            "label": "08",
+            "title": "CRM & segmentation",
+            "text": "Pipeline structuré. Tags auto par comportement. Les leads chauds remontent. Les froids sont nurturés. Zéro lead perdu."
+          },
+          {
+            "label": "09",
+            "title": "Optimisation continue",
+            "text": "A/B tests. Data. Itérations rapides. Un tunnel livré n'est pas un tunnel terminé. Il s'améliore après chaque cycle."
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000027",
+      "position": 26,
+      "type": "analytics",
+      "notes": "KPI · 1 min. Pied de slide d'origine : « Chaque KPI a un benchmark marché. Vous savez où vous êtes — par rapport à des données réelles. » Visuel d'origine : 4 cartes avec icônes (courbe, cible, dollar, pointeur). Ajouter vos benchmarks cibles dans le champ « target » si vous en avez. Script rédigé lors du portage — à relire.",
+      "script": "Ce qui ne se mesure pas ne peut pas s'améliorer.\n\nVoilà ce qu'on mesure, en quatre familles.\nL'acquisition : coût par lead, coût par acquisition, ROAS, CTR par créatif.\nLe funnel : taux d'optin, complétion de la VSL, points de décrochage, taux de présence aux RDV.\nLes revenus : panier moyen, LTV, taux de closing, revenu par lead.\nEt le comportement : heatmaps, profondeur de scroll, rage clicks, points de friction.\n\nEt chaque KPI a un benchmark marché.\nDonc vous savez où vous êtes. Pas au feeling : par rapport à des données réelles.",
+      "content": {
+        "headline": "Ce qu'on mesure. Ce qui ne se mesure pas ne peut pas s'améliorer.",
+        "metrics": [
+          {
+            "name": "Acquisition",
+            "definition": "CPL · CPA · ROAS · CTR par créatif"
+          },
+          {
+            "name": "Funnel",
+            "definition": "Taux optin · Complétion VSL · Drop-off · Show-up RDV"
+          },
+          {
+            "name": "Revenus",
+            "definition": "Panier moyen · LTV · Taux closing · Revenu/lead"
+          },
+          {
+            "name": "Comportement",
+            "definition": "Heatmaps · Scroll depth · Rage clicks · Friction"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000028",
+      "position": 27,
+      "type": "architecture",
+      "notes": "LA STACK · 45 sec. Sous-titre d'origine : « Sans commission. Sans agenda caché. Le meilleur pour votre cas. » Pied de slide : « Vous avez déjà un outil ? On s'adapte. Vous ne savez pas quoi choisir ? On vous guide. On ne vend pas d'outils. On vend des résultats. » Adapter la liste aux outils que vous maîtrisez réellement. Script rédigé lors du portage — à relire.",
+      "script": "On ne vend pas d'outils. On vend des résultats.\n\nCôté technique, on maîtrise les principaux outils du marché.\nPour les tunnels : GoHighLevel, ClickFunnels, Systeme.io, Webflow.\nPour l'email : ActiveCampaign, Klaviyo, Brevo.\nPour le CRM : GoHighLevel, HubSpot, Pipedrive.\nEt pour le tracking : GTM, GA4, Meta Pixel, Clarity.\n\nVous avez déjà un outil ? On s'adapte.\nVous ne savez pas quoi choisir ? On vous guide.\nSans commission. Sans agenda caché. Juste le meilleur pour votre cas.",
+      "content": {
+        "headline": "On maîtrise votre outil. Ou on vous dit lequel prendre.",
+        "layers": [
+          {
+            "name": "Tunnels",
+            "items": [
+              "GoHighLevel",
+              "ClickFunnels",
+              "Systeme.io",
+              "Webflow"
+            ]
+          },
+          {
+            "name": "Email",
+            "items": [
+              "ActiveCampaign",
+              "Klaviyo",
+              "Brevo",
+              "GoHighLevel"
+            ]
+          },
+          {
+            "name": "CRM",
+            "items": [
+              "GoHighLevel",
+              "HubSpot",
+              "Pipedrive"
+            ]
+          },
+          {
+            "name": "Tracking",
+            "items": [
+              "GTM",
+              "GA4",
+              "Meta Pixel",
+              "Clarity"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000029",
+      "position": 28,
+      "type": "mistakes",
+      "notes": "NOS STANDARDS · 45 sec. Sous-titre d'origine : « Parce que certaines choses ne sont pas négociables — quel que soit le deal. » La slide d'origine n'affichait que la liste des 5 interdits (croix rouges) ; les engagements en regard reprennent des phrases d'autres slides du deck (méthode, équipe, KPI) — ajoutés lors du portage, à relire. Script rédigé lors du portage — à relire.",
+      "script": "Il y a des choses qu'on s'interdit. Quel que soit le deal.\n\nOn s'interdit de livrer quelque chose de moyen.\nDe disparaître après la signature.\nDe décider sans pouvoir le justifier par la data.\nDe construire pour faire beau plutôt que pour convertir.\nEt de traiter votre business comme un projet parmi d'autres.\n\nCertaines choses ne sont pas négociables.\nOn préfère perdre un deal que compromettre un standard.",
+      "content": {
+        "headline": "Ce qu'on s'interdit. On préfère perdre un deal que compromettre un standard.",
+        "mistakes": [
+          {
+            "mistake": "Livrer quelque chose de moyen",
+            "fix": "On livre ce qui fonctionne. Pas ce qui a l'air de fonctionner."
+          },
+          {
+            "mistake": "Disparaître après la signature",
+            "fix": "Personne ne disparaît après la signature. Un seul interlocuteur."
+          },
+          {
+            "mistake": "Décider sans justifier par la data",
+            "fix": "Chaque décision s'appuie sur vos KPIs et un benchmark marché."
+          },
+          {
+            "mistake": "Construire pour faire beau plutôt que pour convertir",
+            "fix": "Chaque bloc a un rôle psychologique précis."
+          },
+          {
+            "mistake": "Traiter votre business comme un projet parmi d'autres",
+            "fix": "Chaque expert travaille sur votre projet. Avec son nom dessus."
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000030",
+      "position": 29,
+      "type": "faq",
+      "notes": "FAQ · 2 min. Fusion de 2 slides d'origine découpées pour la mise en page. (1) « Les vraies questions. Les vraies réponses. Sans langue de bois. Sans sur-vente. » — 3 questions. (2) « Les deux questions que tout le monde pense mais peu osent poser. On préfère les entendre — et y répondre directement. » — 2 questions, dont la dernière avec l'encart « La question n'est pas combien ça coûte. La question est combien ça rapporte. » Annoncer la bascule à l'oral avant la question 4. Script rédigé lors du portage — à relire.",
+      "script": "Les vraies questions. Les vraies réponses. Sans langue de bois.\n\n« J'ai déjà un site, on fait quoi ? »\nOn l'analyse. On optimise l'existant, ou on construit en parallèle.\nMais avoir un site, ça ne veut pas dire avoir un système.\n\n« Vous gérez aussi les ads ? »\nOui. Mais une fois le système en place.\nMettre du trafic sur un tunnel qui ne convertit pas, c'est juste accélérer les pertes.\n\n« En combien de temps ? »\nQuelques semaines, selon le scope.\nOn préfère livrer propre que « vite sur le papier ».\n\nEt maintenant, les deux questions que tout le monde pense… mais que peu osent poser.\n\n« Et si je ne suis pas éligible ? »\nOn vous dit la vérité, et on vous oriente vers ce qui est juste pour vous.\nPas de pitch forcé. Notre réputation vaut plus qu'un deal mal aligné.\n\n« Pourquoi ne pas prendre moins cher ? »\nParce qu'un tunnel qui ne convertit pas ne coûte pas moins cher.\nIl coûte exactement ce qu'il n'a pas généré. Chaque mois.\nLa question n'est pas combien ça coûte.\nLa question, c'est combien ça rapporte.",
+      "content": {
+        "headline": "Les vraies questions. Les vraies réponses.",
+        "questions": [
+          {
+            "q": "J'ai déjà un site — on fait quoi ?",
+            "a": "On l'analyse. On optimise l'existant ou on construit en parallèle. Avoir un site ne signifie pas avoir un système."
+          },
+          {
+            "q": "Vous gérez aussi les Ads ?",
+            "a": "Oui — une fois le système en place. Mettre du trafic sur un tunnel qui ne convertit pas, c'est accélérer les pertes. On met du trafic sur ce qu'on a construit pour le recevoir."
+          },
+          {
+            "q": "En combien de temps ?",
+            "a": "Quelques semaines selon le scope. On préfère livrer propre que « vite sur le papier »."
+          },
+          {
+            "q": "Et si je ne suis pas éligible ?",
+            "a": "On vous dit la vérité et on vous oriente vers ce qui est juste. Pas de pitch forcé. Pas de promesse qui ne tient pas. Notre réputation vaut plus qu'un deal mal aligné."
+          },
+          {
+            "q": "Pourquoi ne pas prendre moins cher ?",
+            "a": "Un tunnel qui ne convertit pas ne coûte pas moins cher. Il coûte exactement ce qu'il n'a pas généré. Chaque mois. Ce n'est pas une dépense. C'est un investissement. La question n'est pas combien ça coûte. La question est combien ça rapporte."
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000031",
+      "position": 30,
+      "type": "kpi",
+      "needsInput": true,
+      "notes": "LE COÛT DE L'INACTION · 1 min 30. Sous-titre d'origine : « Pas une pause. Une décision active de laisser cet argent ailleurs. » Structure du calcul d'origine : un volume de visiteurs mensuel, un taux de conversion « sans système » (courbe descendante, en rouge) comparé à une fourchette « avec [Votre entreprise] » (courbe montante), le nombre de clients correspondant, puis le gain mensuel sur une offre type (visiteurs × écart de conversion × prix de l'offre). Utiliser des hypothèses prudentes et défendables. Pied de slide : « Ce potentiel existe déjà dans votre trafic actuel. Il attend juste le bon système pour se libérer. » Script rédigé lors du portage — à relire.",
+      "script": "Ne rien faire, c'est aussi une décision.\n\nFaisons le calcul ensemble.\nPrenons [X] visiteurs par mois sur votre site.\n\nSans système, avec [X %] de conversion : [X] clients.\nAvec un vrai système, à [X %] : [X] clients.\n\nSur une offre à [prix de l'offre], ça fait [X €] de plus. Par mois.\n\nChaque mois sans système, ce n'est pas une pause.\nC'est une décision active de laisser cet argent ailleurs.\n\nEt la bonne nouvelle, c'est que ce potentiel existe déjà dans votre trafic actuel.\nIl attend juste le bon système pour se libérer.",
+      "content": {
+        "headline": "Chaque mois sans système est une décision.",
+        "metrics": [
+          {
+            "value": "[X]",
+            "label": "Visiteurs / mois sur votre site"
+          },
+          {
+            "value": "[X %] → [X]",
+            "label": "Sans système : conversion → clients / mois"
+          },
+          {
+            "value": "[X %] → [X]",
+            "label": "Avec [Votre entreprise] : conversion → clients / mois"
+          },
+          {
+            "value": "+[X €]",
+            "label": "Par mois, sur une offre à [Prix de l'offre]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000032",
+      "position": 31,
+      "type": "statement",
+      "needsInput": true,
+      "notes": "LE PONT · 45 sec. Poser la question, puis SE TAIRE 3 secondes. La slide d'origine prévoyait une photo du fondateur : insérer [Votre photo]. Ton bienveillant — on rassure, on ne culpabilise pas. Script rédigé lors du portage — à relire.",
+      "script": "Une seule question.\n\nVous avez une bonne offre. Ça, on est d'accord.\nMais votre système… est-il à sa hauteur ?\n\n…\n\nSi vous avez hésité avant de répondre oui, la réponse est non.\nEt non, ce n'est pas un problème.\nC'est exactement pour ça qu'on est là.",
+      "content": {
+        "eyebrow": "Vous avez une bonne offre.",
+        "headline": "Votre système est-il à sa hauteur ?",
+        "highlight": "C'est exactement pour ça qu'on est là.",
+        "sub": "Si vous avez hésité avant de répondre oui — la réponse est non. Et non — ce n'est pas un problème."
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000033",
+      "position": 32,
+      "type": "statement",
+      "notes": "TRANSITION · 10 sec. Bascule de la présentation vers l'audit en direct. Changer de posture : on passe du pitch à l'écoute. Script rédigé lors du portage — à relire.",
+      "script": "Assez parlé de nous.\n\nParlons de vous.",
+      "content": {
+        "headline": "Assez parlé de nous.",
+        "highlight": "Parlons de vous."
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000034",
+      "position": 33,
+      "type": "benefits",
+      "notes": "AUDIT EN DIRECT · 3 à 10 min selon l'échange. Sous-titre d'origine : « Sans filtre. Sans complaisance. Sans promesse avant d'avoir vu la réalité. » Pied de slide : « Un audit honnête vaut plus qu'une belle proposition. » Poser les questions point par point et noter les réponses : elles alimentent les slides Diagnostic, Recommandation et Proposition. Script rédigé lors du portage — à relire.",
+      "script": "Maintenant, on regarde votre business. Ensemble. Sans filtre.\n\nJe vais passer en revue cinq choses avec vous.\nVotre offre, et votre positionnement réel sur le marché.\nVos sources de trafic : les volumes, la qualité.\nVotre parcours de conversion actuel, étape par étape.\nVos points de capture : ce qui fuit, et ce qui convertit.\nEt votre stack : ce qui manque, ce qui freine.\n\nSans complaisance. Et sans promesse avant d'avoir vu la réalité.\nParce qu'un audit honnête vaut plus qu'une belle proposition.\n\nOn commence par votre offre : racontez-moi.",
+      "content": {
+        "headline": "Ce qu'on regarde ensemble. Sans filtre. Sans complaisance.",
+        "benefits": [
+          {
+            "icon": "search",
+            "title": "Votre offre",
+            "text": "Votre offre & positionnement réel sur le marché"
+          },
+          {
+            "icon": "trending-up",
+            "title": "Votre trafic",
+            "text": "Vos sources de trafic · volumes · qualité"
+          },
+          {
+            "icon": "mouse-pointer-click",
+            "title": "Votre parcours",
+            "text": "Votre parcours de conversion actuel · étape par étape"
+          },
+          {
+            "icon": "database",
+            "title": "Votre capture",
+            "text": "Vos points de capture · ce qui fuit · ce qui convertit"
+          },
+          {
+            "icon": "layers",
+            "title": "Votre stack",
+            "text": "Votre stack · ce qui manque · ce qui freine"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000035",
+      "position": 34,
+      "type": "flow",
+      "needsInput": true,
+      "notes": "CARTOGRAPHIE · 2 min. Sous-titre d'origine : « Avant qu'on construise quoi que ce soit — vous validez le chemin. » Encart d'origine : « Chaque nœud a un objectif. Chaque flèche a une intention. Chaque étape a un taux cible. » Pied de slide : « Zéro surprise à la livraison. » La slide d'origine affichait un schéma de tunnel personnalisé pour le prospect (outil de cartographie type Funnelytics) : remplir les étapes avec le parcours du prospect ou attacher la capture du schéma. Script rédigé lors du portage — à relire.",
+      "script": "Voici votre business. Cartographié.\n\nAvant qu'on construise quoi que ce soit, vous validez le chemin.\n\nIci, on part de [votre source de trafic],\non arrive sur [votre page d'entrée],\non capture à [votre point de capture],\non relance avec [votre relance],\net on convertit en [RDV ou vente].\n\nChaque nœud a un objectif.\nChaque flèche a une intention.\nChaque étape a un taux cible.\n\nComme ça, zéro surprise à la livraison.",
+      "content": {
+        "headline": "Voici votre business. Cartographié.",
+        "steps": [
+          {
+            "label": "Étape 1",
+            "title": "[Source de trafic]",
+            "text": "Objectif : [Objectif de l'étape] · Taux cible : [X %]"
+          },
+          {
+            "label": "Étape 2",
+            "title": "[Page d'entrée]",
+            "text": "Objectif : [Objectif de l'étape] · Taux cible : [X %]"
+          },
+          {
+            "label": "Étape 3",
+            "title": "[Point de capture]",
+            "text": "Objectif : [Objectif de l'étape] · Taux cible : [X %]"
+          },
+          {
+            "label": "Étape 4",
+            "title": "[Relance]",
+            "text": "Objectif : [Objectif de l'étape] · Taux cible : [X %]"
+          },
+          {
+            "label": "Étape 5",
+            "title": "[Conversion — RDV ou vente]",
+            "text": "Objectif : [Objectif de l'étape] · Taux cible : [X %]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000036",
+      "position": 35,
+      "type": "blanks",
+      "notes": "DIAGNOSTIC EN DIRECT · 2 min. Sous-titre d'origine : « Par mois. En euros réels. Pas en théorie. » Remplir les blancs pendant ou juste après l'audit, avec les chiffres du prospect. Le « Manque à gagner estimé » était mis en avant dans un encart d'alerte. Pied de slide : « Ce chiffre n'est pas là pour vous faire peur. Il est là pour vous montrer où est l'opportunité. » Script rédigé lors du portage — à relire.",
+      "script": "Voilà ce que votre système actuel vous coûte. Chaque mois.\n\nAvec ce que vous venez de me dire :\n[X] leads non capturés par mois.\n[X €] de chiffre d'affaires non converti.\n[X €] de budget pub sous-optimisé.\n\nAu total, un manque à gagner estimé de [X €] par mois.\n\nCe chiffre n'est pas là pour vous faire peur.\nIl est là pour vous montrer où est l'opportunité.",
+      "content": {
+        "headline": "Ce que votre système actuel vous coûte.",
+        "intro": "Par mois. En euros réels. Pas en théorie.",
+        "fields": [
+          {
+            "label": "Leads non capturés"
+          },
+          {
+            "label": "CA non converti",
+            "suffix": "€"
+          },
+          {
+            "label": "Budget pub sous-optimisé",
+            "suffix": "€"
+          },
+          {
+            "label": "Manque à gagner estimé",
+            "suffix": "€ / mois"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000037",
+      "position": 36,
+      "type": "blanks",
+      "notes": "RECOMMANDATION EN DIRECT · 2 min. Remplir chaque champ à partir de l'audit. Pied de slide d'origine : « Ce n'est pas une estimation. C'est une recommandation basée sur votre audit. » S'appuyer sur la slide « types de tunnels » pour justifier le choix. Script rédigé lors du portage — à relire.",
+      "script": "Voilà ce qu'on construirait pour vous. Et pourquoi celui-là, pas un autre.\n\nLe parcours recommandé : [type de tunnel].\nPourquoi ce tunnel : [raison principale].\nLes KPIs cibles à 90 jours : [KPI cible].\nEt une timeline réaliste : [X semaines].\n\nCe n'est pas une estimation au doigt mouillé.\nC'est une recommandation basée sur votre audit.",
+      "content": {
+        "headline": "Ce qu'on construirait pour vous.",
+        "intro": "Et pourquoi ce tunnel — pas un autre.",
+        "fields": [
+          {
+            "label": "Type de parcours recommandé"
+          },
+          {
+            "label": "Pourquoi ce tunnel"
+          },
+          {
+            "label": "KPIs cibles à 90 jours"
+          },
+          {
+            "label": "Timeline réaliste"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000038",
+      "position": 37,
+      "type": "gallery",
+      "needsInput": true,
+      "notes": "INSPIRATION · 1 min. Sous-titre d'origine : « Des tunnels réels. Construits pour des offres similaires à la vôtre. » Insérer 4 captures de tunnels actifs proches de l'offre du prospect (avec l'accord des clients). Pied de slide : « Ce que vous voyez ici tourne en ce moment. Ce sont des systèmes actifs — pas des maquettes. C'est ce niveau de qualité qu'on apporte à votre projet. » Script rédigé lors du portage — à relire.",
+      "script": "Concrètement, à quoi ça ressemble ?\n\nVoici des tunnels réels, construits pour des offres similaires à la vôtre.\nLa page d'optin. La VSL. La page de vente. La confirmation.\n\nEt ce que vous voyez là tourne en ce moment.\nCe sont des systèmes actifs, pas des maquettes.\nC'est ce niveau de qualité qu'on apporte à votre projet.",
+      "content": {
+        "headline": "À quoi ça ressemble — concrètement.",
+        "items": [
+          {
+            "caption": "Page d'optin — [Capture d'un tunnel similaire]"
+          },
+          {
+            "caption": "VSL — [Capture d'un tunnel similaire]"
+          },
+          {
+            "caption": "Page de vente — [Capture d'un tunnel similaire]"
+          },
+          {
+            "caption": "Confirmation — [Capture d'un tunnel similaire]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000039",
+      "position": 38,
+      "type": "blanks",
+      "notes": "PROPOSITION EN DIRECT · 2 min. Sous-titre d'origine : « Les chiffres qu'on défend. Les prochaines étapes qu'on s'engage à respecter. » Champs d'origine à remplir : Pack recommandé, Investissement, Délai de mise en ligne, Retour estimé à 90 jours. Pied de slide : « On ne facture pas du temps. On facture de la performance construite. » Annoncer le prix calmement, puis se taire. Script rédigé lors du portage — à relire.",
+      "script": "Voilà l'investissement. Et le retour qu'on défend.\n\nLe pack recommandé pour vous : [pack recommandé].\nL'investissement : [votre prix].\nLa mise en ligne : [X semaines].\nEt le retour estimé à 90 jours : [X €].\n\nSi vous signez aujourd'hui, voilà ce qui se passe :\nle contrat, l'onboarding sous 48 heures, et le cadrage dès la semaine 1.\n\nOn ne facture pas du temps.\nOn facture de la performance construite.",
+      "content": {
+        "headline": "L'investissement. Le retour attendu.",
+        "intro": "Les chiffres qu'on défend. Les prochaines étapes qu'on s'engage à respecter.",
+        "fields": [
+          {
+            "label": "Pack recommandé"
+          },
+          {
+            "label": "Investissement"
+          },
+          {
+            "label": "Délai de mise en ligne"
+          },
+          {
+            "label": "Retour estimé à 90 jours"
+          }
+        ],
+        "summary": "Si vous signez aujourd'hui : Contrat → Onboarding sous 48h → Cadrage semaine 1"
+      }
+    },
+    {
+      "id": "18000000-0000-4000-8000-000000000040",
+      "position": 39,
+      "type": "cta",
+      "notes": "CLOSING · 30 sec. Poser la question, puis SILENCE : laisser le prospect répondre en premier. La slide d'origine n'affichait que la question, sans bouton ; le bouton a été ajouté lors du portage (exigé par le type de slide). Script rédigé lors du portage — à relire.",
+      "script": "Une dernière question.\n\nOn a vu où ça fuit.\nOn a vu ce que ça vous coûte.\nOn a vu ce qu'on construirait, et ce que ça peut rapporter.\n\nAlors…\non le fait ensemble ?",
+      "content": {
+        "headline": "On le fait ensemble ?",
+        "actions": [
+          {
+            "label": "Lancer le projet ensemble",
+            "kind": "calendar"
+          }
+        ]
+      }
+    }
+  ]
+}

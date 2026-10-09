@@ -10,7 +10,7 @@
 | `profiles` | 3 | owner / editor / viewer (French names) |
 | `memberships` | 3 | Covers all three roles for permission testing |
 | `themes` | 5 | System themes, all schema-valid token sets |
-| `templates` | 4 | RDV Classique, VSL Funnel, Webinaire, Commercial (stage configs for AI planning) |
+| `templates` | — | Not in this file: loaded from the ported legacy decks in `templates/*.json` (`seedTemplates()`, called by `npm run db:seed`) |
 | `assets` | 1 | Org logo |
 | `decks` | 3 | `ready` (20 slides), `draft` (12 slides), AI-generated draft (6 slides) |
 | `slides` | 38 | Realistic French sales copy with presenter `notes` and `script` |

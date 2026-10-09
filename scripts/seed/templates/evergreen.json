@@ -1,0 +1,1005 @@
+{
+  "title": "Evergreen",
+  "language": "fr",
+  "id": "60000000-0000-4000-8000-000000000006",
+  "slug": "evergreen",
+  "name": "Evergreen",
+  "category": "Automatisation",
+  "description": "Tunnel evergreen 100% automatisé : page hub (VSL ou webinaire evergreen), checkout, relances email et WhatsApp, deadline propre, onboarding et upsell — pour vendre en continu, toute l'année, sans lancement ni appels.",
+  "themeId": "40000000-0000-4000-8000-00000000000a",
+  "slides": [
+    {
+      "id": "15000000-0000-4000-8000-000000000001",
+      "position": 0,
+      "type": "cover",
+      "needsInput": true,
+      "script": "Ok. Tu viens de finir le diagnostic [Votre entreprise].\nEt là, ton résultat, c'est Evergreen 100% automatisé.\n\nDans cette vidéo, je vais te montrer :\npourquoi c'est le bon système pour toi,\nà quoi ressemble la machine,\net ce que tu dois mettre en place pour que ça vende en continu, sans dépendre d'un lancement ou de ton énergie du moment.\n\nPas de théorie. Une architecture.",
+      "cue": {
+        "punchline": "On va faire simple, et surtout rentable.",
+        "durationSec": 45,
+        "tag": "INTRO",
+        "transition": "On commence direct par le verdict.",
+        "bullets": [
+          "3 secondes de silence avant de commencer",
+          "Ton direct — pas de chauffe inutile",
+          "Regard caméra / prospect"
+        ]
+      },
+      "notes": "INTRO · 45 sec. 3 secondes de silence avant de commencer. Ton direct — pas de chauffe inutile. Regard caméra / prospect.\nVisuel legacy : boucle infinie (symbole evergreen) + anneaux en orbite, mention « Architecture Core » en bas de slide.\nÀ compléter : votre nom (et le nom de votre entreprise dans le script).",
+      "content": {
+        "kicker": "Deck Résultat — Version Diagnostic • Confidentiel",
+        "title": "Tunnel Evergreen — 100% Automatisé",
+        "subtitle": "Vendre en continu. Sans lancement. Sans appels.",
+        "presenterName": "[Votre nom]"
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000002",
+      "position": 1,
+      "type": "statement",
+      "script": "Verdict : Tunnel Evergreen 100% automatisé.\n\nPourquoi ? Parce que ton objectif n'est pas « faire un gros lancement ».\nTon objectif, c'est d'avoir un système qui vend toute l'année, même quand tu n'es pas en mode « communication », même quand tu ne postes pas, même quand tu ne fais pas de live.\n\nEn evergreen, tu construis une machine qui fait toujours le même job :\nattirer → faire avancer → convertir → relancer → onboarder → répéter.\n\nEt ça change tout, parce que tu passes d'un business « par à-coups »…\nà un business pilotable.",
+      "cue": {
+        "punchline": "Ici, on ne crée pas un pic. On crée une ligne.",
+        "durationSec": 120,
+        "tag": "VERDICT",
+        "transition": "Avant de rentrer dans le détail, je pose une base : qui te parle.",
+        "bullets": [
+          "Insister sur 'même quand tu ne postes pas'",
+          "Pause après 'pilotable'",
+          "Chercher le hochement de tête"
+        ]
+      },
+      "notes": "VERDICT · 2 min. Insister sur « même quand tu ne postes pas ». Pause après « pilotable ». Chercher le hochement de tête.\nPromesse du système (chaîne animée legacy) : attirer → préchauffer → convertir → relancer → vendre → onboarder → répéter.\nVisuel legacy : entonnoir Trafic (Pub / Organique) → Evergreen (VSL / Webinar auto) → Checkout (Paiement direct) → Relances (Email + WhatsApp) → Client (Onboarding + Upsell) → ∞.",
+      "content": {
+        "eyebrow": "Système Recommandé",
+        "headline": "TUNNEL EVERGREEN",
+        "highlight": "100% AUTOMATISÉ",
+        "sub": "Pourquoi ce choix (selon vos réponses) : votre objectif est d'avoir un système qui vend en continu, sans dépendre d'un lancement ou de votre présence."
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000003",
+      "position": 2,
+      "type": "authority",
+      "needsInput": true,
+      "script": "Je m'appelle [Votre nom], fondateur de [Votre entreprise].\nDepuis plus de [X] ans, on construit des systèmes complets : funnels, CRM, automatisations.\n\nOn a bossé avec des références :\n[Client 1], [Client 2], [Client 3], [Client 4], [Client 5]… et d'autres.\n\nEt peu importe le marché, on voit le même pattern :\nles gens pensent que leur problème, c'est « plus de pub »…\nalors que leur vrai problème, c'est l'architecture.\n\nParce que si ton système ne convertit pas, plus de trafic = plus de pertes.",
+      "cue": {
+        "punchline": "Je ne vends pas un tunnel. Je vends une structure.",
+        "durationSec": 90,
+        "tag": "AUTORITÉ",
+        "transition": "Et evergreen, c'est justement un modèle où les gens se plantent souvent… parce qu'ils le comprennent mal.",
+        "bullets": [
+          "90 sec max — aller vite",
+          "Citer les noms avec assurance",
+          "Finir sur 'plus de trafic = plus de pertes' — image forte"
+        ]
+      },
+      "notes": "AUTORITÉ · 90 sec max — aller vite. Citer les références clients avec assurance. Finir sur « plus de trafic = plus de pertes » — image forte.\nÀ compléter : votre nom, votre entreprise, vos années d'expérience, la taille de vos clients et 3 à 5 références clients (avec leur accord).",
+      "content": {
+        "headline": "Je m'appelle [Votre nom], fondateur de [Votre entreprise].",
+        "points": [
+          {
+            "icon": "briefcase",
+            "title": "[X]+ ans à construire des systèmes complets",
+            "text": "Funnels + CRM + automatisations."
+          },
+          {
+            "icon": "trophy",
+            "title": "[X] chiffres pour nos clients",
+            "text": "Marché francophone & anglophone."
+          },
+          {
+            "icon": "handshake",
+            "title": "On a bossé avec :",
+            "text": "[Client 1], [Client 2], [Client 3], [Client 4], [Client 5]."
+          },
+          {
+            "icon": "lightbulb",
+            "title": "Une vérité simple",
+            "text": "Le problème n°1 n'est pas « la pub ». C'est l'architecture."
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000004",
+      "position": 3,
+      "type": "problem",
+      "script": "La majorité des gens font un evergreen comme ça :\nils mettent une page, une vidéo, un bouton… et ils espèrent.\n\nSauf que le prospect, lui, il n'est pas pressé.\nIl compare. Il doute. Il ferme l'onglet. Il remet à demain.\nEt demain, ça devient jamais.\n\nDonc sans timing, sans relance, sans tracking, un evergreen ne vend pas.\nIl dort.\n\nCe qu'on voit partout :\npas de séquence derrière,\npas de relance panier,\npas de preuve bien placée,\npas de CRM,\net surtout : aucune optimisation.\n\nRésultat : tu dis « evergreen ça marche pas ».\nAlors que ce qui ne marche pas, c'est l'absence de machine.",
+      "cue": {
+        "punchline": "Evergreen ne veut pas dire 'je pose une page et j'attends'.",
+        "durationSec": 90,
+        "tag": "DOULEUR",
+        "transition": "Donc avant de continuer, on clarifie un truc : c'est quoi un tunnel, vraiment ?",
+        "bullets": [
+          "Égrener chaque point lentement",
+          "Pause après 'il dort'",
+          "Ton empathique — pas accusateur"
+        ]
+      },
+      "notes": "DOULEUR · 90 sec. Égrener chaque point lentement. Pause après « il dort ». Ton empathique — pas accusateur.\nListe legacy (6 puces) : une page isolée · pas de séquence · pas de deadline / pas de rythme · pas de relance panier · pas de CRM · pas d'optimisation (les deux dernières fusionnées ici).\nVisuel legacy : entonnoir cassé VSL / PAGE ✕ pas de séquence ✕ pas de deadline → « 0 VENTES — le funnel \"existe\" mais... », avec des € qui fuient.",
+      "content": {
+        "headline": "La plupart pensent : « Evergreen = je mets une VSL et ça tourne. »",
+        "intro": "En réalité : sans timing, sans relance, sans tracking, ça ne vend pas. Résultat : un funnel « qui existe » mais qui ne produit pas.",
+        "painPoints": [
+          {
+            "icon": "layout",
+            "title": "Une page isolée",
+            "text": "Une page, une vidéo, un bouton… et on espère."
+          },
+          {
+            "icon": "mail",
+            "title": "Pas de séquence",
+            "text": "Rien derrière la page : le prospect ferme l'onglet et remet à demain."
+          },
+          {
+            "icon": "clock",
+            "title": "Pas de deadline / pas de rythme",
+            "text": "Sans timing, le prospect remet à plus tard. Et demain devient jamais."
+          },
+          {
+            "icon": "shopping-cart",
+            "title": "Pas de relance panier",
+            "text": "Les checkouts abandonnés partent sans aucune relance."
+          },
+          {
+            "icon": "bar-chart-2",
+            "title": "Pas de CRM, pas d'optimisation",
+            "text": "Aucun suivi, aucune donnée : impossible de savoir où ça casse."
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000005",
+      "position": 4,
+      "type": "definition",
+      "script": "Un tunnel, c'est une suite d'étapes qui transforme un inconnu en client — de façon contrôlée.\n\nUn bon tunnel, c'est :\nune promesse claire,\nun chemin sans friction,\ndes relances automatiques,\ndu tracking,\net une optimisation continue.\n\nSans tunnel : tu vends quand tu as de la chance.\nAvec tunnel : tu vends quand le système tourne.\n\nEt ici, l'objectif est simple :\nvendre en continu, sans intervention.",
+      "cue": {
+        "punchline": "Un tunnel, c'est un parcours contrôlé.",
+        "durationSec": 60,
+        "tag": "CONCEPT",
+        "transition": "Ok. Maintenant, c'est quoi evergreen exactement ?",
+        "bullets": [
+          "Appuyer sur 'de façon contrôlée'",
+          "Contraste sans / avec = évidence",
+          "Finir sur 'sans intervention' — le rêve"
+        ]
+      },
+      "notes": "CONCEPT · 60 sec. Appuyer sur « de façon contrôlée ». Contraste sans / avec = évidence. Finir sur « sans intervention » — le rêve.\nVisuel legacy : entonnoir INCONNU → PROSPECT → LEAD → ACHETEUR → UPSELL → ∞.",
+      "content": {
+        "headline": "Un tunnel, c'est une suite d'étapes qui transforme un inconnu en client — de façon contrôlée.",
+        "body": "Sans tunnel, vous vendez quand vous avez de la chance. Avec tunnel, vous vendez quand le système tourne. Ici, le tunnel a un but : vendre en continu, sans intervention. Étapes : Inconnu → Prospect → Lead → Acheteur → Upsell.",
+        "pillars": [
+          {
+            "icon": "target",
+            "title": "Promesse claire",
+            "text": "Le prospect comprend tout de suite ce qu'il va obtenir."
+          },
+          {
+            "icon": "zap",
+            "title": "Chemin sans friction",
+            "text": "Chaque étape mène naturellement à la suivante."
+          },
+          {
+            "icon": "repeat",
+            "title": "Relances automatiques",
+            "text": "Ceux qui hésitent sont relancés sans intervention."
+          },
+          {
+            "icon": "bar-chart-2",
+            "title": "Suivi des conversions",
+            "text": "Chaque étape est mesurée, donc optimisable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000006",
+      "position": 5,
+      "type": "definition",
+      "script": "Evergreen, ça veut dire : tu as un mécanisme qui tourne en permanence.\nLes gens entrent chaque jour, ils avancent, ils achètent.\n\nCe n'est pas « automatique » parce que c'est magique.\nC'est automatique parce que tu as prévu :\nle message,\nle timing,\nles relances,\net la suite après achat.\n\nEt quand c'est bien fait, tu n'as plus besoin de « faire un événement » pour vendre.",
+      "cue": {
+        "punchline": "Evergreen = le même système qui vend tous les jours.",
+        "durationSec": 90,
+        "tag": "DÉFINITION",
+        "transition": "Et du coup : quand l'evergreen est le bon choix ?",
+        "bullets": [
+          "Égrener les 4 piliers avec des pauses",
+          "Insister sur 'tu as prévu' — c'est de la conception, pas de la magie",
+          "Finir sur 'faire un événement' — différenciation lancement vs evergreen"
+        ]
+      },
+      "notes": "DÉFINITION · 90 sec. Égrener les 4 piliers avec des pauses. Insister sur « tu as prévu » — c'est de la conception, pas de la magie. Finir sur « faire un événement » — différenciation lancement vs evergreen.\nVisuel legacy : cercle des 12 mois (Jan → Déc) avec ∞ au centre et la mention « TOUTE L'ANNÉE ». Deux cartes : ✕ Pas « automatique » parce que c'est magique / ✓ Automatique parce que tout est prévu.",
+      "content": {
+        "headline": "Evergreen = un système qui vend toute l'année, sur le même mécanisme.",
+        "body": "Les gens entrent chaque jour, avancent, et achètent. Ce n'est pas « automatique » parce que c'est magique. C'est automatique parce que tout est prévu.",
+        "pillars": [
+          {
+            "icon": "message-circle",
+            "title": "Le message",
+            "text": "Prévu à l'avance, identique pour chaque prospect."
+          },
+          {
+            "icon": "timer",
+            "title": "Le timing",
+            "text": "Une raison d'agir maintenant, pas « plus tard »."
+          },
+          {
+            "icon": "repeat",
+            "title": "Les relances",
+            "text": "Ceux qui hésitent sont récupérés automatiquement."
+          },
+          {
+            "icon": "rocket",
+            "title": "La suite après achat",
+            "text": "Accès, onboarding, quick win : le client avance."
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000007",
+      "position": 6,
+      "type": "why",
+      "script": "On recommande evergreen quand :\nton offre est claire,\ntu veux vendre toute l'année,\ntu veux arrêter le yo-yo « gros mois / petit mois »,\net tu veux un système qui s'optimise avec des chiffres.\n\nEvergreen, c'est une approche « engineering » :\ntu poses la base, tu mesures, tu améliores.\n\nCe n'est pas « je le fais une fois et terminé ».\nC'est : je le fais propre, puis je le rends de plus en plus rentable.",
+      "cue": {
+        "punchline": "Quand tu veux arrêter de dépendre des lancements.",
+        "durationSec": 90,
+        "tag": "LOGIQUE",
+        "transition": "Et pour que ça vende vraiment, il y a un cœur de système.",
+        "bullets": [
+          "Égrener les 4 conditions avec des pauses",
+          "Insister sur 'engineering' — approche pro",
+          "Finir sur 'de plus en plus rentable' — vision long terme"
+        ]
+      },
+      "notes": "LOGIQUE · 90 sec. Égrener les 4 conditions avec des pauses. Insister sur « engineering » — approche pro. Finir sur « de plus en plus rentable » — vision long terme.\nTag legacy : « Logique diagnostic ». Encadré : « Evergreen = optimisation continue, pas \"one shot\". »\nVisuel legacy : orbites Trafic → Tunnel → Vente → Client autour d'un noyau « EVERGREEN ».",
+      "content": {
+        "headline": "On recommande Evergreen quand :",
+        "reasons": [
+          {
+            "icon": "circle-check",
+            "title": "Votre offre est claire et déjà « vendable »",
+            "text": "Le message est simple : on sait ce qu'on vend, à qui, et pourquoi maintenant."
+          },
+          {
+            "icon": "trending-up",
+            "title": "Vous voulez vendre sans faire de lancement",
+            "text": "Vendre toute l'année et sortir du yo-yo « gros mois / petit mois »."
+          },
+          {
+            "icon": "settings",
+            "title": "Vous voulez un système stable, optimisable",
+            "text": "Une approche « engineering » : on pose la base, on mesure, on améliore."
+          },
+          {
+            "icon": "bar-chart-2",
+            "title": "Vous acceptez de piloter avec des chiffres",
+            "text": "Evergreen = optimisation continue, pas « one shot »."
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000008",
+      "position": 7,
+      "type": "definition",
+      "script": "Un evergreen qui vend repose sur 3 piliers :\n\nPré-chauffage : tu prépares le prospect avant de lui demander d'acheter.\nRelances : tu récupères ceux qui hésitent et ceux qui abandonnent.\nTiming / deadline : tu évites le « je verrai plus tard ».\n\nSans timing, les gens procrastinent.\nSans relance, tu perds les ventes.\nSans preuve, tu perds la confiance.\n\nC'est simple. C'est mécanique.",
+      "cue": {
+        "punchline": "Sans ces 3 piliers, ton evergreen ne vendra pas.",
+        "durationSec": 90,
+        "tag": "PILIERS",
+        "transition": "Maintenant : les objectifs précis de ce système.",
+        "bullets": [
+          "Égrener les 3 piliers avec des pauses",
+          "Répéter 'c'est mécanique' — dédramatise",
+          "Finir fort — laisser résonner"
+        ]
+      },
+      "notes": "PILIERS · 90 sec. Égrener les 3 piliers avec des pauses. Répéter « c'est mécanique » — dédramatise. Finir fort — laisser résonner.\nTag legacy : « La vraie différence ». Visuel legacy : triangle Pré-chauffage → Relances → Deadline relié à un centre « VENTE continue ».",
+      "content": {
+        "headline": "Un evergreen qui vend a 3 piliers.",
+        "body": "Sans timing : procrastination. Sans relance : ventes perdues. Sans preuve : confiance perdue. C'est simple. C'est mécanique.",
+        "pillars": [
+          {
+            "icon": "play",
+            "title": "01 · Pré-chauffage",
+            "text": "VSL / webinaire evergreen / séquence. Le prospect comprend, se projette, fait confiance avant de décider."
+          },
+          {
+            "icon": "bell",
+            "title": "02 · Relances",
+            "text": "Email + WhatsApp si dispo. Les non-convertis sont relancés avec preuves, objections traitées, retour checkout."
+          },
+          {
+            "icon": "clock",
+            "title": "03 · Timing / Deadline",
+            "text": "Pour éviter le « je verrai plus tard ». Sans timing, les gens procrastinent. Une deadline propre déclenche la décision."
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000009",
+      "position": 8,
+      "type": "objectives",
+      "script": "Trois objectifs :\nconvertir à froid, sans appel.\nrécupérer les abandons : panier, hésitation, doute.\naugmenter la valeur : upsell, séquences, activation.\n\nLe KPI ici, ce n'est pas « combien de vues ».\nC'est : combien d'achats, combien ça coûte, et combien ça rapporte.",
+      "cue": {
+        "punchline": "Convertir, récupérer, augmenter.",
+        "durationSec": 60,
+        "tag": "OBJECTIFS",
+        "transition": "Ok. Je te montre le flow global.",
+        "bullets": [
+          "Égrener les 3 avec des pauses marquées",
+          "Insister sur 'combien ça rapporte' — le seul chiffre qui compte",
+          "KPI final = ancrage pour la suite"
+        ]
+      },
+      "notes": "OBJECTIFS · 60 sec. Égrener les 3 avec des pauses marquées. Insister sur « combien ça rapporte » — le seul chiffre qui compte. KPI final = ancrage pour la suite.\nTag legacy : « Ce qu'on vient optimiser ». Encadré : « Focus métrique : pas les vues. → Coût par achat + Panier moyen + ROI ».",
+      "content": {
+        "headline": "Optimiser 3 leviers clés — focus métrique : pas les vues, mais coût par achat + panier moyen + ROI.",
+        "goals": [
+          {
+            "label": "Convertir à froid (sans calls)",
+            "target": "KPI : CVR page → achat",
+            "text": "Le système vend seul, 24h/24, sans votre intervention. Chaque lead reçoit la même expérience de vente."
+          },
+          {
+            "label": "Récupérer les abandons (relance panier)",
+            "target": "KPI : taux récupération panier",
+            "text": "Les prospects qui ont initié le checkout mais pas acheté sont relancés automatiquement."
+          },
+          {
+            "label": "Augmenter la valeur par lead (upsell / séquences)",
+            "target": "KPI : panier moyen + ROI",
+            "text": "Chaque acheteur est orienté vers un upsell ou une séquence qui augmente son panier moyen."
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000010",
+      "position": 9,
+      "type": "flow",
+      "script": "Flow : trafic → page evergreen → checkout → confirmation → onboarding → upsell / follow-up.\n\nEt règle : chaque étape a une page, un event tracké, et une automation associée.\nSinon tu n'optimises pas. Tu devines.",
+      "cue": {
+        "punchline": "Si tu peux le dessiner, tu peux le piloter.",
+        "durationSec": 75,
+        "tag": "FLOW",
+        "transition": "Maintenant, on rentre dans les pages.",
+        "bullets": [
+          "Suivre le flow avec le curseur ou la main",
+          "Insister sur 'chaque étape trackée'",
+          "Finir fort : 'tu devines'"
+        ]
+      },
+      "notes": "FLOW · 75 sec. Suivre le flow avec le curseur ou la main. Insister sur « chaque étape trackée ». Finir fort : « tu devines ».\nTag legacy : « Vue globale ultra simple ». Encadré : « Upsell = valeur maximisée sans nouveau lead. » Animation legacy : paquets lumineux qui circulent le long du flow.",
+      "content": {
+        "headline": "Le flow complet — chaque étape : une page dédiée, un événement tracké, une automation associée.",
+        "steps": [
+          {
+            "label": "01",
+            "title": "Trafic",
+            "text": "Meta / Google / Organique"
+          },
+          {
+            "label": "02",
+            "title": "Page Evergreen",
+            "text": "VSL / Webinar Evergreen"
+          },
+          {
+            "label": "03",
+            "title": "Checkout",
+            "text": "Paiement"
+          },
+          {
+            "label": "04",
+            "title": "Confirmation",
+            "text": "Accès + étapes"
+          },
+          {
+            "label": "05",
+            "title": "Onboarding",
+            "text": "Quick win"
+          },
+          {
+            "label": "06",
+            "title": "Upsell",
+            "text": "Follow-up — valeur maximisée sans nouveau lead"
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000011",
+      "position": 10,
+      "type": "architecture",
+      "script": "La page hub : elle vend la décision d'avancer.\nLe checkout : il encaisse sans friction.\nLa confirmation : elle rassure et donne l'accès.\nL'upsell : il augmente la valeur.\nL'onboarding : il crée un quick win, évite les refunds, et fait consommer.\n\nÇa, c'est la vraie logique evergreen :\nvendre + activer + garder la valeur.",
+      "cue": {
+        "punchline": "Chaque page a un job, pas un design.",
+        "durationSec": 90,
+        "tag": "PAGES",
+        "transition": "Et maintenant, le point que beaucoup n'assument pas : le timing.",
+        "bullets": [
+          "Dérouler les 5 pages une par une",
+          "Appuyer sur 'quick win évite les refunds' — insight clé",
+          "Finir sur 'vendre + activer + garder la valeur'"
+        ]
+      },
+      "notes": "PAGES · 90 sec. Dérouler les 5 pages une par une. Appuyer sur « quick win évite les refunds » — insight clé. Finir sur « vendre + activer + garder la valeur ».\nTag legacy : « Le tunnel en pages ». Visuel legacy : les 5 pages en zigzag reliées par des flèches.",
+      "content": {
+        "headline": "Architecture des pages — chaque page a un job, pas un design.",
+        "layers": [
+          {
+            "name": "01 · Page Evergreen (hub)",
+            "items": [
+              "VSL / présentation",
+              "Preuve",
+              "CTA"
+            ]
+          },
+          {
+            "name": "02 · Checkout / Bon de commande",
+            "items": [
+              "Paiement simple",
+              "Rassurance",
+              "FAQ courte"
+            ]
+          },
+          {
+            "name": "03 · Confirmation",
+            "items": [
+              "Accès",
+              "Prochaines étapes"
+            ]
+          },
+          {
+            "name": "04 · Upsell (optionnel)",
+            "items": [
+              "Upgrade",
+              "Bundle",
+              "Accompagnement"
+            ]
+          },
+          {
+            "name": "05 · Onboarding / Activation",
+            "items": [
+              "Quick win",
+              "Instructions",
+              "Support"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000012",
+      "position": 11,
+      "type": "definition",
+      "script": "Deadline, ça ne veut pas dire manipulation.\nÇa veut dire : une raison propre d'agir maintenant.\n\nExemples propres :\nbonus disponible X heures,\nprix préférentiel X jours,\naccès à un module / upgrade limité dans le temps.\n\nSi tu n'as aucun rythme, aucun timing…\nton prospect va remettre à plus tard.\nEt tu le perds.",
+      "cue": {
+        "punchline": "Sans timing, l'evergreen devient 'plus tard'.",
+        "durationSec": 75,
+        "tag": "TIMING",
+        "transition": "Ok. Maintenant, ce qui fait rentrer l'argent : automations.",
+        "bullets": [
+          "Clarifier 'deadline ≠ manipulation'",
+          "Égrener les exemples propres",
+          "Finir sur 'tu le perds' — conséquence réelle"
+        ]
+      },
+      "notes": "TIMING · 75 sec. Clarifier « deadline ≠ manipulation ». Égrener les exemples propres. Finir sur « tu le perds » — conséquence réelle.\nTag legacy : « Timing sans bullshit ».\nVisuel legacy (maquette de compte à rebours, à montrer à l'écran si besoin) : « Offre expire dans 23 H : 47 MIN : 12 SEC » — « Bonus : Audit funnel offert — Valeur : 497€ — Inclus si inscription avant minuit » — bouton « J'en profite maintenant → ». Chiffres d'illustration.",
+      "content": {
+        "headline": "La Deadline — objectif : donner un rythme, pas manipuler.",
+        "body": "Deadline ≠ manipulation : c'est une raison propre d'agir maintenant. Sans deadline, l'evergreen devient « je verrai plus tard ».",
+        "pillars": [
+          {
+            "icon": "gift",
+            "title": "Bonus limité dans le temps",
+            "text": "Un bonus disponible pendant X heures."
+          },
+          {
+            "icon": "percent",
+            "title": "Prix préférentiel limité",
+            "text": "Un prix préférentiel pendant X jours."
+          },
+          {
+            "icon": "layers",
+            "title": "Accès limité",
+            "text": "Accès à un module / upgrade pendant X heures / jours."
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000013",
+      "position": 12,
+      "type": "automation",
+      "script": "Là où 90% se plantent en evergreen, c'est pas sur la page.\nC'est sur la suite.\n\nNous, on automatise et on segmente proprement :\n\n1) Dès qu'une personne arrive :\ntag source + tag segment + entrée dans la séquence adaptée.\nTu ne veux pas « un gros message pour tout le monde ».\nTu veux un parcours.\n\n2) Si la personne regarde mais n'avance pas :\ntu la relances avec un message simple :\nrappel bénéfice + preuve + lien.\nPas un roman.\n\n3) Si la personne ouvre le checkout mais n'achète pas :\nlà tu mets la vraie séquence rentable : panier abandonné.\nEmail J0/J1/J2, et WhatsApp soft si dispo.\nUne objection par message :\n« c'est trop cher », « j'ai pas le temps », « est-ce que c'est pour moi », « est-ce que ça marche ».\n\n4) Si la personne achète :\nconfirmation, accès, onboarding, quick win.\nParce que si elle achète et qu'elle n'avance pas, tu vas prendre un refund.\n\nEvergreen, c'est ça :\nun système qui récupère les hésitants, et qui active les acheteurs.\n\nSinon, tu n'as pas un evergreen.\nTu as une page.",
+      "cue": {
+        "punchline": "Sans relance, ça fuit. C'est mécanique.",
+        "durationSec": 180,
+        "tag": "AUTOMATISATION",
+        "transition": "Et les séquences email / WhatsApp ont un rôle très précis : vendre ET activer.",
+        "bullets": [
+          "Dérouler les 4 blocs : arrivée / hésitation / abandon / achat",
+          "Insister sur 'une objection par message'",
+          "Finir sur 'tu as une page' — distinction forte"
+        ]
+      },
+      "notes": "AUTOMATISATION · 3 min. Dérouler les 4 blocs : arrivée / hésitation / abandon / achat. Insister sur « une objection par message ». Finir sur « tu as une page » — distinction forte.\nTag legacy : « Ce que 90% n'installent jamais ». Visuel legacy : 3 colonnes Visite (tag + source, segmentation) → Abandon (J0/J1/J2, WhatsApp soft, retour checkout) → Achat (accès immédiat, onboarding, upsell). Le bloc « hésitation » vient du script.",
+      "content": {
+        "headline": "Les automations — ce que 90% n'installent jamais.",
+        "items": [
+          {
+            "trigger": "Quand quelqu'un arrive sur la page",
+            "action": "Tag + source, segmentation selon comportement (view, click, checkout), entrée dans la séquence adaptée.",
+            "delay": "Immédiat"
+          },
+          {
+            "trigger": "Il regarde mais n'avance pas",
+            "action": "Relance simple : rappel bénéfice + preuve + lien. Pas un roman.",
+            "delay": "Selon comportement"
+          },
+          {
+            "trigger": "Checkout initié mais pas acheté",
+            "action": "Séquence panier abandonné (email J0/J1/J2) + WhatsApp soft si dispo : preuve + objection + retour checkout.",
+            "delay": "J0 / J1 / J2"
+          },
+          {
+            "trigger": "Quand quelqu'un achète",
+            "action": "Confirmation + accès immédiat, onboarding (J+1 / J+3), upsell si logique.",
+            "delay": "J+0 → J+3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000014",
+      "position": 13,
+      "type": "channel",
+      "script": "Avant achat : tu récupères les abandons et les hésitations.\nAprès achat : tu crées du résultat rapide.\n\nParce qu'un client qui consomme, c'est un client qui reste.\nUn client qui a un quick win, c'est un client qui recommande.\nEt un client satisfait, c'est un client qui achète la suite.",
+      "cue": {
+        "punchline": "Avant achat : récupérer. Après achat : activer.",
+        "durationSec": 75,
+        "tag": "CANAUX",
+        "transition": "Et tout ça doit remonter dans un CRM propre.",
+        "bullets": [
+          "Différencier les rôles : avant vs après",
+          "Insister sur 'quick win' — le meilleur anti-refund",
+          "Finir sur 'achète la suite' — vision LTV"
+        ]
+      },
+      "notes": "CANAUX · 75 sec. Différencier les rôles : avant vs après. Insister sur « quick win » — le meilleur anti-refund. Finir sur « achète la suite » — vision LTV.\nLe legacy couvre email ET WhatsApp (le type de slide n'accepte qu'un canal : WhatsApp retenu pour la maquette de téléphone « séquence active »).\nEncadré legacy : « But : moins de refunds, plus de satisfaction. »",
+      "content": {
+        "headline": "Email & WhatsApp — conversion + activation. But : moins de refunds, plus de satisfaction.",
+        "channel": "whatsapp",
+        "scripts": [
+          {
+            "moment": "Avant achat · J0",
+            "message": "Relance panier + objection principale."
+          },
+          {
+            "moment": "Avant achat · J1 / J2",
+            "message": "J1 : preuve sociale. J2 : rappel deadline (si applicable)."
+          },
+          {
+            "moment": "Après achat · J+0 / J+1",
+            "message": "J+0 : activation rapide. J+1 : quick win."
+          },
+          {
+            "moment": "Après achat · J+3 / J+7",
+            "message": "J+3 : consommation du contenu. J+7 : upsell / next step."
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000015",
+      "position": 14,
+      "type": "crm",
+      "script": "Ton CRM doit te dire :\nqui vient d'où,\nqui a regardé,\nqui a abandonné,\nqui a acheté,\nqui est actif.\n\nTags, segments, stats, pipeline si upsell.\nSinon tu navigues à l'aveugle.\n\nJe te montre la vue d'ensemble : là tu vois la machine entière.",
+      "cue": {
+        "punchline": "Si ce n'est pas tracké, ce n'est pas optimisable.",
+        "durationSec": 60,
+        "tag": "SUIVI",
+        "transition": "Je te montre la vue Funnelytics : là tu vois la machine entière.",
+        "bullets": [
+          "'Piloter, pas deviner'",
+          "Égrener les 5 infos que le CRM doit donner",
+          "Finir sur 'à l'aveugle' — image forte"
+        ]
+      },
+      "notes": "SUIVI · 60 sec. « Piloter, pas deviner ». Égrener les 5 infos que le CRM doit donner. Finir sur « à l'aveugle » — image forte.\nTag legacy : « Sinon c'est pas un système ».\nVisuel legacy : pipeline CRM « Evergreen temps réel » View → Abandon → Acheteur → Upsell (leads fictifs) + taux de conversion par étape (illustratifs) : Page view 100% · Checkout 22% · Achat 8% · Upsell 3%. « Tout tracké → tout optimisable ».",
+      "content": {
+        "headline": "Le tunnel doit alimenter le CRM — si ce n'est pas tracké, ce n'est pas optimisable.",
+        "pipelines": [
+          {
+            "stage": "Tags",
+            "definition": "Source, progress, checkout, buyer."
+          },
+          {
+            "stage": "Segments",
+            "definition": "View 80%, abandon, acheteur."
+          },
+          {
+            "stage": "Opportunités",
+            "definition": "Si upsell."
+          },
+          {
+            "stage": "Tasks",
+            "definition": "Support / follow-up."
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000016",
+      "position": 15,
+      "type": "embed",
+      "script": "Dans la vue Funnelytics, tu vois :\nentrées trafic, pages, events, conversions, automations reliées.\n\nTu sais où ça casse.\nEt tu corriges au bon endroit.\nC'est ce qui rend evergreen vraiment rentable.",
+      "cue": {
+        "punchline": "Voici la machine. Pas une page.",
+        "durationSec": 90,
+        "tag": "VUE D'ENSEMBLE",
+        "transition": "Maintenant, du concret : exemples de pages.",
+        "bullets": [
+          "Pointer les blocs dans l'ordre",
+          "Répéter 'machine vs page' — distinction clé",
+          "Finir sur 'vraiment rentable' — le mot final"
+        ]
+      },
+      "notes": "VUE D'ENSEMBLE · 90 sec. Pointer les blocs dans l'ordre. Répéter « machine vs page » — distinction clé. Finir sur « vraiment rentable » — le mot final.\nTag legacy : « Slide obligatoire ». Le legacy intégrait une carte de funnel live (iframe plein écran, bouton « Voir la carte live ») : montrer ici votre propre carte de funnel (Funnelytics ou équivalent).\nSchéma legacy : sources Meta Ads / Email / Organique → Trafic → Page Hub → Checkout → Confirmation → Upsell, automations Email + relances / Panier abandonné / Onboarding. Bandeau : « Deadline · Relance · Tracking · Onboarding ».",
+      "content": {
+        "headline": "Voici la machine. Pas une page.",
+        "title": "Schéma Funnelytics"
+      },
+      "needsInput": true
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000017",
+      "position": 16,
+      "type": "showcase",
+      "needsInput": true,
+      "script": "Page evergreen, checkout, confirmation, upsell.\nTu dois le voir, pas juste l'imaginer.\n\nL'objectif : un système duplicable, exécutable, pas un concept.",
+      "cue": {
+        "punchline": "On ne théorise pas.",
+        "durationSec": 45,
+        "tag": "PREUVE",
+        "transition": "Et si tu veux pousser la crédibilité : preuves brutes.",
+        "bullets": [
+          "45 sec max — montrer, ne pas sur-expliquer",
+          "Pointer 1-2 exemples proches du secteur",
+          "Transition fluide vers les preuves"
+        ]
+      },
+      "notes": "PREUVE · 45 sec max — montrer, ne pas sur-expliquer. Pointer 1-2 exemples proches du secteur. Transition fluide vers les preuves.\nLe legacy affichait un carrousel de 7 pages clients en aperçu live (iframes, vignettes, plein écran). À compléter : ajoutez vos propres captures (page evergreen, checkout, confirmation, upsell) et renommez les légendes.",
+      "content": {
+        "headline": "On ne théorise pas. On construit.",
+        "items": [
+          {
+            "title": "[Page client 1]"
+          },
+          {
+            "title": "[Page client 2]"
+          },
+          {
+            "title": "[Page client 3]"
+          },
+          {
+            "title": "[Page client 4]"
+          },
+          {
+            "title": "[Page client 5]"
+          },
+          {
+            "title": "[Page client 6]"
+          },
+          {
+            "title": "[Page client 7]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000018",
+      "position": 17,
+      "type": "screenshots",
+      "needsInput": true,
+      "script": "Dashboards, stats, conversions…\nPas pour te promettre un chiffre.\nJuste pour te montrer que ce modèle se pilote avec des données.",
+      "cue": {
+        "punchline": "On mesure.",
+        "durationSec": 60,
+        "tag": "PREUVES",
+        "transition": "Ok. Concrètement, tu gagnes quoi ?",
+        "bullets": [
+          "Ton factuel — pas de survente",
+          "Laisser le prospect regarder quelques secondes",
+          "Finir sur 'se pilote avec des données' — crédibilité"
+        ]
+      },
+      "notes": "PREUVES · 60 sec. Ton factuel — pas de survente. Laisser le prospect regarder quelques secondes. Finir sur « se pilote avec des données » — crédibilité.\nLe legacy affichait une grille de 10 captures de dashboards (plateformes de tunnels) avec lightbox « Cliquez pour agrandir » et un total cumulé multi-clients. À compléter avec vos propres résultats vérifiables (captures + chiffres).",
+      "content": {
+        "headline": "Les chiffres parlent d'eux-mêmes.",
+        "items": [
+          {
+            "caption": "[Capture 1]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 2]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 3]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 4]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 5]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 6]",
+            "result": "[Résultat]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000019",
+      "position": 18,
+      "type": "benefits",
+      "script": "Ce que tu gagnes avec un evergreen propre, c'est d'abord la stabilité.\n\nParce qu'aujourd'hui, beaucoup de business font du yo-yo :\nun bon mois, un mois vide, puis ils paniquent, puis ils relancent un truc.\n\nEvergreen, ça te sort de ça.\nTu construis un système où tu sais :\nsi j'envoie X trafic, j'obtiens Y ventes.\n\nEt derrière, ça donne :\ndes ventes en continu,\nmoins de dépendance à ton temps,\nun panier moyen qui monte avec les upsells,\nun onboarding qui réduit les refunds,\net surtout une machine optimisable.\n\nTu passes de « je poste et j'espère »\nà « j'envoie du trafic et je pilote ».",
+      "cue": {
+        "punchline": "Tu sors du 'je dois lancer pour vendre'.",
+        "durationSec": 180,
+        "tag": "BÉNÉFICES",
+        "transition": "Et justement, pour piloter, on regarde les KPI.",
+        "bullets": [
+          "Égrener les 5 gains lentement",
+          "Finir fort sur 'j'envoie du trafic et je pilote'",
+          "Regard direct — cette phrase doit atterrir"
+        ]
+      },
+      "notes": "BÉNÉFICES · 3 min. Égrener les gains lentement. Finir fort sur « j'envoie du trafic et je pilote ». Regard direct — cette phrase doit atterrir.\nSlide partagée avec le deck Webinaire dans le legacy (mêmes 6 libellés) ; les textes reprennent les gains evergreen du script. Encadré legacy : « Ce système vous sort du \"je lance et je prie\". »",
+      "content": {
+        "headline": "Ce que vous gagnez — ce système vous sort du « je lance et je prie ».",
+        "benefits": [
+          {
+            "icon": "lightbulb",
+            "title": "Des prospects plus éduqués",
+            "text": "Le pré-chauffage fait comprendre l'offre avant l'achat."
+          },
+          {
+            "icon": "shield-check",
+            "title": "Moins d'objections en vente",
+            "text": "Les relances traitent une objection par message : prix, temps, « est-ce pour moi », « est-ce que ça marche »."
+          },
+          {
+            "icon": "star",
+            "title": "Plus de confiance (autorité)",
+            "text": "Des preuves bien placées rassurent avant le checkout."
+          },
+          {
+            "icon": "trending-up",
+            "title": "Une conversion plus douce mais plus forte",
+            "text": "Des ventes en continu, et un panier moyen qui monte avec les upsells."
+          },
+          {
+            "icon": "repeat",
+            "title": "Un système duplicable",
+            "text": "Moins de dépendance à votre temps : la même machine tourne chaque jour."
+          },
+          {
+            "icon": "bar-chart-2",
+            "title": "Une croissance pilotée",
+            "text": "Si j'envoie X trafic, j'obtiens Y ventes : une machine optimisable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000020",
+      "position": 19,
+      "type": "gauge",
+      "script": "On suit des chiffres simples :\nCTR vers la page,\nlecture / scroll,\nclic vers checkout,\nconversion checkout→achat,\nabandon panier,\npanier moyen,\ncoût par achat / ROI.\n\nChaque chiffre te dit quoi corriger.\nDonc tu ne changes pas tout.\nTu changes là où ça casse.",
+      "cue": {
+        "punchline": "Chaque chiffre dit où tu perds de l'argent.",
+        "durationSec": 120,
+        "tag": "MESURABLE",
+        "transition": "Maintenant, les 3 erreurs qui tuent un evergreen.",
+        "bullets": [
+          "Pointer chaque KPI à l'écran",
+          "Insister sur 'tu ne changes pas tout'",
+          "Finir sur 'là où ça casse' = précision chirurgicale"
+        ]
+      },
+      "notes": "MESURABLE · 2 min. Pointer chaque KPI à l'écran. Insister sur « tu ne changes pas tout ». Finir sur « là où ça casse » = précision chirurgicale.\nLe legacy (slide partagée avec le deck Webinaire) affichait 7 jauges animées « Live » avec des valeurs d'illustration : CTR annonce → inscription 54% (obj. 50%) · CVR inscription 38% (35%) · Show-up rate 42% (40%) · Taux click offre 21% (20%) · Conversion RDV / paiement 14% (12%) · Coût par conversion / ROI 3.1x (3x) · Replay watch + conversion 28% (25%).\nKPI evergreen du script : CTR vers la page, lecture / scroll, clic vers checkout, conversion checkout → achat, abandon panier, panier moyen, coût par achat / ROI.",
+      "content": {
+        "headline": "7 métriques. Tout le reste en découle.",
+        "gauges": [
+          {
+            "label": "CTR annonce → inscription",
+            "value": 54,
+            "suffix": "%",
+            "note": "Objectif : 50%"
+          },
+          {
+            "label": "CVR inscription",
+            "value": 38,
+            "suffix": "%",
+            "note": "Objectif : 35%"
+          },
+          {
+            "label": "Show-up rate",
+            "value": 42,
+            "suffix": "%",
+            "note": "Objectif : 40%"
+          },
+          {
+            "label": "Taux click offre",
+            "value": 21,
+            "suffix": "%",
+            "note": "Objectif : 20%"
+          },
+          {
+            "label": "Conversion RDV / paiement",
+            "value": 14,
+            "suffix": "%",
+            "note": "Objectif : 12%"
+          },
+          {
+            "label": "Coût par conversion / ROI",
+            "value": 3.1,
+            "max": 5,
+            "suffix": "x",
+            "note": "Objectif : 3x"
+          },
+          {
+            "label": "Replay watch + conversion",
+            "value": 28,
+            "suffix": "%",
+            "note": "Objectif : 25%"
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000021",
+      "position": 20,
+      "type": "mistakes",
+      "script": "Un evergreen qui ne vend pas, c'est rarement « le marché ». C'est juste un système mal fini.\n\nJe te le dis franchement : la plupart des evergreen ne sont pas mauvais… ils sont juste incomplets.\n\nErreur 1 : pas de timing.\nTu laisses le prospect décider « quand il veut ».\nEt devine quoi : il ne décide jamais. Il remet à demain.\n\nErreur 2 : pas de relance.\nLes gens commencent, hésitent, ferment l'onglet… et toi tu ne fais rien derrière.\nDonc tu payes le trafic, et tu laisses les ventes partir.\n\nErreur 3 : pas assez de preuve / offre pas claire.\nLe prospect arrive, il a un doute, il ne comprend pas exactement ce qu'il achète, ou il ne voit pas pourquoi toi plutôt qu'un autre…\net il sort.\n\nC'est pour ça que je ne crois pas aux evergreen « one shot ».\nUn evergreen, c'est une machine : timing + relances + preuve + tracking.\nSi tu enlèves un morceau, ça tourne mal.",
+      "cue": {
+        "punchline": "Un evergreen qui ne vend pas, c'est rarement 'le marché'. C'est juste un système mal fini.",
+        "durationSec": 120,
+        "tag": "ERREURS",
+        "transition": "Ok. Maintenant, si tu veux le faire proprement, voilà le plan.",
+        "bullets": [
+          "Égrener les 3 erreurs avec gravité",
+          "Identifier laquelle correspond au prospect",
+          "Finir sur 'ça tourne mal' — conséquence claire"
+        ]
+      },
+      "notes": "ERREURS · 2 min. Égrener les 3 erreurs avec gravité. Identifier laquelle correspond au prospect. Finir sur « ça tourne mal » — conséquence claire.\nVisuel legacy « Sans système / Avec » (barres d'illustration) : Procrastination 80% → 12% · Paniers récupérés 0% → 35% · Confiance offre 15% → 68% — « Revenu evergreen récupéré +€€€ ». Conclusion : « On corrige ça dès le départ. »",
+      "content": {
+        "headline": "Les 3 erreurs qui tuent un Evergreen — ce qu'on corrige dès le départ.",
+        "mistakes": [
+          {
+            "mistake": "Pas de timing (tout le monde procrastine) : les leads « regardent et reviendront ». Jamais.",
+            "fix": "Une deadline propre — bonus, prix ou accès limité dans le temps — qui déclenche la décision."
+          },
+          {
+            "mistake": "Pas de relance (tu perds les achats) : le panier abandonné ne revient pas seul.",
+            "fix": "Une séquence panier abandonné J0/J1/J2 + WhatsApp soft. Sinon, c'est de l'argent laissé sur la table."
+          },
+          {
+            "mistake": "Pas de preuve / offre floue (tu perds la confiance) : le prospect part chez le concurrent qui prouve.",
+            "fix": "Social proof bien placée + clarté sur l'offre : ce qu'il achète, et pourquoi vous plutôt qu'un autre."
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000022",
+      "position": 21,
+      "type": "plan",
+      "script": "Ok, maintenant, comment on met ça en place sans se perdre ?\n\nJe préfère te le dire comme je le pense :\nun evergreen, ça ne marche pas quand tu commences par « la pub ».\nÇa marche quand tu commences par la structure.\n\nDonc l'ordre est important. Très.\n\nÉtape 1 : Cadrage (offre + angle).\nOn verrouille le plus important :\nqu'est-ce qu'on vend, à qui, avec quelle promesse, et surtout… pourquoi les gens devraient acheter maintenant.\nSi ça, c'est bancal, tout le reste ne sert à rien.\n\nÉtape 2 : Pages + tracking plan.\nOn construit le parcours : page hub, checkout, confirmation, upsell si besoin.\nEt on prépare le tracking dès le départ :\nparce que si tu ne mesures pas, tu vas « optimiser » au hasard.\n\nÉtape 3 : Contenu + intégration.\nVSL ou webinaire evergreen… peu importe le format.\nCe qui compte : que ce soit structuré, clair, et orienté décision.\nEnsuite on intègre proprement, sans bricolage.\n\nÉtape 4 : CRM + automations + relances + timing.\nC'est là que la machine devient une machine.\nRelance panier abandonné, séquences avant achat, après achat, onboarding, et surtout le timing (deadline propre).\nSans ça, ton evergreen devient juste… une page qui attend.\n\nÉtape 5 : Lancement contrôlé + optimisation continue.\nOn lance, on observe, on corrige.\nPas 15 tests dans tous les sens.\nOn corrige là où ça casse : message, page, checkout, relance, offre.\nEt chaque semaine, tu rends la machine un peu plus rentable.\n\nDonc la promesse est simple :\nbase propre avant d'accélérer.\nParce que si tu accélères sur un système bancal… tu accélères juste tes pertes.",
+      "cue": {
+        "punchline": "On construit une base propre. Après seulement on pousse.",
+        "durationSec": 180,
+        "tag": "PLAN",
+        "transition": "Dernier point : si tu veux qu'on te l'installe proprement, voilà la prochaine étape.",
+        "bullets": [
+          "Dérouler les 5 étapes avec rythme",
+          "Insister sur 'l'ordre est important. Très.'",
+          "Finir sur 'tu accélères juste tes pertes' — phrase choc"
+        ]
+      },
+      "notes": "PLAN · 3 min. Dérouler les 5 étapes avec rythme. Insister sur « l'ordre est important. Très. » Finir sur « tu accélères juste tes pertes » — phrase choc.\nTag legacy : « Simple, rassurant ».",
+      "content": {
+        "headline": "Plan d'implémentation — promesse : base propre avant d'accélérer.",
+        "phases": [
+          {
+            "name": "Cadrage + offre + angle evergreen",
+            "duration": "Étape 01",
+            "deliverables": [
+              "Positionnement",
+              "Angle d'attaque",
+              "Structure offre"
+            ]
+          },
+          {
+            "name": "Pages + tracking plan",
+            "duration": "Étape 02",
+            "deliverables": [
+              "Wireframes",
+              "Plan de tracking",
+              "Pixels + events"
+            ]
+          },
+          {
+            "name": "Contenu + intégration",
+            "duration": "Étape 03",
+            "deliverables": [
+              "VSL ou webinar evergreen",
+              "Slides visuels",
+              "Intégration pages"
+            ]
+          },
+          {
+            "name": "CRM + automations + relances + deadline",
+            "duration": "Étape 04",
+            "deliverables": [
+              "Séquences email",
+              "Panier abandonné",
+              "Tags + deadline"
+            ]
+          },
+          {
+            "name": "Lancement + optimisation continue",
+            "duration": "Étape 05",
+            "deliverables": [
+              "Go live",
+              "AB tests",
+              "Optimisation continue"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "15000000-0000-4000-8000-000000000023",
+      "position": 22,
+      "type": "cta",
+      "script": "Si tu veux qu'on t'installe ce système evergreen proprement, tu candidates pour un appel court (10–15 minutes).\n\nOn vérifie trois choses, très simplement :\nest-ce que ton offre est éligible à l'evergreen,\nest-ce que la mécanique evergreen est le bon modèle pour toi,\net est-ce que ça a du sens de le construire maintenant.\n\nEt dans tous les cas : tu repars avec un plan clair.\nMême si on ne bosse pas ensemble.\n\nSi c'est un match, on installe le système clé en main : pages, tracking, CRM, relances, timing, onboarding… et derrière on optimise.\n\nTu peux candidater juste en dessous.\n\nClique. Et on fait le point.",
+      "cue": {
+        "punchline": "Tu repars avec un plan. Et si c'est un match, on l'installe.",
+        "durationSec": 120,
+        "tag": "CLOSE",
+        "bullets": [
+          "Ton calme — aucune pression",
+          "Insister sur 'même si on ne bosse pas ensemble'",
+          "Pause 2-3 sec avant le bouton",
+          "Laisser respirer le prospect"
+        ],
+        "closing": "Clique. Et on fait le point."
+      },
+      "notes": "CLOSE · 2 min. Ton calme — aucune pression. Insister sur « même si on ne bosse pas ensemble ». Pause 2-3 sec avant le bouton. Laisser respirer le prospect.\nBadge legacy : « On ne prend pas tout le monde. » Encadré : « Ce qu'on installe ensemble — Setup clés en main : Pages · Tracking · CRM · Automations · Relances · Timing · Onboarding — et derrière, on optimise. » Citation : « Si c'est un match, on vous installe le système clé en main. »\nPhrase de clôture : « Clique. Et on fait le point. »",
+      "content": {
+        "headline": "Vous voulez qu'on vous installe ce système proprement ?",
+        "sub": "Vous candidatez pour un appel court (10–15 min), on vérifie si votre offre est éligible à l'evergreen, vous repartez avec le plan exact à exécuter — même si on ne bosse pas ensemble.",
+        "actions": [
+          {
+            "label": "Candidater pour la mise en place clé en main",
+            "kind": "form"
+          }
+        ]
+      }
+    }
+  ]
+}

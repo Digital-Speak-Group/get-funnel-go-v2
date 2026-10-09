@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { SlideIcon } from "../icons";
 
 interface DefinitionContent {
   headline: string;
@@ -29,6 +31,7 @@ export function DefinitionSlide({ content, theme }: { content: DefinitionContent
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
         <h1
           style={{
+            ...headlineFill(theme, theme["--slide-text"]),
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
@@ -57,7 +60,7 @@ export function DefinitionSlide({ content, theme }: { content: DefinitionContent
             color: theme["--slide-text"],
             textAlign: "center",
             padding: "32px",
-            background: theme["--slide-surface"],
+            ...cardSurface(theme),
             borderRadius: theme["--slide-radius"],
             border: `1px solid ${theme["--slide-muted"]}1a`,
           }}
@@ -83,7 +86,7 @@ export function DefinitionSlide({ content, theme }: { content: DefinitionContent
                   textAlign: "center",
                   gap: "16px",
                   padding: "24px",
-                  background: theme["--slide-surface"],
+                  ...cardSurface(theme),
                   borderRadius: theme["--slide-radius"],
                   border: `1px solid ${theme["--slide-muted"]}1a`,
                 }}
@@ -102,7 +105,7 @@ export function DefinitionSlide({ content, theme }: { content: DefinitionContent
                       borderRadius: "16px",
                     }}
                   >
-                    {pillar.icon}
+                    <SlideIcon name={pillar.icon} size={28} fallback="✓" />
                   </span>
                 )}
                 <h3

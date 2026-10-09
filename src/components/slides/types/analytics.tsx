@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface AnalyticsContent {
   headline: string;
@@ -33,7 +34,7 @@ export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; 
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -46,6 +47,7 @@ export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; 
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {metrics.map((metric, index) => (
@@ -56,7 +58,7 @@ export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; 
               flexDirection: "column",
               gap: "12px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
             }}

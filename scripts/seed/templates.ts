@@ -64,6 +64,8 @@ export function templateConfig(t: TemplateFile) {
       content: slide.content,
       notes: slide.notes,
       script: slide.script,
+      cue: slide.cue,
+      layout: slide.layout,
     })),
   };
 }

@@ -1,7 +1,7 @@
 "use server";
 
 import { getSession } from "@/lib/auth/session";
-import { SLIDE_TYPES, SlideSchema } from "@/lib/slides/schema";
+import { SLIDE_TYPES, ScriptCueSchema, SlideSchema } from "@/lib/slides/schema";
 import { buildDefaultContent } from "@/lib/slides/defaults";
 import {
   createSlide,
@@ -20,6 +20,10 @@ const UpdateSlideSchema = z.object({
   content: z.record(z.string(), z.unknown()),
   notes: z.string().max(2000),
   script: z.string().max(4000),
+  // null clears the cue (plain script).
+  cue: ScriptCueSchema.nullable().default(null),
+  // null = the type's original layout; checked against the type by SlideSchema below.
+  layout: z.string().max(30).nullable().default(null),
 });
 
 const AddSlideSchema = z.object({
@@ -50,6 +54,8 @@ export async function updateSlideAction(raw: unknown) {
     content: parsed.data.content,
     notes: parsed.data.notes,
     script: parsed.data.script,
+    cue: parsed.data.cue ?? undefined,
+    layout: parsed.data.layout ?? undefined,
   };
   const valid = SlideSchema.safeParse(candidate);
   if (!valid.success) return { error: "INVALID_SLIDE" };
@@ -61,6 +67,8 @@ export async function updateSlideAction(raw: unknown) {
       content: valid.data.content as Record<string, unknown>,
       notes: valid.data.notes,
       script: valid.data.script,
+      cue: valid.data.cue ?? null,
+      layout: valid.data.layout ?? null,
     },
     ctx
   );

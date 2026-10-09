@@ -1,24 +1,9 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { env } from "@/lib/env";
+import { isAudienceAssetPath, isAudiencePath, requiresLogin } from "@/lib/auth/route-access";
 
 const publicRateLimitCache = new Map<string, number[]>();
-
-const PUBLIC_PATHS = [
-  "/",
-  "/login",
-  "/signup",
-  "/auth/callback",
-  "/auth/forgot-password",
-  "/auth/reset-password",
-  "/pricing",
-  "/legal/terms",
-  "/legal/privacy",
-];
-
-function isPublicPath(pathname: string) {
-  return PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"));
-}
 
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({
@@ -64,14 +49,17 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Rate limiting for public audience routes
-  if (pathname.startsWith("/p/")) {
+  if (isAudiencePath(pathname)) {
     const ip = request.headers.get("x-forwarded-for") || "127.0.0.1";
+    // Images get their own, larger budget so a gallery slide doesn't use up the page limit.
+    const isAsset = isAudienceAssetPath(pathname);
+    const bucket = `${ip}:${isAsset ? "asset" : "page"}`;
     const now = Date.now();
-    const tokenCount = publicRateLimitCache.get(ip) || [];
+    const tokenCount = publicRateLimitCache.get(bucket) || [];
     const windowStart = now - 60000;
     const recentTokens = tokenCount.filter((ts: number) => ts > windowStart);
     
-    const limit = 20;
+    const limit = isAsset ? 300 : 20;
     const reset = Math.floor((now + 60000) / 1000);
     
     if (recentTokens.length >= limit) {
@@ -90,7 +78,7 @@ export async function middleware(request: NextRequest) {
     }
     
     recentTokens.push(now);
-    publicRateLimitCache.set(ip, recentTokens);
+    publicRateLimitCache.set(bucket, recentTokens);
     
     // We want to append headers to the successful response
     response.headers.set("X-RateLimit-Limit", limit.toString());
@@ -98,7 +86,7 @@ export async function middleware(request: NextRequest) {
     response.headers.set("X-RateLimit-Reset", reset.toString());
   }
 
-  if (!user && !isPublicPath(pathname) && !pathname.startsWith("/p/")) {
+  if (!user && requiresLogin(pathname)) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
@@ -113,6 +101,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.svg$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:png|svg|jpg|jpeg|webp|ico|woff2?)$).*)",
   ],
 };

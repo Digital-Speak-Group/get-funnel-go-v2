@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { signatureThemes } from "./signature-themes";
 
 export const ThemeTokensSchema = z.object({
   id: z.string(),
@@ -23,6 +24,14 @@ export const ThemeTokensSchema = z.object({
   motion: z.enum(["none", "subtle", "expressive"]),
   background: z.enum(["solid", "grid", "gradient", "noise"]),
   logoAssetId: z.string().uuid().optional(),
+  // Optional so themes saved before the Signature kit (Phase 6) still validate; absent = flat look.
+  style: z
+    .object({
+      decor: z.enum(["none", "glow", "signature"]),
+      surface: z.enum(["flat", "glass"]),
+      headline: z.enum(["solid", "gradient"]),
+    })
+    .optional(),
 });
 
 export type ThemeTokens = z.infer<typeof ThemeTokensSchema>;
@@ -54,8 +63,59 @@ const backgroundStyles: Record<ThemeTokens["background"], React.CSSProperties> =
   },
 };
 
+export const FLAT_STYLE: NonNullable<ThemeTokens["style"]> = {
+  decor: "none",
+  surface: "flat",
+  headline: "solid",
+};
+
+function luminance(hex: string): number {
+  const [r, g, b] = [1, 3, 5].map((i) => {
+    const c = parseInt(hex.slice(i, i + 2), 16) / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrast(a: string, b: string): number {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+/**
+ * Brand color for text (labels, highlights). Deep primaries like #470c85 are fills,
+ * unreadable as text on dark canvases, so fall back to the accent, then the text color.
+ */
+function readablePrimary(theme: ThemeTokens): string {
+  const { primary, accent, text, bg } = theme.color;
+  if (contrast(primary, bg) >= 4.5) return primary;
+  if (contrast(accent, bg) >= 4.5) return accent;
+  return text;
+}
+
+/**
+ * Derived look values, precomputed so slide components stay plain inline styles.
+ * Colors are #rrggbb (schema-enforced), so a two-digit hex alpha suffix is valid.
+ */
+function styleVars(theme: ThemeTokens): Record<string, string> {
+  const style = theme.style ?? FLAT_STYLE;
+  const { text, surface, primary } = theme.color;
+  const glass = style.surface === "glass";
+  return {
+    "--slide-card-bg": glass ? `${text}0a` : surface,
+    "--slide-card-blur": glass ? "blur(16px)" : "none",
+    "--slide-card-shadow": glass ? `inset 0 1px 0 ${text}14, 0 24px 64px -32px ${primary}80` : "none",
+    "--slide-headline": style.headline,
+    "--slide-headline-image": `linear-gradient(180deg, ${text} 0%, ${text}b3 100%)`,
+    "--slide-kicker": style.decor === "signature" ? "pill" : "plain",
+    "--slide-decor": style.decor,
+    "--slide-primary-text": readablePrimary(theme),
+  };
+}
+
 export function tokensToCssVars(theme: ThemeTokens): Record<string, string> {
   return {
+    ...styleVars(theme),
     "--slide-bg": theme.color.bg,
     "--slide-surface": theme.color.surface,
     "--slide-text": theme.color.text,
@@ -201,4 +261,5 @@ export const systemThemes: ThemeTokens[] = [
   midnightTheme,
   editorialTheme,
   minimalTheme,
+  ...signatureThemes,
 ];

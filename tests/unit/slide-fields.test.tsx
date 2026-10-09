@@ -4,6 +4,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { SlideFields } from "@/components/app/editor/SlideFields";
 import { buildDefaultContent } from "@/lib/slides/defaults";
 import type { EditorSlide } from "@/components/app/editor/validation";
+import { EMPTY_EDITOR_CUE } from "@/components/app/editor/cue";
 import { randomUUID } from "node:crypto";
 
 function makeSlide(overrides?: Partial<EditorSlide>): EditorSlide {
@@ -14,6 +15,7 @@ function makeSlide(overrides?: Partial<EditorSlide>): EditorSlide {
     content: buildDefaultContent("cover"),
     notes: "",
     script: "",
+    cue: EMPTY_EDITOR_CUE,
     ...overrides,
   };
 }
@@ -73,5 +75,13 @@ describe("SlideFields", () => {
     });
     render(<SlideFields slide={slide} errors={{}} onChange={vi.fn()} />);
     expect(screen.getByTestId("slide-field-channel")).toHaveValue("whatsapp");
+  });
+
+  it("keeps a single regenerate panel and cue section when switching slides", () => {
+    const first = makeSlide();
+    const { rerender } = render(<SlideFields slide={first} errors={{}} onChange={vi.fn()} onRegenerate={vi.fn()} />);
+    rerender(<SlideFields slide={makeSlide()} errors={{}} onChange={vi.fn()} onRegenerate={vi.fn()} />);
+    expect(screen.getAllByText("Instructions pour l'IA")).toHaveLength(1);
+    expect(screen.getAllByTestId("slide-cue")).toHaveLength(1);
   });
 });

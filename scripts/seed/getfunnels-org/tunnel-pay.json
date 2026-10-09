@@ -1,0 +1,144 @@
+{
+  "template": "tunnel-pay",
+  "deckId": "20000000-0000-4000-8000-000000000106",
+  "slides": [
+    {
+      "position": 0,
+      "content": {
+        "kicker": "Deck Résultat — Version Diagnostic • Confidentiel",
+        "title": "Tunnel VSL → Paiement — Architecture Core",
+        "subtitle": "Expliquer → prouver → convertir. Sans appel.",
+        "presenterName": "Hamid El Bouhali"
+      },
+      "script": "Ok. Si tu vois cette vidéo, c'est que tu viens de terminer le diagnostic GetFunnels.\nTon résultat ici, c'est : VSL → Paiement.\n\nEt je te préviens : ça peut être une machine incroyable…\nbut only if it's built as a system, not just a 'sales page with a video'.\n\nDans les prochaines minutes, je vais te montrer :\npourquoi c'est ce modèle-là dans ton cas, à quoi ressemble l'architecture, où ça fuit dans 90% des business, et comment on le rend rentable.",
+      "notes": "INTRO · 45 sec. 3 secondes de silence avant de commencer. Ton direct — pas de chauffe inutile. Regard caméra / prospect. Badge d'origine : « Deck Résultat — Version Diagnostic • Confidentiel ». Bouton « Voir l'architecture » en bas de slide. Pied de slide legacy : « GetFunnels · Hamid El Bouhali · Deck Résultat — Version Diagnostic · Confidentiel »."
+    },
+    {
+      "position": 2,
+      "content": {
+        "headline": "Hamid El Bouhali — Fondateur de GetFunnels",
+        "points": [
+          {
+            "icon": "briefcase",
+            "title": "8+ ans d'expérience · +470 funnels créés",
+            "text": "Depuis 8+ ans, on construit des systèmes de vente complets : funnels + CRM + automatisations pour des entrepreneurs qui font du 6 à 7 chiffres."
+          },
+          {
+            "icon": "star",
+            "title": "On a bossé avec",
+            "text": "Yomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini… et d'autres experts du marché francophone & anglophone."
+          },
+          {
+            "icon": "lightbulb",
+            "title": "Une vérité simple",
+            "text": "Le problème n°1 n'est pas \"la pub\". C'est l'architecture."
+          }
+        ]
+      },
+      "script": "Je m'appelle Hamid El Bouhali, fondateur de GetFunnels.\nÇa fait plus de 8 ans qu'on construit des systèmes complets : tunnels, CRM, automatisations.\nOn a bossé avec des entrepreneurs comme Yomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini… et d'autres.\n\nEt la réalité qu'on voit partout, c'est la même :\nles gens pensent que leur problème c'est la pub… alors que c'est l'architecture.",
+      "notes": "AUTORITÉ · 90 sec max — aller vite. Citer les noms de clients avec assurance. Finir sur « l'architecture » — mot clé de toute la prez. Le legacy affichait le logo GetFunnels à côté des références (image à migrer, Task 57b)."
+    },
+    {
+      "position": 18,
+      "content": {
+        "headline": "Voici la machine.",
+        "title": "Funnelytics View",
+        "caption": "Pas une page. Le système complet en action.",
+        "url": "https://canvas.funnelytics.io/view/6ddc74c0-b5ff-4dfa-a361-712d5a40c58a"
+      }
+    },
+    {
+      "position": 19,
+      "content": {
+        "headline": "On ne théorise pas. On construit.",
+        "items": [
+          {
+            "title": "Viral Script VSL",
+            "url": "https://www.getfunnels.agency/viral_script_vsl-v3"
+          },
+          {
+            "title": "Programme Ambassadeurs",
+            "url": "https://getfunnels.clickfunnels.com/programme-ambassadeurs"
+          },
+          {
+            "title": "Arthaud Immobilier",
+            "url": "https://getfunnels.clickfunnels.com/arthaud_immobilier"
+          },
+          {
+            "title": "Reborn",
+            "url": "https://by.getfunnels.agency/reborn"
+          },
+          {
+            "title": "Go Scale Systems",
+            "url": "https://go-scale.systems/vsl"
+          },
+          {
+            "title": "Optin",
+            "url": "https://getfunnels.clickfunnels.com/optin1745946068279"
+          }
+        ]
+      },
+      "notes": "PREUVE · 45 sec max — ne pas sur-expliquer. Pointer 1-2 exemples proches du secteur du prospect. Transition fluide vers les preuves. L'original est un carrousel de ces 6 pages live (aperçus intégrés, plein écran, bouton « Ouvrir ») : captures à ajouter quand les images seront migrées (Task 57b) ; aperçus live avec le type embed (Task 60)."
+    },
+    {
+      "position": 20,
+      "content": {
+        "headline": "Les chiffres parlent d'eux-mêmes.",
+        "items": [
+          {
+            "caption": "ClickFunnels — Stats Tunnel",
+            "result": "385 241 $",
+            "assetId": "60000000-0000-4000-8000-000000000003"
+          },
+          {
+            "caption": "Systeme.io — Statistiques",
+            "result": "€143 181",
+            "assetId": "60000000-0000-4000-8000-000000000004"
+          },
+          {
+            "caption": "ClickFunnels — Tunnel Stats",
+            "result": "380 711 $",
+            "assetId": "60000000-0000-4000-8000-000000000005"
+          },
+          {
+            "caption": "ClickFunnels — Stats détaillées",
+            "result": "572",
+            "assetId": "60000000-0000-4000-8000-000000000006"
+          },
+          {
+            "caption": "Systeme.io — Challenge Connaissance",
+            "result": "€263 818",
+            "assetId": "60000000-0000-4000-8000-000000000007"
+          },
+          {
+            "caption": "Systeme.io — Opt-in 41%",
+            "result": "41 052",
+            "assetId": "60000000-0000-4000-8000-000000000008"
+          },
+          {
+            "caption": "Systeme.io — Vue globale",
+            "result": "€257 386",
+            "assetId": "60000000-0000-4000-8000-000000000009"
+          },
+          {
+            "caption": "Systeme.io — Tunnel REBORN",
+            "result": "€3 608 200",
+            "assetId": "60000000-0000-4000-8000-00000000000a"
+          },
+          {
+            "caption": "ClickFunnels — 49 348 vues",
+            "result": "49 348",
+            "assetId": "60000000-0000-4000-8000-00000000000b"
+          },
+          {
+            "caption": "Systeme.io — Récap global",
+            "result": "€3 608 200",
+            "assetId": "60000000-0000-4000-8000-00000000000c"
+          }
+        ]
+      },
+      "notes": "PREUVES · 90 sec. Ton factuel — pas de survente. Laisser le prospect regarder quelques secondes. Finir sur « tu scales » — vision long terme. L'original affiche 10 captures de dashboards (ClickFunnels, Systeme.io) cliquables en lightbox, dont aussi : 380 711 $ Sales Value · Challenge Connaissance 263 818 € · opt-in 41 % sur 41 052 vues · vue globale 257 386 € · Tunnel REBORN 3 608 200 € · 49 348 vues (opt-in 41,4 %)."
+    }
+  ],
+  "keepPlaceholders": []
+}

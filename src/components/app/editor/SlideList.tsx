@@ -7,6 +7,8 @@ import { SLIDE_TYPES, type SlideType } from "@/lib/slides/schema";
 import { SLIDE_TYPE_LABELS } from "./messages";
 import { cn } from "@/lib/utils";
 import type { EditorSlide } from "./validation";
+import { findPlaceholders } from "./placeholders";
+import { PlaceholderBadge } from "./PlaceholderHints";
 
 interface SlideListProps {
   slides: EditorSlide[];
@@ -94,6 +96,7 @@ export function SlideList({
               <span className="text-sm text-white">
                 {SLIDE_TYPE_LABELS[slide.type]}
               </span>
+              <PlaceholderBadge count={findPlaceholders(slide.content).length} />
             </button>
             <div className="flex shrink-0 items-center gap-0.5">
               <IconBtn

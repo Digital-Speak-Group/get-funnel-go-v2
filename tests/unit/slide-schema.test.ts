@@ -6,6 +6,7 @@ import {
   type Slide,
   type Deck,
 } from "@/lib/slides/schema";
+import { buildDefaultContent } from "@/lib/slides/defaults";
 
 function uuid() {
   return "00000000-0000-4000-8000-000000000001";
@@ -645,10 +646,12 @@ describe("DeckSchema", () => {
               headline: `Slide ${index}`,
               members: [{ name: "N1", role: "R1" }],
             }
-          : {
+          : type === "cta"
+          ? {
               headline: `Slide ${index}`,
               actions: [{ label: "Act", kind: "link" }],
-            },
+            }
+          : (buildDefaultContent(type) as never),
     };
   }
 

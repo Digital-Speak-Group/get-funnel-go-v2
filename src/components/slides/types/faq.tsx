@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface FaqContent {
   headline: string;
@@ -32,7 +33,7 @@ export function FaqSlide({ content, theme }: { content: FaqContent; theme: Recor
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -51,7 +52,7 @@ export function FaqSlide({ content, theme }: { content: FaqContent; theme: Recor
           <details
             key={index}
             style={{
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-muted"]}1a`,
               overflow: "hidden",
@@ -74,7 +75,7 @@ export function FaqSlide({ content, theme }: { content: FaqContent; theme: Recor
               <span
                 style={{
                   fontSize: "20px",
-                  color: theme["--slide-primary"],
+                  color: theme["--slide-primary-text"],
                   flexShrink: 0,
                   marginLeft: "16px",
                 }}

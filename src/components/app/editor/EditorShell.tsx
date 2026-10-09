@@ -24,13 +24,17 @@ import {
 import { SlideList } from "./SlideList";
 import { SlideCanvas } from "./SlideCanvas";
 import { SlideFields } from "./SlideFields";
-import { STATUS_LABELS } from "./messages";
+import { REGENERATE_MESSAGES, STATUS_LABELS } from "./messages";
 import {
   buildSavePayload,
   validateEditorSlide,
   type EditorSlide,
 } from "./validation";
 import type { FieldErrors } from "./field-schema";
+import { toEditorCue } from "./cue";
+import { validLayout } from "@/lib/slides/layouts";
+import { LayoutPicker } from "./LayoutPicker";
+import { IllustrationPicker } from "./IllustrationPicker";
 import { cn } from "@/lib/utils";
 
 const AUTOSAVE_DELAY_MS = 800;
@@ -55,6 +59,8 @@ function toEditorSlide(slide: SlideWithDeck): EditorSlide {
     content: (slide.content ?? {}) as Record<string, unknown>,
     notes: slide.notes ?? "",
     script: slide.script ?? "",
+    cue: toEditorCue(slide.cue),
+    layout: validLayout(slide.type, slide.layout),
   };
 }
 
@@ -75,6 +81,7 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
   const [status, setStatus] = React.useState<SaveStatus>("idle");
   const [themeId, setThemeId] = React.useState<string>(deck.themeId);
   const [isRegenerating, setIsRegenerating] = React.useState(false);
+  const [regenerateError, setRegenerateError] = React.useState<string | undefined>();
 
   const slidesRef = React.useRef(slides);
   const activeIdRef = React.useRef(activeId);
@@ -145,6 +152,7 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
   function selectSlide(id: string | null) {
     activeIdRef.current = id;
     setActiveId(id);
+    setRegenerateError(undefined);
     const slide = slidesRef.current.find((s) => s.id === id);
     setErrors(slide ? validateEditorSlide(slide) : {});
   }
@@ -276,20 +284,28 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
     }
   }
 
-  async function handleRegenerate() {
+  async function handleRegenerate(instructions: string) {
     if (!activeId || isRegenerating) return;
     setIsRegenerating(true);
-    setStatus("saving");
+    setRegenerateError(undefined);
 
     try {
       const res = await fetch("/api/ai/regenerate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slideId: activeId }),
+        body: JSON.stringify({ slideId: activeId, instructions: instructions || undefined }),
       });
 
       if (!res.ok) {
-        throw new Error("Failed to regenerate slide");
+        // Shown in the regenerate panel, not the save status: nothing failed to save.
+        setRegenerateError(
+          res.status === 402
+            ? REGENERATE_MESSAGES.noCredits
+            : res.status === 429
+              ? REGENERATE_MESSAGES.rateLimited
+              : REGENERATE_MESSAGES.failed
+        );
+        return;
       }
 
       const data = await res.json();
@@ -300,10 +316,9 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
           notes: data.slide.notes,
           script: data.slide.script,
         });
-        setStatus("saved");
       }
     } catch {
-      setStatus("error");
+      setRegenerateError(REGENERATE_MESSAGES.failed);
     } finally {
       setIsRegenerating(false);
     }
@@ -398,13 +413,30 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
         <SlideCanvas slide={previewSlide} theme={previewTheme} />
         <div className="space-y-6 rounded-2xl border border-zinc-800 bg-zinc-900/50 p-4">
           {activeSlide ? (
+            <>
+            <LayoutPicker
+              slide={previewSlide ?? activeSlide}
+              theme={previewTheme}
+              onChange={(layout) => updateActive({ layout })}
+            />
+            <IllustrationPicker
+              value={typeof activeSlide.content.illustration === "string" ? activeSlide.content.illustration : undefined}
+              theme={previewTheme}
+              onChange={(illustration) => {
+                const { illustration: _previous, ...rest } = activeSlide.content;
+                void _previous;
+                updateActive({ content: illustration ? { ...rest, illustration } : rest });
+              }}
+            />
             <SlideFields
               slide={activeSlide}
               errors={errors}
               onChange={updateActive}
-              onRegenerate={handleRegenerate}
+              onRegenerate={(instructions) => void handleRegenerate(instructions)}
               isRegenerating={isRegenerating}
+              regenerateError={regenerateError}
             />
+            </>
           ) : (
             <p className="text-sm text-zinc-500">
               Ajoutez un slide pour commencer l’édition.

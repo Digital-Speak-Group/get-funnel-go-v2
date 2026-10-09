@@ -41,13 +41,15 @@ test.describe("dashboard", () => {
     // Delete
     await renamedCard.getByRole("button", { name: "Plus d'options" }).click();
     await page.getByRole("menuitem", { name: "Supprimer" }).click();
+    await page.getByRole("alertdialog").getByRole("button", { name: "Supprimer" }).click();
     await expect(cardWithTitle(renamedTitle)).toHaveCount(0, { timeout: 10000 });
   });
 
   test("sort select changes deck ordering", async ({ page }) => {
     await expect(page.getByRole("heading", { name: "Tableau de bord", exact: true })).toBeVisible();
 
-    await page.getByLabel("Trier les decks").selectOption("title_asc");
+    await page.getByRole("combobox", { name: "Trier les decks" }).click();
+    await page.getByRole("option", { name: "Titre (A–Z)" }).click();
     await expect(page).toHaveURL(/sort=title_asc/);
 
     const cards = page.getByTestId("deck-card");

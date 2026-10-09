@@ -41,17 +41,19 @@ decks(id, org_id, owner_id references profiles(id), title, description,
       theme_id references themes(id), template_id nullable references templates(id),
       status text check (status in ('draft','ready','archived')) default 'draft',
       present_token text unique, language text default 'fr',
+      source_script text nullable,  -- script the deck was generated from; server-only (AI regeneration), never selected for lists or the audience view
       deleted_at, created_at, updated_at)
 
 slides(id, deck_id references decks(id) on delete cascade, position int, type text,
-       content jsonb, notes text, script text, created_at, updated_at,
+       content jsonb, notes text, script text, cue jsonb nullable, layout text nullable,
+       created_at, updated_at,
        unique (deck_id, position) deferrable initially deferred)
 
 deck_versions(id, deck_id references decks(id) on delete cascade, version int,
               snapshot jsonb, created_by, created_at, unique (deck_id, version))
 ```
 
-`slides.type` must match the discriminated union in `docs/ai-generation.md`. `content` is validated against the per-type schema. `notes` and `script` power the presenter view (ported from the legacy `SlideNotes`/`SlideScripts`).
+`slides.type` must match the discriminated union in `docs/ai-generation.md`. `content` is validated against the per-type schema. `notes` and `script` power the presenter view (ported from the legacy `SlideNotes`/`SlideScripts`). `cue` (migration `0004_slide_script_cue`, Task 62) holds the structured part of the legacy script panel — `{punchline, durationSec, tag, transition, bullets, closing}`, all optional, validated by `ScriptCueSchema`; `script` stays the plain body, so slides without a cue are unchanged. A stored cue that fails validation is dropped on read (`parseScriptCue`), never the slide. The deck's target duration is the sum of `cue.durationSec`. `layout` (migration `0005_slide_layout`, Task 59) picks one of the type's variants in `SLIDE_LAYOUTS` (`src/lib/slides/layouts.ts`); null = the original look. An unknown stored layout falls back to the original (`validLayout`), never drops the slide.
 
 ### Sessions & realtime
 
@@ -90,6 +92,10 @@ assets(id, org_id, deck_id nullable references decks(id) on delete cascade,
        kind text check (kind in ('logo','image','export')), storage_path, mime_type,
        width int, height int, size_bytes int, created_at)
 ```
+
+Files live in the `StorageProvider` at `orgs/<org_id>/<asset_id>.<ext>`; slides point at them with `assetId` in their content (gallery items today). The audience route allows an asset only if one of the token deck's slides references it (`collectAssetIds`). (Shipped columns: `width`/`height`/`size_bytes` are text in migration 0000.) Replacing or removing an image leaves the old asset in place — there is no garbage collection yet.
+
+Legacy GetFunnels images: `scripts/seed/getfunnels-org-assets.json` lists the 12 legacy files with fixed ids (`60000000-…-0000000000NN`); `npx tsx --conditions=react-server scripts/migrate-legacy-assets.ts` (idempotent, after `db:seed`) copies them off the Base44 bucket into storage as GetFunnels org assets. Run it once per environment.
 
 ## Row Level Security
 
@@ -193,8 +199,9 @@ Rules:
 `npm run db:seed` (idempotent):
 
 1. System themes: at minimum `getfunnels-dark` (legacy purple #470C85 palette) and `getfunnels-light`, plus 3–4 themed variants (see `docs/design-system.md`).
-2. System templates: port the legacy decks (RDV Classique, VSL, Webinaire, Commercial first — see spec open question #8) into `templates` + a `template_slides` JSON structure stored in `templates.config`.
-3. Presenter `notes` + `script` per slide, ported from the legacy `SlideNotes.jsx` and `SlideScripts*.jsx` files.
+2. System templates: the 7 ported legacy decks plus 2 v2-authored decks, one JSON file each in `scripts/seed/templates/` (spec decisions 8 and 10), loaded by `seedTemplates()` into `templates` + a `template_slides` JSON structure stored in `templates.config`.
+3. Presenter `notes` + `script` per slide, ported from the legacy `SlideNotes.jsx` and `SlideScripts*.jsx` files; the 6 scripted decks also carry the legacy `cue` (punchline, timing in seconds, tag, transition, tips, closing). The legacy per-slide `tagColor` is not ported — the presenter colours tags with tokens.
 4. Demo org + demo user + one generated deck for local development.
+5. Private "GetFunnels" org (`50000000-…-000000000002`, spec decision 10) with its members' profiles/memberships and the 7 full-fidelity legacy decks (`20000000-…-0000000001NN`). Each deck = its system template + an overlay in `scripts/seed/getfunnels-org/<slug>.json` that replaces the template's `needsInput` slides with the real agency content; per-prospect live blanks are listed in `keepPlaceholders`. `seedGetFunnelsOrg()` creates each deck once and generates its `present_token` at insert time (never rotated). On re-seed it refreshes only slides nobody touched since the seed (same `created_at` as the deck, `updated_at = created_at`); slides the team edited, moved or added are left alone. Runs inside `db:seed`, or alone with `npx tsx scripts/seed/getfunnels-org.ts` (for production, where the demo data must not load).
 
 Seed content lives in `scripts/seed/` as typed JSON files so it is diffable and reviewable.

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { headlineFill } from "../style";
 
 interface ComparisonContent {
   headline: string;
@@ -33,7 +34,7 @@ export function ComparisonSlide({ content, theme }: { content: ComparisonContent
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}

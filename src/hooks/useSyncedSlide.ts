@@ -2,7 +2,11 @@
 
 import * as React from "react";
 import { getRealtimeProvider } from "@/lib/realtime/supabase";
-import type { RealtimeChannel } from "@/lib/realtime/types";
+import type { RealtimeChannel, SlideEvent } from "@/lib/realtime/types";
+import { parseBlanksPayload } from "@/lib/realtime/blanks";
+
+/** Typing in a blank publishes once the presenter pauses (also keeps clear of the 100 ms throttle). */
+const BLANKS_DEBOUNCE_MS = 300;
 
 /**
  * Presenter-side hook: publishes the current slide index to the realtime channel.
@@ -11,11 +15,13 @@ import type { RealtimeChannel } from "@/lib/realtime/types";
  * @param presentToken  - The deck's presentToken (used as channel key)
  * @param slideIndex    - The current slide index to publish
  * @param enabled       - Set to false to disable sync (e.g. during offline editing)
+ * @param blanks        - Live values of the current slide when it is a `blanks` slide
  */
 export function usePresenterSync(
   presentToken: string,
   slideIndex: number,
-  enabled = true
+  enabled = true,
+  blanks?: SlideEvent["blanks"]
 ): void {
   const channelRef = React.useRef<RealtimeChannel | null>(null);
 
@@ -30,11 +36,26 @@ export function usePresenterSync(
     };
   }, [presentToken, enabled]);
 
+  // Every event carries the current slide's blank values, so a slide change also resends them.
+  const blanksRef = React.useRef(blanks);
+  blanksRef.current = blanks;
+
   // Publish on every index change
   React.useEffect(() => {
     if (!enabled || !channelRef.current) return;
-    channelRef.current.publish({ slideIndex, ts: Date.now() });
+    channelRef.current.publish({ slideIndex, ts: Date.now(), blanks: blanksRef.current });
   }, [slideIndex, enabled]);
+
+  // Publish typed values after a short pause
+  const blanksKey = blanks ? JSON.stringify(blanks) : "";
+  React.useEffect(() => {
+    if (!enabled || !blanksKey) return;
+    const timer = setTimeout(() => {
+      channelRef.current?.publish({ slideIndex, ts: Date.now(), blanks: blanksRef.current });
+    }, BLANKS_DEBOUNCE_MS);
+    return () => clearTimeout(timer);
+    // slideIndex is read at send time on purpose; the index effect above covers slide changes.
+  }, [blanksKey, enabled]);
 }
 
 /**
@@ -45,13 +66,17 @@ export function usePresenterSync(
  *
  * @param presentToken  - The deck's presentToken
  * @param enabled       - Set to false to disable sync (offline/fallback mode)
+ * @param onBlanks      - Receives validated live values of a `blanks` slide
  */
 export function useAudienceSync(
   presentToken: string,
-  enabled = true
+  enabled = true,
+  onBlanks?: (slideId: string, values: string[]) => void
 ): number | null {
   const [syncedIndex, setSyncedIndex] = React.useState<number | null>(null);
   const channelRef = React.useRef<RealtimeChannel | null>(null);
+  const onBlanksRef = React.useRef(onBlanks);
+  onBlanksRef.current = onBlanks;
 
   React.useEffect(() => {
     if (!enabled) return;
@@ -62,6 +87,8 @@ export function useAudienceSync(
 
     ch.subscribe((event) => {
       setSyncedIndex(event.slideIndex);
+      const blanks = parseBlanksPayload(event.blanks);
+      if (blanks) onBlanksRef.current?.(blanks.slideId, blanks.values);
     });
 
     return () => {

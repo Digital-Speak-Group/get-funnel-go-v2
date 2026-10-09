@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface CaptureContent {
   headline: string;
@@ -36,7 +37,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -71,7 +72,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
                   width: "100%",
                   padding: "16px",
                   fontSize: "16px",
-                  background: theme["--slide-surface"],
+                  ...cardSurface(theme),
                   color: theme["--slide-text"],
                   border: `1px solid ${theme["--slide-muted"]}33`,
                   borderRadius: theme["--slide-radius"],
@@ -92,7 +93,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
                   width: "100%",
                   padding: "16px",
                   fontSize: "16px",
-                  background: theme["--slide-surface"],
+                  ...cardSurface(theme),
                   color: theme["--slide-text"],
                   border: `1px solid ${theme["--slide-muted"]}33`,
                   borderRadius: theme["--slide-radius"],

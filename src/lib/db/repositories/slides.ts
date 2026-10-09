@@ -2,6 +2,7 @@ import "server-only";
 import { db } from "@/lib/db/client";
 import { slides, decks } from "@/lib/db/schema";
 import { eq, and, isNull, asc, desc, sql } from "drizzle-orm";
+import type { ScriptCue } from "@/lib/slides/schema";
 
 export interface SlideRepositoryContext {
   orgId: string;
@@ -14,6 +15,8 @@ export interface CreateSlideInput {
   content: Record<string, unknown>;
   notes?: string;
   script?: string;
+  cue?: ScriptCue;
+  layout?: string;
   position?: number;
 }
 
@@ -22,6 +25,8 @@ export interface UpdateSlideInput {
   content?: Record<string, unknown>;
   notes?: string;
   script?: string;
+  cue?: ScriptCue | null;
+  layout?: string | null;
 }
 
 export interface SlideWithDeck {
@@ -32,6 +37,8 @@ export interface SlideWithDeck {
   content: unknown;
   notes: string | null;
   script: string | null;
+  cue: unknown;
+  layout: string | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -75,6 +82,8 @@ export async function createSlide(
       content: input.content,
       notes: input.notes ?? null,
       script: input.script ?? null,
+      cue: input.cue ?? null,
+      layout: input.layout ?? null,
     })
     .returning();
 
@@ -172,6 +181,8 @@ export async function duplicateSlide(
       content: existing.content as Record<string, unknown>,
       notes: existing.notes ?? undefined,
       script: existing.script ?? undefined,
+      cue: (existing.cue as ScriptCue | null) ?? undefined,
+      layout: existing.layout ?? undefined,
       position: existing.position + 1,
     },
     ctx

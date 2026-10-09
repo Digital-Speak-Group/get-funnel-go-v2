@@ -1,0 +1,1190 @@
+{
+  "title": "Lancement Orchestré",
+  "language": "fr",
+  "id": "60000000-0000-4000-8000-000000000005",
+  "slug": "lancement-orchestre",
+  "name": "Lancement Orchestré",
+  "category": "Lancement",
+  "description": "Lancement orchestré : pré-chauffage, ouverture et fermeture sur une fenêtre courte (classique ou challenge), avec pages, séquences email/WhatsApp, automations, CRM et KPI pour créer un pic de ventes maîtrisé.",
+  "themeId": "40000000-0000-4000-8000-000000000007",
+  "slides": [
+    {
+      "id": "14000000-0000-4000-8000-000000000001",
+      "position": 0,
+      "type": "cover",
+      "needsInput": true,
+      "notes": "INTRO · 45 sec. 3 secondes de silence avant de commencer. Ton direct — pas de chauffe inutile. Regard caméra / prospect. Pied de slide d'origine : « Confidentiel — Deck Résultat, version Diagnostic ».",
+      "script": "Ok. Tu viens de finir le diagnostic [Votre entreprise].\nDonc tu n'es pas là pour te faire divertir, tu es là pour comprendre quoi faire.\n\nDans cette vidéo, je vais te montrer :\npourquoi ton système recommandé est un lancement orchestré (et parfois un challenge),\nà quoi ressemble la machine,\net ce que tu dois mettre en place pour que ça convertisse sans improvisation.\n\nPas de théorie. Une architecture.",
+      "cue": {
+        "punchline": "On va faire simple, et surtout concret.",
+        "durationSec": 45,
+        "tag": "INTRO",
+        "transition": "On commence direct par le verdict.",
+        "bullets": [
+          "3 secondes de silence avant de commencer",
+          "Ton direct — pas de chauffe inutile",
+          "Regard caméra / prospect"
+        ]
+      },
+      "content": {
+        "kicker": "Diagnostic Complet",
+        "title": "Tunnel Lancement Orchestré",
+        "subtitle": "Créer un pic de ventes. En contrôle. Pas au hasard.",
+        "presenterName": "[Votre nom]"
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000002",
+      "position": 1,
+      "type": "statement",
+      "notes": "VERDICT · 2 min. Le verdict doit être clair dès les 3 premières secondes. Insister sur « pendant X jours, tout est aligné ». Pause après « il décide ». Chercher le hochement de tête. Visuel d'origine : entonnoir animé CHAUFFER → OUVRIR → CONVERTIR → RELANCER → PIC.",
+      "script": "Verdict : Tunnel Lancement Orchestré.\n\nPourquoi ? Parce que tu as besoin d'un système qui concentre l'attention et la décision sur une période courte.\nUn lancement, c'est ce qui te permet de dire :\n'Pendant X jours, tout est aligné : message, contenu, offre, deadline.'\n\nEt ça change tout, parce que le prospect n'est pas en mode 'je verrai plus tard'.\nIl est dans un cadre : il suit, il avance, il décide.\n\nEt surtout : le but, ce n'est pas de 'faire une campagne'.\nLe but, c'est de construire une séquence :\nchauffer → éduquer → ouvrir → convertir → relancer → fermer → exploiter.\nUne machine qui se pilote.",
+      "cue": {
+        "punchline": "Ici, on crée un moment. Pas un tunnel qui dort.",
+        "durationSec": 120,
+        "tag": "VERDICT",
+        "transition": "Avant de rentrer dans l'architecture, je pose une base : qui te parle.",
+        "bullets": [
+          "Insister sur 'pendant X jours, tout est aligné'",
+          "Pause après 'il décide'",
+          "Chercher le hochement de tête"
+        ]
+      },
+      "content": {
+        "eyebrow": "Système Recommandé",
+        "headline": "Votre système recommandé : TUNNEL LANCEMENT ORCHESTRÉ",
+        "highlight": "Un pic de ventes maîtrisé sur une fenêtre courte",
+        "sub": "Pourquoi ce choix : créer un moment d'attention intensive → désir → urgence → décision. En séquence contrôlée. Chauffer → ouvrir → convertir → relancer → exploiter."
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000003",
+      "position": 2,
+      "type": "authority",
+      "needsInput": true,
+      "notes": "AUTORITÉ · 90 sec max — aller vite. Citer les noms de références avec assurance. Finir sur « tu scales juste tes pertes » — image forte. Remplacer les placeholders par votre nom, votre entreprise, vos années d'expérience, votre nombre de funnels et vos références clients.",
+      "script": "Je m'appelle [Votre nom], fondateur de [Votre entreprise].\nDepuis plus de [X] ans, on construit des systèmes complets : funnels, CRM, automatisations.\n\nOn a bossé avec des références :\n[Client 1], [Client 2], [Client 3]… et d'autres.\n\nEt peu importe le marché, on voit toujours le même pattern :\nles gens pensent que leur problème, c'est la pub…\nalors que leur vrai problème, c'est l'architecture.\n\nParce que même avec plus de trafic…\nsi ton système est bancal, tu scales juste tes pertes.",
+      "cue": {
+        "punchline": "Je ne vends pas du bruit. Je vends de la structure.",
+        "durationSec": 90,
+        "tag": "AUTORITÉ",
+        "transition": "Et justement, voilà pourquoi 90% des lancements se plantent.",
+        "bullets": [
+          "90 sec max — aller vite",
+          "Citer les noms avec assurance",
+          "Finir sur 'tu scales juste tes pertes' — image forte"
+        ]
+      },
+      "content": {
+        "headline": "Qui je suis — [Votre nom]",
+        "points": [
+          {
+            "icon": "briefcase",
+            "title": "Fondateur de [Votre entreprise]",
+            "text": "Depuis [X] ans, on construit des systèmes de vente complets : funnels + CRM + automatisations pour des entrepreneurs qui font du [X] chiffres."
+          },
+          {
+            "icon": "award",
+            "title": "[X] ans d'expérience · +[X] funnels créés",
+            "text": "On a bossé avec : [Client 1], [Client 2], [Client 3], [Client 4], [Client 5]."
+          },
+          {
+            "icon": "lightbulb",
+            "title": "Une vérité simple",
+            "text": "Le problème n°1 n'est pas \"la pub\". C'est l'architecture."
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000004",
+      "position": 3,
+      "type": "problem",
+      "notes": "DOULEUR · 90 sec. Égrener chaque point lentement. Pause après « il repousse ». Ton empathique — pas accusateur. Le prospect doit se reconnaître dans au moins 3 points. Visuel d'origine : entonnoir qui fuit avec « 40-70 % — perte de potentiel ».",
+      "script": "La majorité des gens font un lancement comme ça :\nun post, deux emails, et 'c'est ouvert'.\n\nSauf que le prospect, lui, il n'a rien compris.\nIl n'a pas été préparé. Il n'a pas été chauffé.\nIl n'a pas eu de preuve. Pas eu de logique.\nDonc il repousse.\n\nEt quand tu n'as pas de structure :\ntu stresses, tu improvises, tu changes d'idée au milieu,\net après tu ne sais même plus ce qui a marché ou pas.\n\nUn lancement orchestré, c'est l'inverse :\nc'est un cadre clair, un rythme clair, des relances claires.",
+      "cue": {
+        "punchline": "Un lancement, c'est une séquence. Pas un post.",
+        "durationSec": 90,
+        "tag": "DOULEUR",
+        "transition": "Donc avant d'aller plus loin, on clarifie un truc : c'est quoi un tunnel ?",
+        "bullets": [
+          "Égrener chaque point lentement",
+          "Pause après 'il repousse'",
+          "Ton empathique — pas accusateur"
+        ]
+      },
+      "content": {
+        "headline": "La plupart pensent : \"un lancement = je poste + j'envoie 2 emails.\"",
+        "intro": "En réalité : un lancement, c'est une séquence. Sans structure, 40-70% de perte de potentiel. Résultat : stress + résultats aléatoires.",
+        "painPoints": [
+          {
+            "icon": "calendar-x",
+            "title": "Ouverture sans préchauffage",
+            "text": "Le prospect n'a pas été préparé, pas été chauffé. Donc il repousse."
+          },
+          {
+            "icon": "eye",
+            "title": "Offre floue / mal cadrée",
+            "text": "Pas de preuve, pas de logique : il ne comprend pas ce qu'il achète."
+          },
+          {
+            "icon": "clock",
+            "title": "Pas de rythme / pas de deadline",
+            "text": "Rien ne pousse à décider maintenant : il repousse à « plus tard »."
+          },
+          {
+            "icon": "trending-down",
+            "title": "Pas de relances",
+            "text": "Les hésitants partent sans être récupérés."
+          },
+          {
+            "icon": "database",
+            "title": "CRM vide · équipe en improvisation",
+            "text": "Tu stresses, tu improvises, tu changes d'idée au milieu… et tu ne sais plus ce qui a marché."
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000005",
+      "position": 4,
+      "type": "definition",
+      "notes": "CONCEPT · 60 sec. Appuyer sur « de façon contrôlée ». Contraste sans / avec = évidence. Finir sur « fenêtre courte » — urgence. Visuel d'origine : entonnoir Inconnu 100 % → Prospect 60 % → Lead 25 % → Client 5 % (chiffres illustratifs).",
+      "script": "Un tunnel, c'est une suite d'étapes qui transforme un inconnu en client — de façon contrôlée.\n\nUn bon tunnel, c'est :\nune promesse claire\nun chemin sans friction\ndes relances automatiques\ndu tracking\net une optimisation continue\n\nSans tunnel : tu vends quand tu as de la chance.\nAvec tunnel : tu vends quand le système tourne.\n\nEt ici, l'objectif est clair :\ncréer un pic de ventes sur une fenêtre courte.",
+      "cue": {
+        "punchline": "Un tunnel, c'est un parcours contrôlé.",
+        "durationSec": 60,
+        "tag": "CONCEPT",
+        "transition": "Ok. Maintenant, c'est quoi exactement un lancement orchestré ?",
+        "bullets": [
+          "Appuyer sur 'de façon contrôlée'",
+          "Contraste sans / avec = évidence",
+          "Finir sur 'fenêtre courte' — urgence"
+        ]
+      },
+      "content": {
+        "headline": "C'est quoi un tunnel ? Une suite d'étapes qui transforme un inconnu en client — de façon contrôlée et systématique.",
+        "body": "Étapes : Inconnu → Prospect → Lead → Client. Sans tunnel → vous vendez quand vous avez de la chance. Avec tunnel → vous vendez quand le système tourne. Ici, le tunnel a un but : créer un pic de ventes sur une fenêtre courte.",
+        "pillars": [
+          {
+            "icon": "target",
+            "title": "Promesse claire",
+            "text": "Une promesse claire qui attire la bonne personne."
+          },
+          {
+            "icon": "route",
+            "title": "Chemin sans friction",
+            "text": "Un parcours simple, sans obstacle jusqu'à l'achat."
+          },
+          {
+            "icon": "repeat",
+            "title": "Relances automatiques",
+            "text": "Le système relance à ta place, au bon moment."
+          },
+          {
+            "icon": "bar-chart",
+            "title": "Suivi des conversions",
+            "text": "Du tracking et une optimisation continue."
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000006",
+      "position": 5,
+      "type": "definition",
+      "notes": "DÉFINITION · 90 sec. Égrener les 3 phases avec des pauses. Insister sur « faire monter la décision ». « Pas faire du bruit » = différenciation. Visuel d'origine : courbe de décision qui monte à travers les 3 phases.",
+      "script": "Un lancement orchestré, c'est simple :\npré-chauffage → ouverture → fermeture.\n\nPré-chauffage : tu fais monter l'attention et le désir.\nOuverture : tu proposes l'offre au bon moment.\nFermeture : tu actives l'urgence et tu récupères les indécis.\n\nCe n'est pas 'faire du bruit'.\nC'est faire monter la décision.",
+      "cue": {
+        "punchline": "Trois phases. Toujours.",
+        "durationSec": 90,
+        "tag": "DÉFINITION",
+        "transition": "Et du coup : quand c'est le bon choix ?",
+        "bullets": [
+          "Égrener les 3 phases avec des pauses",
+          "Insister sur 'faire monter la décision'",
+          "Pas 'faire du bruit' = différenciation"
+        ]
+      },
+      "content": {
+        "headline": "Un lancement orchestré, c'est un système en 3 phases.",
+        "body": "Pré-chauffage → Ouverture → Fermeture. Ce n'est pas \"faire du bruit\". C'est \"faire monter la décision\".",
+        "pillars": [
+          {
+            "icon": "sparkles",
+            "title": "01 · Pré-chauffage — attention + désir",
+            "text": "On crée l'anticipation. L'audience est préparée, réchauffée, prête à acheter avant même l'ouverture."
+          },
+          {
+            "icon": "rocket",
+            "title": "02 · Ouverture — vente",
+            "text": "La fenêtre s'ouvre. Le momentum créé pendant le pré-chauffage se convertit en décisions d'achat."
+          },
+          {
+            "icon": "hourglass",
+            "title": "03 · Fermeture — urgence + relances",
+            "text": "On maximise chaque vente restante. L'urgence est réelle. Les relances sont précises et calculées."
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000007",
+      "position": 6,
+      "type": "why",
+      "notes": "LOGIQUE DIAGNOSTIC · 90 sec. Égrener les 4 cas avec des pauses. Insister sur « focus » — un seul message. Finir sur « tu crées un moment » — image forte. Rappeler que c'est cohérent avec les réponses du diagnostic.",
+      "script": "On recommande lancement quand :\ntu sors une nouvelle offre ou une refonte,\ntu veux un pic de cash,\ntu veux réactiver une audience,\nou tu veux tester un angle fort.\n\nParce que l'avantage du lancement, c'est le focus :\npendant X jours, tu es 100% aligné sur un seul message, une seule promesse, une seule offre.\n\nEt quand tu fais ça bien, tu crées un moment où les gens passent à l'action.",
+      "cue": {
+        "punchline": "Quand tu veux un pic, pas un filet.",
+        "durationSec": 90,
+        "tag": "LOGIQUE",
+        "transition": "Maintenant, la variante qui peut rendre ça encore plus puissant : le challenge.",
+        "bullets": [
+          "Égrener les 4 cas avec des pauses",
+          "Insister sur 'focus' — un seul message",
+          "Finir sur 'tu crées un moment' — image forte"
+        ]
+      },
+      "content": {
+        "headline": "On recommande le lancement quand :",
+        "reasons": [
+          {
+            "icon": "gift",
+            "title": "Nouvelle offre / refonte",
+            "text": "Vous sortez une nouvelle offre ou une refonte."
+          },
+          {
+            "icon": "dollar-sign",
+            "title": "Pic de cash",
+            "text": "Vous voulez un pic de cash."
+          },
+          {
+            "icon": "bell",
+            "title": "Réactivation",
+            "text": "Vous devez réactiver une audience."
+          },
+          {
+            "icon": "target",
+            "title": "Test d'angle",
+            "text": "Vous voulez tester un angle / une promesse forte."
+          },
+          {
+            "icon": "zap",
+            "title": "L'équation",
+            "text": "Lancement = intensité + structure. Pendant X jours : un seul message, une seule promesse, une seule offre."
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000008",
+      "position": 7,
+      "type": "comparison",
+      "notes": "VARIANTES · 3 min. Pointer chaque variante sur le slide, pause entre chaque. Finir sur « au lieu de bricoler » — ancrage fort. Slide d'origine interactive (onglets A→E) : ici tout est affiché en tableau. Phrase de bas de slide : « Le diagnostic recommande \"Lancement Orchestré\". Ensuite, on choisit la variante la plus rentable selon ton offre, ton audience et ton objectif. » Le script cite aussi les variantes « Liste interne » (base chaude, lancement très court) et « Evergreen-to-launch ».",
+      "script": "Ok. Petit point important : un lancement orchestré, c'est pas un modèle unique.\nC'est une base. Et ensuite on choisit la variante selon ton contexte.\n\nParce que si tu copies le lancement d'un autre business…\ntu vas juste copier ses problèmes.\n\nDonc voilà les variantes qu'on utilise, et quand.\n\nVariante 1 : Lancement 'classique' (contenu → vente)\nTu fais monter la température avec du contenu : 3 vidéos, 3 emails forts, ou une mini-série.\nPuis tu ouvres.\nC'est la version la plus propre quand ton audience est déjà un peu au courant de ce que tu fais.\nT'as pas besoin de les faire bosser, juste de les convaincre et de les faire décider.\n\nVariante 2 : Lancement 'Challenge' (action → résultats → vente)\nLà, c'est différent : tu ne cherches pas juste à éduquer.\nTu cherches à faire agir.\nParce que quand quelqu'un agit, même un petit peu, il te fait confiance deux fois plus vite.\nChallenge 3 jours si tu veux aller vite.\nChallenge 5 jours si tu as un marché plus froid et que tu veux créer de la preuve.\nEt souvent, dedans, tu as des lives : kickoff, Q&A, et un live final qui ressemble à un webinaire de vente.\n\nVariante 3 : Lancement 'Webinaire' (event → offre)\nTu fais un webinaire comme moment central.\nTout ce que tu fais avant sert à faire venir les gens.\nEt tout ce que tu fais après sert à rattraper ceux qui n'ont pas décidé.\nC'est très bon quand l'offre est plus complexe et que tu dois cadrer fort, en une seule fois.\n\nVariante 4 : Lancement 'Liste interne' (silencieux, mais violent)\nÇa, c'est quand tu as déjà une base email / audience chaude.\nPas besoin de faire du cinéma.\nTu peux faire un lancement très court : teasing → ouverture → fermeture, et tu fais un gros chiffre parce que la confiance est déjà là.\n\nVariante 5 : Lancement 'Evergreen-to-launch' (hybride)\nTu as un evergreen qui tourne.\nEt deux ou trois fois par an, tu fais une fenêtre de lancement pour créer un pic de ventes.\nC'est ultra puissant quand tu veux du stable + des pics.\n\nDonc le point à retenir :\nle lancement, c'est la structure.\nla variante, c'est l'adaptation.\n\nEt c'est exactement pour ça qu'on fait le diagnostic avant :\npour choisir le bon format… au lieu de bricoler.",
+      "cue": {
+        "punchline": "Un lancement, c'est pas un format. C'est une intention.",
+        "durationSec": 180,
+        "tag": "VARIANTES",
+        "transition": "Ok. Maintenant, on rentre dans la variante challenge.",
+        "bullets": [
+          "Pointer chaque variante sur le slide",
+          "Pause entre chaque variante",
+          "Finir sur 'au lieu de bricoler' — ancrage fort"
+        ]
+      },
+      "content": {
+        "headline": "Un lancement orchestré, plusieurs variantes — le même moteur, 5 formats.",
+        "columns": [
+          "Format",
+          "Quand",
+          "Forces"
+        ],
+        "rows": [
+          {
+            "label": "A · Classique — Contenu → Offre",
+            "values": [
+              "3 contenus (ou 3 emails forts) + ouverture + fermeture",
+              "Audience déjà tiède, offre claire, promesse simple",
+              "Rapide, efficace, facile à répéter"
+            ]
+          },
+          {
+            "label": "B · Webinaire — Autorité → Démo → Offre",
+            "values": [
+              "Préchauffage + 1 webinaire central + relances replay + fermeture",
+              "Offre plus chère/complexe, besoin de pédagogie, marché méfiant",
+              "Très bon à froid quand il faut \"convaincre\" avant de vendre"
+            ]
+          },
+          {
+            "label": "C · Challenge — Action → Résultats → Offre",
+            "values": [
+              "3/5/7 jours + lives + webinaire de vente final",
+              "Audience froide, besoin d'engagement + preuve rapide",
+              "Conversion très forte si bien drivé (\"j'ai commencé donc je continue\")"
+            ]
+          },
+          {
+            "label": "D · Candidature — Filtre → Offre premium",
+            "values": [
+              "Contenu + pré-qualification + candidature + sélection + RDV/closing",
+              "High ticket, capacité limitée, besoin de trier",
+              "Protège l'agenda, augmente la qualité, moins de bruit"
+            ]
+          },
+          {
+            "label": "E · Hybride — Evergreen → Pic de conversion",
+            "values": [
+              "Evergreen qui tourne + mini-lancement mensuel/trimestriel",
+              "Tu veux du stable + des pics",
+              "Machine continue + accélérations planifiées"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000009",
+      "position": 8,
+      "type": "benefits",
+      "notes": "CHALLENGE · 90 sec. Contraste classique vs challenge — clair et net. Égrener les 3 types de lives. Finir sur « exécution + preuve » — formule. À retenir : le challenge intègre souvent des lives ; la vente se fait au live final — le webinaire de clôture.",
+      "script": "Le challenge, c'est une variante du lancement quand tu veux plus d'engagement et plus de preuve.\n\nLancement classique : tu donnes du contenu, tu convaincs, tu proposes.\nChallenge : tu fais agir, tu crées du progrès, tu crées de la confiance… puis tu proposes.\n\nEt c'est important : un challenge inclut souvent des lives / webinaires :\nun kickoff,\nun ou deux lives de coaching / Q&A,\net un live final qui sert de webinaire de vente.\n\nDonc oui : challenge = lancement + exécution + preuve.",
+      "cue": {
+        "punchline": "Le challenge, c'est de l'action, pas du contenu.",
+        "durationSec": 90,
+        "tag": "CHALLENGE",
+        "transition": "Ok. Maintenant, les formats : 3 jours, 5 jours, 7 jours.",
+        "bullets": [
+          "Contraste classique vs challenge — clair et net",
+          "Égrener les 3 types de lives",
+          "Finir sur 'exécution + preuve' — formule"
+        ]
+      },
+      "content": {
+        "headline": "Le Challenge n'est pas un type séparé. C'est une variante du lancement orchestré quand tu veux :",
+        "benefits": [
+          {
+            "icon": "users",
+            "title": "Plus d'engagement",
+            "text": "Les gens agissent, pas juste « regarder »."
+          },
+          {
+            "icon": "trophy",
+            "title": "Plus de preuve",
+            "text": "Des micro-résultats en temps réel."
+          },
+          {
+            "icon": "trending-up",
+            "title": "Plus de conversion",
+            "text": "Ils ont déjà commencé avec toi."
+          },
+          {
+            "icon": "lightbulb",
+            "title": "Principe simple",
+            "text": "Lancement classique : contenu → conviction → offre. Challenge : actions → progrès → confiance → offre."
+          },
+          {
+            "icon": "video",
+            "title": "Structure des lives",
+            "text": "Jour 1 : live kickoff · Milieu : live(s) Q&A / coaching · Dernier jour : live final = webinaire de vente."
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000010",
+      "position": 9,
+      "type": "plan",
+      "notes": "FORMATS · 90 sec. Dérouler les 3 formats avec des pauses : 3 jours = rapide / 5 jours = équilibre / 7 jours = premium. Insister sur « progrès visible ». Slide d'origine interactive (onglets, 5 jours sélectionné par défaut) : mettre en avant le format 5 jours.",
+      "script": "Challenge 3 jours : c'est rapide, intense, efficace si ton audience est déjà chaude.\nTu veux un effet 'coup de poing'.\n\nChallenge 5 jours : c'est le meilleur équilibre.\nTu as le temps d'installer la logique, de créer du progrès, d'ajouter de la preuve, et de vendre proprement.\nC'est celui que je recommande le plus souvent pour audience tiède/froide.\n\nChallenge 7 jours : c'est premium, mais plus lourd.\nSi tu n'as pas une grosse mécanique derrière, tu risques de perdre des gens en route.\n\nRègle simple :\nplus l'offre est chère ou complexe, plus tu dois créer du progrès visible.",
+      "cue": {
+        "punchline": "Le bon format dépend de ton marché.",
+        "durationSec": 90,
+        "tag": "FORMATS",
+        "transition": "Maintenant, je te montre l'architecture complète d'un challenge.",
+        "bullets": [
+          "Dérouler les 3 formats avec des pauses",
+          "Insister sur 'progrès visible'",
+          "3 jours = rapide / 5 jours = équilibre / 7 jours = premium"
+        ]
+      },
+      "content": {
+        "headline": "Formats de Challenge — plus l'offre est chère/complexe, plus le challenge doit créer du progrès visible.",
+        "phases": [
+          {
+            "name": "Challenge 3 jours",
+            "duration": "rapide · agressif · simple",
+            "deliverables": [
+              "J1 : diagnostic + plan",
+              "J2 : exécution + preuve",
+              "J3 : correction + offre",
+              "Idéal si : audience déjà chaude / promesse simple"
+            ]
+          },
+          {
+            "name": "Challenge 5 jours — recommandé",
+            "duration": "le plus rentable · équilibré",
+            "deliverables": [
+              "J1 : reset + diagnostic + quick win",
+              "J2 : erreur n°1 + correction",
+              "J3 : méthode / système",
+              "J4 : preuve + cas + objections",
+              "J5 : webinaire de vente + offre + bonus + fermeture",
+              "Idéal si : audience tiède/froide / offre plus complexe"
+            ]
+          },
+          {
+            "name": "Challenge 7 jours",
+            "duration": "premium · mais plus lourd",
+            "deliverables": [
+              "J1–J2 : immersion + diagnostic",
+              "J3–J4 : méthode + preuves",
+              "J5–J6 : objections + transformation",
+              "J7 : webinaire de vente",
+              "Idéal si : marché très méfiant / high ticket",
+              "Attention : fatigue + drop-off si mal piloté"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000011",
+      "position": 10,
+      "type": "architecture",
+      "notes": "ARCHITECTURE · 90 sec. Suivre chaque bloc dans l'ordre : pages → lives → séquences. Insister sur « un message par jour minimum ». Finir sur la fermeture 48-72h. Slide d'origine : colonnes qui s'illuminent au survol.",
+      "script": "Un challenge, ce n'est pas juste 'un groupe WhatsApp'.\nC'est un mini système.\n\nPages :\nopt-in challenge → confirmation → hub (jours + replays) → page offre → checkout → onboarding.\n\nCôté lives, sur un 5 jours par exemple :\nkickoff (cadrage + plan)\nworkshop (correction)\nméthode (système)\nQ&A (objections)\nlive final = webinaire de vente\n\nEt côté séquences :\navant = teasing + préparation\npendant = un message par jour minimum\naprès = replay + objections + fermeture 48-72h",
+      "cue": {
+        "punchline": "Un challenge, c'est une mini-plateforme.",
+        "durationSec": 90,
+        "tag": "ARCHITECTURE",
+        "transition": "Ok. Maintenant on revient au lancement : c'est quoi les objectifs précis ?",
+        "bullets": [
+          "Suivre chaque bloc dans l'ordre",
+          "Insister sur 'un message par jour minimum'",
+          "Finir sur la fermeture 48-72h"
+        ]
+      },
+      "content": {
+        "headline": "Architecture Challenge — un challenge, c'est une mini-plateforme.",
+        "layers": [
+          {
+            "name": "Pages",
+            "items": [
+              "01 · Opt-in Challenge — promesse + deadline d'inscription",
+              "02 · Confirmation — règles + calendrier + accès groupe",
+              "03 · Hub Challenge — accès jours + replays + checklist",
+              "04 · Page offre — jour final",
+              "05 · Checkout + Merci + Onboarding"
+            ]
+          },
+          {
+            "name": "Lives / Webinaires (exemple 5 jours)",
+            "items": [
+              "Live 1 · Kickoff — cadrage + plan",
+              "Live 2 · Workshop / correction",
+              "Live 3 · Méthode / système",
+              "Live 4 · Q&A + objections",
+              "Live 5 · Webinaire de vente — offre + bonus + deadline"
+            ]
+          },
+          {
+            "name": "Séquences",
+            "items": [
+              "Avant · Teasing + préparation",
+              "Pendant · 1 email + 1 WhatsApp / jour minimum",
+              "Après · Replay + objections + fermeture 48–72h (optionnel)"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000012",
+      "position": 11,
+      "type": "objectives",
+      "notes": "OBJECTIFS · 60 sec. Égrener les 3 avec des pauses marquées. Insister sur « cash collecté » — mettre le mot. KPI final = ancrage pour la suite : ventes → taux de conversion → ROI → cash collecté. Visuel d'origine : courbe pré-chauffage → fenêtre ouverte → fermeture.",
+      "script": "Objectif 1 : monter la température.\nObjectif 2 : maximiser la conversion pendant l'ouverture.\nObjectif 3 : exploiter la fin : relances + fermeture.\n\nEt je le dis clairement :\nle KPI ce n'est pas les likes, ni les vues.\nC'est : ventes, conversion, ROI, cash collecté.",
+      "cue": {
+        "punchline": "Chauffer. Convertir. Fermer.",
+        "durationSec": 60,
+        "tag": "OBJECTIFS",
+        "transition": "Je te montre le flow global.",
+        "bullets": [
+          "Égrener les 3 avec des pauses marquées",
+          "Insister sur 'cash collecté' — mettre le mot",
+          "KPI final = ancrage pour la suite"
+        ]
+      },
+      "content": {
+        "headline": "Les 3 objectifs du lancement — le KPI n'est pas « les likes ».",
+        "goals": [
+          {
+            "label": "Monter la température",
+            "target": "Pré-chauffage",
+            "text": "L'audience doit désirer l'ouverture avant qu'elle arrive. KPI : taux d'ouverture email, clics teasing, inscriptions early."
+          },
+          {
+            "label": "Maximiser les conversions",
+            "target": "Fenêtre ouverte",
+            "text": "Chaque touchpoint est conçu pour réduire la friction et pousser à la décision. KPI : ventes, taux de conversion, panier moyen."
+          },
+          {
+            "label": "Exploiter la fin",
+            "target": "Relances + fermeture",
+            "text": "60% des ventes arrivent dans les dernières 48h. KPI : ROI, cash collecté, lift fermeture."
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000013",
+      "position": 12,
+      "type": "flow",
+      "notes": "FLOW · 90 sec. Suivre le flow avec le curseur ou la main. Insister sur « chaque étape trackée ». Finir fort : « tu espères ». Le flow d'origine compte 9 étapes (survol = page · event · automation) ; ici Ouverture + Vente et Relances + Fermeture sont regroupées. Relances : pas de page dédiée, events email_open · link_click.",
+      "script": "Flow : trafic → opt-in → préchauffage → contenu/challenge → ouverture → vente → relances → fermeture → post-lancement.\n\nEt la règle :\nchaque étape a une page, un event tracké, et une automation associée.\n\nSinon tu ne pilotes pas. Tu espères.",
+      "cue": {
+        "punchline": "Si tu ne peux pas dessiner ton lancement, tu vas subir.",
+        "durationSec": 90,
+        "tag": "FLOW",
+        "transition": "Ok. Maintenant, les pages.",
+        "bullets": [
+          "Suivre le flow avec le curseur ou la main",
+          "Insister sur 'chaque étape trackée'",
+          "Finir fort : 'tu espères'"
+        ]
+      },
+      "content": {
+        "headline": "Le flow du lancement — chaque étape a une page, un event tracké et une automation.",
+        "steps": [
+          {
+            "label": "01 · Trafic",
+            "title": "Pub / Landing froide",
+            "text": "Event : page_view · click_ad. Automation : pixel fire · UTM tagging.",
+            "channel": "Pub"
+          },
+          {
+            "label": "02 · Opt-in",
+            "title": "Page d'inscription",
+            "text": "Event : optin_submit. Automation : tag lead · séquence bienvenue.",
+            "channel": "Email"
+          },
+          {
+            "label": "03 · Pré-chauffage",
+            "title": "Confirmation + accès early",
+            "text": "Event : prelaunch_engaged. Automation : email J-7 → J-1 · rappels WhatsApp.",
+            "channel": "Email + WhatsApp"
+          },
+          {
+            "label": "04 · Contenus / Challenge",
+            "title": "Hub Challenge · pages journalières",
+            "text": "Events : day_completed · live_attended. Automation : séquence quotidienne · relance non-ouvreurs.",
+            "channel": "Email + WhatsApp"
+          },
+          {
+            "label": "05-06 · Ouverture + Vente",
+            "title": "Page offre · checkout · order bump · upsell",
+            "text": "Events : cart_open · offer_viewed · purchase. Automation : email ouverture · push urgence J0 · confirmation achat + onboarding.",
+            "channel": "Email"
+          },
+          {
+            "label": "07-08 · Relances + Fermeture",
+            "title": "Page fermeture imminente",
+            "text": "Events : link_click · last_chance_click · cart_close. Automation : relances × objections · bonus urgence · email H-24 / H-4 / H-1.",
+            "channel": "SMS / WhatsApp"
+          },
+          {
+            "label": "09 · Post-lancement",
+            "title": "Espace membre · onboarding",
+            "text": "Events : onboarding_started · nps_sent. Automation : séquence client · liste d'attente · retargeting non-acheteurs.",
+            "channel": "Email"
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000014",
+      "position": 13,
+      "type": "architecture",
+      "notes": "PAGES · 90 sec. Dérouler les 6 pages une par une. Appuyer sur « tout ce qu'il y a autour ». Laisser résonner la dernière phrase. Règle : chaque page a un seul objectif. Slide d'origine : 6 pages, éléments clés affichés au survol ; ici Checkout et Merci / Onboarding sont regroupés.",
+      "script": "Tu as l'opt-in pour capter et cadrer.\nLa confirmation pour donner les règles et le rythme.\nLes pages contenu ou le hub challenge pour faire consommer.\nLa page de vente pour vendre.\nLe checkout pour encaisser sans friction.\nLe merci/onboarding pour activer et démarrer.\n\nUn lancement, ce n'est pas 'une page de vente'.\nC'est tout ce qu'il y a autour.",
+      "cue": {
+        "punchline": "Pages simples. Rôle clair.",
+        "durationSec": 90,
+        "tag": "PAGES",
+        "transition": "Et ce qui fait tenir tout ça… c'est les séquences.",
+        "bullets": [
+          "Dérouler les 6 pages une par une",
+          "Appuyer sur 'tout ce qu'il y a autour'",
+          "Laisser résonner la dernière phrase"
+        ]
+      },
+      "content": {
+        "headline": "Architecture des pages — 1 tunnel complet. Une page = une action.",
+        "layers": [
+          {
+            "name": "01 · Opt-in lancement / challenge",
+            "items": [
+              "Promesse + inscription",
+              "Headline promesse forte",
+              "Formulaire opt-in",
+              "Compteur inscrits",
+              "Preuves / logos"
+            ]
+          },
+          {
+            "name": "02 · Confirmation",
+            "items": [
+              "Règles + agenda + prochaine étape",
+              "Règles du challenge",
+              "Agenda / calendrier",
+              "Accès groupe privé",
+              "CTA « prochaine étape »"
+            ]
+          },
+          {
+            "name": "03 · Pages contenus / Hub Challenge",
+            "items": [
+              "Vidéo 1/2/3 ou modules jour 1→5",
+              "Vidéo ou live replay",
+              "Checklist du jour",
+              "Espace commentaires",
+              "Progress bar"
+            ]
+          },
+          {
+            "name": "04 · Page de vente",
+            "items": [
+              "Offre + preuve + bonus + deadline",
+              "Stack valeur offre",
+              "Preuves + témoignages",
+              "Bloc bonus",
+              "Deadline + CTA achat"
+            ]
+          },
+          {
+            "name": "05-06 · Checkout + Merci / Onboarding",
+            "items": [
+              "Checkout : résumé commande + paiement simple",
+              "Garantie visible + badges sécurité",
+              "Merci : accès espace membre",
+              "Prochaine étape claire",
+              "Partage social · upsell optionnel"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000015",
+      "position": 14,
+      "type": "channel",
+      "notes": "SÉQUENCES · 90 sec. Email · WhatsApp. Dérouler les 3 séquences avec des pauses. Insister sur « la fermeture fait une grosse partie du chiffre ». Laisser résonner.",
+      "script": "Pré-chauffage : tu prépares le cerveau du prospect.\nTu installes le problème, la tension, et tu mets de la preuve.\n\nOuverture : tu annonces l'offre, tu cadres, tu proposes.\nFermeture : tu gères les objections, tu rappelles la deadline, tu récupères ceux qui hésitent.\n\nEt souvent, la fermeture fait une grosse partie du chiffre.",
+      "cue": {
+        "punchline": "Un lancement, c'est une guerre de relances.",
+        "durationSec": 90,
+        "tag": "SÉQUENCES",
+        "transition": "Maintenant, ce que 90% n'installent jamais : automations.",
+        "bullets": [
+          "Dérouler les 3 séquences avec des pauses",
+          "Insister sur 'la fermeture fait une grosse partie du chiffre'",
+          "Laisser résonner"
+        ]
+      },
+      "content": {
+        "headline": "Les 3 séquences du lancement — le cœur du lancement. Une guerre de relances, pas une annonce.",
+        "channel": "email",
+        "scripts": [
+          {
+            "moment": "SEQ 01 · Pré-chauffage",
+            "message": "E1 Teasing : « Quelque chose arrive… » → E2 Tension : le problème qu'ils vivent → E3 Preuve : résultats + avant/après → E4 « Ce qui arrive » : l'annonce de l'ouverture."
+          },
+          {
+            "moment": "SEQ 02 · Ouverture",
+            "message": "E1 Annonce offre : c'est ouvert maintenant → E2 Bonus : ce qu'ils ont en plus → E3 CTA : clique. Maintenant."
+          },
+          {
+            "moment": "SEQ 03 · Fermeture",
+            "message": "E1 Objections : les vraies raisons de ne pas acheter → E2 Urgence : il reste X places / X heures → E3 Deadline : fermeture dans 24h → E4 Derniers bonus : bonus de fermeture exclusif."
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000016",
+      "position": 15,
+      "type": "automation",
+      "notes": "AUTOMATISATION · 3 min. Dérouler les 4 blocs : inscription / pendant / ouverture / fermeture. Insister sur « feu de camp vs machine ». « Tu contrôles » — répéter 3 fois. Visuel d'origine : circuit d'automatisation (Tag · Email · SMS · WhatsApp) qui s'active au survol de chaque phase.",
+      "script": "Là où 90% se plantent sur un lancement, c'est pas sur la page de vente.\nC'est sur la suite.\n\nIls font une opt-in, ils font du contenu… et après ils laissent les gens se débrouiller.\nRésultat : ça fuit de partout.\n\nDonc nous, on fait l'inverse : on automatise ce qui doit l'être, et on segmente proprement.\n\n1) Dès qu'une personne s'inscrit :\non tag la source (Meta, Insta, YouTube, organique…)\non l'ajoute dans le bon pipeline \"Launch\"\non envoie confirmation immédiate (email)\net si on a WhatsApp : message direct + micro-engagement.\nLe fameux \"réponds OK\".\nJuste ça, ça change tout.\n\n2) Pendant le lancement / challenge :\nOn n'envoie pas le même message à tout le monde, sinon tu parles dans le vide.\nOn segmente simple :\na vu le contenu / n'a pas vu\na cliqué / n'a pas cliqué\nest actif / est en retard\n\nEt derrière, tu fais des automations par jour.\nPas un roman.\nUn rappel clair : \"Voilà le jour 2, voilà l'objectif, voilà le lien, voilà ce que tu dois faire.\"\n\n3) À l'ouverture :\nLà tu veux pas \"annoncer\", tu veux convertir.\nDonc tu mets :\nrelance des gens qui ont cliqué mais n'ont pas checkout\nrelance panier abandonné\net surtout : objections + preuve.\nPas du blabla.\nUne objection par message, une preuve, et un lien.\n\n4) À la fermeture :\nC'est là que tu fais ton chiffre.\nDonc tu assumes :\ndernière journée\ndernières heures\ncountdown\net WhatsApp qui pousse gentiment mais clairement :\n\"ça ferme à telle heure, après c'est fini\".\n\nEt je te dis la vérité :\nun lancement sans ces automations, c'est un feu de camp.\nÇa chauffe un peu… puis ça s'éteint.\nUn lancement avec ça, c'est une machine.\nTu contrôles le rythme, tu contrôles les relances, tu contrôles la fermeture.",
+      "cue": {
+        "punchline": "Sans relance, tu perds. C'est mécanique.",
+        "durationSec": 180,
+        "tag": "AUTOMATISATION",
+        "transition": "Et maintenant, on parle du canal qui fait le plus gros différentiel sur un lancement : WhatsApp.",
+        "bullets": [
+          "Dérouler les 4 blocs : inscription / pendant / ouverture / fermeture",
+          "Insister sur 'feu de camp vs machine'",
+          "'Tu contrôles' — répéter 3 fois"
+        ]
+      },
+      "content": {
+        "headline": "Automations — ce que 90% n'installent jamais : la segmentation comportementale.",
+        "items": [
+          {
+            "trigger": "01 · Inscription",
+            "action": "Tag + source + segment · confirmation email + WhatsApp (« réponds OK ») · ajout calendrier / rappels.",
+            "delay": "Immédiat"
+          },
+          {
+            "trigger": "02 · Pendant le lancement",
+            "action": "Automation par jour (contenu / rappel / CTA) · segmentation « a vu / n'a pas vu » et « a cliqué / pas cliqué ».",
+            "delay": "Chaque jour"
+          },
+          {
+            "trigger": "03 · Ouverture",
+            "action": "Paniers abandonnés (checkout) · relances preuve + objection : une objection par message, une preuve, un lien.",
+            "delay": "J0"
+          },
+          {
+            "trigger": "04 · Fermeture",
+            "action": "« Dernières heures » + countdown · relance WhatsApp + lien direct.",
+            "delay": "Dernières heures"
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000017",
+      "position": 16,
+      "type": "channel",
+      "notes": "WHATSAPP · 75 sec. Insister sur « engagement » — pas spam. Micro-réponse = micro-engagement. Ton direct — cette slide doit marquer. Les 3 rôles : 01 augmenter la présence (contenus / challenge) · 02 réduire l'hésitation (rappel + lien direct) · 03 pousser la fermeture (deadline). Message H-1 d'origine : « Lien direct ici → [lien d'accès] ». Visuel d'origine : mockup de conversation WhatsApp « Lancement Officiel 🚀 ».",
+      "script": "WhatsApp sert à :\nfaire consommer le contenu / le challenge\nréduire l'hésitation avec des rappels simples\npousser la fermeture avec un lien direct\n\nMoments clés :\nimmédiat 'OK', rappels, et dernier passage avant deadline.",
+      "cue": {
+        "punchline": "WhatsApp = présence + fermeture.",
+        "durationSec": 75,
+        "tag": "WHATSAPP",
+        "transition": "Maintenant, si tu n'as pas un CRM propre, tu perds tes contacts.",
+        "bullets": [
+          "Insister sur 'engagement' — pas spam",
+          "Micro-réponse = micro-engagement",
+          "Ton direct — cette slide doit marquer"
+        ]
+      },
+      "content": {
+        "headline": "WhatsApp sert à 3 choses : présence, moins d'hésitation, fermeture. Taux d'ouverture = 98%.",
+        "channel": "whatsapp",
+        "scripts": [
+          {
+            "moment": "Immédiat",
+            "message": "Réponds OK pour confirmer ta place 👋"
+          },
+          {
+            "moment": "J-1",
+            "message": "Rappel — c'est demain. Voici le lien 👇"
+          },
+          {
+            "moment": "H-3",
+            "message": "Dans 3h. Réponds 1 si tu viens 🔥"
+          },
+          {
+            "moment": "Fin",
+            "message": "Dernier passage. Fermeture dans 1h ⏳"
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000018",
+      "position": 17,
+      "type": "crm",
+      "notes": "SUIVI · 60 sec. « Piloter, pas deviner ». Pipeline = vocabulaire commun. Finir sur « tu repaies tout au prochain » — douleur réelle. Tags : source · segment · engagement · statut · objection. Taux de conversion par étape (illustratif) : Inscrit 100 % → Consommateur 60 % → Cliqué vente 28 % → Checkout 14 % → Client 6 %.",
+      "script": "Le lancement, si tu ne le mets pas dans un CRM, c'est comme si tu recommençais à zéro à chaque fois.\nTu veux un pipeline simple :\ninscrit → a consommé → a cliqué → checkout → client → pas acheté.\n\nEt des tags propres : d'où il vient, son segment, son niveau d'engagement, son blocage principal.\n\nSinon tu fais un bon lancement… et derrière tu perds le vrai actif : ta base. Et tu repaies tout au prochain.\n\nJe te montre la vue d'ensemble de la machine, là tu vas comprendre.",
+      "cue": {
+        "punchline": "Sans CRM, tu fais du bruit… mais tu ne construis rien.",
+        "durationSec": 60,
+        "tag": "SUIVI",
+        "transition": "Je te montre la vue Funnelytics, là tu vas comprendre la machine.",
+        "bullets": [
+          "'Piloter, pas deviner'",
+          "Pipeline = vocabulaire commun",
+          "Finir sur 'tu repaies tout au prochain' — douleur réelle"
+        ]
+      },
+      "content": {
+        "headline": "Le CRM — sinon c'est pas un système. Sans CRM, ton lancement est un feu d'artifice… et tu perds les contacts.",
+        "pipelines": [
+          {
+            "stage": "Inscrit",
+            "definition": "S'est inscrit au lancement / challenge."
+          },
+          {
+            "stage": "Consommateur",
+            "definition": "A vu le contenu."
+          },
+          {
+            "stage": "Cliqué vente",
+            "definition": "A cliqué vers la page de vente."
+          },
+          {
+            "stage": "Checkout",
+            "definition": "Est arrivé sur le bon de commande."
+          },
+          {
+            "stage": "Client",
+            "definition": "A acheté : onboarding client."
+          },
+          {
+            "stage": "Non-acheteur",
+            "definition": "Post-launch : nurturing, liste d'attente, retargeting."
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000019",
+      "position": 18,
+      "type": "embed",
+      "notes": "VUE D'ENSEMBLE · 2 min. Slide obligatoire. Pointer les blocs dans l'ordre. Répéter « machine vs campagne » — image forte. Finir sur « quoi optimiser » = priorisation. Montrer la cartographie Funnelytics (ou outil équivalent) du lancement : trafic → pages → events → automations, email + WhatsApp reliés. Le deck d'origine ouvrait la vue live en plein écran.",
+      "script": "Tu vois : entrées trafic, pages, events, conversions, automations reliées.\nDonc tu sais où ça casse et quoi optimiser.",
+      "cue": {
+        "punchline": "Voici la machine. Pas une campagne.",
+        "durationSec": 120,
+        "tag": "VUE D'ENSEMBLE",
+        "transition": "Maintenant, du concret : exemples de pages.",
+        "bullets": [
+          "Pointer les blocs dans l'ordre",
+          "Répéter 'machine vs campagne' — image forte",
+          "Finir sur 'quoi optimiser' = priorisation"
+        ]
+      },
+      "content": {
+        "headline": "Voici la machine. Pas une campagne.",
+        "title": "Schéma Funnelytics"
+      },
+      "needsInput": true
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000020",
+      "position": 19,
+      "type": "showcase",
+      "needsInput": true,
+      "notes": "PREUVE · 45 sec max — montrer, ne pas sur-expliquer. Pointer 1-2 exemples proches du secteur du prospect. Transition fluide vers les preuves. Ajouter des captures de vos propres pages (opt-in, hub, page de vente, checkout). Le deck d'origine affichait un carrousel de pages live en aperçu.",
+      "script": "Opt-in, hub/module, page de vente, checkout.\nL'objectif : te montrer que c'est structuré, duplicable, exécutable.",
+      "cue": {
+        "punchline": "On ne théorise pas.",
+        "durationSec": 45,
+        "tag": "PREUVE",
+        "transition": "Et si tu veux pousser la crédibilité : preuves brutes.",
+        "bullets": [
+          "45 sec max — montrer, ne pas sur-expliquer",
+          "Pointer 1-2 exemples proches du secteur",
+          "Transition fluide vers les preuves"
+        ]
+      },
+      "content": {
+        "headline": "On ne théorise pas. On construit.",
+        "items": [
+          {
+            "title": "[Page client 1]"
+          },
+          {
+            "title": "[Page client 2]"
+          },
+          {
+            "title": "[Page client 3]"
+          },
+          {
+            "title": "[Page client 4]"
+          },
+          {
+            "title": "[Page client 5]"
+          },
+          {
+            "title": "[Page client 6]"
+          },
+          {
+            "title": "[Page client 7]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000021",
+      "position": 20,
+      "type": "screenshots",
+      "needsInput": true,
+      "notes": "PREUVES · 75 sec. Ton factuel — pas de survente. Laisser le prospect regarder quelques secondes. Finir sur « vrais indicateurs » — crédibilité. Remplacer les placeholders par vos résultats réels et ajouter les captures de vos dashboards (outil de tunnel, statistiques de ventes, taux d'opt-in). Le deck d'origine affichait une grille de captures cliquables (lightbox).",
+      "script": "Stats d'inscriptions, de conversion, dashboards…\nPas pour promettre un chiffre.\nJuste pour te montrer que tout ça se pilote avec des vrais indicateurs.",
+      "cue": {
+        "punchline": "Un lancement se pilote avec des données.",
+        "durationSec": 75,
+        "tag": "PREUVES",
+        "transition": "Ok. Qu'est-ce que tu gagnes avec ce modèle ?",
+        "bullets": [
+          "Ton factuel — pas de survente",
+          "Laisser le prospect regarder quelques secondes",
+          "Finir sur 'vrais indicateurs' — crédibilité"
+        ]
+      },
+      "content": {
+        "headline": "On ne théorise pas. On mesure.",
+        "items": [
+          {
+            "caption": "[Capture 1]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 2]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 3]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 4]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 5]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 6]",
+            "result": "[Résultat]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000022",
+      "position": 21,
+      "type": "benefits",
+      "notes": "BÉNÉFICES · 3 min. Égrener les 5 gains lentement. Finir fort sur « si j'exécute ça, j'obtiens ça ». Regard direct — cette phrase doit atterrir. Avant / après d'origine : « je poste · j'espère · je prie · je subis » → « j'oriente · j'active · j'exécute · je ferme ».",
+      "script": "Ce que ça te donne, concrètement, un lancement orchestré… c'est pas juste 'un pic de ventes'.\nC'est surtout un business qui arrête de dépendre de ton humeur.\n\nParce que là, aujourd'hui, la plupart des gens font quoi ?\nIls postent. Ils envoient deux messages. Ils ouvrent une page.\nEt après ils attendent… en mode : 'inchallah ça prend'.\n\nUn lancement bien orchestré, ça change complètement le jeu.\n\nDéjà, tu contrôles le timing.\nTu sais quand tu chauffes. Tu sais quand tu ouvres. Tu sais quand tu fermes.\nTu ne laisses pas les gens décider \"quand ils veulent\" — parce que \"quand ils veulent\", ça veut dire jamais.\n\nEnsuite, tu montes en autorité.\nPas parce que tu répètes \"je suis expert\".\nMais parce que tu fais vivre une expérience :\ntu éduques, tu cadres, tu démontres, tu réponds aux objections… et tu tiens ta ligne.\n\nTroisième point : tu réactives ton audience.\nMême une audience qui dort.\nParce qu'un lancement crée un événement.\nLes gens se reconnectent. Ils suivent. Ils reviennent. Ils reparlent.\n\nQuatrième : tu concentres ton cashflow.\nAu lieu de vendre \"par hasard\" toute l'année, tu crées une fenêtre où tu encaisses vraiment.\nEt ça, ça te donne de l'air : pour investir, recruter, produire, scaler.\n\nEt le plus important : tu construis un système réutilisable.\nC'est pas un coup one shot.\nUne fois que l'architecture est propre, tu peux relancer :\nmême offre, même mécanique, même séquences — juste avec des améliorations à chaque run.\n\nDonc au final, tu arrêtes de dépendre de l'inspiration.\nTu passes sur un système où tu sais :\n'si j'exécute ça, j'obtiens ça'.",
+      "cue": {
+        "punchline": "Tu passes de 'je poste et je prie' à 'j'oriente et je ferme'.",
+        "durationSec": 180,
+        "tag": "BÉNÉFICES",
+        "transition": "Et justement… pour piloter un lancement comme ça, il faut regarder les bons chiffres. Je te montre lesquels.",
+        "bullets": [
+          "Égrener les 5 gains lentement",
+          "Finir fort sur 'si j'exécute ça, j'obtiens ça'",
+          "Regard direct — cette phrase doit atterrir"
+        ]
+      },
+      "content": {
+        "headline": "Ce que vous gagnez.",
+        "benefits": [
+          {
+            "icon": "trending-up",
+            "title": "Un pic de ventes maîtrisé",
+            "text": "Tu contrôles le timing : tu sais quand tu chauffes, quand tu ouvres, quand tu fermes."
+          },
+          {
+            "icon": "crown",
+            "title": "Une montée en autorité",
+            "text": "Contenu / lives : tu éduques, tu cadres, tu démontres, tu réponds aux objections."
+          },
+          {
+            "icon": "bell",
+            "title": "Une audience réactivée",
+            "text": "Un lancement crée un événement : les gens se reconnectent, suivent, reviennent."
+          },
+          {
+            "icon": "wallet",
+            "title": "Un cashflow concentré",
+            "text": "Une fenêtre où tu encaisses vraiment : de l'air pour investir, recruter, produire, scaler."
+          },
+          {
+            "icon": "repeat",
+            "title": "Un système réutilisable",
+            "text": "Tu relances plus tard : même offre, même mécanique, mêmes séquences — améliorées à chaque run."
+          },
+          {
+            "icon": "zap",
+            "title": "Le vrai shift",
+            "text": "Tu passes de \"je poste et je prie\" à \"j'oriente et je ferme\"."
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000023",
+      "position": 22,
+      "type": "analytics",
+      "notes": "MESURABLE · 3 min. Pointer chaque KPI à l'écran. Ne pas aller trop vite — chaque chiffre compte. Finir sur « pas au feeling » = précision chirurgicale. Cibles = benchmarks indicatifs. Funnel de conversion illustratif : Trafic 100 % → Opt-in 42 % → Contenu 30 % → Vente 12 % → Checkout 5 % → Achat 3 %. Phrase de bas de slide : « Chaque chiffre dit où ça casse. Donc on corrige au bon endroit. »",
+      "script": "Là, je te montre les seuls chiffres qui comptent.\nPas pour faire 'technique'. Juste pour piloter.\n\nParce qu'un lancement, c'est comme une machine :\nsi tu ne sais pas où ça casse, tu vas corriger au hasard… et tu vas perdre du temps.\n\nOn regarde 6 choses, très simples :\n\n1) CTR (taux de clic) : sur 100 personnes qui voient la pub, combien cliquent ?\n→ Si c'est faible : ton hook est mauvais, ton angle est mal posé.\n\n2) Conversion opt-in : sur 100 visiteurs, combien s'inscrivent ?\n→ Si c'est faible : ta promesse n'est pas claire, ou pas assez désirable.\n\n3) Consommation du contenu : est-ce que les gens regardent vraiment / avancent dans le challenge ?\n→ Si c'est faible : soit c'est trop long, soit c'est pas assez concret, soit ton rythme est mauvais.\n\n4) Clic vers la vente : combien vont sur la page de vente / l'offre ?\n→ Si c'est faible : tu n'as pas créé assez de tension, ou ton CTA n'est pas assumé.\n\n5) Conversion checkout : combien passent à l'achat une fois sur le bon de commande ?\n→ Si c'est faible : problème de friction, de prix, de confiance, ou d'objection non traitée.\n\n6) Panier moyen + ROI :\n→ Le panier moyen te dit si tes upsells/bonus sont cohérents.\n→ Le ROI te dit une chose : est-ce que tu peux remettre du budget… ou pas.\n\nEt le point important :\nchaque chiffre te dit quoi corriger.\nDonc on n'optimise pas \"au feeling\". On optimise proprement, étape par étape.",
+      "cue": {
+        "punchline": "Les chiffres, c'est pas pour faire joli. C'est pour savoir où tu perds de l'argent.",
+        "durationSec": 180,
+        "tag": "MESURABLE",
+        "transition": "Maintenant que t'as les KPI, je te montre les 3 erreurs qui tuent un lancement — même quand l'offre est bonne.",
+        "bullets": [
+          "Pointer chaque KPI à l'écran",
+          "Ne pas aller trop vite — chaque chiffre compte",
+          "Finir sur 'pas au feeling' = précision chirurgicale"
+        ]
+      },
+      "content": {
+        "headline": "KPI Dashboard — ce qu'on mesure vraiment. Chaque chiffre dit où ça casse.",
+        "metrics": [
+          {
+            "name": "CTR annonce → opt-in",
+            "definition": "Sur 100 personnes qui voient la pub, combien cliquent ? Faible = hook mauvais, angle mal posé.",
+            "target": "2–5%"
+          },
+          {
+            "name": "CVR opt-in",
+            "definition": "Sur 100 visiteurs, combien s'inscrivent ? Faible = promesse pas claire ou pas assez désirable.",
+            "target": "30–50%"
+          },
+          {
+            "name": "Consommation contenu",
+            "definition": "Les gens regardent / avancent dans le challenge ? Faible = trop long, pas assez concret, mauvais rythme.",
+            "target": "40–70%"
+          },
+          {
+            "name": "Clic page de vente",
+            "definition": "Combien vont sur l'offre ? Faible = pas assez de tension, ou CTA pas assumé.",
+            "target": "8–15%"
+          },
+          {
+            "name": "Checkout → achat",
+            "definition": "Combien achètent une fois sur le bon de commande ? Faible = friction, prix, confiance, objection.",
+            "target": "3–8%"
+          },
+          {
+            "name": "Panier moyen + ROI",
+            "definition": "Panier moyen : upsells/bonus cohérents ? ROI : est-ce que tu peux remettre du budget… ou pas.",
+            "target": "ROI 3–10×"
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000024",
+      "position": 23,
+      "type": "mistakes",
+      "notes": "ERREURS · 2 min. À éviter absolument. Égrener les 3 erreurs avec gravité. Identifier laquelle correspond au prospect. Finir sur « lancement piloté » — promesse.",
+      "script": "Je te dis un truc simple : la majorité des lancements ne ratent pas parce que l'offre est nulle.\nIls ratent parce que c'est improvisé.\n\nEt dans 90% des cas, ça se plante toujours pour les mêmes raisons.\n\nErreur 1 : pas de préchauffage.\nLes gens ouvrent les ventes comme si l'audience attendait déjà la carte bleue.\nSauf qu'en vrai, la plupart des prospects sont froids.\nDonc si tu ouvres sans avoir chauffé :\ntu vends… mais à une toute petite minorité. Et tu as l'impression que \"ça marche pas\".\n\nErreur 2 : offre floue / bonus incohérents.\nQuand l'offre n'est pas cadrée, tu crées du doute.\nEt le doute, c'est ce qui tue la conversion.\nLa personne se dit : \"ok… mais concrètement j'achète quoi ? c'est pour moi ? ça me fait gagner quoi ?\"\nEt tes bonus doivent renforcer la décision, pas faire \"pack de trucs\" juste pour faire joli.\n\nErreur 3 : pas de relances / pas de fermeture.\nÇa, c'est le pire.\nTu fais 80% du travail… et tu laisses l'argent sur la table.\nUn lancement, c'est une séquence. Et la fermeture, c'est là où les gens décident vraiment.\nSans relance, tu laisses les hésitants partir.\nSans deadline claire, ils repoussent.\nEt tu te retrouves avec un lancement 'mou'… alors que le produit est bon.\n\nDonc voilà : si tu corriges ces 3 points, tu passes d'un lancement \"au feeling\" à un lancement piloté.",
+      "cue": {
+        "punchline": "Un lancement ne rate pas parce que 'le marché est dur'. Il rate parce qu'il est mal piloté.",
+        "durationSec": 120,
+        "tag": "ERREURS",
+        "transition": "Maintenant, je te montre comment on l'implémente proprement, sans chaos, étape par étape.",
+        "bullets": [
+          "Égrener les 3 erreurs avec gravité",
+          "Identifier laquelle correspond au prospect",
+          "Finir sur 'lancement piloté' — promesse"
+        ]
+      },
+      "content": {
+        "headline": "Les 3 erreurs qui tuent un lancement — on corrige ça dès le départ.",
+        "mistakes": [
+          {
+            "mistake": "Pas de préchauffage — tu ouvres dans le vide. L'audience n'est pas prête, pas engagée, pas chaude.",
+            "fix": "Séquence de contenu / challenge en amont — obligatoire."
+          },
+          {
+            "mistake": "Offre floue / bonus incohérents — le prospect ne comprend pas ce qu'il achète.",
+            "fix": "Promesse ultra-précise + stack logique aligné avec l'objectif."
+          },
+          {
+            "mistake": "Pas de relances / pas de fermeture — pas de deadline réelle = pas d'urgence = pas d'achat.",
+            "fix": "Séquence fermeture + relance WhatsApp + countdown visible."
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000025",
+      "position": 24,
+      "type": "plan",
+      "notes": "PLAN · 90 sec. Simple et rassurant. Dérouler les 5 étapes avec rythme. Finir sur « base propre » — conviction ferme. Donner un délai si demandé. Promesse d'origine : tunnel construit et tracké · automations testées · CRM propre avant J0 · scripts validés.",
+      "script": "On cadre l'offre et le calendrier.\nOn construit les pages et le tracking.\nOn écrit les scripts contenus, vente, relances.\nOn installe CRM + automations + WhatsApp.\nPuis on exécute et on optimise.\n\nBase propre avant d'accélérer.",
+      "cue": {
+        "punchline": "Propre d'abord, exécution ensuite.",
+        "durationSec": 90,
+        "tag": "PLAN",
+        "transition": "Dernier point : si tu veux qu'on le fasse pour toi.",
+        "bullets": [
+          "Dérouler les 5 étapes avec rythme",
+          "Finir sur 'base propre' — conviction ferme",
+          "Donner un délai si demandé"
+        ]
+      },
+      "content": {
+        "headline": "Plan d'implémentation — base propre avant d'accélérer.",
+        "phases": [
+          {
+            "name": "01 · Cadrage",
+            "deliverables": [
+              "Cadrage offre + promesse + calendrier",
+              "Offre · promesse · dates"
+            ]
+          },
+          {
+            "name": "02 · Pages + tracking",
+            "deliverables": [
+              "Structure pages + tracking plan",
+              "Opt-in · hub · vente · checkout · events"
+            ]
+          },
+          {
+            "name": "03 · Scripts",
+            "deliverables": [
+              "Scripts — contenu + vente + relances",
+              "Emails · vidéos · lives · WhatsApp"
+            ]
+          },
+          {
+            "name": "04 · CRM + automations",
+            "deliverables": [
+              "CRM + automations + WhatsApp + segmentation",
+              "Tags · séquences · segmentation · CRM"
+            ]
+          },
+          {
+            "name": "05 · Exécution",
+            "deliverables": [
+              "Exécution + optimisation + post-launch",
+              "Live · data · relance · non-acheteurs"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "14000000-0000-4000-8000-000000000026",
+      "position": 25,
+      "type": "cta",
+      "notes": "CLOSE · 2 min. Ton calme — aucune pression. Insister sur « même si on ne bosse pas ensemble ». Pause 2-3 sec avant le bouton. Laisser respirer le prospect. Bloc d'origine : « Clé en main — Si c'est un match, on vous installe le système clé en main. Disponible maintenant. » Pas toutes les offres sont éligibles : on est honnêtes.",
+      "script": "Si tu veux qu'on t'installe ce lancement proprement, tu candidates pour un appel court (10–15 min).\n\nOn vérifie trois choses :\nest-ce que ton offre est éligible à un lancement,\nest-ce que la mécanique la plus logique c'est lancement classique ou challenge,\net est-ce que ça a du sens de le faire maintenant.\n\nEt dans tous les cas : tu repars avec un plan clair.\nSi c'est un match, on installe le système clé en main.\n\nTu peux candidater juste en dessous.",
+      "cue": {
+        "punchline": "Tu repars avec un plan. Et si c'est un match, on l'installe.",
+        "durationSec": 120,
+        "tag": "CLOSE",
+        "bullets": [
+          "Ton calme — aucune pression",
+          "Insister sur 'même si on ne bosse pas ensemble'",
+          "Pause 2-3 sec avant le bouton",
+          "Laisser respirer le prospect"
+        ],
+        "closing": "Tu peux candidater juste en dessous."
+      },
+      "content": {
+        "headline": "Vous voulez qu'on vous installe ce lancement proprement ?",
+        "sub": "Vous candidatez pour un appel court (10–15 min, pas de bullshit), on vérifie si votre offre est éligible à un lancement, vous repartez avec le plan exact — même si on ne bosse pas ensemble. On ne prend pas tout le monde.",
+        "actions": [
+          {
+            "label": "Candidater pour la mise en place clé en main",
+            "kind": "form"
+          }
+        ]
+      }
+    }
+  ]
+}

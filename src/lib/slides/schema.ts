@@ -1,4 +1,7 @@
 import { z } from "zod";
+import { SLIDE_LAYOUTS } from "./layouts";
+import { isAllowedEmbedUrl } from "./embed";
+import { IllustrationSchema } from "./illustrations";
 
 export const SLIDE_TYPES = [
   "cover",
@@ -28,11 +31,24 @@ export const SLIDE_TYPES = [
   "timeline",
   "team",
   "cta",
+  // Task 60 — mechanics from the legacy decks
+  "embed",
+  "showcase",
+  "screenshots",
+  "gauge",
+  "mockup",
+  "blanks",
 ] as const;
 
 export type SlideType = (typeof SLIDE_TYPES)[number];
 
 const Text = (max: number) => z.string().min(1).max(max);
+
+/** An https page on an allow-listed domain (src/lib/slides/embed.ts). */
+const EmbedUrl = z
+  .string()
+  .max(500)
+  .refine(isAllowedEmbedUrl, { message: "Domaine non autorisé pour l'intégration" });
 
 const Bullet = z.object({
   icon: z.string().max(40).optional(),
@@ -40,45 +56,52 @@ const Bullet = z.object({
   text: Text(240),
 });
 
+/**
+ * Every type's content may carry an optional decorative `illustration` (Task 61). It lives in
+ * content (JSON), so it needs no column, and a slide renders the same without it.
+ */
+const withIllustration = <S extends z.ZodRawShape>(shape: S) =>
+  z.object({ ...shape, illustration: IllustrationSchema.optional() });
+
 const content = {
-  cover: z.object({
+  cover: withIllustration({
     kicker: Text(60).optional(),
     title: Text(120),
     subtitle: Text(200).optional(),
     presenterName: Text(80).optional(),
   }),
-  statement: z.object({
+  statement: withIllustration({
     eyebrow: Text(60).optional(),
     headline: Text(140),
     highlight: Text(60).optional(),
     sub: Text(240).optional(),
   }),
-  authority: z.object({
+  authority: withIllustration({
     headline: Text(120),
     points: z.array(Bullet).min(2).max(4),
   }),
-  problem: z.object({
+  problem: withIllustration({
     headline: Text(120),
     intro: Text(240).optional(),
     painPoints: z.array(Bullet).min(3).max(5),
   }),
-  definition: z.object({
+  definition: withIllustration({
     headline: Text(120),
     body: Text(400),
     pillars: z.array(Bullet).min(2).max(4).optional(),
   }),
-  why: z.object({
+  why: withIllustration({
     headline: Text(120),
     reasons: z.array(Bullet).min(3).max(5),
   }),
-  objectives: z.object({
+  objectives: withIllustration({
     headline: Text(120),
     goals: z
       .array(z.object({ label: Text(60), target: Text(60), text: Text(200) }))
       .min(2)
       .max(5),
   }),
-  flow: z.object({
+  flow: withIllustration({
     headline: Text(120),
     steps: z
       .array(
@@ -92,14 +115,14 @@ const content = {
       .min(3)
       .max(7),
   }),
-  architecture: z.object({
+  architecture: withIllustration({
     headline: Text(120),
     layers: z
       .array(z.object({ name: Text(60), items: z.array(Text(80)).min(1).max(6) }))
       .min(2)
       .max(5),
   }),
-  capture: z.object({
+  capture: withIllustration({
     headline: Text(120),
     fields: z
       .array(
@@ -112,21 +135,21 @@ const content = {
       .max(6),
     ctaLabel: Text(60),
   }),
-  qualification: z.object({
+  qualification: withIllustration({
     headline: Text(120),
     questions: z
       .array(z.object({ question: Text(160), options: z.array(Text(80)).min(2).max(5) }))
       .min(2)
       .max(5),
   }),
-  automation: z.object({
+  automation: withIllustration({
     headline: Text(120),
     items: z
       .array(z.object({ trigger: Text(100), action: Text(140), delay: Text(40).optional() }))
       .min(2)
       .max(6),
   }),
-  channel: z.object({
+  channel: withIllustration({
     headline: Text(120),
     channel: z.enum(["whatsapp", "email", "sms", "phone", "dm"]),
     scripts: z
@@ -134,28 +157,28 @@ const content = {
       .min(1)
       .max(4),
   }),
-  crm: z.object({
+  crm: withIllustration({
     headline: Text(120),
     pipelines: z
       .array(z.object({ stage: Text(60), definition: Text(160) }))
       .min(3)
       .max(7),
   }),
-  analytics: z.object({
+  analytics: withIllustration({
     headline: Text(120),
     metrics: z
       .array(z.object({ name: Text(60), definition: Text(160), target: Text(60).optional() }))
       .min(3)
       .max(6),
   }),
-  gallery: z.object({
+  gallery: withIllustration({
     headline: Text(120),
     items: z
       .array(z.object({ caption: Text(120), assetId: z.string().uuid().optional() }))
       .min(2)
       .max(8),
   }),
-  proof: z.object({
+  proof: withIllustration({
     headline: Text(120),
     items: z
       .array(
@@ -169,25 +192,25 @@ const content = {
       .min(1)
       .max(4),
   }),
-  benefits: z.object({
+  benefits: withIllustration({
     headline: Text(120),
     benefits: z.array(Bullet).min(3).max(6),
   }),
-  kpi: z.object({
+  kpi: withIllustration({
     headline: Text(120),
     metrics: z
       .array(z.object({ value: Text(20), label: Text(60), delta: Text(20).optional() }))
       .min(2)
       .max(4),
   }),
-  mistakes: z.object({
+  mistakes: withIllustration({
     headline: Text(120),
     mistakes: z
       .array(z.object({ mistake: Text(120), fix: Text(160) }))
       .min(2)
       .max(5),
   }),
-  plan: z.object({
+  plan: withIllustration({
     headline: Text(120),
     phases: z
       .array(
@@ -200,7 +223,7 @@ const content = {
       .min(2)
       .max(5),
   }),
-  pricing: z.object({
+  pricing: withIllustration({
     headline: Text(120),
     tiers: z
       .array(
@@ -214,11 +237,11 @@ const content = {
       .min(1)
       .max(3),
   }),
-  faq: z.object({
+  faq: withIllustration({
     headline: Text(120),
     questions: z.array(z.object({ q: Text(160), a: Text(400) })).min(2).max(6),
   }),
-  comparison: z.object({
+  comparison: withIllustration({
     headline: Text(120),
     columns: z.array(Text(60)).min(2).max(4),
     rows: z
@@ -226,21 +249,21 @@ const content = {
       .min(2)
       .max(6),
   }),
-  timeline: z.object({
+  timeline: withIllustration({
     headline: Text(120),
     milestones: z
       .array(z.object({ when: Text(40), title: Text(80), text: Text(160).optional() }))
       .min(2)
       .max(6),
   }),
-  team: z.object({
+  team: withIllustration({
     headline: Text(120),
     members: z
       .array(z.object({ name: Text(80), role: Text(80), proof: Text(160).optional() }))
       .min(1)
       .max(6),
   }),
-  cta: z.object({
+  cta: withIllustration({
     headline: Text(120),
     sub: Text(240).optional(),
     actions: z
@@ -253,9 +276,92 @@ const content = {
       .min(1)
       .max(2),
   }),
+  /** One live page (Funnelytics map, client funnel) in a sandboxed iframe. */
+  embed: withIllustration({
+    headline: Text(120),
+    title: Text(80),
+    url: EmbedUrl.optional(),
+    caption: Text(200).optional(),
+  }),
+  /** Several live pages, browsed one at a time (legacy "galerie" of client funnels). */
+  showcase: withIllustration({
+    headline: Text(120),
+    items: z.array(z.object({ title: Text(80), url: EmbedUrl.optional() })).min(1).max(10),
+  }),
+  /** Screenshot proof: a grid of images that open full-size in a lightbox. */
+  screenshots: withIllustration({
+    headline: Text(120),
+    items: z
+      .array(z.object({ caption: Text(120), result: Text(80).optional(), assetId: z.string().uuid().optional() }))
+      .min(1)
+      .max(12),
+  }),
+  /** KPI as dials: value out of max (100 by default). */
+  gauge: withIllustration({
+    headline: Text(120),
+    gauges: z
+      .array(
+        z.object({
+          label: Text(60),
+          value: z.number().min(0).max(1_000_000),
+          max: z.number().positive().max(1_000_000).optional(),
+          suffix: z.string().max(8).optional(),
+          note: Text(100).optional(),
+        })
+      )
+      .min(1)
+      .max(8),
+  }),
+  /** Wireframe of a funnel page: its blocks top to bottom and the button. */
+  mockup: withIllustration({
+    headline: Text(120),
+    page: z.enum(["optin", "sales", "checkout", "registration", "thankyou"]),
+    blocks: z.array(z.object({ label: Text(60), detail: Text(140).optional() })).min(2).max(8),
+    cta: Text(60).optional(),
+    aside: Text(300).optional(),
+  }),
+  /** Blanks the presenter fills during the call; the audience sees them update live. */
+  blanks: withIllustration({
+    headline: Text(120),
+    intro: Text(240).optional(),
+    fields: z
+      .array(
+        z.object({
+          label: Text(80),
+          prefix: z.string().max(6).optional(),
+          suffix: z.string().max(12).optional(),
+          hint: Text(80).optional(),
+        })
+      )
+      .min(1)
+      .max(6),
+    summary: Text(200).optional(),
+  }),
 } as const;
 
 export const slideContentSchemas = content;
+
+/**
+ * Structured presenter cue around the `script` body (legacy script panel): what to say first,
+ * how long to spend, how to hand over to the next slide. Every part is optional, and slides
+ * with a plain `script` and no cue stay valid.
+ */
+export const ScriptCueSchema = z.object({
+  punchline: Text(240).optional(),
+  durationSec: z.number().int().min(5).max(1800).optional(),
+  tag: Text(30).optional(),
+  transition: Text(300).optional(),
+  bullets: z.array(Text(200)).max(6).optional(),
+  closing: Text(120).optional(),
+});
+
+export type ScriptCue = z.infer<typeof ScriptCueSchema>;
+
+/** Stored cue → valid cue or nothing. A bad cue is dropped so it never hides its slide. */
+export function parseScriptCue(raw: unknown): ScriptCue | undefined {
+  const parsed = ScriptCueSchema.safeParse(raw ?? undefined);
+  return parsed.success ? parsed.data : undefined;
+}
 
 const base = z.object({
   id: z.string().uuid(),
@@ -263,17 +369,37 @@ const base = z.object({
   type: z.enum(SLIDE_TYPES),
   notes: z.string().max(2000).optional(),
   script: z.string().max(4000).optional(),
+  cue: ScriptCueSchema.optional(),
   needsInput: z.boolean().optional(),
 });
 
+/** Optional layout variant (Task 59): one of the type's layouts, absent for types that have none. */
+function layoutSchema(t: SlideType) {
+  const options = (SLIDE_LAYOUTS as Partial<Record<SlideType, readonly [string, ...string[]]>>)[t];
+  return options ? z.enum(options).optional() : z.undefined().optional();
+}
+
 const slideSchemas = SLIDE_TYPES.map((t) =>
-  base.extend({ type: z.literal(t), content: content[t] })
+  base.extend({ type: z.literal(t), content: content[t], layout: layoutSchema(t) })
 );
 
 export const SlideSchema = z.discriminatedUnion(
   "type",
   slideSchemas as [typeof slideSchemas[0], ...typeof slideSchemas],
 );
+
+/**
+ * What AI generates for one slide of a known type; `id`/`position` are assigned by code.
+ * `cue` is left out to keep the output small (free-tier token limits); presenters add it.
+ */
+export function slideDraftSchema(type: SlideType) {
+  // Illustrations are a presenter's choice: kept out of what the model is asked to write.
+  const draftContent = (content[type] as unknown as z.ZodObject<{ illustration: z.ZodOptional<typeof IllustrationSchema> }>)
+    .omit({ illustration: true }) as unknown as (typeof content)[typeof type];
+  return base
+    .omit({ id: true, position: true, cue: true })
+    .extend({ type: z.literal(type), content: draftContent });
+}
 
 export const DeckSchema = z.object({
   title: Text(120),

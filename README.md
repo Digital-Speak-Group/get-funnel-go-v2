@@ -44,7 +44,7 @@ Seed documentation for the new **Next.js** repository. These files are written t
 | `docs/design-system.md` | Design tokens, deck themes, slide grid, motion, accessibility, surfaces to design. |
 | `tasks/plan.md` | Phased implementation plan, dependency graph, risks, parallelization. |
 | `tasks/todo.md` | Task list with acceptance criteria, verification steps, files, dependencies. |
-| `scripts/seed/fake-data.json` | Deterministic fake data: demo org, users, themes, templates, 3 decks / 38 slides, sessions, AI logs, usage, subscription. |
+| `scripts/seed/fake-data.json` | Deterministic fake data: demo org, users, themes, 3 decks / 38 slides, sessions, AI logs, usage, subscription. |
 | `scripts/seed/README.md` | How to load the seed data, id conventions, rules. |
 
 ## Context discipline for agents

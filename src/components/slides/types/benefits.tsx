@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { SlideIcon } from "../icons";
 
 interface BenefitsContent {
   headline: string;
@@ -33,7 +35,7 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-success"],
+            ...headlineFill(theme, theme["--slide-success"]),
           }}
         >
           {headline}
@@ -46,6 +48,7 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {benefits.map((benefit, index) => (
@@ -56,7 +59,7 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
               flexDirection: "column",
               gap: "12px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-success"]}26`,
             }}
@@ -76,7 +79,7 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
                   flexShrink: 0,
                 }}
               >
-                {benefit.icon || "✓"}
+                <SlideIcon name={benefit.icon} size={24} fallback="✓" />
               </div>
               <div style={{ flex: 1 }}>
                 <h3

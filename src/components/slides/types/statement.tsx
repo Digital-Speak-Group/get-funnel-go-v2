@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { headlineFill, kickerStyle } from "../style";
 
 interface StatementContent {
   eyebrow?: string;
@@ -11,6 +12,7 @@ interface StatementContent {
 
 export function StatementSlide({ content, theme }: { content: StatementContent; theme: Record<string, string> }) {
   const { eyebrow, headline, highlight, sub } = content;
+  const highlightAt = highlight ? headline.indexOf(highlight) : -1;
 
   return (
     <div
@@ -27,21 +29,13 @@ export function StatementSlide({ content, theme }: { content: StatementContent; 
       }}
     >
       {eyebrow && (
-        <p
-          style={{
-            fontSize: "14px",
-            fontWeight: 600,
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            color: theme["--slide-primary"],
-            marginBottom: "16px",
-          }}
-        >
+        <p style={{ ...kickerStyle(theme), marginBottom: "16px" }}>
           {eyebrow}
         </p>
       )}
       <h1
         style={{
+          ...headlineFill(theme, theme["--slide-text"]),
           fontSize: "64px",
           lineHeight: 1.15,
           fontWeight: 700,
@@ -50,10 +44,19 @@ export function StatementSlide({ content, theme }: { content: StatementContent; 
         }}
       >
         {highlight ? (
-          <>
-            {headline.replace(highlight, "")}
-            <span style={{ color: theme["--slide-primary"] }}>{highlight}</span>
-          </>
+          highlightAt >= 0 ? (
+            <>
+              {headline.slice(0, highlightAt)}
+              <span style={{ color: theme["--slide-primary-text"] }}>{highlight}</span>
+              {headline.slice(highlightAt + highlight.length)}
+            </>
+          ) : (
+            // Highlight written as a separate phrase: keep it on its own, after a space.
+            <>
+              {headline}{" "}
+              <span style={{ color: theme["--slide-primary-text"] }}>{highlight}</span>
+            </>
+          )
         ) : (
           headline
         )}

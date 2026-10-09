@@ -1,0 +1,112 @@
+{
+  "template": "rdv-classique",
+  "deckId": "20000000-0000-4000-8000-000000000101",
+  "slides": [
+    {
+      "position": 0,
+      "content": {
+        "kicker": "Diagnostic Complet",
+        "title": "Tunnel RDV — Architecture Core",
+        "subtitle": "De trafic → RDV → ventes. Avec un système. Pas au feeling.",
+        "presenterName": "Hamid El Bouhali"
+      },
+      "script": "Ok. Si tu vois cette vidéo, c'est que tu viens de terminer le diagnostic GetFunnels.\n\nDans les prochaines minutes, je vais faire un truc très simple :\nje vais te montrer le système qu'on te recommande, et surtout pourquoi c'est celui-là — pas un autre.\n\nL'idée n'est pas de te balancer des conseils vagues.\nJe veux que tu ressortes avec une vision claire :\nà quoi ressemble le tunnel, où ça gagne de l'argent, où ça fuit, et ce qu'il faut installer pour que ça tourne."
+    },
+    {
+      "position": 2,
+      "content": {
+        "headline": "Hamid El Bouhali",
+        "points": [
+          {
+            "title": "Fondateur de GetFunnels",
+            "text": "Depuis 8+ ans, on construit des systèmes de vente complets : funnels + CRM + automatisations pour des entrepreneurs qui font du 6 à 7 chiffres."
+          },
+          {
+            "title": "8+ ans · +470 funnels créés",
+            "text": "Clients en 6 à 7 chiffres. On a bossé avec : Yomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini."
+          },
+          {
+            "title": "Une vérité simple",
+            "text": "Le problème n°1 n'est pas \"la pub\". C'est l'architecture."
+          }
+        ]
+      },
+      "script": "Je m'appelle Hamid El Bouhali, fondateur de GetFunnels.\n\nDepuis plus de 8 ans, on construit des systèmes complets : funnels + CRM + automatisations, avec une logique simple : convertir sans chaos.\n\nOn a travaillé avec des références comme :\nYomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini… et d'autres, sur le marché francophone et anglophone.\n\nEt ce qui est intéressant, c'est que peu importe le secteur, on retrouve toujours le même schéma :\nles gens pensent que leur problème, c'est le trafic…\nalors que leur vrai problème, c'est l'architecture.\n\nEt quand tu corriges l'architecture, souvent, tu n'as même pas besoin de doubler ton budget pub pour doubler tes ventes."
+    },
+    {
+      "position": 14,
+      "content": {
+        "headline": "Voici la machine",
+        "title": "Funnelytics",
+        "caption": "Pas une page. Le système complet en action.",
+        "url": "https://canvas.funnelytics.io/view/2a5afdb7-90e4-4122-b317-352d05ba9924"
+      }
+    },
+    {
+      "position": 15,
+      "content": {
+        "headline": "À quoi ça ressemble",
+        "items": [
+          {
+            "title": "MyBusiness Passion",
+            "url": "https://getfunnels.clickfunnels.com/mybusiness-passion"
+          },
+          {
+            "title": "Présentation V2",
+            "url": "https://immersion.video-ads-agency.com/presentation_v2"
+          },
+          {
+            "title": "Seller Performance",
+            "url": "https://getfunnels.clickfunnels.com/seller-performance62302995"
+          },
+          {
+            "title": "Top Paris 2025",
+            "url": "https://getfunnels.clickfunnels.com/page-client-top-paris-20251752750759796"
+          },
+          {
+            "title": "Finances Liberté",
+            "url": "https://digitalspeak-sarl.systeme.io/finances-liberte-v2-4f7a5056"
+          },
+          {
+            "title": "Page de Vente 1",
+            "url": "https://getfunnels.clickfunnels.com/page-de-vente1660681095320"
+          },
+          {
+            "title": "Page de Vente 2",
+            "url": "https://getfunnels.clickfunnels.com/page-de-vente1679918951707"
+          },
+          {
+            "title": "Sales Page",
+            "url": "https://getfunnels.clickfunnels.com/sales-page-21723544964423"
+          }
+        ]
+      }
+    },
+    {
+      "position": 16,
+      "content": {
+        "headline": "On ne \"devine\" rien. On mesure tout.",
+        "items": [
+          {
+            "name": "Gross Sales",
+            "result": "385 241 $",
+            "quote": "Un tunnel, c'est une machine. Et une machine, ça se pilote avec des chiffres."
+          },
+          {
+            "name": "Opt-in Rate",
+            "result": "13.81%"
+          },
+          {
+            "name": "Earnings / Click",
+            "result": "5,08 $"
+          },
+          {
+            "name": "Exemple réel",
+            "quote": "Les chiffres varient selon l'offre et le trafic. Nous, on construit pour piloter."
+          }
+        ]
+      }
+    }
+  ],
+  "keepPlaceholders": []
+}

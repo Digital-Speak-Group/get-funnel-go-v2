@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface QualificationContent {
   headline: string;
@@ -32,7 +33,7 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -52,7 +53,7 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
             key={qIndex}
             style={{
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-muted"]}1a`,
             }}

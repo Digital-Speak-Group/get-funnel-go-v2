@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface ChannelContent {
   headline: string;
@@ -70,7 +71,7 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-text"],
+            ...headlineFill(theme, theme["--slide-text"]),
           }}
         >
           {headline}
@@ -92,7 +93,7 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
               display: "flex",
               gap: "20px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${channelColor}33`,
               position: "relative",

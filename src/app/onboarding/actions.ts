@@ -1,7 +1,8 @@
 "use server";
 
 import { z } from "zod";
-import { createSupabaseServerClient, createSupabaseServiceRoleClient } from "@/lib/auth/supabase";
+import { supabaseAuthService } from "@/lib/auth/supabase";
+import { createOrganizationWithOwner } from "@/server/services/onboarding";
 
 const CreateOrgInput = z.object({
   name: z.string().min(2, "Le nom doit contenir au moins 2 caractères").max(60, "Le nom ne peut pas dépasser 60 caractères"),
@@ -9,12 +10,7 @@ const CreateOrgInput = z.object({
 });
 
 export async function createOrgAction(raw: unknown) {
-  // Verify the user is authenticated (using their session client)
-  const supabase = await createSupabaseServerClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+  const user = await supabaseAuthService.getUser();
   if (!user) {
     return { error: "NON_AUTHENTIFIÉ" };
   }
@@ -24,65 +20,14 @@ export async function createOrgAction(raw: unknown) {
     return { error: parsed.error.flatten().fieldErrors.name?.[0] || "Données invalides" };
   }
 
-  const { name, slug } = parsed.data;
-
-  // Use service role for privileged writes (bypasses RLS)
-  // This is safe because we've already verified auth above
-  const admin = createSupabaseServiceRoleClient();
-
-  const { data: existingOrg } = await admin
-    .from("organizations")
-    .select("id")
-    .eq("slug", slug)
-    .single();
-
-  if (existingOrg) {
-    return { error: "Cet identifiant est déjà pris" };
-  }
-
-  const { data: newOrg, error: orgError } = await admin
-    .from("organizations")
-    .insert({ name, slug, plan: "trial" })
-    .select()
-    .single();
-
-  if (orgError) {
-    console.error("[onboarding] org insert error:", orgError);
-    return { error: `Erreur lors de la création de l'organisation: ${orgError.message}` };
-  }
-
-  // Create profile if it doesn't exist
-  const { data: profile } = await admin
-    .from("profiles")
-    .select("id")
-    .eq("id", user.id)
-    .single();
-
-  if (!profile) {
-    const { error: profileError } = await admin
-      .from("profiles")
-      .insert({
-        id: user.id,
-        email: user.email ?? "",
-      });
-
-    if (profileError) {
-      console.error("[onboarding] profile insert error:", profileError);
+  try {
+    const result = await createOrganizationWithOwner(parsed.data, user);
+    if (!result.ok) {
+      return { error: "Cet identifiant est déjà pris" };
     }
+    return { success: true, orgId: result.orgId };
+  } catch (err) {
+    console.error("[onboarding] create organization failed:", err);
+    return { error: "Erreur lors de la création de l'organisation" };
   }
-
-  // Create owner membership
-  const { error: memberError } = await admin
-    .from("memberships")
-    .insert({
-      org_id: newOrg.id,
-      user_id: user.id,
-      role: "owner",
-    });
-
-  if (memberError) {
-    console.error("[onboarding] membership insert error:", memberError);
-  }
-
-  return { success: true, orgId: newOrg.id };
 }

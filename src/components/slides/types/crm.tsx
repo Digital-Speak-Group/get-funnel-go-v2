@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface CrmContent {
   headline: string;
@@ -32,7 +33,7 @@ export function CrmSlide({ content, theme }: { content: CrmContent; theme: Recor
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -55,7 +56,7 @@ export function CrmSlide({ content, theme }: { content: CrmContent; theme: Recor
               alignItems: "center",
               gap: "24px",
               padding: "24px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
             }}

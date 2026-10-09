@@ -1,6 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { headlineFill } from "../style";
+import { SlideIcon } from "../icons";
+import type { SlideIconName } from "@/lib/slides/icons";
 
 interface CtaContent {
   headline: string;
@@ -11,19 +14,15 @@ interface CtaContent {
   }>;
 }
 
-const actionIcons: Record<CtaContent["actions"][0]["kind"], string> = {
-  calendar: "📅",
-  link: "🔗",
-  whatsapp: "💬",
-  form: "📝",
+const actionIcons: Record<CtaContent["actions"][0]["kind"], SlideIconName> = {
+  calendar: "calendar-check",
+  link: "mouse-pointer-click",
+  whatsapp: "message-circle",
+  form: "clipboard",
 };
 
-const actionColors: Record<CtaContent["actions"][0]["kind"], string> = {
-  calendar: "#4285F4",
-  link: "#8B5CF6",
-  whatsapp: "#25D366",
-  form: "#F59E0B",
-};
+// Buttons follow the deck theme; WhatsApp keeps its recognisable brand green.
+const WHATSAPP_GREEN = "#25D366";
 
 export function CtaSlide({ content, theme }: { content: CtaContent; theme: Record<string, string> }) {
   const { headline, sub, actions } = content;
@@ -49,7 +48,7 @@ export function CtaSlide({ content, theme }: { content: CtaContent; theme: Recor
             lineHeight: 1.05,
             fontWeight: 800,
             marginBottom: "24px",
-            color: theme["--slide-text"],
+            ...headlineFill(theme, theme["--slide-text"]),
           }}
         >
           {headline}
@@ -77,7 +76,7 @@ export function CtaSlide({ content, theme }: { content: CtaContent; theme: Recor
         }}
       >
         {actions.map((action, index) => {
-          const color = actionColors[action.kind];
+          const color = action.kind === "whatsapp" ? WHATSAPP_GREEN : theme["--slide-primary"];
           return (
             <button
               key={index}
@@ -90,7 +89,7 @@ export function CtaSlide({ content, theme }: { content: CtaContent; theme: Recor
                 fontSize: "18px",
                 fontWeight: 600,
                 fontFamily: theme["--slide-font-display"],
-                color: "#fff",
+                color: theme["--slide-primary-fg"],
                 background: color,
                 border: "none",
                 borderRadius: theme["--slide-radius"],
@@ -99,7 +98,7 @@ export function CtaSlide({ content, theme }: { content: CtaContent; theme: Recor
                 boxShadow: `0 4px 16px ${color}40`,
               }}
             >
-              <span style={{ fontSize: "24px" }}>{actionIcons[action.kind]}</span>
+              <SlideIcon name={actionIcons[action.kind]} size={24} />
               {action.label}
             </button>
           );

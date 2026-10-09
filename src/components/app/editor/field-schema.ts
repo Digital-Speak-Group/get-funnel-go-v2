@@ -95,6 +95,11 @@ export function normalizeContent(
 }
 
 function describeIssue(issue: z.ZodIssue): string {
+  if (issue.code === "too_small" && issue.origin === "number") return `Minimum ${issue.minimum}.`;
+  if (issue.code === "too_big" && issue.origin === "number") return `Maximum ${issue.maximum}.`;
+  if (issue.code === "invalid_type" && (issue.expected === "number" || issue.expected === "int")) {
+    return "Entrez un nombre entier.";
+  }
   if (issue.code === "too_small" && typeof issue.minimum === "number") {
     return issue.origin === "array"
       ? `Ajoutez au moins ${issue.minimum} élément${issue.minimum > 1 ? "s" : ""}.`

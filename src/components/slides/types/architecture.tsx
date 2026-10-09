@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface ArchitectureContent {
   headline: string;
@@ -32,7 +33,7 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -55,7 +56,7 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
               flexDirection: "column",
               gap: "16px",
               padding: "24px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-muted"]}1a`,
             }}
@@ -65,7 +66,7 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
                 fontSize: "20px",
                 fontWeight: 600,
                 fontFamily: theme["--slide-font-display"],
-                color: theme["--slide-primary"],
+                color: theme["--slide-primary-text"],
                 paddingBottom: "8px",
                 borderBottom: `2px solid ${theme["--slide-primary"]}`,
                 display: "inline-block",

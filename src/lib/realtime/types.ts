@@ -9,6 +9,11 @@ export interface SlideEvent {
   slideIndex: number;
   /** Server timestamp (ms) for drift detection */
   ts: number;
+  /**
+   * Values typed by the presenter into the current `blanks` slide (Task 60). Untrusted on
+   * the receiving side: anyone holding the token can publish, so audiences validate it.
+   */
+  blanks?: { slideId: string; values: string[] };
 }
 
 export interface RealtimeChannel {

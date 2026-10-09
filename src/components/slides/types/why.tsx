@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { SlideIcon } from "../icons";
 
 interface WhyContent {
   headline: string;
@@ -33,7 +35,7 @@ export function WhySlide({ content, theme }: { content: WhyContent; theme: Recor
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -46,6 +48,7 @@ export function WhySlide({ content, theme }: { content: WhyContent; theme: Recor
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {reasons.map((reason, index) => (
@@ -56,7 +59,7 @@ export function WhySlide({ content, theme }: { content: WhyContent; theme: Recor
               flexDirection: "column",
               gap: "12px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
               transition: "transform 200ms ease, box-shadow 200ms ease",
@@ -77,7 +80,7 @@ export function WhySlide({ content, theme }: { content: WhyContent; theme: Recor
                   flexShrink: 0,
                 }}
               >
-                {reason.icon || (index + 1).toString()}
+                <SlideIcon name={reason.icon} size={24} fallback={(index + 1).toString()} />
               </div>
               <div style={{ flex: 1 }}>
                 <h3
@@ -86,7 +89,7 @@ export function WhySlide({ content, theme }: { content: WhyContent; theme: Recor
                     fontWeight: 600,
                     fontFamily: theme["--slide-font-display"],
                     margin: "0 0 8px 0",
-                    color: theme["--slide-primary"],
+                    color: theme["--slide-primary-text"],
                   }}
                 >
                   {reason.title}

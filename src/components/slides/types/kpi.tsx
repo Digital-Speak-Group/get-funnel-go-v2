@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { headlineFill } from "../style";
 
 interface KpiContent {
   headline: string;
@@ -35,7 +36,7 @@ export function KpiSlide({ content, theme }: { content: KpiContent; theme: Recor
             lineHeight: 1.15,
             fontWeight: 700,
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}

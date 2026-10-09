@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { headlineFill, kickerStyle } from "../style";
 
 interface CoverContent {
   kicker?: string;
@@ -27,21 +28,13 @@ export function CoverSlide({ content, theme }: { content: CoverContent; theme: R
       }}
     >
       {kicker && (
-        <p
-          style={{
-            fontSize: "14px",
-            fontWeight: 600,
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            color: theme["--slide-primary"],
-            marginBottom: "24px",
-          }}
-        >
+        <p style={{ ...kickerStyle(theme), marginBottom: "24px" }}>
           {kicker}
         </p>
       )}
       <h1
         style={{
+          ...headlineFill(theme, theme["--slide-text"]),
           fontSize: "72px",
           lineHeight: 1.05,
           fontWeight: 800,

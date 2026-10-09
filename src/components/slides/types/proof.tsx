@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface ProofContent {
   headline: string;
@@ -34,7 +35,7 @@ export function ProofSlide({ content, theme }: { content: ProofContent; theme: R
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -47,6 +48,7 @@ export function ProofSlide({ content, theme }: { content: ProofContent; theme: R
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {items.map((item, index) => (
@@ -57,7 +59,7 @@ export function ProofSlide({ content, theme }: { content: ProofContent; theme: R
               flexDirection: "column",
               gap: "16px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-success"]}26`,
             }}

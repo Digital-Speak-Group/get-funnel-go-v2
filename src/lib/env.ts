@@ -2,6 +2,7 @@ import { z } from "zod";
 
 const serverSchema = z.object({
   DATABASE_URL: z.string().url(),
+  DATABASE_SSL: z.enum(["true", "false"]).transform((v) => v === "true").optional(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
   AUTH_SECRET: z.string().min(32).optional(),
   GROQ_API_KEY: z.string().min(1),

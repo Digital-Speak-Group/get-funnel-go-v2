@@ -185,13 +185,13 @@ describe("getBackgroundStyles", () => {
 });
 
 describe("systemThemes", () => {
-  it("contains 5 themes", () => {
-    expect(systemThemes).toHaveLength(5);
+  it("contains 5 base themes + 6 Signature themes", () => {
+    expect(systemThemes).toHaveLength(11);
   });
 
   it("all themes have unique ids", () => {
     const ids = systemThemes.map((t) => t.id);
-    expect(new Set(ids).size).toBe(5);
+    expect(new Set(ids).size).toBe(systemThemes.length);
   });
 
   it("all themes validate", () => {
@@ -207,6 +207,9 @@ describe("systemThemes", () => {
     expect(ids).toContain("midnight");
     expect(ids).toContain("editorial");
     expect(ids).toContain("minimal");
+    for (const id of ["violet", "lancement", "vsl", "webinaire", "evergreen", "pay"]) {
+      expect(ids).toContain(`signature-${id}`);
+    }
   });
 });
 

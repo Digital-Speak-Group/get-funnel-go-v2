@@ -25,6 +25,7 @@ export function buildDefaultValue(schema: z.ZodType, key = ""): unknown {
 
   if (core instanceof z.ZodString) return KEY_OVERRIDES[key] ?? PLACEHOLDER;
   if (core instanceof z.ZodBoolean) return false;
+  if (core instanceof z.ZodNumber) return Math.max(0, core.minValue ?? 0);
   if (core instanceof z.ZodEnum) return core.options[0];
   if (core instanceof z.ZodLiteral) return core.value;
 

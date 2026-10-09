@@ -3,13 +3,23 @@
 import * as React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { DECK_SORTS, dashboardMessages as m, type DeckSort } from "@/components/app/dashboard/messages";
+
+const DEFAULT_SORT: DeckSort = "updated_desc";
+
+function isDeckSort(value: string | null): value is DeckSort {
+  return DECK_SORTS.some((sort) => sort === value);
+}
 
 export function DashboardFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchValue, setSearchValue] = React.useState(searchParams.get("search") || "");
   const debounceRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const sortParam = searchParams.get("sort");
+  const sort = isDeckSort(sortParam) ? sortParam : DEFAULT_SORT;
 
   function pushParam(key: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
@@ -34,38 +44,30 @@ export function DashboardFilters() {
   }, []);
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4 flex-1">
-      <div className="relative flex-1">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
-        <input
-          type="text"
-          placeholder="Rechercher un deck..."
-          className={cn(
-            "w-full pl-10 pr-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg",
-            "text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500"
-          )}
+    <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+      <div className="relative sm:w-80">
+        <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-faint" aria-hidden="true" />
+        <Input
+          type="search"
+          placeholder={m.searchPlaceholder}
+          className="pl-9"
           onChange={(e) => handleSearchChange(e.target.value)}
           value={searchValue}
-          aria-label="Rechercher un deck"
+          aria-label={m.search}
         />
       </div>
-      <div className="flex items-center gap-2">
-        <select
-          className={cn(
-            "px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg",
-            "text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
-          )}
-          onChange={(e) => pushParam("sort", e.target.value)}
-          defaultValue={searchParams.get("sort") || ""}
-          aria-label="Trier les decks"
-        >
-          <option value="">Trier par</option>
-          <option value="updated_desc">Plus récents</option>
-          <option value="updated_asc">Plus anciens</option>
-          <option value="title_asc">Titre (A-Z)</option>
-          <option value="title_desc">Titre (Z-A)</option>
-        </select>
-      </div>
+      <Select value={sort} onValueChange={(value) => pushParam("sort", value)}>
+        <SelectTrigger className="sm:w-44" aria-label={m.sort.label}>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent align="end">
+          {DECK_SORTS.map((value) => (
+            <SelectItem key={value} value={value}>
+              {m.sort[value]}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   );
 }

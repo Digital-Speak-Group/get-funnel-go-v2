@@ -4,7 +4,14 @@ import * as React from "react";
 import { type Slide } from "@/lib/slides/schema";
 import { type ThemeTokens } from "@/lib/slides/theme";
 import { AutoScaledSlideRenderer } from "@/components/slides/SlideRenderer";
+import { SlideThumbnail } from "@/components/slides/SlideThumbnail";
 import { usePresenterSync } from "@/hooks/useSyncedSlide";
+import { ScriptPanel } from "./ScriptPanel";
+import { MetricsPanel } from "./MetricsPanel";
+import { formatTime } from "./pace";
+import { PRESENTER_MESSAGES } from "./messages";
+import { BlanksInputs } from "./BlanksInputs";
+import { LiveBlanksProvider } from "@/components/slides/render-context";
 import {
   Play,
   Pause,
@@ -67,14 +74,6 @@ function useTimer() {
   return { totalSeconds, running, start, pause, reset };
 }
 
-function formatTime(s: number): string {
-  const h = Math.floor(s / 3600);
-  const m = Math.floor((s % 3600) / 60);
-  const sec = s % 60;
-  if (h > 0) return `${h}:${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
-  return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
-}
-
 // ─── Main component ──────────────────────────────────────────────────────────
 
 export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
@@ -90,8 +89,15 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
   const currentIndexRef = React.useRef(currentIndex);
   currentIndexRef.current = currentIndex;
 
+  // Live values of blanks slides, by slide id: in memory only, broadcast with each sync event.
+  const [blankValues, setBlankValues] = React.useState<Record<string, string[]>>({});
+  const currentId = slides[currentIndex]?.id;
+  const currentBlanks = currentId && slides[currentIndex]?.type === "blanks"
+    ? { slideId: currentId, values: blankValues[currentId] ?? [] }
+    : undefined;
+
   // Publish current slide to audience
-  usePresenterSync(deck.presentToken, currentIndex);
+  usePresenterSync(deck.presentToken, currentIndex, true, currentBlanks);
 
   // Per-slide time tracking
   React.useEffect(() => {
@@ -196,6 +202,18 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
     return () => document.removeEventListener("fullscreenchange", handler);
   }, []);
 
+  // Each slide/tab opens at the top of the side panel, like the legacy script panel.
+  const panelRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    if (panelRef.current) panelRef.current.scrollTop = 0;
+  }, [currentIndex, activeTab]);
+
+  // Keep the current slide's thumbnail visible in the strip as the deck advances.
+  const activeThumbRef = React.useRef<HTMLButtonElement>(null);
+  React.useEffect(() => {
+    activeThumbRef.current?.scrollIntoView?.({ block: "nearest", inline: "nearest" });
+  }, [currentIndex]);
+
   const currentSlide = slides[currentIndex];
   const nextSlide = slides[currentIndex + 1] ?? null;
 
@@ -274,9 +292,14 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
 
         {/* Current slide */}
         <div className="flex-1 min-h-0 p-4">
-          <div className="w-full h-full rounded-xl overflow-hidden border border-zinc-800">
-            <AutoScaledSlideRenderer slide={currentSlide} theme={theme} isActive />
-          </div>
+          {/* Not `isActive`: the presenter view stays animation-free (docs/design-system.md → Motion). */}
+          <LiveBlanksProvider values={blankValues}>
+            <AutoScaledSlideRenderer
+              slide={currentSlide}
+              theme={theme}
+              className="rounded-xl border border-zinc-800"
+            />
+          </LiveBlanksProvider>
         </div>
 
         {/* Next slide preview */}
@@ -284,23 +307,26 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
           <div className="shrink-0 h-28 px-4 pb-3">
             <p className="text-xs text-zinc-500 mb-1 font-medium">SUIVANTE</p>
             <div
-              className="h-full rounded-lg overflow-hidden border border-zinc-800 cursor-pointer hover:border-zinc-600 transition-colors"
+              className="group h-full cursor-pointer"
               onClick={() => goTo(currentIndex + 1)}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => e.key === "Enter" && goTo(currentIndex + 1)}
               aria-label="Aller à la slide suivante"
             >
-              <div className="w-full h-full">
-                <AutoScaledSlideRenderer slide={nextSlide} theme={theme} />
-              </div>
+              <AutoScaledSlideRenderer
+                slide={nextSlide}
+                theme={theme}
+                staticPreview
+                className="rounded-lg border border-zinc-800 transition-colors group-hover:border-zinc-600"
+              />
             </div>
           </div>
         )}
       </div>
 
       {/* ── Right panel: script / notes / metrics ── */}
-      <div className="w-80 shrink-0 flex flex-col border-l border-zinc-800 bg-zinc-900">
+      <div className="w-96 shrink-0 flex flex-col border-l border-zinc-800 bg-zinc-900">
         {/* Tab bar */}
         <div className="flex border-b border-zinc-800 shrink-0">
           {(
@@ -326,34 +352,50 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
         </div>
 
         {/* Panel content */}
-        <div className="flex-1 overflow-y-auto p-4">
+        <div ref={panelRef} className="flex-1 overflow-y-auto p-4">
           {activeTab === "script" && (
-            <ScriptPanel slide={currentSlide} index={currentIndex} total={slides.length} />
+            <div className="space-y-4">
+              {currentSlide.type === "blanks" && (
+                <BlanksInputs
+                  slide={currentSlide}
+                  values={blankValues[currentSlide.id] ?? []}
+                  onChange={(values) => setBlankValues((prev) => ({ ...prev, [currentSlide.id]: values }))}
+                />
+              )}
+              <ScriptPanel slide={currentSlide} index={currentIndex} total={slides.length} />
+            </div>
           )}
           {activeTab === "notes" && (
             <NotesPanel slide={currentSlide} />
           )}
           {activeTab === "metrics" && (
-            <MetricsPanel metrics={slideMetrics} slides={slides} currentIndex={currentIndex} />
+            <MetricsPanel
+              slideSeconds={slideMetrics.map((m) => m.seconds)}
+              slides={slides}
+              currentIndex={currentIndex}
+              elapsedSec={timer.totalSeconds}
+            />
           )}
         </div>
 
-        {/* Slide strip */}
+        {/* Slide strip: real thumbnails, current one kept in view */}
         <div className="shrink-0 border-t border-zinc-800 p-2">
-          <div className="flex gap-1.5 overflow-x-auto pb-1">
+          <div className="flex gap-1.5 overflow-x-auto pb-1" data-testid="presenter-strip">
             {slides.map((slide, i) => (
               <button
                 key={slide.id}
+                ref={i === currentIndex ? activeThumbRef : undefined}
                 onClick={() => goTo(i)}
-                className={`shrink-0 w-14 h-8 rounded text-xs font-mono transition-colors ${
-                  i === currentIndex
-                    ? "bg-violet-600 text-white"
-                    : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
+                className={`relative shrink-0 w-20 aspect-video overflow-hidden rounded border-2 transition-colors ${
+                  i === currentIndex ? "border-violet-500" : "border-transparent hover:border-zinc-600"
                 }`}
-                aria-label={`Slide ${i + 1}: ${slide.type}`}
+                aria-label={PRESENTER_MESSAGES.strip.label(i + 1, slide.type)}
                 aria-current={i === currentIndex ? "true" : undefined}
               >
-                {i + 1}
+                <SlideThumbnail slide={slide} theme={theme} className="absolute inset-0 h-full w-full" />
+                <span className="absolute bottom-0 left-0 rounded-tr bg-zinc-950/80 px-1 text-[10px] font-mono text-zinc-300">
+                  {i + 1}
+                </span>
               </button>
             ))}
           </div>
@@ -365,23 +407,6 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
 
 // ─── Sub-panels ──────────────────────────────────────────────────────────────
 
-function ScriptPanel({ slide, index, total }: { slide: Slide; index: number; total: number }) {
-  return (
-    <div className="space-y-3">
-      <div className="flex items-center gap-2 text-xs text-zinc-500">
-        <span className="font-medium uppercase tracking-wide">{slide.type}</span>
-        <span>·</span>
-        <span>{index + 1} / {total}</span>
-      </div>
-      {slide.script ? (
-        <p className="text-sm text-zinc-200 leading-relaxed whitespace-pre-wrap">{slide.script}</p>
-      ) : (
-        <p className="text-sm text-zinc-600 italic">Aucun script pour cette slide.</p>
-      )}
-    </div>
-  );
-}
-
 function NotesPanel({ slide }: { slide: Slide }) {
   return (
     <div className="space-y-3">
@@ -391,52 +416,6 @@ function NotesPanel({ slide }: { slide: Slide }) {
       ) : (
         <p className="text-sm text-zinc-600 italic">Aucune note pour cette slide.</p>
       )}
-    </div>
-  );
-}
-
-function MetricsPanel({
-  metrics,
-  slides,
-  currentIndex,
-}: {
-  metrics: SlideMetric[];
-  slides: Slide[];
-  currentIndex: number;
-}) {
-  const totalSeconds = metrics.reduce((sum, m) => sum + m.seconds, 0);
-
-  return (
-    <div className="space-y-4">
-      <div className="rounded-lg bg-zinc-800 px-3 py-2.5 flex justify-between items-center">
-        <span className="text-xs text-zinc-400">Total</span>
-        <span className="text-sm font-mono tabular-nums text-white">{formatTime(totalSeconds)}</span>
-      </div>
-      <div className="space-y-1.5">
-        {slides.map((slide, i) => {
-          const m = metrics[i];
-          const secs = m?.seconds ?? 0;
-          const pct = totalSeconds > 0 ? (secs / totalSeconds) * 100 : 0;
-          return (
-            <div key={slide.id} className={`rounded px-3 py-2 ${i === currentIndex ? "bg-zinc-800" : ""}`}>
-              <div className="flex justify-between items-center mb-1">
-                <span className={`text-xs ${i === currentIndex ? "text-white" : "text-zinc-400"}`}>
-                  {i + 1}. {slide.type}
-                </span>
-                <span className="text-xs font-mono tabular-nums text-zinc-400">{formatTime(secs)}</span>
-              </div>
-              {totalSeconds > 0 && (
-                <div className="h-0.5 bg-zinc-700 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-violet-500 rounded-full"
-                    style={{ width: `${pct}%` }}
-                  />
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 }

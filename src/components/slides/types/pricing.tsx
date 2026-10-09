@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { headlineFill } from "../style";
 
 interface PricingContent {
   headline: string;
@@ -34,7 +35,7 @@ export function PricingSlide({ content, theme }: { content: PricingContent; them
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -47,6 +48,7 @@ export function PricingSlide({ content, theme }: { content: PricingContent; them
           gridTemplateColumns: `repeat(${tiers.length}, 1fr)`,
           gap: "24px",
           flex: 1,
+          alignContent: "center",
           alignItems: "stretch",
         }}
       >

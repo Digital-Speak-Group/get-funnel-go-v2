@@ -6,7 +6,7 @@ import { Plus, Trash2 } from "lucide-react";
 import { slideContentSchemas } from "@/lib/slides/schema";
 import { buildDefaultValue } from "@/lib/slides/defaults";
 import { cn } from "@/lib/utils";
-import { fieldLabel } from "./messages";
+import { fieldLabel, optionLabel } from "./messages";
 import {
   isOptionalSchema,
   stringBounds,
@@ -14,6 +14,11 @@ import {
   type FieldErrors,
 } from "./field-schema";
 import type { EditorSlide } from "./validation";
+import { RegeneratePanel } from "./RegeneratePanel";
+import { findPlaceholders } from "./placeholders";
+import { PlaceholderNotice } from "./PlaceholderHints";
+import { CueFields } from "./CueFields";
+import { AssetField } from "./AssetField";
 
 const inputBase =
   "w-full rounded-lg border border-zinc-700 bg-zinc-800/60 px-3 py-2 text-sm text-white placeholder-zinc-500 outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500";
@@ -26,11 +31,12 @@ interface SlideFieldsProps {
   slide: EditorSlide;
   errors: FieldErrors;
   onChange: (patch: Partial<EditorSlide>) => void;
-  onRegenerate?: () => void;
+  onRegenerate?: (instructions: string) => void;
   isRegenerating?: boolean;
+  regenerateError?: string;
 }
 
-export function SlideFields({ slide, errors, onChange, onRegenerate, isRegenerating }: SlideFieldsProps) {
+export function SlideFields({ slide, errors, onChange, onRegenerate, isRegenerating, regenerateError }: SlideFieldsProps) {
   const schema = slideContentSchemas[slide.type];
   const shape = (
     schema as unknown as z.ZodObject<Record<string, z.ZodType>>
@@ -38,18 +44,17 @@ export function SlideFields({ slide, errors, onChange, onRegenerate, isRegenerat
 
   return (
     <div className="space-y-4" data-testid="slide-fields">
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium text-white capitalize">{slide.type}</h3>
-        {onRegenerate && (
-          <button
-            onClick={onRegenerate}
-            disabled={isRegenerating}
-            className="text-xs px-2 py-1 bg-violet-600/20 text-violet-400 hover:bg-violet-600/30 rounded flex items-center gap-1 transition-colors disabled:opacity-50"
-          >
-            {isRegenerating ? "Regénération..." : "Regénérer (IA)"}
-          </button>
-        )}
-      </div>
+      <h3 className="text-sm font-medium text-white capitalize">{slide.type}</h3>
+      {onRegenerate && (
+        // Keyed by slide so instructions typed for one slide don't carry over to the next.
+        <RegeneratePanel
+          key={slide.id}
+          onRegenerate={onRegenerate}
+          isRegenerating={isRegenerating ?? false}
+          error={regenerateError}
+        />
+      )}
+      <PlaceholderNotice placeholders={findPlaceholders(slide.content)} />
       <ShapeFields
         shape={shape}
         value={slide.content}
@@ -71,6 +76,13 @@ export function SlideFields({ slide, errors, onChange, onRegenerate, isRegenerat
         max={4000}
         error={errors.script}
         onChange={(script) => onChange({ script })}
+      />
+      <CueFields
+        // Own key: RegeneratePanel above is keyed by slide.id too, and sibling keys must differ.
+        key={`cue-${slide.id}`}
+        cue={slide.cue}
+        errors={errors}
+        onChange={(cue) => onChange({ cue })}
       />
     </div>
   );
@@ -193,6 +205,18 @@ function Field({
 }) {
   const core = unwrapSchema(schema);
 
+  // Picked with the illustration picker above the fields, not as a plain select.
+  if (name === "illustration" && path === "illustration") return null;
+  if (name === "assetId") {
+    return (
+      <AssetField
+        path={path}
+        value={typeof value === "string" ? value : undefined}
+        error={errors[path]}
+        onChange={onChange}
+      />
+    );
+  }
   if (core instanceof z.ZodArray) {
     return (
       <ArrayField
@@ -215,6 +239,29 @@ function Field({
         errors={errors}
         onChange={onChange}
       />
+    );
+  }
+  if (core instanceof z.ZodNumber) {
+    const id = `field-${path.replace(/./g, "-")}`;
+    const error = errors[path];
+    return (
+      <div className="space-y-1">
+        <label htmlFor={id} className="text-sm font-medium text-zinc-300">
+          {fieldLabel(name)}
+          {isOptionalSchema(schema) && <span className="font-normal text-zinc-500"> — facultatif</span>}
+        </label>
+        <input
+          id={id}
+          type="number"
+          inputMode="decimal"
+          value={typeof value === "number" && !Number.isNaN(value) ? value : ""}
+          data-testid={`slide-field-${path}`}
+          aria-invalid={error ? true : undefined}
+          className={inputClass(!!error)}
+          onChange={(e) => onChange(e.target.value === "" ? undefined : Number(e.target.value))}
+        />
+        <FieldStatus path={path} error={error} length={0} />
+      </div>
     );
   }
   if (core instanceof z.ZodBoolean) {
@@ -338,7 +385,7 @@ function EnumField({
       >
         {options.map((option) => (
           <option key={option} value={option}>
-            {option}
+            {optionLabel(option)}
           </option>
         ))}
       </select>

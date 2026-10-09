@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { SlideIcon } from "../icons";
 
 interface ProblemContent {
   headline: string;
@@ -34,7 +36,7 @@ export function ProblemSlide({ content, theme }: { content: ProblemContent; them
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-danger"],
+            ...headlineFill(theme, theme["--slide-danger"]),
           }}
         >
           {headline}
@@ -60,6 +62,7 @@ export function ProblemSlide({ content, theme }: { content: ProblemContent; them
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {painPoints.map((pain, index) => (
@@ -70,7 +73,7 @@ export function ProblemSlide({ content, theme }: { content: ProblemContent; them
               flexDirection: "column",
               gap: "12px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
 border: `2px solid ${theme["--slide-danger"]}33`,
               position: "relative",
@@ -91,7 +94,7 @@ border: `2px solid ${theme["--slide-danger"]}33`,
                   flexShrink: 0,
                 }}
               >
-                {pain.icon || "⚠"}
+                <SlideIcon name={pain.icon} size={28} fallback="⚠" />
               </div>
               <div style={{ flex: 1 }}>
                 <h3

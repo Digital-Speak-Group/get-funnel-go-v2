@@ -1,0 +1,1109 @@
+{
+  "title": "Tunnel Pay",
+  "language": "fr",
+  "id": "60000000-0000-4000-8000-000000000007",
+  "slug": "tunnel-pay",
+  "name": "Tunnel Pay",
+  "category": "Conversion",
+  "description": "Tunnel VSL → Paiement : une vidéo de vente qui clarifie, prouve et convertit, puis un checkout sans friction avec relances panier abandonné, onboarding et upsell — la vente se fait en paiement direct, sans appel.",
+  "themeId": "40000000-0000-4000-8000-00000000000b",
+  "slides": [
+    {
+      "id": "16000000-0000-4000-8000-000000000001",
+      "position": 0,
+      "type": "cover",
+      "needsInput": true,
+      "notes": "INTRO · 45 sec. 3 secondes de silence avant de commencer. Ton direct — pas de chauffe inutile. Regard caméra / prospect. Badge d'origine : « Deck Résultat — Version Diagnostic • Confidentiel ». Bouton « Voir l'architecture » en bas de slide.",
+      "script": "Ok. Si tu vois cette vidéo, c'est que tu viens de terminer le diagnostic [Votre entreprise].\nTon résultat ici, c'est : VSL → Paiement.\n\nEt je te préviens : ça peut être une machine incroyable…\nbut only if it's built as a system, not just a 'sales page with a video'.\n\nDans les prochaines minutes, je vais te montrer :\npourquoi c'est ce modèle-là dans ton cas, à quoi ressemble l'architecture, où ça fuit dans 90% des business, et comment on le rend rentable.",
+      "cue": {
+        "punchline": "On va droit au but : vendre sans appel, mais proprement.",
+        "durationSec": 45,
+        "tag": "INTRO",
+        "transition": "On commence par le verdict.",
+        "bullets": [
+          "3 secondes de silence avant de commencer",
+          "Ton direct — pas de chauffe inutile",
+          "Regard caméra / prospect"
+        ]
+      },
+      "content": {
+        "kicker": "Deck Résultat — Version Diagnostic",
+        "title": "Tunnel VSL → Paiement — Architecture Core",
+        "subtitle": "Expliquer → prouver → convertir. Sans appel.",
+        "presenterName": "[Votre nom]"
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000002",
+      "position": 1,
+      "type": "statement",
+      "notes": "VERDICT · 2 min. Insister sur « selon TES réponses » — personnalisation. Chercher le hochement de tête. Visuel d'origine : entonnoir animé Trafic (Pub / Organique) → VSL (Réchauffer + Convaincre) → Preuves (Témoignages + Résultats) → Checkout (Page de paiement) → Achat (Paiement confirmé), puis la frise : attirer → préchauffer → prouver → lever objections → acheter → onboarder → upsell.",
+      "script": "Verdict : Tunnel VSL → Paiement.\n\nPourquoi ? Parce que d'après tes réponses, tu as indiqué vouloir vendre en paiement direct — ou hybride.\nEt ton offre peut se vendre sans appel, à une condition :\nclarté + preuve + relances.\n\nLe but de la VSL, ce n'est pas d'être 'inspirante'.\nC'est de faire avancer un prospect froid jusqu'à une décision simple :\n'ok, je comprends, je te fais confiance, j'achète'.\n\nDonc l'architecture, c'est :\nattirer → préchauffer → prouver → lever les objections → acheter → onboarder → upsell.",
+      "cue": {
+        "punchline": "Ici on ne book pas. Ici on encaisse.",
+        "durationSec": 120,
+        "tag": "VERDICT",
+        "transition": "Avant de rentrer dans la machine, je pose le contexte : qui te parle.",
+        "bullets": [
+          "Insister sur 'selon TES réponses' — personnalisation",
+          "Pause après 'tu vends pendant que tu dors'",
+          "Chercher le hochement de tête"
+        ]
+      },
+      "content": {
+        "eyebrow": "Système Recommandé",
+        "headline": "TUNNEL VSL → PAIEMENT",
+        "highlight": "Transformer un prospect froid en acheteur :",
+        "sub": "Vous avez indiqué vouloir vendre en paiement direct (ou hybride). Votre offre peut se vendre sans appel, à condition d'avoir : clarté + preuve + relances. Sans appel. Sans friction."
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000003",
+      "position": 2,
+      "type": "authority",
+      "needsInput": true,
+      "notes": "AUTORITÉ · 90 sec max — aller vite. Citer les noms de clients avec assurance. Finir sur « l'architecture » — mot clé de toute la prez. Remplacer les placeholders par votre nom, votre entreprise, vos années d'expérience, votre nombre de funnels et vos références clients. Afficher votre logo si disponible.",
+      "script": "Je m'appelle [Votre nom], fondateur de [Votre entreprise].\nÇa fait plus de [X] ans qu'on construit des systèmes complets : tunnels, CRM, automatisations.\nOn a bossé avec des entrepreneurs comme [Client 1], [Client 2], [Client 3]… et d'autres.\n\nEt la réalité qu'on voit partout, c'est la même :\nles gens pensent que leur problème c'est la pub… alors que c'est l'architecture.",
+      "cue": {
+        "punchline": "Je construis des systèmes, pas des pages.",
+        "durationSec": 90,
+        "tag": "AUTORITÉ",
+        "transition": "Je te montre justement le problème classique quand on essaie de vendre en paiement direct.",
+        "bullets": [
+          "90 sec max — aller vite",
+          "Citer les noms avec assurance",
+          "Finir sur 'l'architecture' — mot clé de toute la prez"
+        ]
+      },
+      "content": {
+        "headline": "[Votre nom] — Fondateur de [Votre entreprise]",
+        "points": [
+          {
+            "icon": "briefcase",
+            "title": "[X] ans d'expérience · [X] funnels créés",
+            "text": "Depuis [X] ans, on construit des systèmes de vente complets : funnels + CRM + automatisations pour des entrepreneurs qui font du [X] chiffres."
+          },
+          {
+            "icon": "star",
+            "title": "On a bossé avec",
+            "text": "[Client 1], [Client 2], [Client 3]… et d'autres experts du marché francophone & anglophone."
+          },
+          {
+            "icon": "lightbulb",
+            "title": "Une vérité simple",
+            "text": "Le problème n°1 n'est pas \"la pub\". C'est l'architecture."
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000004",
+      "position": 3,
+      "type": "problem",
+      "notes": "DOULEUR · 90 sec. Égrener chaque point lentement. Ton empathique — pas accusateur. Visuel d'origine (« Diagnostic Critique ») : entonnoir de fuite Trafic 100% → VSL 55% → Checkout 22% → Paiement 9% → Achat 3% — « perdu en route ».",
+      "script": "La plupart pensent : 'je dois juste faire une page de vente'.\nMais une page, ça ne vend pas à froid, toute seule.\n\nCe qu'on voit partout :\nune VSL floue ou trop longue\npas de preuve solide\npas de relances\nun checkout froid avec friction\nzéro séquence post-achat\n\nRésultat : soit tu as 'trafic → rien',\nsoit tu as 'trafic → paniers abandonnés', ce qui est pire… parce que tu sais que ça pouvait vendre, mais tu laisses l'argent sur la table.",
+      "cue": {
+        "punchline": "Le problème n'est pas la VSL. Le problème c'est ce qu'il y a autour.",
+        "durationSec": 90,
+        "tag": "DOULEUR",
+        "transition": "Donc on revient à la base : c'est quoi un tunnel, vraiment ?",
+        "bullets": [
+          "Égrener chaque point lentement",
+          "Pause après 'sans réchauffement'",
+          "Ton empathique — pas accusateur"
+        ]
+      },
+      "content": {
+        "headline": "La plupart pensent : \"il me faut juste une page de vente.\"",
+        "intro": "En réalité : ils ont un système qui ne convertit pas. Résultat : trafic → paniers abandonnés, ça coûte cher, et ça ne scale pas.",
+        "painPoints": [
+          {
+            "icon": "video",
+            "title": "Une VSL floue / trop longue",
+            "text": "Le prospect décroche avant le CTA"
+          },
+          {
+            "icon": "shield",
+            "title": "Pas de preuve solide",
+            "text": "Pas de confiance = pas d'achat"
+          },
+          {
+            "icon": "bell",
+            "title": "Pas de relances",
+            "text": "Les paniers abandonnés restent abandonnés"
+          },
+          {
+            "icon": "shopping-cart",
+            "title": "Un checkout froid (friction)",
+            "text": "Trop de champs = fuite au dernier moment"
+          },
+          {
+            "icon": "mail",
+            "title": "Zéro séquence post-achat",
+            "text": "Pas d'onboarding = refund + silence"
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000005",
+      "position": 4,
+      "type": "definition",
+      "notes": "CONCEPT · 60 sec. Appuyer sur « de façon contrôlée ». Contraste sans / avec = évidence. 5 points — compter sur les doigts si besoin. Visuel d'origine : entonnoir Inconnu → Prospect → Client → Upsell.",
+      "script": "Un tunnel, c'est une suite d'étapes qui transforme un inconnu en client — de façon contrôlée.\n\nUn bon tunnel, en vrai, c'est pas compliqué :\nune promesse claire,\nun chemin sans friction,\ndes relances automatiques,\ndu tracking,\net de l'optimisation.\n\nSans tunnel : tu vends quand tu as de la chance.\nAvec tunnel : tu vends quand le système tourne.\n\nEt ici, le but est clair : faire acheter en paiement direct, sans appel.",
+      "cue": {
+        "punchline": "Un tunnel, c'est un parcours. Pas une page.",
+        "durationSec": 60,
+        "tag": "CONCEPT",
+        "transition": "Maintenant, on clarifie la brique centrale : c'est quoi une VSL ?",
+        "bullets": [
+          "Appuyer sur 'de façon contrôlée'",
+          "Contraste sans / avec = évidence",
+          "5 points — compter sur les doigts si besoin"
+        ]
+      },
+      "content": {
+        "headline": "Un tunnel, c'est une suite d'étapes qui transforme un inconnu en client. De façon contrôlée.",
+        "body": "Un bon tunnel = promesse claire + chemin sans friction + relances automatiques + suivi des conversions + optimisation continue. Sans tunnel, vous vendez quand vous avez de la chance. Avec tunnel, vous vendez quand le système tourne. Ici, le tunnel a un but : faire acheter en paiement direct, sans appel.",
+        "pillars": [
+          {
+            "icon": "users",
+            "title": "Inconnu",
+            "text": "Il découvre votre offre"
+          },
+          {
+            "icon": "eye",
+            "title": "Prospect",
+            "text": "Il comprend et se rassure"
+          },
+          {
+            "icon": "credit-card",
+            "title": "Client",
+            "text": "Il achète en paiement direct"
+          },
+          {
+            "icon": "trending-up",
+            "title": "Upsell",
+            "text": "Il monte en gamme"
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000006",
+      "position": 5,
+      "type": "definition",
+      "notes": "CONCEPT VSL · 75 sec. Les 3 jobs — marquer une pause entre chaque. Finir sur « avant le checkout » — mot clé pour la suite. Visuel d'origine : écran vidéo avec bouton play.",
+      "script": "Une VSL, ce n'est pas 'une vidéo'.\nC'est ton vendeur.\n\nElle doit faire trois choses :\nclarifier : ce que tu fais, pour qui, et pourquoi maintenant\nprouver : que ça marche, sans blabla\nconvertir : en amenant la personne au checkout\n\nSans VSL : le prospect réfléchit trop, compare, et repart.\nAvec VSL : le prospect suit un chemin.",
+      "cue": {
+        "punchline": "La VSL fait le job du closer… mais en silence.",
+        "durationSec": 75,
+        "tag": "CONCEPT VSL",
+        "transition": "Maintenant on va être très honnêtes : pourquoi VSL → Paiement, et pas RDV ?",
+        "bullets": [
+          "Les 3 jobs — marquer une pause entre chaque",
+          "Contraste 'espères / contrôles' = image forte",
+          "Finir sur 'avant le checkout' — mot clé pour la suite"
+        ]
+      },
+      "content": {
+        "headline": "Une VSL, c'est une vidéo de vente qui fait 3 choses.",
+        "body": "Ce n'est pas \"une vidéo\" : c'est votre vendeur. Sans VSL : le prospect réfléchit trop. Avec VSL : le prospect avance.",
+        "pillars": [
+          {
+            "icon": "lightbulb",
+            "title": "Clarifie",
+            "text": "Ce que vous faites + pour qui"
+          },
+          {
+            "icon": "shield-check",
+            "title": "Prouve",
+            "text": "Que ça marche"
+          },
+          {
+            "icon": "shopping-cart",
+            "title": "Convertit",
+            "text": "Sans que vous soyez au téléphone"
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000007",
+      "position": 6,
+      "type": "why",
+      "notes": "LOGIQUE · 90 sec. Rappeler que c'est basé sur LEUR diagnostic. « Elle achète parce qu'elle est prête » — ancrage fort. Pas de vente — juste de la logique. Chute de la slide : « Ici, l'objectif n'est pas \"booker\". C'est encaisser. »",
+      "script": "On recommande VSL → Paiement quand :\nl'offre est simple à comprendre\nle prix est compatible avec le paiement direct\ntu as assez de preuve\net tu veux automatiser la vente\n\nDonc là, le but n'est pas de prendre des appels.\nLe but, c'est que la personne arrive, comprenne, se rassure… et achète.",
+      "cue": {
+        "punchline": "Ici, l'objectif n'est pas de booker. C'est d'encaisser.",
+        "durationSec": 90,
+        "tag": "LOGIQUE",
+        "transition": "Et là, slide la plus importante : les conditions pour que ça marche.",
+        "bullets": [
+          "Rappeler que c'est basé sur LEUR diagnostic",
+          "'Elle achète parce qu'elle est prête' — ancrage fort",
+          "Pas de vente — juste de la logique"
+        ]
+      },
+      "content": {
+        "headline": "On recommande VSL → Paiement quand… — ici, l'objectif n'est pas \"booker\". C'est encaisser.",
+        "reasons": [
+          {
+            "icon": "zap",
+            "title": "L'offre est simple à comprendre",
+            "text": "Le prospect saisit ce qu'il achète sans avoir besoin d'un appel."
+          },
+          {
+            "icon": "dollar-sign",
+            "title": "Le prix est compatible avec le paiement direct",
+            "text": "Le montant permet une décision d'achat en ligne, sans conversation."
+          },
+          {
+            "icon": "circle-check",
+            "title": "La preuve est suffisante",
+            "text": "Cas, résultats et démonstrations rassurent avant le checkout."
+          },
+          {
+            "icon": "cpu",
+            "title": "Vous voulez automatiser la vente",
+            "text": "La personne arrive, comprend, se rassure… et achète."
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000008",
+      "position": 7,
+      "type": "why",
+      "notes": "CONDITIONS · 75 sec · TRÈS IMPORTANT. Égrener les conditions une par une. Insister sur « scaler ce qui est validé ». Pas de pression — juste de la clarté. Visuel d'origine : checklist « Tout en place ? » → OUI : paiement direct ✓ / NON : basculer vers VSL → RDV (plus rentable à froid).",
+      "script": "Paiement direct, c'est OK uniquement si tu as :\nune promesse claire en 10 secondes\nune offre lisible : ce que j'achète, ce que je reçois, comment j'y accède\nde la preuve : cas, démo, résultats, captures… un truc réel\nun checkout sans friction : simple, rassurant, pas froid\nune relance panier automatique, obligatoire\n\nEt je te dis un truc important :\nsi un de ces points manque, on ne s'entête pas.\nOn bascule vers VSL → RDV, parce que c'est plus rentable à froid.\n\nDonc le paiement direct, ce n'est pas 'mieux'.\nC'est juste 'adapté'… quand les conditions sont là.",
+      "cue": {
+        "punchline": "Si tu ne coches pas ça, tu vas perdre de l'argent.",
+        "durationSec": 75,
+        "tag": "CONDITIONS",
+        "transition": "Ok. Maintenant je te montre les objectifs précis de ce tunnel.",
+        "bullets": [
+          "Égrener les 4 conditions une par une",
+          "Insister sur 'scaler ce qui est validé'",
+          "Pas de pression — juste de la clarté"
+        ]
+      },
+      "content": {
+        "headline": "Paiement direct = OK si vous avez… Sinon → on bascule vers VSL → RDV (plus rentable à froid).",
+        "reasons": [
+          {
+            "icon": "message-circle",
+            "title": "Une promesse claire en 10 secondes",
+            "text": "Le prospect comprend immédiatement ce que vous lui apportez."
+          },
+          {
+            "icon": "eye",
+            "title": "Une offre lisible",
+            "text": "Ce que j'achète, ce que je reçois, quand et comment j'y accède."
+          },
+          {
+            "icon": "star",
+            "title": "De la preuve",
+            "text": "Cas, chiffres, démonstration, résultats — un truc réel."
+          },
+          {
+            "icon": "credit-card",
+            "title": "Un checkout sans friction",
+            "text": "Simple, rassurant, pas froid."
+          },
+          {
+            "icon": "bell",
+            "title": "Une relance panier automatique",
+            "text": "Obligatoire : sans elle, les intentions d'achat se perdent."
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000009",
+      "position": 8,
+      "type": "objectives",
+      "notes": "OBJECTIFS · 60 sec. Égrener les 3 avec des pauses marquées. Insister sur « sans être là ». KPI final = ancrage pour la suite : pas les vues → conversion + coût par achat + panier moyen.",
+      "script": "Trois objectifs :\naugmenter la conversion VSL → achat\nréduire l'abandon de panier\naugmenter le panier moyen avec bump/upsell\n\nLe KPI ici, c'est pas les vues.\nC'est : conversion, coût par achat, panier moyen.",
+      "cue": {
+        "punchline": "Conversion, panier, et récupération des abandons.",
+        "durationSec": 60,
+        "tag": "OBJECTIFS",
+        "transition": "Je te montre le flow complet.",
+        "bullets": [
+          "Égrener les 3 avec des pauses marquées",
+          "Insister sur 'sans être là'",
+          "KPI final = ancrage pour la suite"
+        ]
+      },
+      "content": {
+        "headline": "Les 3 objectifs du VSL → Paiement. Le KPI ici : pas les vues → conversion + coût par achat + panier moyen.",
+        "goals": [
+          {
+            "label": "Augmenter le taux de conversion",
+            "target": "VSL → achat",
+            "text": "Plus d'acheteurs avec le même trafic, sans appel."
+          },
+          {
+            "label": "Réduire l'abandon de panier",
+            "target": "Relances + friction faible",
+            "text": "Récupérer les intentions d'achat qui partent au checkout."
+          },
+          {
+            "label": "Augmenter le panier moyen",
+            "target": "Order bump / upsell",
+            "text": "Plus de valeur par client, dès le premier achat."
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000010",
+      "position": 9,
+      "type": "flow",
+      "notes": "ARCHITECTURE · 90 sec. Suivre le flow avec le curseur ou la main. Insister sur « chaque étape trackée ». Finir fort : « tu subis ». Rappel affiché : chaque étape a une page dédiée, un événement tracké, une automation associée.",
+      "script": "Flow : Trafic → VSL → Checkout → Confirmation → Onboarding → Upsell/Follow-up.\n\nEt règle : chaque étape a une page, un event tracké, et une automation associée.\nSinon tu ne sais pas où tu perds.",
+      "cue": {
+        "punchline": "Un chemin simple, sans fuites.",
+        "durationSec": 90,
+        "tag": "ARCHITECTURE",
+        "transition": "Ok. Maintenant, les pages une par une.",
+        "bullets": [
+          "Suivre le flow avec le curseur ou la main",
+          "Insister sur 'chaque étape trackée'",
+          "Finir fort : 'tu subis'"
+        ]
+      },
+      "content": {
+        "headline": "Le flow complet — chaque étape a : une page dédiée + un événement tracké + une automation associée.",
+        "steps": [
+          {
+            "label": "01",
+            "title": "Trafic",
+            "text": "Meta / Google / Organique"
+          },
+          {
+            "label": "02",
+            "title": "Page VSL",
+            "text": "Vidéo + Preuve + CTA"
+          },
+          {
+            "label": "03",
+            "title": "Checkout",
+            "text": "Paiement simplifié"
+          },
+          {
+            "label": "04",
+            "title": "Confirmation",
+            "text": "Accès immédiat"
+          },
+          {
+            "label": "05",
+            "title": "Onboarding",
+            "text": "Démarrage + quick win"
+          },
+          {
+            "label": "06",
+            "title": "Upsell",
+            "text": "Offre complémentaire"
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000011",
+      "position": 10,
+      "type": "architecture",
+      "notes": "PAGES · 90 sec. Dérouler les 5 pages une par une. Appuyer sur l'analogie « caisse ». Upsell = carte bonus, ne pas survendre. Page abandon : email + WhatsApp de relance (détaillé plus loin).",
+      "script": "Page VSL : vidéo + preuves + CTA vers checkout\nCheckout : offre claire + garantie + friction minimale\nConfirmation : instructions + upsell\nUpsell (optionnel) : offre complémentaire\nPage abandon : email + WhatsApp de relance",
+      "cue": {
+        "punchline": "C'est une chaîne. Chaque page a un rôle.",
+        "durationSec": 90,
+        "tag": "PAGES",
+        "transition": "Zoom sur la page VSL : qu'est-ce qu'on met dessus ?",
+        "bullets": [
+          "Dérouler les 5 pages une par une",
+          "Appuyer sur l'analogie 'caisse'",
+          "Upsell = carte bonus, ne pas survendre"
+        ]
+      },
+      "content": {
+        "headline": "5 pages. 1 système. Chaque page a un rôle précis dans la conversion.",
+        "layers": [
+          {
+            "name": "Le tunnel en pages",
+            "items": [
+              "Page VSL — vidéo + preuves + points clés + CTA \"acheter\"",
+              "Checkout — paiement simple + rassurance + FAQ courte",
+              "Confirmation / Merci — accès immédiat + prochaines étapes",
+              "Upsell (optionnel) — upgrade / bundle / accompagnement",
+              "Onboarding — démarrage + quick win + support"
+            ]
+          },
+          {
+            "name": "Exigences",
+            "items": [
+              "Chaque page est trackée : pixel + événements de conversion",
+              "Vous savez exactement où ça bloque",
+              "Mobile-first : 80%+ du trafic arrive sur mobile"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000012",
+      "position": 11,
+      "type": "mockup",
+      "notes": "PAGE VSL · 75 sec. Répéter « une seule décision » comme mantra. Pointer les éléments visuels si dispo. Beau vs efficace = évidence. Visuel d'origine : maquette de page avec vidéo et bouton « Acheter maintenant ».",
+      "script": "Headline orientée résultat.\nVidéo 7–15 min selon marché.\n3 bullets : ce que ça change concrètement.\nPreuves.\nObjections majeures (3 à 5 max).\nCTA clair : acheter maintenant.\n\nLa page VSL a une seule mission :\nfaire dire au prospect 'ok, j'avance'.",
+      "cue": {
+        "punchline": "Clair. Pas artistique.",
+        "durationSec": 75,
+        "tag": "PAGE VSL",
+        "transition": "Et dans la vidéo, on suit une ossature précise.",
+        "bullets": [
+          "Répéter 'une seule décision' comme mantra",
+          "Pointer les éléments visuels si dispo",
+          "Beau vs efficace = évidence"
+        ]
+      },
+      "content": {
+        "headline": "Structure de la Page VSL.",
+        "page": "sales",
+        "blocks": [
+          {
+            "label": "Headline"
+          },
+          {
+            "label": "Vidéo",
+            "detail": "lecteur avec bouton play"
+          },
+          {
+            "label": "Bullets"
+          }
+        ],
+        "cta": "Acheter maintenant",
+        "aside": "Headline orientée résultat (simple) · Vidéo (7–15 min selon ton marché) · 3 bullets : ce que ça change concrètement · Preuves (logos, témoignages, screenshots) · Objections majeures (3–5 max) · CTA clair : \"Acheter maintenant\""
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000013",
+      "position": 12,
+      "type": "flow",
+      "notes": "OSSATURE VSL · 90 sec. Égrener l'ossature comme une checklist. « Parler dans le bon ordre » = insight clé. Finir sur « ne convertit pas » — vérité directe. L'original compte 8 blocs : 06 Offre (ce que le client reçoit) et 07 Prix + garantie (si applicable) sont fusionnés ici en une seule étape.",
+      "script": "Tu pars du vrai problème.\nTu expliques pourquoi les solutions actuelles échouent.\nTu présentes ton mécanisme / ta méthode.\nTu mets la preuve.\nTu montres un aperçu concret du livrable.\nTu présentes l'offre : ce que le client reçoit.\nTu donnes prix + garantie si applicable.\nEt tu termines par un CTA simple : acheter maintenant.\n\nLe but n'est pas de parler beaucoup.\nLe but est d'enlever les doutes dans le bon ordre.",
+      "cue": {
+        "punchline": "Une VSL structurée, c'est une vente structurée.",
+        "durationSec": 90,
+        "tag": "OSSATURE VSL",
+        "transition": "Et même avec une bonne VSL, tu peux tout perdre à un endroit : le checkout.",
+        "bullets": [
+          "Égrener l'ossature comme une checklist",
+          "'Parler dans le bon ordre' = insight clé",
+          "Finir sur 'ne convertit pas' — vérité directe"
+        ]
+      },
+      "content": {
+        "headline": "Structure de la vidéo — sans script, juste l'ossature.",
+        "steps": [
+          {
+            "label": "01",
+            "title": "Le vrai problème",
+            "text": "Vous posez le diagnostic avant de vendre."
+          },
+          {
+            "label": "02",
+            "title": "Pourquoi les solutions actuelles échouent",
+            "text": "Ce que le prospect a déjà essayé, et pourquoi ça ne marche pas."
+          },
+          {
+            "label": "03",
+            "title": "La solution",
+            "text": "Ton mécanisme / ta méthode."
+          },
+          {
+            "label": "04",
+            "title": "Preuve",
+            "text": "Cas / exemples."
+          },
+          {
+            "label": "05",
+            "title": "Démo / aperçu du livrable",
+            "text": "Un aperçu concret de ce que le client obtient."
+          },
+          {
+            "label": "06",
+            "title": "Offre + prix + garantie",
+            "text": "Ce que le client reçoit, le prix, et la garantie si applicable."
+          },
+          {
+            "label": "07",
+            "title": "CTA : acheter maintenant",
+            "text": "Un seul CTA. Une seule action."
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000014",
+      "position": 13,
+      "type": "mockup",
+      "notes": "CHECKOUT · 90 sec. Égrener les 4 points un par un : paiement simple, rassurance (sécurité, support, accès immédiat), FAQ courte (objections finales), order bump si pertinent. Pause après « ils s'étonnent » — ça résonne. Finir sur « page de vente, pas formulaire ». Visuel d'origine : maquette de checkout « Paiement 100% sécurisé » avec case d'order bump « Ajouter l'option + ». Chute : « Une VSL peut être excellente… si le checkout est mauvais, tu perds tout. »",
+      "script": "Le checkout doit être froidement optimisé :\npaiement simple, rassurance, FAQ courte, objection finale, order bump si pertinent.\n\nParce que c'est là que la personne se dit :\n'ok, j'y vais'… puis elle hésite, et elle quitte.\n\nEt ça, c'est pas un problème de VSL.\nC'est un problème de friction.",
+      "cue": {
+        "punchline": "Un mauvais checkout peut tuer une bonne VSL.",
+        "durationSec": 90,
+        "tag": "CHECKOUT",
+        "transition": "Et quand elle quitte, c'est là que l'argent se récupère : panier abandonné.",
+        "bullets": [
+          "Égrener les 5 points un par un",
+          "Pause après 'ils s'étonnent' — ça résonne",
+          "Finir sur 'page de vente, pas formulaire'"
+        ]
+      },
+      "content": {
+        "headline": "Objectif : réduire la friction au maximum.",
+        "page": "checkout",
+        "blocks": [
+          {
+            "label": "Paiement 100% sécurisé",
+            "detail": "badge bouclier"
+          },
+          {
+            "label": "Prénom + Nom",
+            "detail": "champ"
+          },
+          {
+            "label": "Email",
+            "detail": "champ"
+          },
+          {
+            "label": "Numéro de carte",
+            "detail": "champ"
+          },
+          {
+            "label": "Ajouter l'option +",
+            "detail": "order bump (case à cocher)"
+          }
+        ],
+        "cta": "Finaliser ma commande",
+        "aside": "paiement simple · rassurance (sécurité, support, accès immédiat) · FAQ courte (objections finales) · order bump si pertinent"
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000015",
+      "position": 14,
+      "type": "automation",
+      "notes": "RELANCES · 90 sec · LÀ OÙ L'ARGENT EST. Insister sur « intention = prospect chaud ». Dérouler la séquence avec rythme. Finir sur « récupéré, pas créé » — différence clé. Visuel d'origine : Checkout → Abandon ✕ → J0 / J1 / J2 → Récupéré ✓. But : récupérer les ventes « perdues ».",
+      "script": "Une grosse partie des prospects arrive au checkout… et part.\nCe n'est pas parce qu'ils disent 'non'.\nC'est parce qu'ils reportent.\n\nDonc on installe une séquence :\nemail J0 J1 J2 + WhatsApp soft si dispo,\npreuve + objection principale,\nrappel du bénéfice + lien direct retour checkout.\n\nÇa, c'est ce qui transforme un funnel 'moyen' en funnel rentable.",
+      "cue": {
+        "punchline": "Là où l'argent est.",
+        "durationSec": 90,
+        "tag": "RELANCES",
+        "transition": "Et maintenant, on assemble tout : automations.",
+        "bullets": [
+          "Insister sur 'intention = prospect chaud'",
+          "Dérouler la séquence avec rythme",
+          "Finir sur 'récupéré, pas créé' — différence clé"
+        ]
+      },
+      "content": {
+        "headline": "Relance panier abandonné : beaucoup arrivent au checkout… puis partent. But : récupérer les ventes \"perdues\".",
+        "items": [
+          {
+            "trigger": "Abandon au checkout",
+            "action": "Relance email n°1 : rappel du bénéfice + lien direct \"revenir au checkout\".",
+            "delay": "J0"
+          },
+          {
+            "trigger": "Toujours pas d'achat",
+            "action": "Relance email n°2 : preuve + objection principale.",
+            "delay": "J1"
+          },
+          {
+            "trigger": "Toujours pas d'achat",
+            "action": "Relance email n°3 : dernier rappel + retour checkout.",
+            "delay": "J2"
+          },
+          {
+            "trigger": "Numéro WhatsApp disponible",
+            "action": "WhatsApp soft en complément des emails.",
+            "delay": "Si dispo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000016",
+      "position": 15,
+      "type": "automation",
+      "notes": "AUTOMATISATION · 2 min · Ce que 90% n'installent jamais. Dérouler les 3 blocs : watch / abandon / achat. Insister sur le post-achat — souvent oublié. « Le système travaille pendant que tu dors ». Bloc achat complet d'origine : email confirmation + accès immédiat, WhatsApp accès (si donné), tag client + stage « client », onboarding (J+1, J+3), proposition upsell (si logique).",
+      "script": "Quand quelqu'un regarde la VSL : tag + segmentation 25/50/80.\nQuand quelqu'un clique checkout mais n'achète pas : panier abandonné + retour checkout.\nQuand quelqu'un achète : confirmation + accès immédiat + tags client + onboarding + upsell si logique.\n\nTu veux que le système sache exactement :\noù il est, ce qu'il a fait, et quoi lui envoyer.",
+      "cue": {
+        "punchline": "Sans relance, ça fuit. Avec relance, ça vend.",
+        "durationSec": 120,
+        "tag": "AUTOMATISATION",
+        "transition": "Et email/WhatsApp ont deux rôles : convertir et activer.",
+        "bullets": [
+          "Dérouler les 3 blocs : watch / abandon / achat",
+          "Insister sur post-achat — souvent oublié",
+          "'Le système travaille pendant que tu dors'"
+        ]
+      },
+      "content": {
+        "headline": "Les automations — ce que 90% n'installent jamais.",
+        "items": [
+          {
+            "trigger": "Quand quelqu'un regarde la VSL",
+            "action": "Tag \"VSL_view\" + segmentation (25%, 50%, 80%)."
+          },
+          {
+            "trigger": "Quand quelqu'un clique checkout mais n'achète pas",
+            "action": "Séquence panier abandonné (email + WA) : preuve + objection + retour checkout."
+          },
+          {
+            "trigger": "Quand quelqu'un achète",
+            "action": "Email confirmation + accès immédiat + WhatsApp accès (si donné) + tag client et stage \"client\"."
+          },
+          {
+            "trigger": "Après l'achat",
+            "action": "Onboarding automatique.",
+            "delay": "J+1, J+3"
+          },
+          {
+            "trigger": "Client activé",
+            "action": "Proposition upsell (si logique)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000017",
+      "position": 16,
+      "type": "channel",
+      "notes": "CANAUX · 75 sec · Conversion + activation. Différencier les rôles : email = fond, WhatsApp = urgence. Insister sur la combinaison — pas l'un ou l'autre. Ton direct — cette slide doit marquer. Les deux blocs d'origine (Avant achat / Après achat) s'appliquent à l'email ET à WhatsApp.",
+      "script": "Avant achat : abandon panier + objections + preuve.\nAprès achat : démarrage rapide, quick win, support, puis upsell si pertinent.\n\nLe but : moins de refunds, plus de satisfaction, plus de valeur par client.",
+      "cue": {
+        "punchline": "Avant : récupérer. Après : activer.",
+        "durationSec": 75,
+        "tag": "CANAUX",
+        "transition": "Et tout ça doit remonter dans ton CRM.",
+        "bullets": [
+          "Différencier les rôles : email = fond, WA = urgence",
+          "Insister sur la combinaison — pas l'un ou l'autre",
+          "Ton direct — cette slide doit marquer"
+        ]
+      },
+      "content": {
+        "headline": "Email & WhatsApp — conversion + activation. But : moins de refunds, plus de satisfaction, plus d'upsell.",
+        "channel": "email",
+        "scripts": [
+          {
+            "moment": "Avant achat — séquences de conversion",
+            "message": "Panier abandonné · objections · preuve · rappel."
+          },
+          {
+            "moment": "Après achat — séquences d'activation",
+            "message": "Comment démarrer · quick win · support · upsell logique (si pertinent)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000018",
+      "position": 17,
+      "type": "crm",
+      "notes": "SUIVI · 60 sec · Sinon c'est pas un système. « Piloter, pas deviner ». Pipeline = visibilité totale. Transition rapide vers la vue Funnelytics. Visuel d'origine : pipeline CRM temps réel avec leads fictifs + taux de conversion par étape (VSL View 100% → Checkout 42% → Achat 18% → Upsell 8%). « Tout tracké → tout optimisable. »",
+      "script": "Tags source, statut, progress VSL.\nSegments : view 80, checkout, buyer.\nOpportunités si upsell ou si high ticket derrière.\nTasks support / onboarding.\n\nSinon tu es aveugle. Et un evergreen/paiement direct sans data… c'est du hasard.",
+      "cue": {
+        "punchline": "Si ce n'est pas tracké, tu ne peux pas optimiser.",
+        "durationSec": 60,
+        "tag": "SUIVI",
+        "transition": "Je te montre la vue Funnelytics : la machine entière.",
+        "bullets": [
+          "'Piloter, pas deviner'",
+          "Pipeline = visibilité totale",
+          "Transition rapide vers Funnelytics"
+        ]
+      },
+      "content": {
+        "headline": "Le tunnel doit alimenter : tags, segments, opportunités, tâches. Si ce n'est pas tracké, ce n'est pas optimisable.",
+        "pipelines": [
+          {
+            "stage": "VSL View",
+            "definition": "Tags : source, statut, progress VSL — segment view 80%"
+          },
+          {
+            "stage": "Checkout",
+            "definition": "Segment checkout : intention d'achat, relance panier en cours"
+          },
+          {
+            "stage": "Achat ✓",
+            "definition": "Segment buyer + tâches support / onboarding"
+          },
+          {
+            "stage": "Upsell",
+            "definition": "Opportunités si upsell ou high ticket derrière"
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000019",
+      "position": 18,
+      "type": "embed",
+      "notes": "VUE D'ENSEMBLE · 2 min. Pointer les blocs dans l'ordre. Insister sur la LTV — pas juste la vente initiale. Finir sur « corriger en premier » = priorisation. L'original intègre un canvas Funnelytics interactif (bouton « Voir la machine en action », plein écran) : montrer ici votre propre schéma Sources (Meta, YouTube) → VSL → Checkout → Merci → Upsell, avec les automations Panier abandonné et WhatsApp reliées.",
+      "script": "Dans Funnelytics, tu vois : trafic, pages, events (view/25/50/80/click/checkout/purchase) et automations reliées.\nDonc tu sais où ça casse, et tu corriges au bon endroit.",
+      "cue": {
+        "punchline": "Voici la machine entière.",
+        "durationSec": 120,
+        "tag": "VUE D'ENSEMBLE",
+        "transition": "Maintenant, du concret : des exemples de pages.",
+        "bullets": [
+          "Pointer les blocs dans l'ordre",
+          "Insister sur LTV — pas juste la vente initiale",
+          "Finir sur 'corriger en premier' = priorisation"
+        ]
+      },
+      "content": {
+        "headline": "Voici la machine.",
+        "title": "Schéma Funnelytics",
+        "caption": "Pas une page. Le système complet en action."
+      },
+      "needsInput": true
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000020",
+      "position": 19,
+      "type": "showcase",
+      "needsInput": true,
+      "notes": "PREUVE · 45 sec max — ne pas sur-expliquer. Pointer 1-2 exemples proches du secteur du prospect. Transition fluide vers les preuves. L'original est un carrousel de pages live (aperçus intégrés, plein écran, bouton « Ouvrir ») : remplacer les placeholders par des captures de vos propres pages VSL, checkout, confirmation et upsell.",
+      "script": "Exemples : VSL, checkout, confirmation, upsell.\nL'objectif : que tu voies que c'est réel et duplicable.",
+      "cue": {
+        "punchline": "On ne théorise pas.",
+        "durationSec": 45,
+        "tag": "PREUVE",
+        "transition": "Et si tu veux, tu peux aussi regarder des preuves brutes.",
+        "bullets": [
+          "45 sec max — ne pas sur-expliquer",
+          "Pointer 1-2 exemples proches du secteur",
+          "Transition fluide vers les preuves"
+        ]
+      },
+      "content": {
+        "headline": "On ne théorise pas. On construit.",
+        "items": [
+          {
+            "title": "[Page client 1]"
+          },
+          {
+            "title": "[Page client 2]"
+          },
+          {
+            "title": "[Page client 3]"
+          },
+          {
+            "title": "[Page client 4]"
+          },
+          {
+            "title": "[Page client 5]"
+          },
+          {
+            "title": "[Page client 6]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000021",
+      "position": 20,
+      "type": "screenshots",
+      "needsInput": true,
+      "notes": "PREUVES · 90 sec. Ton factuel — pas de survente. Laisser le prospect regarder quelques secondes. Finir sur « tu scales » — vision long terme. L'original affiche une grille de captures de dashboards (ClickFunnels, Systeme.io) cliquables en lightbox + un total cumulé multi-clients : insérer vos propres captures et chiffres réels.",
+      "script": "Captures ClickFunnels, systeme.io, GHL…\nLe but n'est pas de te promettre un chiffre.\nLe but est de te montrer qu'un système se pilote avec des données : conversion, panier moyen, ROI.",
+      "cue": {
+        "punchline": "On mesure. Point.",
+        "durationSec": 90,
+        "tag": "PREUVES",
+        "transition": "Ok. Qu'est-ce que tu gagnes avec ce modèle ?",
+        "bullets": [
+          "Ton factuel — pas de survente",
+          "Laisser le prospect regarder quelques secondes",
+          "Finir sur 'tu scales' — vision long terme"
+        ]
+      },
+      "content": {
+        "headline": "Les chiffres parlent d'eux-mêmes.",
+        "items": [
+          {
+            "caption": "[Capture 1]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 2]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 3]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 4]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 5]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 6]",
+            "result": "[Résultat]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000022",
+      "position": 21,
+      "type": "benefits",
+      "notes": "BÉNÉFICES · 75 sec. Égrener lentement. Finir fort sur « tu reprends le contrôle ». Regard direct — cette phrase doit atterrir. Chute de la slide : « Ce système vous sort du \"je lance et je prie\". »",
+      "script": "Ce système, il sert à une chose : arrêter de dépendre de toi.\n\nParce qu'aujourd'hui, beaucoup de business tournent comme ça :\nsi t'es en forme → ça vend.\nsi t'es fatigué / en déplacement / pas dispo → ça ralentit.\n\nAvec un evergreen propre, tu récupères trois trucs :\n\n1) De la stabilité.\nTu as des ventes qui peuvent tomber un lundi matin comme un vendredi soir, parce que la machine tourne.\n\n2) Du temps.\nMoins de calls inutiles, moins de discussion pour convaincre, moins de \"je t'explique encore\".\nLe système fait le travail en amont.\n\n3) Du contrôle.\nTu sais où ça bloque, tu sais ce qui marche, tu sais quoi corriger.\nTu n'es plus dans le \"j'ai l'impression que…\".\n\nEt au passage, tu peux augmenter ton panier moyen proprement :\navec un upsell logique, ou une séquence qui fait avancer les gens au bon moment.\n\nDonc tu passes de :\n'je teste au hasard et j'espère'\nà :\n'j'optimise avec méthode, et je sais pourquoi ça monte ou ça baisse'.",
+      "cue": {
+        "punchline": "Tu vends sans calls… mais tu gardes le contrôle.",
+        "durationSec": 75,
+        "tag": "BÉNÉFICES",
+        "transition": "Et justement, pour piloter ça, voilà les KPI simples qu'on suit vraiment.",
+        "bullets": [
+          "Égrener lentement",
+          "Finir fort sur 'tu reprends le contrôle'",
+          "Regard direct — cette phrase doit atterrir"
+        ]
+      },
+      "content": {
+        "headline": "Ce que vous gagnez — ce système vous sort du \"je lance et je prie\".",
+        "benefits": [
+          {
+            "icon": "phone",
+            "title": "Des ventes sans appels",
+            "text": "Le prospect comprend, se rassure et achète seul."
+          },
+          {
+            "icon": "clock",
+            "title": "Un système qui vend même quand vous êtes off",
+            "text": "Des ventes un lundi matin comme un vendredi soir."
+          },
+          {
+            "icon": "timer",
+            "title": "Moins de temps perdu en calls",
+            "text": "Le système fait le travail en amont."
+          },
+          {
+            "icon": "trending-up",
+            "title": "Un panier moyen optimisé",
+            "text": "Order bump / upsell logique au bon moment."
+          },
+          {
+            "icon": "target",
+            "title": "Une conversion pilotée",
+            "text": "Pas au feeling : vous savez quoi corriger."
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000023",
+      "position": 22,
+      "type": "gauge",
+      "notes": "MESURABLE · 90 sec · Cockpit de pilotage. Pointer chaque KPI à l'écran. Ne pas aller trop vite — chaque chiffre compte. Finir sur « jamais au hasard ». L'original affiche 7 jauges animées + un ticker « Live » (valeurs d'exemple) : CTR annonce → VSL 68% (cible 70%), Lecture vidéo 80% 42% (cible 40%), Clic VSL → checkout 31% (cible 30%), Checkout → achat 18% (cible 15%), Abandon panier 72% (cible 60%), Panier moyen 497€, ROI / coût par achat 3.2x (cible 3x). Citation : « Ce qui se mesure s'améliore. Ce qui ne se mesure pas s'effondre. »",
+      "script": "Ok. Là, on rentre dans le vrai sujet.\nParce qu'un funnel, ce n'est pas une opinion. C'est des chiffres.\n\nEt le but ici, c'est pas de faire du reporting pour faire joli.\nC'est de savoir où ça casse, pour corriger au bon endroit.\n\nJe te donne les indicateurs qu'on suit, et surtout comment tu les lis :\n\n1) CTR annonce → VSL\nSur 100 personnes qui voient ta pub, combien cliquent ?\nSi c'est faible, le problème n'est pas ton funnel.\nLe problème c'est le hook / le message / l'angle.\nTu attires mal, donc tu vas payer cher tout le reste.\n\n2) Lecture vidéo (25% / 50% / 80%)\nÇa, c'est ton \"thermomètre de persuasion\".\nSi les gens quittent à 10–20%, c'est que tu perds leur attention trop tôt :\nhook pas clair, trop de blabla, ou pas assez concret.\nSi les gens vont à 50–80%, c'est bon signe : la VSL tient.\n\n3) Clic VSL → checkout\nLà tu mesures un truc simple :\nest-ce que ta vidéo donne envie d'agir maintenant ?\nSi les gens regardent mais ne cliquent pas, t'as souvent un problème de :\nCTA pas assez clair, offre pas assez tangible, ou manque de preuve au bon moment.\n\n4) Checkout → achat\nIci c'est le point où beaucoup perdent de l'argent sans le voir.\nSi le checkout ne convertit pas, c'est rarement \"le prix\".\nSouvent c'est :\npas assez de réassurance, trop de friction, pas assez clair, ou un détail qui bloque.\n\n5) Abandon panier\nC'est normal d'en avoir.\nLe vrai sujet c'est : est-ce que tu le récupères ?\nSi tu n'as pas une séquence panier abandonné propre, tu jettes de l'argent.\n\n6) Panier moyen\nC'est ton levier \"rentabilité\".\nMême un funnel moyen devient rentable si ton panier monte avec un upsell intelligent.\nEt inversement, un funnel qui convertit mais avec un panier trop faible… ça ne scale pas.\n\n7) Coût par achat / ROI\nC'est le juge final.\nTout le reste, c'est des sous-indicateurs.\nSi ton coût par achat est bon et que ton ROI tient, tu peux scaler.\nSi ce n'est pas bon, tu ne scales pas : tu corriges.\n\nDonc la logique est simple :\nchaque chiffre te dit quoi corriger.\nEt comme ça tu n'optimises jamais au hasard.",
+      "cue": {
+        "punchline": "Chaque chiffre te dit où tu perds de l'argent. Point.",
+        "durationSec": 90,
+        "tag": "MESURABLE",
+        "transition": "Et justement, pour éviter de perdre des semaines, je te montre les erreurs classiques qu'on voit sur 8 funnels sur 10…",
+        "bullets": [
+          "Pointer chaque KPI à l'écran",
+          "Ne pas aller trop vite — chaque chiffre compte",
+          "Finir sur 'jamais au hasard' = précision chirurgicale"
+        ]
+      },
+      "content": {
+        "headline": "7 métriques. Tout le reste en découle.",
+        "gauges": [
+          {
+            "label": "CTR annonce → VSL",
+            "value": 68,
+            "suffix": "%",
+            "note": "Objectif : 70%"
+          },
+          {
+            "label": "Lecture vidéo 80%",
+            "value": 42,
+            "suffix": "%",
+            "note": "Objectif : 40%"
+          },
+          {
+            "label": "Clic VSL → checkout",
+            "value": 31,
+            "suffix": "%",
+            "note": "Objectif : 30%"
+          },
+          {
+            "label": "Checkout → achat",
+            "value": 18,
+            "suffix": "%",
+            "note": "Objectif : 15%"
+          },
+          {
+            "label": "Abandon panier",
+            "value": 72,
+            "suffix": "%",
+            "note": "Objectif : sous 60%"
+          },
+          {
+            "label": "Panier moyen",
+            "value": 497,
+            "max": 1000,
+            "suffix": " €",
+            "note": "Objectif : 497 €"
+          },
+          {
+            "label": "ROI / Coût par achat",
+            "value": 3.2,
+            "max": 5,
+            "suffix": "x",
+            "note": "Objectif : 3x"
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000024",
+      "position": 23,
+      "type": "mistakes",
+      "notes": "ERREURS · 75 sec. Égrener les 3 avec gravité — pas de rush. Identifier laquelle correspond au prospect. Finir sur « dès le départ » — rassurer. Conclusion de la slide : « On corrige ça dès le départ. »",
+      "script": "VSL floue/trop longue.\nCheckout avec friction.\nAucune relance panier abandonné.\n\nOn corrige ces 3 points dès le départ.",
+      "cue": {
+        "punchline": "Ce qui tue VSL → paiement.",
+        "durationSec": 75,
+        "tag": "ERREURS",
+        "transition": "Ok. Maintenant : comment on l'implémente proprement ?",
+        "bullets": [
+          "Égrener les 3 avec gravité — pas de rush",
+          "Identifier laquelle correspond au prospect",
+          "Finir sur 'dès le départ' — rassurer"
+        ]
+      },
+      "content": {
+        "headline": "Les 3 erreurs qui tuent un VSL → Paiement. Ce qu'on corrige dès le départ.",
+        "mistakes": [
+          {
+            "mistake": "VSL floue / trop longue",
+            "fix": "Le prospect décroche avant le CTA."
+          },
+          {
+            "mistake": "Checkout avec friction",
+            "fix": "Les intentions ne se transforment pas en achat."
+          },
+          {
+            "mistake": "Aucune relance panier abandonné",
+            "fix": "Jusqu'à 70% des ventes laissées sur la table."
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000025",
+      "position": 24,
+      "type": "plan",
+      "notes": "PLAN · 90 sec · Simple, rassurant. Dérouler les 5 étapes avec rythme. Finir sur « toujours » — conviction ferme. Donner un délai si demandé. Promesse : base propre avant d'accélérer.",
+      "script": "Cadrage + angle VSL + offre.\nStructure pages + tracking plan.\nMontage + intégration.\nCRM + automations + relances panier.\nPuis lancement + optimisation.\n\nParce que si tu accélères sur un système bancal… tu accélères tes pertes.",
+      "cue": {
+        "punchline": "Base propre, puis optimisation.",
+        "durationSec": 90,
+        "tag": "PLAN",
+        "transition": "Dernier point : si tu veux qu'on le fasse pour toi.",
+        "bullets": [
+          "Dérouler les 5 étapes avec rythme",
+          "Finir sur 'toujours' — conviction ferme",
+          "Donner un délai si demandé"
+        ]
+      },
+      "content": {
+        "headline": "Plan d'implémentation. Promesse : base propre avant d'accélérer.",
+        "phases": [
+          {
+            "name": "Cadrage + angle VSL + offre",
+            "deliverables": [
+              "Positionnement",
+              "Angle d'attaque",
+              "Structure offre"
+            ]
+          },
+          {
+            "name": "Structure pages + tracking plan",
+            "deliverables": [
+              "Wireframes",
+              "Plan de tracking",
+              "Pixels + events"
+            ]
+          },
+          {
+            "name": "Montage VSL + intégration pages",
+            "deliverables": [
+              "Production vidéo",
+              "Intégration pages",
+              "CTA + formulaires"
+            ]
+          },
+          {
+            "name": "CRM + automations + relances panier",
+            "deliverables": [
+              "Séquences email",
+              "WhatsApp",
+              "Tags + segments"
+            ]
+          },
+          {
+            "name": "Lancement + optimisation",
+            "deliverables": [
+              "Go live",
+              "AB tests",
+              "Optimisation continue"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "16000000-0000-4000-8000-000000000026",
+      "position": 25,
+      "type": "cta",
+      "notes": "CLOSE · 2 min. Ton calme — aucune pression. Insister sur « même si on ne bosse pas ensemble ». Pause 2-3 sec avant le bouton. Laisser respirer le prospect. Badge : « On ne prend pas tout le monde. » Phrase de fin : « Si c'est un match, on installe le système clé en main. » Closing : « Tu peux candidater juste en dessous. »",
+      "script": "Si tu veux qu'on installe ça proprement, tu candidates.\n\nPourquoi candidature ?\nParce qu'on ne va pas te mettre un système VSL → Paiement si ce n'est pas le bon modèle.\nJe préfère te le dire direct, plutôt que de te faire perdre ton temps.\n\nL'appel est court : 10–15 minutes.\nOn check :\nton offre\nton pricing\nton trafic\net si VSL → Paiement est vraiment le bon choix\n\nEt dans tous les cas, tu repars avec un plan clair.\nMême si on ne bosse pas ensemble.\n\nSi c'est un match : on installe le système clé en main.\n\nTu peux candidater juste en dessous.",
+      "cue": {
+        "punchline": "Tu repars avec un plan. Et si c'est un match, on l'installe.",
+        "durationSec": 120,
+        "tag": "CLOSE",
+        "bullets": [
+          "Ton calme — aucune pression",
+          "Insister sur 'même si on ne bosse pas ensemble'",
+          "Pause 2-3 sec avant le bouton",
+          "Laisser respirer le prospect"
+        ],
+        "closing": "Tu peux candidater juste en dessous."
+      },
+      "content": {
+        "headline": "Vous voulez qu'on vous installe ce système proprement ?",
+        "sub": "Vous candidatez pour un appel court (10–15 min), on vérifie si votre offre est éligible (et si VSL→Paiement est le bon modèle), vous repartez avec le plan exact à exécuter — même si on ne bosse pas ensemble.",
+        "actions": [
+          {
+            "label": "Candidater pour la mise en place clé en main",
+            "kind": "form"
+          }
+        ]
+      }
+    }
+  ]
+}

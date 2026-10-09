@@ -22,6 +22,15 @@ vi.mock("@/lib/ai/groq", () => ({
   GroqProvider: vi.fn().mockImplementation(() => ({})),
 }));
 
+vi.mock("@/lib/db/client", () => ({
+  db: {
+    select: vi.fn().mockReturnThis(),
+    from: vi.fn().mockReturnThis(),
+    where: vi.fn().mockReturnThis(),
+    limit: vi.fn().mockResolvedValue([{ plan: "pro" }]),
+  },
+}));
+
 vi.mock("@/server/services/generation", () => ({
   generateDeckFromScript: vi.fn().mockImplementation(
     async (ctx, provider, script, templateConfig, themeId, options, onProgress) => {
@@ -38,7 +47,7 @@ describe("API: /api/ai/generate", () => {
       script: "A".repeat(300), // Min length is 300
       themeId: "00000000-0000-0000-0000-000000000000",
       templateConfig: {
-        id: "vsl",
+        id: "60000000-0000-4000-8000-000000000002",
         name: "VSL",
         stages: ["Intro", "CTA"],
       },
@@ -75,6 +84,22 @@ describe("API: /api/ai/generate", () => {
     const req = new Request("http://localhost:3000/api/generate", {
       method: "POST",
       body: JSON.stringify({ script: "too short" }),
+    });
+
+    const res = await POST(req);
+    expect(res.status).toBe(400);
+  });
+
+  it("returns 400 when the template id is a slug instead of a uuid", async () => {
+    // decks.template_id is a uuid FK; a slug would only fail at insert, after AI credits are spent.
+    const req = new Request("http://localhost:3000/api/generate", {
+      method: "POST",
+      body: JSON.stringify({
+        script: "A".repeat(300),
+        themeId: "00000000-0000-0000-0000-000000000000",
+        templateConfig: { id: "vsl-funnel", name: "VSL", stages: ["Intro", "CTA"] },
+        options: { slideCount: 10 },
+      }),
     });
 
     const res = await POST(req);

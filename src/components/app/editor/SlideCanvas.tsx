@@ -40,6 +40,7 @@ export function SlideCanvas({ slide, theme }: SlideCanvasProps) {
     content: slide.content,
     notes: slide.notes || undefined,
     script: slide.script || undefined,
+    layout: slide.layout,
   } as unknown as Slide;
 
   return (

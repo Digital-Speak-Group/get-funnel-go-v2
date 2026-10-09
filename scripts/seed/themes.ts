@@ -3,12 +3,18 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { themes } from "@/lib/db/schema";
 import { systemThemes } from "@/lib/slides/theme";
 
-const SYSTEM_THEME_IDS: Record<string, string> = {
+export const SYSTEM_THEME_IDS: Record<string, string> = {
   "getfunnels-dark": "40000000-0000-4000-8000-000000000001",
   "getfunnels-light": "40000000-0000-4000-8000-000000000002",
   midnight: "40000000-0000-4000-8000-000000000003",
   editorial: "40000000-0000-4000-8000-000000000004",
   minimal: "40000000-0000-4000-8000-000000000005",
+  "signature-violet": "40000000-0000-4000-8000-000000000006",
+  "signature-lancement": "40000000-0000-4000-8000-000000000007",
+  "signature-vsl": "40000000-0000-4000-8000-000000000008",
+  "signature-webinaire": "40000000-0000-4000-8000-000000000009",
+  "signature-evergreen": "40000000-0000-4000-8000-00000000000a",
+  "signature-pay": "40000000-0000-4000-8000-00000000000b",
 };
 
 export async function seedThemes(connectionString?: string): Promise<void> {

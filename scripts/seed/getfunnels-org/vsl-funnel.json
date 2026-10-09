@@ -1,0 +1,201 @@
+{
+  "template": "vsl-funnel",
+  "deckId": "20000000-0000-4000-8000-000000000103",
+  "slides": [
+    {
+      "position": 0,
+      "content": {
+        "kicker": "Diagnostic Résultat — GetFunnels",
+        "title": "Tunnel VSL → RDV — Architecture Core",
+        "subtitle": "Éduquer → convaincre → qualifier → closer. Sans forcer.",
+        "presenterName": "Hamid El Bouhali"
+      },
+      "script": "Ok. Si tu es ici, c'est que tu viens de finir le diagnostic GetFunnels.\nDonc je vais faire simple : je te donne ton résultat, je t'explique pourquoi, et je te montre la logique du système.\n\nPas des conseils vagues.\nPas des 'ça dépend'.\nJuste : une architecture claire, comme si on dessinait la machine ensemble."
+    },
+    {
+      "position": 2,
+      "content": {
+        "headline": "Hamid El Bouhali",
+        "points": [
+          {
+            "title": "Fondateur de GetFunnels",
+            "text": "Depuis 8+ ans, on construit des systèmes de vente complets : funnels + CRM + automatisations pour des entrepreneurs qui font du 6 à 7 chiffres."
+          },
+          {
+            "title": "8+ ans · +470 funnels créés",
+            "text": "Clients en 6 à 7 chiffres. On a bossé avec : Yomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini."
+          },
+          {
+            "title": "Une vérité simple",
+            "text": "Le problème n°1 n'est pas \"la pub\". C'est l'architecture."
+          }
+        ]
+      },
+      "script": "Je m'appelle Hamid El Bouhali, fondateur de GetFunnels.\nÇa fait plus de 8 ans qu'on construit des systèmes complets : funnels + CRM + automatisations.\n\nOn a bossé avec des gros acteurs du marché :\nYomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini… et d'autres.\n\nMais le plus important c'est pas les noms.\nLe plus important c'est : on a vu des centaines de cas réels.\n\nEt le pattern est toujours le même :\nles gens pensent que leur problème c'est la pub…\nalors que leur vrai problème c'est l'architecture.\n\nTu peux mettre 10k en pub.\nSi derrière c'est bancal… tu vas juste perdre plus vite."
+    },
+    {
+      "position": 11,
+      "content": {
+        "headline": "Sans script. Juste la structure. Si vous manquez un bloc, le prospect ne candidatera pas.",
+        "steps": [
+          {
+            "label": "01",
+            "title": "Le vrai problème",
+            "text": "Architecture vs pub. Vous posez le diagnostic avant de vendre."
+          },
+          {
+            "label": "02",
+            "title": "Pourquoi les approches classiques échouent",
+            "text": "Pages isolées, pas de réchauffage, pas de filtre."
+          },
+          {
+            "label": "03",
+            "title": "La solution",
+            "text": "Le système VSL → RDV — et pourquoi il change tout."
+          },
+          {
+            "label": "04",
+            "title": "Preuve",
+            "text": "Cas clients, exemples, résultats si validés."
+          },
+          {
+            "label": "05",
+            "title": "Qui je suis + légitimité",
+            "text": "8+ ans, 150+ funnels, marchés 6–7 chiffres."
+          },
+          {
+            "label": "06",
+            "title": "À qui c'est destiné",
+            "text": "Filtre explicite : inclusion + exclusion franche."
+          },
+          {
+            "label": "07",
+            "title": "CTA : qualification → RDV",
+            "text": "Un seul CTA. Une seule action. \"Je candidate\"."
+          }
+        ]
+      }
+    },
+    {
+      "position": 15,
+      "content": {
+        "headline": "Le canal qui supprime les no-show — tout est automatisé, vous n'avez rien à faire.",
+        "channel": "whatsapp",
+        "scripts": [
+          {
+            "moment": "Confirmation booking",
+            "message": "✅ RDV confirmé — Voici les détails de votre appel avec Hamid."
+          },
+          {
+            "moment": "Rappel J-1 — veille RDV",
+            "message": "📅 Rappel : votre appel est demain à 15h00. Confirmez avec \"OUI\"."
+          },
+          {
+            "moment": "Message 1h avant",
+            "message": "🎯 Dans 1h : préparez vos 3 questions clés. Bonne session !"
+          }
+        ]
+      }
+    },
+    {
+      "position": 17,
+      "content": {
+        "headline": "Voici la machine",
+        "title": "Tracking & Funnelytics",
+        "caption": "Pas une page. Le système complet en action.",
+        "url": "https://canvas.funnelytics.io/view/885c6016-4f47-4e61-a318-546fd79811ae"
+      }
+    },
+    {
+      "position": 18,
+      "content": {
+        "headline": "À quoi ça ressemble",
+        "items": [
+          {
+            "title": "Viral Script VSL",
+            "url": "https://www.getfunnels.agency/viral_script_vsl-v3"
+          },
+          {
+            "title": "Programme Ambassadeurs",
+            "url": "https://getfunnels.clickfunnels.com/programme-ambassadeurs"
+          },
+          {
+            "title": "Arthaud Immobilier",
+            "url": "https://getfunnels.clickfunnels.com/arthaud_immobilier"
+          },
+          {
+            "title": "Reborn",
+            "url": "https://by.getfunnels.agency/reborn"
+          },
+          {
+            "title": "Go Scale Systems",
+            "url": "https://go-scale.systems/vsl"
+          },
+          {
+            "title": "Optin",
+            "url": "https://getfunnels.clickfunnels.com/optin1745946068279"
+          }
+        ]
+      }
+    },
+    {
+      "position": 19,
+      "content": {
+        "headline": "Les chiffres parlent d'eux-mêmes.",
+        "items": [
+          {
+            "caption": "ClickFunnels — Stats Tunnel",
+            "result": "385 241 $",
+            "assetId": "60000000-0000-4000-8000-000000000003"
+          },
+          {
+            "caption": "Systeme.io — Statistiques",
+            "result": "€143 181",
+            "assetId": "60000000-0000-4000-8000-000000000004"
+          },
+          {
+            "caption": "ClickFunnels — Tunnel Stats",
+            "result": "380 711 $",
+            "assetId": "60000000-0000-4000-8000-000000000005"
+          },
+          {
+            "caption": "ClickFunnels — Stats détaillées",
+            "result": "572",
+            "assetId": "60000000-0000-4000-8000-000000000006"
+          },
+          {
+            "caption": "Systeme.io — Challenge Connaissance",
+            "result": "€263 818",
+            "assetId": "60000000-0000-4000-8000-000000000007"
+          },
+          {
+            "caption": "Systeme.io — Opt-in 41%",
+            "result": "41 052",
+            "assetId": "60000000-0000-4000-8000-000000000008"
+          },
+          {
+            "caption": "Systeme.io — Vue globale",
+            "result": "€257 386",
+            "assetId": "60000000-0000-4000-8000-000000000009"
+          },
+          {
+            "caption": "Systeme.io — Tunnel REBORN",
+            "result": "€3 608 200",
+            "assetId": "60000000-0000-4000-8000-00000000000a"
+          },
+          {
+            "caption": "ClickFunnels — 49 348 vues",
+            "result": "49 348",
+            "assetId": "60000000-0000-4000-8000-00000000000b"
+          },
+          {
+            "caption": "Systeme.io — Récap global",
+            "result": "€3 608 200",
+            "assetId": "60000000-0000-4000-8000-00000000000c"
+          }
+        ]
+      }
+    }
+  ],
+  "keepPlaceholders": []
+}

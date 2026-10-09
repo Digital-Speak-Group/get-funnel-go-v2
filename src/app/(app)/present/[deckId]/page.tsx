@@ -3,7 +3,8 @@ import { getSession } from "@/lib/auth/session";
 import { getDeckWithSlides } from "@/server/services/decks";
 import { listSystemThemes } from "@/lib/db/repositories/themes";
 import { ThemeTokensSchema } from "@/lib/slides/theme";
-import { SlideSchema } from "@/lib/slides/schema";
+import { SlideSchema, parseScriptCue } from "@/lib/slides/schema";
+import { validLayout } from "@/lib/slides/layouts";
 import { PresenterShell } from "@/components/presenter/PresenterShell";
 
 interface PresentPageProps {
@@ -46,6 +47,8 @@ export default async function PresentPage({ params }: PresentPageProps) {
       content: s.content,
       notes: s.notes ?? undefined,
       script: s.script ?? undefined,
+      cue: parseScriptCue(s.cue),
+      layout: validLayout(s.type, s.layout),
     });
     return result.success ? [result.data] : [];
   });

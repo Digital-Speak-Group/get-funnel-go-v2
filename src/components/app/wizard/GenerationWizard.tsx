@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import type { SystemTheme } from "@/lib/db/repositories/themes";
 import type { SystemTemplate } from "@/lib/db/repositories/templates";
 import { Loader2, Wand2, ArrowRight } from "lucide-react";
+import { takeSseData } from "./sse";
 
 export function GenerationWizard({ themes, templates }: { themes: SystemTheme[], templates: SystemTemplate[] }) {
   const router = useRouter();
@@ -41,7 +42,7 @@ export function GenerationWizard({ themes, templates }: { themes: SystemTheme[],
           script,
           themeId,
           templateConfig: {
-            id: templateConfig?.slug, // the AI uses slug as ID generally, wait, in our API it expects `id` to be the string e.g. 'vsl'
+            id: templateConfig?.id, // stored as decks.template_id (uuid FK), not the slug
             name: templateConfig?.name,
             stages: templateConfig?.config.stages
           },
@@ -57,32 +58,33 @@ export function GenerationWizard({ themes, templates }: { themes: SystemTheme[],
       const decoder = new TextDecoder();
       
       let finalDeckId = "";
+      let buffer = "";
 
       while (true) {
         const { done, value } = (await reader?.read()) || { done: true, value: undefined };
         if (done) break;
 
-        const chunk = decoder.decode(value);
-        const lines = chunk.split("\n\n");
-        for (const line of lines) {
-          if (line.startsWith("data: ")) {
-            const dataStr = line.substring(6);
-            try {
-              const data = JSON.parse(dataStr);
-              if (data.status === "ERROR") {
-                throw new Error(data.error || "Generation error");
-              } else if (data.status === "GENERATING_SLIDES") {
-                setProgressStatus(`Création des slides... (${data.progress}/${data.total})`);
-                setProgressCurrent(data.progress || 0);
-                setProgressTotal(data.total || 1);
-              } else if (data.status === "DONE") {
-                finalDeckId = data.deckId;
-              } else {
-                setProgressStatus(data.status); // e.g. EXTRACTING_BRIEF
-              }
-            } catch {
-              console.error("Failed to parse SSE line", line);
-            }
+        const { data: payloads, rest } = takeSseData(buffer + decoder.decode(value, { stream: true }));
+        buffer = rest;
+        for (const dataStr of payloads) {
+          let data;
+          try {
+            data = JSON.parse(dataStr);
+          } catch {
+            console.error("Failed to parse SSE event", dataStr);
+            continue;
+          }
+          // Outside the parse try/catch so server errors reach the user.
+          if (data.status === "ERROR") {
+            throw new Error(data.error || "Generation error");
+          } else if (data.status === "GENERATING_SLIDES") {
+            setProgressStatus(`Création des slides... (${data.progress}/${data.total})`);
+            setProgressCurrent(data.progress || 0);
+            setProgressTotal(data.total || 1);
+          } else if (data.status === "DONE") {
+            finalDeckId = data.deckId;
+          } else {
+            setProgressStatus(data.status); // e.g. EXTRACTING_BRIEF
           }
         }
       }

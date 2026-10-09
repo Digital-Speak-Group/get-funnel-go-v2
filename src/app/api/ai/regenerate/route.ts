@@ -8,7 +8,7 @@ import { eq } from "drizzle-orm";
 import { reserveCredits, refundCredits } from "@/server/services/credits";
 import { logGeneration } from "@/lib/db/repositories/usage";
 import { GENERATE_SLIDE_SYSTEM_PROMPT } from "@/server/ai/prompts/generateSlide";
-import { SlideSchema } from "@/lib/slides/schema";
+import { SLIDE_TYPES, slideDraftSchema } from "@/lib/slides/schema";
 import { rateLimit } from "@/lib/rate-limit";
 import { analytics } from "@/lib/analytics";
 
@@ -68,6 +68,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Not found or unauthorized" }, { status: 404 });
   }
 
+  const slideType = z.enum(SLIDE_TYPES).safeParse(slide.type);
+  if (!slideType.success) {
+    return NextResponse.json({ error: "Unsupported slide type" }, { status: 400 });
+  }
+
   // 2. Reserve credits
   const hasCredits = await reserveCredits({ orgId: session.activeOrgId }, ESTIMATED_SLIDE_COST_CENTS);
   if (!hasCredits) {
@@ -76,6 +81,8 @@ export async function POST(req: Request) {
 
   const startTime = Date.now();
   const provider = new GroqProvider();
+  // Still on the usage counter for this request; refunded in full on failure.
+  let charged = ESTIMATED_SLIDE_COST_CENTS;
 
   try {
     const [org] = await db.select({ plan: organizations.plan }).from(organizations).where(eq(organizations.id, session.activeOrgId)).limit(1);
@@ -87,6 +94,12 @@ SLIDE TO GENERATE:
 Type: ${slide.type}
 Existing Content (JSON): ${JSON.stringify(slide.content)}
 
+DECK CONTEXT:
+Title: ${deck.title}
+Description: ${deck.description ?? ""}
+Language: ${deck.language}
+${deck.sourceScript ? `\nRAW SCRIPT (Extract facts from here!):\n<SCRIPT>\n${deck.sourceScript}\n</SCRIPT>\n` : ""}
+
 USER INSTRUCTIONS FOR REVISION:
 ${instructions || "Improve this slide based on its current content. Fix missing information."}
 `;
@@ -95,8 +108,10 @@ ${instructions || "Improve this slide based on its current content. Fix missing 
       tier: "quality",
       system: GENERATE_SLIDE_SYSTEM_PROMPT,
       input,
-      schema: SlideSchema,
+      // Only this slide type's schema: the full union is ~10k tokens per request.
+      schema: slideDraftSchema(slideType.data),
       temperature: 0.7,
+      maxTokens: 1500,
     });
 
     if (!result.success) {
@@ -119,8 +134,11 @@ ${instructions || "Improve this slide based on its current content. Fix missing 
     
     if (cost < ESTIMATED_SLIDE_COST_CENTS) {
       await refundCredits({ orgId: session.activeOrgId }, ESTIMATED_SLIDE_COST_CENTS - cost);
+      charged = cost;
     } else if (cost > ESTIMATED_SLIDE_COST_CENTS) {
-      await reserveCredits({ orgId: session.activeOrgId }, cost - ESTIMATED_SLIDE_COST_CENTS);
+      if (await reserveCredits({ orgId: session.activeOrgId }, cost - ESTIMATED_SLIDE_COST_CENTS)) {
+        charged = cost;
+      }
     }
 
     await logGeneration(
@@ -141,7 +159,7 @@ ${instructions || "Improve this slide based on its current content. Fix missing 
 
     return NextResponse.json({ success: true, slide: newSlideData });
   } catch (err: unknown) {
-    await refundCredits({ orgId: session.activeOrgId }, ESTIMATED_SLIDE_COST_CENTS);
+    if (charged > 0) await refundCredits({ orgId: session.activeOrgId }, charged);
     await logGeneration(
       { orgId: session.activeOrgId, userId: session.userId },
       {

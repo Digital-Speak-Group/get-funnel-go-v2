@@ -7,6 +7,7 @@ import {
   validateEditorSlide,
   type EditorSlide,
 } from "@/components/app/editor/validation";
+import { EMPTY_EDITOR_CUE } from "@/components/app/editor/cue";
 
 function defaultSlide(type: SlideType = "cover"): EditorSlide {
   return {
@@ -16,6 +17,7 @@ function defaultSlide(type: SlideType = "cover"): EditorSlide {
     content: buildDefaultContent(type),
     notes: "",
     script: "",
+    cue: EMPTY_EDITOR_CUE,
   };
 }
 

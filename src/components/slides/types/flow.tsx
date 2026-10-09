@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface FlowContent {
   headline: string;
@@ -14,6 +15,7 @@ interface FlowContent {
 
 export function FlowSlide({ content, theme }: { content: FlowContent; theme: Record<string, string> }) {
   const { headline, steps } = content;
+  const twoColumns = steps.length > 4;
 
   return (
     <div
@@ -34,7 +36,7 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -44,8 +46,12 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
       <div
         style={{
           flex: 1,
-          display: "flex",
-          flexDirection: "column",
+          display: "grid",
+          // Long flows (5–7 steps) read top-to-bottom in two columns so they fit the 1080px canvas.
+          gridTemplateRows: `repeat(${twoColumns ? Math.ceil(steps.length / 2) : steps.length}, auto)`,
+          gridAutoFlow: "column",
+          gridAutoColumns: "1fr",
+          alignContent: "center",
           gap: "24px",
         }}
       >
@@ -56,7 +62,7 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
               display: "flex",
               gap: "24px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
               position: "relative",
@@ -77,7 +83,7 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
                   fontSize: "28px",
                   fontWeight: 700,
                   fontFamily: theme["--slide-font-display"],
-                  color: theme["--slide-primary"],
+                  color: theme["--slide-primary-text"],
                 }}
               >
                 {step.label}
@@ -85,7 +91,7 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
               <div
                 style={{
                   width: "4px",
-                  height: index < steps.length - 1 ? "60px" : "0",
+                  height: !twoColumns && index < steps.length - 1 ? "60px" : "0",
                   background: theme["--slide-primary"],
                 }}
               />

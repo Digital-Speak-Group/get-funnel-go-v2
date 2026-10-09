@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface PlanContent {
   headline: string;
@@ -33,7 +34,7 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -55,7 +56,7 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
               display: "flex",
               gap: "24px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
               position: "relative",

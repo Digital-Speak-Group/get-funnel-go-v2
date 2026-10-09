@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface AutomationContent {
   headline: string;
@@ -33,7 +34,7 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -56,7 +57,7 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
               alignItems: "center",
               gap: "24px",
               padding: "24px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
             }}
@@ -124,7 +125,7 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
                 alignItems: "center",
                 justifyContent: "center",
                 fontSize: "24px",
-                color: theme["--slide-primary"],
+                color: theme["--slide-primary-text"],
                 flexShrink: 0,
               }}
             >

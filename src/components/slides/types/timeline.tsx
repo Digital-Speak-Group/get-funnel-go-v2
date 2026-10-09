@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { headlineFill } from "../style";
 
 interface TimelineContent {
   headline: string;
@@ -33,7 +34,7 @@ export function TimelineSlide({ content, theme }: { content: TimelineContent; th
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -65,7 +66,7 @@ export function TimelineSlide({ content, theme }: { content: TimelineContent; th
                   fontWeight: 600,
                   textTransform: "uppercase",
                   letterSpacing: "0.08em",
-                  color: theme["--slide-primary"],
+                  color: theme["--slide-primary-text"],
                   marginBottom: "8px",
                   textAlign: "center",
                 }}

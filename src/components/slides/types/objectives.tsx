@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
 
 interface ObjectivesContent {
   headline: string;
@@ -33,7 +34,7 @@ export function ObjectivesSlide({ content, theme }: { content: ObjectivesContent
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
         >
           {headline}
@@ -46,6 +47,7 @@ export function ObjectivesSlide({ content, theme }: { content: ObjectivesContent
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {goals.map((goal, index) => (
@@ -56,7 +58,7 @@ export function ObjectivesSlide({ content, theme }: { content: ObjectivesContent
               flexDirection: "column",
               gap: "16px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
               position: "relative",
@@ -94,7 +96,7 @@ export function ObjectivesSlide({ content, theme }: { content: ObjectivesContent
                   style={{
                     fontSize: "16px",
                     fontWeight: 500,
-                    color: theme["--slide-primary"],
+                    color: theme["--slide-primary-text"],
                     margin: 0,
                   }}
                 >
