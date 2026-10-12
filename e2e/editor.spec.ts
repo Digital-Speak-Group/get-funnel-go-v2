@@ -119,6 +119,35 @@ test.describe("editor", () => {
     );
   });
 
+  test("duplicates, deletes and restores list items on the canvas", async ({ page }) => {
+    const deckTitle = `Deck items ${Date.now()}`;
+    await createDeckViaDashboard(page, deckTitle);
+    await openDeckEditor(page, deckTitle);
+    await page.getByTestId("add-slide-type").selectOption("problem");
+    await page.getByTestId("add-slide-submit").click();
+
+    const canvas = page.getByTestId("slide-canvas");
+    const items = canvas.locator("[data-edit-item]");
+    await expect(items).toHaveCount(3); // problem slides start at the schema minimum
+
+    // At the minimum, delete is disabled; duplicate adds a fourth.
+    await items.first().hover();
+    await expect(items.first().getByRole("button", { name: "Supprimer" })).toBeDisabled();
+    await items.first().getByRole("button", { name: "Dupliquer" }).click();
+    await expect(items).toHaveCount(4);
+
+    // Delete, then undo from the toast.
+    await items.nth(3).hover();
+    await items.nth(3).getByRole("button", { name: "Supprimer" }).click();
+    await expect(items).toHaveCount(3);
+    await page.getByRole("button", { name: "Annuler" }).click();
+    await expect(items).toHaveCount(4);
+
+    await expect(page.getByTestId("editor-status")).toHaveText("Enregistré", { timeout: 8000 });
+    await page.reload();
+    await expect(page.getByTestId("slide-canvas").locator("[data-edit-item]")).toHaveCount(4);
+  });
+
   test("exports the deck as PowerPoint", async ({ page }) => {
     const deckTitle = `Deck export ${Date.now()}`;
     await createDeckViaDashboard(page, deckTitle);

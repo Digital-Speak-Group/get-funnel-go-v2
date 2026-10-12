@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface PlanContent {
   headline: string;
@@ -52,7 +52,7 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
         }}
       >
         {phases.map((phase, index) => (
-          <div
+          <EditableItem path="phases" index={index} length={phases.length}
             key={index}
             style={{
               display: "flex",
@@ -120,11 +120,12 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
                 }}
               >
                 {phase.deliverables.map((deliverable, dIndex) => (
-                  <EditableText
-                    key={dIndex}
+                  <EditableItem
                     as="span"
-                    path={`phases.${index}.deliverables.${dIndex}`}
-                    value={deliverable}
+                    path={`phases.${index}.deliverables`}
+                    index={dIndex}
+                    length={phase.deliverables.length}
+                    key={dIndex}
                     style={{
                       fontSize: "15px",
                       padding: "8px 14px",
@@ -134,11 +135,13 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
                       borderRadius: theme["--slide-radius"],
                       fontWeight: 500,
                     }}
-                  />
+                  >
+                    <EditableText path={`phases.${index}.deliverables.${dIndex}`} value={deliverable} />
+                  </EditableItem>
                 ))}
               </div>
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface KpiContent {
   headline: string;
@@ -55,7 +55,7 @@ export function KpiSlide({ content, theme }: { content: KpiContent; theme: Recor
         }}
       >
         {metrics.map((metric, index) => (
-          <div
+          <EditableItem path="metrics" index={index} length={metrics.length}
             key={index}
             style={{
               display: "flex",
@@ -99,7 +99,7 @@ export function KpiSlide({ content, theme }: { content: KpiContent; theme: Recor
                 borderRadius: "9999px",
               }}
             />
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

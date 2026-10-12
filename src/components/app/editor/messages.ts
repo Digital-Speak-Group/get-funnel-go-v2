@@ -258,3 +258,12 @@ export const CANVAS_MESSAGES = {
   focus: "Agrandir la slide",
   unfocus: "Afficher le panneau",
 } as const;
+
+export const ITEM_MESSAGES = {
+  before: "Déplacer avant",
+  after: "Déplacer après",
+  duplicate: "Dupliquer",
+  remove: "Supprimer",
+  removed: "Élément supprimé",
+  undo: "Annuler",
+} as const;

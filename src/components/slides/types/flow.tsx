@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface FlowContent {
   headline: string;
@@ -58,7 +58,7 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
         }}
       >
         {steps.map((step, index) => (
-          <div
+          <EditableItem path="steps" index={index} length={steps.length}
             key={index}
             style={{
               display: "flex",
@@ -140,7 +140,7 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
                 }}
               />
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

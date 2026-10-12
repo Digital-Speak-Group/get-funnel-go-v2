@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface CaptureContent {
   headline: string;
@@ -56,7 +56,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
         }}
       >
         {fields.map((field, index) => (
-          <div key={index} style={{ textAlign: "left" }}>
+          <EditableItem path="fields" index={index} length={fields.length} key={index} style={{ textAlign: "left" }}>
             <label
               style={{
                 display: "block",
@@ -104,7 +104,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
                 placeholder={field.label}
               />
             )}
-          </div>
+          </EditableItem>
         ))}
         <button
           type="submit"

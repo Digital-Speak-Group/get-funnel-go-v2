@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
 import { useAssetUrl } from "../asset-url";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 /** The image when the asset resolves; the placeholder when there is none or it fails to load. */
 function GalleryImage({ assetId, alt }: { assetId?: string; alt: string }) {
@@ -83,7 +83,7 @@ export function GallerySlide({ content, theme }: { content: GalleryContent; them
         }}
       >
         {items.map((item, index) => (
-          <div
+          <EditableItem path="items" index={index} length={items.length}
             key={index}
             style={{
               display: "flex",
@@ -120,7 +120,7 @@ export function GallerySlide({ content, theme }: { content: GalleryContent; them
                 fontWeight: 500,
               }}
             />
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

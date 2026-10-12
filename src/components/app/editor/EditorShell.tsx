@@ -23,7 +23,7 @@ import {
 import { SlideList } from "./SlideList";
 import { SlideCanvas } from "./SlideCanvas";
 import { SlideFields } from "./SlideFields";
-import { REGENERATE_MESSAGES, STATUS_LABELS } from "./messages";
+import { ITEM_MESSAGES, REGENERATE_MESSAGES, STATUS_LABELS } from "./messages";
 import {
   buildSavePayload,
   validateEditorSlide,
@@ -33,6 +33,9 @@ import type { FieldErrors } from "./field-schema";
 import { toEditorCue } from "./cue";
 import { validLayout } from "@/lib/slides/layouts";
 import { setContentPath } from "@/lib/slides/content-path";
+import { toast } from "sonner";
+import type { ItemAction } from "@/components/slides/editable";
+import { applyListAction } from "./list-actions";
 import { LayoutPicker } from "./LayoutPicker";
 import { IllustrationPicker } from "./IllustrationPicker";
 import { cn } from "@/lib/utils";
@@ -197,6 +200,26 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
     const slide = slidesRef.current.find((s) => s.id === activeIdRef.current);
     if (!slide) return;
     updateActive({ content: setContentPath(slide.content, path, value) });
+  }
+
+  function itemAction(path: string, action: ItemAction, index: number) {
+    const slide = slidesRef.current.find((s) => s.id === activeIdRef.current);
+    if (!slide) return;
+    const next = applyListAction(slide.type, slide.content, path, action, index);
+    if (!next) return;
+    const previous = slide.content;
+    updateActive({ content: next });
+    if (action === "remove") {
+      toast(ITEM_MESSAGES.removed, {
+        action: {
+          label: ITEM_MESSAGES.undo,
+          onClick: () => {
+            if (activeIdRef.current !== slide.id) selectSlide(slide.id);
+            updateActive({ content: previous });
+          },
+        },
+      });
+    }
   }
 
   async function handleAdd(type: SlideType) {
@@ -435,6 +458,7 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
           slide={previewSlide}
           theme={previewTheme}
           onEditText={editText}
+          onItemAction={itemAction}
           focused={focused}
           onToggleFocus={() => setFocused((f) => !f)}
         />

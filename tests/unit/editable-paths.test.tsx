@@ -59,6 +59,7 @@ function getAtPath(content: unknown, path: string): unknown {
 
 const noop = () => {};
 const label = (path: string) => path;
+const items = { can: () => true, act: noop, label: (action: string) => action };
 
 describe("editable text paths", () => {
   const slides = seedSlides();
@@ -76,7 +77,7 @@ describe("editable text paths", () => {
       for (const layout of layouts) {
         const slide = { id: "00000000-0000-4000-8000-000000000001", position: 0, type, content, layout } as Slide;
         const { container } = render(
-          <SlideEditProvider onEdit={noop} placeholderFor={label}>
+          <SlideEditProvider onEdit={noop} placeholderFor={label} items={items}>
             <SlideRenderer slide={slide} theme={defaultTheme} />
           </SlideEditProvider>
         );
@@ -88,6 +89,15 @@ describe("editable text paths", () => {
             problems.push(`${name} [${layout ?? "default"}] ${path}: not a string (${typeof value})`);
           } else if ((value ?? "") !== el.textContent) {
             problems.push(`${name} [${layout ?? "default"}] ${path}: shows "${el.textContent}", path holds "${value}"`);
+          }
+        }
+        for (const el of container.querySelectorAll<HTMLElement>("[data-edit-item]")) {
+          const itemPath = el.dataset.editItem!;
+          const [, listPath, index] = itemPath.match(/^(.*)\.(\d+)$/) ?? [];
+          const list = listPath ? getAtPath(content, listPath) : undefined;
+          checked++;
+          if (!Array.isArray(list) || Number(index) >= list.length) {
+            problems.push(`${name} [${layout ?? "default"}] item ${itemPath}: no such list item`);
           }
         }
         cleanup();

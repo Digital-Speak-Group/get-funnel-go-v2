@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 import { Frame, Title, type LayoutProps } from "./parts";
 
 interface KpiContent {
@@ -42,7 +42,7 @@ export function KpiCards({ content, theme }: LayoutProps<KpiContent>) {
       <Title theme={theme} size={52} align="center" color={theme["--slide-primary-text"]} path="headline">{headline}</Title>
       <div style={{ display: "grid", gridTemplateColumns: `repeat(${metrics.length}, 1fr)`, gap: "28px" }}>
         {metrics.map((metric, i) => (
-          <div
+          <EditableItem path="metrics" index={i} length={metrics.length}
             key={i}
             style={{
               display: "flex",
@@ -71,7 +71,7 @@ export function KpiCards({ content, theme }: LayoutProps<KpiContent>) {
               style={{ fontSize: "22px", fontWeight: 500, color: theme["--slide-muted"] }}
             />
             <Delta theme={theme} path={`metrics.${i}.delta`} value={metric.delta} />
-          </div>
+          </EditableItem>
         ))}
       </div>
     </Frame>
@@ -104,7 +104,7 @@ export function KpiHero({ content, theme }: LayoutProps<KpiContent>) {
         </div>
         <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "32px", borderLeft: `2px solid ${theme["--slide-primary"]}33`, paddingLeft: "64px" }}>
           {rest.map((metric, i) => (
-            <div key={i} style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+            <EditableItem path="metrics" index={i + 1} length={metrics.length} key={i} style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
               <EditableText
                 path={`metrics.${i + 1}.value`}
                 value={metric.value}
@@ -116,7 +116,7 @@ export function KpiHero({ content, theme }: LayoutProps<KpiContent>) {
                 style={{ fontSize: "20px", color: theme["--slide-muted"] }}
               />
               <Delta theme={theme} path={`metrics.${i + 1}.delta`} value={metric.delta} />
-            </div>
+            </EditableItem>
           ))}
         </div>
       </div>

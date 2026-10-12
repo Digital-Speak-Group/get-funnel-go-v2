@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { ChevronLeft, ChevronRight, Copy, Trash2 } from "lucide-react";
 
 /**
  * Inline editing on the editor canvas. Slide components render their content strings
@@ -10,17 +11,28 @@ import * as React from "react";
  * (`painPoints.0.title`, see `setContentPath`).
  */
 
+export type ItemAction = "before" | "after" | "duplicate" | "remove";
+
+/** Item toolbar on repeated parts (pain points, steps…), see `EditableItem`. */
+export interface SlideItemApi {
+  /** Whether `action` is allowed on item `index` of the list at `path` (schema min/max, ends). */
+  can: (path: string, action: ItemAction, index: number, length: number) => boolean;
+  act: (path: string, action: ItemAction, index: number) => void;
+  label: (action: ItemAction) => string;
+}
+
 interface SlideEditApi {
   onEdit: (path: string, value: string) => void;
   /** Hint shown in an empty field (optional text the slide does not use yet). */
   placeholderFor: (path: string) => string;
+  items?: SlideItemApi;
 }
 
 const SlideEditContext = React.createContext<SlideEditApi | null>(null);
 
 export function SlideEditProvider({ children, ...api }: SlideEditApi & { children: React.ReactNode }) {
-  const { onEdit, placeholderFor } = api;
-  const value = React.useMemo(() => ({ onEdit, placeholderFor }), [onEdit, placeholderFor]);
+  const { onEdit, placeholderFor, items } = api;
+  const value = React.useMemo(() => ({ onEdit, placeholderFor, items }), [onEdit, placeholderFor, items]);
   return <SlideEditContext.Provider value={value}>{children}</SlideEditContext.Provider>;
 }
 
@@ -102,4 +114,63 @@ function EditableField({
       }
     },
   });
+}
+
+type ItemTag = "div" | "li" | "article" | "section" | "figure" | "span";
+
+interface EditableItemProps extends React.HTMLAttributes<HTMLElement> {
+  /** Content path of the list (`painPoints`, `layers.1.items`). */
+  path: string;
+  index: number;
+  /** Current length of the list (to disable moves at the ends and keep schema limits). */
+  length: number;
+  as?: ItemTag;
+}
+
+const ITEM_ACTIONS: { action: ItemAction; Icon: typeof Copy }[] = [
+  { action: "before", Icon: ChevronLeft },
+  { action: "after", Icon: ChevronRight },
+  { action: "duplicate", Icon: Copy },
+  { action: "remove", Icon: Trash2 },
+];
+
+/**
+ * Root element of one repeated item. Outside the editor it is the plain element; on the
+ * editor canvas it also carries a hover toolbar to move, duplicate or delete the item.
+ */
+export function EditableItem({ path, index, length, as = "div", style, children, ...rest }: EditableItemProps) {
+  const items = React.useContext(SlideEditContext)?.items;
+  if (!items) return React.createElement(as, { ...rest, style }, children);
+
+  return React.createElement(
+    as,
+    {
+      ...rest,
+      // The toolbar is positioned against the item; items already positioned keep theirs.
+      style: { position: "relative", ...style },
+      "data-edit-item": `${path}.${index}`,
+    },
+    children,
+    <span data-item-toolbar="" key="gf-item-toolbar" contentEditable={false}>
+      {ITEM_ACTIONS.map(({ action, Icon }) => (
+        <button
+          key={action}
+          type="button"
+          aria-label={items.label(action)}
+          title={items.label(action)}
+          disabled={!items.can(path, action, index, length)}
+          data-item-action={action}
+          // Keep the click (and the caret of a text being edited) inside the toolbar.
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            items.act(path, action, index);
+          }}
+        >
+          <Icon aria-hidden="true" />
+        </button>
+      ))}
+    </span>
+  );
 }

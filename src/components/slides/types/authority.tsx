@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
 import { SlideIcon } from "../icons";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface AuthorityContent {
   headline: string;
@@ -54,7 +54,7 @@ export function AuthoritySlide({ content, theme }: { content: AuthorityContent; 
         }}
       >
         {points.map((point, index) => (
-<div
+<EditableItem path="points" index={index} length={points.length}
               key={index}
               style={{
                 display: "flex",
@@ -108,7 +108,7 @@ export function AuthoritySlide({ content, theme }: { content: AuthorityContent; 
                 margin: 0,
               }}
             />
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

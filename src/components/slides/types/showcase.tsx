@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Frame, Title } from "../layouts/parts";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 import { BrowserFrame, EmbeddedPage, displayAddress } from "./browser-frame";
 
 interface ShowcaseContent {
@@ -28,7 +28,7 @@ export function ShowcaseSlide({ content, theme }: { content: ShowcaseContent; th
           {items.map((item, i) => {
             const active = item === current;
             return (
-              <li key={i}>
+              <EditableItem as="li" path="items" index={i} length={items.length} key={i}>
                 <button
                   type="button"
                   onClick={() => setSelected(i)}
@@ -50,7 +50,7 @@ export function ShowcaseSlide({ content, theme }: { content: ShowcaseContent; th
                   <span style={{ color: theme["--slide-primary-text"], marginRight: "12px" }}>{String(i + 1).padStart(2, "0")}</span>
                   <EditableText path={`items.${i}.title`} value={item.title} />
                 </button>
-              </li>
+              </EditableItem>
             );
           })}
         </ol>

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface } from "../style";
-import { EditableText, useSlideEditing } from "../editable";
+import { EditableItem, EditableText, useSlideEditing } from "../editable";
 import { Frame, Title, type LayoutProps } from "./parts";
 
 interface ProofContent {
@@ -64,7 +64,7 @@ export function ProofQuote({ content, theme }: LayoutProps<ProofContent>) {
           // `others` skips the spotlight: map back to the item's index in `items`.
           const at = i < spotlightAt ? i : i + 1;
           return (
-            <span
+            <EditableItem as="span" path="items" index={at} length={items.length}
               key={i}
               style={{
                 display: "inline-flex",
@@ -79,7 +79,7 @@ export function ProofQuote({ content, theme }: LayoutProps<ProofContent>) {
             >
               <EditableText as="strong" path={`items.${at}.name`} value={item.name} />
               <EditableText path={`items.${at}.result`} value={item.result} style={{ color: success, fontWeight: 700 }} />
-            </span>
+            </EditableItem>
           );
         })}
       </div>
@@ -97,7 +97,7 @@ export function ProofTable({ content, theme }: LayoutProps<ProofContent>) {
       <Title theme={theme} size={52} color={theme["--slide-primary-text"]} path="headline">{headline}</Title>
       <div>
         {items.map((item, i) => (
-          <div
+          <EditableItem path="items" index={i} length={items.length}
             key={i}
             style={{
               display: "grid",
@@ -130,7 +130,7 @@ export function ProofTable({ content, theme }: LayoutProps<ProofContent>) {
               value={item.result}
               style={{ fontSize: "32px", fontWeight: 800, fontFamily: theme["--slide-font-display"], color: success, textAlign: "right" }}
             />
-          </div>
+          </EditableItem>
         ))}
       </div>
     </Frame>

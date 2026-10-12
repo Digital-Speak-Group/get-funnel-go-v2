@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Frame, Title } from "../layouts/parts";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface GaugeContent {
   headline: string;
@@ -18,12 +18,15 @@ const formatNumber = (n: number) => new Intl.NumberFormat("fr-FR", { maximumFrac
 function Dial({
   gauge,
   index,
+  length,
   theme,
   compact,
 }: {
   gauge: GaugeContent["gauges"][0];
   /** Position in `gauges`, for the editable content paths. */
   index: number;
+  /** `gauges.length`, for the item toolbar. */
+  length: number;
   theme: Theme;
   compact: boolean;
 }) {
@@ -36,7 +39,7 @@ function Dial({
   const size = RADIUS * 2 + STROKE;
   const path = `M ${STROKE / 2} ${RADIUS + STROKE / 2} A ${RADIUS} ${RADIUS} 0 0 1 ${size - STROKE / 2} ${RADIUS + STROKE / 2}`;
   return (
-    <figure style={{ margin: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+    <EditableItem as="figure" path="gauges" index={index} length={length} style={{ margin: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
       <div style={{ position: "relative", width: `${size}px`, height: `${RADIUS + STROKE}px` }}>
         <svg width={size} height={RADIUS + STROKE} viewBox={`0 0 ${size} ${RADIUS + STROKE}`} aria-hidden="true">
           <defs>
@@ -76,7 +79,7 @@ function Dial({
           style={{ display: "block", marginTop: "6px", fontSize: "16px", color: theme["--slide-muted"] }}
         />
       </figcaption>
-    </figure>
+    </EditableItem>
   );
 }
 
@@ -89,7 +92,7 @@ export function GaugeSlide({ content, theme }: { content: GaugeContent; theme: T
       <Title theme={theme} size={52} align="center" color={theme["--slide-primary-text"]} path="headline">{headline}</Title>
       <div style={{ display: "flex", justifyContent: "center", gap: compact ? "32px 48px" : "56px", flexWrap: "wrap" }}>
         {gauges.map((gauge, i) => (
-          <Dial key={i} gauge={gauge} index={i} theme={theme} compact={compact} />
+          <Dial key={i} gauge={gauge} index={i} length={gauges.length} theme={theme} compact={compact} />
         ))}
       </div>
     </Frame>

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface ArchitectureContent {
   headline: string;
@@ -51,7 +51,7 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
         }}
       >
         {layers.map((layer, layerIndex) => (
-          <div
+          <EditableItem path="layers" index={layerIndex} length={layers.length}
             key={layerIndex}
             style={{
               display: "flex",
@@ -85,10 +85,12 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
               }}
             >
               {layer.items.map((item, itemIndex) => (
-                <EditableText
+                <EditableItem
+                  as="span"
+                  path={`layers.${layerIndex}.items`}
+                  index={itemIndex}
+                  length={layer.items.length}
                   key={itemIndex}
-                  path={`layers.${layerIndex}.items.${itemIndex}`}
-                  value={item}
                   style={{
                     fontSize: "15px",
                     padding: "8px 16px",
@@ -97,10 +99,12 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
                     borderRadius: theme["--slide-radius"],
                     fontWeight: 500,
                   }}
-                />
+                >
+                  <EditableText path={`layers.${layerIndex}.items.${itemIndex}`} value={item} />
+                </EditableItem>
               ))}
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

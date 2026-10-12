@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface ChannelContent {
   headline: string;
@@ -89,7 +89,7 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
         }}
       >
         {scripts.map((script, index) => (
-          <div
+          <EditableItem path="scripts" index={index} length={scripts.length}
             key={index}
             style={{
               display: "flex",
@@ -149,7 +149,7 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
                 }}
               />
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

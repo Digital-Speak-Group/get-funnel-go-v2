@@ -4,7 +4,7 @@ import * as React from "react";
 import { kickerStyle } from "../style";
 import { Frame, Lead, Title } from "../layouts/parts";
 import { BrowserFrame } from "./browser-frame";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 type PageKind = "optin" | "sales" | "checkout" | "registration" | "thankyou";
 
@@ -38,7 +38,7 @@ export function MockupSlide({ content, theme }: { content: MockupContent; theme:
       <BrowserFrame theme={theme} address={kind.path} style={{ flex: 1, alignSelf: "stretch" }}>
         <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", gap: "14px", padding: "28px 40px" }}>
           {blocks.map((block, i) => (
-            <div
+            <EditableItem path="blocks" index={i} length={blocks.length}
               key={i}
               style={{
                 flex: i === 0 ? 1.4 : 1,
@@ -64,7 +64,7 @@ export function MockupSlide({ content, theme }: { content: MockupContent; theme:
                 multiline
                 style={{ fontSize: "15px", color: theme["--slide-muted"] }}
               />
-            </div>
+            </EditableItem>
           ))}
           <EditableText
             as="div"

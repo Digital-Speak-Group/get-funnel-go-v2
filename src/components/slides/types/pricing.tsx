@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface PricingContent {
   headline: string;
@@ -55,7 +55,7 @@ export function PricingSlide({ content, theme }: { content: PricingContent; them
         }}
       >
         {tiers.map((tier, index) => (
-          <div
+          <EditableItem path="tiers" index={index} length={tiers.length}
             key={index}
             style={{
               display: "flex",
@@ -117,7 +117,7 @@ export function PricingSlide({ content, theme }: { content: PricingContent; them
             </div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, flex: 1, display: "flex", flexDirection: "column", gap: "14px" }}>
               {tier.features.map((feature, fIndex) => (
-                <li
+                <EditableItem as="li" path={`tiers.${index}.features`} index={fIndex} length={tier.features.length}
                   key={fIndex}
                   style={{
                     display: "flex",
@@ -139,10 +139,10 @@ export function PricingSlide({ content, theme }: { content: PricingContent; them
                     ✓
                   </span>
                   <EditableText path={`tiers.${index}.features.${fIndex}`} value={feature} />
-                </li>
+                </EditableItem>
               ))}
             </ul>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface ObjectivesContent {
   headline: string;
@@ -53,7 +53,7 @@ export function ObjectivesSlide({ content, theme }: { content: ObjectivesContent
         }}
       >
         {goals.map((goal, index) => (
-          <div
+          <EditableItem path="goals" index={index} length={goals.length}
             key={index}
             style={{
               display: "flex",
@@ -120,7 +120,7 @@ export function ObjectivesSlide({ content, theme }: { content: ObjectivesContent
                 margin: 0,
               }}
             />
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
 import { SlideIcon } from "../icons";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface ProblemContent {
   headline: string;
@@ -68,7 +68,7 @@ export function ProblemSlide({ content, theme }: { content: ProblemContent; them
         }}
       >
         {painPoints.map((pain, index) => (
-          <div
+          <EditableItem path="painPoints" index={index} length={painPoints.length}
             key={index}
             style={{
               display: "flex",
@@ -125,7 +125,7 @@ border: `2px solid ${theme["--slide-danger"]}33`,
                 />
               </div>
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

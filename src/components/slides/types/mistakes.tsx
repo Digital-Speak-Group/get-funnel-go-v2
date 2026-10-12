@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface MistakesContent {
   headline: string;
@@ -51,7 +51,7 @@ export function MistakesSlide({ content, theme }: { content: MistakesContent; th
         }}
       >
         {mistakes.map((m, index) => (
-          <div
+          <EditableItem path="mistakes" index={index} length={mistakes.length}
             key={index}
             style={{
               display: "grid",
@@ -157,7 +157,7 @@ export function MistakesSlide({ content, theme }: { content: MistakesContent; th
                 style={{ fontSize: "16px", lineHeight: 1.55, margin: 0 }}
               />
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

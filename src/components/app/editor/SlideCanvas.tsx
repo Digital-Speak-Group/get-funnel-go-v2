@@ -1,12 +1,14 @@
 "use client";
 
+import * as React from "react";
 import { Maximize2, Minimize2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SlideThumbnail } from "@/components/slides/SlideThumbnail";
-import { SlideEditProvider } from "@/components/slides/editable";
+import { SlideEditProvider, type ItemAction, type SlideItemApi } from "@/components/slides/editable";
+import { canApply, listBounds } from "./list-actions";
 import type { ThemeTokens } from "@/lib/slides/theme";
 import type { Slide } from "@/lib/slides/schema";
-import { CANVAS_MESSAGES, SLIDE_TYPE_LABELS, fieldLabel } from "./messages";
+import { CANVAS_MESSAGES, ITEM_MESSAGES, SLIDE_TYPE_LABELS, fieldLabel } from "./messages";
 import type { EditorSlide } from "./validation";
 
 interface SlideCanvasProps {
@@ -14,6 +16,8 @@ interface SlideCanvasProps {
   theme: ThemeTokens;
   /** A text edited directly on the slide: its content path and new value. */
   onEditText: (path: string, value: string) => void;
+  /** Move, duplicate or delete an item of the list at `path`. */
+  onItemAction: (path: string, action: ItemAction, index: number) => void;
   /** Inspector hidden so the slide gets the room to edit on. */
   focused: boolean;
   onToggleFocus: () => void;
@@ -22,7 +26,18 @@ interface SlideCanvasProps {
 /** Field label of the last named segment: `painPoints.0.title` → label of `title`. */
 const placeholderFor = (path: string) => fieldLabel(path.split(".").filter((p) => !/^\d+$/.test(p)).pop() ?? path);
 
-export function SlideCanvas({ slide, theme, onEditText, focused, onToggleFocus }: SlideCanvasProps) {
+export function SlideCanvas({ slide, theme, onEditText, onItemAction, focused, onToggleFocus }: SlideCanvasProps) {
+  const type = slide?.type;
+  const items = React.useMemo<SlideItemApi | undefined>(
+    () =>
+      type && {
+        can: (path, action, index, length) => canApply(action, index, length, listBounds(type, path)),
+        act: onItemAction,
+        label: (action) => ITEM_MESSAGES[action],
+      },
+    [type, onItemAction]
+  );
+
   if (!slide) {
     return (
       <div
@@ -79,7 +94,7 @@ export function SlideCanvas({ slide, theme, onEditText, focused, onToggleFocus }
         data-testid="slide-canvas"
         className="relative aspect-video overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900"
       >
-        <SlideEditProvider onEdit={onEditText} placeholderFor={placeholderFor}>
+        <SlideEditProvider onEdit={onEditText} placeholderFor={placeholderFor} items={items}>
           <SlideThumbnail
             slide={preview}
             theme={theme}

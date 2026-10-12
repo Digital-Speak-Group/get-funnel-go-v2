@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 import { Frame, Title, type LayoutProps } from "./parts";
 
 interface FlowContent {
@@ -51,7 +51,7 @@ export function FlowTimeline({ content, theme }: LayoutProps<FlowContent>) {
           }}
         />
         {steps.map((step, i) => (
-          <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: "16px" }}>
+          <EditableItem path="steps" index={i} length={steps.length} key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: "16px" }}>
             <div
               style={{
                 position: "relative",
@@ -96,7 +96,7 @@ export function FlowTimeline({ content, theme }: LayoutProps<FlowContent>) {
               multiline
               style={{ fontSize: "16px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}
             />
-          </div>
+          </EditableItem>
         ))}
       </div>
     </Frame>
@@ -120,7 +120,7 @@ export function FlowGrid({ content, theme }: LayoutProps<FlowContent>) {
         }}
       >
         {steps.map((step, i) => (
-          <div
+          <EditableItem path="steps" index={i} length={steps.length}
             key={i}
             style={{
               display: "flex",
@@ -157,7 +157,7 @@ export function FlowGrid({ content, theme }: LayoutProps<FlowContent>) {
               multiline
               style={{ fontSize: "17px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}
             />
-          </div>
+          </EditableItem>
         ))}
       </div>
     </Frame>

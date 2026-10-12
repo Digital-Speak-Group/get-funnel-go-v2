@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cardSurface } from "../style";
 import { SlideIcon } from "../icons";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 import { Frame, Lead, Title, pad, type LayoutProps } from "./parts";
 
 interface ProblemContent {
@@ -24,7 +24,7 @@ export function ProblemList({ content, theme }: LayoutProps<ProblemContent>) {
       </header>
       <ol style={{ listStyle: "none", margin: 0, padding: 0 }}>
         {painPoints.map((pain, i) => (
-          <li
+          <EditableItem as="li" path="painPoints" index={i} length={painPoints.length}
             key={i}
             style={{
               display: "grid",
@@ -53,7 +53,7 @@ export function ProblemList({ content, theme }: LayoutProps<ProblemContent>) {
                 style={{ fontSize: "19px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}
               />
             </div>
-          </li>
+          </EditableItem>
         ))}
       </ol>
     </Frame>
@@ -73,7 +73,7 @@ export function ProblemAside({ content, theme }: LayoutProps<ProblemContent>) {
       </div>
       <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "16px" }}>
         {painPoints.map((pain, i) => (
-          <div
+          <EditableItem path="painPoints" index={i} length={painPoints.length}
             key={i}
             style={{
               display: "flex",
@@ -103,7 +103,7 @@ export function ProblemAside({ content, theme }: LayoutProps<ProblemContent>) {
                 style={{ fontSize: "17px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}
               />
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </Frame>

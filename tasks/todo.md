@@ -812,7 +812,8 @@ The editor today changes slides only through the form panel; the canvas is a rea
 **Size:** L
 
 ### Task 66: List items on the canvas
-**Description:** Hover toolbar on repeated items (pain points, steps, plans, FAQ…): move left/right, duplicate, delete; "+" to add an item, respecting each schema's min/max.
+**Description:** Hover toolbar on repeated items (pain points, steps, plans…): move before/after, duplicate, delete, respecting each schema's min/max (`list-actions.ts`); delete offers "Annuler" in a toast.
+**Done 2026-10-12:** `EditableItem` on the content lists of 27 slide types and the layout variants; `tests/unit/list-actions.test.ts`, item paths checked in `editable-paths.test.tsx`, e2e duplicate → delete → undo → reload. "Duplicate" is how an item is added. Skipped (form panel only): items whose root is a button or table/definition-list markup — CTA actions, qualification options, screenshot items, FAQ questions (`<details>`), comparison rows/cells, blanks fields — and the big featured item of the featured/hero/quote layouts.
 **Size:** M
 
 ### Task 67: Images on the canvas

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
 import { SlideIcon } from "../icons";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface DefinitionContent {
   headline: string;
@@ -81,7 +81,7 @@ export function DefinitionSlide({ content, theme }: { content: DefinitionContent
             }}
           >
             {pillars.map((pillar, index) => (
-              <div
+              <EditableItem path="pillars" index={index} length={pillars.length}
                 key={index}
                 style={{
                   display: "flex",
@@ -135,7 +135,7 @@ export function DefinitionSlide({ content, theme }: { content: DefinitionContent
                     margin: 0,
                   }}
                 />
-              </div>
+              </EditableItem>
             ))}
           </div>
         )}

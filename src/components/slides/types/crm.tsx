@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface CrmContent {
   headline: string;
@@ -51,7 +51,7 @@ export function CrmSlide({ content, theme }: { content: CrmContent; theme: Recor
         }}
       >
         {pipelines.map((pipe, index) => (
-          <div
+          <EditableItem path="pipelines" index={index} length={pipelines.length}
             key={index}
             style={{
               display: "flex",
@@ -111,7 +111,7 @@ export function CrmSlide({ content, theme }: { content: CrmContent; theme: Recor
                 }}
               />
             )}
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cardSurface } from "../style";
 import { SlideIcon } from "../icons";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 import { Frame, Title, type LayoutProps } from "./parts";
 
 interface BenefitsContent {
@@ -30,7 +30,7 @@ export function BenefitsChecklist({ content, theme }: LayoutProps<BenefitsConten
         }}
       >
         {benefits.map((benefit, i) => (
-          <li key={i} style={{ display: "flex", gap: "20px", alignItems: "flex-start" }}>
+          <EditableItem as="li" path="benefits" index={i} length={benefits.length} key={i} style={{ display: "flex", gap: "20px", alignItems: "flex-start" }}>
             <span
               style={{
                 width: "44px",
@@ -61,7 +61,7 @@ export function BenefitsChecklist({ content, theme }: LayoutProps<BenefitsConten
                 style={{ fontSize: "18px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}
               />
             </div>
-          </li>
+          </EditableItem>
         ))}
       </ul>
     </Frame>
@@ -107,7 +107,7 @@ export function BenefitsFeatured({ content, theme }: LayoutProps<BenefitsContent
         </div>
         <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: "16px" }}>
           {rest.map((benefit, i) => (
-            <div
+            <EditableItem path="benefits" index={i + 1} length={benefits.length}
               key={i}
               style={{
                 display: "flex",
@@ -136,7 +136,7 @@ export function BenefitsFeatured({ content, theme }: LayoutProps<BenefitsContent
                   style={{ fontSize: "16px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}
                 />
               </div>
-            </div>
+            </EditableItem>
           ))}
         </div>
       </div>

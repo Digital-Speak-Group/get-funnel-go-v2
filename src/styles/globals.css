@@ -288,3 +288,55 @@
   font-style: italic;
   -webkit-text-fill-color: currentColor;
 }
+
+/* Item toolbar on repeated slide parts (EditableItem), in 1920×1080 slide space. */
+[data-edit-item] > [data-item-toolbar] {
+  position: absolute;
+  top: -22px;
+  right: 12px;
+  z-index: 5;
+  display: none;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--surface-3);
+  border: 2px solid var(--border-strong);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+}
+[data-edit-item]:hover > [data-item-toolbar],
+[data-edit-item]:focus-within > [data-item-toolbar] {
+  display: flex;
+}
+[data-edit-item]:hover {
+  outline: 3px solid color-mix(in srgb, var(--primary) 30%, transparent);
+  outline-offset: 4px;
+}
+[data-item-toolbar] button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  color: var(--fg);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+[data-item-toolbar] button:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+[data-item-toolbar] button[data-item-action="remove"]:hover:not(:disabled) {
+  color: var(--danger);
+}
+[data-item-toolbar] button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+[data-item-toolbar] button:focus-visible {
+  outline: 3px solid var(--primary);
+}
+[data-item-toolbar] svg {
+  width: 26px;
+  height: 26px;
+}

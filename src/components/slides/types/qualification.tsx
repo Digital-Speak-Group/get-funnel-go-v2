@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface QualificationContent {
   headline: string;
@@ -51,7 +51,7 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
         }}
       >
         {questions.map((q, qIndex) => (
-          <div
+          <EditableItem path="questions" index={qIndex} length={questions.length}
             key={qIndex}
             style={{
               padding: "28px",
@@ -101,7 +101,7 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
                 </button>
               ))}
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

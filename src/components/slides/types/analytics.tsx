@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText, useSlideEditing } from "../editable";
+import { EditableItem, EditableText, useSlideEditing } from "../editable";
 
 interface AnalyticsContent {
   headline: string;
@@ -54,7 +54,7 @@ export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; 
         }}
       >
         {metrics.map((metric, index) => (
-          <div
+          <EditableItem path="metrics" index={index} length={metrics.length}
             key={index}
             style={{
               display: "flex",
@@ -107,7 +107,7 @@ export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; 
                 margin: 0,
               }}
             />
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

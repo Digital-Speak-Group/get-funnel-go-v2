@@ -1,7 +1,7 @@
 import * as React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { EditableText, SlideEditProvider } from "@/components/slides/editable";
+import { EditableItem, EditableText, SlideEditProvider } from "@/components/slides/editable";
 import { SlideRenderer } from "@/components/slides/SlideRenderer";
 import { defaultTheme } from "@/lib/slides/theme";
 import type { Slide } from "@/lib/slides/schema";
@@ -99,5 +99,48 @@ describe("EditableText accessibility in the editor", () => {
     );
     expect(screen.getByRole("heading", { name: "Champ headline" })).not.toHaveAttribute("role");
     expect(screen.getByRole("textbox", { name: "Champ intro" })).toHaveTextContent("Intro");
+  });
+});
+
+describe("EditableItem", () => {
+  const items = {
+    can: (_path: string, action: string, index: number, length: number) =>
+      action === "before" ? index > 0 : action === "after" ? index < length - 1 : action !== "remove" || length > 3,
+    act: vi.fn(),
+    label: (action: string) => `Action ${action}`,
+  };
+
+  it("is the plain element outside the editor", () => {
+    const { container } = render(
+      <EditableItem as="li" path="painPoints" index={0} length={3} style={{ padding: "8px" }}>
+        Item
+      </EditableItem>
+    );
+    expect(container.innerHTML).toBe('<li style="padding: 8px;">Item</li>');
+  });
+
+  it("adds a toolbar on the canvas, with moves past the ends and over-limit deletes disabled", () => {
+    render(
+      <SlideEditProvider onEdit={vi.fn()} placeholderFor={placeholderFor} items={items}>
+        <EditableItem path="painPoints" index={0} length={3}>
+          Item
+        </EditableItem>
+      </SlideEditProvider>
+    );
+    expect(screen.getByRole("button", { name: "Action before" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Action remove" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Action after" })).toBeEnabled();
+
+    fireEvent.click(screen.getByRole("button", { name: "Action duplicate" }));
+    expect(items.act).toHaveBeenCalledWith("painPoints", "duplicate", 0);
+  });
+
+  it("puts a toolbar on every pain point of a real slide", () => {
+    render(
+      <SlideEditProvider onEdit={vi.fn()} placeholderFor={placeholderFor} items={items}>
+        <SlideRenderer slide={problem} theme={defaultTheme} />
+      </SlideEditProvider>
+    );
+    expect(screen.getAllByRole("button", { name: "Action duplicate" })).toHaveLength(2);
   });
 });

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface TeamContent {
   headline: string;
@@ -53,7 +53,7 @@ export function TeamSlide({ content, theme }: { content: TeamContent; theme: Rec
         }}
       >
         {members.map((member, index) => (
-          <div
+          <EditableItem path="members" index={index} length={members.length}
             key={index}
             style={{
               display: "flex",
@@ -121,7 +121,7 @@ export function TeamSlide({ content, theme }: { content: TeamContent; theme: Rec
                 maxWidth: "240px",
               }}
             />
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

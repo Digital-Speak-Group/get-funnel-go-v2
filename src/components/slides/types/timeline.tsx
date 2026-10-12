@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface TimelineContent {
   headline: string;
@@ -52,7 +52,7 @@ export function TimelineSlide({ content, theme }: { content: TimelineContent; th
         }}
       >
         {milestones.map((ms, index) => (
-          <div
+          <EditableItem path="milestones" index={index} length={milestones.length}
             key={index}
             style={{
               display: "flex",
@@ -124,7 +124,7 @@ export function TimelineSlide({ content, theme }: { content: TimelineContent; th
                 }}
               />
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

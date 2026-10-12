@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 import { SlideIcon } from "../icons";
 
 interface WhyContent {
@@ -54,7 +54,7 @@ export function WhySlide({ content, theme }: { content: WhyContent; theme: Recor
         }}
       >
         {reasons.map((reason, index) => (
-          <div
+          <EditableItem path="reasons" index={index} length={reasons.length}
             key={index}
             style={{
               display: "flex",
@@ -111,7 +111,7 @@ export function WhySlide({ content, theme }: { content: WhyContent; theme: Recor
                 />
               </div>
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

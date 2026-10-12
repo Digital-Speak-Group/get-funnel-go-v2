@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
 import { SlideIcon } from "../icons";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface BenefitsContent {
   headline: string;
@@ -54,7 +54,7 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
         }}
       >
         {benefits.map((benefit, index) => (
-          <div
+          <EditableItem path="benefits" index={index} length={benefits.length}
             key={index}
             style={{
               display: "flex",
@@ -110,7 +110,7 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
                 />
               </div>
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

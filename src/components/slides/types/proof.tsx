@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText, useSlideEditing } from "../editable";
+import { EditableItem, EditableText, useSlideEditing } from "../editable";
 
 interface ProofContent {
   headline: string;
@@ -55,7 +55,7 @@ export function ProofSlide({ content, theme }: { content: ProofContent; theme: R
         }}
       >
         {items.map((item, index) => (
-          <div
+          <EditableItem path="items" index={index} length={items.length}
             key={index}
             style={{
               display: "flex",
@@ -131,7 +131,7 @@ export function ProofSlide({ content, theme }: { content: ProofContent; theme: R
                 />
               </div>
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

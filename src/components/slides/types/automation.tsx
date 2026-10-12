@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
-import { EditableText } from "../editable";
+import { EditableItem, EditableText } from "../editable";
 
 interface AutomationContent {
   headline: string;
@@ -52,7 +52,7 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
         }}
       >
         {items.map((item, index) => (
-          <div
+          <EditableItem path="items" index={index} length={items.length}
             key={index}
             style={{
               display: "flex",
@@ -133,7 +133,7 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
             >
               →
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>
