@@ -549,7 +549,7 @@
 - [x] e2e dashboard spec updated in this task: sort drives the Radix Select; delete clicks the confirmation dialog
 - [x] Card hover/focus states match; the thumbnail is a keyboard-reachable link to the editor (overlay link, since slides can render their own buttons/links)
 - [x] Guardrail allowlist shrinks by every file touched
-- [ ] `npm run test:e2e -- dashboard` green (blocked: Docker/database not running)
+- [x] `npm run test:e2e -- dashboard` green (2026-10-12, against the Docker stack)
 **Verify:** `/dev/dashboard` preview (seed content, no DB) at 1440×900 and 390×844 — no overflow, no console errors, rename input receives focus, body pointer lock released after dialogs; `npm run test:e2e -- dashboard` once the DB is up
 **Dependencies:** 43
 **Files:** `src/app/(app)/app/page.tsx`, `DashboardFilters.tsx`, `templates/page.tsx`, `src/components/app/dashboard/*` (DeckCard, DeckActionsMenu, DeleteDeckDialog, CreateDeckDialog, format, messages), `src/components/app/templates/*`, `src/lib/db/repositories/templates.ts` (`listTemplateGallery`), `e2e/dashboard.spec.ts`, `src/app/dev/dashboard/page.tsx`
@@ -590,7 +590,7 @@
 
 ### Checkpoint G — Core product review
 - [ ] Dashboard, wizard, editor, presenter, audience approved by human (desktop + mobile screenshots)
-- [ ] Full e2e suite green
+- [x] Full e2e suite green (2026-10-12: 6 passed, AI generation spec skipped by design; fixed slide reorder unique violation, presenter landmarks, dashboard search race)
 
 ### Task 48: Settings + billing
 **Description:** Settings layout with a left sub-nav (Profil, Organisation, Facturation) and `SectionCard` form sections with right-aligned save actions. Organisation: members table with role badges. Billing: current plan card, usage meter, plan comparison cards, invoices table.

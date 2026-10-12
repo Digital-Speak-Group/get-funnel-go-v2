@@ -1,7 +1,7 @@
 import "server-only";
 import { db } from "@/lib/db/client";
 import { slides, decks } from "@/lib/db/schema";
-import { eq, and, isNull, asc, desc, sql } from "drizzle-orm";
+import { eq, and, isNull, asc, desc, gte, lt, sql } from "drizzle-orm";
 import type { ScriptCue } from "@/lib/slides/schema";
 
 export interface SlideRepositoryContext {
@@ -43,6 +43,24 @@ export interface SlideWithDeck {
   updatedAt: Date;
 }
 
+type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
+
+/**
+ * Moves every slide of the deck at `from` or later by `delta`. `slides_deck_position_unique`
+ * is checked row by row (not deferred), so a plain `position + 1` can collide mid-statement:
+ * park the rows on distinct negative positions first, then land them on their targets.
+ */
+async function shiftPositions(tx: Tx, deckId: string, from: number, delta: number) {
+  await tx
+    .update(slides)
+    .set({ position: sql`-${slides.position} - 1` })
+    .where(and(eq(slides.deckId, deckId), gte(slides.position, from)));
+  await tx
+    .update(slides)
+    .set({ position: sql`-${slides.position} - 1 + ${delta}`, updatedAt: new Date() })
+    .where(and(eq(slides.deckId, deckId), lt(slides.position, 0)));
+}
+
 export async function createSlide(
   input: CreateSlideInput,
   ctx: SlideRepositoryContext
@@ -55,39 +73,38 @@ export async function createSlide(
 
   if (!deck) return null;
 
-  // Get max position to insert at the end if not specified
-  let position = input.position;
-  if (position === undefined) {
-    const maxPosResult = await db
-      .select({ maxPos: slides.position })
-      .from(slides)
-      .where(eq(slides.deckId, input.deckId))
-      .orderBy(desc(slides.position))
-      .limit(1);
-    position = ((maxPosResult[0]?.maxPos ?? -1) as number) + 1;
-  }
+  return db.transaction(async (tx) => {
+    // Get max position to insert at the end if not specified
+    let position = input.position;
+    if (position === undefined) {
+      const maxPosResult = await tx
+        .select({ maxPos: slides.position })
+        .from(slides)
+        .where(eq(slides.deckId, input.deckId))
+        .orderBy(desc(slides.position))
+        .limit(1);
+      position = ((maxPosResult[0]?.maxPos ?? -1) as number) + 1;
+    } else {
+      // Make room: every slide from this position on moves down one
+      await shiftPositions(tx, input.deckId, position, 1);
+    }
 
-  // Shift slides after this position
-  await db
-    .update(slides)
-    .set({ position: sql`${slides.position} + 1`, updatedAt: new Date() })
-    .where(and(eq(slides.deckId, input.deckId), eq(slides.position, position)));
+    const [slide] = await tx
+      .insert(slides)
+      .values({
+        deckId: input.deckId,
+        position,
+        type: input.type,
+        content: input.content,
+        notes: input.notes ?? null,
+        script: input.script ?? null,
+        cue: input.cue ?? null,
+        layout: input.layout ?? null,
+      })
+      .returning();
 
-  const [slide] = await db
-    .insert(slides)
-    .values({
-      deckId: input.deckId,
-      position,
-      type: input.type,
-      content: input.content,
-      notes: input.notes ?? null,
-      script: input.script ?? null,
-      cue: input.cue ?? null,
-      layout: input.layout ?? null,
-    })
-    .returning();
-
-  return slide;
+    return slide;
+  });
 }
 
 export async function getSlideById(
@@ -153,18 +170,14 @@ export async function deleteSlide(
   const deckId = existing.deckId;
   const position = existing.position;
 
-  const result = await db.delete(slides).where(eq(slides.id, id));
+  return db.transaction(async (tx) => {
+    const result = await tx.delete(slides).where(eq(slides.id, id));
+    if ((result.rowCount ?? 0) === 0) return false;
 
-  if ((result.rowCount ?? 0) > 0) {
-    // Shift remaining slides down
-    await db
-      .update(slides)
-      .set({ position: sql`${slides.position} - 1`, updatedAt: new Date() })
-      .where(and(eq(slides.deckId, deckId), eq(slides.position, position)));
+    // Close the gap: every slide after the deleted one moves up one
+    await shiftPositions(tx, deckId, position + 1, -1);
     return true;
-  }
-
-  return false;
+  });
 }
 
 export async function duplicateSlide(
@@ -202,15 +215,26 @@ export async function reorderSlides(
 
   if (!deck) return false;
 
-  // Update positions in a transaction
-  await db.transaction(async (tx) => {
+  return db.transaction(async (tx) => {
+    // The new order must name every slide of the deck exactly once, or some would keep
+    // a parked negative position below.
+    const current = await tx.select({ id: slides.id }).from(slides).where(eq(slides.deckId, deckId));
+    const ids = new Set(slideIds);
+    if (ids.size !== slideIds.length || current.length !== ids.size || current.some((s) => !ids.has(s.id))) {
+      return false;
+    }
+
+    // Park every slide on a distinct negative position so no target collides (see shiftPositions).
+    await tx
+      .update(slides)
+      .set({ position: sql`-${slides.position} - 1` })
+      .where(eq(slides.deckId, deckId));
     for (let i = 0; i < slideIds.length; i++) {
       await tx
         .update(slides)
         .set({ position: i, updatedAt: new Date() })
         .where(and(eq(slides.id, slideIds[i]), eq(slides.deckId, deckId)));
     }
+    return true;
   });
-
-  return true;
 }

@@ -47,7 +47,7 @@ decks(id, org_id, owner_id references profiles(id), title, description,
 slides(id, deck_id references decks(id) on delete cascade, position int, type text,
        content jsonb, notes text, script text, cue jsonb nullable, layout text nullable,
        created_at, updated_at,
-       unique (deck_id, position) deferrable initially deferred)
+       unique index (deck_id, position))  -- not deferrable: position moves park rows on negative positions first (repositories/slides.ts shiftPositions)
 
 deck_versions(id, deck_id references decks(id) on delete cascade, version int,
               snapshot jsonb, created_by, created_at, unique (deck_id, version))

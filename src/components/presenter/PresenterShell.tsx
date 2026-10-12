@@ -225,7 +225,7 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
   return (
     <div className="flex h-screen w-screen bg-zinc-950 text-white overflow-hidden">
       {/* ── Left panel: current slide canvas ── */}
-      <div className="flex flex-col flex-1 min-w-0">
+      <main className="flex flex-col flex-1 min-w-0">
         {/* Top controls bar */}
         <div className="flex items-center justify-between px-4 h-12 bg-zinc-900 border-b border-zinc-800 shrink-0">
           <div className="flex items-center gap-3">
@@ -329,10 +329,13 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
             </div>
           </div>
         )}
-      </div>
+      </main>
 
       {/* ── Right panel: script / notes / metrics ── */}
-      <div className="w-96 shrink-0 flex flex-col border-l border-zinc-800 bg-zinc-900">
+      <aside
+        aria-label={PRESENTER_MESSAGES.panelLabel}
+        className="w-96 shrink-0 flex flex-col border-l border-zinc-800 bg-zinc-900"
+      >
         {/* Tab bar */}
         <div className="flex border-b border-zinc-800 shrink-0">
           {(
@@ -406,7 +409,7 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
             ))}
           </div>
         </div>
-      </div>
+      </aside>
     </div>
   );
 }

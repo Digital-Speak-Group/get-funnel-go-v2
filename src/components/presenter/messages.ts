@@ -1,5 +1,6 @@
 /** Presenter view copy (French-first, one place for future i18n). */
 export const PRESENTER_MESSAGES = {
+  panelLabel: "Script, notes et temps",
   script: {
     empty: "Aucun script pour cette slide.",
     tips: (n: number) => `Conseils présentateur (${n})`,

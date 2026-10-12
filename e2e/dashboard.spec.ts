@@ -36,6 +36,9 @@ test.describe("dashboard", () => {
 
     // Clear search restores the list
     await page.getByLabel("Rechercher un deck").fill("");
+    // The card is already visible in the filtered grid: wait for the debounced URL update,
+    // whose keyed Suspense remounts the grid (and would close a dialog opened before it).
+    await expect(page).not.toHaveURL(/search=/, { timeout: 10000 });
     await expect(renamedCard).toBeVisible({ timeout: 10000 });
 
     // Delete
