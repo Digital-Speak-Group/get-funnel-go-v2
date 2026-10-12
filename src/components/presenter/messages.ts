@@ -23,3 +23,11 @@ export const PRESENTER_MESSAGES = {
     label: (n: number, type: string) => `Slide ${n} : ${type}`,
   },
 } as const;
+
+/** Audience link button copy (editor + presenter). */
+export const AUDIENCE_LINK_MESSAGES = {
+  copy: "Lien audience",
+  copied: "Lien copié",
+  opened: "Lien ouvert",
+  hint: "Copier le lien public que l'audience ouvre pour suivre la présentation",
+} as const;

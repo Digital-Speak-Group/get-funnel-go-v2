@@ -47,6 +47,11 @@ describe("slide style helpers", () => {
     expect(headlineFill(glass, "#123456")).toMatchObject({ color: "transparent", backgroundClip: "text" });
   });
 
+  it("headlineFill leaves room for the last line's descenders under a gradient", () => {
+    expect(headlineFill(glass, "#123456").paddingBottom).toBe("0.15em");
+    expect(headlineFill(flat, "#123456")).not.toHaveProperty("paddingBottom");
+  });
+
   it("cardSurface uses the surface on flat themes and frosted glass on Signature", () => {
     expect(cardSurface(flat)).toMatchObject({ background: defaultTheme.color.surface, backdropFilter: "none" });
     expect(cardSurface(glass)).toMatchObject({ backdropFilter: "blur(16px)" });

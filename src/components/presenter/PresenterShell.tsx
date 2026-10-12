@@ -11,6 +11,7 @@ import { MetricsPanel } from "./MetricsPanel";
 import { formatTime } from "./pace";
 import { PRESENTER_MESSAGES } from "./messages";
 import { BlanksInputs } from "./BlanksInputs";
+import { CopyAudienceLinkButton } from "./CopyAudienceLinkButton";
 import { LiveBlanksProvider } from "@/components/slides/render-context";
 import {
   Play,
@@ -252,6 +253,11 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
           <h1 className="text-sm font-medium text-zinc-400 truncate max-w-xs">{deck.title}</h1>
 
           <div className="flex items-center gap-2">
+            <CopyAudienceLinkButton
+              presentToken={deck.presentToken}
+              className="rounded px-2.5 py-1 text-sm text-zinc-300 hover:bg-zinc-800 transition-colors"
+            />
+
             {/* Timer */}
             <div className="flex items-center gap-1.5 bg-zinc-800 rounded px-2.5 py-1">
               <Clock className="h-3.5 w-3.5 text-zinc-400" />

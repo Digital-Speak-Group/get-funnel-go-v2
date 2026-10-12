@@ -238,3 +238,15 @@ export function fieldLabel(key: string): string {
   if (label) return label;
   return key.charAt(0).toUpperCase() + key.slice(1);
 }
+
+export const EXPORT_MESSAGES = {
+  label: "PDF",
+  busy: "Export…",
+  failed: "L'export PDF a échoué. Réessayez dans un instant.",
+} as const;
+
+export const THEME_MESSAGES = {
+  label: "Thème",
+  title: "Thème du deck",
+  description: "S'applique à tous les slides, en présentation comme dans la vue audience.",
+} as const;

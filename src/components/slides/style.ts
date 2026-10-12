@@ -14,7 +14,12 @@ export function cardSurface(theme: SlideTheme): React.CSSProperties {
   };
 }
 
-/** Headline color, or the legacy white-to-translucent gradient clip when the theme asks for it. */
+/**
+ * Headline color, or the legacy white-to-translucent gradient clip when the theme asks for it.
+ * The gradient is painted only inside the element's box, and with the tight headline
+ * line-heights the last line's descenders (g, p, y) hang below it — the bottom padding
+ * gives them paint.
+ */
 export function headlineFill(theme: SlideTheme, color: string): React.CSSProperties {
   if (theme["--slide-headline"] !== "gradient") return { color };
   return {
@@ -22,6 +27,7 @@ export function headlineFill(theme: SlideTheme, color: string): React.CSSPropert
     backgroundImage: theme["--slide-headline-image"],
     WebkitBackgroundClip: "text",
     backgroundClip: "text",
+    paddingBottom: "0.15em",
   };
 }
 

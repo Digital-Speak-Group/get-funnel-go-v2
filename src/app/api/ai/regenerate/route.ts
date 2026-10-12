@@ -8,6 +8,7 @@ import { eq } from "drizzle-orm";
 import { reserveCredits, refundCredits } from "@/server/services/credits";
 import { logGeneration } from "@/lib/db/repositories/usage";
 import { GENERATE_SLIDE_SYSTEM_PROMPT } from "@/server/ai/prompts/generateSlide";
+import { cleanPresenterText } from "@/server/ai/stages/generateSlides";
 import { SLIDE_TYPES, slideDraftSchema } from "@/lib/slides/schema";
 import { rateLimit } from "@/lib/rate-limit";
 import { analytics } from "@/lib/analytics";
@@ -124,8 +125,8 @@ ${instructions || "Improve this slide based on its current content. Fix missing 
     await db.update(slides)
       .set({
         content: newSlideData.content,
-        notes: newSlideData.notes,
-        script: newSlideData.script,
+        notes: cleanPresenterText(newSlideData.notes, deck.sourceScript ?? ""),
+        script: cleanPresenterText(newSlideData.script, deck.sourceScript ?? ""),
       })
       .where(eq(slides.id, slideId));
 

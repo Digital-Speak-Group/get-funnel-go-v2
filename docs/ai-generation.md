@@ -309,7 +309,7 @@ Each stage has one prompt file with a fixed structure: role, task, constraints, 
 - Fixture scripts (short/long/French/English) → run pipeline against recorded provider responses (no live API in CI).
 - Assertions: deck is schema-valid, requested slide count ±1, template stage order preserved, no forbidden content (invented numbers), language matches input.
 - Snapshot only structure (`slide.type` sequence) and key fields (`headline`), never full prose.
-- A manual eval script (`npm run eval:ai`) hits the live provider for spot checks before releases.
+- A manual eval script against the live provider (`npm run eval:ai`) is planned but not written yet (`scripts/eval-ai.ts` does not exist); `npm run test -- tests/ai` runs the fixture evals with a mocked provider.
 
 ## Failure Modes
 

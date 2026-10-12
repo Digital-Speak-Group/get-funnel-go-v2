@@ -86,6 +86,8 @@ export function AudienceView({ slides, theme, presentToken, initialIndex = 0 }: 
     <div
       className="w-screen h-screen overflow-hidden bg-black relative"
       onMouseMove={onMouseMove}
+      // PDF export steps through slides and waits for this to match before printing.
+      data-slide-index={currentIndex}
     >
       {/* Slide canvas — full bleed */}
       <div className="w-full h-full">
@@ -98,7 +100,7 @@ export function AudienceView({ slides, theme, presentToken, initialIndex = 0 }: 
       </div>
 
       {/* Progress bar at top */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-black/20 z-10">
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-black/20 z-10" data-export-hide>
         <div
           className="h-full bg-white/30 transition-all duration-300"
           style={{ width: `${((currentIndex + 1) / slides.length) * 100}%` }}
@@ -107,6 +109,7 @@ export function AudienceView({ slides, theme, presentToken, initialIndex = 0 }: 
 
       {/* Nav controls — fade in/out */}
       <div
+        data-export-hide
         className={`absolute inset-x-0 bottom-4 flex items-center justify-center gap-4 z-10 transition-opacity duration-300 ${
           showControls ? "opacity-100" : "opacity-0"
         }`}

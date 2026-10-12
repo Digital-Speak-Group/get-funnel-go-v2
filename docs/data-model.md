@@ -99,7 +99,11 @@ Legacy GetFunnels images: `scripts/seed/getfunnels-org-assets.json` lists the 12
 
 ## Row Level Security
 
-RLS is enabled on **every** table. Server code connects with a role that is still subject to RLS (not service-role) so the policies are genuinely exercised.
+RLS is enabled on **every** table (migration `0006_rls_policies`, 2026-10-12). The policies bind the `authenticated` role with the user id in `request.jwt.claims` — what Supabase's REST API uses with a user JWT. On plain Postgres the migration creates the same `authenticated` role and `auth.uid()` / `auth.role()` functions reading that setting; on Supabase it reuses Supabase's own.
+
+**Known gap:** the server's `DATABASE_URL` role (`postgres`, a superuser and the table owner) bypasses RLS, so today the policies protect direct database access (e.g. the Supabase REST API with the anon key), not the app's own queries — tenant isolation in the app rests on the org-scoped repositories. Making the server role subject to RLS needs a non-owner login role plus a per-request `set_config('request.jwt.claims', …)` in every transaction, and an RLS-exempt path for system work (seeds, Stripe webhooks, audience-by-token); not done.
+
+Tests: `tests/integration/rls.test.ts` runs the migration chain on `TEST_DATABASE_URL` (a disposable database — the suite truncates every table; it refuses to run when it equals `DATABASE_URL`) and checks each policy as `authenticated`, plus that no public table is missing RLS.
 
 Helper functions (security definer, stable):
 
@@ -144,6 +148,7 @@ Special cases:
 - `profiles`: users read/update only their own row; org members may read co-members via a join policy.
 - `themes` / `templates`: `is_system = true` rows are readable by all authenticated users; org rows follow the tenant pattern.
 - `subscriptions` / `usage_counters`: readable by org owners/admins; writes only via server (service context).
+- `organizations` and owner `memberships`: created only by the server's onboarding transaction. There is no client INSERT policy on `organizations`, and the old "insert your own membership" policy was dropped (it let any user join any org as owner).
 - Public audience access **never** uses RLS: the audience route fetches by `present_token` in a server route and returns a sanitized payload.
 
 ## Indexes

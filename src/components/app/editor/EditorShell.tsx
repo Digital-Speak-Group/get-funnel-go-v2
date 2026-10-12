@@ -2,8 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ChevronLeft, Play, Download } from "lucide-react";
-import { ThemePicker } from "@/components/app/ThemePicker";
+import { ChevronLeft, Play } from "lucide-react";
 import {
   ThemeTokensSchema,
   systemThemes,
@@ -36,6 +35,10 @@ import { validLayout } from "@/lib/slides/layouts";
 import { LayoutPicker } from "./LayoutPicker";
 import { IllustrationPicker } from "./IllustrationPicker";
 import { cn } from "@/lib/utils";
+import { CopyAudienceLinkButton } from "@/components/presenter/CopyAudienceLinkButton";
+import { ExportPdfButton } from "./ExportPdfButton";
+import { ThemeDialog } from "./ThemeDialog";
+import { buttonVariants } from "@/components/ui/button";
 
 const AUTOSAVE_DELAY_MS = 800;
 
@@ -389,14 +392,16 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
             <Play className="h-4 w-4" />
             <span className="hidden sm:inline">Présenter</span>
           </Link>
-          <a
-            href={`/api/decks/${deck.id}/export`}
-            download
-            className="flex items-center gap-2 rounded-lg bg-zinc-800 px-3 py-1.5 text-sm font-medium text-white hover:bg-zinc-700 transition-colors"
-          >
-            <Download className="h-4 w-4" />
-            <span className="hidden sm:inline">PDF</span>
-          </a>
+          <ThemeDialog
+            selectedThemeId={selectedThemeSlug}
+            themeName={previewTheme.name}
+            onSelect={(slug) => void handleThemeSelect(slug)}
+          />
+          <CopyAudienceLinkButton
+            presentToken={deck.presentToken}
+            className={buttonVariants({ variant: "secondary", size: "sm" })}
+          />
+          <ExportPdfButton deckId={deck.id} deckTitle={deck.title} />
         </div>
       </div>
 
@@ -442,13 +447,6 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
               Ajoutez un slide pour commencer l’édition.
             </p>
           )}
-          <div className="border-t border-zinc-800 pt-4">
-            <ThemePicker
-              selectedThemeId={selectedThemeSlug}
-              onSelect={(slug) => void handleThemeSelect(slug)}
-              variant="list"
-            />
-          </div>
         </div>
       </div>
     </div>

@@ -15,6 +15,7 @@ Follow these rules:
 7. Any \`icon\` field must be exactly one of these names (pick the one that best fits the item): ${SLIDE_ICON_NAMES.join(", ")}.
 8. Never invent a \`url\`: copy one from the script only if it is an https address on ${EMBED_ALLOWED_DOMAINS.join(", ")}; otherwise leave \`url\` out. Never set \`assetId\`.
 9. For \`blanks\` slides, write only the labels (with \`prefix\`/\`suffix\` units such as "€" or "%"): the values are typed live by the presenter.
+10. \`script\` is what the presenter says aloud while THIS slide is on screen: 2 to 5 spoken sentences, in the brief's language, drawn from the part of the raw script that matches this slide. Never paste the whole raw script, other slides' sections, or the <SCRIPT> tags into it. \`notes\` (optional) is one or two short reminders for the presenter.
 
 Output the single slide object matching the exact schema for the requested type.
 `;

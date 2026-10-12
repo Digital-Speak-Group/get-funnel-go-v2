@@ -11,6 +11,7 @@ interface ThemePickerProps {
   onSelect: (themeId: string) => void;
   className?: string;
   variant?: "grid" | "list";
+  showHeader?: boolean;
 }
 
 const sampleSlide: Slide = {
@@ -48,13 +49,16 @@ export function ThemePicker({
   onSelect,
   className,
   variant = "grid",
+  showHeader = true,
 }: ThemePickerProps) {
   return (
     <div className={cn("space-y-4", className)}>
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-white">Thème</h3>
-        <span className="text-sm text-zinc-400">{systemThemes.length} thèmes système</span>
-      </div>
+      {showHeader && (
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg font-semibold text-white">Thème</h3>
+          <span className="text-sm text-zinc-400">{systemThemes.length} thèmes système</span>
+        </div>
+      )}
 
       {variant === "grid" ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">

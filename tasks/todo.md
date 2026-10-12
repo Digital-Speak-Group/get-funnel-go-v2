@@ -57,9 +57,9 @@
 - [x] Policies exist for every tenant table; RLS enabled
 - [x] Integration tests prove: member can read own org, non-member cannot, viewer cannot write
 - [x] Helpers are `security definer` with fixed `search_path`
-**Verify:** `npm run test -- rls`
+**Verify:** `TEST_DATABASE_URL=<disposable db> npm run test -- rls`
 **Dependencies:** 4
-**Files:** `drizzle/0001_rls_baseline.sql`, `tests/integration/rls.test.ts`
+**Files:** `drizzle/0006_rls_policies.sql` (the original `0001_rls_baseline.sql` was never in the migration journal; replaced 2026-10-12), `tests/integration/rls.test.ts`
 **Size:** M
 
 ### Task 6: Supabase Auth + session helper
@@ -357,7 +357,7 @@
 - [x] CI runs evals without live API calls
 - [x] Assertions cover schema validity, slide count, stage order, language, no invented numbers
 - [x] Adding a fixture is documented in the test file header
-**Verify:** `npm run test -- ai-eval`
+**Verify:** `npm run test -- tests/ai`
 **Dependencies:** 27
 **Files:** `tests/ai/fixtures/*.json`, `tests/ai/eval.test.ts`, `scripts/eval-ai.ts`
 **Size:** M
@@ -696,7 +696,7 @@
 **Description:** Seed a GetFunnels org holding the 7 decks with the real agency content (founder bio, client names, figures, screenshots, Funnelytics/client funnel links). Move the legacy logo and screenshots from the Base44-hosted Supabase bucket into our `StorageProvider`.
 **Acceptance:**
 - [x] Org and decks visible only to its members via org-scoped queries (active org comes only from the user's own membership; seeded member belongs to no other org)
-- [ ] …and via RLS — blocked: the migration journal applies the drizzle-generated migrations, which have no RLS policies (`0001_rls_baseline.sql` is not in the chain; RLS integration tests are `describe.skip`)
+- [x] …and via RLS — done 2026-10-12: `0006_rls_policies` in the journal (portable to plain Postgres), applied to the dev DB; `tests/integration/rls.test.ts` green on a disposable DB (20 tests). Still open: the server role bypasses RLS (`docs/data-model.md` → Known gap)
 - [x] 7 overlays validated by `tests/unit/getfunnels-org-seed.test.ts` (schema, slide order, no leftover placeholders outside `keepPlaceholders`, no URLs); local DB seeded: 7 decks / 186 slides, re-seed leaves them untouched
 - [ ] Human review of the agency content. Known legacy inconsistencies kept as-is: funnel count "+470" (RDV/VSL/Lancement/Pay) vs "1700+" (Webinaire) vs "+2 000 tunnels" (Commercial), and "150+ funnels" in VSL flow step 05. Pitch Commercial: slide 20 packs have no prices (legacy had none), slide 18 has only 2 captions (legacy mosaic was empty), slide 30 is a fixed worked example (not a live blank)
 - [x] No asset URL points to the legacy Base44 storage → done in Task 57b (source list in `scripts/seed/getfunnels-org/LEGACY-ASSETS.md`)

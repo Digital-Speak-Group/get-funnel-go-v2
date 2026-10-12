@@ -60,4 +60,10 @@ describe("ThemePicker", () => {
     expect(screen.getByLabelText("Sélectionner Midnight")).toHaveAttribute("aria-pressed", "true");
     expect(screen.getByLabelText("Sélectionner Editorial")).toHaveAttribute("aria-pressed", "false");
   });
+
+  it("drops its own heading inside a titled dialog", () => {
+    render(<ThemePicker selectedThemeId="midnight" onSelect={() => {}} showHeader={false} />);
+    expect(screen.queryByRole("heading", { name: "Thème" })).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Sélectionner Midnight")).toBeInTheDocument();
+  });
 });

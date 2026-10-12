@@ -51,8 +51,14 @@ ENV NODE_ENV=production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED=1
 
+# Chromium for PDF export (src/server/services/pdf.ts), plus fonts for accents/emoji.
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends chromium fonts-liberation fonts-noto-color-emoji \
+  && rm -rf /var/lib/apt/lists/*
+ENV CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium
+
 RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN adduser --system --uid 1001 --home /home/nextjs nextjs
 
 COPY --from=builder /app/public ./public
 
