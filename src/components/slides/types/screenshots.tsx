@@ -5,7 +5,7 @@ import { cardSurface } from "../style";
 import { useAssetUrl } from "../asset-url";
 import { useStaticSlide } from "../render-context";
 import { Frame, Title } from "../layouts/parts";
-import { EditableText } from "../editable";
+import { EditableImage, EditableItem, EditableText, useSlideEditing } from "../editable";
 
 interface ScreenshotsContent {
   headline: string;
@@ -52,6 +52,7 @@ function Shot({ assetId, alt, theme }: { assetId?: string; alt: string; theme: T
 export function ScreenshotsSlide({ content, theme }: { content: ScreenshotsContent; theme: Theme }) {
   const { headline, items } = content;
   const isStatic = useStaticSlide();
+  const editing = useSlideEditing();
   const [open, setOpen] = React.useState<number | null>(null);
   const columns = items.length <= 2 ? items.length : items.length <= 4 ? 2 : items.length <= 6 ? 3 : 4;
   const opened = open === null ? null : items[open];
@@ -69,28 +70,25 @@ export function ScreenshotsSlide({ content, theme }: { content: ScreenshotsConte
           gap: "20px",
         }}
       >
-        {items.map((item, i) => (
-          <button
-            key={i}
-            type="button"
-            disabled={isStatic || !item.assetId}
-            onClick={() => setOpen(i)}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              minHeight: 0,
-              padding: 0,
-              textAlign: "left",
-              color: theme["--slide-text"],
-              ...cardSurface(theme),
-              borderRadius: theme["--slide-radius"],
-              border: `1px solid ${theme["--slide-success"]}33`,
-              overflow: "hidden",
-              cursor: !isStatic && item.assetId ? "zoom-in" : "default",
-            }}
-          >
+        {items.map((item, i) => {
+          const cardStyle: React.CSSProperties = {
+            display: "flex",
+            flexDirection: "column",
+            minHeight: 0,
+            padding: 0,
+            textAlign: "left",
+            color: theme["--slide-text"],
+            ...cardSurface(theme),
+            borderRadius: theme["--slide-radius"],
+            border: `1px solid ${theme["--slide-success"]}33`,
+            overflow: "hidden",
+            cursor: !isStatic && item.assetId ? "zoom-in" : "default",
+          };
+          const body = (
+            <>
             <span style={{ position: "relative", flex: 1, minHeight: 0, display: "block", background: theme["--slide-bg"] }}>
               <Shot assetId={item.assetId} alt={item.caption} theme={theme} />
+              <EditableImage path={`items.${i}.assetId`} hasImage={Boolean(item.assetId)} />
             </span>
             <span style={{ display: "flex", justifyContent: "space-between", gap: "12px", padding: "12px 16px", fontSize: "16px" }}>
               <EditableText path={`items.${i}.caption`} value={item.caption} style={{ fontWeight: 600 }} />
@@ -100,8 +98,20 @@ export function ScreenshotsSlide({ content, theme }: { content: ScreenshotsConte
                 style={{ fontWeight: 800, color: theme["--slide-success"], whiteSpace: "nowrap" }}
               />
             </span>
-          </button>
-        ))}
+            </>
+          );
+          // On the editor canvas the card is a plain block (image and item controls can't live
+          // inside a button, and there is no lightbox to open while editing).
+          return editing ? (
+            <EditableItem key={i} path="items" index={i} length={items.length} style={{ ...cardStyle, cursor: "default" }}>
+              {body}
+            </EditableItem>
+          ) : (
+            <button key={i} type="button" disabled={isStatic || !item.assetId} onClick={() => setOpen(i)} style={cardStyle}>
+              {body}
+            </button>
+          );
+        })}
       </div>
 
       {opened && (

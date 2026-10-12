@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
 import { useAssetUrl } from "../asset-url";
-import { EditableItem, EditableText } from "../editable";
+import { EditableImage, EditableItem, EditableText } from "../editable";
 
 /** The image when the asset resolves; the placeholder when there is none or it fails to load. */
 function GalleryImage({ assetId, alt }: { assetId?: string; alt: string }) {
@@ -107,6 +107,7 @@ export function GallerySlide({ content, theme }: { content: GalleryContent; them
               }}
             >
               <GalleryImage assetId={item.assetId} alt={item.caption} />
+              <EditableImage path={`items.${index}.assetId`} hasImage={Boolean(item.assetId)} />
             </div>
             <EditableText
               as="div"

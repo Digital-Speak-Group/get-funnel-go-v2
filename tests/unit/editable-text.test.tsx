@@ -1,7 +1,7 @@
 import * as React from "react";
 import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { EditableItem, EditableText, SlideEditProvider } from "@/components/slides/editable";
+import { render, screen, fireEvent, cleanup } from "@testing-library/react";
+import { EditableImage, EditableItem, EditableText, SlideEditProvider } from "@/components/slides/editable";
 import { SlideRenderer } from "@/components/slides/SlideRenderer";
 import { defaultTheme } from "@/lib/slides/theme";
 import type { Slide } from "@/lib/slides/schema";
@@ -142,5 +142,57 @@ describe("EditableItem", () => {
       </SlideEditProvider>
     );
     expect(screen.getAllByRole("button", { name: "Action duplicate" })).toHaveLength(2);
+  });
+});
+
+describe("EditableImage", () => {
+  const images = { pick: vi.fn(), remove: vi.fn(), label: (action: string) => `Image ${action}` };
+
+  it("renders nothing outside the editor", () => {
+    const { container } = render(<EditableImage path="items.0.assetId" hasImage />);
+    expect(container.innerHTML).toBe("");
+  });
+
+  it("offers to add an image to an empty area", () => {
+    render(
+      <SlideEditProvider onEdit={vi.fn()} placeholderFor={placeholderFor} images={images}>
+        <EditableImage path="items.0.assetId" hasImage={false} />
+      </SlideEditProvider>
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Image add" }));
+    expect(images.pick).toHaveBeenCalledWith("items.0.assetId");
+    expect(screen.queryByRole("button", { name: "Image remove" })).toBeNull();
+  });
+
+  it("offers to replace or remove an existing image", () => {
+    render(
+      <SlideEditProvider onEdit={vi.fn()} placeholderFor={placeholderFor} images={images}>
+        <EditableImage path="items.1.assetId" hasImage />
+      </SlideEditProvider>
+    );
+    expect(screen.getByRole("button", { name: "Image replace" })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Image remove" }));
+    expect(images.remove).toHaveBeenCalledWith("items.1.assetId");
+  });
+
+  it("turns screenshot cards into plain blocks on the canvas (no lightbox button around the controls)", () => {
+    const slide: Slide = {
+      id: "00000000-0000-4000-8000-0000000000b1",
+      position: 0,
+      type: "screenshots",
+      content: { headline: "Preuves", items: [{ caption: "Ventes" }, { caption: "Leads" }] },
+    };
+    const { container: plain } = render(<SlideRenderer slide={slide} theme={defaultTheme} />);
+    expect(plain.querySelectorAll("button")).toHaveLength(2);
+    cleanup();
+
+    render(
+      <SlideEditProvider onEdit={vi.fn()} placeholderFor={placeholderFor} images={images}>
+        <SlideRenderer slide={slide} theme={defaultTheme} />
+      </SlideEditProvider>
+    );
+    const adds = screen.getAllByRole("button", { name: "Image add" });
+    expect(adds).toHaveLength(2);
+    for (const add of adds) expect(add.parentElement?.closest("button")).toBeNull();
   });
 });

@@ -817,7 +817,8 @@ The editor today changes slides only through the form panel; the canvas is a rea
 **Size:** M
 
 ### Task 67: Images on the canvas
-**Description:** Click an image (gallery, team photo, screenshots…) to replace or remove it through the existing upload flow.
+**Description:** Click an image (gallery, screenshots) to add, replace or remove it through the existing upload flow.
+**Done 2026-10-12:** `EditableImage` overlay (add on empty areas; replace/remove on hover) on gallery and screenshot images; upload logic shared with the form (`asset-upload.ts`), errors as toasts. Screenshot cards render as plain blocks on the canvas (no lightbox) and gain the item toolbar. Team members have no photo field (initials only). Verify: `editable-text.test.tsx`, image paths in `editable-paths.test.tsx`, e2e upload → reload.
 **Size:** S
 
 ### Checkpoint J — Inline editing review
@@ -825,5 +826,5 @@ The editor today changes slides only through the form panel; the canvas is a rea
 
 ### Task 68: Freeform "Libre" slides (Phase B — plan only)
 **Description:** New slide type with absolutely positioned elements (text, shape, image) on the 1920×1080 canvas: drag, resize, rotate, layers, snapping, undo/redo; "Convertir en libre" turns any slide into a freeform one (AI regeneration and automatic layouts no longer apply to it; theme colours and fonts still do).
-**Ask first:** slide schema change (new type + element model) and the drag/resize library — to be presented with a spec before building.
+**Ask first:** slide schema change (new type + element model) and the drag/resize library. Spec: `docs/freeform-slides.md` — approved 2026-10-12 (theme colours only, convert included).
 **Size:** XL

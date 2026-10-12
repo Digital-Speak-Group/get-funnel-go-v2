@@ -4,11 +4,18 @@ import * as React from "react";
 import { Maximize2, Minimize2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SlideThumbnail } from "@/components/slides/SlideThumbnail";
-import { SlideEditProvider, type ItemAction, type SlideItemApi } from "@/components/slides/editable";
+import { toast } from "sonner";
+import {
+  SlideEditProvider,
+  type ItemAction,
+  type SlideImageApi,
+  type SlideItemApi,
+} from "@/components/slides/editable";
+import { useAssetUpload } from "./asset-upload";
 import { canApply, listBounds } from "./list-actions";
 import type { ThemeTokens } from "@/lib/slides/theme";
 import type { Slide } from "@/lib/slides/schema";
-import { CANVAS_MESSAGES, ITEM_MESSAGES, SLIDE_TYPE_LABELS, fieldLabel } from "./messages";
+import { ASSET_MESSAGES, CANVAS_MESSAGES, ITEM_MESSAGES, SLIDE_TYPE_LABELS, fieldLabel } from "./messages";
 import type { EditorSlide } from "./validation";
 
 interface SlideCanvasProps {
@@ -18,6 +25,8 @@ interface SlideCanvasProps {
   onEditText: (path: string, value: string) => void;
   /** Move, duplicate or delete an item of the list at `path`. */
   onItemAction: (path: string, action: ItemAction, index: number) => void;
+  /** An image picked (asset id) or removed (undefined) on the slide, at its `assetId` path. */
+  onSetImage: (path: string, assetId: string | undefined) => void;
   /** Inspector hidden so the slide gets the room to edit on. */
   focused: boolean;
   onToggleFocus: () => void;
@@ -26,7 +35,15 @@ interface SlideCanvasProps {
 /** Field label of the last named segment: `painPoints.0.title` → label of `title`. */
 const placeholderFor = (path: string) => fieldLabel(path.split(".").filter((p) => !/^\d+$/.test(p)).pop() ?? path);
 
-export function SlideCanvas({ slide, theme, onEditText, onItemAction, focused, onToggleFocus }: SlideCanvasProps) {
+export function SlideCanvas({
+  slide,
+  theme,
+  onEditText,
+  onItemAction,
+  onSetImage,
+  focused,
+  onToggleFocus,
+}: SlideCanvasProps) {
   const type = slide?.type;
   const items = React.useMemo<SlideItemApi | undefined>(
     () =>
@@ -37,6 +54,37 @@ export function SlideCanvas({ slide, theme, onEditText, onItemAction, focused, o
       },
     [type, onItemAction]
   );
+
+  // One hidden file input serves every image on the slide; `pending` is the path it fills.
+  const fileRef = React.useRef<HTMLInputElement>(null);
+  const pending = React.useRef<string | null>(null);
+  const { upload } = useAssetUpload();
+  const images = React.useMemo<SlideImageApi>(
+    () => ({
+      pick: (path) => {
+        pending.current = path;
+        fileRef.current?.click();
+      },
+      remove: (path) => onSetImage(path, undefined),
+      label: (action) =>
+        action === "add"
+          ? ASSET_MESSAGES.canvasAdd
+          : action === "replace"
+            ? ASSET_MESSAGES.canvasReplace
+            : ASSET_MESSAGES.canvasRemove,
+    }),
+    [onSetImage]
+  );
+
+  async function uploadPicked(file: File) {
+    const path = pending.current;
+    if (!path) return;
+    const toastId = toast.loading(ASSET_MESSAGES.uploading);
+    const result = await upload(file);
+    toast.dismiss(toastId);
+    if ("assetId" in result) onSetImage(path, result.assetId);
+    else toast.error(result.error);
+  }
 
   if (!slide) {
     return (
@@ -94,7 +142,21 @@ export function SlideCanvas({ slide, theme, onEditText, onItemAction, focused, o
         data-testid="slide-canvas"
         className="relative aspect-video overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900"
       >
-        <SlideEditProvider onEdit={onEditText} placeholderFor={placeholderFor} items={items}>
+        <input
+          ref={fileRef}
+          type="file"
+          accept="image/png,image/jpeg,image/webp,image/gif"
+          className="sr-only"
+          tabIndex={-1}
+          aria-hidden="true"
+          data-testid="canvas-image-input"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            e.target.value = "";
+            if (file) void uploadPicked(file);
+          }}
+        />
+        <SlideEditProvider onEdit={onEditText} placeholderFor={placeholderFor} items={items} images={images}>
           <SlideThumbnail
             slide={preview}
             theme={theme}

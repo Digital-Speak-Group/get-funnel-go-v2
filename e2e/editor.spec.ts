@@ -148,6 +148,32 @@ test.describe("editor", () => {
     await expect(page.getByTestId("slide-canvas").locator("[data-edit-item]")).toHaveCount(4);
   });
 
+  test("adds an image directly on the canvas", async ({ page }) => {
+    const deckTitle = `Deck image ${Date.now()}`;
+    await createDeckViaDashboard(page, deckTitle);
+    await openDeckEditor(page, deckTitle);
+    await page.getByTestId("add-slide-type").selectOption("gallery");
+    await page.getByTestId("add-slide-submit").click();
+
+    const canvas = page.getByTestId("slide-canvas");
+    const chooser = page.waitForEvent("filechooser");
+    await canvas.getByRole("button", { name: "Ajouter une image" }).first().click();
+    // 8×8 red PNG
+    await (await chooser).setFiles({
+      name: "rouge.png",
+      mimeType: "image/png",
+      buffer: Buffer.from(
+        "iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAAEklEQVR4nGP4z8CAFTEMLQkAc6g/wd7nXIEAAAAASUVORK5CYII=",
+        "base64"
+      ),
+    });
+
+    await expect(canvas.locator("img")).toHaveCount(1, { timeout: 15000 });
+    await expect(page.getByTestId("editor-status")).toHaveText("Enregistré", { timeout: 8000 });
+    await page.reload();
+    await expect(page.getByTestId("slide-canvas").locator("img")).toHaveCount(1);
+  });
+
   test("exports the deck as PowerPoint", async ({ page }) => {
     const deckTitle = `Deck export ${Date.now()}`;
     await createDeckViaDashboard(page, deckTitle);

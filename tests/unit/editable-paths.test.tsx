@@ -60,6 +60,7 @@ function getAtPath(content: unknown, path: string): unknown {
 const noop = () => {};
 const label = (path: string) => path;
 const items = { can: () => true, act: noop, label: (action: string) => action };
+const images = { pick: noop, remove: noop, label: (action: string) => action };
 
 describe("editable text paths", () => {
   const slides = seedSlides();
@@ -77,7 +78,7 @@ describe("editable text paths", () => {
       for (const layout of layouts) {
         const slide = { id: "00000000-0000-4000-8000-000000000001", position: 0, type, content, layout } as Slide;
         const { container } = render(
-          <SlideEditProvider onEdit={noop} placeholderFor={label} items={items}>
+          <SlideEditProvider onEdit={noop} placeholderFor={label} items={items} images={images}>
             <SlideRenderer slide={slide} theme={defaultTheme} />
           </SlideEditProvider>
         );
@@ -98,6 +99,15 @@ describe("editable text paths", () => {
           checked++;
           if (!Array.isArray(list) || Number(index) >= list.length) {
             problems.push(`${name} [${layout ?? "default"}] item ${itemPath}: no such list item`);
+          }
+        }
+        for (const el of container.querySelectorAll<HTMLElement>("[data-edit-image]")) {
+          const imagePath = el.dataset.editImage!;
+          const parent = getAtPath(content, imagePath.split(".").slice(0, -1).join("."));
+          const value = getAtPath(content, imagePath);
+          checked++;
+          if (!imagePath.endsWith(".assetId") || !parent || typeof parent !== "object" || (value !== undefined && typeof value !== "string")) {
+            problems.push(`${name} [${layout ?? "default"}] image ${imagePath}: not an assetId of an existing item`);
           }
         }
         cleanup();

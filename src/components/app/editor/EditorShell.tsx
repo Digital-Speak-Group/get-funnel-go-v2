@@ -202,6 +202,12 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
     updateActive({ content: setContentPath(slide.content, path, value) });
   }
 
+  function setImage(path: string, assetId: string | undefined) {
+    const slide = slidesRef.current.find((s) => s.id === activeIdRef.current);
+    if (!slide) return;
+    updateActive({ content: setContentPath(slide.content, path, assetId) });
+  }
+
   function itemAction(path: string, action: ItemAction, index: number) {
     const slide = slidesRef.current.find((s) => s.id === activeIdRef.current);
     if (!slide) return;
@@ -459,6 +465,7 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
           theme={previewTheme}
           onEditText={editText}
           onItemAction={itemAction}
+          onSetImage={setImage}
           focused={focused}
           onToggleFocus={() => setFocused((f) => !f)}
         />

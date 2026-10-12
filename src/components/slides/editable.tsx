@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ChevronLeft, ChevronRight, Copy, Trash2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Copy, ImagePlus, Trash2 } from "lucide-react";
 
 /**
  * Inline editing on the editor canvas. Slide components render their content strings
@@ -21,18 +21,29 @@ export interface SlideItemApi {
   label: (action: ItemAction) => string;
 }
 
+/** Image picker on the canvas, see `EditableImage`. `path` is the `assetId` content path. */
+export interface SlideImageApi {
+  pick: (path: string) => void;
+  remove: (path: string) => void;
+  label: (action: "add" | "replace" | "remove") => string;
+}
+
 interface SlideEditApi {
   onEdit: (path: string, value: string) => void;
   /** Hint shown in an empty field (optional text the slide does not use yet). */
   placeholderFor: (path: string) => string;
   items?: SlideItemApi;
+  images?: SlideImageApi;
 }
 
 const SlideEditContext = React.createContext<SlideEditApi | null>(null);
 
 export function SlideEditProvider({ children, ...api }: SlideEditApi & { children: React.ReactNode }) {
-  const { onEdit, placeholderFor, items } = api;
-  const value = React.useMemo(() => ({ onEdit, placeholderFor, items }), [onEdit, placeholderFor, items]);
+  const { onEdit, placeholderFor, items, images } = api;
+  const value = React.useMemo(
+    () => ({ onEdit, placeholderFor, items, images }),
+    [onEdit, placeholderFor, items, images]
+  );
   return <SlideEditContext.Provider value={value}>{children}</SlideEditContext.Provider>;
 }
 
@@ -171,6 +182,49 @@ export function EditableItem({ path, index, length, as = "div", style, children,
           <Icon aria-hidden="true" />
         </button>
       ))}
+    </span>
+  );
+}
+
+/**
+ * Image controls over an image area (the area must be positioned). Renders nothing outside
+ * the editor; on the canvas it covers the area with "add" or "replace / remove" buttons.
+ */
+export function EditableImage({ path, hasImage }: { path: string; hasImage: boolean }) {
+  const images = React.useContext(SlideEditContext)?.images;
+  if (!images) return null;
+
+  const stop = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+  return (
+    <span data-edit-image={path} data-has-image={hasImage ? "" : undefined}>
+      <button
+        type="button"
+        onMouseDown={stop}
+        onClick={(event) => {
+          stop(event);
+          images.pick(path);
+        }}
+      >
+        <ImagePlus aria-hidden="true" />
+        {images.label(hasImage ? "replace" : "add")}
+      </button>
+      {hasImage && (
+        <button
+          type="button"
+          aria-label={images.label("remove")}
+          title={images.label("remove")}
+          onMouseDown={stop}
+          onClick={(event) => {
+            stop(event);
+            images.remove(path);
+          }}
+        >
+          <Trash2 aria-hidden="true" />
+        </button>
+      )}
     </span>
   );
 }

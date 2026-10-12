@@ -4,6 +4,7 @@ import * as React from "react";
 import { ImagePlus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ASSET_MESSAGES as m } from "./messages";
+import { useAssetUpload } from "./asset-upload";
 
 interface AssetFieldProps {
   path: string;
@@ -15,26 +16,13 @@ interface AssetFieldProps {
 /** Image picker for an `assetId`: uploads to the org's storage and stores the returned id. */
 export function AssetField({ path, value, error, onChange }: AssetFieldProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [busy, setBusy] = React.useState(false);
-  const [uploadError, setUploadError] = React.useState<string | null>(null);
+  const { upload: uploadFile, busy, error: uploadError } = useAssetUpload();
   const id = `field-${path.replace(/\./g, "-")}`;
 
   async function upload(file: File) {
-    setBusy(true);
-    setUploadError(null);
-    try {
-      const body = new FormData();
-      body.set("file", file);
-      const res = await fetch("/api/assets", { method: "POST", body });
-      const data: { assetId?: string; error?: string } = await res.json().catch(() => ({}));
-      if (res.ok && data.assetId) onChange(data.assetId);
-      else setUploadError(m.errors[data.error ?? ""] ?? m.errors.FAILED);
-    } catch {
-      setUploadError(m.errors.FAILED);
-    } finally {
-      setBusy(false);
-      if (inputRef.current) inputRef.current.value = "";
-    }
+    const result = await uploadFile(file);
+    if ("assetId" in result) onChange(result.assetId);
+    if (inputRef.current) inputRef.current.value = "";
   }
 
   const message = uploadError ?? error?.[0];

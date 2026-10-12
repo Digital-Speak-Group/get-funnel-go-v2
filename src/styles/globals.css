@@ -340,3 +340,51 @@
   width: 26px;
   height: 26px;
 }
+
+/* Image controls over slide images (EditableImage), in slide space. Empty areas always show
+   the "add" button; filled ones show replace/remove on hover. */
+[data-edit-image] {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: inherit;
+  outline: 3px dashed color-mix(in srgb, var(--primary) 45%, transparent);
+  outline-offset: -6px;
+}
+[data-edit-image][data-has-image] {
+  opacity: 0;
+  outline: 0;
+  background: rgb(0 0 0 / 0.45);
+  transition: opacity 120ms ease;
+}
+[data-edit-image][data-has-image]:hover,
+[data-edit-image][data-has-image]:focus-within {
+  opacity: 1;
+}
+[data-edit-image] button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 22px;
+  border-radius: 12px;
+  border: 2px solid var(--border-strong);
+  background: var(--surface-3);
+  color: var(--fg);
+  font: 600 22px/1 var(--font-sans, system-ui), system-ui, sans-serif;
+  cursor: pointer;
+}
+[data-edit-image] button:hover {
+  background: var(--surface-2);
+}
+[data-edit-image] button:focus-visible {
+  outline: 3px solid var(--primary);
+}
+[data-edit-image] svg {
+  width: 26px;
+  height: 26px;
+}

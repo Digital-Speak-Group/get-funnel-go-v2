@@ -200,6 +200,9 @@ export const ASSET_MESSAGES = {
   remove: "Retirer",
   uploading: "Import…",
   hint: "PNG, JPEG, WebP ou GIF — 4 Mo max.",
+  canvasAdd: "Ajouter une image",
+  canvasReplace: "Remplacer l'image",
+  canvasRemove: "Retirer l'image",
   errors: {
     TOO_LARGE: "Image trop lourde (4 Mo max).",
     UNSUPPORTED_TYPE: "Format non pris en charge (PNG, JPEG, WebP ou GIF).",
