@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { stat } from "node:fs/promises";
 import { createDeckViaDashboard, login, openDeckEditor } from "./helpers";
 
 test.describe("editor", () => {
@@ -93,5 +94,25 @@ test.describe("editor", () => {
     await expect(page.getByTestId("slide-field-title")).toHaveValue(
       "Valeur valide"
     );
+  });
+
+  test("exports the deck as PowerPoint", async ({ page }) => {
+    const deckTitle = `Deck export ${Date.now()}`;
+    await createDeckViaDashboard(page, deckTitle);
+    await openDeckEditor(page, deckTitle);
+
+    await page.getByTestId("add-slide-submit").click();
+    await page.getByTestId("slide-field-title").fill("Slide exportée");
+    await expect(page.getByTestId("editor-status")).toHaveText("Enregistré", { timeout: 8000 });
+
+    // Headless Chrome renders every slide on the server: allow a few seconds.
+    const download = page.waitForEvent("download", { timeout: 45000 });
+    await page.getByTestId("export-menu").click();
+    await page.getByTestId("export-pptx").click();
+    const file = await download;
+
+    expect(file.suggestedFilename()).toBe(`${deckTitle}.pptx`);
+    const { size } = await stat(await file.path());
+    expect(size).toBeGreaterThan(10_000);
   });
 });

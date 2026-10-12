@@ -768,3 +768,20 @@
 - [x] All 7 legacy decks available as templates; GetFunnels org holds the full decks
 - [ ] Signature kit, layouts and new types approved against the legacy decks (screenshots)
 - [x] Definition of done green (2026-10-09: lint, typecheck, 509 unit tests, build; `test:e2e` not run)
+
+---
+
+## Phase 7 — Export
+
+### Task 63: PowerPoint export
+**Description:** Download the deck as `.pptx` from the editor: one 16:9 slide per deck slide, each a full-bleed 1920×1080 PNG rendered by the same headless Chrome pipeline as the PDF (audience view), with the presenter script, cue and notes as PowerPoint speaker notes.
+**Acceptance:**
+- [x] Editor top bar "Exporter" menu offers PDF and PowerPoint; errors show a toast
+- [x] Every slide type and theme matches the on-screen rendering (it is a picture of it)
+- [x] Speaker notes carry the punchline, script, transition and notes of each slide
+- [x] Slide text is not editable in PowerPoint (accepted trade-off, decided 2026-10-12)
+**Ask first:** new dependency `pptxgenjs` — approved 2026-10-12
+**Verify:** `tests/unit/pptx-export.test.ts`; e2e `editor › exports the deck as PowerPoint`
+**Done 2026-10-12:** PNG per slide (lossless; ~430 KB each, so a 40-slide deck is ~17 MB and ~25 s to render). Files: `ExportMenu.tsx` replaces `ExportPdfButton.tsx`
+**Dependencies:** 23 · **Size:** S
+**Files:** `src/server/services/slide-capture.ts`, `src/server/services/pptx.ts`, `src/app/api/decks/[deckId]/export/route.ts`, `src/components/app/editor/ExportMenu.tsx`

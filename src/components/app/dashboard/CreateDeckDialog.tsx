@@ -16,14 +16,14 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { createDeckAction } from "@/app/(app)/app/decks/actions";
 import { dashboardMessages } from "./messages";
+import { ThemeChoiceGrid, type ThemeChoice } from "./ThemeChoiceGrid";
 
 const m = dashboardMessages.create;
 
 interface CreateDeckDialogProps {
-  themes: { id: string; name: string }[];
+  themes: ThemeChoice[];
 }
 
 export function CreateDeckDialog({ themes }: CreateDeckDialogProps) {
@@ -98,7 +98,7 @@ export function CreateDeckDialog({ themes }: CreateDeckDialogProps) {
           {dashboardMessages.blankDeck}
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-w-3xl">
         <form onSubmit={handleSubmit} className="grid gap-5">
           <DialogHeader>
             <DialogTitle>{m.title}</DialogTitle>
@@ -119,19 +119,20 @@ export function CreateDeckDialog({ themes }: CreateDeckDialogProps) {
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="deck-theme">{m.themeLabel}</Label>
-            <Select value={themeId} onValueChange={setThemeId}>
-              <SelectTrigger id="deck-theme">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {themes.map((theme) => (
-                  <SelectItem key={theme.id} value={theme.id}>
-                    {theme.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+              <Label id="deck-theme-label">{m.themeLabel}</Label>
+              <span className="text-small text-faint">{m.themeHint}</span>
+            </div>
+            {/* Scrolls on its own so the title field and the buttons stay in view. */}
+            <div className="-mx-1 max-h-[min(28rem,50dvh)] overflow-y-auto p-1">
+              <ThemeChoiceGrid
+                themes={themes}
+                value={themeId}
+                onChange={setThemeId}
+                deckTitle={title}
+                labelledBy="deck-theme-label"
+              />
+            </div>
           </div>
 
           {error && (

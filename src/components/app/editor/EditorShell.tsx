@@ -36,7 +36,7 @@ import { LayoutPicker } from "./LayoutPicker";
 import { IllustrationPicker } from "./IllustrationPicker";
 import { cn } from "@/lib/utils";
 import { CopyAudienceLinkButton } from "@/components/presenter/CopyAudienceLinkButton";
-import { ExportPdfButton } from "./ExportPdfButton";
+import { ExportMenu } from "./ExportMenu";
 import { ThemeDialog } from "./ThemeDialog";
 import { buttonVariants } from "@/components/ui/button";
 
@@ -401,7 +401,7 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
             presentToken={deck.presentToken}
             className={buttonVariants({ variant: "secondary", size: "sm" })}
           />
-          <ExportPdfButton deckId={deck.id} deckTitle={deck.title} />
+          <ExportMenu deckId={deck.id} deckTitle={deck.title} />
         </div>
       </div>
 

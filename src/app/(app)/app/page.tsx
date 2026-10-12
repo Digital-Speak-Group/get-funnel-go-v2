@@ -118,7 +118,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
         actions={
           <>
             <Suspense fallback={null}>
-              <CreateDeckDialog themes={systemThemes.map(({ id, name }) => ({ id, name }))} />
+              <CreateDeckDialog themes={systemThemes} />
             </Suspense>
             <Button asChild>
               <Link href="/app/new">

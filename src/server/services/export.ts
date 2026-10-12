@@ -8,6 +8,9 @@ export interface ExportSlide {
   position: number;
   type: string;
   content: unknown;
+  script: string | null;
+  notes: string | null;
+  cue: unknown;
 }
 
 export interface ExportPayload {
@@ -20,7 +23,7 @@ export interface ExportPayload {
 }
 
 /**
- * Resolves the deck payload needed for PDF export.
+ * Resolves the deck payload needed for the PDF and PowerPoint exports.
  * Only accessible server-side (org-scoped).
  */
 export async function getExportPayload(
@@ -49,6 +52,9 @@ export async function getExportPayload(
       position: slides.position,
       type: slides.type,
       content: slides.content,
+      script: slides.script,
+      notes: slides.notes,
+      cue: slides.cue,
     })
     .from(slides)
     .where(eq(slides.deckId, deckId))

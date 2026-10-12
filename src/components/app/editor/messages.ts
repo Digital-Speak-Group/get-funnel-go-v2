@@ -240,9 +240,11 @@ export function fieldLabel(key: string): string {
 }
 
 export const EXPORT_MESSAGES = {
-  label: "PDF",
+  label: "Exporter",
+  pdf: "PDF",
+  pptx: "PowerPoint (images + notes)",
   busy: "Export…",
-  failed: "L'export PDF a échoué. Réessayez dans un instant.",
+  failed: "L'export a échoué. Réessayez dans un instant.",
 } as const;
 
 export const THEME_MESSAGES = {

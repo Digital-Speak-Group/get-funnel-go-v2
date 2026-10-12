@@ -132,7 +132,7 @@ Testable conditions for V1 launch:
 - [ ] A user can regenerate a single slide without regenerating the deck.
 - [ ] Every AI call is logged with tokens and cost; credits are deducted and refunded on failure.
 - [ ] Stripe checkout upgrades a plan; webhook updates `subscriptions`; plan limits are enforced server-side.
-- [ ] PDF export of a deck matches the on-screen rendering.
+- [ ] PDF and PowerPoint exports of a deck match the on-screen rendering (PowerPoint: one picture per slide, presenter script as speaker notes, not editable — decided 2026-10-12).
 - [ ] E2E happy path passes in CI on every PR.
 - [ ] `docker compose up` with plain Postgres runs migrations + app (V2 rehearsal) — documented gaps only.
 
