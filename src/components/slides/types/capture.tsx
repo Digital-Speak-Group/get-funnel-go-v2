@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface CaptureContent {
   headline: string;
@@ -30,7 +31,10 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
       }}
     >
       <header style={{ marginBottom: "48px", maxWidth: "700px" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -39,9 +43,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <form
@@ -64,7 +66,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
                 color: theme["--slide-text"],
               }}
             >
-              {field.label}
+              <EditableText path={`fields.${index}.label`} value={field.label} />
             </label>
             {field.type === "select" ? (
               <select
@@ -120,7 +122,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
             transition: "background 200ms ease",
           }}
         >
-          {ctaLabel}
+          <EditableText path="ctaLabel" value={ctaLabel} />
         </button>
       </form>
     </div>

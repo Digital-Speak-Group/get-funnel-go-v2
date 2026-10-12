@@ -5,6 +5,7 @@ import { cardSurface } from "../style";
 import { useAssetUrl } from "../asset-url";
 import { useStaticSlide } from "../render-context";
 import { Frame, Title } from "../layouts/parts";
+import { EditableText } from "../editable";
 
 interface ScreenshotsContent {
   headline: string;
@@ -57,7 +58,7 @@ export function ScreenshotsSlide({ content, theme }: { content: ScreenshotsConte
 
   return (
     <Frame theme={theme} style={{ gap: "36px", padding: "72px 96px", position: "relative" }}>
-      <Title theme={theme} size={44} align="center" color={theme["--slide-primary-text"]}>{headline}</Title>
+      <Title theme={theme} size={44} align="center" color={theme["--slide-primary-text"]} path="headline">{headline}</Title>
       <div
         style={{
           flex: 1,
@@ -92,10 +93,12 @@ export function ScreenshotsSlide({ content, theme }: { content: ScreenshotsConte
               <Shot assetId={item.assetId} alt={item.caption} theme={theme} />
             </span>
             <span style={{ display: "flex", justifyContent: "space-between", gap: "12px", padding: "12px 16px", fontSize: "16px" }}>
-              <span style={{ fontWeight: 600 }}>{item.caption}</span>
-              {item.result && (
-                <span style={{ fontWeight: 800, color: theme["--slide-success"], whiteSpace: "nowrap" }}>{item.result}</span>
-              )}
+              <EditableText path={`items.${i}.caption`} value={item.caption} style={{ fontWeight: 600 }} />
+              <EditableText
+                path={`items.${i}.result`}
+                value={item.result}
+                style={{ fontWeight: 800, color: theme["--slide-success"], whiteSpace: "nowrap" }}
+              />
             </span>
           </button>
         ))}

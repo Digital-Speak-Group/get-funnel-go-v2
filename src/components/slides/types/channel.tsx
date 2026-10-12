@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface ChannelContent {
   headline: string;
@@ -64,7 +65,10 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
           <span style={{ fontSize: "20px" }}>{icon}</span>
           {channel.toUpperCase()}
         </div>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -73,9 +77,7 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -115,7 +117,10 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
               >
                 {icon}
               </span>
-              <span
+              <EditableText
+                as="span"
+                path={`scripts.${index}.moment`}
+                value={script.moment}
                 style={{
                   fontSize: "13px",
                   fontWeight: 600,
@@ -123,12 +128,14 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
                   letterSpacing: "0.08em",
                   color: channelColor,
                 }}
-              >
-                {script.moment}
-              </span>
+              />
             </div>
             <div style={{ flex: 1 }}>
-              <div
+              <EditableText
+                as="div"
+                path={`scripts.${index}.message`}
+                value={script.message}
+                multiline
                 style={{
                   fontSize: "18px",
                   lineHeight: 1.55,
@@ -140,9 +147,7 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
                   fontFamily: theme["--slide-font-mono"],
                   whiteSpace: "pre-wrap",
                 }}
-              >
-                {script.message}
-              </div>
+              />
             </div>
           </div>
         ))}

@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
 import { useAssetUrl } from "../asset-url";
+import { EditableText } from "../editable";
 
 /** The image when the asset resolves; the placeholder when there is none or it fails to load. */
 function GalleryImage({ assetId, alt }: { assetId?: string; alt: string }) {
@@ -57,7 +58,10 @@ export function GallerySlide({ content, theme }: { content: GalleryContent; them
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -66,9 +70,7 @@ export function GallerySlide({ content, theme }: { content: GalleryContent; them
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -106,7 +108,10 @@ export function GallerySlide({ content, theme }: { content: GalleryContent; them
             >
               <GalleryImage assetId={item.assetId} alt={item.caption} />
             </div>
-            <div
+            <EditableText
+              as="div"
+              path={`items.${index}.caption`}
+              value={item.caption}
               style={{
                 padding: "16px",
                 fontSize: "15px",
@@ -114,9 +119,7 @@ export function GallerySlide({ content, theme }: { content: GalleryContent; them
                 color: theme["--slide-text"],
                 fontWeight: 500,
               }}
-            >
-              {item.caption}
-            </div>
+            />
           </div>
         ))}
       </div>

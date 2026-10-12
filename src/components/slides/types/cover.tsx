@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { headlineFill, kickerStyle } from "../style";
+import { EditableText, useSlideEditing } from "../editable";
 
 interface CoverContent {
   kicker?: string;
@@ -12,6 +13,7 @@ interface CoverContent {
 
 export function CoverSlide({ content, theme }: { content: CoverContent; theme: Record<string, string> }) {
   const { kicker, title, subtitle, presenterName } = content;
+  const editing = useSlideEditing();
 
   return (
     <div
@@ -27,12 +29,11 @@ export function CoverSlide({ content, theme }: { content: CoverContent; theme: R
         color: theme["--slide-text"],
       }}
     >
-      {kicker && (
-        <p style={{ ...kickerStyle(theme), marginBottom: "24px" }}>
-          {kicker}
-        </p>
-      )}
-      <h1
+      <EditableText as="p" path="kicker" value={kicker} style={{ ...kickerStyle(theme), marginBottom: "24px" }} />
+      <EditableText
+        as="h1"
+        path="title"
+        value={title}
         style={{
           ...headlineFill(theme, theme["--slide-text"]),
           fontSize: "72px",
@@ -41,24 +42,22 @@ export function CoverSlide({ content, theme }: { content: CoverContent; theme: R
           marginBottom: "24px",
           maxWidth: "1200px",
         }}
-      >
-        {title}
-      </h1>
-      {subtitle && (
-        <p
-          style={{
-            fontSize: "24px",
-            lineHeight: 1.35,
-            fontWeight: 400,
-            color: theme["--slide-muted"],
-            maxWidth: "800px",
-            marginBottom: "48px",
-          }}
-        >
-          {subtitle}
-        </p>
-      )}
-      {presenterName && (
+      />
+      <EditableText
+        as="p"
+        path="subtitle"
+        value={subtitle}
+        multiline
+        style={{
+          fontSize: "24px",
+          lineHeight: 1.35,
+          fontWeight: 400,
+          color: theme["--slide-muted"],
+          maxWidth: "800px",
+          marginBottom: "48px",
+        }}
+      />
+      {(presenterName || editing) && (
         <p
           style={{
             fontSize: "18px",
@@ -66,7 +65,7 @@ export function CoverSlide({ content, theme }: { content: CoverContent; theme: R
             color: theme["--slide-muted"],
           }}
         >
-          Présenté par {presenterName}
+          Présenté par <EditableText path="presenterName" value={presenterName} />
         </p>
       )}
     </div>

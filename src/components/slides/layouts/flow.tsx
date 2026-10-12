@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface } from "../style";
+import { EditableText } from "../editable";
 import { Frame, Title, type LayoutProps } from "./parts";
 
 interface FlowContent {
@@ -9,9 +10,12 @@ interface FlowContent {
   steps: Array<{ label: string; title: string; text: string; channel?: string }>;
 }
 
-function ChannelPill({ theme, children }: { theme: Record<string, string>; children: React.ReactNode }) {
+/** Optional channel tag: renders nothing without a value (outside the editor). */
+function ChannelPill({ theme, path, value }: { theme: Record<string, string>; path: string; value: string | undefined }) {
   return (
-    <span
+    <EditableText
+      path={path}
+      value={value}
       style={{
         alignSelf: "flex-start",
         fontSize: "12px",
@@ -23,9 +27,7 @@ function ChannelPill({ theme, children }: { theme: Record<string, string>; child
         color: theme["--slide-primary-text"],
         borderRadius: "9999px",
       }}
-    >
-      {children}
-    </span>
+    />
   );
 }
 
@@ -35,7 +37,7 @@ export function FlowTimeline({ content, theme }: LayoutProps<FlowContent>) {
   const primary = theme["--slide-primary"];
   return (
     <Frame theme={theme} style={{ justifyContent: "center", gap: "72px" }}>
-      <Title theme={theme} size={52} align="center" color={theme["--slide-primary-text"]}>{headline}</Title>
+      <Title theme={theme} size={52} align="center" color={theme["--slide-primary-text"]} path="headline">{headline}</Title>
       <div style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${steps.length}, 1fr)`, gap: "24px" }}>
         {/* The line runs between the first and last node centres. */}
         <div
@@ -69,7 +71,9 @@ export function FlowTimeline({ content, theme }: LayoutProps<FlowContent>) {
             >
               {i + 1}
             </div>
-            <span
+            <EditableText
+              path={`steps.${i}.label`}
+              value={step.label}
               style={{
                 fontSize: "14px",
                 fontWeight: 700,
@@ -77,12 +81,21 @@ export function FlowTimeline({ content, theme }: LayoutProps<FlowContent>) {
                 letterSpacing: "0.08em",
                 color: theme["--slide-primary-text"],
               }}
-            >
-              {step.label}
-            </span>
-            <h3 style={{ fontSize: "22px", fontWeight: 700, fontFamily: theme["--slide-font-display"], margin: 0 }}>{step.title}</h3>
-            {step.channel && <ChannelPill theme={theme}>{step.channel}</ChannelPill>}
-            <p style={{ fontSize: "16px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}>{step.text}</p>
+            />
+            <EditableText
+              as="h3"
+              path={`steps.${i}.title`}
+              value={step.title}
+              style={{ fontSize: "22px", fontWeight: 700, fontFamily: theme["--slide-font-display"], margin: 0 }}
+            />
+            <ChannelPill theme={theme} path={`steps.${i}.channel`} value={step.channel} />
+            <EditableText
+              as="p"
+              path={`steps.${i}.text`}
+              value={step.text}
+              multiline
+              style={{ fontSize: "16px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}
+            />
           </div>
         ))}
       </div>
@@ -96,7 +109,7 @@ export function FlowGrid({ content, theme }: LayoutProps<FlowContent>) {
   const columns = steps.length === 4 || steps.length > 6 ? 4 : 3;
   return (
     <Frame theme={theme} style={{ gap: "48px" }}>
-      <Title theme={theme} size={52} color={theme["--slide-primary-text"]}>{headline}</Title>
+      <Title theme={theme} size={52} color={theme["--slide-primary-text"]} path="headline">{headline}</Title>
       <div
         style={{
           flex: 1,
@@ -119,7 +132,9 @@ export function FlowGrid({ content, theme }: LayoutProps<FlowContent>) {
               borderTop: `4px solid ${theme["--slide-primary"]}`,
             }}
           >
-            <span
+            <EditableText
+              path={`steps.${i}.label`}
+              value={step.label}
               style={{
                 fontSize: "48px",
                 lineHeight: 1,
@@ -127,12 +142,21 @@ export function FlowGrid({ content, theme }: LayoutProps<FlowContent>) {
                 fontFamily: theme["--slide-font-display"],
                 color: theme["--slide-primary-text"],
               }}
-            >
-              {step.label}
-            </span>
-            <h3 style={{ fontSize: "24px", fontWeight: 700, fontFamily: theme["--slide-font-display"], margin: 0 }}>{step.title}</h3>
-            {step.channel && <ChannelPill theme={theme}>{step.channel}</ChannelPill>}
-            <p style={{ fontSize: "17px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}>{step.text}</p>
+            />
+            <EditableText
+              as="h3"
+              path={`steps.${i}.title`}
+              value={step.title}
+              style={{ fontSize: "24px", fontWeight: 700, fontFamily: theme["--slide-font-display"], margin: 0 }}
+            />
+            <ChannelPill theme={theme} path={`steps.${i}.channel`} value={step.channel} />
+            <EditableText
+              as="p"
+              path={`steps.${i}.text`}
+              value={step.text}
+              multiline
+              style={{ fontSize: "17px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}
+            />
           </div>
         ))}
       </div>

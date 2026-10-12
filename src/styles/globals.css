@@ -263,3 +263,28 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Inline editing on the editor canvas (src/components/slides/editable.tsx). Sizes are in the
+   1920×1080 slide space, which the canvas scales down to roughly half. */
+[data-edit-path] {
+  outline: 3px dashed transparent;
+  outline-offset: 6px;
+  border-radius: 4px;
+  transition: outline-color 120ms ease;
+}
+[data-edit-path]:hover {
+  outline-color: color-mix(in srgb, var(--primary) 55%, transparent);
+}
+[data-edit-path]:focus {
+  outline: 3px solid var(--primary);
+}
+[data-edit-path]:empty {
+  min-width: 2em;
+  min-height: 1em;
+}
+[data-edit-path]:empty::before {
+  content: attr(data-placeholder);
+  opacity: 0.45;
+  font-style: italic;
+  -webkit-text-fill-color: currentColor;
+}

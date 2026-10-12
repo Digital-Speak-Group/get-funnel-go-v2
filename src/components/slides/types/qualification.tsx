@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface QualificationContent {
   headline: string;
@@ -26,7 +27,10 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -35,9 +39,7 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -58,7 +60,10 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
               border: `1px solid ${theme["--slide-muted"]}1a`,
             }}
           >
-            <p
+            <EditableText
+              as="p"
+              path={`questions.${qIndex}.question`}
+              value={q.question}
               style={{
                 fontSize: "22px",
                 fontWeight: 600,
@@ -66,9 +71,7 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
                 marginBottom: "20px",
                 color: theme["--slide-text"],
               }}
-            >
-              {q.question}
-            </p>
+            />
             <div
               style={{
                 display: "grid",
@@ -94,7 +97,7 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
                     transition: "border-color 200ms ease, background 200ms ease",
                   }}
                 >
-                  {option}
+                  <EditableText path={`questions.${qIndex}.options.${oIndex}`} value={option} />
                 </button>
               ))}
             </div>

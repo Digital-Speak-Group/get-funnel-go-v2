@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface FlowContent {
   headline: string;
@@ -29,7 +30,10 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -38,9 +42,7 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -78,16 +80,17 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
                 gap: "8px",
               }}
             >
-              <div
+              <EditableText
+                as="div"
+                path={`steps.${index}.label`}
+                value={step.label}
                 style={{
                   fontSize: "28px",
                   fontWeight: 700,
                   fontFamily: theme["--slide-font-display"],
                   color: theme["--slide-primary-text"],
                 }}
-              >
-                {step.label}
-              </div>
+              />
               <div
                 style={{
                   width: "4px",
@@ -98,43 +101,44 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
             </div>
             <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "12px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <h3
+                <EditableText
+                  as="h3"
+                  path={`steps.${index}.title`}
+                  value={step.title}
                   style={{
                     fontSize: "24px",
                     fontWeight: 600,
                     fontFamily: theme["--slide-font-display"],
                     margin: 0,
                   }}
-                >
-                  {step.title}
-                </h3>
-                {step.channel && (
-                  <span
-                    style={{
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.08em",
-                      padding: "4px 12px",
-                      background: theme["--slide-primary"],
-                      color: theme["--slide-primary-fg"],
-                      borderRadius: "9999px",
-                    }}
-                  >
-                    {step.channel}
-                  </span>
-                )}
+                />
+                <EditableText
+                  path={`steps.${index}.channel`}
+                  value={step.channel}
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    padding: "4px 12px",
+                    background: theme["--slide-primary"],
+                    color: theme["--slide-primary-fg"],
+                    borderRadius: "9999px",
+                  }}
+                />
               </div>
-              <p
+              <EditableText
+                as="p"
+                path={`steps.${index}.text`}
+                value={step.text}
+                multiline
                 style={{
                   fontSize: "16px",
                   lineHeight: 1.55,
                   color: theme["--slide-text"],
                   margin: 0,
                 }}
-              >
-                {step.text}
-              </p>
+              />
             </div>
           </div>
         ))}

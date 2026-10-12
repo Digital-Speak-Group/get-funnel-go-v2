@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
+import { EditableText } from "../editable";
 import { SlideIcon } from "../icons";
 
 interface WhyContent {
@@ -28,7 +29,10 @@ export function WhySlide({ content, theme }: { content: WhyContent; theme: Recor
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -37,9 +41,7 @@ export function WhySlide({ content, theme }: { content: WhyContent; theme: Recor
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -83,7 +85,10 @@ export function WhySlide({ content, theme }: { content: WhyContent; theme: Recor
                 <SlideIcon name={reason.icon} size={24} fallback={(index + 1).toString()} />
               </div>
               <div style={{ flex: 1 }}>
-                <h3
+                <EditableText
+                  as="h3"
+                  path={`reasons.${index}.title`}
+                  value={reason.title}
                   style={{
                     fontSize: "22px",
                     fontWeight: 600,
@@ -91,19 +96,19 @@ export function WhySlide({ content, theme }: { content: WhyContent; theme: Recor
                     margin: "0 0 8px 0",
                     color: theme["--slide-primary-text"],
                   }}
-                >
-                  {reason.title}
-                </h3>
-                <p
+                />
+                <EditableText
+                  as="p"
+                  path={`reasons.${index}.text`}
+                  value={reason.text}
+                  multiline
                   style={{
                     fontSize: "16px",
                     lineHeight: 1.55,
                     color: theme["--slide-text"],
                     margin: 0,
                   }}
-                >
-                  {reason.text}
-                </p>
+                />
               </div>
             </div>
           </div>

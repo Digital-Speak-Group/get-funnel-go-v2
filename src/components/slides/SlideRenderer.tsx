@@ -7,6 +7,7 @@ import { getSlideComponent, UnknownSlide } from "./registry";
 import { getLayoutComponent } from "./layouts";
 import { StaticSlideProvider, useLiveBlanks, useStaticSlide } from "./render-context";
 import { SlideIllustration } from "./illustrations/Illustration";
+import { useSlideEditing } from "./editable";
 import { tokensToCssVars, getBackgroundStyles } from "@/lib/slides/theme";
 import { type Slide } from "@/lib/slides/schema";
 import { type ThemeTokens } from "@/lib/slides/theme";
@@ -25,6 +26,8 @@ export function SlideRenderer({ slide, theme, isActive = false, className }: Sli
   const Component = getLayoutComponent(slide.type, slide.layout) ?? getSlideComponent(slide.type) ?? UnknownSlide;
   const liveValues = useLiveBlanks(slide.id);
   const isStatic = useStaticSlide();
+  // Editable fields cannot live inside role="img" (its children are presentational).
+  const editing = useSlideEditing();
 
   const style: React.CSSProperties = {
     ...cssVars,
@@ -45,7 +48,7 @@ export function SlideRenderer({ slide, theme, isActive = false, className }: Sli
     <div
       className={className}
       style={style}
-      role="img"
+      role={editing ? "group" : "img"}
       aria-label={`Slide ${slide.type}: ${(slide.content as Record<string, unknown>).headline || (slide.content as Record<string, unknown>).title || "Sans titre"}`}
     >
       <SlideBackground background={theme.background}>

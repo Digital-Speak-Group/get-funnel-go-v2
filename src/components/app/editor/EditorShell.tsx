@@ -32,6 +32,7 @@ import {
 import type { FieldErrors } from "./field-schema";
 import { toEditorCue } from "./cue";
 import { validLayout } from "@/lib/slides/layouts";
+import { setContentPath } from "@/lib/slides/content-path";
 import { LayoutPicker } from "./LayoutPicker";
 import { IllustrationPicker } from "./IllustrationPicker";
 import { cn } from "@/lib/utils";
@@ -84,6 +85,7 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
   const [status, setStatus] = React.useState<SaveStatus>("idle");
   const [themeId, setThemeId] = React.useState<string>(deck.themeId);
   const [isRegenerating, setIsRegenerating] = React.useState(false);
+  const [focused, setFocused] = React.useState(false);
   const [regenerateError, setRegenerateError] = React.useState<string | undefined>();
 
   const slidesRef = React.useRef(slides);
@@ -191,6 +193,12 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
     scheduleFlush();
   }
 
+  function editText(path: string, value: string) {
+    const slide = slidesRef.current.find((s) => s.id === activeIdRef.current);
+    if (!slide) return;
+    updateActive({ content: setContentPath(slide.content, path, value) });
+  }
+
   async function handleAdd(type: SlideType) {
     const res = await addSlideAction({ deckId: deck.id, type });
     if ("error" in res) {
@@ -216,11 +224,14 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
     const reordered = next.map((s, i) => ({ ...s, position: i }));
     commitSlides(reordered);
 
+    // Shown like a content save, so a reload right after a move doesn't look safe while it isn't.
+    setStatus("saving");
     const res = await reorderSlidesAction({
       deckId: deck.id,
       slideIds: reordered.map((s) => s.id),
     });
     if ("error" in res) setStatus("error");
+    else if (dirtyRef.current.size === 0 && !flushingRef.current) setStatus("saved");
   }
 
   async function handleDuplicate(id: string) {
@@ -405,7 +416,12 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-[260px_minmax(0,1fr)_380px]">
+      <div
+        className={cn(
+          "grid grid-cols-1 items-start gap-4",
+          focused ? "lg:grid-cols-[200px_minmax(0,1fr)]" : "lg:grid-cols-[260px_minmax(0,1fr)_380px]"
+        )}
+      >
         <SlideList
           slides={slides}
           activeId={activeId}
@@ -415,8 +431,14 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
           onDuplicate={(id) => void handleDuplicate(id)}
           onDelete={(id) => void handleDelete(id)}
         />
-        <SlideCanvas slide={previewSlide} theme={previewTheme} />
-        <div className="space-y-6 rounded-2xl border border-zinc-800 bg-zinc-900/50 p-4">
+        <SlideCanvas
+          slide={previewSlide}
+          theme={previewTheme}
+          onEditText={editText}
+          focused={focused}
+          onToggleFocus={() => setFocused((f) => !f)}
+        />
+        <div className={cn("space-y-6 rounded-2xl border border-zinc-800 bg-zinc-900/50 p-4", focused && "lg:hidden")}>
           {activeSlide ? (
             <>
             <LayoutPicker

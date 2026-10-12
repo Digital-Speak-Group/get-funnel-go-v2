@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Frame, Lead, Title } from "../layouts/parts";
+import { EditableText } from "../editable";
 
 interface BlanksContent {
   headline: string;
@@ -27,8 +28,8 @@ export function BlanksSlide({
   return (
     <Frame theme={theme} style={{ justifyContent: "center", gap: "48px" }}>
       <header style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-        <Title theme={theme} size={56}>{headline}</Title>
-        {intro && <Lead theme={theme} style={{ maxWidth: "1300px" }}>{intro}</Lead>}
+        <Title theme={theme} size={56} path="headline">{headline}</Title>
+        <Lead theme={theme} path="intro" style={{ maxWidth: "1300px" }}>{intro}</Lead>
       </header>
       <dl style={{ margin: 0, display: "grid", gridTemplateColumns: "1fr auto", columnGap: "48px" }}>
         {fields.map((field, i) => {
@@ -43,7 +44,7 @@ export function BlanksSlide({
                   borderTop: `1px solid ${theme["--slide-muted"]}33`,
                 }}
               >
-                {field.label}
+                <EditableText path={`fields.${i}.label`} value={field.label} />
               </dt>
               <dd
                 data-blank-filled={value ? "true" : "false"}
@@ -59,7 +60,7 @@ export function BlanksSlide({
                   minWidth: "320px",
                 }}
               >
-                {field.prefix && <span style={{ marginRight: "8px" }}>{field.prefix}</span>}
+                <EditableText path={`fields.${i}.prefix`} value={field.prefix} style={{ marginRight: "8px" }} />
                 {value ? (
                   value
                 ) : (
@@ -70,15 +71,19 @@ export function BlanksSlide({
                     &nbsp;
                   </span>
                 )}
-                {field.suffix && <span style={{ marginLeft: "8px", fontSize: "28px" }}>{field.suffix}</span>}
+                <EditableText path={`fields.${i}.suffix`} value={field.suffix} style={{ marginLeft: "8px", fontSize: "28px" }} />
               </dd>
             </React.Fragment>
           );
         })}
       </dl>
-      {summary && (
-        <p style={{ margin: 0, fontSize: "24px", fontWeight: 600, color: theme["--slide-primary-text"] }}>{summary}</p>
-      )}
+      <EditableText
+        as="p"
+        path="summary"
+        value={summary}
+        multiline
+        style={{ margin: 0, fontSize: "24px", fontWeight: 600, color: theme["--slide-primary-text"] }}
+      />
     </Frame>
   );
 }

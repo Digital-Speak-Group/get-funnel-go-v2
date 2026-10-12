@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Frame, Title } from "../layouts/parts";
+import { EditableText } from "../editable";
 import { BrowserFrame, EmbeddedPage, displayAddress } from "./browser-frame";
 
 interface ShowcaseContent {
@@ -21,7 +22,7 @@ export function ShowcaseSlide({ content, theme }: { content: ShowcaseContent; th
 
   return (
     <Frame theme={theme} style={{ gap: "32px", padding: "72px 96px" }}>
-      <Title theme={theme} size={44} color={theme["--slide-primary-text"]}>{headline}</Title>
+      <Title theme={theme} size={44} color={theme["--slide-primary-text"]} path="headline">{headline}</Title>
       <div style={{ flex: 1, display: "flex", gap: "32px", minHeight: 0 }}>
         <ol style={{ listStyle: "none", margin: 0, padding: 0, flex: "0 0 380px", display: "flex", flexDirection: "column", gap: "10px", overflow: "hidden" }}>
           {items.map((item, i) => {
@@ -47,7 +48,7 @@ export function ShowcaseSlide({ content, theme }: { content: ShowcaseContent; th
                   }}
                 >
                   <span style={{ color: theme["--slide-primary-text"], marginRight: "12px" }}>{String(i + 1).padStart(2, "0")}</span>
-                  {item.title}
+                  <EditableText path={`items.${i}.title`} value={item.title} />
                 </button>
               </li>
             );

@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
 import { SlideIcon } from "../icons";
+import { EditableText } from "../editable";
 
 interface DefinitionContent {
   headline: string;
@@ -29,7 +30,10 @@ export function DefinitionSlide({ content, theme }: { content: DefinitionContent
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             ...headlineFill(theme, theme["--slide-text"]),
             fontSize: "48px",
@@ -38,9 +42,7 @@ export function DefinitionSlide({ content, theme }: { content: DefinitionContent
             fontFamily: theme["--slide-font-display"],
             marginBottom: "24px",
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -53,7 +55,11 @@ export function DefinitionSlide({ content, theme }: { content: DefinitionContent
           margin: "0 auto",
         }}
       >
-        <div
+        <EditableText
+          as="div"
+          path="body"
+          value={body}
+          multiline
           style={{
             fontSize: "22px",
             lineHeight: 1.55,
@@ -64,9 +70,7 @@ export function DefinitionSlide({ content, theme }: { content: DefinitionContent
             borderRadius: theme["--slide-radius"],
             border: `1px solid ${theme["--slide-muted"]}1a`,
           }}
-        >
-          {body}
-        </div>
+        />
 
         {pillars && pillars.length > 0 && (
           <div
@@ -108,26 +112,29 @@ export function DefinitionSlide({ content, theme }: { content: DefinitionContent
                     <SlideIcon name={pillar.icon} size={28} fallback="✓" />
                   </span>
                 )}
-                <h3
+                <EditableText
+                  as="h3"
+                  path={`pillars.${index}.title`}
+                  value={pillar.title}
                   style={{
                     fontSize: "20px",
                     fontWeight: 600,
                     fontFamily: theme["--slide-font-display"],
                     margin: 0,
                   }}
-                >
-                  {pillar.title}
-                </h3>
-                <p
+                />
+                <EditableText
+                  as="p"
+                  path={`pillars.${index}.text`}
+                  value={pillar.text}
+                  multiline
                   style={{
                     fontSize: "16px",
                     lineHeight: 1.55,
                     color: theme["--slide-muted"],
                     margin: 0,
                   }}
-                >
-                  {pillar.text}
-                </p>
+                />
               </div>
             ))}
           </div>

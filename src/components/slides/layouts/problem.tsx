@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cardSurface } from "../style";
 import { SlideIcon } from "../icons";
+import { EditableText } from "../editable";
 import { Frame, Lead, Title, pad, type LayoutProps } from "./parts";
 
 interface ProblemContent {
@@ -18,8 +19,8 @@ export function ProblemList({ content, theme }: LayoutProps<ProblemContent>) {
   return (
     <Frame theme={theme} style={{ justifyContent: "center", gap: "40px" }}>
       <header style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-        <Title theme={theme} size={56} color={danger}>{headline}</Title>
-        {intro && <Lead theme={theme} style={{ maxWidth: "1300px" }}>{intro}</Lead>}
+        <Title theme={theme} size={56} color={danger} path="headline">{headline}</Title>
+        <Lead theme={theme} path="intro" style={{ maxWidth: "1300px" }}>{intro}</Lead>
       </header>
       <ol style={{ listStyle: "none", margin: 0, padding: 0 }}>
         {painPoints.map((pain, i) => (
@@ -38,10 +39,19 @@ export function ProblemList({ content, theme }: LayoutProps<ProblemContent>) {
               {pad(i + 1)}
             </span>
             <div style={{ display: "flex", gap: "40px", alignItems: "baseline" }}>
-              <h3 style={{ fontSize: "26px", fontWeight: 700, fontFamily: theme["--slide-font-display"], margin: 0, flex: "0 0 480px" }}>
-                {pain.title}
-              </h3>
-              <p style={{ fontSize: "19px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}>{pain.text}</p>
+              <EditableText
+                as="h3"
+                path={`painPoints.${i}.title`}
+                value={pain.title}
+                style={{ fontSize: "26px", fontWeight: 700, fontFamily: theme["--slide-font-display"], margin: 0, flex: "0 0 480px" }}
+              />
+              <EditableText
+                as="p"
+                path={`painPoints.${i}.text`}
+                value={pain.text}
+                multiline
+                style={{ fontSize: "19px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}
+              />
             </div>
           </li>
         ))}
@@ -58,8 +68,8 @@ export function ProblemAside({ content, theme }: LayoutProps<ProblemContent>) {
     <Frame theme={theme} style={{ flexDirection: "row", gap: "80px", alignItems: "center" }}>
       <div style={{ flex: "0 0 640px", display: "flex", flexDirection: "column", gap: "24px" }}>
         <div style={{ width: "72px", height: "6px", borderRadius: "9999px", background: danger }} />
-        <Title theme={theme} size={60} color={danger}>{headline}</Title>
-        {intro && <Lead theme={theme}>{intro}</Lead>}
+        <Title theme={theme} size={60} color={danger} path="headline">{headline}</Title>
+        <Lead theme={theme} path="intro">{intro}</Lead>
       </div>
       <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "16px" }}>
         {painPoints.map((pain, i) => (
@@ -79,10 +89,19 @@ export function ProblemAside({ content, theme }: LayoutProps<ProblemContent>) {
               <SlideIcon name={pain.icon} size={28} fallback="⚠" />
             </span>
             <div>
-              <h3 style={{ fontSize: "22px", fontWeight: 700, fontFamily: theme["--slide-font-display"], margin: "0 0 6px" }}>
-                {pain.title}
-              </h3>
-              <p style={{ fontSize: "17px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}>{pain.text}</p>
+              <EditableText
+                as="h3"
+                path={`painPoints.${i}.title`}
+                value={pain.title}
+                style={{ fontSize: "22px", fontWeight: 700, fontFamily: theme["--slide-font-display"], margin: "0 0 6px" }}
+              />
+              <EditableText
+                as="p"
+                path={`painPoints.${i}.text`}
+                value={pain.text}
+                multiline
+                style={{ fontSize: "17px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}
+              />
             </div>
           </div>
         ))}

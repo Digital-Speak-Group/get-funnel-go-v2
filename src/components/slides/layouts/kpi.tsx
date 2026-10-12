@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface } from "../style";
+import { EditableText } from "../editable";
 import { Frame, Title, type LayoutProps } from "./parts";
 
 interface KpiContent {
@@ -9,9 +10,12 @@ interface KpiContent {
   metrics: Array<{ value: string; label: string; delta?: string }>;
 }
 
-function Delta({ theme, children }: { theme: Record<string, string>; children: React.ReactNode }) {
+/** Optional delta badge: renders nothing without a value (outside the editor). */
+function Delta({ theme, path, value }: { theme: Record<string, string>; path: string; value: string | undefined }) {
   return (
-    <span
+    <EditableText
+      path={path}
+      value={value}
       style={{
         alignSelf: "flex-start",
         fontSize: "16px",
@@ -21,9 +25,7 @@ function Delta({ theme, children }: { theme: Record<string, string>; children: R
         background: `${theme["--slide-success"]}26`,
         color: theme["--slide-success"],
       }}
-    >
-      {children}
-    </span>
+    />
   );
 }
 
@@ -37,7 +39,7 @@ export function KpiCards({ content, theme }: LayoutProps<KpiContent>) {
   const { headline, metrics } = content;
   return (
     <Frame theme={theme} style={{ justifyContent: "center", gap: "64px" }}>
-      <Title theme={theme} size={52} align="center" color={theme["--slide-primary-text"]}>{headline}</Title>
+      <Title theme={theme} size={52} align="center" color={theme["--slide-primary-text"]} path="headline">{headline}</Title>
       <div style={{ display: "grid", gridTemplateColumns: `repeat(${metrics.length}, 1fr)`, gap: "28px" }}>
         {metrics.map((metric, i) => (
           <div
@@ -52,7 +54,9 @@ export function KpiCards({ content, theme }: LayoutProps<KpiContent>) {
               border: `1px solid ${theme["--slide-primary"]}33`,
             }}
           >
-            <span
+            <EditableText
+              path={`metrics.${i}.value`}
+              value={metric.value}
               style={{
                 fontSize: `${valueSize(metric.value, [76, 56, 40])}px`,
                 lineHeight: 1.05,
@@ -60,11 +64,13 @@ export function KpiCards({ content, theme }: LayoutProps<KpiContent>) {
                 fontFamily: theme["--slide-font-display"],
                 color: theme["--slide-primary-text"],
               }}
-            >
-              {metric.value}
-            </span>
-            <span style={{ fontSize: "22px", fontWeight: 500, color: theme["--slide-muted"] }}>{metric.label}</span>
-            {metric.delta && <Delta theme={theme}>{metric.delta}</Delta>}
+            />
+            <EditableText
+              path={`metrics.${i}.label`}
+              value={metric.label}
+              style={{ fontSize: "22px", fontWeight: 500, color: theme["--slide-muted"] }}
+            />
+            <Delta theme={theme} path={`metrics.${i}.delta`} value={metric.delta} />
           </div>
         ))}
       </div>
@@ -78,10 +84,12 @@ export function KpiHero({ content, theme }: LayoutProps<KpiContent>) {
   const [hero, ...rest] = metrics;
   return (
     <Frame theme={theme} style={{ gap: "48px" }}>
-      <Title theme={theme} size={48}>{headline}</Title>
+      <Title theme={theme} size={48} path="headline">{headline}</Title>
       <div style={{ flex: 1, display: "flex", alignItems: "center", gap: "96px" }}>
         <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", gap: "20px", maxWidth: "1000px" }}>
-          <span
+          <EditableText
+            path="metrics.0.value"
+            value={hero.value}
             style={{
               fontSize: `${valueSize(hero.value, [200, 128, 88])}px`,
               lineHeight: 0.95,
@@ -90,20 +98,24 @@ export function KpiHero({ content, theme }: LayoutProps<KpiContent>) {
               color: theme["--slide-primary-text"],
               letterSpacing: "-0.03em",
             }}
-          >
-            {hero.value}
-          </span>
-          <span style={{ fontSize: "30px", fontWeight: 600 }}>{hero.label}</span>
-          {hero.delta && <Delta theme={theme}>{hero.delta}</Delta>}
+          />
+          <EditableText path="metrics.0.label" value={hero.label} style={{ fontSize: "30px", fontWeight: 600 }} />
+          <Delta theme={theme} path="metrics.0.delta" value={hero.delta} />
         </div>
         <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "32px", borderLeft: `2px solid ${theme["--slide-primary"]}33`, paddingLeft: "64px" }}>
           {rest.map((metric, i) => (
             <div key={i} style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-              <span style={{ fontSize: `${valueSize(metric.value, [56, 44, 34])}px`, lineHeight: 1.05, fontWeight: 800, fontFamily: theme["--slide-font-display"] }}>
-                {metric.value}
-              </span>
-              <span style={{ fontSize: "20px", color: theme["--slide-muted"] }}>{metric.label}</span>
-              {metric.delta && <Delta theme={theme}>{metric.delta}</Delta>}
+              <EditableText
+                path={`metrics.${i + 1}.value`}
+                value={metric.value}
+                style={{ fontSize: `${valueSize(metric.value, [56, 44, 34])}px`, lineHeight: 1.05, fontWeight: 800, fontFamily: theme["--slide-font-display"] }}
+              />
+              <EditableText
+                path={`metrics.${i + 1}.label`}
+                value={metric.label}
+                style={{ fontSize: "20px", color: theme["--slide-muted"] }}
+              />
+              <Delta theme={theme} path={`metrics.${i + 1}.delta`} value={metric.delta} />
             </div>
           ))}
         </div>

@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cardSurface } from "../style";
 import { SlideIcon } from "../icons";
+import { EditableText } from "../editable";
 import { Frame, Title, type LayoutProps } from "./parts";
 
 interface BenefitsContent {
@@ -16,7 +17,7 @@ export function BenefitsChecklist({ content, theme }: LayoutProps<BenefitsConten
   const success = theme["--slide-success"];
   return (
     <Frame theme={theme} style={{ justifyContent: "center", gap: "56px" }}>
-      <Title theme={theme} size={56} align="center" color={success}>{headline}</Title>
+      <Title theme={theme} size={56} align="center" color={success} path="headline">{headline}</Title>
       <ul
         style={{
           listStyle: "none",
@@ -46,10 +47,19 @@ export function BenefitsChecklist({ content, theme }: LayoutProps<BenefitsConten
               <SlideIcon name={benefit.icon} size={22} fallback="✓" />
             </span>
             <div>
-              <h3 style={{ fontSize: "24px", fontWeight: 700, fontFamily: theme["--slide-font-display"], margin: "4px 0 8px" }}>
-                {benefit.title}
-              </h3>
-              <p style={{ fontSize: "18px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}>{benefit.text}</p>
+              <EditableText
+                as="h3"
+                path={`benefits.${i}.title`}
+                value={benefit.title}
+                style={{ fontSize: "24px", fontWeight: 700, fontFamily: theme["--slide-font-display"], margin: "4px 0 8px" }}
+              />
+              <EditableText
+                as="p"
+                path={`benefits.${i}.text`}
+                value={benefit.text}
+                multiline
+                style={{ fontSize: "18px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}
+              />
             </div>
           </li>
         ))}
@@ -65,7 +75,7 @@ export function BenefitsFeatured({ content, theme }: LayoutProps<BenefitsContent
   const success = theme["--slide-success"];
   return (
     <Frame theme={theme} style={{ gap: "48px" }}>
-      <Title theme={theme} size={52} color={success}>{headline}</Title>
+      <Title theme={theme} size={52} color={success} path="headline">{headline}</Title>
       <div style={{ flex: 1, display: "flex", gap: "40px", minHeight: 0 }}>
         <div
           style={{
@@ -81,10 +91,19 @@ export function BenefitsFeatured({ content, theme }: LayoutProps<BenefitsContent
           }}
         >
           <SlideIcon name={first.icon} size={64} fallback="✓" />
-          <h3 style={{ fontSize: "44px", lineHeight: 1.1, fontWeight: 800, fontFamily: theme["--slide-font-display"], margin: 0 }}>
-            {first.title}
-          </h3>
-          <p style={{ fontSize: "22px", lineHeight: 1.45, margin: 0, opacity: 0.92 }}>{first.text}</p>
+          <EditableText
+            as="h3"
+            path="benefits.0.title"
+            value={first.title}
+            style={{ fontSize: "44px", lineHeight: 1.1, fontWeight: 800, fontFamily: theme["--slide-font-display"], margin: 0 }}
+          />
+          <EditableText
+            as="p"
+            path="benefits.0.text"
+            value={first.text}
+            multiline
+            style={{ fontSize: "22px", lineHeight: 1.45, margin: 0, opacity: 0.92 }}
+          />
         </div>
         <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: "16px" }}>
           {rest.map((benefit, i) => (
@@ -103,10 +122,19 @@ export function BenefitsFeatured({ content, theme }: LayoutProps<BenefitsContent
                 <SlideIcon name={benefit.icon} size={26} fallback="✓" />
               </span>
               <div>
-                <h3 style={{ fontSize: "21px", fontWeight: 700, fontFamily: theme["--slide-font-display"], margin: "0 0 6px" }}>
-                  {benefit.title}
-                </h3>
-                <p style={{ fontSize: "16px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}>{benefit.text}</p>
+                <EditableText
+                  as="h3"
+                  path={`benefits.${i + 1}.title`}
+                  value={benefit.title}
+                  style={{ fontSize: "21px", fontWeight: 700, fontFamily: theme["--slide-font-display"], margin: "0 0 6px" }}
+                />
+                <EditableText
+                  as="p"
+                  path={`benefits.${i + 1}.text`}
+                  value={benefit.text}
+                  multiline
+                  style={{ fontSize: "16px", lineHeight: 1.5, color: theme["--slide-muted"], margin: 0 }}
+                />
               </div>
             </div>
           ))}

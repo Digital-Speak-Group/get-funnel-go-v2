@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Frame, Title } from "../layouts/parts";
+import { EditableText } from "../editable";
 
 interface GaugeContent {
   headline: string;
@@ -14,7 +15,18 @@ type Theme = Record<string, string>;
 const formatNumber = (n: number) => new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 }).format(n);
 
 /** Up to 4 dials sit on one row; 5–8 wrap onto two rows of smaller dials. */
-function Dial({ gauge, theme, compact }: { gauge: GaugeContent["gauges"][0]; theme: Theme; compact: boolean }) {
+function Dial({
+  gauge,
+  index,
+  theme,
+  compact,
+}: {
+  gauge: GaugeContent["gauges"][0];
+  /** Position in `gauges`, for the editable content paths. */
+  index: number;
+  theme: Theme;
+  compact: boolean;
+}) {
   const RADIUS = compact ? 104 : 150;
   const STROKE = compact ? 20 : 26;
   const ARC = Math.PI * RADIUS; // length of the half circle
@@ -53,10 +65,16 @@ function Dial({ gauge, theme, compact }: { gauge: GaugeContent["gauges"][0]; the
         </div>
       </div>
       <figcaption style={{ textAlign: "center", maxWidth: `${size}px` }}>
-        <span style={{ display: "block", fontSize: compact ? "18px" : "22px", fontWeight: 700 }}>{gauge.label}</span>
-        {gauge.note && (
-          <span style={{ display: "block", marginTop: "6px", fontSize: "16px", color: theme["--slide-muted"] }}>{gauge.note}</span>
-        )}
+        <EditableText
+          path={`gauges.${index}.label`}
+          value={gauge.label}
+          style={{ display: "block", fontSize: compact ? "18px" : "22px", fontWeight: 700 }}
+        />
+        <EditableText
+          path={`gauges.${index}.note`}
+          value={gauge.note}
+          style={{ display: "block", marginTop: "6px", fontSize: "16px", color: theme["--slide-muted"] }}
+        />
       </figcaption>
     </figure>
   );
@@ -68,10 +86,10 @@ export function GaugeSlide({ content, theme }: { content: GaugeContent; theme: T
   const compact = gauges.length > 4;
   return (
     <Frame theme={theme} style={{ justifyContent: "center", gap: compact ? "40px" : "72px" }}>
-      <Title theme={theme} size={52} align="center" color={theme["--slide-primary-text"]}>{headline}</Title>
+      <Title theme={theme} size={52} align="center" color={theme["--slide-primary-text"]} path="headline">{headline}</Title>
       <div style={{ display: "flex", justifyContent: "center", gap: compact ? "32px 48px" : "56px", flexWrap: "wrap" }}>
         {gauges.map((gauge, i) => (
-          <Dial key={i} gauge={gauge} theme={theme} compact={compact} />
+          <Dial key={i} gauge={gauge} index={i} theme={theme} compact={compact} />
         ))}
       </div>
     </Frame>

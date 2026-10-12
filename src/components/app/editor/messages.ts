@@ -252,3 +252,9 @@ export const THEME_MESSAGES = {
   title: "Thème du deck",
   description: "S'applique à tous les slides, en présentation comme dans la vue audience.",
 } as const;
+
+export const CANVAS_MESSAGES = {
+  hint: "Cliquez sur un texte de la slide pour le modifier.",
+  focus: "Agrandir la slide",
+  unfocus: "Afficher le panneau",
+} as const;

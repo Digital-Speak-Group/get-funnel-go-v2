@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface ArchitectureContent {
   headline: string;
@@ -26,7 +27,10 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -35,9 +39,7 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -61,7 +63,10 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
               border: `1px solid ${theme["--slide-muted"]}1a`,
             }}
           >
-            <div
+            <EditableText
+              as="div"
+              path={`layers.${layerIndex}.name`}
+              value={layer.name}
               style={{
                 fontSize: "20px",
                 fontWeight: 600,
@@ -71,9 +76,7 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
                 borderBottom: `2px solid ${theme["--slide-primary"]}`,
                 display: "inline-block",
               }}
-            >
-              {layer.name}
-            </div>
+            />
             <div
               style={{
                 display: "flex",
@@ -82,8 +85,10 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
               }}
             >
               {layer.items.map((item, itemIndex) => (
-                <span
+                <EditableText
                   key={itemIndex}
+                  path={`layers.${layerIndex}.items.${itemIndex}`}
+                  value={item}
                   style={{
                     fontSize: "15px",
                     padding: "8px 16px",
@@ -92,9 +97,7 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
                     borderRadius: theme["--slide-radius"],
                     fontWeight: 500,
                   }}
-                >
-                  {item}
-                </span>
+                />
               ))}
             </div>
           </div>

@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
 import { SlideIcon } from "../icons";
+import { EditableText } from "../editable";
 
 interface AuthorityContent {
   headline: string;
@@ -28,7 +29,10 @@ export function AuthoritySlide({ content, theme }: { content: AuthorityContent; 
       }}
     >
       <header style={{ marginBottom: "64px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             ...headlineFill(theme, theme["--slide-text"]),
             fontSize: "48px",
@@ -37,9 +41,7 @@ export function AuthoritySlide({ content, theme }: { content: AuthorityContent; 
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -82,27 +84,30 @@ export function AuthoritySlide({ content, theme }: { content: AuthorityContent; 
                   <SlideIcon name={point.icon} size={24} fallback="✓" />
                 </span>
               )}
-              <h3
+              <EditableText
+                as="h3"
+                path={`points.${index}.title`}
+                value={point.title}
                 style={{
                   fontSize: "22px",
                   fontWeight: 600,
                   fontFamily: theme["--slide-font-display"],
                   margin: 0,
                 }}
-              >
-                {point.title}
-              </h3>
+              />
             </div>
-            <p
+            <EditableText
+              as="p"
+              path={`points.${index}.text`}
+              value={point.text}
+              multiline
               style={{
                 fontSize: "16px",
                 lineHeight: 1.55,
                 color: theme["--slide-muted"],
                 margin: 0,
               }}
-            >
-              {point.text}
-            </p>
+            />
           </div>
         ))}
       </div>

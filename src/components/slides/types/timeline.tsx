@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface TimelineContent {
   headline: string;
@@ -27,7 +28,10 @@ export function TimelineSlide({ content, theme }: { content: TimelineContent; th
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -36,9 +40,7 @@ export function TimelineSlide({ content, theme }: { content: TimelineContent; th
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -60,7 +62,10 @@ export function TimelineSlide({ content, theme }: { content: TimelineContent; th
             }}
           >
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minWidth: "120px", flexShrink: 0 }}>
-              <div
+              <EditableText
+                as="div"
+                path={`milestones.${index}.when`}
+                value={ms.when}
                 style={{
                   fontSize: "14px",
                   fontWeight: 600,
@@ -70,9 +75,7 @@ export function TimelineSlide({ content, theme }: { content: TimelineContent; th
                   marginBottom: "8px",
                   textAlign: "center",
                 }}
-              >
-                {ms.when}
-              </div>
+              />
               <div
                 style={{
                   width: "16px",
@@ -96,7 +99,10 @@ export function TimelineSlide({ content, theme }: { content: TimelineContent; th
               )}
             </div>
             <div style={{ flex: 1, paddingTop: "8px" }}>
-              <h3
+              <EditableText
+                as="h3"
+                path={`milestones.${index}.title`}
+                value={ms.title}
                 style={{
                   fontSize: "22px",
                   fontWeight: 600,
@@ -104,21 +110,19 @@ export function TimelineSlide({ content, theme }: { content: TimelineContent; th
                   margin: "0 0 8px 0",
                   color: theme["--slide-text"],
                 }}
-              >
-                {ms.title}
-              </h3>
-              {ms.text && (
-                <p
-                  style={{
-                    fontSize: "16px",
-                    lineHeight: 1.55,
-                    color: theme["--slide-muted"],
-                    margin: 0,
-                  }}
-                >
-                  {ms.text}
-                </p>
-              )}
+              />
+              <EditableText
+                as="p"
+                path={`milestones.${index}.text`}
+                value={ms.text}
+                multiline
+                style={{
+                  fontSize: "16px",
+                  lineHeight: 1.55,
+                  color: theme["--slide-muted"],
+                  margin: 0,
+                }}
+              />
             </div>
           </div>
         ))}

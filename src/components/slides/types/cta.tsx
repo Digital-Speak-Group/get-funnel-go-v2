@@ -3,6 +3,7 @@
 import * as React from "react";
 import { headlineFill } from "../style";
 import { SlideIcon } from "../icons";
+import { EditableText } from "../editable";
 import type { SlideIconName } from "@/lib/slides/icons";
 
 interface CtaContent {
@@ -42,7 +43,10 @@ export function CtaSlide({ content, theme }: { content: CtaContent; theme: Recor
       }}
     >
       <header style={{ marginBottom: "48px", maxWidth: "800px" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "56px",
             lineHeight: 1.05,
@@ -50,21 +54,19 @@ export function CtaSlide({ content, theme }: { content: CtaContent; theme: Recor
             marginBottom: "24px",
             ...headlineFill(theme, theme["--slide-text"]),
           }}
-        >
-          {headline}
-        </h1>
-        {sub && (
-          <p
-            style={{
-              fontSize: "22px",
-              lineHeight: 1.4,
-              fontWeight: 400,
-              color: theme["--slide-muted"],
-            }}
-          >
-            {sub}
-          </p>
-        )}
+        />
+        <EditableText
+          as="p"
+          path="sub"
+          value={sub}
+          multiline
+          style={{
+            fontSize: "22px",
+            lineHeight: 1.4,
+            fontWeight: 400,
+            color: theme["--slide-muted"],
+          }}
+        />
       </header>
 
       <div
@@ -99,7 +101,7 @@ export function CtaSlide({ content, theme }: { content: CtaContent; theme: Recor
               }}
             >
               <SlideIcon name={actionIcons[action.kind]} size={24} />
-              {action.label}
+              <EditableText path={`actions.${index}.label`} value={action.label} />
             </button>
           );
         })}

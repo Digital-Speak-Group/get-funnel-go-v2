@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface PlanContent {
   headline: string;
@@ -27,7 +28,10 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -36,9 +40,7 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -85,31 +87,31 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
               >
                 {index + 1}
               </span>
-              {phase.duration && (
-                <span
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: 600,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    opacity: 0.9,
-                  }}
-                >
-                  {phase.duration}
-                </span>
-              )}
+              <EditableText
+                as="span"
+                path={`phases.${index}.duration`}
+                value={phase.duration}
+                style={{
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  opacity: 0.9,
+                }}
+              />
             </div>
             <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "12px" }}>
-              <h3
+              <EditableText
+                as="h3"
+                path={`phases.${index}.name`}
+                value={phase.name}
                 style={{
                   fontSize: "24px",
                   fontWeight: 600,
                   fontFamily: theme["--slide-font-display"],
                   margin: 0,
                 }}
-              >
-                {phase.name}
-              </h3>
+              />
               <div
                 style={{
                   display: "flex",
@@ -118,8 +120,11 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
                 }}
               >
                 {phase.deliverables.map((deliverable, dIndex) => (
-                  <span
+                  <EditableText
                     key={dIndex}
+                    as="span"
+                    path={`phases.${index}.deliverables.${dIndex}`}
+                    value={deliverable}
                     style={{
                       fontSize: "15px",
                       padding: "8px 14px",
@@ -129,9 +134,7 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
                       borderRadius: theme["--slide-radius"],
                       fontWeight: 500,
                     }}
-                  >
-                    {deliverable}
-                  </span>
+                  />
                 ))}
               </div>
             </div>

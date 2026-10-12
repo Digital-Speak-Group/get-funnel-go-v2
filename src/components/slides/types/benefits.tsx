@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
 import { SlideIcon } from "../icons";
+import { EditableText } from "../editable";
 
 interface BenefitsContent {
   headline: string;
@@ -28,7 +29,10 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -37,9 +41,7 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-success"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -82,7 +84,10 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
                 <SlideIcon name={benefit.icon} size={24} fallback="✓" />
               </div>
               <div style={{ flex: 1 }}>
-                <h3
+                <EditableText
+                  as="h3"
+                  path={`benefits.${index}.title`}
+                  value={benefit.title}
                   style={{
                     fontSize: "22px",
                     fontWeight: 600,
@@ -90,19 +95,19 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
                     margin: "0 0 8px 0",
                     color: theme["--slide-success"],
                   }}
-                >
-                  {benefit.title}
-                </h3>
-                <p
+                />
+                <EditableText
+                  as="p"
+                  path={`benefits.${index}.text`}
+                  value={benefit.text}
+                  multiline
                   style={{
                     fontSize: "16px",
                     lineHeight: 1.55,
                     color: theme["--slide-text"],
                     margin: 0,
                   }}
-                >
-                  {benefit.text}
-                </p>
+                />
               </div>
             </div>
           </div>

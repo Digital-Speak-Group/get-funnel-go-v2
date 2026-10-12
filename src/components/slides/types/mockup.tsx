@@ -4,6 +4,7 @@ import * as React from "react";
 import { kickerStyle } from "../style";
 import { Frame, Lead, Title } from "../layouts/parts";
 import { BrowserFrame } from "./browser-frame";
+import { EditableText } from "../editable";
 
 type PageKind = "optin" | "sales" | "checkout" | "registration" | "thankyou";
 
@@ -31,8 +32,8 @@ export function MockupSlide({ content, theme }: { content: MockupContent; theme:
     <Frame theme={theme} style={{ flexDirection: "row", gap: "72px", alignItems: "center" }}>
       <div style={{ flex: "0 0 560px", display: "flex", flexDirection: "column", gap: "24px" }}>
         <p style={{ ...kickerStyle(theme), alignSelf: "flex-start", margin: 0 }}>{kind.name}</p>
-        <Title theme={theme} size={52}>{headline}</Title>
-        {aside && <Lead theme={theme}>{aside}</Lead>}
+        <Title theme={theme} size={52} path="headline">{headline}</Title>
+        <Lead theme={theme} path="aside">{aside}</Lead>
       </div>
       <BrowserFrame theme={theme} address={kind.path} style={{ flex: 1, alignSelf: "stretch" }}>
         <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", gap: "14px", padding: "28px 40px" }}>
@@ -52,28 +53,34 @@ export function MockupSlide({ content, theme }: { content: MockupContent; theme:
                 background: i === 0 ? `${theme["--slide-primary"]}14` : "transparent",
               }}
             >
-              <span style={{ fontSize: i === 0 ? "24px" : "19px", fontWeight: 700, fontFamily: theme["--slide-font-display"] }}>
-                {block.label}
-              </span>
-              {block.detail && <span style={{ fontSize: "15px", color: theme["--slide-muted"] }}>{block.detail}</span>}
+              <EditableText
+                path={`blocks.${i}.label`}
+                value={block.label}
+                style={{ fontSize: i === 0 ? "24px" : "19px", fontWeight: 700, fontFamily: theme["--slide-font-display"] }}
+              />
+              <EditableText
+                path={`blocks.${i}.detail`}
+                value={block.detail}
+                multiline
+                style={{ fontSize: "15px", color: theme["--slide-muted"] }}
+              />
             </div>
           ))}
-          {cta && (
-            <div
-              style={{
-                alignSelf: "center",
-                padding: "16px 48px",
-                borderRadius: theme["--slide-radius"],
-                background: theme["--slide-primary"],
-                color: theme["--slide-primary-fg"],
-                fontSize: "20px",
-                fontWeight: 700,
-                fontFamily: theme["--slide-font-display"],
-              }}
-            >
-              {cta}
-            </div>
-          )}
+          <EditableText
+            as="div"
+            path="cta"
+            value={cta}
+            style={{
+              alignSelf: "center",
+              padding: "16px 48px",
+              borderRadius: theme["--slide-radius"],
+              background: theme["--slide-primary"],
+              color: theme["--slide-primary-fg"],
+              fontSize: "20px",
+              fontWeight: 700,
+              fontFamily: theme["--slide-font-display"],
+            }}
+          />
         </div>
       </BrowserFrame>
     </Frame>

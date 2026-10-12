@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface ObjectivesContent {
   headline: string;
@@ -27,7 +28,10 @@ export function ObjectivesSlide({ content, theme }: { content: ObjectivesContent
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -36,9 +40,7 @@ export function ObjectivesSlide({ content, theme }: { content: ObjectivesContent
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -82,38 +84,42 @@ export function ObjectivesSlide({ content, theme }: { content: ObjectivesContent
                 {index + 1}
               </div>
               <div>
-                <h3
+                <EditableText
+                  as="h3"
+                  path={`goals.${index}.label`}
+                  value={goal.label}
                   style={{
                     fontSize: "22px",
                     fontWeight: 600,
                     fontFamily: theme["--slide-font-display"],
                     margin: "0 0 4px 0",
                   }}
-                >
-                  {goal.label}
-                </h3>
-                <p
+                />
+                <EditableText
+                  as="p"
+                  path={`goals.${index}.target`}
+                  value={goal.target}
                   style={{
                     fontSize: "16px",
                     fontWeight: 500,
                     color: theme["--slide-primary-text"],
                     margin: 0,
                   }}
-                >
-                  {goal.target}
-                </p>
+                />
               </div>
             </div>
-            <p
+            <EditableText
+              as="p"
+              path={`goals.${index}.text`}
+              value={goal.text}
+              multiline
               style={{
                 fontSize: "16px",
                 lineHeight: 1.55,
                 color: theme["--slide-text"],
                 margin: 0,
               }}
-            >
-              {goal.text}
-            </p>
+            />
           </div>
         ))}
       </div>

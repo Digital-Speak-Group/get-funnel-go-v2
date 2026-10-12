@@ -1,18 +1,28 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
+import { Maximize2, Minimize2, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { SlideThumbnail } from "@/components/slides/SlideThumbnail";
+import { SlideEditProvider } from "@/components/slides/editable";
 import type { ThemeTokens } from "@/lib/slides/theme";
 import type { Slide } from "@/lib/slides/schema";
-import { SLIDE_TYPE_LABELS } from "./messages";
+import { CANVAS_MESSAGES, SLIDE_TYPE_LABELS, fieldLabel } from "./messages";
 import type { EditorSlide } from "./validation";
 
 interface SlideCanvasProps {
   slide: EditorSlide | null;
   theme: ThemeTokens;
+  /** A text edited directly on the slide: its content path and new value. */
+  onEditText: (path: string, value: string) => void;
+  /** Inspector hidden so the slide gets the room to edit on. */
+  focused: boolean;
+  onToggleFocus: () => void;
 }
 
-export function SlideCanvas({ slide, theme }: SlideCanvasProps) {
+/** Field label of the last named segment: `painPoints.0.title` → label of `title`. */
+const placeholderFor = (path: string) => fieldLabel(path.split(".").filter((p) => !/^\d+$/.test(p)).pop() ?? path);
+
+export function SlideCanvas({ slide, theme, onEditText, focused, onToggleFocus }: SlideCanvasProps) {
   if (!slide) {
     return (
       <div
@@ -49,16 +59,33 @@ export function SlideCanvas({ slide, theme }: SlideCanvasProps) {
         <span data-testid="canvas-caption">
           Slide {slide.position + 1} — {SLIDE_TYPE_LABELS[slide.type]}
         </span>
+        <div className="flex items-center gap-2">
+          <span className="hidden text-small text-faint xl:inline">{CANVAS_MESSAGES.hint}</span>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={onToggleFocus}
+            aria-pressed={focused}
+            className="hidden lg:inline-flex"
+            data-testid="canvas-focus"
+          >
+            {focused ? <Minimize2 /> : <Maximize2 />}
+            {focused ? CANVAS_MESSAGES.unfocus : CANVAS_MESSAGES.focus}
+          </Button>
+        </div>
       </div>
       <div
         data-testid="slide-canvas"
         className="relative aspect-video overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900"
       >
-        <SlideThumbnail
-          slide={preview}
-          theme={theme}
-          className="absolute inset-0 h-full w-full"
-        />
+        <SlideEditProvider onEdit={onEditText} placeholderFor={placeholderFor}>
+          <SlideThumbnail
+            slide={preview}
+            theme={theme}
+            className="absolute inset-0 h-full w-full"
+          />
+        </SlideEditProvider>
       </div>
     </div>
   );

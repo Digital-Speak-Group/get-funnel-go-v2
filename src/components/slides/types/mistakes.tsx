@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface MistakesContent {
   headline: string;
@@ -26,7 +27,10 @@ export function MistakesSlide({ content, theme }: { content: MistakesContent; th
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -35,9 +39,7 @@ export function MistakesSlide({ content, theme }: { content: MistakesContent; th
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-danger"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -100,7 +102,13 @@ export function MistakesSlide({ content, theme }: { content: MistakesContent; th
                   ERREUR
                 </span>
               </div>
-              <p style={{ fontSize: "16px", lineHeight: 1.55, margin: 0 }}>{m.mistake}</p>
+              <EditableText
+                as="p"
+                path={`mistakes.${index}.mistake`}
+                value={m.mistake}
+                multiline
+                style={{ fontSize: "16px", lineHeight: 1.55, margin: 0 }}
+              />
             </div>
             <div
               style={{
@@ -141,7 +149,13 @@ export function MistakesSlide({ content, theme }: { content: MistakesContent; th
                   CORRECTION
                 </span>
               </div>
-              <p style={{ fontSize: "16px", lineHeight: 1.55, margin: 0 }}>{m.fix}</p>
+              <EditableText
+                as="p"
+                path={`mistakes.${index}.fix`}
+                value={m.fix}
+                multiline
+                style={{ fontSize: "16px", lineHeight: 1.55, margin: 0 }}
+              />
             </div>
           </div>
         ))}

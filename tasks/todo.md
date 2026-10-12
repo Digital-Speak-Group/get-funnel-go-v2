@@ -785,3 +785,44 @@
 **Done 2026-10-12:** PNG per slide (lossless; ~430 KB each, so a 40-slide deck is ~17 MB and ~25 s to render). Files: `ExportMenu.tsx` replaces `ExportPdfButton.tsx`
 **Dependencies:** 23 · **Size:** S
 **Files:** `src/server/services/slide-capture.ts`, `src/server/services/pptx.ts`, `src/app/api/decks/[deckId]/export/route.ts`, `src/components/app/editor/ExportMenu.tsx`
+
+---
+
+## Phase 8 — Canva-like editing (decided 2026-10-12: inline editing first, then freeform slides)
+
+The editor today changes slides only through the form panel; the canvas is a read-only picture. Phase A makes the canvas itself editable while slides stay structured data (AI, themes, layouts, exports keep working). Phase B adds a freeform slide type for full Canva-style control.
+
+### Task 64: Inline text editing on the canvas — foundation + cover/problem slice
+**Description:** `EditableText` (`src/components/slides/editable.tsx`) replaces plain text elements in slide components. Outside the editor it renders the same element with the same styles (audience, presenter, thumbnails, PDF/PPTX unchanged). Inside the editor canvas (`SlideEditProvider`) it is a `contentEditable="plaintext-only"` element that writes the value back to its content path (`painPoints.0.title`) through the editor's existing `updateActive` → validation → autosave.
+**Acceptance:**
+- [x] Click a text on the canvas, type, the form field and the save status follow; reload keeps it
+- [x] Enter ends single-line fields; multi-line fields keep line breaks
+- [x] Hover/focus outline shows what is editable; empty optional text shows a placeholder and stays clickable
+- [x] Rendering outside the editor looks the same (pixel comparison of the 7 GetFunnels decks, 186 slides: only live-embed noise differs; a few values gained a wrapping <span>)
+- [x] Cover and problem (types + layout variants) converted; editor "Agrandir la slide" focus mode hides the inspector
+**Verify:** `tests/unit/editable-text.test.tsx`, `tests/unit/content-path.test.ts`; e2e edit on canvas → reload
+**Size:** M
+
+### Task 65: Inline editing for every slide type and layout
+**Description:** Convert the remaining 31 types and the layout variants to `EditableText` for every text that maps 1:1 to a content string (formatted/derived text such as computed totals stays read-only).
+**Acceptance:**
+- [x] Every content string that is displayed verbatim is editable on the canvas (`tests/unit/editable-paths.test.tsx` checks every path against the text it shows, for all seeded slides × layouts)
+- [x] Existing slide snapshot/unit tests unchanged
+**Done 2026-10-12, known limits:** statement headlines edit as one plain field (the highlight colour shows again outside the editor; `highlight` itself is edited in the form, or on the canvas in the banner layout); text inside lightboxes, browser frames and computed values (gauge numbers, indexes, initials) stays form-only; text inside <button>s may be unreliable to edit in Firefox. Reorder now shows the save status.
+**Size:** L
+
+### Task 66: List items on the canvas
+**Description:** Hover toolbar on repeated items (pain points, steps, plans, FAQ…): move left/right, duplicate, delete; "+" to add an item, respecting each schema's min/max.
+**Size:** M
+
+### Task 67: Images on the canvas
+**Description:** Click an image (gallery, team photo, screenshots…) to replace or remove it through the existing upload flow.
+**Size:** S
+
+### Checkpoint J — Inline editing review
+- [ ] Human review of editing on the canvas across the 7 template decks
+
+### Task 68: Freeform "Libre" slides (Phase B — plan only)
+**Description:** New slide type with absolutely positioned elements (text, shape, image) on the 1920×1080 canvas: drag, resize, rotate, layers, snapping, undo/redo; "Convertir en libre" turns any slide into a freeform one (AI regeneration and automatic layouts no longer apply to it; theme colours and fonts still do).
+**Ask first:** slide schema change (new type + element model) and the drag/resize library — to be presented with a spec before building.
+**Size:** XL

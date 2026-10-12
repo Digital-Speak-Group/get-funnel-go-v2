@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface AutomationContent {
   headline: string;
@@ -27,7 +28,10 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -36,9 +40,7 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -80,32 +82,32 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
                 >
                   ⚡
                 </span>
-                <h3
+                <EditableText
+                  as="h3"
+                  path={`items.${index}.trigger`}
+                  value={item.trigger}
                   style={{
                     fontSize: "20px",
                     fontWeight: 600,
                     fontFamily: theme["--slide-font-display"],
                     margin: 0,
                   }}
-                >
-                  {item.trigger}
-                </h3>
-                {item.delay && (
-                  <span
-                    style={{
-                      fontSize: "13px",
-                      fontWeight: 600,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.08em",
-                      padding: "2px 8px",
-                      background: theme["--slide-warning"],
-                      color: "#000",
-                      borderRadius: "9999px",
-                    }}
-                  >
-                    {item.delay}
-                  </span>
-                )}
+                />
+                <EditableText
+                  as="span"
+                  path={`items.${index}.delay`}
+                  value={item.delay}
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    padding: "2px 8px",
+                    background: theme["--slide-warning"],
+                    color: "#000",
+                    borderRadius: "9999px",
+                  }}
+                />
               </div>
               <div
                 style={{
@@ -114,7 +116,7 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
                   color: theme["--slide-muted"],
                 }}
               >
-                → {item.action}
+                → <EditableText path={`items.${index}.action`} value={item.action} multiline />
               </div>
             </div>
             <div

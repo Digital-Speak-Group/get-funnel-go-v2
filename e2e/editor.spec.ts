@@ -47,6 +47,7 @@ test.describe("editor", () => {
       "data-slide-type",
       "problem"
     );
+    await expect(page.getByTestId("editor-status")).toHaveText("Enregistré", { timeout: 8000 });
 
     // Reload: both order and content persisted
     await page.reload();
@@ -93,6 +94,28 @@ test.describe("editor", () => {
     await page.reload();
     await expect(page.getByTestId("slide-field-title")).toHaveValue(
       "Valeur valide"
+    );
+  });
+
+  test("edits text directly on the slide canvas", async ({ page }) => {
+    const deckTitle = `Deck canvas ${Date.now()}`;
+    await createDeckViaDashboard(page, deckTitle);
+    await openDeckEditor(page, deckTitle);
+    await page.getByTestId("add-slide-submit").click();
+
+    const canvasTitle = page.getByTestId("slide-canvas").locator('[data-edit-path="title"]');
+    await canvasTitle.click();
+    await page.keyboard.press("ControlOrMeta+A");
+    await page.keyboard.type("Titre tapé sur la slide");
+    await page.keyboard.press("Enter"); // single-line field: Enter ends editing
+
+    // The form field follows, and the usual autosave runs.
+    await expect(page.getByTestId("slide-field-title")).toHaveValue("Titre tapé sur la slide");
+    await expect(page.getByTestId("editor-status")).toHaveText("Enregistré", { timeout: 8000 });
+
+    await page.reload();
+    await expect(page.getByTestId("slide-canvas").locator('[data-edit-path="title"]')).toHaveText(
+      "Titre tapé sur la slide"
     );
   });
 

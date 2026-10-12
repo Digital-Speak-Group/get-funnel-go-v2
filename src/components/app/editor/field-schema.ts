@@ -45,25 +45,6 @@ export function stringBounds(schema: z.ZodType): { max?: number; min?: number } 
   return bounds;
 }
 
-export function setAtPath(
-  source: Record<string, unknown>,
-  path: string,
-  value: unknown
-): Record<string, unknown> {
-  if (!path) return value as Record<string, unknown>;
-  const [head, ...rest] = path.split(".");
-  return {
-    ...source,
-    [head]: rest.length
-      ? setAtPath(
-          (source[head] ?? {}) as Record<string, unknown>,
-          rest.join("."),
-          value
-        )
-      : value,
-  };
-}
-
 export function normalizeContent(
   schema: z.ZodType,
   value: unknown

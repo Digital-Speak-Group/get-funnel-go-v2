@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
 import { SlideIcon } from "../icons";
+import { EditableText } from "../editable";
 
 interface ProblemContent {
   headline: string;
@@ -29,7 +30,10 @@ export function ProblemSlide({ content, theme }: { content: ProblemContent; them
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -38,22 +42,20 @@ export function ProblemSlide({ content, theme }: { content: ProblemContent; them
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-danger"]),
           }}
-        >
-          {headline}
-        </h1>
-        {intro && (
-          <p
-            style={{
-              fontSize: "20px",
-              lineHeight: 1.55,
-              color: theme["--slide-muted"],
-              maxWidth: "800px",
-              margin: "0 auto",
-            }}
-          >
-            {intro}
-          </p>
-        )}
+        />
+        <EditableText
+          as="p"
+          path="intro"
+          value={intro}
+          multiline
+          style={{
+            fontSize: "20px",
+            lineHeight: 1.55,
+            color: theme["--slide-muted"],
+            maxWidth: "800px",
+            margin: "0 auto",
+          }}
+        />
       </header>
 
       <div
@@ -97,7 +99,10 @@ border: `2px solid ${theme["--slide-danger"]}33`,
                 <SlideIcon name={pain.icon} size={28} fallback="⚠" />
               </div>
               <div style={{ flex: 1 }}>
-                <h3
+                <EditableText
+                  as="h3"
+                  path={`painPoints.${index}.title`}
+                  value={pain.title}
                   style={{
                     fontSize: "22px",
                     fontWeight: 600,
@@ -105,19 +110,19 @@ border: `2px solid ${theme["--slide-danger"]}33`,
                     margin: "0 0 8px 0",
                     color: theme["--slide-danger"],
                   }}
-                >
-                  {pain.title}
-                </h3>
-                <p
+                />
+                <EditableText
+                  as="p"
+                  path={`painPoints.${index}.text`}
+                  value={pain.text}
+                  multiline
                   style={{
                     fontSize: "16px",
                     lineHeight: 1.55,
                     color: theme["--slide-text"],
                     margin: 0,
                   }}
-                >
-                  {pain.text}
-                </p>
+                />
               </div>
             </div>
           </div>

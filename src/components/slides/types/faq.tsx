@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface FaqContent {
   headline: string;
@@ -26,7 +27,10 @@ export function FaqSlide({ content, theme }: { content: FaqContent; theme: Recor
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -35,9 +39,7 @@ export function FaqSlide({ content, theme }: { content: FaqContent; theme: Recor
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -71,7 +73,7 @@ export function FaqSlide({ content, theme }: { content: FaqContent; theme: Recor
                 listStyle: "none",
               }}
             >
-              {item.q}
+              <EditableText path={`questions.${index}.q`} value={item.q} />
               <span
                 style={{
                   fontSize: "20px",
@@ -83,7 +85,11 @@ export function FaqSlide({ content, theme }: { content: FaqContent; theme: Recor
                 +
               </span>
             </summary>
-            <div
+            <EditableText
+              as="div"
+              path={`questions.${index}.a`}
+              value={item.a}
+              multiline
               style={{
                 padding: "0 24px 24px 24px",
                 fontSize: "16px",
@@ -91,9 +97,7 @@ export function FaqSlide({ content, theme }: { content: FaqContent; theme: Recor
                 color: theme["--slide-text"],
                 borderTop: `1px solid ${theme["--slide-muted"]}1a`,
               }}
-            >
-              {item.a}
-            </div>
+            />
           </details>
         ))}
       </div>

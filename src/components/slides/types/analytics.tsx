@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cardSurface, headlineFill } from "../style";
+import { EditableText, useSlideEditing } from "../editable";
 
 interface AnalyticsContent {
   headline: string;
@@ -14,6 +15,7 @@ interface AnalyticsContent {
 
 export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; theme: Record<string, string> }) {
   const { headline, metrics } = content;
+  const editing = useSlideEditing();
 
   return (
     <div
@@ -27,7 +29,10 @@ export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; 
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -36,9 +41,7 @@ export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; 
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -64,17 +67,18 @@ export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; 
             }}
           >
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <h3
+              <EditableText
+                as="h3"
+                path={`metrics.${index}.name`}
+                value={metric.name}
                 style={{
                   fontSize: "20px",
                   fontWeight: 600,
                   fontFamily: theme["--slide-font-display"],
                   margin: 0,
                 }}
-              >
-                {metric.name}
-              </h3>
-              {metric.target && (
+              />
+              {(metric.target || editing) && (
                 <span
                   style={{
                     fontSize: "13px",
@@ -87,20 +91,22 @@ export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; 
                     borderRadius: "9999px",
                   }}
                 >
-                  Cible: {metric.target}
+                  Cible: <EditableText path={`metrics.${index}.target`} value={metric.target} />
                 </span>
               )}
             </div>
-            <p
+            <EditableText
+              as="p"
+              path={`metrics.${index}.definition`}
+              value={metric.definition}
+              multiline
               style={{
                 fontSize: "15px",
                 lineHeight: 1.55,
                 color: theme["--slide-muted"],
                 margin: 0,
               }}
-            >
-              {metric.definition}
-            </p>
+            />
           </div>
         ))}
       </div>

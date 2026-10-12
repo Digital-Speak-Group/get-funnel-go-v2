@@ -83,6 +83,7 @@ Slide text uses the deck theme's `font.scale`: `compact` (denser, more content),
 - Max content per slide: enforced by the schema character limits, not by CSS clamping. If it overflows in review, fix the content limits, not the layout.
 - Backgrounds: `solid | grid | gradient | noise` from the theme — implemented as one background component, not per-slide.
 - Slide chrome (page number, logo, progress) is app-controlled, not part of slide content.
+- Inline editing (Phase 8): slide components render every content string they show verbatim through `EditableText` (`src/components/slides/editable.tsx`) with its content path (`painPoints.0.title`), or `Title`/`Lead` with `path`. Outside the editor it is the plain element; on the editor canvas (`SlideEditProvider`) it is a `contentEditable` field writing through the editor's validation and autosave. Optional text is rendered unconditionally (null outside the editor, a placeholder inside). Numbers, formatted/derived text, URLs and icons stay read-only — the form panel edits those.
 
 ### Signature kit (Phase 6, Task 58)
 

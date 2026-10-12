@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface KpiContent {
   headline: string;
@@ -30,7 +31,10 @@ export function KpiSlide({ content, theme }: { content: KpiContent; theme: Recor
       }}
     >
       <header style={{ marginBottom: "64px" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
@@ -38,9 +42,7 @@ export function KpiSlide({ content, theme }: { content: KpiContent; theme: Recor
             marginBottom: "16px",
             ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -63,39 +65,40 @@ export function KpiSlide({ content, theme }: { content: KpiContent; theme: Recor
               minWidth: "200px",
             }}
           >
-            <div
+            <EditableText
+              as="div"
+              path={`metrics.${index}.value`}
+              value={metric.value}
               style={{
                 fontSize: "72px",
                 fontWeight: 800,
                 lineHeight: 1,
                 color: theme["--slide-text"],
               }}
-            >
-              {metric.value}
-            </div>
-            <div
+            />
+            <EditableText
+              as="div"
+              path={`metrics.${index}.label`}
+              value={metric.label}
               style={{
                 fontSize: "20px",
                 fontWeight: 500,
                 color: theme["--slide-muted"],
               }}
-            >
-              {metric.label}
-            </div>
-            {metric.delta && (
-              <div
-                style={{
-                  fontSize: "16px",
-                  fontWeight: 600,
-                  padding: "4px 12px",
-                  background: theme["--slide-success"],
-                  color: theme["--slide-primary-fg"],
-                  borderRadius: "9999px",
-                }}
-              >
-                {metric.delta}
-              </div>
-            )}
+            />
+            <EditableText
+              as="div"
+              path={`metrics.${index}.delta`}
+              value={metric.delta}
+              style={{
+                fontSize: "16px",
+                fontWeight: 600,
+                padding: "4px 12px",
+                background: theme["--slide-success"],
+                color: theme["--slide-primary-fg"],
+                borderRadius: "9999px",
+              }}
+            />
           </div>
         ))}
       </div>

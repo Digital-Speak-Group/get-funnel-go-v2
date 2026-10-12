@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cardSurface } from "../style";
 import { SlideIcon } from "../icons";
+import { EditableText } from "../editable";
 import type { SlideIconName } from "@/lib/slides/icons";
 import { Frame, Lead, Title, type LayoutProps } from "./parts";
 
@@ -24,10 +25,12 @@ const WHATSAPP_GREEN = "#25D366";
 
 function ActionButton({
   action,
+  index,
   theme,
   inverted = false,
 }: {
   action: CtaContent["actions"][0];
+  index: number;
   theme: Record<string, string>;
   inverted?: boolean;
 }) {
@@ -53,7 +56,7 @@ function ActionButton({
       }}
     >
       <SlideIcon name={actionIcons[action.kind]} size={26} />
-      {action.label}
+      <EditableText path={`actions.${index}.label`} value={action.label} />
     </button>
   );
 }
@@ -64,8 +67,8 @@ export function CtaSplit({ content, theme }: LayoutProps<CtaContent>) {
   return (
     <Frame theme={theme} style={{ flexDirection: "row", alignItems: "center", gap: "96px" }}>
       <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "28px" }}>
-        <Title theme={theme} size={76}>{headline}</Title>
-        {sub && <Lead theme={theme} style={{ fontSize: "26px" }}>{sub}</Lead>}
+        <Title theme={theme} size={76} path="headline">{headline}</Title>
+        <Lead theme={theme} path="sub" style={{ fontSize: "26px" }}>{sub}</Lead>
       </div>
       <div
         style={{
@@ -80,7 +83,7 @@ export function CtaSplit({ content, theme }: LayoutProps<CtaContent>) {
         }}
       >
         {actions.map((action, i) => (
-          <ActionButton key={i} action={action} theme={theme} />
+          <ActionButton key={i} action={action} index={i} theme={theme} />
         ))}
       </div>
     </Frame>
@@ -104,14 +107,23 @@ export function CtaBanner({ content, theme }: LayoutProps<CtaContent>) {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "1000px" }}>
-          <h1 style={{ fontSize: "68px", lineHeight: 1.05, fontWeight: 800, fontFamily: theme["--slide-font-display"], margin: 0 }}>
-            {headline}
-          </h1>
-          {sub && <p style={{ fontSize: "24px", lineHeight: 1.4, margin: 0, opacity: 0.9 }}>{sub}</p>}
+          <EditableText
+            as="h1"
+            path="headline"
+            value={headline}
+            style={{ fontSize: "68px", lineHeight: 1.05, fontWeight: 800, fontFamily: theme["--slide-font-display"], margin: 0 }}
+          />
+          <EditableText
+            as="p"
+            path="sub"
+            value={sub}
+            multiline
+            style={{ fontSize: "24px", lineHeight: 1.4, margin: 0, opacity: 0.9 }}
+          />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "16px", flexShrink: 0 }}>
           {actions.map((action, i) => (
-            <ActionButton key={i} action={action} theme={theme} inverted />
+            <ActionButton key={i} action={action} index={i} theme={theme} inverted />
           ))}
         </div>
       </div>
