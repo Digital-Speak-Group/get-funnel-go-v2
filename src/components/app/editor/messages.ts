@@ -65,90 +65,6 @@ export const PLACEHOLDER_MESSAGES = {
   notice: "Remplacez ces éléments par vos propres informations :",
 } as const;
 
-const FIELD_LABELS: Record<string, string> = {
-  headline: "Titre",
-  title: "Titre",
-  kicker: "Sur-titre",
-  subtitle: "Sous-titre",
-  presenterName: "Présentateur",
-  eyebrow: "Accroche",
-  highlight: "Mise en avant",
-  sub: "Sous-titre",
-  intro: "Introduction",
-  body: "Contenu",
-  points: "Points",
-  painPoints: "Points de douleur",
-  reasons: "Raisons",
-  goals: "Objectifs",
-  steps: "Étapes",
-  layers: "Couches",
-  fields: "Champs",
-  ctaLabel: "Libellé du bouton",
-  questions: "Questions",
-  scripts: "Scripts",
-  pipelines: "Étapes du pipeline",
-  metrics: "Métriques",
-  items: "Éléments",
-  benefits: "Bénéfices",
-  mistakes: "Erreurs",
-  phases: "Phases",
-  tiers: "Offres",
-  columns: "Colonnes",
-  rows: "Lignes",
-  milestones: "Jalons",
-  members: "Membres",
-  actions: "Actions",
-  notes: "Notes du présentateur",
-  script: "Script",
-  icon: "Icône",
-  text: "Texte",
-  label: "Libellé",
-  target: "Cible",
-  channel: "Canal",
-  trigger: "Déclencheur",
-  action: "Action",
-  delay: "Délai",
-  moment: "Moment",
-  message: "Message",
-  stage: "Étape",
-  definition: "Définition",
-  name: "Nom",
-  caption: "Légende",
-  quote: "Citation",
-  role: "Rôle",
-  result: "Résultat",
-  value: "Valeur",
-  delta: "Variation",
-  fix: "Solution",
-  duration: "Durée",
-  deliverables: "Livrables",
-  price: "Prix",
-  features: "Fonctionnalités",
-  q: "Question",
-  a: "Réponse",
-  when: "Quand",
-  proof: "Preuve",
-  kind: "Type",
-  options: "Options",
-  question: "Question",
-  type: "Type",
-  assetId: "Ressource",
-  url: "Adresse de la page (https)",
-  gauges: "Jauges",
-  max: "Maximum",
-  suffix: "Suffixe",
-  prefix: "Préfixe",
-  note: "Note",
-  page: "Type de page",
-  blocks: "Blocs",
-  detail: "Détail",
-  cta: "Bouton",
-  aside: "Commentaire",
-  summary: "Synthèse",
-  hint: "Aide pour le présentateur",
-};
-
-/** Illustration picker (Task 61). Keys are names from ILLUSTRATIONS. */
 export const ILLUSTRATION_MESSAGES = {
   section: "Illustration",
   hint: "Décor facultatif, dans les couleurs du thème. Animé uniquement côté audience.",
@@ -225,23 +141,6 @@ export const CUE_MESSAGES = {
 } as const;
 
 /** Labels for enum values shown in selects; values without one are shown as-is. */
-const OPTION_LABELS: Record<string, string> = {
-  optin: "Page d'opt-in",
-  sales: "Page de vente",
-  checkout: "Page de paiement",
-  registration: "Page d'inscription",
-  thankyou: "Page de remerciement",
-};
-
-export function optionLabel(option: string): string {
-  return OPTION_LABELS[option] ?? option;
-}
-
-export function fieldLabel(key: string): string {
-  const label = FIELD_LABELS[key];
-  if (label) return label;
-  return key.charAt(0).toUpperCase() + key.slice(1);
-}
 
 export const EXPORT_MESSAGES = {
   label: "Exporter",
@@ -258,6 +157,8 @@ export const THEME_MESSAGES = {
 } as const;
 
 export const CANVAS_MESSAGES = {
+  emptyTitle: "Ce deck n'a pas encore de slide",
+  emptyBody: "Ajoutez un slide dans la liste à gauche pour commencer à construire votre présentation.",
   hint: "Cliquez sur un texte de la slide pour le modifier.",
   focus: "Agrandir la slide",
   unfocus: "Afficher le panneau",
@@ -272,63 +173,35 @@ export const ITEM_MESSAGES = {
   undo: "Annuler",
 } as const;
 
-/** Freeform "Libre" slides (Task 68). */
-export const FREE_MESSAGES = {
-  fieldsHint:
-    "Slide libre : sélectionnez, déplacez et redimensionnez les éléments directement sur la slide. Les notes et le script restent ci-dessous.",
-  toolbarLabel: "Outils de la slide libre",
+export { fieldLabel, optionLabel } from "./field-labels";
+export { FREE_MESSAGES } from "./free/messages";
+
+/** Editor top bar (Task 46). */
+export const TOPBAR_MESSAGES = {
+  back: "Retour au tableau de bord",
+  slides: (n: number) => `${n} slide${n > 1 ? "s" : ""}`,
+  rename: "Renommer le deck",
+  titleLabel: "Titre du deck",
+  renameFailed: "Le renommage a échoué.",
+  present: "Présenter",
+  inspector: "Propriétés du slide",
+  inspectorEmpty: "Ajoutez un slide pour commencer l'édition.",
+} as const;
+
+/** Inspector form (Task 46). */
+export const FIELD_MESSAGES = {
+  optional: "facultatif",
+  emptyList: "Aucun élément pour l'instant.",
   add: "Ajouter",
-  addKinds: {
-    text: "Texte",
-    rect: "Rectangle",
-    ellipse: "Cercle",
-    line: "Ligne",
-    image: "Image",
-    icon: "Icône",
-  },
-  limit: "60 éléments maximum par slide.",
-  hint: "Double-cliquez sur un texte pour l'écrire. Suppr pour effacer, Ctrl+Z pour annuler.",
-  textStyle: "Style du texte",
-  textStyles: { title: "Titre", subtitle: "Sous-titre", body: "Texte", caption: "Légende" },
-  align: { left: "Aligner à gauche", center: "Centrer", right: "Aligner à droite" },
-  bold: "Gras",
-  color: "Couleur",
-  fill: "Remplissage",
-  roles: {
-    text: "Texte",
-    muted: "Discret",
-    primary: "Principale",
-    accent: "Accent",
-    surface: "Surface",
-    bg: "Fond",
-    danger: "Alerte",
-    success: "Succès",
-  },
-  icon: "Changer l'icône",
-  image: "Choisir une image",
-  fit: { cover: "Remplir", contain: "Ajuster" },
-  arrange: "Disposition",
-  forward: "Avancer",
-  backward: "Reculer",
-  front: "Premier plan",
-  back: "Arrière-plan",
-  alignSelection: {
-    left: "Aligner à gauche",
-    center: "Centrer horizontalement",
-    right: "Aligner à droite",
-    top: "Aligner en haut",
-    middle: "Centrer verticalement",
-    bottom: "Aligner en bas",
-  },
-  duplicate: "Dupliquer",
   remove: "Supprimer",
-  undo: "Annuler",
-  redo: "Rétablir",
-  convert: "Convertir en libre",
-  convertTitle: "Convertir cette slide en slide libre ?",
-  convertDescription:
-    "Chaque texte, carte et image reste à sa place et devient un élément que vous pouvez déplacer, redimensionner et faire pivoter. La régénération IA et les mises en page automatiques ne s'appliqueront plus à cette slide ; le thème, si. Les icônes et décorations des cartes ne sont pas reprises.",
-  convertConfirm: "Convertir",
-  convertCancel: "Garder la slide",
-  converted: "Slide convertie en slide libre",
+  content: "Contenu",
+  presenter: "Présentateur",
+} as const;
+
+/** Slide rail (Task 46). */
+export const SLIDE_LIST_MESSAGES = {
+  title: "Slides",
+  empty: "Aucun slide. Ajoutez le premier pour commencer.",
+  newSlide: "Nouveau slide",
+  add: "Ajouter un slide",
 } as const;

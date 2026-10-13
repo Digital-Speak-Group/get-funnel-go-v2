@@ -23,6 +23,24 @@ export const PRESENTER_MESSAGES = {
   strip: {
     label: (n: number, type: string) => `Slide ${n} : ${type}`,
   },
+  tabs: { script: "Script", notes: "Notes", metrics: "Métriques" },
+  notes: { title: "Notes présentateur", empty: "Aucune note pour cette slide." },
+  next: "Suivante",
+  goNext: "Aller à la slide suivante",
+  nav: { previous: "Slide précédente (←)", next: "Slide suivante (→)" },
+  timer: { start: "Démarrer (P)", pause: "Pause (P)", reset: "Réinitialiser le timer", label: "Temps écoulé" },
+  fullscreen: "Plein écran (F)",
+  link: {
+    live: "Lien audience actif",
+    connecting: "Connexion…",
+    offline: "Lien audience hors ligne",
+  },
+  keys: {
+    label: "Raccourcis clavier",
+    navigate: "naviguer",
+    timer: "timer",
+    fullscreen: "plein écran",
+  },
 } as const;
 
 /** Audience link button copy (editor + presenter). */
@@ -31,4 +49,9 @@ export const AUDIENCE_LINK_MESSAGES = {
   copied: "Lien copié",
   opened: "Lien ouvert",
   hint: "Copier le lien public que l'audience ouvre pour suivre la présentation",
+} as const;
+
+/** Audience view copy (Task 47). */
+export const AUDIENCE_MESSAGES = {
+  waiting: "En attente du présentateur",
 } as const;

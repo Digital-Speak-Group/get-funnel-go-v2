@@ -11,8 +11,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ThemePicker } from "@/components/app/ThemePicker";
+import { ThemeChoiceGrid } from "@/components/app/dashboard/ThemeChoiceGrid";
+import { systemThemes } from "@/lib/slides/theme";
 import { THEME_MESSAGES } from "./messages";
+
+/** System themes keyed by slug, the id the editor selects with. */
+const THEME_CHOICES = systemThemes.map((tokens) => ({ id: tokens.id, name: tokens.name, tokens }));
 
 interface ThemeDialogProps {
   selectedThemeId: string;
@@ -33,10 +37,18 @@ export function ThemeDialog({ selectedThemeId, themeName, onSelect }: ThemeDialo
       </DialogTrigger>
       <DialogContent className="max-w-5xl">
         <DialogHeader>
-          <DialogTitle>{THEME_MESSAGES.title}</DialogTitle>
+          <DialogTitle id="theme-dialog-title">{THEME_MESSAGES.title}</DialogTitle>
           <DialogDescription>{THEME_MESSAGES.description}</DialogDescription>
         </DialogHeader>
-        <ThemePicker selectedThemeId={selectedThemeId} onSelect={onSelect} showHeader={false} />
+        <div className="-mx-1 max-h-[min(36rem,65dvh)] overflow-y-auto p-1">
+          <ThemeChoiceGrid
+            themes={THEME_CHOICES}
+            value={selectedThemeId}
+            onChange={onSelect}
+            deckTitle=""
+            labelledBy="theme-dialog-title"
+          />
+        </div>
       </DialogContent>
     </Dialog>
   );

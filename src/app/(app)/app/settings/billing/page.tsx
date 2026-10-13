@@ -5,9 +5,10 @@ import { subscriptions } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { PLANS } from "@/server/services/billing";
 import { getWorkspaceSummary } from "@/server/services/workspace";
+import { billingMessages as m } from "@/components/app/billing/messages";
 import { BillingClient } from "./BillingClient";
 
-export const metadata = { title: "Facturation — GetFunnels" };
+export const metadata = { title: m.metaTitle };
 
 export default async function BillingPage() {
   const session = await getSession();
@@ -30,12 +31,7 @@ export default async function BillingPage() {
     name: p.name,
     credits: p.credits,
     isCurrent: key === currentPlan,
-    priceLabel:
-      key === "trial"
-        ? "Gratuit"
-        : key === "pro"
-        ? "29€ / mois"
-        : "99€ / mois",
+    priceLabel: m.priceLabel[key] ?? "",
   }));
 
   return (

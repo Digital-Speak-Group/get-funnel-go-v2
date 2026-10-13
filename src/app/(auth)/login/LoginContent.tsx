@@ -3,7 +3,20 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { ArrowRight, KeyRound, LoaderCircle, Mail } from "lucide-react";
 import { signInAction } from "@/app/(auth)/actions";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AuthField } from "../_components/AuthField";
+import { FormAlert } from "../_components/FormAlert";
+import { emailError, passwordRequiredError } from "../_components/validation";
+import { authMessages } from "../messages";
+
+const m = authMessages.login;
+const f = authMessages.fields;
+
+type FieldErrors = { email?: string; password?: string };
 
 export function LoginContent() {
   const router = useRouter();
@@ -11,12 +24,18 @@ export function LoginContent() {
   const callbackUrl = searchParams.get("callbackUrl") || "/app";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+
+    const errors: FieldErrors = { email: emailError(email), password: passwordRequiredError(password) };
+    setFieldErrors(errors);
+    if (errors.email || errors.password) return;
+
     setLoading(true);
 
     const result = await signInAction({ email, password });
@@ -32,183 +51,97 @@ export function LoginContent() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      {/* Header */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-white">Connexion</h2>
-        <p className="text-zinc-500 text-sm mt-1">
-          Bienvenue de retour ! Connectez-vous à votre compte.
-        </p>
+    <div className="space-y-6">
+      <div className="space-y-1.5">
+        <h1 className="text-h1 text-foreground">{m.title}</h1>
+        <p className="text-body text-muted-foreground">{m.description}</p>
       </div>
 
-      {/* Error */}
-      {error && (
-        <div
-          className="flex items-start gap-3 px-4 py-3 rounded-xl text-sm"
-          style={{
-            background: "rgba(248,113,113,0.08)",
-            border: "1px solid rgba(248,113,113,0.2)",
-            color: "#fca5a5",
-          }}
-        >
-          <span className="mt-0.5">⚠</span>
-          <span>{error}</span>
-        </div>
-      )}
+      <Tabs defaultValue="password">
+        <TabsList aria-label={m.methodsLabel} className="grid w-full grid-cols-2">
+          <TabsTrigger value="password">
+            <KeyRound aria-hidden="true" />
+            {m.tabPassword}
+          </TabsTrigger>
+          {/* No magic-link sign-in action exists yet; the tab is a visible, disabled seam. */}
+          <TabsTrigger value="magic-link" disabled>
+            <Mail aria-hidden="true" />
+            {m.tabMagicLink}
+            <Badge>{m.soon}</Badge>
+          </TabsTrigger>
+        </TabsList>
 
-      {/* Fields */}
-      <div className="space-y-4">
-        <div className="space-y-1.5">
-          <label
-            htmlFor="email"
-            className="block text-xs font-medium text-zinc-400 uppercase tracking-widest"
-          >
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="vous@exemple.com"
-            disabled={loading}
-            className="w-full px-4 py-3 rounded-xl text-white text-sm placeholder-zinc-600 transition-all outline-none"
-            style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.08)",
-            }}
-            onFocus={(e) => {
-              e.currentTarget.style.border = "1px solid rgba(139,92,246,0.5)";
-              e.currentTarget.style.boxShadow =
-                "0 0 0 3px rgba(139,92,246,0.1)";
-            }}
-            onBlur={(e) => {
-              e.currentTarget.style.border = "1px solid rgba(255,255,255,0.08)";
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          />
-        </div>
+        <TabsContent value="password" className="mt-6">
+          <form onSubmit={handleSubmit} noValidate className="space-y-5">
+            {error && <FormAlert>{error}</FormAlert>}
 
-        <div className="space-y-1.5">
-          <div className="flex items-center justify-between">
-            <label
-              htmlFor="password"
-              className="block text-xs font-medium text-zinc-400 uppercase tracking-widest"
-            >
-              Mot de passe
-            </label>
-            <Link
-              href="/forgot-password"
-              className="text-xs text-zinc-500 hover:text-violet-400 transition-colors"
-            >
-              Oublié ?
-            </Link>
-          </div>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••"
-            disabled={loading}
-            className="w-full px-4 py-3 rounded-xl text-white text-sm placeholder-zinc-600 transition-all outline-none"
-            style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.08)",
-            }}
-            onFocus={(e) => {
-              e.currentTarget.style.border = "1px solid rgba(139,92,246,0.5)";
-              e.currentTarget.style.boxShadow =
-                "0 0 0 3px rgba(139,92,246,0.1)";
-            }}
-            onBlur={(e) => {
-              e.currentTarget.style.border = "1px solid rgba(255,255,255,0.08)";
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          />
-        </div>
-      </div>
+            <AuthField
+              id="email"
+              label={f.email}
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (fieldErrors.email) setFieldErrors((prev) => ({ ...prev, email: emailError(e.target.value) }));
+              }}
+              onBlur={() => email && setFieldErrors((prev) => ({ ...prev, email: emailError(email) }))}
+              placeholder={f.emailPlaceholder}
+              disabled={loading}
+              error={fieldErrors.email}
+            />
 
-      {/* Submit */}
-      <button
-        type="submit"
-        disabled={loading}
-        className="relative w-full py-3 px-4 rounded-xl font-semibold text-sm text-white transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden group mt-2"
-        style={{
-          background: loading
-            ? "rgba(71,12,133,0.6)"
-            : "linear-gradient(135deg, #7c3aed 0%, #470c85 100%)",
-          boxShadow: loading ? "none" : "0 0 24px rgba(124,58,237,0.35)",
-        }}
-      >
-        {/* Shimmer hover effect */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent)",
-          }}
-        />
-        <span className="relative">
-          {loading ? (
-            <span className="flex items-center justify-center gap-2">
-              <svg
-                className="animate-spin h-4 w-4"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8v8z"
-                />
-              </svg>
-              Connexion en cours…
-            </span>
-          ) : (
-            "Se connecter →"
-          )}
-        </span>
-      </button>
+            <AuthField
+              id="password"
+              label={f.password}
+              type="password"
+              autoComplete="current-password"
+              required
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (fieldErrors.password) setFieldErrors((prev) => ({ ...prev, password: undefined }));
+              }}
+              placeholder={f.passwordPlaceholder}
+              disabled={loading}
+              error={fieldErrors.password}
+              labelAside={
+                <Link
+                  href="/forgot-password"
+                  className="rounded-sm text-small text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  {m.forgot}
+                </Link>
+              }
+            />
 
-      {/* Divider */}
-      <div className="flex items-center gap-3 my-1">
-        <div
-          className="flex-1 h-px"
-          style={{ background: "rgba(255,255,255,0.06)" }}
-        />
-        <span className="text-zinc-600 text-xs">ou</span>
-        <div
-          className="flex-1 h-px"
-          style={{ background: "rgba(255,255,255,0.06)" }}
-        />
-      </div>
+            <Button type="submit" size="lg" className="w-full" disabled={loading}>
+              {loading ? (
+                <>
+                  <LoaderCircle className="animate-spin" aria-hidden="true" />
+                  {m.pending}
+                </>
+              ) : (
+                <>
+                  {m.submit}
+                  <ArrowRight aria-hidden="true" />
+                </>
+              )}
+            </Button>
+          </form>
+        </TabsContent>
+      </Tabs>
 
-      {/* Sign up link */}
-      <p className="text-center text-zinc-500 text-sm">
-        Pas encore de compte ?{" "}
+      <p className="text-center text-small text-muted-foreground">
+        {m.noAccount}{" "}
         <Link
           href={`/signup?callbackUrl=${encodeURIComponent(callbackUrl)}`}
-          className="text-violet-400 hover:text-violet-300 font-medium transition-colors"
+          className="font-medium text-brand underline-offset-4 hover:underline"
         >
-          S'inscrire gratuitement
+          {m.signup}
         </Link>
       </p>
-    </form>
+    </div>
   );
 }

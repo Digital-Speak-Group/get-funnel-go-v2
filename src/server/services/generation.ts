@@ -11,7 +11,8 @@ import { logGeneration } from "@/lib/db/repositories/usage";
 import { db } from "@/lib/db/client";
 import { decks, slides } from "@/lib/db/schema";
 
-const ESTIMATED_COST_CENTS = 5; // Reserve 5 cents upfront
+/** Reserved upfront for one deck generation (refunded down to the real cost). */
+export const ESTIMATED_COST_CENTS = 5;
 
 export async function generateDeckFromScript(
   ctx: { orgId: string; userId: string },

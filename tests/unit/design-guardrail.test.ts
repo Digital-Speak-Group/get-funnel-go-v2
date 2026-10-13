@@ -29,36 +29,6 @@ const RULES: { name: string; pattern: RegExp }[] = [
 ];
 
 const MIGRATING = new Set<string>([
-  "src/app/(app)/app/settings/billing/BillingClient.tsx",
-  "src/app/(app)/app/settings/layout.tsx",
-  "src/app/(app)/app/settings/organization/page.tsx",
-  "src/app/(app)/app/settings/profile/page.tsx",
-  "src/app/(auth)/callback/CallbackContent.tsx",
-  "src/app/(auth)/callback/page.tsx",
-  "src/app/(auth)/layout.tsx",
-  "src/app/(auth)/login/LoginContent.tsx",
-  "src/app/(auth)/login/page.tsx",
-  "src/app/(auth)/signup/SignupContent.tsx",
-  "src/app/(auth)/signup/page.tsx",
-  "src/app/(marketing)/layout.tsx",
-  "src/app/(marketing)/page.tsx",
-  "src/app/(marketing)/pricing/page.tsx",
-  "src/app/global-error.tsx",
-  "src/app/onboarding/OnboardingContent.tsx",
-  "src/app/onboarding/layout.tsx",
-  "src/app/onboarding/page.tsx",
-  "src/app/opengraph-image.tsx",
-  "src/components/app/ThemePicker.tsx",
-  "src/components/app/billing/PlanCard.tsx",
-  "src/components/app/billing/UpgradeDialog.tsx",
-  "src/components/app/billing/UsageMeter.tsx",
-  "src/components/app/editor/EditorShell.tsx",
-  "src/components/app/editor/SlideCanvas.tsx",
-  "src/components/app/editor/SlideFields.tsx",
-  "src/components/app/editor/SlideList.tsx",
-  "src/components/app/wizard/GenerationWizard.tsx",
-  "src/components/presenter/AudienceView.tsx",
-  "src/components/presenter/PresenterShell.tsx",
 ]);
 
 function walk(dir: string): string[] {

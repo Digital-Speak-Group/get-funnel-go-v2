@@ -1,20 +1,24 @@
 import Link from "next/link";
+import { Logo } from "@/components/app/patterns/Logo";
+import { onboardingMessages as m } from "./messages";
 
-export default function OnboardingLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function OnboardingLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-zinc-950">
-      <div className="max-w-3xl mx-auto px-4 py-12">
-        <Link href="/" className="block text-center mb-8">
-          <h1 className="text-3xl font-bold text-white">GetFunnels</h1>
+    <div className="flex min-h-dvh flex-col bg-background px-6 py-6 sm:px-10">
+      <header>
+        <Link
+          href="/"
+          aria-label={m.home}
+          className="inline-flex rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          <Logo />
         </Link>
-        <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-8 md:p-12">
+      </header>
+      <main className="flex flex-1 items-center justify-center py-12">
+        <div className="w-full max-w-md rounded-xl border border-border bg-surface p-6 shadow-card sm:p-8">
           {children}
         </div>
-      </div>
+      </main>
     </div>
   );
 }

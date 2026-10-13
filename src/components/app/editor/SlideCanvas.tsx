@@ -102,18 +102,13 @@ export function SlideCanvas({
     return (
       <div
         data-testid="editor-empty"
-        className="flex aspect-video flex-col items-center justify-center rounded-2xl border-2 border-dashed border-zinc-800 text-center"
+        className="flex aspect-video flex-col items-center justify-center rounded-lg border border-dashed border-border-strong bg-surface-2/40 p-6 text-center"
       >
-        <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-600/15">
-          <Sparkles className="h-6 w-6 text-violet-400" />
+        <div className="mb-3 flex size-12 items-center justify-center rounded-lg border border-primary/30 bg-primary/15">
+          <Sparkles className="size-6 text-brand" aria-hidden="true" />
         </div>
-        <h2 className="text-lg font-semibold text-white">
-          Ce deck n’a pas encore de slide
-        </h2>
-        <p className="mt-1 max-w-sm text-sm text-zinc-400">
-          Ajoutez un slide dans la liste à gauche pour commencer à construire
-          votre présentation.
-        </p>
+        <h2 className="text-h3 text-foreground">{CANVAS_MESSAGES.emptyTitle}</h2>
+        <p className="mt-1 max-w-sm text-small text-muted-foreground">{CANVAS_MESSAGES.emptyBody}</p>
       </div>
     );
   }
@@ -130,12 +125,12 @@ export function SlideCanvas({
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between text-sm text-zinc-400">
-        <span data-testid="canvas-caption">
+      <div className="flex items-center justify-between text-small text-muted-foreground">
+        <span data-testid="canvas-caption" className="truncate whitespace-nowrap">
           Slide {slide.position + 1} — {SLIDE_TYPE_LABELS[slide.type]}
         </span>
         <div className="flex items-center gap-2">
-          <span className="hidden text-small text-faint xl:inline">{CANVAS_MESSAGES.hint}</span>
+          <span className="hidden whitespace-nowrap text-small text-faint 2xl:inline">{CANVAS_MESSAGES.hint}</span>
           {slide.type !== "free" && (
             <ConvertToFreeButton
               onConvert={() => {
@@ -158,6 +153,8 @@ export function SlideCanvas({
           </Button>
         </div>
       </div>
+      {/* Neutral stage around the canvas, so any theme (light or dark) reads as "the slide". */}
+      <div className="rounded-lg border border-border bg-surface-2/50 p-3 lg:p-5" data-testid="editor-stage">
       {slide.type === "free" ? (
         <FreeEditor
           slideId={slide.id}
@@ -171,6 +168,7 @@ export function SlideCanvas({
       ) : (
         renderCanvas()
       )}
+      </div>
     </div>
   );
 
@@ -179,7 +177,7 @@ export function SlideCanvas({
       <div
         ref={canvasRef}
         data-testid="slide-canvas"
-        className="relative aspect-video overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900"
+        className="relative aspect-video overflow-hidden rounded-md bg-surface shadow-pop"
       >
         <input
           ref={fileRef}

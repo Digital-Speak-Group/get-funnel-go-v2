@@ -1,15 +1,20 @@
 import { ImageResponse } from "next/og";
+import { productTokens as t } from "@/lib/design/tokens";
+import { marketingFacts as facts } from "./(marketing)/_lib/facts";
+import { marketingMessages } from "./(marketing)/messages";
 
-export const runtime = "edge";
+/*
+ * Refined-dark OG card: near-black canvas, hairline, logo tile, one headline, verifiable facts.
+ * Colors come from the product tokens (Satori cannot read CSS variables). No font is fetched:
+ * the default bundled font renders, so the image never depends on the network at build time.
+ */
+const m = marketingMessages.og;
 
-export const alt = "GetFunnels - Générez des decks de vente en minutes";
-export const size = {
-  width: 1200,
-  height: 630,
-};
+export const alt = m.alt;
+export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function Image() {
+export default function Image() {
   return new ImageResponse(
     (
       <div
@@ -18,93 +23,60 @@ export default async function Image() {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#09090b", // zinc-950
-          backgroundImage: "radial-gradient(circle at center, #2e1065 0%, #09090b 70%)", // violet-950 glow
+          justifyContent: "space-between",
+          padding: "72px",
+          backgroundColor: t.bg,
+          color: t.fg,
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "40px",
-            border: "1px solid rgba(255, 255, 255, 0.1)",
-            borderRadius: "24px",
-            backgroundColor: "rgba(0, 0, 0, 0.4)",
-            boxShadow: "0 20px 40px rgba(0, 0, 0, 0.5)",
-          }}
-        >
+        <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "24px",
-              marginBottom: "40px",
+              justifyContent: "center",
+              width: "56px",
+              height: "56px",
+              borderRadius: "12px",
+              backgroundColor: t.primary,
+              color: t["primary-fg"],
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                height: "80px",
-                width: "80px",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "16px",
-                backgroundColor: "#7c3aed", // violet-600
-                color: "white",
-                fontSize: "48px",
-                fontWeight: 900,
-              }}
-            >
-              G
-            </div>
-            <span
-              style={{
-                fontSize: "64px",
-                fontWeight: 900,
-                color: "white",
-                letterSpacing: "-0.05em",
-              }}
-            >
-              GetFunnels
-            </span>
+            <svg width="34" height="34" viewBox="0 0 16 16" fill="currentColor">
+              <rect x="1" y="2" width="14" height="3" rx="1.5" />
+              <rect x="3.5" y="6.5" width="9" height="3" rx="1.5" opacity="0.85" />
+              <rect x="6" y="11" width="4" height="3" rx="1.5" opacity="0.7" />
+            </svg>
           </div>
+          <span style={{ fontSize: "36px", fontWeight: 600, letterSpacing: "-0.02em" }}>GetFunnels</span>
+        </div>
 
-          <h1
-            style={{
-              fontSize: "72px",
-              fontWeight: 900,
-              color: "white",
-              textAlign: "center",
-              lineHeight: 1.1,
-              letterSpacing: "-0.05em",
-              maxWidth: "900px",
-              marginBottom: "32px",
-            }}
-          >
-            De votre script à un deck de vente
-            <br />
-            <span style={{ color: "#a78bfa" /* violet-400 */ }}>en quelques secondes.</span>
-          </h1>
+        <div
+          style={{
+            display: "flex",
+            fontSize: "72px",
+            fontWeight: 600,
+            lineHeight: 1.08,
+            letterSpacing: "-0.035em",
+            maxWidth: "960px",
+          }}
+        >
+          {m.title}
+        </div>
 
-          <p
-            style={{
-              fontSize: "32px",
-              color: "#a1a1aa", // zinc-400
-              textAlign: "center",
-              maxWidth: "800px",
-            }}
-          >
-            Généré par IA, conçu pour la conversion.
-          </p>
+        <div
+          style={{
+            display: "flex",
+            paddingTop: "28px",
+            borderTop: `1px solid ${t["surface-3"]}`,
+            fontSize: "28px",
+            color: t["fg-muted"],
+          }}
+        >
+          {m.facts(facts.frameworks, facts.slideTypes, facts.themes)}
         </div>
       </div>
     ),
-    {
-      ...size,
-    }
+    { ...size }
   );
 }

@@ -7,14 +7,12 @@ import type { FreeElement } from "@/lib/slides/free";
 import { FreeHistory } from "./history";
 import {
   addElement,
-  duplicateElements,
   makeElement,
-  nudgeElements,
-  removeElements,
   updateElements,
   type NewElementKind,
 } from "./free-ops";
 import { FreeToolbar } from "./FreeToolbar";
+import { useFreeKeyboard } from "./useFreeKeyboard";
 
 interface FreeEditorProps {
   slideId: string;
@@ -26,10 +24,6 @@ interface FreeEditorProps {
   /** The rendered slide canvas (inside a SlideEditProvider). */
   children: React.ReactNode;
 }
-
-const isTyping = (target: EventTarget | null) =>
-  target instanceof HTMLElement &&
-  (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
 
 /** Element box read back from the DOM after Moveable changed its inline styles. */
 function readBox(node: HTMLElement) {
@@ -152,44 +146,7 @@ export function FreeEditor({ slideId, elements, theme, onChange, onPickImage, ch
     });
   }, []);
 
-  // Keyboard: Delete, arrows (Shift = 10 px), Ctrl+D, Ctrl+Z / Ctrl+Shift+Z / Ctrl+Y, Escape.
-  React.useEffect(() => {
-    function onKeyDown(event: KeyboardEvent) {
-      if (isTyping(event.target)) return;
-      const mod = event.ctrlKey || event.metaKey;
-      const ids = selected;
-      if (mod && event.key.toLowerCase() === "z") {
-        event.preventDefault();
-        if (event.shiftKey) redo();
-        else undo();
-      } else if (mod && event.key.toLowerCase() === "y") {
-        event.preventDefault();
-        redo();
-      } else if (ids.length === 0) {
-        return;
-      } else if (event.key === "Delete" || event.key === "Backspace") {
-        event.preventDefault();
-        commit(removeElements(elementsRef.current, ids));
-      } else if (event.key === "Escape") {
-        setSelected([]);
-      } else if (mod && event.key.toLowerCase() === "d") {
-        event.preventDefault();
-        const result = duplicateElements(elementsRef.current, ids);
-        if (result) {
-          commit(result.elements);
-          setSelected(result.ids);
-        }
-      } else if (event.key.startsWith("Arrow")) {
-        event.preventDefault();
-        const step = event.shiftKey ? 10 : 1;
-        const dx = event.key === "ArrowLeft" ? -step : event.key === "ArrowRight" ? step : 0;
-        const dy = event.key === "ArrowUp" ? -step : event.key === "ArrowDown" ? step : 0;
-        commit(nudgeElements(elementsRef.current, ids, dx, dy));
-      }
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [selected, commit, undo, redo]);
+  useFreeKeyboard({ selected, setSelected, elementsRef, commit, undo, redo });
 
   // Mouse events, not pointer events: Moveable's gesture layer (Gesto) tracks a drag started
   // from a pointer event with the wrong listeners, which left a stale drag open.

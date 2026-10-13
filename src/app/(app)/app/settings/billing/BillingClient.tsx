@@ -1,22 +1,26 @@
 "use client";
 
-import { PlanCard } from "@/components/app/billing/PlanCard";
+import { Receipt } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { EmptyState } from "@/components/app/patterns/EmptyState";
+import { SectionCard } from "@/components/app/patterns/SectionCard";
+import { CurrentPlanSummary, type SubscriptionInfo } from "@/components/app/billing/CurrentPlanSummary";
+import { PlanCard, type Plan } from "@/components/app/billing/PlanCard";
 import { UsageMeter } from "@/components/app/billing/UsageMeter";
-import { Calendar, FileText, ExternalLink } from "lucide-react";
+import { billingMessages as m } from "@/components/app/billing/messages";
 
-type Plan = {
-  key: string;
-  name: string;
-  credits: number;
-  isCurrent: boolean;
-  priceLabel: string;
-};
+const NEXT_PLAN: Record<string, string | undefined> = { trial: "pro", pro: "agency" };
 
-type SubscriptionInfo = {
-  status: string;
-  currentPeriodEnd: string;
-  cancelAtPeriodEnd: boolean;
-} | null;
+interface BillingClientProps {
+  plans: Plan[];
+  currentPlan: string;
+  creditsUsed: number;
+  creditsLimit: number;
+  decksCreated: number;
+  decksLimit: number;
+  subscription: SubscriptionInfo;
+}
 
 export function BillingClient({
   plans,
@@ -26,15 +30,11 @@ export function BillingClient({
   decksCreated,
   decksLimit,
   subscription,
-}: {
-  plans: Plan[];
-  currentPlan: string;
-  creditsUsed: number;
-  creditsLimit: number;
-  decksCreated: number;
-  decksLimit: number;
-  subscription: SubscriptionInfo;
-}) {
+}: BillingClientProps) {
+  const current = plans.find((plan) => plan.key === currentPlan);
+  const suggested = NEXT_PLAN[currentPlan];
+
+  /** Resolves while the browser navigates to Stripe; rejects (after a toast) on failure. */
   const handleUpgrade = async (planKey: string) => {
     try {
       const res = await fetch("/api/stripe/checkout", {
@@ -46,128 +46,66 @@ export function BillingClient({
         }),
       });
 
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      }
-    } catch {
-      // Silently fail — the checkout route handles errors
+      const data: unknown = await res.json();
+      const url = typeof data === "object" && data !== null && "url" in data ? data.url : null;
+      if (typeof url !== "string") throw new Error("checkout_failed");
+      window.location.href = url;
+    } catch (error) {
+      toast.error(m.checkoutFailed);
+      throw error;
     }
   };
 
-  const periodEnd = subscription?.currentPeriodEnd
-    ? new Date(subscription.currentPeriodEnd)
-    : null;
-
-  const periodEndFormatted = periodEnd
-    ? periodEnd.toLocaleDateString("fr-FR", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })
-    : null;
-
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div>
-        <h2 className="text-lg font-semibold text-white">Facturation</h2>
-        <p className="text-sm text-zinc-400 mt-1">
-          Gérez votre abonnement et suivez votre consommation.
-        </p>
-      </div>
+    <div className="space-y-6">
+      <SectionCard
+        title={m.current.title}
+        description={m.current.description}
+        footer={
+          suggested ? (
+            <Button variant="ghost" size="sm" asChild>
+              <a href="#plans">{m.current.comparePlans}</a>
+            </Button>
+          ) : undefined
+        }
+      >
+        <CurrentPlanSummary
+          planName={current?.name ?? currentPlan}
+          priceLabel={current?.priceLabel ?? ""}
+          subscription={subscription}
+        />
+      </SectionCard>
 
-      {/* Subscription status */}
-      {subscription && (
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-5">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-600/20">
-                <Calendar className="h-4 w-4 text-purple-400" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-white">
-                  Abonnement{" "}
-                  <span className="capitalize text-purple-400">
-                    {currentPlan}
-                  </span>
-                </p>
-                <p className="text-xs text-zinc-500">
-                  {subscription.cancelAtPeriodEnd
-                    ? `Annulation prévue le ${periodEndFormatted}`
-                    : subscription.status === "active"
-                    ? `Renouvellement le ${periodEndFormatted}`
-                    : `Statut : ${subscription.status}`}
-                </p>
-              </div>
-            </div>
-
-            {subscription.status === "active" && (
-              <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                Actif
-              </span>
-            )}
-          </div>
+      <SectionCard title={m.usage.title} description={m.usage.description}>
+        <div className="grid gap-6 sm:grid-cols-2">
+          <UsageMeter used={creditsUsed} limit={creditsLimit} label={m.usage.credits} />
+          <UsageMeter used={decksCreated} limit={decksLimit} label={m.usage.decks} />
         </div>
-      )}
+      </SectionCard>
 
-      {/* Usage meters */}
-      <div>
-        <h3 className="text-sm font-medium text-zinc-400 uppercase tracking-wide mb-3">
-          Consommation ce mois
-        </h3>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <UsageMeter
-            used={creditsUsed}
-            limit={creditsLimit}
-            label="Crédits AI (centimes)"
-          />
-          <UsageMeter
-            used={decksCreated}
-            limit={decksLimit}
-            label="Decks créés"
-          />
-        </div>
-      </div>
-
-      {/* Plans */}
-      <div>
-        <h3 className="text-sm font-medium text-zinc-400 uppercase tracking-wide mb-3">
-          Plans disponibles
-        </h3>
-        <div className="grid gap-4 sm:grid-cols-3">
+      <SectionCard id="plans" className="scroll-mt-20" title={m.plans.title} description={m.plans.description}>
+        <div className="grid gap-4 xl:grid-cols-3">
           {plans.map((plan) => (
             <PlanCard
               key={plan.key}
               plan={plan}
+              highlighted={plan.key === suggested}
               onUpgrade={handleUpgrade}
             />
           ))}
         </div>
-      </div>
+      </SectionCard>
 
-      {/* Invoices link */}
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <FileText className="h-4 w-4 text-zinc-500" />
-            <div>
-              <p className="text-sm font-medium text-zinc-300">Factures</p>
-              <p className="text-xs text-zinc-500">
-                Accédez à vos factures via le portail Stripe.
-              </p>
-            </div>
-          </div>
-          <a
-            href="#"
-            className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 transition-colors"
-          >
-            Portail client
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-        </div>
-      </div>
+      <SectionCard title={m.invoices.title} description={m.invoices.description}>
+        {/* No invoice data source yet (no Stripe invoice sync): show the empty state, never placeholder rows. */}
+        <EmptyState
+          data-testid="billing-invoices-empty"
+          size="compact"
+          icon={Receipt}
+          title={m.invoices.emptyTitle}
+          description={m.invoices.emptyDescription}
+        />
+      </SectionCard>
     </div>
   );
 }

@@ -1,13 +1,14 @@
 "use client";
 
 import * as React from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { type Slide } from "@/lib/slides/schema";
 import { type ThemeTokens } from "@/lib/slides/theme";
 import { AutoScaledSlideRenderer } from "@/components/slides/SlideRenderer";
 import { AudienceAssetUrlProvider } from "@/components/slides/asset-url";
 import { LiveBlanksProvider } from "@/components/slides/render-context";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useAudienceSync } from "@/hooks/useSyncedSlide";
+import { AUDIENCE_MESSAGES as m } from "./messages";
 
 interface AudienceViewProps {
   slides: Slide[];
@@ -18,14 +19,20 @@ interface AudienceViewProps {
   initialIndex?: number;
 }
 
-export function AudienceView({ slides, theme, presentToken, initialIndex = 0 }: AudienceViewProps) {
-  const [currentIndex, setCurrentIndex] = React.useState(
-    Math.max(0, Math.min(initialIndex, slides.length - 1))
-  );
-  const [showControls, setShowControls] = React.useState(false);
-  const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+const SWIPE_MIN_PX = 50;
 
-  // Follow presenter in realtime
+/**
+ * Audience view (Task 47): full-bleed slide, no chrome. Follows the presenter in realtime;
+ * arrows and swipes still work when nobody presents. Slides cross-fade in 450 ms (opacity
+ * only under reduced motion).
+ */
+export function AudienceView({ slides, theme, presentToken, initialIndex = 0 }: AudienceViewProps) {
+  const clamp = React.useCallback((i: number) => Math.max(0, Math.min(slides.length - 1, i)), [slides.length]);
+  const [currentIndex, setCurrentIndex] = React.useState(() => clamp(initialIndex));
+  // The slide on screen once its transition is over: PDF/PPTX capture waits on it.
+  const [settledIndex, setSettledIndex] = React.useState(currentIndex);
+  const reduceMotion = useReducedMotion();
+
   // Values the presenter types into blanks slides (validated in the sync hook).
   const [blankValues, setBlankValues] = React.useState<Record<string, string[]>>({});
   const onBlanks = React.useCallback((slideId: string, values: string[]) => {
@@ -33,109 +40,79 @@ export function AudienceView({ slides, theme, presentToken, initialIndex = 0 }: 
   }, []);
   const syncedIndex = useAudienceSync(presentToken, true, onBlanks);
   React.useEffect(() => {
-    if (syncedIndex !== null) {
-      setCurrentIndex(Math.max(0, Math.min(syncedIndex, slides.length - 1)));
-    }
-  }, [syncedIndex, slides.length]);
+    if (syncedIndex !== null) setCurrentIndex(clamp(syncedIndex));
+  }, [syncedIndex, clamp]);
 
-  const goTo = React.useCallback(
-    (idx: number) => {
-      setCurrentIndex(Math.max(0, Math.min(slides.length - 1, idx)));
-    },
-    [slides.length]
-  );
-
-  // Keyboard navigation (audience can also follow along manually)
+  // Keyboard (follow along manually).
   React.useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case "ArrowRight":
-        case "ArrowDown":
-        case " ":
-          e.preventDefault();
-          goTo(currentIndex + 1);
-          break;
-        case "ArrowLeft":
-        case "ArrowUp":
-          e.preventDefault();
-          goTo(currentIndex - 1);
-          break;
+      if (["ArrowRight", "ArrowDown", " "].includes(e.key)) {
+        e.preventDefault();
+        setCurrentIndex((i) => clamp(i + 1));
+      } else if (["ArrowLeft", "ArrowUp"].includes(e.key)) {
+        e.preventDefault();
+        setCurrentIndex((i) => clamp(i - 1));
       }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [currentIndex, goTo]);
+  }, [clamp]);
 
-  // Show controls briefly on mouse move
-  const onMouseMove = React.useCallback(() => {
-    setShowControls(true);
-    if (hideTimer.current) clearTimeout(hideTimer.current);
-    hideTimer.current = setTimeout(() => setShowControls(false), 2500);
-  }, []);
-
-  React.useEffect(() => {
-    return () => {
-      if (hideTimer.current) clearTimeout(hideTimer.current);
-    };
-  }, []);
+  // Swipe on touch screens (mobile audience).
+  const touchStart = React.useRef<number | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => (touchStart.current = e.touches[0]?.clientX ?? null);
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touchStart.current;
+    const end = e.changedTouches[0]?.clientX;
+    touchStart.current = null;
+    if (start === null || end === undefined || Math.abs(end - start) < SWIPE_MIN_PX) return;
+    setCurrentIndex((i) => clamp(i + (end < start ? 1 : -1)));
+  };
 
   const currentSlide = slides[currentIndex];
   if (!currentSlide) return null;
 
   return (
     <div
-      className="w-screen h-screen overflow-hidden bg-black relative"
-      onMouseMove={onMouseMove}
-      // PDF export steps through slides and waits for this to match before printing.
-      data-slide-index={currentIndex}
+      className="relative h-dvh w-screen overflow-hidden bg-background"
+      data-slide-index={settledIndex}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
     >
-      {/* Slide canvas — full bleed */}
-      <div className="w-full h-full">
-        {/* Images come through the token route: the audience has no session. */}
-        <AudienceAssetUrlProvider presentToken={presentToken}>
-          <LiveBlanksProvider values={blankValues}>
-            <AutoScaledSlideRenderer slide={currentSlide} theme={theme} isActive />
-          </LiveBlanksProvider>
-        </AudienceAssetUrlProvider>
-      </div>
+      {/* Images come through the token route: the audience has no session. */}
+      <AudienceAssetUrlProvider presentToken={presentToken}>
+        <LiveBlanksProvider values={blankValues}>
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={currentSlide.id}
+              className="absolute inset-0"
+              variants={{
+                enter: reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.985 },
+                center: { opacity: 1, scale: 1 },
+                exit: { opacity: 0 },
+              }}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              // Only the incoming slide's arrival counts; the outgoing one also completes (exit).
+              onAnimationComplete={(definition) => definition === "center" && setSettledIndex(currentIndex)}
+            >
+              <AutoScaledSlideRenderer slide={currentSlide} theme={theme} isActive />
+            </motion.div>
+          </AnimatePresence>
+        </LiveBlanksProvider>
+      </AudienceAssetUrlProvider>
 
-      {/* Progress bar at top */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-black/20 z-10" data-export-hide>
-        <div
-          className="h-full bg-white/30 transition-all duration-300"
-          style={{ width: `${((currentIndex + 1) / slides.length) * 100}%` }}
-        />
-      </div>
-
-      {/* Nav controls — fade in/out */}
-      <div
-        data-export-hide
-        className={`absolute inset-x-0 bottom-4 flex items-center justify-center gap-4 z-10 transition-opacity duration-300 ${
-          showControls ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <button
-          onClick={() => goTo(currentIndex - 1)}
-          disabled={currentIndex === 0}
-          className="p-2 rounded-full bg-black/40 backdrop-blur-sm text-white hover:bg-black/60 disabled:opacity-30 transition-colors"
-          aria-label="Slide précédente"
+      {syncedIndex === null && (
+        <p
+          data-export-hide
+          role="status"
+          className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-border bg-surface-2 px-3 py-1 text-xs text-foreground"
         >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-
-        <span className="text-sm text-white/60 tabular-nums font-mono bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full">
-          {currentIndex + 1} / {slides.length}
-        </span>
-
-        <button
-          onClick={() => goTo(currentIndex + 1)}
-          disabled={currentIndex === slides.length - 1}
-          className="p-2 rounded-full bg-black/40 backdrop-blur-sm text-white hover:bg-black/60 disabled:opacity-30 transition-colors"
-          aria-label="Slide suivante"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
-      </div>
+          {m.waiting}
+        </p>
+      )}
     </div>
   );
 }

@@ -1,0 +1,48 @@
+/** Settings copy (layout, profile, organization). Billing copy lives in components/app/billing/messages.ts. */
+export const settingsMessages = {
+  title: "Paramètres",
+  description: "Gérez votre profil, votre organisation et votre abonnement.",
+  nav: {
+    label: "Sections des paramètres",
+    profile: "Profil",
+    organization: "Organisation",
+    billing: "Facturation",
+  },
+  save: "Enregistrer",
+  empty: "—",
+  profile: {
+    metaTitle: "Profil — GetFunnels",
+    title: "Profil utilisateur",
+    description: "Informations associées à votre compte.",
+    fullName: "Nom complet",
+    email: "Adresse email",
+    locale: "Langue",
+    locales: { fr: "Français" } as Record<string, string>,
+    comingSoon: "La modification du profil sera disponible prochainement.",
+  },
+  organization: {
+    metaTitle: "Organisation — GetFunnels",
+    title: "Organisation",
+    description: "Informations de votre espace de travail.",
+    name: "Nom",
+    slug: "Identifiant (slug)",
+    plan: "Plan",
+    comingSoon: "La modification de l'organisation sera disponible prochainement.",
+  },
+  members: {
+    title: "Membres",
+    description: (n: number) => `${n} membre${n > 1 ? "s" : ""} dans cet espace de travail.`,
+    tableLabel: "Membres de l'organisation",
+    member: "Membre",
+    role: "Rôle",
+    joined: "Ajouté le",
+    you: "Vous",
+    roles: {
+      owner: "Propriétaire",
+      admin: "Administrateur",
+      editor: "Éditeur",
+      viewer: "Lecteur",
+    },
+    comingSoon: "La gestion des membres sera disponible prochainement.",
+  },
+} as const;

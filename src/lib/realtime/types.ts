@@ -23,7 +23,14 @@ export interface RealtimeChannel {
   subscribe(handler: (event: SlideEvent) => void): void;
   /** Clean up the channel */
   destroy(): void;
+  /**
+   * Optional: connection state changes ("live" once joined, "offline" on error/timeout/close),
+   * so the presenter can show whether the audience link is reachable. Returns an unsubscribe.
+   */
+  onStatus?(handler: (status: ChannelStatus) => void): () => void;
 }
+
+export type ChannelStatus = "connecting" | "live" | "offline";
 
 export interface RealtimeProvider {
   /**

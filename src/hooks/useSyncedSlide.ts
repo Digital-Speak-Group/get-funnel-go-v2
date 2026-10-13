@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { getRealtimeProvider } from "@/lib/realtime/supabase";
-import type { RealtimeChannel, SlideEvent } from "@/lib/realtime/types";
+import type { ChannelStatus, RealtimeChannel, SlideEvent } from "@/lib/realtime/types";
 import { parseBlanksPayload } from "@/lib/realtime/blanks";
 
 /** Typing in a blank publishes once the presenter pauses (also keeps clear of the 100 ms throttle). */
@@ -22,15 +22,18 @@ export function usePresenterSync(
   slideIndex: number,
   enabled = true,
   blanks?: SlideEvent["blanks"]
-): void {
+): ChannelStatus {
   const channelRef = React.useRef<RealtimeChannel | null>(null);
+  const [status, setStatus] = React.useState<ChannelStatus>("connecting");
 
   React.useEffect(() => {
     if (!enabled) return;
     const provider = getRealtimeProvider();
     const ch = provider.channel(presentToken);
     channelRef.current = ch;
+    const stopStatus = ch.onStatus?.(setStatus);
     return () => {
+      stopStatus?.();
       ch.destroy();
       channelRef.current = null;
     };
@@ -56,6 +59,8 @@ export function usePresenterSync(
     return () => clearTimeout(timer);
     // slideIndex is read at send time on purpose; the index effect above covers slide changes.
   }, [blanksKey, enabled]);
+
+  return status;
 }
 
 /**

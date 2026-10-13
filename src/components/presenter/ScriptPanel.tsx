@@ -3,6 +3,7 @@ import { ArrowRight, Clock } from "lucide-react";
 import type { Slide } from "@/lib/slides/schema";
 import { formatTime } from "./pace";
 import { PRESENTER_MESSAGES } from "./messages";
+import { SLIDE_TYPE_LABELS } from "@/components/app/editor/messages";
 
 const m = PRESENTER_MESSAGES.script;
 
@@ -33,7 +34,7 @@ export function ScriptPanel({ slide, index, total }: { slide: Slide; index: numb
           </span>
         )}
         <span className="ml-auto">
-          <span className="font-medium uppercase tracking-wide">{slide.type}</span> · {index + 1} / {total}
+          <span className="font-medium uppercase tracking-wide">{SLIDE_TYPE_LABELS[slide.type]}</span> · {index + 1} / {total}
         </span>
       </div>
 

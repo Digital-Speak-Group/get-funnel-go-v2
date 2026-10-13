@@ -2,38 +2,75 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { ArrowLeft, ArrowRight, CircleCheck, LoaderCircle } from "lucide-react";
 import { createOrgAction } from "@/app/onboarding/actions";
+import { AuthField } from "@/app/(auth)/_components/AuthField";
+import { FormAlert } from "@/app/(auth)/_components/FormAlert";
+import { Button } from "@/components/ui/button";
+import { OnboardingStepper } from "./OnboardingStepper";
+import { SlugField } from "./SlugField";
+import { onboardingMessages as m } from "./messages";
 
+const SLUG_PATTERN = /^[a-z0-9-]{2,50}$/;
+
+function generateSlug(input: string) {
+  return input
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "")
+    .slice(0, 50);
+}
+
+function nameError(name: string) {
+  const length = name.trim().length;
+  return length >= 2 && length <= 60 ? undefined : m.name.errorLength;
+}
+
+function slugError(slug: string) {
+  return SLUG_PATTERN.test(slug) ? undefined : m.slug.errorFormat;
+}
+
+/**
+ * Onboarding stepper over the existing org action (name + slug): 1 name, 2 slug,
+ * 3 confirmation while redirecting. Brand colour / first template are not supported by
+ * `createOrgAction` yet.
+ */
 export function OnboardingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/app";
+  const [step, setStep] = useState(0);
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
+  const [fieldError, setFieldError] = useState<string>();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  function generateSlug(input: string) {
-    return input
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "")
-      .slice(0, 50);
-  }
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     setName(value);
+    if (fieldError) setFieldError(nameError(value));
     if (!slug || slug === generateSlug(name)) {
       setSlug(generateSlug(value));
     }
   }
 
+  function goToSlug(e: React.FormEvent) {
+    e.preventDefault();
+    const invalid = nameError(name);
+    setFieldError(invalid);
+    if (!invalid) setStep(1);
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    const invalid = slugError(slug);
+    setFieldError(invalid);
+    if (invalid) return;
+
     setLoading(true);
 
     const result = await createOrgAction({ name, slug });
@@ -44,87 +81,91 @@ export function OnboardingContent() {
       return;
     }
 
+    setStep(2);
     router.push(callbackUrl);
     router.refresh();
   }
 
+  const current = m.steps[step];
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <div className="text-center mb-4">
-        <div className="flex items-center justify-center gap-2 mb-6">
-          <div className="w-8 h-8 bg-violet-600 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-sm">1</span>
-          </div>
-          <div className="w-8 h-8 bg-zinc-700 rounded-full flex items-center justify-center">
-            <span className="text-zinc-500 font-bold text-sm">2</span>
-          </div>
-          <div className="w-8 h-8 bg-zinc-700 rounded-full flex items-center justify-center">
-            <span className="text-zinc-500 font-bold text-sm">3</span>
-          </div>
-        </div>
-        <h2 className="text-2xl font-semibold text-white">Créer votre organisation</h2>
-        <p className="text-zinc-400 mt-1">
-          Configurez votre espace de travail pour commencer.
-        </p>
-      </div>
+    <div className="space-y-8">
+      <OnboardingStepper current={step} />
 
-      {error && (
-        <div className="bg-red-900/30 border border-red-800 text-red-300 px-4 py-3 rounded-lg text-sm">
-          {error}
-        </div>
-      )}
-
-      <div className="space-y-6">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-zinc-300 mb-1">
-            Nom de l'organisation
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            required
-            value={name}
-            onChange={handleNameChange}
-            className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-            placeholder="Ex: Mon Agence"
-            disabled={loading}
-            maxLength={60}
-          />
-          <p className="text-zinc-500 text-sm mt-1">2 à 60 caractères</p>
+      <div key={step} className="animate-fade-in space-y-6 motion-reduce:animate-none">
+        {step === 2 && <CircleCheck className="size-10 text-success" aria-hidden="true" />}
+        <div className="space-y-1.5">
+          <h1 className="text-h1 text-foreground">{current.title}</h1>
+          <p className="text-body text-muted-foreground">{current.description}</p>
         </div>
 
-        <div>
-          <label htmlFor="slug" className="block text-sm font-medium text-zinc-300 mb-1">
-            Identifiant (slug)
-          </label>
-          <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500">getfunnels.io/</span>
-            <input
-              id="slug"
-              name="slug"
+        {step === 0 && (
+          <form onSubmit={goToSlug} noValidate className="space-y-6">
+            <AuthField
+              id="name"
+              label={m.name.label}
               type="text"
               required
-              value={slug}
-              onChange={(e) => setSlug(e.target.value.toLowerCase())}
-              className="w-full pl-36 px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-              placeholder="mon-agence"
-              disabled={loading}
-              maxLength={50}
-              pattern="^[a-z0-9-]+$"
+              autoFocus
+              value={name}
+              onChange={handleNameChange}
+              placeholder={m.name.placeholder}
+              maxLength={60}
+              error={fieldError}
+              hint={m.name.hint}
             />
-          </div>
-          <p className="text-zinc-500 text-sm mt-1">Lettres minuscules, chiffres et tirets uniquement</p>
-        </div>
-      </div>
+            <Button type="submit" size="lg" className="w-full">
+              {m.next}
+              <ArrowRight aria-hidden="true" />
+            </Button>
+          </form>
+        )}
 
-      <button
-        type="submit"
-        disabled={loading || !name.trim() || !slug.trim()}
-        className="w-full py-3 px-4 bg-violet-600 hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-medium text-white transition-colors"
-      >
-        {loading ? "Création..." : "Continuer"}
-      </button>
-    </form>
+        {step === 1 && (
+          <form onSubmit={handleSubmit} noValidate className="space-y-6">
+            {error && <FormAlert>{error}</FormAlert>}
+            <dl className="flex items-center justify-between gap-4 rounded-md border border-border bg-surface-2 px-3 py-2.5 text-small">
+              <dt className="text-faint">{m.summary.name}</dt>
+              <dd className="truncate font-medium text-foreground">{name.trim()}</dd>
+            </dl>
+            <SlugField
+              value={slug}
+              onChange={(value) => {
+                setSlug(value);
+                if (fieldError) setFieldError(slugError(value));
+              }}
+              error={fieldError}
+              disabled={loading}
+            />
+            <div className="flex gap-3">
+              <Button
+                type="button"
+                variant="secondary"
+                size="lg"
+                disabled={loading}
+                onClick={() => {
+                  setError("");
+                  setFieldError(undefined);
+                  setStep(0);
+                }}
+              >
+                <ArrowLeft aria-hidden="true" />
+                {m.back}
+              </Button>
+              <Button type="submit" size="lg" className="flex-1" disabled={loading || !slug.trim()}>
+                {loading ? (
+                  <>
+                    <LoaderCircle className="animate-spin" aria-hidden="true" />
+                    {m.pending}
+                  </>
+                ) : (
+                  m.submit
+                )}
+              </Button>
+            </div>
+          </form>
+        )}
+      </div>
+    </div>
   );
 }

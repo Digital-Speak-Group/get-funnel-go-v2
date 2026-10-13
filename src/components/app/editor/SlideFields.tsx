@@ -1,31 +1,17 @@
 "use client";
 
 import * as React from "react";
-import { z } from "zod";
-import { Plus, Trash2 } from "lucide-react";
+import type { z } from "zod";
 import { slideContentSchemas } from "@/lib/slides/schema";
-import { buildDefaultValue } from "@/lib/slides/defaults";
-import { cn } from "@/lib/utils";
-import { FREE_MESSAGES, fieldLabel, optionLabel } from "./messages";
-import {
-  isOptionalSchema,
-  stringBounds,
-  unwrapSchema,
-  type FieldErrors,
-} from "./field-schema";
+import { FIELD_MESSAGES, FREE_MESSAGES, SLIDE_TYPE_LABELS } from "./messages";
+import type { FieldErrors } from "./field-schema";
 import type { EditorSlide } from "./validation";
 import { RegeneratePanel } from "./RegeneratePanel";
 import { findPlaceholders } from "./placeholders";
 import { PlaceholderNotice } from "./PlaceholderHints";
 import { CueFields } from "./CueFields";
-import { AssetField } from "./AssetField";
-
-const inputBase =
-  "w-full rounded-lg border border-zinc-700 bg-zinc-800/60 px-3 py-2 text-sm text-white placeholder-zinc-500 outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500";
-
-function inputClass(hasError: boolean): string {
-  return cn(inputBase, hasError && "border-red-500/70");
-}
+import { ShapeFields } from "./fields/Field";
+import { TextareaField } from "./fields/TextInput";
 
 interface SlideFieldsProps {
   slide: EditorSlide;
@@ -36,474 +22,53 @@ interface SlideFieldsProps {
   regenerateError?: string;
 }
 
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="space-y-4 border-t border-border pt-4 first:border-t-0 first:pt-0">
+      <h3 className="text-xs font-medium uppercase tracking-wide text-faint">{title}</h3>
+      {children}
+    </section>
+  );
+}
+
+/** The inspector's form for one slide: AI regeneration, content fields, presenter material. */
 export function SlideFields({ slide, errors, onChange, onRegenerate, isRegenerating, regenerateError }: SlideFieldsProps) {
-  const schema = slideContentSchemas[slide.type];
-  const shape = (
-    schema as unknown as z.ZodObject<Record<string, z.ZodType>>
-  ).shape;
+  const shape = (slideContentSchemas[slide.type] as unknown as z.ZodObject<Record<string, z.ZodType>>).shape;
 
   return (
-    <div className="space-y-4" data-testid="slide-fields">
-      <h3 className="text-sm font-medium text-white capitalize">{slide.type}</h3>
-      {onRegenerate && (
-        // Keyed by slide so instructions typed for one slide don't carry over to the next.
-        <RegeneratePanel
-          key={slide.id}
-          onRegenerate={onRegenerate}
-          isRegenerating={isRegenerating ?? false}
-          error={regenerateError}
-        />
-      )}
-      <PlaceholderNotice placeholders={findPlaceholders(slide.content)} />
-      {slide.type === "free" ? (
-        // Freeform elements are placed and edited on the canvas, not as form fields.
-        <p className="rounded-lg border border-zinc-800 p-3 text-sm text-zinc-400" data-testid="free-fields-hint">
-          {FREE_MESSAGES.fieldsHint}
-        </p>
-      ) : (
-        <ShapeFields
-          shape={shape}
-          value={slide.content}
-          path=""
-          errors={errors}
-          onChange={(next) => onChange({ content: next })}
-        />
-      )}
-
-      <TextareaField
-        name="notes"
-        value={slide.notes}
-        max={2000}
-        error={errors.notes}
-        onChange={(notes) => onChange({ notes })}
-      />
-      <TextareaField
-        name="script"
-        value={slide.script}
-        max={4000}
-        error={errors.script}
-        onChange={(script) => onChange({ script })}
-      />
-      <CueFields
-        // Own key: RegeneratePanel above is keyed by slide.id too, and sibling keys must differ.
-        key={`cue-${slide.id}`}
-        cue={slide.cue}
-        errors={errors}
-        onChange={(cue) => onChange({ cue })}
-      />
-    </div>
-  );
-}
-
-function TextareaField({
-  name,
-  value,
-  max,
-  error,
-  onChange,
-}: {
-  name: string;
-  value: string;
-  max: number;
-  error?: string[];
-  onChange: (next: string) => void;
-}) {
-  const id = `slide-${name}`;
-  return (
-    <div className="space-y-1">
-      <label htmlFor={id} className="text-sm font-medium text-zinc-300">
-        {fieldLabel(name)}
-        <span className="font-normal text-zinc-500"> — facultatif</span>
-      </label>
-      <textarea
-        id={id}
-        rows={3}
-        value={value}
-        data-testid={`slide-field-${name}`}
-        aria-invalid={error ? true : undefined}
-        className={inputClass(!!error)}
-        onChange={(e) => onChange(e.target.value)}
-      />
-      <FieldStatus path={name} error={error} length={value.length} max={max} />
-    </div>
-  );
-}
-
-function FieldStatus({
-  path,
-  error,
-  length,
-  max,
-}: {
-  path: string;
-  error?: string[];
-  length: number;
-  max?: number;
-}) {
-  return (
-    <div className="flex justify-between gap-2 text-xs">
-      <span
-        className="text-red-400"
-        data-testid={error ? `slide-error-${path}` : undefined}
-      >
-        {error?.[0] ?? ""}
-      </span>
-      {max !== undefined && (
-        <span className={cn("text-zinc-500", length > max && "text-red-400")}>
-          {length}/{max}
-        </span>
-      )}
-    </div>
-  );
-}
-
-function ShapeFields({
-  shape,
-  value,
-  path,
-  errors,
-  onChange,
-}: {
-  shape: Record<string, z.ZodType>;
-  value: Record<string, unknown>;
-  path: string;
-  errors: FieldErrors;
-  onChange: (next: Record<string, unknown>) => void;
-}) {
-  return (
-    <>
-      {Object.entries(shape).map(([key, fieldSchema]) => {
-        const fieldPath = path ? `${path}.${key}` : key;
-        return (
-          <Field
-            key={key}
-            name={key}
-            schema={fieldSchema}
-            path={fieldPath}
-            value={value[key]}
-            errors={errors}
-            onChange={(nextValue) => {
-              const next = { ...value };
-              if (nextValue === undefined) delete next[key];
-              else next[key] = nextValue;
-              onChange(next);
-            }}
+    <div className="space-y-6" data-testid="slide-fields">
+      <Section title={`${FIELD_MESSAGES.content} — ${SLIDE_TYPE_LABELS[slide.type]}`}>
+        {onRegenerate && (
+          // Keyed by slide so instructions typed for one slide don't carry over to the next.
+          <RegeneratePanel
+            key={slide.id}
+            onRegenerate={onRegenerate}
+            isRegenerating={isRegenerating ?? false}
+            error={regenerateError}
           />
-        );
-      })}
-    </>
-  );
-}
-
-function Field({
-  name,
-  schema,
-  path,
-  value,
-  errors,
-  onChange,
-}: {
-  name: string;
-  schema: z.ZodType;
-  path: string;
-  value: unknown;
-  errors: FieldErrors;
-  onChange: (next: unknown) => void;
-}) {
-  const core = unwrapSchema(schema);
-
-  // Picked with the illustration picker above the fields, not as a plain select.
-  if (name === "illustration" && path === "illustration") return null;
-  if (name === "assetId") {
-    return (
-      <AssetField
-        path={path}
-        value={typeof value === "string" ? value : undefined}
-        error={errors[path]}
-        onChange={onChange}
-      />
-    );
-  }
-  if (core instanceof z.ZodArray) {
-    return (
-      <ArrayField
-        name={name}
-        schema={core}
-        path={path}
-        value={value}
-        errors={errors}
-        onChange={onChange}
-      />
-    );
-  }
-  if (core instanceof z.ZodEnum) {
-    return (
-      <EnumField
-        name={name}
-        options={core.options.map((option) => String(option))}
-        path={path}
-        value={value}
-        errors={errors}
-        onChange={onChange}
-      />
-    );
-  }
-  if (core instanceof z.ZodNumber) {
-    const id = `field-${path.replace(/./g, "-")}`;
-    const error = errors[path];
-    return (
-      <div className="space-y-1">
-        <label htmlFor={id} className="text-sm font-medium text-zinc-300">
-          {fieldLabel(name)}
-          {isOptionalSchema(schema) && <span className="font-normal text-zinc-500"> — facultatif</span>}
-        </label>
-        <input
-          id={id}
-          type="number"
-          inputMode="decimal"
-          value={typeof value === "number" && !Number.isNaN(value) ? value : ""}
-          data-testid={`slide-field-${path}`}
-          aria-invalid={error ? true : undefined}
-          className={inputClass(!!error)}
-          onChange={(e) => onChange(e.target.value === "" ? undefined : Number(e.target.value))}
-        />
-        <FieldStatus path={path} error={error} length={0} />
-      </div>
-    );
-  }
-  if (core instanceof z.ZodBoolean) {
-    const id = `field-${path.replace(/\./g, "-")}`;
-    return (
-      <div className="flex items-center gap-2 py-1">
-        <input
-          id={id}
-          type="checkbox"
-          checked={value === true}
-          data-testid={`slide-field-${path}`}
-          className="h-4 w-4 rounded border-zinc-600 bg-zinc-800 accent-violet-500"
-          onChange={(e) => onChange(e.target.checked)}
-        />
-        <label htmlFor={id} className="text-sm text-zinc-300">
-          {fieldLabel(name)}
-        </label>
-      </div>
-    );
-  }
-
-  return (
-    <TextInput
-      name={name}
-      schema={schema}
-      path={path}
-      value={value}
-      errors={errors}
-      onChange={onChange}
-    />
-  );
-}
-
-function TextInput({
-  name,
-  schema,
-  path,
-  value,
-  errors,
-  onChange,
-}: {
-  name: string;
-  schema: z.ZodType;
-  path: string;
-  value: unknown;
-  errors: FieldErrors;
-  onChange: (next: unknown) => void;
-}) {
-  const bounds = stringBounds(schema);
-  const str = typeof value === "string" ? value : "";
-  const optional = isOptionalSchema(schema);
-  const error = errors[path];
-  const multiline = (bounds.max ?? 0) > 160;
-  const id = `field-${path.replace(/\./g, "-")}`;
-
-  const control = multiline ? (
-    <textarea
-      id={id}
-      rows={3}
-      value={str}
-      data-testid={`slide-field-${path}`}
-      aria-invalid={error ? true : undefined}
-      className={inputClass(!!error)}
-      onChange={(e) => onChange(e.target.value)}
-    />
-  ) : (
-    <input
-      id={id}
-      type="text"
-      value={str}
-      data-testid={`slide-field-${path}`}
-      aria-invalid={error ? true : undefined}
-      className={inputClass(!!error)}
-      onChange={(e) => onChange(e.target.value)}
-    />
-  );
-
-  return (
-    <div className="space-y-1">
-      <label htmlFor={id} className="text-sm font-medium text-zinc-300">
-        {fieldLabel(name)}
-        {optional && (
-          <span className="font-normal text-zinc-500"> — facultatif</span>
         )}
-      </label>
-      {control}
-      <FieldStatus path={path} error={error} length={str.length} max={bounds.max} />
+        <PlaceholderNotice placeholders={findPlaceholders(slide.content)} />
+        {slide.type === "free" ? (
+          // Freeform elements are placed and edited on the canvas, not as form fields.
+          <p className="rounded-md border border-border p-3 text-small text-muted-foreground" data-testid="free-fields-hint">
+            {FREE_MESSAGES.fieldsHint}
+          </p>
+        ) : (
+          <ShapeFields shape={shape} value={slide.content} path="" errors={errors} onChange={(next) => onChange({ content: next })} />
+        )}
+      </Section>
+
+      <Section title={FIELD_MESSAGES.presenter}>
+        <TextareaField name="notes" value={slide.notes} max={2000} error={errors.notes} onChange={(notes) => onChange({ notes })} />
+        <TextareaField name="script" value={slide.script} max={4000} error={errors.script} onChange={(script) => onChange({ script })} />
+        <CueFields
+          // Own key: RegeneratePanel above is keyed by slide.id too, and sibling keys must differ.
+          key={`cue-${slide.id}`}
+          cue={slide.cue}
+          errors={errors}
+          onChange={(cue) => onChange({ cue })}
+        />
+      </Section>
     </div>
-  );
-}
-
-function EnumField({
-  name,
-  options,
-  path,
-  value,
-  errors,
-  onChange,
-}: {
-  name: string;
-  options: string[];
-  path: string;
-  value: unknown;
-  errors: FieldErrors;
-  onChange: (next: unknown) => void;
-}) {
-  const error = errors[path];
-  const id = `field-${path.replace(/\./g, "-")}`;
-  return (
-    <div className="space-y-1">
-      <label htmlFor={id} className="text-sm font-medium text-zinc-300">
-        {fieldLabel(name)}
-      </label>
-      <select
-        id={id}
-        value={typeof value === "string" ? value : ""}
-        data-testid={`slide-field-${path}`}
-        aria-invalid={error ? true : undefined}
-        className={inputClass(!!error)}
-        onChange={(e) => onChange(e.target.value)}
-      >
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {optionLabel(option)}
-          </option>
-        ))}
-      </select>
-      <FieldStatus path={path} error={error} length={0} />
-    </div>
-  );
-}
-
-function ArrayField({
-  name,
-  schema,
-  path,
-  value,
-  errors,
-  onChange,
-}: {
-  name: string;
-  schema: z.ZodArray;
-  path: string;
-  value: unknown;
-  errors: FieldErrors;
-  onChange: (next: unknown) => void;
-}) {
-  const items = Array.isArray(value) ? value : [];
-  const error = errors[path];
-  const optional = isOptionalSchema(schema);
-  const element = schema.element;
-  const elementCore = unwrapSchema(element as z.ZodType);
-
-  const update = (nextItems: unknown[]) => onChange(nextItems);
-  const addItem = () =>
-    update([...items, buildDefaultValue(element as z.ZodType, name)]);
-  const removeItem = (index: number) =>
-    update(items.filter((_, i) => i !== index));
-
-  return (
-    <fieldset
-      className="space-y-3 rounded-xl border border-zinc-800 p-3"
-      data-testid={`slide-field-${path}`}
-    >
-      <legend className="px-1 text-sm font-medium text-zinc-300">
-        {fieldLabel(name)}
-        <span className="font-normal text-zinc-500">
-          {" "}
-          ({items.length})
-          {optional && " — facultatif"}
-        </span>
-      </legend>
-      {error && (
-        <p className="text-xs text-red-400" data-testid={`slide-error-${path}`}>
-          {error[0]}
-        </p>
-      )}
-      {items.length === 0 && (
-        <p className="text-xs text-zinc-500">Aucun élément pour l’instant.</p>
-      )}
-      {items.map((item, index) => {
-        const itemPath = `${path}.${index}`;
-        return (
-          <div key={index} className="space-y-2 rounded-lg bg-zinc-800/40 p-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
-                {fieldLabel(name)} {index + 1}
-              </span>
-              <button
-                type="button"
-                aria-label={`Supprimer ${fieldLabel(name)} ${index + 1}`}
-                data-testid={`slide-remove-${itemPath}`}
-                className="rounded p-1 text-zinc-500 hover:text-red-400"
-                onClick={() => removeItem(index)}
-              >
-                <Trash2 className="h-4 w-4" />
-              </button>
-            </div>
-            {elementCore instanceof z.ZodObject ? (
-              <ShapeFields
-                shape={elementCore.shape as Record<string, z.ZodType>}
-                value={
-                  item && typeof item === "object" && !Array.isArray(item)
-                    ? (item as Record<string, unknown>)
-                    : {}
-                }
-                path={itemPath}
-                errors={errors}
-                onChange={(next) =>
-                  update(items.map((it, i) => (i === index ? next : it)))
-                }
-              />
-            ) : (
-              <TextInput
-                name={name}
-                schema={element as z.ZodType}
-                path={itemPath}
-                value={item}
-                errors={errors}
-                onChange={(next) =>
-                  update(items.map((it, i) => (i === index ? next : it)))
-                }
-              />
-            )}
-          </div>
-        );
-      })}
-      <button
-        type="button"
-        data-testid={`slide-add-${path}`}
-        className="flex items-center gap-1 text-sm text-violet-400 hover:text-violet-300"
-        onClick={addItem}
-      >
-        <Plus className="h-4 w-4" /> Ajouter
-      </button>
-    </fieldset>
   );
 }

@@ -1,82 +1,78 @@
 "use client";
 
-import { AlertTriangle, ArrowRight, X } from "lucide-react";
 import { useState } from "react";
+import { AlertTriangle, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { billingMessages as m } from "./messages";
 
-export function UpgradeDialog({
-  open,
-  currentPlan,
-  onClose,
-  onUpgrade,
-}: {
+interface UpgradeDialogProps {
   open: boolean;
   currentPlan: string;
   onClose: () => void;
-  onUpgrade: (plan: string) => void;
-}) {
-  const [loading, setLoading] = useState(false);
+  /** May return a promise; if it rejects, the button leaves its loading state. */
+  onUpgrade: (plan: string) => void | Promise<void>;
+}
 
-  if (!open) return null;
+function capitalize(value: string): string {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+/** Shown when a plan limit blocks an action; suggests the next plan up. */
+export function UpgradeDialog({ open, currentPlan, onClose, onUpgrade }: UpgradeDialogProps) {
+  const [loading, setLoading] = useState(false);
 
   const suggestedPlan = currentPlan === "trial" ? "pro" : "agency";
   const suggestedLabel = suggestedPlan === "pro" ? "Pro" : "Agency";
 
   const handleUpgrade = async () => {
     setLoading(true);
-    onUpgrade(suggestedPlan);
+    try {
+      await onUpgrade(suggestedPlan);
+    } catch {
+      setLoading(false);
+    }
+  };
+
+  const handleOpenChange = (next: boolean) => {
+    if (next) return;
+    setLoading(false);
+    onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      <div className="relative w-full max-w-md rounded-2xl border border-zinc-800 bg-zinc-900 p-8 shadow-2xl">
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute right-4 top-4 rounded-lg p-1 text-zinc-500 transition-colors hover:bg-zinc-800 hover:text-zinc-300"
-        >
-          <X className="h-4 w-4" />
-        </button>
-
-        {/* Icon */}
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/10">
-          <AlertTriangle className="h-7 w-7 text-amber-400" />
-        </div>
-
-        {/* Title */}
-        <h2 className="mb-2 text-center text-xl font-bold text-white">
-          Limite atteinte
-        </h2>
-        <p className="mb-6 text-center text-sm text-zinc-400 leading-relaxed">
-          Vous avez atteint la limite de votre plan{" "}
-          <span className="font-medium text-zinc-300 capitalize">{currentPlan}</span>.
-          Passez au plan{" "}
-          <span className="font-medium text-purple-400">{suggestedLabel}</span> pour
-          continuer à créer des decks et générer du contenu AI.
-        </p>
-
-        {/* CTA */}
-        <button
-          onClick={handleUpgrade}
-          disabled={loading}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-purple-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {loading ? (
-            "Redirection..."
-          ) : (
-            <>
-              Passer au plan {suggestedLabel}
-              <ArrowRight className="h-4 w-4" />
-            </>
-          )}
-        </button>
-
-        <button
-          onClick={onClose}
-          className="mt-3 w-full rounded-xl px-6 py-2.5 text-sm text-zinc-400 transition-colors hover:text-zinc-300"
-        >
-          Plus tard
-        </button>
-      </div>
-    </div>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <div className="mb-2 flex size-10 items-center justify-center rounded-lg border border-warning/25 bg-warning/10">
+            <AlertTriangle className="size-5 text-warning" aria-hidden="true" />
+          </div>
+          <DialogTitle>{m.limitDialog.title}</DialogTitle>
+          <DialogDescription>{m.limitDialog.body(capitalize(currentPlan), suggestedLabel)}</DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <Button variant="ghost" onClick={() => handleOpenChange(false)}>
+            {m.limitDialog.later}
+          </Button>
+          <Button onClick={handleUpgrade} disabled={loading}>
+            {loading ? (
+              m.plan.redirecting
+            ) : (
+              <>
+                {m.plan.upgrade(suggestedLabel)}
+                <ArrowRight />
+              </>
+            )}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 import { monitoring } from "@/lib/monitoring";
+// Replaces the root layout, so it brings its own styles (tokens).
+import "@/styles/globals.css";
 
 export default function GlobalError({
   error,
@@ -15,11 +17,11 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <html>
-      <body>
+    <html lang="fr">
+      <body className="bg-background text-foreground antialiased">
         <div className="flex min-h-screen flex-col items-center justify-center p-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Une erreur inattendue est survenue</h2>
-          <p className="text-zinc-500 mb-8 max-w-md">
+          <h2 className="mb-4 text-h1 text-foreground">Une erreur inattendue est survenue</h2>
+          <p className="mb-8 max-w-md text-muted-foreground">
             Nous avons été notifiés du problème et nous travaillons à le résoudre.
           </p>
           <button
