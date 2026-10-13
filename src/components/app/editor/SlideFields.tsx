@@ -6,7 +6,7 @@ import { Plus, Trash2 } from "lucide-react";
 import { slideContentSchemas } from "@/lib/slides/schema";
 import { buildDefaultValue } from "@/lib/slides/defaults";
 import { cn } from "@/lib/utils";
-import { fieldLabel, optionLabel } from "./messages";
+import { FREE_MESSAGES, fieldLabel, optionLabel } from "./messages";
 import {
   isOptionalSchema,
   stringBounds,
@@ -55,13 +55,20 @@ export function SlideFields({ slide, errors, onChange, onRegenerate, isRegenerat
         />
       )}
       <PlaceholderNotice placeholders={findPlaceholders(slide.content)} />
-      <ShapeFields
-        shape={shape}
-        value={slide.content}
-        path=""
-        errors={errors}
-        onChange={(next) => onChange({ content: next })}
-      />
+      {slide.type === "free" ? (
+        // Freeform elements are placed and edited on the canvas, not as form fields.
+        <p className="rounded-lg border border-zinc-800 p-3 text-sm text-zinc-400" data-testid="free-fields-hint">
+          {FREE_MESSAGES.fieldsHint}
+        </p>
+      ) : (
+        <ShapeFields
+          shape={shape}
+          value={slide.content}
+          path=""
+          errors={errors}
+          onChange={(next) => onChange({ content: next })}
+        />
+      )}
 
       <TextareaField
         name="notes"

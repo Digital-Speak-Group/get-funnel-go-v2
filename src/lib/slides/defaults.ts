@@ -52,9 +52,20 @@ export function buildDefaultValue(schema: z.ZodType, key = ""): unknown {
   return undefined;
 }
 
+/** A new freeform slide starts with a title and a text in the safe area, ready to move. */
+function freeStarter(): Record<string, unknown> {
+  return {
+    elements: [
+      { id: crypto.randomUUID(), kind: "text", style: "title", text: "Nouveau titre", x: 96, y: 96, w: 1200, h: 90 },
+      { id: crypto.randomUUID(), kind: "text", style: "body", text: "Texte à compléter.", x: 96, y: 220, w: 900, h: 120 },
+    ],
+  };
+}
+
 export function buildDefaultContent(
   type: SlideType
 ): Record<string, unknown> {
+  if (type === "free") return freeStarter();
   return buildDefaultValue(slideContentSchemas[type]) as Record<
     string,
     unknown

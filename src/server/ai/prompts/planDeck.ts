@@ -1,4 +1,4 @@
-import { SLIDE_TYPES } from "@/lib/slides/schema";
+import { AI_SLIDE_TYPES } from "@/lib/slides/schema";
 import { EMBED_ALLOWED_DOMAINS } from "@/lib/slides/embed";
 
 export const PLAN_DECK_SYSTEM_PROMPT = `
@@ -9,7 +9,7 @@ Follow these strict constraints:
 1. Target length: We need approximately the requested number of slides (±1).
 2. Template order: The template provides a mandatory sequence of "core stages" (e.g. Intro, Problem, Solution, Pitch). You MUST preserve this high-level flow. You can add supporting slides inside these stages, but do not rearrange the stages.
 3. Valid canonical slide types ONLY: Every slide in your plan must use a \`type\` strictly from the following allowed list:
-${SLIDE_TYPES.map((t) => `- ${t}`).join("\n")}
+${AI_SLIDE_TYPES.map((t) => `- ${t}`).join("\n")}
 4. Special types — use them only when they fit:
    - embed / showcase: only if the script gives the address of a page on one of these domains: ${EMBED_ALLOWED_DOMAINS.join(", ")}. Otherwise use another type.
    - screenshots: proof by screenshots of dashboards or sales results (the presenter adds the images later).

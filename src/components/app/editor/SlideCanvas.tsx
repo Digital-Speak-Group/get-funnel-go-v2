@@ -12,6 +12,10 @@ import {
   type SlideItemApi,
 } from "@/components/slides/editable";
 import { useAssetUpload } from "./asset-upload";
+import { FreeEditor } from "./free/FreeEditor";
+import { ConvertToFreeButton } from "./free/ConvertToFreeButton";
+import { convertRenderedSlide } from "./free/convert";
+import type { FreeElement } from "@/lib/slides/free";
 import { canApply, listBounds } from "./list-actions";
 import type { ThemeTokens } from "@/lib/slides/theme";
 import type { Slide } from "@/lib/slides/schema";
@@ -27,6 +31,10 @@ interface SlideCanvasProps {
   onItemAction: (path: string, action: ItemAction, index: number) => void;
   /** An image picked (asset id) or removed (undefined) on the slide, at its `assetId` path. */
   onSetImage: (path: string, assetId: string | undefined) => void;
+  /** New element list of a freeform slide (moved, resized, added, styled…). */
+  onFreeChange: (elements: FreeElement[]) => void;
+  /** Turns the current structured slide into a freeform one with these elements. */
+  onConvertToFree: (elements: FreeElement[]) => void;
   /** Inspector hidden so the slide gets the room to edit on. */
   focused: boolean;
   onToggleFocus: () => void;
@@ -41,6 +49,8 @@ export function SlideCanvas({
   onEditText,
   onItemAction,
   onSetImage,
+  onFreeChange,
+  onConvertToFree,
   focused,
   onToggleFocus,
 }: SlideCanvasProps) {
@@ -54,6 +64,8 @@ export function SlideCanvas({
       },
     [type, onItemAction]
   );
+
+  const canvasRef = React.useRef<HTMLDivElement>(null);
 
   // One hidden file input serves every image on the slide; `pending` is the path it fills.
   const fileRef = React.useRef<HTMLInputElement>(null);
@@ -124,6 +136,14 @@ export function SlideCanvas({
         </span>
         <div className="flex items-center gap-2">
           <span className="hidden text-small text-faint xl:inline">{CANVAS_MESSAGES.hint}</span>
+          {slide.type !== "free" && (
+            <ConvertToFreeButton
+              onConvert={() => {
+                const root = canvasRef.current?.querySelector<HTMLElement>('[role="group"]');
+                if (root) onConvertToFree(convertRenderedSlide(root, slide.content, theme));
+              }}
+            />
+          )}
           <Button
             type="button"
             variant="ghost"
@@ -138,7 +158,26 @@ export function SlideCanvas({
           </Button>
         </div>
       </div>
+      {slide.type === "free" ? (
+        <FreeEditor
+          slideId={slide.id}
+          elements={(slide.content.elements as FreeElement[] | undefined) ?? []}
+          theme={theme}
+          onChange={onFreeChange}
+          onPickImage={images.pick}
+        >
+          {renderCanvas()}
+        </FreeEditor>
+      ) : (
+        renderCanvas()
+      )}
+    </div>
+  );
+
+  function renderCanvas() {
+    return (
       <div
+        ref={canvasRef}
         data-testid="slide-canvas"
         className="relative aspect-video overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900"
       >
@@ -164,6 +203,6 @@ export function SlideCanvas({
           />
         </SlideEditProvider>
       </div>
-    </div>
-  );
+    );
+  }
 }

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { SLIDE_TYPES } from "@/lib/slides/schema";
+import { AI_SLIDE_TYPES } from "@/lib/slides/schema";
 
 export const BriefSchema = z.object({
   offer: z.string().describe("What is the product or service being sold?"),
@@ -15,7 +15,7 @@ export const BriefSchema = z.object({
 export type Brief = z.infer<typeof BriefSchema>;
 
 export const SlidePlanSchema = z.object({
-  type: z.enum(SLIDE_TYPES).describe("The exact canonical slide type (e.g., 'cover', 'problem', 'solution', 'cta')."),
+  type: z.enum(AI_SLIDE_TYPES as [typeof AI_SLIDE_TYPES[number], ...typeof AI_SLIDE_TYPES]).describe("The exact canonical slide type (e.g., 'cover', 'problem', 'solution', 'cta')."),
   headline: z.string().describe("The core message or headline for this slide (1-2 sentences)."),
   purpose: z.string().describe("The goal of this slide in the narrative."),
 });

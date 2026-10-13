@@ -50,7 +50,7 @@ Element = {
 )
 ```
 
-- Text sizes come from the four styles (theme fonts and a fixed scale), so text stays consistent across slides; the box width wraps it.
+- Text sizes come from the four styles (theme fonts and a fixed scale), so text stays consistent across slides; the box width wraps it. A text may carry a `size` override (px): "Convertir en libre" sets it to keep the original look, and choosing a style in the toolbar clears it.
 - Elements may extend past the safe margins but are clamped to the canvas.
 
 ## Rendering and editing — how it's built
@@ -64,6 +64,10 @@ Element = {
 - **Canvas engines (Konva, Fabric)**: draw to `<canvas>`, so text is not HTML — breaks inline editing, accessibility and the "same component everywhere" rule; PDF export would rasterise text. Rejected.
 - **Hand-built drag/resize**: no dependency, but rotation + snapping + multi-select is weeks of fiddly work that `react-moveable` already does well.
 - **Free hex colours**: deferred; easy to add later as an extra `color: { hex }` option if users ask.
+
+## Status
+
+Built 2026-10-13 (all five steps). See Task 68 in `tasks/todo.md` for files, tests and known limits.
 
 ## Plan (each step shippable, behind the normal tests)
 

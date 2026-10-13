@@ -23,7 +23,7 @@ import {
 import { SlideList } from "./SlideList";
 import { SlideCanvas } from "./SlideCanvas";
 import { SlideFields } from "./SlideFields";
-import { ITEM_MESSAGES, REGENERATE_MESSAGES, STATUS_LABELS } from "./messages";
+import { FREE_MESSAGES, ITEM_MESSAGES, REGENERATE_MESSAGES, STATUS_LABELS } from "./messages";
 import {
   buildSavePayload,
   validateEditorSlide,
@@ -36,6 +36,7 @@ import { setContentPath } from "@/lib/slides/content-path";
 import { toast } from "sonner";
 import type { ItemAction } from "@/components/slides/editable";
 import { applyListAction } from "./list-actions";
+import type { FreeElement } from "@/lib/slides/free";
 import { LayoutPicker } from "./LayoutPicker";
 import { IllustrationPicker } from "./IllustrationPicker";
 import { cn } from "@/lib/utils";
@@ -206,6 +207,29 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
     const slide = slidesRef.current.find((s) => s.id === activeIdRef.current);
     if (!slide) return;
     updateActive({ content: setContentPath(slide.content, path, assetId) });
+  }
+
+  function setFreeElements(elements: FreeElement[]) {
+    const slide = slidesRef.current.find((s) => s.id === activeIdRef.current);
+    if (!slide || slide.type !== "free") return;
+    updateActive({ content: { ...slide.content, elements } });
+  }
+
+  function convertToFree(elements: FreeElement[]) {
+    const slide = slidesRef.current.find((s) => s.id === activeIdRef.current);
+    if (!slide || slide.type === "free") return;
+    const previous = { type: slide.type, content: slide.content, layout: slide.layout };
+    const illustration = slide.content.illustration;
+    updateActive({ type: "free", content: { elements, ...(illustration ? { illustration } : {}) }, layout: undefined });
+    toast.success(FREE_MESSAGES.converted, {
+      action: {
+        label: FREE_MESSAGES.undo,
+        onClick: () => {
+          if (activeIdRef.current !== slide.id) selectSlide(slide.id);
+          updateActive(previous);
+        },
+      },
+    });
   }
 
   function itemAction(path: string, action: ItemAction, index: number) {
@@ -466,6 +490,8 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
           onEditText={editText}
           onItemAction={itemAction}
           onSetImage={setImage}
+          onFreeChange={setFreeElements}
+          onConvertToFree={convertToFree}
           focused={focused}
           onToggleFocus={() => setFocused((f) => !f)}
         />
@@ -490,7 +516,8 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
               slide={activeSlide}
               errors={errors}
               onChange={updateActive}
-              onRegenerate={(instructions) => void handleRegenerate(instructions)}
+              // Freeform slides are the user's layout: no AI regeneration (docs/freeform-slides.md).
+              onRegenerate={activeSlide.type === "free" ? undefined : (instructions) => void handleRegenerate(instructions)}
               isRegenerating={isRegenerating}
               regenerateError={regenerateError}
             />

@@ -388,3 +388,25 @@
   width: 26px;
   height: 26px;
 }
+
+/* Freeform editor (FreeEditor): a click selects the whole element; its inside (text, image)
+   only takes the pointer while a text is being typed in (double-click). Slide space units. */
+[data-free-editor] [data-free-id] {
+  cursor: move;
+}
+[data-free-editor] [data-free-id] > * {
+  pointer-events: none;
+}
+[data-free-editor] [data-free-id][data-free-editing] > *,
+[data-free-editor] [data-free-id][data-free-editing] [contenteditable] {
+  pointer-events: auto;
+  cursor: text;
+}
+[data-free-editor] [data-free-id]:hover {
+  outline: 3px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  outline-offset: 2px;
+}
+/* The text's own inline-editing outline would double the selection box. */
+[data-free-editor] [data-free-id] [data-edit-path] {
+  outline: 0;
+}

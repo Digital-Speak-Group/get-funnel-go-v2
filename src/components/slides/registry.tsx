@@ -34,6 +34,7 @@ import { ScreenshotsSlide } from "./types/screenshots";
 import { GaugeSlide } from "./types/gauge";
 import { MockupSlide } from "./types/mockup";
 import { BlanksSlide } from "./types/blanks";
+import { FreeSlide } from "./types/free";
 
 export type SlideComponentProps = {
   content: Record<string, unknown>;
@@ -88,6 +89,7 @@ registerSlideComponent("screenshots", ScreenshotsSlide as unknown as SlideCompon
 registerSlideComponent("gauge", GaugeSlide as unknown as SlideComponent);
 registerSlideComponent("mockup", MockupSlide as unknown as SlideComponent);
 registerSlideComponent("blanks", BlanksSlide as unknown as SlideComponent);
+registerSlideComponent("free", FreeSlide as unknown as SlideComponent);
 
 export function registerSlideComponent(type: SlideType, component: SlideComponent) {
   registry.set(type, component);

@@ -824,7 +824,8 @@ The editor today changes slides only through the form panel; the canvas is a rea
 ### Checkpoint J — Inline editing review
 - [ ] Human review of editing on the canvas across the 7 template decks
 
-### Task 68: Freeform "Libre" slides (Phase B — plan only)
+### Task 68: Freeform "Libre" slides (Phase B)
 **Description:** New slide type with absolutely positioned elements (text, shape, image) on the 1920×1080 canvas: drag, resize, rotate, layers, snapping, undo/redo; "Convertir en libre" turns any slide into a freeform one (AI regeneration and automatic layouts no longer apply to it; theme colours and fonts still do).
 **Ask first:** slide schema change (new type + element model) and the drag/resize library. Spec: `docs/freeform-slides.md` — approved 2026-10-12 (theme colours only, convert included).
+**Done 2026-10-13:** steps 1–5 of the spec. `free` type (`src/lib/slides/free.ts`, renderer `types/free.tsx`, never offered to the AI); editor `components/app/editor/free/` — `FreeEditor` (react-moveable 0.56.0: select, Shift-select, drag, resize, rotate with 45° snaps, snapping to canvas/safe margins/elements, double-click to type or pick an image, Delete, arrows, Ctrl+D, Ctrl+Z/Y), `FreeToolbar` (add text/rectangle/circle/line/image/icon, text style, align, bold, theme colours, icon picker, image fit, layers, align selection, duplicate, delete, undo/redo), `convert.ts` + "Convertir en libre" (texts, cards, images measured from the rendered slide; undo from the toast). Text gained an optional `size` (kept by conversion). Verify: `free-slide`, `free-ops`, `free-history`, `free-convert` unit tests; `e2e/free.spec.ts`. Known limits: icons, card borders and numbering are not carried over by conversion; history covers structural changes, not each keystroke.
 **Size:** XL
