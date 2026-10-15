@@ -10,6 +10,11 @@ export interface SlideEvent {
   /** Server timestamp (ms) for drift detection */
   ts: number;
   /**
+   * Build steps revealed on the current slide (Task 75): 0 = none yet. Absent from older
+   * presenters, which means everything is shown. Untrusted: audiences validate it.
+   */
+  step?: number;
+  /**
    * Values typed by the presenter into the current `blanks` slide (Task 60). Untrusted on
    * the receiving side: anyone holding the token can publish, so audiences validate it.
    */

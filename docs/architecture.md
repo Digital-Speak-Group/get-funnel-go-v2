@@ -63,7 +63,7 @@ Failure at any stage: refund reserved credits, record `ai_generations.status = '
 
 ```
 PresenterView (client)
-  → RealtimeProvider.publish(`deck:${deckId}`, { slideIndex, ts, blanks? })
+  → RealtimeProvider.publish(`deck:${deckId}`, { slideIndex, step?, ts, blanks? })
       ↳ Supabase Realtime broadcast channel (V1)
       ↳ WebSocket server (V2)
 
@@ -140,7 +140,7 @@ Plan limits are enforced **server-side** in `services/generation` and `services/
 
 - Slides render in a fixed 1920×1080 design space, scaled with CSS `transform` — one layout math for every screen.
 - Deck payloads are cached per request with `unstable_cache`-style helpers only in `src/app` (never in services).
-- Realtime messages carry `{ slideIndex, ts }` plus, on a `blanks` slide, `blanks: { slideId, values }` — the figures the presenter types during the call (Task 60). They are never saved; the presenter resends them with every event and after a 300 ms typing pause. Anyone holding the token can publish on the channel, so the audience validates `blanks` (`parseBlanksPayload`: ≤ 6 values, ≤ 40 chars each) and renders it as text only.
+- Realtime messages carry `{ slideIndex, step, ts }` — `step` is how many build steps of a freeform slide are revealed (Task 75; the audience validates it as an integer 0–100 and shows everything when it is absent). Broadcasts are not stored, so the presenter repeats its position every 3 s while the channel is live: an audience that opens the link late catches up within seconds. Plus, on a `blanks` slide, `blanks: { slideId, values }` — the figures the presenter types during the call (Task 60). They are never saved; the presenter resends them with every event and after a 300 ms typing pause. Anyone holding the token can publish on the channel, so the audience validates `blanks` (`parseBlanksPayload`: ≤ 6 values, ≤ 40 chars each) and renders it as text only.
 - Indexes required for hot paths are listed in `docs/data-model.md`.
 - Images: plain `<img>` inside slides (fixed 1920×1080 design space, CSS-scaled, also in the PDF and PowerPoint exports, both captured by `src/server/services/slide-capture.ts`), URL from `useAssetUrl()` — the app route by default, the token route under `AudienceAssetUrlProvider`. Uploads ≤ 4 MB (serverless body limit), pre-resized to ≤ 2000 px.
 

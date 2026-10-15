@@ -69,6 +69,16 @@ Element = {
 
 Built 2026-10-13 (all five steps). See Task 68 in `tasks/todo.md` for files, tests and known limits.
 
+## Phase 9 additions (Tasks 69–79, 2026-10-13)
+
+All optional fields, no migration; old slides render as before.
+
+- **Every element**: `locked?: boolean` (selectable and stylable, not movable or deletable), `groupId?: uuid` (selected and moved together; groups are re-created under new ids when copied), `reveal?: { step: 1–20, effect: "fade" | "rise" | "zoom" }` (build-up while presenting: hidden until the presenter's "next" reaches its step; same step = together), `shadow?: "soft" | "strong"` (CSS drop-shadow following the element's outline).
+- **Text**: `rich?: RichText` — paragraphs (optionally `bullet`/`ordered` list items) of runs with `bold`, `italic`, `underline`, `link` (http(s)/mailto only), `src/lib/slides/rich-text.ts`. Stored as validated JSON and rendered by React (`RichTextView`), never as HTML; `text` stays the plain mirror. Edited with **TipTap** (`@tiptap/react` 3.31.3), provided by the editor through `SlideEditProvider.richText` so audiences never load it. `lineHeight?` (0.8–3) and `letterSpacing?` (−0.1–0.5 em).
+- **Shape**: `shape` adds `triangle | diamond | arrow | star | bubble` (SVG outlines stretched to the box, non-scaling stroke), `strokeWidth?` (1–40 px), `dash?: solid | dashed | dotted`.
+- **New kinds**: `table` (`rows: string[][]` ≤ 12×8, `header?`, `variant?: lines | striped | grid`, `accent?`, `size?`; cells are EditableTexts typed on the canvas), `chart` (`chart: bar | hbar | line | pie | donut`, `data: { label, value }[]` ≤ 12, `color?`, `showValues?`, `unit?`; SVG in the element's own pixel space, so PDF/PPTX keep it), `video` (`provider: youtube | vimeo`, `videoId` — never a URL; the player address is built from them, youtube-nocookie / Vimeo dnt; a still frame in the editor, thumbnails and the slide rail).
+- **Editor**: one undo history for the whole editor (`history.ts`, typing bursts merge), box selection, distribute, group (Ctrl+G), copy/cut/paste across slides (in-memory clipboard), opacity, lock, right-click menu (`FreeContextMenu`), zoom (Ctrl+wheel), reveal badges.
+
 ## Plan (each step shippable, behind the normal tests)
 
 1. Schema + renderer for `free` (read-only rendering, PDF/PPTX check) — S

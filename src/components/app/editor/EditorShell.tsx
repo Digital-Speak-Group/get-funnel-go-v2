@@ -12,11 +12,13 @@ import { SlideCanvas } from "./SlideCanvas";
 import { SlideFields } from "./SlideFields";
 import { LayoutPicker } from "./LayoutPicker";
 import { IllustrationPicker } from "./IllustrationPicker";
+import { SlideStylePanel } from "./SlideStylePanel";
 import { EditorTopBar } from "./EditorTopBar";
 import { EditorInspector } from "./EditorInspector";
 import { TOPBAR_MESSAGES } from "./messages";
 import { useEditorState } from "./useEditorState";
 import { useCanvasActions } from "./useCanvasActions";
+import { useEditorKeyboard } from "./useEditorKeyboard";
 
 interface EditorShellProps {
   deck: DeckWithRelations;
@@ -31,6 +33,7 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
   const [themeId, setThemeId] = React.useState<string>(deck.themeId);
   const [focused, setFocused] = React.useState(false);
   const { slides, activeId, activeSlide, previewSlide, errors, updateActive } = editor;
+  useEditorKeyboard(editor);
 
   async function selectTheme(slug: string) {
     const row = themes.find((t) => t.tokens.id === slug);
@@ -61,6 +64,7 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
         themeSlug={themeSlug}
         themeName={theme.name}
         onTheme={(slug) => void selectTheme(slug)}
+        history={editor}
       />
 
       <div
@@ -75,14 +79,18 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
           activeId={activeId}
           onSelect={editor.selectSlide}
           onMove={(index, direction) => void editor.moveSlide(index, direction)}
+          onMoveTo={(from, to) => void editor.moveSlideTo(from, to)}
           onAdd={(type) => void editor.addSlide(type)}
           onDuplicate={(id) => void editor.duplicateSlide(id)}
           onDelete={(id) => void editor.deleteSlide(id)}
         />
         <SlideCanvas
+          deckId={deck.id}
           slide={previewSlide}
+          onUndo={editor.undo}
           theme={theme}
           onEditText={actions.editText}
+          onEditRich={actions.editRich}
           onItemAction={actions.itemAction}
           onSetImage={actions.setImage}
           onFreeChange={actions.setFreeElements}
@@ -94,6 +102,7 @@ export function EditorShell({ deck, initialSlides, themes }: EditorShellProps) {
           {activeSlide ? (
             <>
               <LayoutPicker slide={previewSlide ?? activeSlide} theme={theme} onChange={(layout) => updateActive({ layout })} />
+              <SlideStylePanel content={activeSlide.content} theme={theme} onChange={(content) => updateActive({ content })} />
               <IllustrationPicker
                 value={typeof activeSlide.content.illustration === "string" ? activeSlide.content.illustration : undefined}
                 theme={theme}

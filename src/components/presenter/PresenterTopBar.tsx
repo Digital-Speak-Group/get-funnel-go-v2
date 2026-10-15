@@ -19,6 +19,8 @@ interface PresenterTopBarProps {
   total: number;
   onPrevious: () => void;
   onNext: () => void;
+  /** Build steps of the current slide (Task 75), when it has any. */
+  steps: { current: number; total: number } | null;
   link: ChannelStatus;
   timer: { totalSeconds: number; running: boolean; toggle: () => void; reset: () => void };
   isFullscreen: boolean;
@@ -33,6 +35,7 @@ export function PresenterTopBar({
   total,
   onPrevious,
   onNext,
+  steps,
   link,
   timer,
   isFullscreen,
@@ -41,15 +44,31 @@ export function PresenterTopBar({
   return (
     <div className="flex h-12 shrink-0 items-center gap-3 border-b border-border bg-surface px-3">
       <div className="flex items-center gap-1">
-        <Button type="button" variant="ghost" size="icon-sm" onClick={onPrevious} disabled={index === 0} aria-label={m.nav.previous}>
+        <Button type="button" variant="ghost" size="icon-sm" onClick={onPrevious} disabled={index === 0 && !steps?.current} aria-label={m.nav.previous}>
           <ChevronLeft aria-hidden="true" />
         </Button>
         <span className="min-w-14 text-center font-mono text-sm tabular-nums text-muted-foreground">
           {index + 1} / {total}
         </span>
-        <Button type="button" variant="ghost" size="icon-sm" onClick={onNext} disabled={index === total - 1} aria-label={m.nav.next}>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-sm"
+          onClick={onNext}
+          disabled={index === total - 1 && (!steps || steps.current >= steps.total)}
+          aria-label={m.nav.next}
+        >
           <ChevronRight aria-hidden="true" />
         </Button>
+        {steps && (
+          <span
+            className="ml-1 rounded-md bg-surface-2 px-1.5 py-0.5 font-mono text-xs tabular-nums text-muted-foreground"
+            aria-label={m.stepsLabel}
+            data-testid="presenter-steps"
+          >
+            {m.steps(steps.current, steps.total)}
+          </span>
+        )}
       </div>
 
       <h1 className="min-w-0 flex-1 truncate text-center text-small text-muted-foreground">{title}</h1>

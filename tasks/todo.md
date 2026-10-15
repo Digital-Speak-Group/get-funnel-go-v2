@@ -835,3 +835,65 @@ The editor today changes slides only through the form panel; the canvas is a rea
 **Ask first:** slide schema change (new type + element model) and the drag/resize library. Spec: `docs/freeform-slides.md` — approved 2026-10-12 (theme colours only, convert included).
 **Done 2026-10-13:** steps 1–5 of the spec. `free` type (`src/lib/slides/free.ts`, renderer `types/free.tsx`, never offered to the AI); editor `components/app/editor/free/` — `FreeEditor` (react-moveable 0.56.0: select, Shift-select, drag, resize, rotate with 45° snaps, snapping to canvas/safe margins/elements, double-click to type or pick an image, Delete, arrows, Ctrl+D, Ctrl+Z/Y), `FreeToolbar` (add text/rectangle/circle/line/image/icon, text style, align, bold, theme colours, icon picker, image fit, layers, align selection, duplicate, delete, undo/redo), `convert.ts` + "Convertir en libre" (texts, cards, images measured from the rendered slide; undo from the toast). Text gained an optional `size` (kept by conversion). Verify: `free-slide`, `free-ops`, `free-history`, `free-convert` unit tests; `e2e/free.spec.ts`. Known limits: icons, card borders and numbering are not carried over by conversion; history covers structural changes, not each keystroke.
 **Size:** XL
+
+## Phase 9 — Editor power tools (decided 2026-10-13: user approved all proposals 1–17, new libraries allowed, slide-data additions approved; no DB migration — new fields live in slide content JSON and are optional)
+
+### Task 69: Undo/redo for every slide
+**Description:** One editor-wide history (content, layout, type, notes, script) replaces the freeform-only one. Typing in the same field within a second is one step. Ctrl+Z / Ctrl+Shift+Z / Ctrl+Y anywhere outside a text being typed; undo/redo buttons in the top bar. Slide add/delete/reorder stay outside the history (server actions).
+**Acceptance:** [x] undo/redo on structured and freeform slides, across slides (reselects the slide) · [x] unit tests for the history · [x] e2e edit → undo → redo → reload
+**Done 2026-10-13:** `editor/history.ts` (EditorHistory, `changeGroup`), `useEditorState` (`updateActive(patch, { group })`, `undo/redo/canUndo/canRedo`), `useEditorKeyboard.ts`, top-bar buttons (`editor-undo`/`editor-redo`); the freeform-only history is gone. Typing inside a field keeps the browser's (or TipTap's) own undo. Verify: `editor-history.test.ts`, e2e "undoes and redoes edits across slides".
+**Size:** M
+
+### Task 70: Freeform power tools
+**Description:** Drag a box on empty canvas to select; distribute horizontally/vertically; group/ungroup (`groupId`); copy/cut/paste (also onto another freeform slide); opacity slider; lock (`locked`: selectable, not movable/deletable); right-click menu on elements.
+**Acceptance:** [x] each tool works by mouse and keyboard shortcut where one exists · [x] free-ops unit tests · [x] e2e marquee → group → copy → paste on another slide
+**Done 2026-10-13:** `free/selection-ops.ts`, `clipboard.ts`, `useFreeActions.ts` (one action set for toolbar, right-click menu and shortcuts), `useMarquee.ts`, `FreeContextMenu.tsx` (new `ui/context-menu`, `@radix-ui/react-context-menu` 2.3.7), opacity slider (`ui/slider`, `@radix-ui/react-slider` 1.4.7). Shortcuts: Ctrl+A/C/X/V/D/G, Ctrl+Shift+G, Delete, arrows (held arrows = one undo step). Verify: `free-ops.test.ts`, e2e "box-select, group, copy…".
+**Size:** L
+
+### Task 71: Canvas zoom
+**Description:** Fit / 50–200 % zoom on the editor stage (buttons + Ctrl+wheel), the stage scrolls; editing and handles keep working when zoomed.
+**Done 2026-10-13:** `ZoomControl.tsx` (0.5×–4× of fit, shown as the slide's real size, click = fit). Verify: e2e "reorders slides by dragging… and zooms the canvas".
+**Size:** S
+
+### Task 72: Drag-and-drop slide reorder
+**Description:** Drag thumbnails in the slide rail (`@dnd-kit`), keyboard-accessible; ↑/↓ buttons stay. Right-click menu on thumbnails (duplicate, move, delete).
+**Done 2026-10-13:** `SlideListItem.tsx` (`@dnd-kit/core` 6.3.1, `sortable` 10.0.0, `utilities` 3.2.2), `moveSlideTo`. The keyboard path is the ↑/↓ buttons and the right-click menu (no dnd-kit keyboard sensor: a focusable row would nest buttons).
+**Size:** S
+
+### Task 73: Slide background
+**Description:** Optional `background` in every slide's content: theme colour, two-colour gradient, or image with an overlay (theme roles only, like freeform). Inspector section + renderer; kept by exports and the audience asset route.
+**Done 2026-10-13:** `lib/slides/slide-style.ts`, `SlideStyleBackground.tsx` (an image background hides the theme decor), `SlideStylePanel.tsx` ("Fond et transition"). AI drafts omit it; regeneration and "Convertir en libre" keep it (`SLIDE_STYLE_KEYS`). Verify: e2e "sets a slide background…".
+**Size:** M
+
+### Task 74: Slide transitions
+**Description:** Optional `transition` per slide (none, fade, slide, zoom) used by the audience view; default stays the current fade. (The presenter view stays animation-free, per the design system.)
+**Done 2026-10-13:** `presenter/transitions.ts` (variants by the arriving slide's transition and the direction; opacity only under reduced motion).
+**Size:** S
+
+### Task 75: Reveal animations
+**Description:** Freeform elements get an optional `reveal` (order + effect: fade, rise, zoom). The presenter's "next" first reveals the next step, then moves to the next slide; the step is broadcast to the audience. Thumbnails, exports and the editor show the final state; the editor shows step badges.
+**Done 2026-10-13:** `lib/slides/reveal.ts`, `slides/reveal-context.tsx`, `presenter/navigation.ts` (`navigate`), `RevealControl.tsx`; the realtime event gained `step`. Found and fixed on the way: an audience opening the link after the presenter's last change never got the position (broadcasts are not stored) — the presenter now repeats it every 3 s. Verify: `presenter-navigation.test.ts`, e2e "an element with a build step appears…".
+**Size:** L
+
+### Task 76: Rich text in freeform texts
+**Description:** Bold, italic, underline, links on parts of a text and bullet/numbered lists (TipTap while typing; stored as a small validated JSON document, rendered by React — never stored HTML). Font size, line height and letter spacing controls.
+**Done 2026-10-13:** `lib/slides/rich-text.ts`, `slides/RichTextView.tsx`, `free/RichTextField.tsx` + `rich-convert.ts` + `rich-editors.ts` (`@tiptap/react`, `pm`, `core`, `starter-kit` 3.31.3), `RichMarks.tsx`, `TextSpacing.tsx`. Marks apply to the selected words while typing, to the whole text otherwise. Structured slides keep plain text (their typography is the layout's). Verify: `rich-text.test.tsx`, e2e "formats a freeform text…".
+**Size:** L
+
+### Task 77: More shapes and shape styles
+**Description:** Triangle, diamond, arrow, star, speech bubble (SVG); border width and dashes; shadow.
+**Done 2026-10-13:** `slides/shape-paths.ts`, `free/ShapeControls.tsx` (border on/off, colour, width, dash, rectangle corner rounding; shadow none/soft/strong on any element). Verify: `free-slide.test.tsx`.
+**Size:** M
+
+### Task 78: Tables, charts, video
+**Description:** Freeform element kinds `table` (cells editable on the canvas), `chart` (bar, line, pie, donut from typed numbers; theme colours; SVG so exports keep it), `video` (YouTube/Vimeo URL; still thumbnail in the editor and exports, player in the audience view).
+**Done 2026-10-13:** `types/free-table.tsx`, `free-chart.tsx` (bar, horizontal bar, line, pie, donut), `free-video.tsx`, `lib/slides/video.ts` (stores provider + id, never a URL), `free/DataControls.tsx`, `table-ops.ts`; exports flag their page (`export-mode.ts`) so videos show a still frame. Verify: `free-data.test.tsx`, e2e "adds a table, a chart, a video and a star…".
+**Size:** L
+
+### Task 79: AI rewrite
+**Description:** "Réécrire" on the text being edited (structured or freeform): shorter, more persuasive, more formal, fix spelling, custom instruction — goes through the AI provider and the credit ledger like regeneration. Quick instruction chips on "Régénérer ce slide".
+**Done 2026-10-13:** `POST /api/ai/rewrite`, `server/services/rewrite.ts`, `server/ai/prompts/rewriteText.ts`, `RewriteMenu.tsx` + `rewrite-target.ts` (limit of the field the text goes back to), chips in `RegeneratePanel`. Verify: `rewrite-credits.test.ts`, e2e "sets a slide background and rewrites a text with AI" (AI mocked). A freeform text loses its formatting when rewritten (the toast says so).
+**Size:** M
+
+### Checkpoint K — Editor power tools review
+- [ ] Human review of Tasks 69–79

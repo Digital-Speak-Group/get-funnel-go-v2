@@ -291,6 +291,10 @@ Each stage has one prompt file with a fixed structure: role, task, constraints, 
 - Constraints enforced in prompts *and* schema: slide count, max characters per field, no invented statistics — proof slides may only use facts present in the script, otherwise emit `{ needsInput: true }` markers that surface in the editor.
 - Templates constrain narrative order; AI may adapt labels but not reorder core stages.
 
+## Rewrite (Task 79)
+
+`POST /api/ai/rewrite` — `{ deckId, text, action, instructions?, maxLength }` → `{ text }`. Actions: `shorter`, `persuasive`, `formal`, `simpler`, `fix`, `custom` (with an instruction ≤ 300 chars). Prompt: `src/server/ai/prompts/rewriteText.ts` (the text and the instruction are delimited data; keep the language, no invented facts, keep `[placeholders]`). Service: `src/server/services/rewrite.ts` — reserves 1 credit cent, settles to the real cost, refunds in full on failure, logs to `ai_generations` as `kind: "slide"` (no enum change). The output is schema-checked against the field's own length limit. Rate limit: 20/min per user. A freeform text goes back as plain paragraphs (its formatting is not kept; the editor says so).
+
 ## Credits & Cost Control
 
 | Rule | Value |

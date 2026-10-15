@@ -17,8 +17,14 @@ export interface ListBounds {
   max: number;
 }
 
-/** The array schema at `path` in a slide type's content (numeric segments step into items). */
 function arraySchemaAt(type: SlideType, path: string): z.ZodArray | null {
+  const node = schemaAt(type, path);
+  const core = node && unwrapSchema(node);
+  return core instanceof z.ZodArray ? core : null;
+}
+
+/** The schema at `path` in a slide type's content (numeric segments step into items). */
+export function schemaAt(type: SlideType, path: string): z.ZodType | null {
   let node: z.ZodType | undefined = slideContentSchemas[type] as unknown as z.ZodType;
   for (const segment of path.split(".")) {
     const core: z.ZodType = unwrapSchema(node!);
@@ -31,8 +37,7 @@ function arraySchemaAt(type: SlideType, path: string): z.ZodArray | null {
       if (!node) return null;
     }
   }
-  const core = unwrapSchema(node!);
-  return core instanceof z.ZodArray ? core : null;
+  return node ?? null;
 }
 
 const boundsCache = new Map<string, ListBounds>();

@@ -14,10 +14,21 @@ import {
 import { buildSavePayload, validateEditorSlide, type EditorSlide } from "./validation";
 import type { FieldErrors } from "./field-schema";
 import { toEditorCue } from "./cue";
+import { EditorHistory, changeGroup, snapshotOf, type SlideSnapshot } from "./history";
 
 const AUTOSAVE_DELAY_MS = 800;
 
 export type SaveStatus = "idle" | "pending" | "saving" | "saved" | "invalid" | "error";
+
+/**
+ * How an edit enters the undo history: `group` merges quick changes of the same group into one
+ * step (default: the fields it touches); `false` makes it a step of its own; `record: false`
+ * keeps it out (undo/redo themselves).
+ */
+export interface UpdateOptions {
+  group?: string | false;
+  record?: boolean;
+}
 
 export function toEditorSlide(slide: SlideWithDeck): EditorSlide {
   const validType = (SLIDE_TYPES as readonly string[]).includes(slide.type);
@@ -36,7 +47,7 @@ export function toEditorSlide(slide: SlideWithDeck): EditorSlide {
 /**
  * The editor's slides: selection, validation, debounced autosave of edited slides, and the
  * slide-list actions (add, move, duplicate, delete). Edits go through `updateActive`, which
- * validates first and only queues a save when the slide is valid.
+ * records an undo step, validates, and only queues a save when the slide is valid.
  */
 export function useEditorState(deckId: string, initialSlides: SlideWithDeck[]) {
   const [slides, setSlides] = React.useState<EditorSlide[]>(() => initialSlides.map(toEditorSlide));
@@ -120,9 +131,20 @@ export function useEditorState(deckId: string, initialSlides: SlideWithDeck[]) {
     return slidesRef.current.find((s) => s.id === activeIdRef.current);
   }
 
-  function updateActive(patch: Partial<EditorSlide>) {
+  const historyRef = React.useRef(new EditorHistory());
+  const [history, setHistory] = React.useState({ canUndo: false, canRedo: false });
+  const syncHistory = () => setHistory({ canUndo: historyRef.current.canUndo, canRedo: historyRef.current.canRedo });
+
+  function updateActive(patch: Partial<EditorSlide>, options: UpdateOptions = {}) {
     const id = activeIdRef.current;
     if (!id) return;
+
+    const before = slidesRef.current.find((s) => s.id === id);
+    if (before && options.record !== false) {
+      const group = options.group === false ? undefined : (options.group ?? changeGroup(before, patch));
+      historyRef.current.record(id, snapshotOf(before), group);
+      syncHistory();
+    }
 
     const next = slidesRef.current.map((s) => (s.id === id ? { ...s, ...patch } : s));
     commitSlides(next);
@@ -147,6 +169,20 @@ export function useEditorState(deckId: string, initialSlides: SlideWithDeck[]) {
     scheduleFlush();
   }
 
+  const readSnapshot = (slideId: string): SlideSnapshot | undefined => {
+    const slide = slidesRef.current.find((s) => s.id === slideId);
+    return slide && snapshotOf(slide);
+  };
+
+  /** Undo or redo one step, on whichever slide it belongs to (selected first). */
+  function travel(direction: "undo" | "redo") {
+    const step = historyRef.current[direction](readSnapshot);
+    syncHistory();
+    if (!step) return;
+    if (activeIdRef.current !== step.slideId) selectSlide(step.slideId);
+    updateActive(step.snapshot, { record: false });
+  }
+
   async function addSlide(type: SlideType) {
     const res = await addSlideAction({ deckId, type });
     if ("error" in res) return setStatus("error");
@@ -156,14 +192,14 @@ export function useEditorState(deckId: string, initialSlides: SlideWithDeck[]) {
     selectSlide(slide.id);
   }
 
-  async function moveSlide(index: number, direction: -1 | 1) {
+  /** Moves the slide at `from` to `to` (drag and drop, Task 72; ↑/↓ buttons move by one). */
+  async function moveSlideTo(from: number, to: number) {
     const current = slidesRef.current;
-    const target = index + direction;
-    if (target < 0 || target >= current.length) return;
+    if (from === to || to < 0 || to >= current.length || from < 0 || from >= current.length) return;
 
     const next = [...current];
-    const [moved] = next.splice(index, 1);
-    next.splice(target, 0, moved);
+    const [moved] = next.splice(from, 1);
+    next.splice(to, 0, moved);
     const reordered = next.map((s, i) => ({ ...s, position: i }));
     commitSlides(reordered);
 
@@ -233,8 +269,13 @@ export function useEditorState(deckId: string, initialSlides: SlideWithDeck[]) {
     currentSlide,
     selectSlide,
     updateActive,
+    undo: () => travel("undo"),
+    redo: () => travel("redo"),
+    canUndo: history.canUndo,
+    canRedo: history.canRedo,
     addSlide,
-    moveSlide,
+    moveSlide: (index: number, direction: -1 | 1) => moveSlideTo(index, index + direction),
+    moveSlideTo,
     duplicateSlide,
     deleteSlide,
   };

@@ -28,6 +28,8 @@ export const PRESENTER_MESSAGES = {
   next: "Suivante",
   goNext: "Aller à la slide suivante",
   nav: { previous: "Slide précédente (←)", next: "Slide suivante (→)" },
+  steps: (step: number, total: number) => `Animation ${step}/${total}`,
+  stepsLabel: "Éléments révélés sur ce slide",
   timer: { start: "Démarrer (P)", pause: "Pause (P)", reset: "Réinitialiser le timer", label: "Temps écoulé" },
   fullscreen: "Plein écran (F)",
   link: {

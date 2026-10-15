@@ -12,6 +12,9 @@ import { PresenterPanel } from "./PresenterPanel";
 import { usePresenterClock } from "./usePresenterClock";
 import { usePresenterKeys } from "./usePresenterKeys";
 import { PRESENTER_MESSAGES as m } from "./messages";
+import { RevealProvider } from "@/components/slides/reveal-context";
+import { revealSteps, revealedUpTo } from "@/lib/slides/reveal";
+import { navigate, type PresenterMove, type PresenterPosition } from "./navigation";
 
 interface PresenterShellProps {
   deck: { id: string; title: string; presentToken: string };
@@ -24,14 +27,21 @@ interface PresenterShellProps {
  * state, Script / Notes / Métriques. Animation-free by design (docs/design-system.md → Motion).
  */
 export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
-  const [index, setIndex] = React.useState(0);
-  const goTo = React.useCallback((i: number) => setIndex(Math.max(0, Math.min(slides.length - 1, i))), [slides.length]);
+  // Slide and build step (Task 75): "next" reveals a slide's steps before moving on.
+  const [position, setPosition] = React.useState<PresenterPosition>({ index: 0, step: 0 });
+  const { index, step } = position;
+  const stepsOf = React.useCallback((i: number) => (slides[i] ? revealSteps(slides[i]) : []), [slides]);
+  const move = React.useCallback(
+    (to: PresenterMove) => setPosition((p) => navigate(p, to, slides.length, (i) => stepsOf(i).length)),
+    [slides.length, stepsOf]
+  );
+  const goTo = React.useCallback((i: number) => move({ goTo: i }), [move]);
   const clock = usePresenterClock(slides.length, index);
   const { isFullscreen, toggleFullscreen } = usePresenterKeys({
-    next: () => setIndex((i) => Math.min(slides.length - 1, i + 1)),
-    previous: () => setIndex((i) => Math.max(0, i - 1)),
-    first: () => setIndex(0),
-    last: () => setIndex(slides.length - 1),
+    next: () => move("next"),
+    previous: () => move("previous"),
+    first: () => move("first"),
+    last: () => move("last"),
     toggleTimer: clock.toggle,
   });
 
@@ -40,7 +50,8 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
   const current = slides[index];
   const next = slides[index + 1] ?? null;
   const currentBlanks = current?.type === "blanks" ? { slideId: current.id, values: blankValues[current.id] ?? [] } : undefined;
-  const link = usePresenterSync(deck.presentToken, index, true, currentBlanks);
+  const link = usePresenterSync(deck.presentToken, index, true, currentBlanks, step);
+  const steps = stepsOf(index);
 
   if (!current) return null;
 
@@ -52,8 +63,9 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
           presentToken={deck.presentToken}
           index={index}
           total={slides.length}
-          onPrevious={() => goTo(index - 1)}
-          onNext={() => goTo(index + 1)}
+          onPrevious={() => move("previous")}
+          onNext={() => move("next")}
+          steps={steps.length > 0 ? { current: step, total: steps.length } : null}
           link={link}
           timer={clock}
           isFullscreen={isFullscreen}
@@ -66,7 +78,10 @@ export function PresenterShell({ deck, slides, theme }: PresenterShellProps) {
         <div className="min-h-0 flex-1 p-4">
           {/* Not `isActive`: the presenter view stays animation-free. */}
           <LiveBlanksProvider values={blankValues}>
-            <AutoScaledSlideRenderer slide={current} theme={theme} className="rounded-lg border border-border" />
+            {/* Not-yet-revealed elements show ghosted: the presenter sees what comes next. */}
+            <RevealProvider value={{ upTo: revealedUpTo(steps, step), mode: "presenter" }}>
+              <AutoScaledSlideRenderer slide={current} theme={theme} className="rounded-lg border border-border" />
+            </RevealProvider>
           </LiveBlanksProvider>
         </div>
 

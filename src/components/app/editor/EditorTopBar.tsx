@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import Link from "next/link";
-import { ChevronLeft, Play } from "lucide-react";
+import { ChevronLeft, Play, Redo2, Undo2 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { StatusPill } from "@/components/app/patterns/StatusPill";
 import { CopyAudienceLinkButton } from "@/components/presenter/CopyAudienceLinkButton";
@@ -29,10 +29,11 @@ interface EditorTopBarProps {
   themeSlug: string;
   themeName: string;
   onTheme: (slug: string) => void;
+  history: { canUndo: boolean; canRedo: boolean; undo: () => void; redo: () => void };
 }
 
-/** Back, deck title (renamable), save state, then theme · audience link · export · Présenter. */
-export function EditorTopBar({ deck, slideCount, status, themeSlug, themeName, onTheme }: EditorTopBarProps) {
+/** Back, deck title (renamable), save state, undo/redo, then theme · audience link · export · Présenter. */
+export function EditorTopBar({ deck, slideCount, status, themeSlug, themeName, onTheme, history }: EditorTopBarProps) {
   return (
     <header className="flex flex-wrap items-center gap-x-3 gap-y-2">
       <Button asChild variant="ghost" size="icon-sm">
@@ -49,6 +50,14 @@ export function EditorTopBar({ deck, slideCount, status, themeSlug, themeName, o
         </StatusPill>
       </div>
       <div className="flex flex-wrap items-center gap-2">
+        <div className="flex items-center">
+          <Button type="button" variant="ghost" size="icon-sm" aria-label={m.undo} title={`${m.undo} (Ctrl+Z)`} disabled={!history.canUndo} onClick={history.undo} data-testid="editor-undo">
+            <Undo2 aria-hidden="true" />
+          </Button>
+          <Button type="button" variant="ghost" size="icon-sm" aria-label={m.redo} title={`${m.redo} (Ctrl+Shift+Z)`} disabled={!history.canRedo} onClick={history.redo} data-testid="editor-redo">
+            <Redo2 aria-hidden="true" />
+          </Button>
+        </div>
         <ThemeDialog selectedThemeId={themeSlug} themeName={themeName} onSelect={onTheme} />
         <CopyAudienceLinkButton presentToken={deck.presentToken} className={buttonVariants({ variant: "secondary", size: "sm" })} />
         <ExportMenu deckId={deck.id} deckTitle={deck.title} />

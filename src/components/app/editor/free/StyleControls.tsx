@@ -19,17 +19,20 @@ export function TextControls({
   text,
   patch,
   theme,
+  wholeBold,
 }: {
   text: FreeText;
   patch: (fn: (e: FreeElement) => FreeElement) => void;
   theme: ThemeTokens;
+  /** Element-wide bold: for several texts at once (one text uses RichMarks), or to undo it. */
+  wholeBold: boolean;
 }) {
   const setText = (fn: (t: FreeText) => FreeText) => patch((e) => (e.kind === "text" ? fn(e) : e));
   const align = text.align ?? "left";
   return (
     <>
       <Select value={text.style} onValueChange={(style) => setText((t) => ({ ...t, style: style as FreeText["style"], size: undefined }))}>
-        <SelectTrigger className="h-8 w-32" aria-label={m.textStyle} data-testid="free-text-style">
+        <SelectTrigger className="h-8 w-28" aria-label={m.textStyle} data-testid="free-text-style">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -57,22 +60,25 @@ export function TextControls({
           </Button>
         );
       })}
-      <Button
-        type="button"
-        size="icon-sm"
-        variant="ghost"
-        aria-label={m.bold}
-        aria-pressed={text.weight === "bold"}
-        className={cn(text.weight === "bold" && "bg-surface-3 text-foreground")}
-        onClick={() => setText((t) => ({ ...t, weight: t.weight === "bold" ? undefined : "bold" }))}
-      >
-        <Bold aria-hidden="true" />
-      </Button>
+      {wholeBold && (
+        <Button
+          type="button"
+          size="icon-sm"
+          variant="ghost"
+          aria-label={m.bold}
+          aria-pressed={text.weight === "bold"}
+          className={cn(text.weight === "bold" && "bg-surface-3 text-foreground")}
+          onClick={() => setText((t) => ({ ...t, weight: t.weight === "bold" ? undefined : "bold" }))}
+        >
+          <Bold aria-hidden="true" />
+        </Button>
+      )}
       <ColorPicker
         label={m.color}
         value={text.color ?? (text.style === "caption" ? "muted" : "text")}
         theme={theme}
         onChange={(color) => setText((t) => ({ ...t, color }))}
+        compact
       />
     </>
   );
@@ -85,19 +91,29 @@ export function ColorPicker({
   value,
   theme,
   onChange,
+  compact = false,
 }: {
   label: string;
   value: ThemeRole;
   theme: ThemeTokens;
   onChange: (role: ThemeRole) => void;
+  /** Swatch only (the toolbar); the label stays as the accessible name and tooltip. */
+  compact?: boolean;
 }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button type="button" size="sm" variant="ghost" aria-label={`${label} : ${m.roles[value]}`} data-testid="free-color">
+        <Button
+          type="button"
+          size={compact ? "icon-sm" : "sm"}
+          variant="ghost"
+          aria-label={`${label} : ${m.roles[value]}`}
+          title={compact ? label : undefined}
+          data-testid="free-color"
+        >
           {/* Swatch of the deck theme's own colour: the dynamic value is the point here. */}
           <span className="size-4 rounded-full border border-border-strong" style={{ background: roleColor(theme, value) }} aria-hidden="true" />
-          {label}
+          {!compact && label}
         </Button>
       </PopoverTrigger>
       <PopoverContent align="start" className="w-auto p-2">

@@ -7,6 +7,7 @@ import { getSlideComponent, UnknownSlide } from "./registry";
 import { getLayoutComponent } from "./layouts";
 import { StaticSlideProvider, useLiveBlanks, useStaticSlide } from "./render-context";
 import { SlideIllustration } from "./illustrations/Illustration";
+import { SlideStyleBackground, parseSlideBackground } from "./SlideStyleBackground";
 import { useSlideEditing } from "./editable";
 import { tokensToCssVars, getBackgroundStyles } from "@/lib/slides/theme";
 import { type Slide } from "@/lib/slides/schema";
@@ -28,6 +29,7 @@ export function SlideRenderer({ slide, theme, isActive = false, className }: Sli
   const isStatic = useStaticSlide();
   // Editable fields cannot live inside role="img" (its children are presentational).
   const editing = useSlideEditing();
+  const background = parseSlideBackground((slide.content as { background?: unknown }).background);
 
   const style: React.CSSProperties = {
     ...cssVars,
@@ -52,7 +54,9 @@ export function SlideRenderer({ slide, theme, isActive = false, className }: Sli
       aria-label={`Slide ${slide.type}: ${(slide.content as Record<string, unknown>).headline || (slide.content as Record<string, unknown>).title || "Sans titre"}`}
     >
       <SlideBackground background={theme.background}>
-        <SlideDecor theme={theme} animate={isActive} />
+        {background && <SlideStyleBackground background={background} />}
+        {/* A photo background replaces the theme's decorative shapes. */}
+        {background?.kind !== "image" && <SlideDecor theme={theme} animate={isActive} />}
         <SlideIllustration
           name={(slide.content as { illustration?: unknown }).illustration}
           theme={cssVars}

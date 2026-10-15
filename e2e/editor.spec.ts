@@ -66,6 +66,72 @@ test.describe("editor", () => {
     }).toPass({ timeout: 15000 });
   });
 
+  test("reorders slides by dragging their thumbnails, and zooms the canvas", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    const deckTitle = `Deck glisser ${Date.now()}`;
+    await createDeckViaDashboard(page, deckTitle);
+    await openDeckEditor(page, deckTitle);
+    for (const type of ["cover", "problem", "statement"]) {
+      await page.getByTestId("add-slide-type").selectOption(type);
+      await page.getByTestId("add-slide-submit").click();
+    }
+    const items = page.getByTestId("slide-item");
+    await expect(items).toHaveCount(3);
+
+    // Drag the third thumbnail above the first.
+    const from = (await items.nth(2).boundingBox())!;
+    const to = (await items.nth(0).boundingBox())!;
+    await page.mouse.move(from.x + from.width / 2, from.y + from.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(to.x + to.width / 2, to.y + 10, { steps: 12 });
+    await page.mouse.up();
+    await expect(items.first()).toHaveAttribute("data-slide-type", "statement");
+    await expect(page.getByTestId("editor-status")).toHaveText("Enregistré", { timeout: 8000 });
+
+    // Zoom in: the slide gets wider than its stage; the level resets to fit.
+    const fitWidth = (await page.getByTestId("slide-canvas").boundingBox())!.width;
+    const fitLabel = await page.getByTestId("canvas-zoom-value").textContent();
+    await page.getByRole("button", { name: "Zoom avant" }).click();
+    await expect.poll(async () => (await page.getByTestId("slide-canvas").boundingBox())!.width).toBeGreaterThan(fitWidth * 1.2);
+    await page.getByTestId("canvas-zoom-value").click();
+    await expect(page.getByTestId("canvas-zoom-value")).toHaveText(fitLabel!);
+
+    await page.reload();
+    await expect(items.first()).toHaveAttribute("data-slide-type", "statement");
+    await expect(items.nth(1)).toHaveAttribute("data-slide-type", "cover");
+  });
+
+  test("sets a slide background and rewrites a text with AI", async ({ page }) => {
+    const deckTitle = `Deck fond ${Date.now()}`;
+    await createDeckViaDashboard(page, deckTitle);
+    await openDeckEditor(page, deckTitle);
+    await page.getByTestId("add-slide-submit").click();
+
+    // Background: a gradient from the inspector.
+    await page.getByTestId("slide-style-panel").locator("summary").click();
+    await page.getByTestId("slide-bg-gradient").click();
+    const canvas = page.getByTestId("slide-canvas");
+    await expect(canvas.locator('[data-slide-background="gradient"]')).toHaveCount(1);
+
+    // Rewrite the title (the AI is mocked: no credits, no network).
+    await page.route("**/api/ai/rewrite", async (route) => {
+      const body = route.request().postDataJSON() as { action: string; maxLength: number };
+      expect(body.action).toBe("shorter");
+      expect(body.maxLength).toBe(120);
+      await route.fulfill({ json: { text: "Titre réécrit" } });
+    });
+    await canvas.locator('[data-edit-path="title"]').click();
+    await page.getByTestId("rewrite-menu").click();
+    await page.getByTestId("rewrite-shorter").click();
+    await expect(canvas.locator('[data-edit-path="title"]')).toHaveText("Titre réécrit");
+
+    await expect(page.getByTestId("editor-status")).toHaveText("Enregistré", { timeout: 8000 });
+    await page.reload();
+    const reloaded = page.getByTestId("slide-canvas");
+    await expect(reloaded.locator('[data-edit-path="title"]')).toHaveText("Titre réécrit");
+    await expect(reloaded.locator('[data-slide-background="gradient"]')).toHaveCount(1);
+  });
+
   test("validation errors appear inline and block save", async ({ page }) => {
     const deckTitle = `Deck éditeur invalide ${Date.now()}`;
     await createDeckViaDashboard(page, deckTitle);
@@ -119,6 +185,40 @@ test.describe("editor", () => {
     );
   });
 
+  test("undoes and redoes edits across slides", async ({ page }) => {
+    const deckTitle = `Deck historique ${Date.now()}`;
+    await createDeckViaDashboard(page, deckTitle);
+    await openDeckEditor(page, deckTitle);
+    await page.getByTestId("add-slide-submit").click();
+    const title = page.getByTestId("slide-canvas").locator('[data-edit-path="title"]');
+    const original = (await title.textContent()) ?? "";
+
+    // One typing burst on the canvas is one undo step.
+    await title.click();
+    await page.keyboard.press("ControlOrMeta+A");
+    await page.keyboard.type("Titre modifié");
+    await page.keyboard.press("Enter");
+    await expect(title).toHaveText("Titre modifié");
+
+    // A second slide, edited in the form.
+    await page.getByTestId("add-slide-type").selectOption("problem");
+    await page.getByTestId("add-slide-submit").click();
+    await page.getByTestId("slide-field-headline").fill("Autre titre");
+    await page.getByTestId("slide-field-headline").blur();
+
+    // Undo goes back through both slides, reselecting the first one.
+    await page.keyboard.press("ControlOrMeta+z");
+    await expect(page.getByTestId("slide-field-headline")).not.toHaveValue("Autre titre");
+    await page.keyboard.press("ControlOrMeta+z");
+    await expect(title).toHaveText(original);
+
+    await page.getByTestId("editor-redo").click();
+    await expect(title).toHaveText("Titre modifié");
+    await expect(page.getByTestId("editor-status")).toHaveText("Enregistré", { timeout: 8000 });
+    await page.reload();
+    await expect(page.getByTestId("slide-canvas").locator('[data-edit-path="title"]')).toHaveText("Titre modifié");
+  });
+
   test("duplicates, deletes and restores list items on the canvas", async ({ page }) => {
     const deckTitle = `Deck items ${Date.now()}`;
     await createDeckViaDashboard(page, deckTitle);
@@ -136,11 +236,11 @@ test.describe("editor", () => {
     await items.first().getByRole("button", { name: "Dupliquer" }).click();
     await expect(items).toHaveCount(4);
 
-    // Delete, then undo from the toast.
+    // Delete, then undo from the toast (the top bar's undo is also named "Annuler…").
     await items.nth(3).hover();
     await items.nth(3).getByRole("button", { name: "Supprimer" }).click();
     await expect(items).toHaveCount(3);
-    await page.getByRole("button", { name: "Annuler" }).click();
+    await page.locator("[data-sonner-toast]").getByRole("button", { name: "Annuler" }).click();
     await expect(items).toHaveCount(4);
 
     await expect(page.getByTestId("editor-status")).toHaveText("Enregistré", { timeout: 8000 });

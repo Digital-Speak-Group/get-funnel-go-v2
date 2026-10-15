@@ -5,7 +5,7 @@ import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { REGENERATE_INSTRUCTIONS_MAX, REGENERATE_MESSAGES as m } from "./messages";
+import { REGENERATE_CHIPS, REGENERATE_INSTRUCTIONS_MAX, REGENERATE_MESSAGES as m } from "./messages";
 
 interface RegeneratePanelProps {
   onRegenerate: (instructions: string) => void;
@@ -32,6 +32,20 @@ export function RegeneratePanel({ onRegenerate, isRegenerating, error }: Regener
         disabled={isRegenerating}
         onChange={(e) => setInstructions(e.target.value)}
       />
+      {/* Quick instructions (Task 79): a click fills the field, which stays editable. */}
+      <div className="flex flex-wrap gap-1">
+        {REGENERATE_CHIPS.map((chip) => (
+          <button
+            key={chip}
+            type="button"
+            disabled={isRegenerating}
+            onClick={() => setInstructions(chip)}
+            className="rounded-full border border-border bg-surface-2 px-2 py-0.5 text-xs text-muted-foreground outline-none transition-colors hover:border-border-strong hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+          >
+            {chip}
+          </button>
+        ))}
+      </div>
       <div className="flex items-center justify-between gap-2">
         <span className="font-mono text-xs tabular-nums text-faint">
           {instructions.length}/{REGENERATE_INSTRUCTIONS_MAX}

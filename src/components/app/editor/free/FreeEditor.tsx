@@ -3,26 +3,33 @@
 import * as React from "react";
 import Moveable, { type OnDrag, type OnResize, type OnRotate } from "react-moveable";
 import type { ThemeTokens } from "@/lib/slides/theme";
+import { cn } from "@/lib/utils";
 import type { FreeElement } from "@/lib/slides/free";
-import { FreeHistory } from "./history";
 import {
   addElement,
   makeElement,
+  makeVideoElement,
   updateElements,
   type NewElementKind,
 } from "./free-ops";
+import { expandToGroups } from "./selection-ops";
 import { FreeToolbar } from "./FreeToolbar";
+import { FreeContextMenu } from "./FreeContextMenu";
 import { useFreeKeyboard } from "./useFreeKeyboard";
+import { useFreeActions, type FreeCommit } from "./useFreeActions";
+import { useMarquee } from "./useMarquee";
 
 interface FreeEditorProps {
   slideId: string;
   elements: FreeElement[];
   theme: ThemeTokens;
-  onChange: (elements: FreeElement[]) => void;
+  onChange: FreeCommit;
   /** Opens the image picker for the image element at `elements.<i>.assetId`. */
   onPickImage: (path: string) => void;
   /** The rendered slide canvas (inside a SlideEditProvider). */
   children: React.ReactNode;
+  /** Classes of the scrolling box around the canvas (zoom, Task 71). */
+  viewportClassName?: string;
 }
 
 /** Element box read back from the DOM after Moveable changed its inline styles. */
@@ -38,26 +45,24 @@ function readBox(node: HTMLElement) {
 }
 
 /**
- * Canva-style editing of a freeform slide (Task 68): click to select (Shift to add), drag,
- * resize and rotate with snapping to the canvas, safe margins and other elements,
- * double-click a text to type in it, keyboard nudges and shortcuts, undo/redo.
+ * Canva-style editing of a freeform slide (Tasks 68, 70): click to select (Shift to add, a
+ * group selects as one), drag a box on the empty canvas to select several, drag, resize and
+ * rotate with snapping to the canvas, safe margins and other elements, double-click a text to
+ * type in it, right-click menu, keyboard shortcuts. Locked elements get no handles. Undo/redo
+ * is the editor's.
  */
-export function FreeEditor({ slideId, elements, theme, onChange, onPickImage, children }: FreeEditorProps) {
+export function FreeEditor({ slideId, elements, theme, onChange, onPickImage, children, viewportClassName }: FreeEditorProps) {
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const moveableRef = React.useRef<Moveable>(null);
   const [selected, setSelected] = React.useState<string[]>([]);
   const [targets, setTargets] = React.useState<HTMLElement[]>([]);
   const [guides, setGuides] = React.useState<HTMLElement[]>([]);
-  const historyRef = React.useRef(new FreeHistory());
   const pressing = React.useRef(false);
   const elementsRef = React.useRef(elements);
   elementsRef.current = elements;
 
-  // A new slide gets its own history and an empty selection.
-  React.useEffect(() => {
-    historyRef.current = new FreeHistory();
-    setSelected([]);
-  }, [slideId]);
+  // A new slide starts with an empty selection.
+  React.useEffect(() => setSelected([]), [slideId]);
 
   // Drop ids that no longer exist (deleted, undone).
   React.useEffect(() => {
@@ -68,7 +73,14 @@ export function FreeEditor({ slideId, elements, theme, onChange, onPickImage, ch
     const root = wrapperRef.current;
     if (!root) return;
     const nodes = Array.from(root.querySelectorAll<HTMLElement>("[data-free-id]"));
-    setTargets(nodes.filter((n) => selected.includes(n.dataset.freeId!)));
+    const locked = new Set(elements.filter((e) => e.locked).map((e) => e.id));
+    // Selected locked elements show a dashed outline (CSS) instead of handles.
+    for (const node of nodes) {
+      const id = node.dataset.freeId!;
+      node.toggleAttribute("data-free-selected", selected.includes(id));
+      node.toggleAttribute("data-free-locked", locked.has(id));
+    }
+    setTargets(nodes.filter((n) => selected.includes(n.dataset.freeId!) && !locked.has(n.dataset.freeId!)));
     const canvas = root.querySelector<HTMLElement>("[data-free-canvas]");
     const safe = root.querySelector<HTMLElement>("[data-free-safe]");
     setGuides([
@@ -83,13 +95,8 @@ export function FreeEditor({ slideId, elements, theme, onChange, onPickImage, ch
     moveableRef.current?.updateRect();
   }, [elements, targets]);
 
-  const commit = React.useCallback(
-    (next: FreeElement[]) => {
-      historyRef.current.record(elementsRef.current);
-      onChange(next);
-    },
-    [onChange]
-  );
+  // Each change is one step of the editor's undo history (useEditorState).
+  const commit = onChange;
 
   /** Writes the boxes Moveable left in the DOM back into the slide content. */
   const commitTargets = React.useCallback(
@@ -107,9 +114,12 @@ export function FreeEditor({ slideId, elements, theme, onChange, onPickImage, ch
     [commit]
   );
 
+  // Panel of a chart's data or a video's link (double-click opens it), see FreeToolbar.
+  const [panel, setPanel] = React.useState<string | null>(null);
+
   const add = React.useCallback(
-    (kind: NewElementKind) => {
-      const element = makeElement(kind);
+    (kind: NewElementKind | FreeElement) => {
+      const element = typeof kind === "string" ? makeElement(kind) : kind;
       const next = addElement(elementsRef.current, element);
       if (!next) return false;
       commit(next);
@@ -119,20 +129,15 @@ export function FreeEditor({ slideId, elements, theme, onChange, onPickImage, ch
     [commit]
   );
 
-  const undo = React.useCallback(() => {
-    const previous = historyRef.current.undo(elementsRef.current);
-    if (previous) onChange(previous);
-  }, [onChange]);
-
-  const redo = React.useCallback(() => {
-    const next = historyRef.current.redo(elementsRef.current);
-    if (next) onChange(next);
-  }, [onChange]);
-
-  const startTextEditing = React.useCallback((node: HTMLElement) => {
-    const field = node.querySelector<HTMLElement>("[contenteditable]");
-    if (!field) return;
+  const startTextEditing = React.useCallback((node: HTMLElement, at?: { x: number; y: number }) => {
     node.dataset.freeEditing = "";
+    // A table: the cell under the pointer (its cells take the pointer once editing is on).
+    const hit = at && document.elementFromPoint(at.x, at.y)?.closest<HTMLElement>("[contenteditable]");
+    const field = hit && node.contains(hit) ? hit : node.querySelector<HTMLElement>("[contenteditable]");
+    if (!field) {
+      delete node.dataset.freeEditing;
+      return;
+    }
     // Next frame: after the click's own focus handling and any closing menu's focus return.
     requestAnimationFrame(() => {
       field.focus();
@@ -142,11 +147,24 @@ export function FreeEditor({ slideId, elements, theme, onChange, onPickImage, ch
       const selection = window.getSelection();
       selection?.removeAllRanges();
       selection?.addRange(range);
-      field.addEventListener("blur", () => delete node.dataset.freeEditing, { once: true });
+      // Typing ends when the focus leaves the element (Tab between table cells keeps it).
+      const end = (event: FocusEvent) => {
+        if (event.relatedTarget instanceof Node && node.contains(event.relatedTarget)) return;
+        delete node.dataset.freeEditing;
+        node.removeEventListener("focusout", end);
+      };
+      node.addEventListener("focusout", end);
     });
   }, []);
 
-  useFreeKeyboard({ selected, setSelected, elementsRef, commit, undo, redo });
+  const actions = useFreeActions({ slideId, elementsRef, selected, setSelected, commit });
+  useFreeKeyboard(actions, () => setSelected([]));
+
+  const marquee = useMarquee(wrapperRef, (ids, additive) => {
+    const unlocked = ids.filter((id) => !elementsRef.current.find((e) => e.id === id)?.locked);
+    const picked = expandToGroups(elementsRef.current, unlocked);
+    setSelected((current) => (additive ? [...new Set([...current, ...picked])] : picked));
+  });
 
   // Mouse events, not pointer events: Moveable's gesture layer (Gesto) tracks a drag started
   // from a pointer event with the wrong listeners, which left a stale drag open.
@@ -154,8 +172,17 @@ export function FreeEditor({ slideId, elements, theme, onChange, onPickImage, ch
     const target = event.target as HTMLElement;
     if (target.closest(".moveable-control-box")) return;
     const node = target.closest<HTMLElement>("[data-free-id]");
+    if (event.button === 2) {
+      // Right-click: the menu acts on what is under the pointer.
+      const id = node?.dataset.freeId;
+      if (!id) setSelected([]);
+      else if (!selected.includes(id)) actions.select([id]);
+      return;
+    }
+    if (event.button !== 0) return;
     if (!node) {
-      setSelected([]);
+      if (target.closest("[data-free-canvas]")) marquee.start(event);
+      else setSelected([]);
       return;
     }
     if (node.dataset.freeEditing !== undefined) return; // typing inside a text
@@ -164,16 +191,18 @@ export function FreeEditor({ slideId, elements, theme, onChange, onPickImage, ch
       // after the first click re-rendered the selection, and the browser's own focus change
       // on mousedown would steal the caret from the text we focus.
       event.preventDefault();
-      openElement(node);
+      openElement(node, { x: event.clientX, y: event.clientY });
       return;
     }
     const id = node.dataset.freeId!;
+    const unit = expandToGroups(elementsRef.current, [id]);
     if (event.shiftKey) {
-      setSelected((ids) => (ids.includes(id) ? ids.filter((i) => i !== id) : [...ids, id]));
+      setSelected((ids) => (ids.includes(id) ? ids.filter((i) => !unit.includes(i)) : [...new Set([...ids, ...unit])]));
       return;
     }
     if (!selected.includes(id)) {
-      setSelected([id]);
+      setSelected(unit);
+      if (elementsRef.current.find((e) => e.id === id)?.locked) return;
       // Start dragging right away instead of needing a second press — but only while the
       // button is still down: a quick click must not leave a drag open with a stale start point.
       const native = event.nativeEvent;
@@ -185,12 +214,17 @@ export function FreeEditor({ slideId, elements, theme, onChange, onPickImage, ch
     }
   }
 
-  /** Double-click: type in a text, pick an image for an image. */
-  function openElement(node: HTMLElement) {
+  /**
+   * Double-click: type in a text (or the table cell under the pointer), pick an image, open a
+   * chart's data or a video's link.
+   */
+  function openElement(node: HTMLElement, at: { x: number; y: number }) {
     const index = elementsRef.current.findIndex((e) => e.id === node.dataset.freeId);
     const element = elementsRef.current[index];
     if (element?.kind === "text") startTextEditing(node);
+    else if (element?.kind === "table") startTextEditing(node, at);
     else if (element?.kind === "image") onPickImage(`elements.${index}.assetId`);
+    else if (element?.kind === "chart" || element?.kind === "video") setPanel(element.id);
   }
 
   const setPos = (target: HTMLElement | SVGElement, left: number, top: number) => {
@@ -216,51 +250,60 @@ export function FreeEditor({ slideId, elements, theme, onChange, onPickImage, ch
         theme={theme}
         elements={elements}
         selected={selectedElements}
-        canUndo={historyRef.current.canUndo}
-        canRedo={historyRef.current.canRedo}
+        actions={actions}
         onAdd={add}
         onChange={commit}
-        onSelect={setSelected}
         onPickImage={(id) => onPickImage(`elements.${elements.findIndex((e) => e.id === id)}.assetId`)}
-        onUndo={undo}
-        onRedo={redo}
+        panel={panel}
+        onPanelChange={setPanel}
+        onAddVideo={(video) => add(makeVideoElement(video))}
       />
-      <div
-        ref={wrapperRef}
-        className="relative"
-        data-free-editor=""
-        data-testid="free-editor"
-        onMouseDown={onMouseDown}
-      >
-        {children}
-        <Moveable
-          ref={moveableRef}
-          target={targets}
-          draggable
-          resizable
-          rotatable
-          snappable
-          origin={false}
-          throttleRotate={0}
-          snapRotationDegrees={[0, 45, 90, 135, 180, 225, 270, 315]}
-          snapThreshold={6}
-          snapDirections={{ top: true, left: true, bottom: true, right: true, center: true, middle: true }}
-          elementSnapDirections={{ top: true, left: true, bottom: true, right: true, center: true, middle: true }}
-          elementGuidelines={guides}
-          onDrag={onDrag}
-          onDragEnd={({ target, isDrag }) => isDrag && commitTargets([target])}
-          onResize={onResize}
-          onResizeEnd={({ target, isDrag }) => isDrag && commitTargets([target])}
-          onRotate={onRotate}
-          onRotateEnd={({ target, isDrag }) => isDrag && commitTargets([target])}
-          onDragGroup={({ events }) => events.forEach(onDrag)}
-          onDragGroupEnd={({ targets: nodes, isDrag }) => isDrag && commitTargets(nodes)}
-          onResizeGroup={({ events }) => events.forEach(onResize)}
-          onResizeGroupEnd={({ targets: nodes, isDrag }) => isDrag && commitTargets(nodes)}
-          onRotateGroup={({ events }) => events.forEach(onRotate)}
-          onRotateGroupEnd={({ targets: nodes, isDrag }) => isDrag && commitTargets(nodes)}
-        />
-      </div>
+      <FreeContextMenu actions={actions}>
+        <div
+          ref={wrapperRef}
+          className={cn("relative", viewportClassName)}
+          data-free-editor=""
+          data-testid="free-editor"
+          onMouseDown={onMouseDown}
+        >
+          {children}
+          {marquee.rect && (
+            <div
+              aria-hidden="true"
+              data-testid="free-marquee"
+              className="pointer-events-none absolute z-10 rounded-sm border border-primary bg-primary/10"
+              style={{ left: marquee.rect.x, top: marquee.rect.y, width: marquee.rect.w, height: marquee.rect.h }}
+            />
+          )}
+          <Moveable
+            ref={moveableRef}
+            target={targets}
+            draggable
+            resizable
+            rotatable
+            snappable
+            origin={false}
+            throttleRotate={0}
+            snapRotationDegrees={[0, 45, 90, 135, 180, 225, 270, 315]}
+            snapThreshold={6}
+            snapDirections={{ top: true, left: true, bottom: true, right: true, center: true, middle: true }}
+            elementSnapDirections={{ top: true, left: true, bottom: true, right: true, center: true, middle: true }}
+            elementGuidelines={guides}
+            onDrag={onDrag}
+            onDragEnd={({ target, isDrag }) => isDrag && commitTargets([target])}
+            onResize={onResize}
+            onResizeEnd={({ target, isDrag }) => isDrag && commitTargets([target])}
+            onRotate={onRotate}
+            onRotateEnd={({ target, isDrag }) => isDrag && commitTargets([target])}
+            onDragGroup={({ events }) => events.forEach(onDrag)}
+            onDragGroupEnd={({ targets: nodes, isDrag }) => isDrag && commitTargets(nodes)}
+            onResizeGroup={({ events }) => events.forEach(onResize)}
+            onResizeGroupEnd={({ targets: nodes, isDrag }) => isDrag && commitTargets(nodes)}
+            onRotateGroup={({ events }) => events.forEach(onRotate)}
+            onRotateGroupEnd={({ targets: nodes, isDrag }) => isDrag && commitTargets(nodes)}
+          />
+        </div>
+      </FreeContextMenu>
     </div>
   );
 }

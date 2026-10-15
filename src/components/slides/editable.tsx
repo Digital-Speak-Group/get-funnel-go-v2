@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { ChevronLeft, ChevronRight, Copy, ImagePlus, Trash2 } from "lucide-react";
+import type { RichText } from "@/lib/slides/rich-text";
 
 /**
  * Inline editing on the editor canvas. Slide components render their content strings
@@ -28,8 +29,22 @@ export interface SlideImageApi {
   label: (action: "add" | "replace" | "remove") => string;
 }
 
+/** Props of the editor's rich text field (Task 76), see `SlideEditApi.richText`. */
+export interface RichTextEditorProps {
+  /** Content path of the text element, e.g. `elements.3`. */
+  path: string;
+  value: RichText;
+  placeholder: string;
+  style: React.CSSProperties;
+}
+
 interface SlideEditApi {
   onEdit: (path: string, value: string) => void;
+  /**
+   * Rich text field for freeform texts (Task 76), provided by the editor so the slide renderer
+   * never ships the editing library to audiences. Without it, texts edit as plain text.
+   */
+  richText?: React.ComponentType<RichTextEditorProps>;
   /** Hint shown in an empty field (optional text the slide does not use yet). */
   placeholderFor: (path: string) => string;
   items?: SlideItemApi;
@@ -39,16 +54,22 @@ interface SlideEditApi {
 const SlideEditContext = React.createContext<SlideEditApi | null>(null);
 
 export function SlideEditProvider({ children, ...api }: SlideEditApi & { children: React.ReactNode }) {
-  const { onEdit, placeholderFor, items, images } = api;
+  const { onEdit, placeholderFor, items, images, richText } = api;
   const value = React.useMemo(
-    () => ({ onEdit, placeholderFor, items, images }),
-    [onEdit, placeholderFor, items, images]
+    () => ({ onEdit, placeholderFor, items, images, richText }),
+    [onEdit, placeholderFor, items, images, richText]
   );
   return <SlideEditContext.Provider value={value}>{children}</SlideEditContext.Provider>;
 }
 
 export function useSlideEditing(): boolean {
   return React.useContext(SlideEditContext) !== null;
+}
+
+/** The editor's rich text field, when editing with one (Task 76). */
+export function useRichTextEditor(): { Editor: React.ComponentType<RichTextEditorProps>; placeholderFor: (path: string) => string } | null {
+  const api = React.useContext(SlideEditContext);
+  return api?.richText ? { Editor: api.richText, placeholderFor: api.placeholderFor } : null;
 }
 
 type TextTag = "h1" | "h2" | "h3" | "h4" | "p" | "span" | "div" | "li" | "strong" | "em" | "small" | "blockquote" | "figcaption" | "cite";

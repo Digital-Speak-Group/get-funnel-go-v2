@@ -6,6 +6,7 @@ import { AssetField } from "../AssetField";
 import { ArrayField } from "./ArrayField";
 import { TextInput } from "./TextInput";
 import { FieldLabel, FieldStatus, fieldId, inputClass } from "./field-ui";
+import { SLIDE_STYLE_KEYS } from "@/lib/slides/schema";
 
 export interface FieldProps {
   name: string;
@@ -22,8 +23,8 @@ export function Field({ name, schema, path, value, errors, onChange }: FieldProp
   const error = errors[path];
   const id = fieldId(path);
 
-  // Picked with the illustration picker above the fields, not as a plain select.
-  if (name === "illustration" && path === "illustration") return null;
+  // Illustration, background and transition have their own pickers above the fields.
+  if (name === path && (SLIDE_STYLE_KEYS as readonly string[]).includes(name)) return null;
   if (name === "assetId") {
     return <AssetField path={path} value={typeof value === "string" ? value : undefined} error={error} onChange={onChange} />;
   }

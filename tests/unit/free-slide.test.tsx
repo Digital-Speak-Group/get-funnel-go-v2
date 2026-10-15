@@ -34,7 +34,7 @@ describe("free slide schema", () => {
   it("rejects hex colours, unknown kinds and more than 60 elements", () => {
     const text = (n: number, extra: object = {}) => ({ id: id(n), kind: "text", text: "T", style: "body", x: 0, y: 0, w: 100, h: 40, ...extra });
     expect(SlideSchema.safeParse(freeSlide([text(6, { color: "#ff0000" })])).success).toBe(false);
-    expect(SlideSchema.safeParse(freeSlide([{ ...text(7), kind: "video" }])).success).toBe(false);
+    expect(SlideSchema.safeParse(freeSlide([{ ...text(7), kind: "hologram" }])).success).toBe(false);
     expect(SlideSchema.safeParse(freeSlide(Array.from({ length: 61 }, (_, i) => text(100 + i)))).success).toBe(false);
   });
 
@@ -67,5 +67,23 @@ describe("free slide renderer", () => {
       </SlideEditProvider>
     );
     expect(screen.getByText("Bonjour")).toHaveAttribute("data-edit-path", "elements.1.text");
+  });
+});
+
+describe("free slide shapes and shadows (Task 77)", () => {
+  it("draws the SVG shapes with their border, and a shadow on any element", () => {
+    const slide = freeSlide([
+      { id: id(40), kind: "shape", shape: "star", x: 0, y: 0, w: 300, h: 300, fill: "accent", stroke: "text", strokeWidth: 6, dash: "dashed", shadow: "soft" },
+      { id: id(41), kind: "shape", shape: "rect", x: 400, y: 0, w: 300, h: 200, stroke: "primary", strokeWidth: 8, dash: "dotted" },
+    ]);
+    expect(SlideSchema.safeParse(slide).success).toBe(true);
+    const { container } = render(<SlideRenderer slide={slide} theme={defaultTheme} />);
+    const star = container.querySelector(`[data-free-id="${id(40)}"]`) as HTMLElement;
+    const path = star.querySelector("svg path")!;
+    expect(path.getAttribute("stroke-width")).toBe("6");
+    expect(path.getAttribute("stroke-dasharray")).toBe("18 12");
+    expect(star.style.filter).toContain("drop-shadow");
+    const rect = container.querySelector(`[data-free-id="${id(41)}"] > div`) as HTMLElement;
+    expect(rect.style.border).toContain("8px dotted");
   });
 });

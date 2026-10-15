@@ -3,11 +3,17 @@
 import * as React from "react";
 import { toast } from "sonner";
 import { setContentPath } from "@/lib/slides/content-path";
+import { isPlainRich, richToPlain, type RichText } from "@/lib/slides/rich-text";
 import type { FreeElement } from "@/lib/slides/free";
 import type { ItemAction } from "@/components/slides/editable";
 import { applyListAction } from "./list-actions";
 import { FREE_MESSAGES, ITEM_MESSAGES, REGENERATE_MESSAGES } from "./messages";
 import type { EditorSlide } from "./validation";
+import { SLIDE_STYLE_KEYS } from "@/lib/slides/schema";
+
+/** The slide-look keys of a content (illustration, background, transition) that are set. */
+const styleOf = (content: Record<string, unknown>) =>
+  Object.fromEntries(SLIDE_STYLE_KEYS.filter((k) => content[k] !== undefined).map((k) => [k, content[k]]));
 import type { EditorState } from "./useEditorState";
 
 /**
@@ -31,7 +37,8 @@ export function useCanvasActions(editor: EditorState) {
 
   function editText(path: string, value: string) {
     const slide = currentSlide();
-    if (slide) updateActive({ content: setContentPath(slide.content, path, value) });
+    // One undo step per typing burst in the same text.
+    if (slide) updateActive({ content: setContentPath(slide.content, path, value) }, { group: `text:${path}` });
   }
 
   function setImage(path: string, assetId: string | undefined) {
@@ -39,17 +46,35 @@ export function useCanvasActions(editor: EditorState) {
     if (slide) updateActive({ content: setContentPath(slide.content, path, assetId) });
   }
 
-  function setFreeElements(elements: FreeElement[]) {
+  /**
+   * A freeform text typed in (Task 76): its rich text, and the plain `text` mirror. A text with
+   * no formatting keeps only the plain text. One undo step per typing burst.
+   */
+  function editRich(path: string, rich: RichText) {
     const slide = currentSlide();
-    if (slide?.type === "free") updateActive({ content: { ...slide.content, elements } });
+    if (slide?.type !== "free") return;
+    const index = Number(path.split(".")[1]);
+    const elements = (slide.content.elements as FreeElement[] | undefined) ?? [];
+    const element = elements[index];
+    if (element?.kind !== "text") return;
+    const next: FreeElement = { ...element, text: richToPlain(rich) };
+    if (isPlainRich(rich)) delete next.rich;
+    else next.rich = rich;
+    const updated = elements.map((e, i) => (i === index ? next : e));
+    updateActive({ content: { ...slide.content, elements: updated } }, { group: `text:${path}` });
+  }
+
+  /** A freeform change: its own undo step (a drag, a style), unless grouped (a slider drag). */
+  function setFreeElements(elements: FreeElement[], group?: string) {
+    const slide = currentSlide();
+    if (slide?.type === "free") updateActive({ content: { ...slide.content, elements } }, { group: group ?? false });
   }
 
   function convertToFree(elements: FreeElement[]) {
     const slide = currentSlide();
     if (!slide || slide.type === "free") return;
     const previous = { type: slide.type, content: slide.content, layout: slide.layout };
-    const illustration = slide.content.illustration;
-    updateActive({ type: "free", content: { elements, ...(illustration ? { illustration } : {}) }, layout: undefined });
+    updateActive({ type: "free", content: { elements, ...styleOf(slide.content) }, layout: undefined });
     toast.success(FREE_MESSAGES.converted, {
       action: { label: FREE_MESSAGES.undo, onClick: () => restore(slide, previous) },
     });
@@ -92,7 +117,8 @@ export function useCanvasActions(editor: EditorState) {
         return;
       }
       const data = await res.json();
-      if (data.slide) updateActive({ content: data.slide.content, notes: data.slide.notes, script: data.slide.script });
+      // The AI rewrites the words; the slide's own look (illustration, background…) stays.
+      if (data.slide) updateActive({ content: { ...data.slide.content, ...styleOf(slide.content) }, notes: data.slide.notes, script: data.slide.script });
     } catch {
       setRegenerateError(REGENERATE_MESSAGES.failed);
     } finally {
@@ -100,5 +126,5 @@ export function useCanvasActions(editor: EditorState) {
     }
   }
 
-  return { editText, setImage, setFreeElements, convertToFree, itemAction, regenerate, isRegenerating, regenerateError };
+  return { editText, editRich, setImage, setFreeElements, convertToFree, itemAction, regenerate, isRegenerating, regenerateError };
 }

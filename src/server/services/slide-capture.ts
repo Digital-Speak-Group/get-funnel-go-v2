@@ -110,6 +110,11 @@ export async function captureSlides(
     await page.emulateMediaType("screen");
     await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
 
+    // Live players render a still frame in exports (useExportCapture); the flag name is
+    // inlined: this runs in the page, not in Node.
+    await page.evaluateOnNewDocument(() => {
+      (window as unknown as Record<string, unknown>).__GF_EXPORT__ = true;
+    });
     const audienceUrl = `${appUrl}/p/${encodeURIComponent(presentToken)}`;
     const response = await page.goto(audienceUrl, { waitUntil: "networkidle0", timeout: 30000 });
     if (!response?.ok()) {

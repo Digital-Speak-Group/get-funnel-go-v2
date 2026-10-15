@@ -2,6 +2,7 @@ import { z } from "zod";
 import { SLIDE_LAYOUTS } from "./layouts";
 import { isAllowedEmbedUrl } from "./embed";
 import { IllustrationSchema } from "./illustrations";
+import { SlideBackgroundSchema, SlideTransitionSchema } from "./slide-style";
 import { FreeContentShape } from "./free";
 
 export const SLIDE_TYPES = [
@@ -63,11 +64,20 @@ const Bullet = z.object({
 });
 
 /**
- * Every type's content may carry an optional decorative `illustration` (Task 61). It lives in
- * content (JSON), so it needs no column, and a slide renders the same without it.
+ * Every type's content may carry an optional decorative `illustration` (Task 61), `background`
+ * (Task 73) and `transition` (Task 74). They live in content (JSON), so they need no column,
+ * and a slide renders the same without them.
  */
 const withIllustration = <S extends z.ZodRawShape>(shape: S) =>
-  z.object({ ...shape, illustration: IllustrationSchema.optional() });
+  z.object({
+    ...shape,
+    illustration: IllustrationSchema.optional(),
+    background: SlideBackgroundSchema.optional(),
+    transition: SlideTransitionSchema.optional(),
+  });
+
+/** The shared look keys above, which the AI never writes. */
+export const SLIDE_STYLE_KEYS = ["illustration", "background", "transition"] as const;
 
 const content = {
   cover: withIllustration({
@@ -400,9 +410,10 @@ export const SlideSchema = z.discriminatedUnion(
  * `cue` is left out to keep the output small (free-tier token limits); presenters add it.
  */
 export function slideDraftSchema(type: SlideType) {
-  // Illustrations are a presenter's choice: kept out of what the model is asked to write.
-  const draftContent = (content[type] as unknown as z.ZodObject<{ illustration: z.ZodOptional<typeof IllustrationSchema> }>)
-    .omit({ illustration: true }) as unknown as (typeof content)[typeof type];
+  // Illustration, background and transition are a presenter's choice: kept out of what the
+  // model is asked to write.
+  const draftContent = (content[type] as unknown as z.ZodObject<Record<(typeof SLIDE_STYLE_KEYS)[number], z.ZodOptional<z.ZodType>>>)
+    .omit({ illustration: true, background: true, transition: true }) as unknown as (typeof content)[typeof type];
   return base
     .omit({ id: true, position: true, cue: true })
     .extend({ type: z.literal(type), content: draftContent });

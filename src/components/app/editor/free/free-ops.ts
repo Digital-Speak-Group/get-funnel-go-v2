@@ -4,14 +4,17 @@ import {
   MAX_FREE_ELEMENTS,
   type FreeElement,
   type FreeIcon,
+  type FreeVideo,
+  type ShapeName,
 } from "@/lib/slides/free";
+import { FREE_MESSAGES } from "./messages";
 
 /**
  * Pure operations on a freeform slide's elements (Task 68). Every function returns a new
  * array (or null when the action is not possible) and never mutates its input.
  */
 
-export type NewElementKind = "text" | "rect" | "ellipse" | "line" | "image" | "icon";
+export type NewElementKind = "text" | "image" | "icon" | "table" | "chart" | ShapeName;
 
 /** At least this much of an element stays on the canvas, so it can always be grabbed back. */
 const MIN_VISIBLE = 40;
@@ -41,11 +44,46 @@ export function makeElement(kind: NewElementKind, at?: { x: number; y: number },
       return { id, kind: "shape", shape: "ellipse", fill: "primary", ...centred(240, 240) };
     case "line":
       return { id, kind: "shape", shape: "line", fill: "muted", ...centred(600, 8) };
+    case "triangle":
+      return { id, kind: "shape", shape: "triangle", fill: "primary", ...centred(300, 260) };
+    case "diamond":
+      return { id, kind: "shape", shape: "diamond", fill: "accent", ...centred(280, 280) };
+    case "arrow":
+      return { id, kind: "shape", shape: "arrow", fill: "primary", ...centred(420, 200) };
+    case "star":
+      return { id, kind: "shape", shape: "star", fill: "accent", ...centred(300, 300) };
+    case "bubble":
+      return { id, kind: "shape", shape: "bubble", fill: "surface", stroke: "primary", strokeWidth: 3, ...centred(520, 320) };
     case "image":
       return { id, kind: "image", fit: "cover", radius: 12, ...centred(640, 360) };
+    case "table":
+      return {
+        id,
+        kind: "table",
+        header: true,
+        variant: "lines",
+        rows: [
+          [FREE_MESSAGES.table.sample.head(1), FREE_MESSAGES.table.sample.head(2), FREE_MESSAGES.table.sample.head(3)],
+          ...Array.from({ length: 2 }, () => Array.from({ length: 3 }, () => FREE_MESSAGES.table.sample.cell)),
+        ],
+        ...centred(960, 300),
+      };
+    case "chart":
+      return {
+        id,
+        kind: "chart",
+        chart: "bar",
+        data: FREE_MESSAGES.chart.sample.map((label, i) => ({ label, value: [42, 58, 71, 86][i] })),
+        ...centred(880, 480),
+      };
     case "icon":
       return { id, kind: "icon", icon: icon ?? "sparkles", color: "primary", ...centred(120, 120) };
   }
+}
+
+/** A video element for a parsed YouTube/Vimeo link (Task 78), centred, 16:9. */
+export function makeVideoElement(video: { provider: FreeVideo["provider"]; videoId: string }): FreeVideo {
+  return { id: crypto.randomUUID(), kind: "video", ...video, x: 480, y: 270, w: 960, h: 540 };
 }
 
 export function addElement(elements: FreeElement[], element: FreeElement): FreeElement[] | null {
@@ -75,10 +113,21 @@ export function duplicateElements(
 ): { elements: FreeElement[]; ids: string[] } | null {
   const selected = elements.filter((e) => ids.includes(e.id));
   if (selected.length === 0 || elements.length + selected.length > MAX_FREE_ELEMENTS) return null;
-  const copies = selected.map((e) =>
-    clampToCanvas({ ...structuredClone(e), id: crypto.randomUUID(), x: e.x + DUPLICATE_OFFSET, y: e.y + DUPLICATE_OFFSET })
-  );
+  const copies = cloneElements(selected, DUPLICATE_OFFSET);
   return { elements: [...elements, ...copies], ids: copies.map((c) => c.id) };
+}
+
+/** Copies with new ids, shifted by `offset`; groups stay among the copies, under new group ids. */
+export function cloneElements(source: readonly FreeElement[], offset: number): FreeElement[] {
+  const groups = new Map<string, string>();
+  return source.map((e) => {
+    const copy: FreeElement = { ...structuredClone(e), id: crypto.randomUUID(), x: e.x + offset, y: e.y + offset };
+    if (e.groupId) {
+      if (!groups.has(e.groupId)) groups.set(e.groupId, crypto.randomUUID());
+      copy.groupId = groups.get(e.groupId);
+    }
+    return clampToCanvas(copy);
+  });
 }
 
 /** Layer order: array order is paint order (last = on top). */

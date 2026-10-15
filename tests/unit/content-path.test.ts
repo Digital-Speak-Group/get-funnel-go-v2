@@ -36,3 +36,13 @@ describe("setContentPath", () => {
     expect(content).toEqual(snapshot);
   });
 });
+
+describe("setContentPath in arrays of arrays (Task 78)", () => {
+  it("writes a table cell and keeps rows as arrays", () => {
+    const content = { elements: [{ kind: "table", rows: [["A", "B"], ["C", "D"]] }] };
+    const next = setContentPath(content, "elements.0.rows.1.0", "X");
+    expect(next).toEqual({ elements: [{ kind: "table", rows: [["A", "B"], ["X", "D"]] }] });
+    expect(Array.isArray((next.elements as { rows: unknown[] }[])[0].rows[1])).toBe(true);
+    expect(content.elements[0].rows[1][0]).toBe("C");
+  });
+});

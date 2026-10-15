@@ -7,6 +7,13 @@
 export function setContentPath(content: Record<string, unknown>, path: string, value: unknown): Record<string, unknown> {
   const [head, ...rest] = path.split(".");
   if (!head) return content;
+  // Arrays of arrays (table rows, Task 78) stay arrays when a cell is written.
+  if (Array.isArray(content)) {
+    const list = [...content];
+    const index = Number(head);
+    list[index] = rest.length === 0 ? value : setContentPath(list[index] ?? {}, rest.join("."), value);
+    return list as unknown as Record<string, unknown>;
+  }
   if (rest.length === 0) return { ...content, [head]: value };
 
   const child = content[head];
@@ -31,4 +38,12 @@ export function setContentPath(content: Record<string, unknown>, path: string, v
 
   const nested = child && typeof child === "object" && !Array.isArray(child) ? (child as Record<string, unknown>) : {};
   return { ...content, [head]: setContentPath(nested, rest.join("."), value) };
+}
+
+/** The value at `path` in `content`, or undefined. */
+export function getContentPath(content: unknown, path: string): unknown {
+  return path.split(".").reduce<unknown>(
+    (node, key) => (node && typeof node === "object" ? (node as Record<string, unknown>)[key] : undefined),
+    content
+  );
 }
