@@ -127,6 +127,10 @@ export const marketingMessages = {
     account: "Compte",
     login: "Se connecter",
     signup: "Créer un compte",
+    legal: "Légal",
+    terms: "CGV / CGU",
+    privacy: "Confidentialité",
+    mentions: "Mentions légales",
     rights: (year: number) => `© ${year} GetFunnels. Tous droits réservés.`,
   },
   pricing: {

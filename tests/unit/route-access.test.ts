@@ -14,6 +14,9 @@ describe("requiresLogin", () => {
     "/login",
     "/signup",
     "/pricing",
+    "/legal/terms",
+    "/legal/privacy",
+    "/legal/mentions",
     "/callback", // email confirmation, before any session exists
     "/opengraph-image",
     "/p/some-token",
@@ -32,5 +35,6 @@ describe("requiresLogin", () => {
     expect(requiresLogin("/pricingx")).toBe(true);
     expect(requiresLogin("/apix")).toBe(true);
     expect(requiresLogin("/login-admin")).toBe(true);
+    expect(requiresLogin("/legalx")).toBe(true);
   });
 });

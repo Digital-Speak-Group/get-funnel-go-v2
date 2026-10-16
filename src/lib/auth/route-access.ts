@@ -8,8 +8,7 @@ const PUBLIC_PATHS = [
   "/auth/forgot-password",
   "/auth/reset-password",
   "/pricing",
-  "/legal/terms",
-  "/legal/privacy",
+  "/legal", // terms, privacy, mentions
   "/opengraph-image", // fetched by link-preview crawlers
   "/dev", // design review routes; they 404 in production
 ];

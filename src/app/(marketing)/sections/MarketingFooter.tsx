@@ -16,12 +16,20 @@ const COLUMNS = [
       { href: "/signup", label: m.signup },
     ],
   },
+  {
+    title: m.legal,
+    links: [
+      { href: "/legal/terms", label: m.terms },
+      { href: "/legal/privacy", label: m.privacy },
+      { href: "/legal/mentions", label: m.mentions },
+    ],
+  },
 ];
 
 export function MarketingFooter() {
   return (
     <footer className="border-t border-border">
-      <div className={cn(containerClass, "grid gap-10 py-12 sm:grid-cols-2 md:grid-cols-4")}>
+      <div className={cn(containerClass, "grid gap-10 py-12 sm:grid-cols-2 md:grid-cols-5")}>
         <div className="sm:col-span-2">
           <Link href="/" aria-label={marketingMessages.nav.home} className="inline-flex rounded-md">
             <Logo />

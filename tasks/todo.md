@@ -897,3 +897,18 @@ The editor today changes slides only through the form panel; the canvas is a rea
 
 ### Checkpoint K — Editor power tools review
 - [ ] Human review of Tasks 69–79
+
+---
+
+## Phase 10 — Launch blockers
+
+### Task 80: Legal pages (CGV/CGU, confidentialité, mentions légales)
+**Description:** Three public French pages under `/legal/*` (`terms`, `privacy`, `mentions`), linked from the marketing footer and the auth layout. Text is a draft written from what the product actually does (sub-processors, data kept, plans/credits); publisher identity, hosting provider, DPO/contact and governing details are explicit `[À COMPLÉTER]` placeholders. No new route structure beyond the `/legal/*` paths the signup page already links to.
+**Acceptance:**
+- [x] `/legal/terms`, `/legal/privacy`, `/legal/mentions` render, are public (no login redirect) and have metadata
+- [x] Footer links to all three; unit test covers the route-access rule
+- [x] Every unknown company fact is a visible placeholder, never invented
+- [ ] Human/legal review of the text and fill-in of the placeholders before launch
+**Done 2026-10-16:** text in `legal/content.ts` (typed documents, `todo()` placeholders shown highlighted by `LegalPage`), one static route `legal/[slug]`; `/legal` is public in `route-access.ts`; footer gained a "Légal" column. Verify: `legal-content.test.tsx`, `route-access.test.ts`; lint, typecheck, 611 unit tests, build green. Still to fill in (search `À COMPLÉTER`): company name/form/SIREN/VAT, publisher, address, contact e-mail, hosting provider, price basis (HT/TTC), refund/withdrawal policy, liability cap, jurisdiction, data regions/transfers, retention of logs, Groq data-use terms.
+**Dependencies:** 50 · **Size:** M
+**Files:** `src/app/(marketing)/legal/**`, `src/app/(marketing)/messages.ts`, `src/lib/auth/route-access.ts`, `tests/unit/route-access.test.ts`
