@@ -2,7 +2,7 @@ name: Deploy to VPS (Digital Speak)
 
 on:
   push:
-    branches: [main]
+    branches: [main, feat/legacy-integration-phase-6]
   workflow_dispatch:
 
 jobs:
@@ -13,12 +13,16 @@ jobs:
     steps:
       - name: 📥 Récupérer le code
         uses: actions/checkout@v4
+      
+      - name: 🔐 Créer le fichier .env 
+        run: |
+         echo "${{ secrets.ENV_FILE }}" > .env
 
       - name: 🗄️ Appliquer les migrations de base de données
         run: |
           docker compose run --rm app npm run db:migrate || true
 
-      - name: 🚀 Lancer les conteneurs Docker
+      - name:  Lancer les conteneurs Docker
         run: |
           docker compose up -d --build
           # Nettoyer les images inutilisées pour préserver l'espace disque du VPS
