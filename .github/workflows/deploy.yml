@@ -13,6 +13,10 @@ jobs:
     steps:
       - name: 📥 Récupérer le code
         uses: actions/checkout@v4
+      
+      - name: 🔐 Créer le fichier .env
+        run: |
+         echo "${{ secrets.ENV_FILE }}" > .env
 
       - name: 🗄️ Appliquer les migrations de base de données
         run: |
