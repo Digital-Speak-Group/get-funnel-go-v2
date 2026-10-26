@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { headlineFill } from "../style";
+import { EditableItem, EditableText } from "../editable";
 
 interface PricingContent {
   headline: string;
@@ -27,18 +29,19 @@ export function PricingSlide({ content, theme }: { content: PricingContent; them
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -47,11 +50,12 @@ export function PricingSlide({ content, theme }: { content: PricingContent; them
           gridTemplateColumns: `repeat(${tiers.length}, 1fr)`,
           gap: "24px",
           flex: 1,
+          alignContent: "center",
           alignItems: "stretch",
         }}
       >
         {tiers.map((tier, index) => (
-          <div
+          <EditableItem path="tiers" index={index} length={tiers.length}
             key={index}
             style={{
               display: "flex",
@@ -88,32 +92,32 @@ export function PricingSlide({ content, theme }: { content: PricingContent; them
               </div>
             )}
             <div style={{ textAlign: "center", marginBottom: "24px" }}>
-              <h3
+              <EditableText
+                as="h3"
+                path={`tiers.${index}.name`}
+                value={tier.name}
                 style={{
                   fontSize: "22px",
                   fontWeight: 600,
                   fontFamily: theme["--slide-font-display"],
                   margin: "0 0 8px 0",
                 }}
-              >
-                {tier.name}
-              </h3>
-              {tier.price && (
-                <div
-                  style={{
-                    fontSize: "42px",
-                    fontWeight: 800,
-                    fontFamily: theme["--slide-font-display"],
-                    color: tier.highlight ? theme["--slide-primary"] : theme["--slide-text"],
-                  }}
-                >
-                  {tier.price}
-                </div>
-              )}
+              />
+              <EditableText
+                as="div"
+                path={`tiers.${index}.price`}
+                value={tier.price}
+                style={{
+                  fontSize: "42px",
+                  fontWeight: 800,
+                  fontFamily: theme["--slide-font-display"],
+                  color: tier.highlight ? theme["--slide-primary"] : theme["--slide-text"],
+                }}
+              />
             </div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, flex: 1, display: "flex", flexDirection: "column", gap: "14px" }}>
               {tier.features.map((feature, fIndex) => (
-                <li
+                <EditableItem as="li" path={`tiers.${index}.features`} index={fIndex} length={tier.features.length}
                   key={fIndex}
                   style={{
                     display: "flex",
@@ -134,11 +138,11 @@ export function PricingSlide({ content, theme }: { content: PricingContent; them
                   >
                     ✓
                   </span>
-                  <span>{feature}</span>
-                </li>
+                  <EditableText path={`tiers.${index}.features.${fIndex}`} value={feature} />
+                </EditableItem>
               ))}
             </ul>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

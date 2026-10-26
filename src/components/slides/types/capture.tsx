@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText } from "../editable";
 
 interface CaptureContent {
   headline: string;
@@ -29,18 +31,19 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
       }}
     >
       <header style={{ marginBottom: "48px", maxWidth: "700px" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <form
@@ -53,7 +56,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
         }}
       >
         {fields.map((field, index) => (
-          <div key={index} style={{ textAlign: "left" }}>
+          <EditableItem path="fields" index={index} length={fields.length} key={index} style={{ textAlign: "left" }}>
             <label
               style={{
                 display: "block",
@@ -63,7 +66,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
                 color: theme["--slide-text"],
               }}
             >
-              {field.label}
+              <EditableText path={`fields.${index}.label`} value={field.label} />
             </label>
             {field.type === "select" ? (
               <select
@@ -71,7 +74,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
                   width: "100%",
                   padding: "16px",
                   fontSize: "16px",
-                  background: theme["--slide-surface"],
+                  ...cardSurface(theme),
                   color: theme["--slide-text"],
                   border: `1px solid ${theme["--slide-muted"]}33`,
                   borderRadius: theme["--slide-radius"],
@@ -92,7 +95,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
                   width: "100%",
                   padding: "16px",
                   fontSize: "16px",
-                  background: theme["--slide-surface"],
+                  ...cardSurface(theme),
                   color: theme["--slide-text"],
                   border: `1px solid ${theme["--slide-muted"]}33`,
                   borderRadius: theme["--slide-radius"],
@@ -101,7 +104,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
                 placeholder={field.label}
               />
             )}
-          </div>
+          </EditableItem>
         ))}
         <button
           type="submit"
@@ -119,7 +122,7 @@ export function CaptureSlide({ content, theme }: { content: CaptureContent; them
             transition: "background 200ms ease",
           }}
         >
-          {ctaLabel}
+          <EditableText path="ctaLabel" value={ctaLabel} />
         </button>
       </form>
     </div>

@@ -12,7 +12,7 @@
  */
 
 import { createClient } from "@supabase/supabase-js";
-import type { RealtimeChannel, RealtimeProvider, SlideEvent } from "./types";
+import type { ChannelStatus, RealtimeChannel, RealtimeProvider, SlideEvent } from "./types";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -24,6 +24,8 @@ const THROTTLE_MS = 100;
 class SupabaseRealtimeChannel implements RealtimeChannel {
   private channel: ReturnType<ReturnType<typeof createClient>["channel"]>;
   private lastPublishAt = 0;
+  private status: ChannelStatus = "connecting";
+  private statusHandlers = new Set<(status: ChannelStatus) => void>();
 
   constructor(
     client: ReturnType<typeof createClient>,
@@ -32,7 +34,16 @@ class SupabaseRealtimeChannel implements RealtimeChannel {
     this.channel = client.channel(`deck:${presentToken}`, {
       config: { broadcast: { self: false } },
     });
-    this.channel.subscribe();
+    this.channel.subscribe((state) => {
+      this.status = state === "SUBSCRIBED" ? "live" : "offline";
+      for (const handler of this.statusHandlers) handler(this.status);
+    });
+  }
+
+  onStatus(handler: (status: ChannelStatus) => void): () => void {
+    this.statusHandlers.add(handler);
+    handler(this.status);
+    return () => this.statusHandlers.delete(handler);
   }
 
   publish(event: SlideEvent): void {
@@ -62,6 +73,7 @@ class SupabaseRealtimeChannel implements RealtimeChannel {
   }
 
   destroy(): void {
+    this.statusHandlers.clear();
     this.channel.unsubscribe();
   }
 }

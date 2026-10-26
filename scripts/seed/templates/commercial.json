@@ -1,9 +1,9 @@
 {
-  "title": "Commercial",
+  "title": "Système Commercial",
   "language": "fr",
   "id": "60000000-0000-4000-8000-000000000004",
   "slug": "commercial",
-  "name": "Commercial",
+  "name": "Système Commercial",
   "category": "Vente Directe",
   "description": "Tunnel commercial : prospection, découverte, présentation, objections, closing, suivi.",
   "themeId": "40000000-0000-4000-8000-000000000001",
@@ -15,11 +15,12 @@
       "script": "Merci d'être là. Je vais aller droit au but.\n\nDans les prochaines minutes, je vais te montrer exactement comment notre système peut t'aider à atteindre tes objectifs.\nPas de blabla commercial. Pas de pitch générique.\nOn va partir de ta situation réelle et voir si on peut faire quelque chose ensemble.\n\nDonc premièrement : je vais te poser quelques questions. Deuxièmement : je te montre le système. Troisièmement : on décide si ça a du sens ou pas.",
       "notes": "Démarrer en position de force calme. L'objectif du call est de découvrir, pas de pitcher.",
       "content": {
-        "kicker": "Session Stratégique — GetFunnels",
+        "kicker": "Session Stratégique — [Votre entreprise]",
         "title": "Votre Système Commercial Clé en Main",
         "subtitle": "Prospection → Découverte → Présentation → Closing",
-        "presenterName": "Hamid El Bouhali"
-      }
+        "presenterName": "[Votre nom]"
+      },
+      "needsInput": true
     },
     {
       "id": "13000000-0000-4000-8000-000000000002",
@@ -38,25 +39,26 @@
       "id": "13000000-0000-4000-8000-000000000003",
       "position": 2,
       "type": "authority",
-      "script": "Permettez-moi de me présenter rapidement.\n\nJe m'appelle Hamid El Bouhali. Je suis fondateur de GetFunnels.\nDepuis 8 ans, on construit des systèmes commerciaux pour des entreprises qui veulent passer à l'échelle.\n\nOn a travaillé avec des entrepreneurs indépendants en solo, des équipes de 2 à 5 commerciaux, et des structures plus larges.\nEt on a vu que dans 90% des cas, le problème n'est pas le commercial lui-même — c'est l'infrastructure.",
+      "script": "Permettez-moi de me présenter rapidement.\n\nJe m'appelle [Votre nom]. Je suis fondateur de [Votre entreprise].\nDepuis [X] ans, on construit des systèmes commerciaux pour des entreprises qui veulent passer à l'échelle.\n\nOn a travaillé avec des entrepreneurs indépendants en solo, des équipes de 2 à 5 commerciaux, et des structures plus larges.\nEt on a vu que dans 90% des cas, le problème n'est pas le commercial lui-même — c'est l'infrastructure.",
       "notes": "Court et précis. Mettre en avant la pertinence par rapport à la situation du prospect, pas les awards.",
       "content": {
-        "headline": "GetFunnels — Systèmes Commerciaux",
+        "headline": "[Votre entreprise] — Systèmes Commerciaux",
         "points": [
           {
-            "title": "8+ ans d'expérience terrain",
-            "text": "Plus de 470 systèmes de vente construits : solo, équipes de 2-5, structures en croissance."
+            "title": "[X]+ ans d'expérience terrain",
+            "text": "Plus de [X] systèmes de vente construits : solo, équipes de 2-5, structures en croissance."
           },
           {
             "title": "Spécialistes du marché francophone",
-            "text": "Yomi Denzel, Thami Kabbaj, Mohamed Boclet et des dizaines de clients en 6 à 7 chiffres annuels."
+            "text": "[Client 1], [Client 2], [Client 3] et des dizaines de clients en [X] chiffres annuels."
           },
           {
             "title": "Approche : infrastructure d'abord",
             "text": "On ne forme pas les commerciaux à parler mieux. On construit le système pour qu'ils aient moins à improviser."
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "13000000-0000-4000-8000-000000000004",
@@ -390,25 +392,26 @@
         "headline": "Résultats Clients — Avant / Après Système",
         "items": [
           {
-            "quote": "On est passé de 12% à 27% de taux de closing en 3 mois. Même équipe, même offre, même marché. On a juste arrêté d'improviser.",
-            "name": "Cabinet de conseil RH",
+            "quote": "[Témoignage client avec le résultat obtenu]",
+            "name": "[Client 1]",
             "role": "Équipe de 3 commerciaux",
-            "result": "12% → 27% de taux de closing"
+            "result": "[Résultat chiffré]"
           },
           {
-            "quote": "Avant je closais 1 client sur 8 prospects. Maintenant c'est 5 sur 18. Mais surtout, je sais exactement pourquoi — et je peux l'optimiser.",
-            "name": "Consultant IT indépendant",
+            "quote": "[Témoignage client avec le résultat obtenu]",
+            "name": "[Client 2]",
             "role": "Solopreneur",
-            "result": "Revenu ×4 en 90 jours"
+            "result": "[Résultat chiffré]"
           },
           {
-            "quote": "Le plus grand impact : on a arrêté de perdre des leads qualifiés dans le CRM. Ça seul, ça représentait 30% de CA supplémentaire.",
-            "name": "Agence de formation B2B",
+            "quote": "[Témoignage client avec le résultat obtenu]",
+            "name": "[Client 3]",
             "role": "Directrice commerciale",
-            "result": "+30% CA récupéré sur les leads perdus"
+            "result": "[Résultat chiffré]"
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "13000000-0000-4000-8000-000000000014",
@@ -570,7 +573,7 @@
         "tiers": [
           {
             "name": "Essentiel",
-            "price": "3 900 €",
+            "price": "[Votre prix]",
             "features": [
               "Audit commercial complet",
               "CRM configuré (1 utilisateur)",
@@ -582,7 +585,7 @@
           },
           {
             "name": "Croissance",
-            "price": "7 900 €",
+            "price": "[Votre prix]",
             "features": [
               "Tout Essentiel",
               "CRM jusqu'à 5 utilisateurs",
@@ -595,7 +598,7 @@
           },
           {
             "name": "Performance",
-            "price": "14 900 €",
+            "price": "[Votre prix]",
             "features": [
               "Tout Croissance",
               "CRM utilisateurs illimités",
@@ -606,7 +609,8 @@
             "highlight": false
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "13000000-0000-4000-8000-000000000019",
@@ -616,26 +620,47 @@
       "notes": "Comparaison objective. Ne jamais dénigrer le concurrent ou l'option de ne rien faire — juste exposer les faits.",
       "content": {
         "headline": "Comparer les Options — Une Vue Honnête",
-        "columns": ["Statu quo", "Recruter un DirCom", "Système GetFunnels"],
+        "columns": [
+          "Statu quo",
+          "Recruter un DirCom",
+          "Système [Votre entreprise]"
+        ],
         "rows": [
           {
             "label": "Investissement",
-            "values": ["0 € (mais coût caché)", "60-100k €/an", "3 900 à 14 900 €"]
+            "values": [
+              "0 € (mais coût caché)",
+              "60-100k €/an",
+              "[Votre prix]"
+            ]
           },
           {
             "label": "Délai d'effet",
-            "values": ["Jamais", "6-12 mois", "90 jours"]
+            "values": [
+              "Jamais",
+              "6-12 mois",
+              "90 jours"
+            ]
           },
           {
             "label": "Scalabilité",
-            "values": ["Non", "Partielle", "Oui"]
+            "values": [
+              "Non",
+              "Partielle",
+              "Oui"
+            ]
           },
           {
             "label": "Résultat garanti",
-            "values": ["Non", "Non", "Garanti ou remboursé"]
+            "values": [
+              "Non",
+              "Non",
+              "[Votre garantie]"
+            ]
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "13000000-0000-4000-8000-000000000020",

@@ -6,26 +6,49 @@
   "name": "RDV Classique",
   "category": "Diagnostic",
   "description": "Funnel de prise de rendez-vous : opt-in, qualification, réservation, rappels, CRM.",
-  "themeId": "40000000-0000-4000-8000-000000000001",
+  "themeId": "40000000-0000-4000-8000-000000000006",
   "slides": [
     {
       "id": "10000000-0000-4000-8000-000000000001",
       "position": 0,
       "type": "cover",
-      "script": "Tu viens d'avoir ton résultat. Maintenant je t'explique le pourquoi, et le comment.\n\nOk. Si tu vois cette vidéo, c'est que tu viens de terminer le diagnostic GetFunnels.\n\nDans les prochaines minutes, je vais faire un truc très simple :\nje vais te montrer le système qu'on te recommande, et surtout pourquoi c'est celui-là — pas un autre.\n\nL'idée n'est pas de te balancer des conseils vagues.\nJe veux que tu ressortes avec une vision claire :\nà quoi ressemble le tunnel, où ça gagne de l'argent, où ça fuit, et ce qu'il faut installer pour que ça tourne.",
+      "script": "Ok. Si tu vois cette vidéo, c'est que tu viens de terminer le diagnostic [Votre entreprise].\n\nDans les prochaines minutes, je vais faire un truc très simple :\nje vais te montrer le système qu'on te recommande, et surtout pourquoi c'est celui-là — pas un autre.\n\nL'idée n'est pas de te balancer des conseils vagues.\nJe veux que tu ressortes avec une vision claire :\nà quoi ressemble le tunnel, où ça gagne de l'argent, où ça fuit, et ce qu'il faut installer pour que ça tourne.",
+      "cue": {
+        "punchline": "Tu viens d'avoir ton résultat. Maintenant je t'explique le pourquoi, et le comment.",
+        "durationSec": 45,
+        "tag": "INTRO",
+        "transition": "On commence direct par le verdict.",
+        "bullets": [
+          "3 secondes de silence avant de commencer",
+          "Ton direct — pas de chauffe inutile",
+          "Regard caméra / prospect"
+        ]
+      },
       "content": {
         "kicker": "Diagnostic Complet",
         "title": "Tunnel RDV — Architecture Core",
         "subtitle": "De trafic → RDV → ventes. Avec un système. Pas au feeling.",
-        "presenterName": "Hamid El Bouhali"
-      }
+        "presenterName": "[Votre nom]"
+      },
+      "needsInput": true
     },
     {
       "id": "10000000-0000-4000-8000-000000000002",
       "position": 1,
       "type": "statement",
       "notes": "Frappe immédiate. Le verdict doit être clair dès les 3 premières secondes. Insister sur 'selon vos réponses' pour la personnalisation.",
-      "script": "Ton problème n'est pas 'manque de leads'. Ton problème c'est 'manque de système'.\n\nOk. Résultat du diagnostic : Tunnel RDV Classique.\n\nEt c'est cohérent avec tes réponses : tu as indiqué vouloir vendre en RDV — ou en hybride RDV + paiement selon les cas.\n\nDonc on commence par le modèle le plus rentable à froid :\nqualification + conversation + closing.\n\nParce qu'un prospect froid, aujourd'hui, il ne paye pas \"par magie\".\nIl paye quand :\nil comprend,\nil te fait confiance,\net il sent que tu as un process.\n\nEt le RDV classique, c'est le socle le plus simple pour mettre ça en place vite, proprement.\n\nL'objectif ici, ce n'est pas de \"faire un tunnel\".\nC'est de construire une machine simple :\nattirer → qualifier → réserver → closer → relancer → optimiser.\n\nUn système qui tourne même quand toi tu n'es pas au top.",
+      "script": "Ok. Résultat du diagnostic : Tunnel RDV Classique.\n\nEt c'est cohérent avec tes réponses : tu as indiqué vouloir vendre en RDV — ou en hybride RDV + paiement selon les cas.\n\nDonc on commence par le modèle le plus rentable à froid :\nqualification + conversation + closing.\n\nParce qu'un prospect froid, aujourd'hui, il ne paye pas \"par magie\".\nIl paye quand :\nil comprend,\nil te fait confiance,\net il sent que tu as un process.\n\nEt le RDV classique, c'est le socle le plus simple pour mettre ça en place vite, proprement.\n\nL'objectif ici, ce n'est pas de \"faire un tunnel\".\nC'est de construire une machine simple :\nattirer → qualifier → réserver → closer → relancer → optimiser.\n\nUn système qui tourne même quand toi tu n'es pas au top.",
+      "cue": {
+        "punchline": "Ton problème n'est pas 'manque de leads'. Ton problème c'est 'manque de système'.",
+        "durationSec": 120,
+        "tag": "VERDICT",
+        "transition": "Avant de te montrer la machine, je dois poser une base : qui suis-je pour te dire ça ?",
+        "bullets": [
+          "Insister sur 'selon TES réponses' — personnalisation",
+          "Pause après chaque ligne du flow",
+          "Chercher le hochement de tête"
+        ]
+      },
       "content": {
         "eyebrow": "Système Recommandé",
         "headline": "TUNNEL RDV CLASSIQUE",
@@ -38,31 +61,54 @@
       "position": 2,
       "type": "authority",
       "notes": "Établir crédibilité rapidement. Noms clients = preuve sociale. Ne pas s'attarder, juste planter le contexte.",
-      "script": "Je ne vends pas des idées. Je construis des systèmes qui vendent.\n\nJe m'appelle Hamid El Bouhali, fondateur de GetFunnels.\n\nDepuis plus de 8 ans, on construit des systèmes complets : funnels + CRM + automatisations, avec une logique simple : convertir sans chaos.\n\nOn a travaillé avec des références comme :\nYomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini… et d'autres, sur le marché francophone et anglophone.\n\nEt ce qui est intéressant, c'est que peu importe le secteur, on retrouve toujours le même schéma :\nles gens pensent que leur problème, c'est le trafic…\nalors que leur vrai problème, c'est l'architecture.\n\nEt quand tu corriges l'architecture, souvent, tu n'as même pas besoin de doubler ton budget pub pour doubler tes ventes.",
+      "script": "Je m'appelle [Votre nom], fondateur de [Votre entreprise].\n\nDepuis plus de [X] ans, on construit des systèmes complets : funnels + CRM + automatisations, avec une logique simple : convertir sans chaos.\n\nOn a travaillé avec des références comme :\n[Client 1], [Client 2], [Client 3], [Client 4], [Client 5]… et d'autres, sur le marché francophone et anglophone.\n\nEt ce qui est intéressant, c'est que peu importe le secteur, on retrouve toujours le même schéma :\nles gens pensent que leur problème, c'est le trafic…\nalors que leur vrai problème, c'est l'architecture.\n\nEt quand tu corriges l'architecture, souvent, tu n'as même pas besoin de doubler ton budget pub pour doubler tes ventes.",
+      "cue": {
+        "punchline": "Je ne vends pas des idées. Je construis des systèmes qui vendent.",
+        "durationSec": 90,
+        "tag": "AUTORITÉ",
+        "transition": "Je te montre exactement à quoi ressemble ce problème dans 90% des business.",
+        "bullets": [
+          "90 sec max — aller vite",
+          "Citer les noms avec assurance",
+          "Finir sur 'l'architecture' — mot clé de toute la prez"
+        ]
+      },
       "content": {
-        "headline": "Hamid El Bouhali",
+        "headline": "[Votre nom]",
         "points": [
           {
-            "title": "Fondateur de GetFunnels",
-            "text": "Depuis 8+ ans, on construit des systèmes de vente complets : funnels + CRM + automatisations pour des entrepreneurs qui font du 6 à 7 chiffres."
+            "title": "Fondateur de [Votre entreprise]",
+            "text": "Depuis [X]+ ans, on construit des systèmes de vente complets : funnels + CRM + automatisations pour des entrepreneurs qui font du [X] chiffres."
           },
           {
-            "title": "8+ ans · +470 funnels créés",
-            "text": "Clients en 6 à 7 chiffres. On a bossé avec : Yomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini."
+            "title": "[X]+ ans · +[X] funnels créés",
+            "text": "Clients en [X] chiffres. On a bossé avec : [Client 1], [Client 2], [Client 3], [Client 4], [Client 5]."
           },
           {
             "title": "Une vérité simple",
             "text": "Le problème n°1 n'est pas \"la pub\". C'est l'architecture."
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "10000000-0000-4000-8000-000000000004",
       "position": 3,
       "type": "problem",
       "notes": "Créer la douleur. Les prospects doivent se reconnaître dans au moins 3 des 6 points.",
-      "script": "Tu ne manques pas de prospects. Tu perds ceux que tu as déjà.\n\nDans la majorité des cas, le système fuit.\n\nPas parce que l'offre est nulle.\nPas parce que la pub est \"morte\".\nMais parce que derrière… il n'y a pas de machine.\n\nCe qu'on voit partout :\nune page isolée\nun calendrier posé au hasard\naucune vraie qualification\nzéro relance WhatsApp\ndes RDV fantômes\nun CRM vide\n\nDonc tu te retrouves avec le pire des mondes :\ntu payes pour des leads… et tu payes en plus en temps et en énergie pour courir derrière.\n\nEt le plus dangereux : quand tu rajoutes du trafic sur un système qui fuit, tu ne scales pas…\ntu augmentes tes pertes.",
+      "script": "Dans la majorité des cas, le système fuit.\n\nPas parce que l'offre est nulle.\nPas parce que la pub est \"morte\".\nMais parce que derrière… il n'y a pas de machine.\n\nCe qu'on voit partout :\nune page isolée\nun calendrier posé au hasard\naucune vraie qualification\nzéro relance WhatsApp\ndes RDV fantômes\nun CRM vide\n\nDonc tu te retrouves avec le pire des mondes :\ntu payes pour des leads… et tu payes en plus en temps et en énergie pour courir derrière.\n\nEt le plus dangereux : quand tu rajoutes du trafic sur un système qui fuit, tu ne scales pas…\ntu augmentes tes pertes.",
+      "cue": {
+        "punchline": "Tu ne manques pas de prospects. Tu perds ceux que tu as déjà.",
+        "durationSec": 90,
+        "tag": "DOULEUR",
+        "transition": "Donc avant de parler 'RDV', on clarifie un truc : c'est quoi un tunnel, vraiment ?",
+        "bullets": [
+          "Égrener chaque point lentement",
+          "Pause après 'il n'y a pas de machine'",
+          "Ton empathique — pas accusateur"
+        ]
+      },
       "content": {
         "headline": "La plupart pensent : \"il me faut plus de leads.\"",
         "intro": "En réalité : ils ont un système qui fuit — 40-70% de perte de potentiel. Résultat : ça coûte cher, ça fatigue, et ça ne scale pas.",
@@ -91,7 +137,18 @@
       "position": 4,
       "type": "definition",
       "notes": "Définition simple pour ceux qui ne connaissent pas. Ne pas être technique, rester sur le bénéfice.",
-      "script": "Un tunnel, c'est un parcours. Pas une page.\n\nUn tunnel, c'est une suite d'étapes qui transforme un inconnu en client — de façon contrôlée.\n\nUn bon tunnel fait 5 choses :\nil attire avec une promesse claire\nil réduit la friction\nit relance automatiquement\nil suit les données\nil s'améliore dans le temps\n\nSans tunnel : tu vends quand tu as de la chance.\nAvec tunnel : tu vends parce que le système fait avancer la personne.",
+      "script": "Un tunnel, c'est une suite d'étapes qui transforme un inconnu en client — de façon contrôlée.\n\nUn bon tunnel fait 5 choses :\nil attire avec une promesse claire\nil réduit la friction\nit relance automatiquement\nil suit les données\nil s'améliore dans le temps\n\nSans tunnel : tu vends quand tu as de la chance.\nAvec tunnel : tu vends parce que le système fait avancer la personne.",
+      "cue": {
+        "punchline": "Un tunnel, c'est un parcours. Pas une page.",
+        "durationSec": 60,
+        "tag": "CONCEPT",
+        "transition": "Maintenant, pourquoi dans ton cas, c'est le RDV classique qui est le bon tunnel ?",
+        "bullets": [
+          "Appuyer sur 'de façon contrôlée'",
+          "Contraste sans / avec = évidence",
+          "5 points — compter sur les doigts si besoin"
+        ]
+      },
       "content": {
         "headline": "Un tunnel, c'est une suite d'étapes qui transforme un inconnu en client — de façon contrôlée et systématique.",
         "body": "Étapes : Inconnu → Intéressé → Qualifié → Client. Sans tunnel → vous vendez quand vous avez de la chance. Avec tunnel → vous vendez quand le système tourne.",
@@ -120,7 +177,18 @@
       "position": 5,
       "type": "why",
       "notes": "Cohérence avec diagnostic. Rappeler que c'est basé sur LEURS réponses. Logique > vente.",
-      "script": "À froid, le RDV convertit. Le paiement direct vient après.\n\nOn recommande le RDV classique quand :\ntu vends une prestation / consulting / accompagnement\nton prix demande confiance + cadrage + diagnostic\ntu veux filtrer (pas parler à tout le monde)\ntu veux augmenter la conversion sans complexifier\n\nEt surtout : cohérence totale avec tes réponses.\nTu as indiqué vouloir vendre en RDV (ou hybride).\n\nDonc on installe d'abord le socle RDV.\nLe paiement direct, c'est une étape d'après.\nD'abord on fait tourner la machine. Ensuite on automatise plus.",
+      "script": "On recommande le RDV classique quand :\ntu vends une prestation / consulting / accompagnement\nton prix demande confiance + cadrage + diagnostic\ntu veux filtrer (pas parler à tout le monde)\ntu veux augmenter la conversion sans complexifier\n\nEt surtout : cohérence totale avec tes réponses.\nTu as indiqué vouloir vendre en RDV (ou hybride).\n\nDonc on installe d'abord le socle RDV.\nLe paiement direct, c'est une étape d'après.\nD'abord on fait tourner la machine. Ensuite on automatise plus.",
+      "cue": {
+        "punchline": "À froid, le RDV convertit. Le paiement direct vient après.",
+        "durationSec": 90,
+        "tag": "LOGIQUE",
+        "transition": "Ok. Maintenant, ce tunnel doit produire quoi exactement ?",
+        "bullets": [
+          "Rappeler que c'est basé sur LEUR diagnostic",
+          "Ouvrir la porte au paiement direct = vision long terme",
+          "Pas de vente — juste de la logique"
+        ]
+      },
       "content": {
         "headline": "On recommande RDV Classique quand :",
         "reasons": [
@@ -152,7 +220,18 @@
       "position": 6,
       "type": "objectives",
       "notes": "3 objectifs = clarté. Insister sur 'qualité > quantité'. RDV qualifiés >>> leads.",
-      "script": "Le but n'est pas de booker. Le but, c'est de closer.\n\nLe RDV classique a 3 objectifs très précis :\n\naugmenter la qualité des prospects qui bookent\nréduire les no-shows avec du multi-canal\naugmenter le close rate avec un pré-frame et un scoring\n\nEt le KPI principal n'est pas ' combien de leads'.\nC'est : combien de RDV qualifiés + combien de ventes.",
+      "script": "Le RDV classique a 3 objectifs très précis :\n\naugmenter la qualité des prospects qui bookent\nréduire les no-shows avec du multi-canal\naugmenter le close rate avec un pré-frame et un scoring\n\nEt le KPI principal n'est pas ' combien de leads'.\nC'est : combien de RDV qualifiés + combien de ventes.",
+      "cue": {
+        "punchline": "Le but n'est pas de booker. Le but, c'est de closer.",
+        "durationSec": 60,
+        "tag": "OBJECTIFS",
+        "transition": "Pour obtenir ça, il faut un flow clair. Je te le montre.",
+        "bullets": [
+          "Égrener les 3 avec des pauses marquées",
+          "Insister sur 'qualité, pas volume'",
+          "KPI final = ancrage pour la suite"
+        ]
+      },
       "content": {
         "headline": "Ce qu'on vise vraiment",
         "goals": [
@@ -179,7 +258,18 @@
       "position": 7,
       "type": "flow",
       "notes": "Vue d'ensemble. Montrer que c'est un SYSTÈME, pas des pages isolées. Flow = machine.",
-      "script": "Si tu ne peux pas dessiner le système, tu ne peux pas le scaler.\n\nLe flow est simple :\nTrafic → Opt-in → Qualification → Booking → Confirmation → Show-up → Closing → Follow-up.\n\nEt la règle d'or :\nchaque étape doit avoir :\nune page dédiée\nun événement tracké\nune automation associée\n\nSinon tu ne pilotes rien. Tu subis.",
+      "script": "Le flow est simple :\nTrafic → Opt-in → Qualification → Booking → Confirmation → Show-up → Closing → Follow-up.\n\nEt la règle d'or :\nchaque étape doit avoir :\nune page dédiée\nun événement tracké\nune automation associée\n\nSinon tu ne pilotes rien. Tu subis.",
+      "cue": {
+        "punchline": "Si tu ne peux pas dessiner le système, tu ne peux pas le scaler.",
+        "durationSec": 90,
+        "tag": "ARCHITECTURE",
+        "transition": "Maintenant on rentre dans l'architecture des pages.",
+        "bullets": [
+          "Suivre le flow avec le curseur ou la main",
+          "Insister sur 'chaque étape tracke'",
+          "Finir fort : 'tu subis'"
+        ]
+      },
       "content": {
         "headline": "Le parcours complet",
         "steps": [
@@ -221,7 +311,18 @@
       "position": 8,
       "type": "architecture",
       "notes": "Architecture = fondation. Chaque page a un rôle. Mentionner que la page 5 (pré-frame) est optionnelle mais puissante.",
-      "script": "Une bonne page ne suffit pas. Il faut une chaîne.\n\nPages :\nOpt-in : promesse + capture simple\nPré-qualification : questions + scoring + tri\nBooking : calendrier + règles\nConfirmation : consignes + micro-engagement\nPré-frame (optionnel) : à faire avant le call\n\nPourquoi ? Parce que ton agenda, c'est ton stock.\nEt un stock rempli de touristes… ça coûte cher.",
+      "script": "Pages :\nOpt-in : promesse + capture simple\nPré-qualification : questions + scoring + tri\nBooking : calendrier + règles\nConfirmation : consignes + micro-engagement\nPré-frame (optionnel) : à faire avant le call\n\nPourquoi ? Parce que ton agenda, c'est ton stock.\nEt un stock rempli de touristes… ça coûte cher.",
+      "cue": {
+        "punchline": "Une bonne page ne suffit pas. Il faut une chaîne.",
+        "durationSec": 90,
+        "tag": "PAGES",
+        "transition": "Ok. La base : l'opt-in. Qu'est-ce qu'on met dessus pour que ça convertisse ?",
+        "bullets": [
+          "Dérouler les 5 pages une par une",
+          "Appuyer sur l'analogie 'stock'",
+          "Pré-frame = carte bonus, ne pas survendre"
+        ]
+      },
       "content": {
         "headline": "L'architecture multi-pages",
         "layers": [
@@ -255,22 +356,43 @@
     {
       "id": "10000000-0000-4000-8000-000000000010",
       "position": 9,
-      "type": "capture",
+      "type": "mockup",
       "notes": "Opt-in = efficacité, pas beauté. Répéter le punchline 'direct + efficace'.",
-      "script": "Opt-in : direct, clair, sans cinéma.\n\nSur l'opt-in, tu veux :\nheadline orientée résultat\npourquoi maintenant (douleur + timing)\n3 bullets : ce que la personne obtient\nà qui c'est pour / pas pour\npreuve : logos, mini témoignages, chiffres\nformulaire ultra simple\nCTA clair\n\nEt une vérité : l'opt-in n'a pas besoin d'être joli.\nIl doit être efficace.",
+      "script": "Sur l'opt-in, tu veux :\nheadline orientée résultat\npourquoi maintenant (douleur + timing)\n3 bullets : ce que la personne obtient\nà qui c'est pour / pas pour\npreuve : logos, mini témoignages, chiffres\nformulaire ultra simple\nCTA clair\n\nEt une vérité : l'opt-in n'a pas besoin d'être joli.\nIl doit être efficace.",
+      "cue": {
+        "punchline": "Opt-in : direct, clair, sans cinéma.",
+        "durationSec": 75,
+        "tag": "OPT-IN",
+        "transition": "Et maintenant, la pièce que 90% oublient : la pré-qualification.",
+        "bullets": [
+          "Répéter 'efficace > joli' comme mantra",
+          "Pointer les éléments visuels si dispo",
+          "Finir sur la transition pré-qual"
+        ]
+      },
       "content": {
         "headline": "Structure de la page d'opt-in",
-        "fields": [
+        "page": "optin",
+        "blocks": [
           {
-            "label": "Nom",
-            "type": "text"
+            "label": "Titre accrocheur",
+            "detail": "Promesse forte"
           },
           {
-            "label": "Email",
-            "type": "email"
+            "label": "Bénéfices",
+            "detail": "3 lignes à puces"
+          },
+          {
+            "label": "Preuve sociale",
+            "detail": "3 avatars"
+          },
+          {
+            "label": "Formulaire",
+            "detail": "Nom · Email"
           }
         ],
-        "ctaLabel": "Réserver mon RDV Gratuit"
+        "cta": "Réserver mon RDV Gratuit",
+        "aside": "Titre accrocheur (promesse forte) · Points de douleur (3-4 max) · Bénéfices clairs (bullet points) · Qui c'est pour (ciblage) · Preuve sociale (témoignages/chiffres) · Formulaire simple (nom + email) · CTA évident"
       }
     },
     {
@@ -278,7 +400,18 @@
       "position": 10,
       "type": "qualification",
       "notes": "CLÉS DU SYSTÈME. Expliquer que moins de RDV = plus de ventes. Scoring automatique = game changer.",
-      "script": "Moins de RDV. Plus de ventes.\n\nLa pré-qualification sert à sortir :\ncurieux, hors-cible, 'pas de budget', chasseurs de conseils.\n\nFormat : 5 à 8 questions max.\nScoring automatique.\nEt derrière :\nqualifié → calendrier\nlimite → nurturing / ressource\nhors-cible → message propre\n\nÇa fait un truc simple : tu passes d'un agenda rempli…\nà un agenda rentable.",
+      "script": "La pré-qualification sert à sortir :\ncurieux, hors-cible, 'pas de budget', chasseurs de conseils.\n\nFormat : 5 à 8 questions max.\nScoring automatique.\nEt derrière :\nqualifié → calendrier\nlimite → nurturing / ressource\nhors-cible → message propre\n\nÇa fait un truc simple : tu passes d'un agenda rempli…\nà un agenda rentable.",
+      "cue": {
+        "punchline": "Moins de RDV. Plus de ventes.",
+        "durationSec": 90,
+        "tag": "CLÉ DU SYSTÈME",
+        "transition": "Même avec de bons prospects, si la suite est mal gérée, tu perds tout. Parlons automations.",
+        "bullets": [
+          "Paradoxe MOINS = PLUS — laisser le silence faire effet",
+          "Scoring auto = rassurer sur la technique",
+          "Exemple concret si dispo"
+        ]
+      },
       "content": {
         "headline": "L'arme secrète : pré-qualifier",
         "questions": [
@@ -307,7 +440,18 @@
       "position": 11,
       "type": "automation",
       "notes": "Ce que personne ne fait. Automations = différence entre système et page. 3 moments clés à expliquer.",
-      "script": "Sans relance, tu payes pour te faire ghost.\n\nQuand quelqu'un book :\nemail confirmation immédiat\nWhatsApp confirmation immédiat\najout calendrier + rappels\ntags + pipeline stage\nattribution closer si besoin\n\nAvant le call :\nrappel J-1 / H-3 / H-1\nconsignes simples\npré-frame : 'voici comment venir prêt'\n\nAprès le call :\nno-show → relance + rebooking\nintéressé → next step + preuves\npas prêt → nurturing",
+      "script": "Quand quelqu'un book :\nemail confirmation immédiat\nWhatsApp confirmation immédiat\najout calendrier + rappels\ntags + pipeline stage\nattribution closer si besoin\n\nAvant le call :\nrappel J-1 / H-3 / H-1\nconsignes simples\npré-frame : 'voici comment venir prêt'\n\nAprès le call :\nno-show → relance + rebooking\nintéressé → next step + preuves\npas prêt → nurturing",
+      "cue": {
+        "punchline": "Sans relance, tu payes pour te faire ghost.",
+        "durationSec": 120,
+        "tag": "AUTOMATISATION",
+        "transition": "Et si je devais isoler une seule chose qui réduit le no-show… c'est WhatsApp.",
+        "bullets": [
+          "Dérouler les 3 blocs : booking / avant / après",
+          "Insister sur no-show prevention",
+          "'Le système travaille pendant que tu dors'"
+        ]
+      },
       "content": {
         "headline": "90% ne font pas ces automations",
         "items": [
@@ -335,7 +479,18 @@
       "position": 12,
       "type": "channel",
       "notes": "WhatsApp = indispensable. Sans ça, no-shows massifs. Micro-engagement = clé.",
-      "script": "WhatsApp = présence. Sans ça, tu vas souffrir.\n\nWhatsApp crée du micro-engagement.\nLa personne répond. Et quand elle répond, elle s'engage.\n\nMoments clés :\nimmédiat : confirmation + lien + 'réponds OK'\nJ-1 : rappel + 'toujours bon ?'\nH-3 : 'réponds 1 pour confirmer'\npost-call : récap + prochaine étape\n\nC'est simple. Brut. Et ça change tout.",
+      "script": "WhatsApp crée du micro-engagement.\nLa personne répond. Et quand elle répond, elle s'engage.\n\nMoments clés :\nimmédiat : confirmation + lien + 'réponds OK'\nJ-1 : rappel + 'toujours bon ?'\nH-3 : 'réponds 1 pour confirmer'\npost-call : récap + prochaine étape\n\nC'est simple. Brut. Et ça change tout.",
+      "cue": {
+        "punchline": "WhatsApp = présence. Sans ça, tu vas souffrir.",
+        "durationSec": 75,
+        "tag": "WHATSAPP",
+        "transition": "Maintenant : sans CRM, tout ça devient du chaos.",
+        "bullets": [
+          "Insister sur 'engagement' — pas spam",
+          "Micro-réponse = micro-engagement = show-up",
+          "Ton direct — cette slide doit marquer"
+        ]
+      },
       "content": {
         "headline": "WhatsApp = l'outil #1 pour zéro no-show",
         "channel": "whatsapp",
@@ -360,7 +515,18 @@
       "position": 13,
       "type": "crm",
       "notes": "CRM = trackability. Si pas tracké, pas optimisable. Phrase clé à répéter.",
-      "script": "Si ce n'est pas tracké, ce n'est pas optimisable.\n\nLe tunnel doit alimenter :\npipeline clair\ntags propres (source, statut, offre)\nopportunités (valeur estimée)\ntâches follow-up\n\nSinon tu ne sais pas où ça casse.\nEt tu ne sais pas quoi corriger.",
+      "script": "Le tunnel doit alimenter :\npipeline clair\ntags propres (source, statut, offre)\nopportunités (valeur estimée)\ntâches follow-up\n\nSinon tu ne sais pas où ça casse.\nEt tu ne sais pas quoi corriger.",
+      "cue": {
+        "punchline": "Si ce n'est pas tracké, ce n'est pas optimisable.",
+        "durationSec": 60,
+        "tag": "SUIVI",
+        "transition": "C'est exactement pour ça que Funnelytics est indispensable : tu vois la machine entière.",
+        "bullets": [
+          "'Piloter, pas deviner'",
+          "Pipeline = vocabulaire commun avec le prospect",
+          "Transition rapide vers Funnelytics"
+        ]
+      },
       "content": {
         "headline": "Le tunnel doit alimenter",
         "pipelines": [
@@ -386,101 +552,133 @@
     {
       "id": "10000000-0000-4000-8000-000000000015",
       "position": 14,
-      "type": "analytics",
+      "type": "embed",
       "notes": "SCHÉMA CLÉ. Montrer comment tout est connecté. 'Machine, pas une page' = punchline à répéter.",
-      "script": "Voici la machine. Pas une page.\n\nDans Funnelytics, tu visualises :\nentrées trafic\npages\nevents trackés\nautomations reliées\n\nDonc tu sais : où ça bloque, où ça fuit, et quoi corriger en premier.\nC'est une radiographie du système.",
+      "script": "Dans Funnelytics, tu visualises :\nentrées trafic\npages\nevents trackés\nautomations reliées\n\nDonc tu sais : où ça bloque, où ça fuit, et quoi corriger en premier.\nC'est une radiographie du système.",
+      "cue": {
+        "punchline": "Voici la machine. Pas une page.",
+        "durationSec": 120,
+        "tag": "VUE D'ENSEMBLE",
+        "transition": "Ok. Maintenant du concret : des exemples de pages.",
+        "bullets": [
+          "Pointer les blocs dans l'ordre",
+          "Répéter 'radiographie' — image forte",
+          "Finir sur 'corriger en premier' = priorisation"
+        ]
+      },
       "content": {
         "headline": "Voici la machine",
-        "metrics": [
-          {
-            "name": "Trafic tracké",
-            "definition": "Meta, Google et autres sources"
-          },
-          {
-            "name": "Pages optimisées",
-            "definition": "Opt-in → Pré-qual → Booking → RDV"
-          },
-          {
-            "name": "Automations",
-            "definition": "Email, WhatsApp à chaque étape"
-          },
-          {
-            "name": "Analytics réel",
-            "definition": "Voir chaque conversion, chaque drop"
-          }
-        ]
-      }
+        "title": "Schéma Funnelytics",
+        "caption": "Pas une page. Le système complet en action."
+      },
+      "needsInput": true
     },
     {
       "id": "10000000-0000-4000-8000-000000000016",
       "position": 15,
-      "type": "gallery",
+      "type": "showcase",
       "notes": "Preuve visuelle. 'On ne théorise pas, on construit' = message simple. Transition rapide.",
-      "script": "On ne théorise pas. On construit.\n\nIci tu vois des exemples réels : opt-in, qualification, confirmation, calendrier.\n\nLe but : que tu visualises le truc, pas que tu l'imagines.\n\nParce que la différence entre 'je comprends' et 'je peux l'exécuter', c'est ça.",
+      "script": "Ici tu vois des exemples réels : opt-in, qualification, confirmation, calendrier.\n\nLe but : que tu visualises le truc, pas que tu l'imagines.\n\nParce que la différence entre 'je comprends' et 'je peux l'exécuter', c'est ça.",
+      "cue": {
+        "punchline": "On ne théorise pas. On construit.",
+        "durationSec": 45,
+        "tag": "PREUVE",
+        "transition": "Et cette machine, elle te donne quoi concrètement ?",
+        "bullets": [
+          "45 sec max — ne pas sur-expliquer",
+          "Pointer 1-2 exemples proches du secteur",
+          "Transition fluide vers les gains"
+        ]
+      },
       "content": {
         "headline": "À quoi ça ressemble",
         "items": [
           {
-            "caption": "MyBusiness Passion"
+            "title": "[Page client 1]"
           },
           {
-            "caption": "Présentation V2"
+            "title": "[Page client 2]"
           },
           {
-            "caption": "Seller Performance"
+            "title": "[Page client 3]"
           },
           {
-            "caption": "Top Paris 2025"
+            "title": "[Page client 4]"
           },
           {
-            "caption": "Finances Liberté"
+            "title": "[Page client 5]"
           },
           {
-            "caption": "Page de Vente 1"
+            "title": "[Page client 6]"
           },
           {
-            "caption": "Page de Vente 2"
+            "title": "[Page client 7]"
           },
           {
-            "caption": "Sales Page"
+            "title": "[Page client 8]"
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "10000000-0000-4000-8000-000000000017",
       "position": 16,
       "type": "proof",
-      "script": "Ce n'est pas moi qui le dis. Ce sont les chiffres.\n\nLes résultats parlent d'eux-mêmes.\n\nCe que tu vois ici, ce sont des cas réels :\ndes gens qui avaient exactement le même point de départ que toi.\n\nPas des success stories triées.\nDes systèmes qu'on a installés, qui tournent, et qui produisent.\n\nCe qu'on mesure à chaque fois :\ncoût par RDV qualifié\ntaux de show-up\ntaux de closing\n\nParce qu'un bon système, ça se prouve. Pas ça se vend.",
+      "script": "Les résultats parlent d'eux-mêmes.\n\nCe que tu vois ici, ce sont des cas réels :\ndes gens qui avaient exactement le même point de départ que toi.\n\nPas des success stories triées.\nDes systèmes qu'on a installés, qui tournent, et qui produisent.\n\nCe qu'on mesure à chaque fois :\ncoût par RDV qualifié\ntaux de show-up\ntaux de closing\n\nParce qu'un bon système, ça se prouve. Pas ça se vend.",
+      "cue": {
+        "punchline": "Ce n'est pas moi qui le dis. Ce sont les chiffres.",
+        "durationSec": 90,
+        "tag": "PREUVES",
+        "transition": "Et cette machine, elle te donne quoi concrètement ?",
+        "bullets": [
+          "Pointer les résultats visuels à l'écran",
+          "Ton factuel — pas de survente",
+          "Laisser le prospect regarder quelques secondes avant de parler"
+        ]
+      },
       "content": {
         "headline": "On ne \"devine\" rien. On mesure tout.",
         "items": [
           {
             "name": "Gross Sales",
-            "result": "385 241 $",
+            "result": "[X]",
             "quote": "Un tunnel, c'est une machine. Et une machine, ça se pilote avec des chiffres."
           },
           {
             "name": "Opt-in Rate",
-            "result": "13.81%"
+            "result": "[X]"
           },
           {
             "name": "Earnings / Click",
-            "result": "5,08 $"
+            "result": "[X]"
           },
           {
             "name": "Exemple réel",
-            "quote": "Les chiffres varient selon l'offre et le trafic. Nous, on construit pour piloter."
+            "quote": "Les chiffres varient selon l'offre et le trafic. Nous, on construit pour piloter.",
+            "result": "[X]"
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "10000000-0000-4000-8000-000000000018",
       "position": 17,
       "type": "benefits",
       "notes": "Récap des gains concrets. Finir sur 'sortir du je lance et je prie'. Transformation mindset.",
-      "script": "Tu sors du chaos.\n\nTu gagnes :\nplus de RDV qualifiés\nmoins de no-shows\nun process duplicable\nun suivi clair\nune exécution simple en équipe\nune croissance pilotée\n\nTu passes de 'je lance et je prie'\nà 'je lance et je contrôle'.",
+      "script": "Tu gagnes :\nplus de RDV qualifiés\nmoins de no-shows\nun process duplicable\nun suivi clair\nune exécution simple en équipe\nune croissance pilotée\n\nTu passes de 'je lance et je prie'\nà 'je lance et je contrôle'.",
+      "cue": {
+        "punchline": "Tu sors du chaos.",
+        "durationSec": 75,
+        "tag": "BÉNÉFICES",
+        "transition": "Et comme tout est mesurable, on parle des chiffres qu'on suit vraiment.",
+        "bullets": [
+          "Égrener lentement",
+          "Finir fort sur 'je contrôle'",
+          "Regard direct — cette phrase doit atterrir"
+        ]
+      },
       "content": {
         "headline": "Un système qui délivre",
         "benefits": [
@@ -516,7 +714,18 @@
       "position": 18,
       "type": "kpi",
       "notes": "Mesurabilité = pro. Chaque KPI dit où corriger. 'Pas au hasard' = phrase clé.",
-      "script": "Chaque chiffre dit où ça casse.\n\nOn suit des indicateurs simples :\nCTR : sur 100 personnes qui voient, combien cliquent\nCVR opt-in : sur 100 visiteurs, combien laissent leurs infos\nbooking : combien prennent un RDV\nshow-up : combien viennent\nclosing : combien signent\ncoût par client : combien ça coûte pour signer\n\nL'intérêt : on ne corrige pas au hasard.\nOn corrige là où ça casse.",
+      "script": "On suit des indicateurs simples :\nCTR : sur 100 personnes qui voient, combien cliquent\nCVR opt-in : sur 100 visiteurs, combien laissent leurs infos\nbooking : combien prennent un RDV\nshow-up : combien viennent\nclosing : combien signent\ncoût par client : combien ça coûte pour signer\n\nL'intérêt : on ne corrige pas au hasard.\nOn corrige là où ça casse.",
+      "cue": {
+        "punchline": "Chaque chiffre dit où ça casse.",
+        "durationSec": 90,
+        "tag": "MESURABLE",
+        "transition": "Et pour éviter de perdre du temps, voici les 3 erreurs qui tuent ce système.",
+        "bullets": [
+          "Pointer chaque KPI à l'écran",
+          "Ne pas aller trop vite — chaque chiffre compte",
+          "Finir sur 'là où ça casse' = précision chirurgicale"
+        ]
+      },
       "content": {
         "headline": "Ce qu'on mesure vraiment",
         "metrics": [
@@ -544,7 +753,18 @@
       "position": 19,
       "type": "mistakes",
       "notes": "Erreurs fatales. Créer l'urgence. 'On corrige dès le départ' = rassurance.",
-      "script": "Tu peux avoir une bonne offre… et quand même perdre.\n\n1) pas de pré-qualification → agenda rempli de touristes\n2) pas de WhatsApp → no-show massif\n3) pas de pré-frame → call = éducation, pas conversion\n\nNous, on corrige ça dès le départ.",
+      "script": "1) pas de pré-qualification → agenda rempli de touristes\n2) pas de WhatsApp → no-show massif\n3) pas de pré-frame → call = éducation, pas conversion\n\nNous, on corrige ça dès le départ.",
+      "cue": {
+        "punchline": "Tu peux avoir une bonne offre… et quand même perdre.",
+        "durationSec": 75,
+        "tag": "ERREURS",
+        "transition": "Ok. Maintenant : comment on l'implémente sans perdre des semaines ?",
+        "bullets": [
+          "Égrener les 3 avec gravité — pas de rush",
+          "Identifier laquelle correspond au prospect",
+          "Finir sur 'dès le départ' — rassurer"
+        ]
+      },
       "content": {
         "headline": "Ce qui tue un RDV funnel",
         "mistakes": [
@@ -568,7 +788,18 @@
       "position": 20,
       "type": "plan",
       "notes": "Plan simple = rassurant. 5 étapes claires. 'Base propre avant accélération' = message.",
-      "script": "On construit propre. Puis on accélère.\n\nÉtape 1 : cadrage\nÉtape 2 : copy + structure\nÉtape 3 : design + intégration\nÉtape 4 : CRM + automations + tracking\nÉtape 5 : lancement + optimisation\n\nParce que si tu accélères sur un système bancal…\ntu accélères juste tes pertes.",
+      "script": "Étape 1 : cadrage\nÉtape 2 : copy + structure\nÉtape 3 : design + intégration\nÉtape 4 : CRM + automations + tracking\nÉtape 5 : lancement + optimisation\n\nParce que si tu accélères sur un système bancal…\ntu accélères juste tes pertes.",
+      "cue": {
+        "punchline": "On construit propre. Puis on accélère.",
+        "durationSec": 90,
+        "tag": "PLAN",
+        "transition": "Si tu veux qu'on te l'installe proprement, voilà la prochaine étape.",
+        "bullets": [
+          "Dérouler les 5 étapes avec rythme",
+          "Finir sur la phrase choc — laisser résonner",
+          "Donner un délai si demandé"
+        ]
+      },
       "content": {
         "headline": "Plan pas à pas",
         "phases": [
@@ -610,7 +841,19 @@
       "position": 21,
       "type": "cta",
       "notes": "CLOSE. CTA clair : candidature, pas vente. 3 bullets = clarté. 'On ne prend pas tout le monde' = exclusivité. Laisser respirer 2-3 sec avant Q&A.",
-      "script": "Si tu veux arrêter de perdre des leads, c'est maintenant.\n\nOk. Là tu as compris la logique :\nle tunnel RDV, c'est pas une page… c'est une machine.\n\nDonc maintenant, deux options :\n\nSoit tu continues à faire au feeling :\nun peu de pub, un peu de DM, un calendrier posé, et tu subis les no-shows.\n\nSoit tu passes sur un système propre.\n\nSi tu veux qu'on te l'installe, tu candidates.\nAppel court, 10–15 minutes.\n\nOn check 3 choses :\nest-ce que ton offre est éligible\nest-ce que le RDV est le bon modèle pour toi\nest-ce que ça a du sens de le construire maintenant\n\nEt dans tous les cas, tu repars avec un plan clair.\nSi c'est un match, on l'installe clé en main.\n\nBouton juste en dessous.\nEt oui : on ne prend pas tout le monde.",
+      "script": "Ok. Là tu as compris la logique :\nle tunnel RDV, c'est pas une page… c'est une machine.\n\nDonc maintenant, deux options :\n\nSoit tu continues à faire au feeling :\nun peu de pub, un peu de DM, un calendrier posé, et tu subis les no-shows.\n\nSoit tu passes sur un système propre.\n\nSi tu veux qu'on te l'installe, tu candidates.\nAppel court, 10–15 minutes.\n\nOn check 3 choses :\nest-ce que ton offre est éligible\nest-ce que le RDV est le bon modèle pour toi\nest-ce que ça a du sens de le construire maintenant\n\nEt dans tous les cas, tu repars avec un plan clair.\nSi c'est un match, on l'installe clé en main.\n\nBouton juste en dessous.\nEt oui : on ne prend pas tout le monde.",
+      "cue": {
+        "punchline": "Si tu veux arrêter de perdre des leads, c'est maintenant.",
+        "durationSec": 120,
+        "tag": "CLOSE",
+        "bullets": [
+          "Ton calme — aucune pression",
+          "Insister sur 'même si on ne bosse pas ensemble'",
+          "Pause 2-3 sec avant le bouton",
+          "Laisser respirer le prospect"
+        ],
+        "closing": "Clique. Et on avance."
+      },
       "content": {
         "headline": "Vous voulez ce système installé pour vous ?",
         "sub": "Si c'est un match, on vous installe le système clé en main. Vous candidatez pour un appel court (10–15 min), on vérifie si votre offre est éligible, vous repartez avec le plan exact à exécuter. On ne prend pas tout le monde.",

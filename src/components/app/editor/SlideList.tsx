@@ -1,155 +1,86 @@
 "use client";
 
 import * as React from "react";
-import { ArrowDown, ArrowUp, Copy, Plus, Trash2 } from "lucide-react";
+import { Plus } from "lucide-react";
+import { DndContext, PointerSensor, closestCenter, useSensor, useSensors, type DragEndEvent } from "@dnd-kit/core";
+import { SortableContext, rectSortingStrategy } from "@dnd-kit/sortable";
 import { Button } from "@/components/ui/button";
 import { SLIDE_TYPES, type SlideType } from "@/lib/slides/schema";
-import { SLIDE_TYPE_LABELS } from "./messages";
-import { cn } from "@/lib/utils";
+import type { ThemeTokens } from "@/lib/slides/theme";
+import { SLIDE_LIST_MESSAGES as m, SLIDE_TYPE_LABELS } from "./messages";
 import type { EditorSlide } from "./validation";
+import { SlideListItem } from "./SlideListItem";
 
 interface SlideListProps {
   slides: EditorSlide[];
+  theme: ThemeTokens;
   activeId: string | null;
   onSelect: (id: string) => void;
   onMove: (index: number, direction: -1 | 1) => void;
+  onMoveTo: (from: number, to: number) => void;
   onAdd: (type: SlideType) => void;
   onDuplicate: (id: string) => void;
   onDelete: (id: string) => void;
 }
 
-function IconBtn({
-  label,
-  testId,
-  disabled,
-  onClick,
-  children,
-}: {
-  label: string;
-  testId: string;
-  disabled?: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      data-testid={testId}
-      disabled={disabled}
-      onClick={(e) => {
-        e.stopPropagation();
-        onClick();
-      }}
-      className="rounded p-1 text-zinc-500 hover:text-white disabled:opacity-30 disabled:hover:text-zinc-500"
-    >
-      {children}
-    </button>
-  );
-}
-
-export function SlideList({
-  slides,
-  activeId,
-  onSelect,
-  onMove,
-  onAdd,
-  onDuplicate,
-  onDelete,
-}: SlideListProps) {
+/**
+ * Slide rail: numbered live thumbnails, dragged to reorder; move/duplicate/delete on hover,
+ * focus or right-click; add at the bottom.
+ */
+export function SlideList({ slides, theme, activeId, onSelect, onMove, onMoveTo, onAdd, onDuplicate, onDelete }: SlideListProps) {
   const [newType, setNewType] = React.useState<SlideType>("cover");
+  // A few pixels of movement before a drag starts, so a click still selects the slide.
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }));
+
+  function onDragEnd({ active, over }: DragEndEvent) {
+    if (!over || active.id === over.id) return;
+    const from = slides.findIndex((s) => s.id === active.id);
+    const to = slides.findIndex((s) => s.id === over.id);
+    if (from >= 0 && to >= 0) onMoveTo(from, to);
+  }
 
   return (
-    <aside
-      className="space-y-4 rounded-2xl border border-zinc-800 bg-zinc-900/50 p-4"
-      data-testid="slide-list"
-    >
-      <div className="flex items-center justify-between">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-400">
-          Slides
-        </h2>
-        <span className="text-xs text-zinc-500">{slides.length}</span>
+    <aside className="space-y-3 rounded-lg border border-border bg-surface p-3 lg:sticky lg:top-4" data-testid="slide-list" aria-label={m.title}>
+      <div className="flex items-center justify-between px-1">
+        <h2 className="text-xs font-medium uppercase tracking-wide text-faint">{m.title}</h2>
+        <span className="font-mono text-xs tabular-nums text-faint">{slides.length}</span>
       </div>
 
-      <ol className="space-y-1">
-        {slides.map((slide, index) => (
-          <li
-            key={slide.id}
-            data-testid="slide-item"
-            data-slide-type={slide.type}
-            className={cn(
-              "flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1.5",
-              activeId === slide.id
-                ? "bg-violet-600/20 ring-1 ring-violet-500"
-                : "hover:bg-zinc-800/60"
-            )}
-            onClick={() => onSelect(slide.id)}
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+        <SortableContext items={slides.map((s) => s.id)} strategy={rectSortingStrategy}>
+          <ol
+            className="flex gap-2 overflow-x-auto pb-1 lg:max-h-[calc(100dvh-16rem)] lg:flex-col lg:overflow-y-auto lg:overflow-x-visible lg:pb-0"
+            title={m.dragHint}
           >
-            <button
-              type="button"
-              className="min-w-0 flex-1 text-left"
-              aria-current={activeId === slide.id ? "true" : undefined}
-            >
-              <span className="mr-1 text-xs text-zinc-500">{index + 1}.</span>
-              <span className="text-sm text-white">
-                {SLIDE_TYPE_LABELS[slide.type]}
-              </span>
-            </button>
-            <div className="flex shrink-0 items-center gap-0.5">
-              <IconBtn
-                label={`Monter le slide ${index + 1}`}
-                testId={`slide-up-${index}`}
-                disabled={index === 0}
-                onClick={() => onMove(index, -1)}
-              >
-                <ArrowUp className="h-4 w-4" />
-              </IconBtn>
-              <IconBtn
-                label={`Descendre le slide ${index + 1}`}
-                testId={`slide-down-${index}`}
-                disabled={index === slides.length - 1}
-                onClick={() => onMove(index, 1)}
-              >
-                <ArrowDown className="h-4 w-4" />
-              </IconBtn>
-              <IconBtn
-                label={`Dupliquer le slide ${index + 1}`}
-                testId={`slide-dup-${index}`}
-                onClick={() => onDuplicate(slide.id)}
-              >
-                <Copy className="h-4 w-4" />
-              </IconBtn>
-              <IconBtn
-                label={`Supprimer le slide ${index + 1}`}
-                testId={`slide-del-${index}`}
-                disabled={slides.length <= 1}
-                onClick={() => onDelete(slide.id)}
-              >
-                <Trash2 className="h-4 w-4" />
-              </IconBtn>
-            </div>
-          </li>
-        ))}
-      </ol>
+            {slides.map((slide, index) => (
+              <SlideListItem
+                key={slide.id}
+                slide={slide}
+                index={index}
+                count={slides.length}
+                theme={theme}
+                active={activeId === slide.id}
+                onSelect={() => onSelect(slide.id)}
+                onMove={(direction) => onMove(index, direction)}
+                onDuplicate={() => onDuplicate(slide.id)}
+                onDelete={() => onDelete(slide.id)}
+              />
+            ))}
+          </ol>
+        </SortableContext>
+      </DndContext>
 
-      {slides.length === 0 && (
-        <p className="text-sm text-zinc-500">
-          Aucun slide. Ajoutez le premier pour commencer.
-        </p>
-      )}
+      {slides.length === 0 && <p className="px-1 text-small text-faint">{m.empty}</p>}
 
-      <div className="space-y-2 border-t border-zinc-800 pt-3">
-        <label
-          htmlFor="add-slide-type"
-          className="text-sm font-medium text-zinc-300"
-        >
-          Nouveau slide
+      <div className="space-y-2 border-t border-border pt-3">
+        <label htmlFor="add-slide-type" className="px-1 text-small font-medium text-foreground">
+          {m.newSlide}
         </label>
         <select
           id="add-slide-type"
           data-testid="add-slide-type"
           value={newType}
-          className="w-full rounded-lg border border-zinc-700 bg-zinc-800/60 px-3 py-2 text-sm text-white outline-none focus:border-violet-500"
+          className="h-8 w-full rounded-md border border-border-strong bg-surface px-2 text-small text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/25"
           onChange={(e) => setNewType(e.target.value as SlideType)}
         >
           {SLIDE_TYPES.map((type) => (
@@ -158,14 +89,9 @@ export function SlideList({
             </option>
           ))}
         </select>
-        <Button
-          type="button"
-          size="sm"
-          className="w-full gap-2"
-          data-testid="add-slide-submit"
-          onClick={() => onAdd(newType)}
-        >
-          <Plus className="h-4 w-4" /> Ajouter un slide
+        <Button type="button" size="sm" className="w-full" data-testid="add-slide-submit" onClick={() => onAdd(newType)}>
+          <Plus aria-hidden="true" />
+          {m.add}
         </Button>
       </div>
     </aside>

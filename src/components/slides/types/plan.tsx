@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText } from "../editable";
 
 interface PlanContent {
   headline: string;
@@ -26,18 +28,19 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -49,13 +52,13 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
         }}
       >
         {phases.map((phase, index) => (
-          <div
+          <EditableItem path="phases" index={index} length={phases.length}
             key={index}
             style={{
               display: "flex",
               gap: "24px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
               position: "relative",
@@ -84,31 +87,31 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
               >
                 {index + 1}
               </span>
-              {phase.duration && (
-                <span
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: 600,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    opacity: 0.9,
-                  }}
-                >
-                  {phase.duration}
-                </span>
-              )}
+              <EditableText
+                as="span"
+                path={`phases.${index}.duration`}
+                value={phase.duration}
+                style={{
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  opacity: 0.9,
+                }}
+              />
             </div>
             <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "12px" }}>
-              <h3
+              <EditableText
+                as="h3"
+                path={`phases.${index}.name`}
+                value={phase.name}
                 style={{
                   fontSize: "24px",
                   fontWeight: 600,
                   fontFamily: theme["--slide-font-display"],
                   margin: 0,
                 }}
-              >
-                {phase.name}
-              </h3>
+              />
               <div
                 style={{
                   display: "flex",
@@ -117,7 +120,11 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
                 }}
               >
                 {phase.deliverables.map((deliverable, dIndex) => (
-                  <span
+                  <EditableItem
+                    as="span"
+                    path={`phases.${index}.deliverables`}
+                    index={dIndex}
+                    length={phase.deliverables.length}
                     key={dIndex}
                     style={{
                       fontSize: "15px",
@@ -129,12 +136,12 @@ export function PlanSlide({ content, theme }: { content: PlanContent; theme: Rec
                       fontWeight: 500,
                     }}
                   >
-                    {deliverable}
-                  </span>
+                    <EditableText path={`phases.${index}.deliverables.${dIndex}`} value={deliverable} />
+                  </EditableItem>
                 ))}
               </div>
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

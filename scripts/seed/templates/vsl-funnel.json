@@ -6,26 +6,49 @@
   "name": "VSL Funnel",
   "category": "Conversion",
   "description": "Tunnel VSL : page d'inscription, vidéo de conviction, candidature qualifiée.",
-  "themeId": "40000000-0000-4000-8000-000000000003",
+  "themeId": "40000000-0000-4000-8000-000000000008",
   "slides": [
     {
       "id": "11000000-0000-4000-8000-000000000001",
       "position": 0,
       "type": "cover",
-      "script": "On va pas tourner autour.\n\nOk. Si tu es ici, c'est que tu viens de finir le diagnostic GetFunnels.\nDonc je vais faire simple : je te donne ton résultat, je t'explique pourquoi, et je te montre la logique du système.\n\nPas des conseils vagues.\nPas des 'ça dépend'.\nJuste : une architecture claire, comme si on dessinait la machine ensemble.",
+      "script": "Ok. Si tu es ici, c'est que tu viens de finir le diagnostic [Votre entreprise].\nDonc je vais faire simple : je te donne ton résultat, je t'explique pourquoi, et je te montre la logique du système.\n\nPas des conseils vagues.\nPas des 'ça dépend'.\nJuste : une architecture claire, comme si on dessinait la machine ensemble.",
+      "cue": {
+        "punchline": "On va pas tourner autour.",
+        "durationSec": 45,
+        "tag": "INTRO",
+        "transition": "On commence par le verdict.",
+        "bullets": [
+          "3 secondes de silence avant de commencer",
+          "Ton direct — pas de chauffe inutile",
+          "Regard caméra / prospect"
+        ]
+      },
       "content": {
-        "kicker": "Diagnostic Résultat — GetFunnels",
+        "kicker": "Diagnostic Résultat — [Votre entreprise]",
         "title": "Tunnel VSL → RDV — Architecture Core",
         "subtitle": "Éduquer → convaincre → qualifier → closer. Sans forcer.",
-        "presenterName": "Hamid El Bouhali"
-      }
+        "presenterName": "[Votre nom]"
+      },
+      "needsInput": true
     },
     {
       "id": "11000000-0000-4000-8000-000000000002",
       "position": 1,
       "type": "statement",
       "notes": "Frappe immédiate. Le verdict doit être clair dès les 3 premières secondes. Insister sur 'selon vos réponses' pour la personnalisation.",
-      "script": "On ne t'envoie pas au hasard.\n\nRésultat : Tunnel VSL → RDV.\n\nPourquoi ce choix ?\nParce que d'après tes réponses, tu veux vendre en RDV — ou au minimum tu veux une vente qui se finalise en conversation.\nEt surtout : ton offre a besoin de confiance et de cadrage avant que quelqu'un accepte de te parler.\n\nDonc l'idée, elle est simple :\nau lieu de faire booker un prospect froid direct…\non le fait passer par une vidéo qui fait le taf avant le call.\n\nCe que ça change ?\nLe prospect arrive :\nil a compris,\nil a déjà été cadré,\nil a déjà vu de la preuve,\net il sait pourquoi il book.\n\nDonc tu perds moins de temps, et tu close mieux.",
+      "script": "Résultat : Tunnel VSL → RDV.\n\nPourquoi ce choix ?\nParce que d'après tes réponses, tu veux vendre en RDV — ou au minimum tu veux une vente qui se finalise en conversation.\nEt surtout : ton offre a besoin de confiance et de cadrage avant que quelqu'un accepte de te parler.\n\nDonc l'idée, elle est simple :\nau lieu de faire booker un prospect froid direct…\non le fait passer par une vidéo qui fait le taf avant le call.\n\nCe que ça change ?\nLe prospect arrive :\nil a compris,\nil a déjà été cadré,\nil a déjà vu de la preuve,\net il sait pourquoi il book.\n\nDonc tu perds moins de temps, et tu close mieux.",
+      "cue": {
+        "punchline": "On ne t'envoie pas au hasard.",
+        "durationSec": 120,
+        "tag": "VERDICT",
+        "transition": "Avant que je détaille la machine, je pose le contexte : qui te parle.",
+        "bullets": [
+          "Insister sur 'selon TES réponses' — personnalisation",
+          "Pause après 'il sait pourquoi il book'",
+          "Chercher le hochement de tête"
+        ]
+      },
       "content": {
         "eyebrow": "Système Recommandé",
         "headline": "TUNNEL VSL → RDV",
@@ -38,31 +61,54 @@
       "position": 2,
       "type": "authority",
       "notes": "Établir crédibilité rapidement. Noms clients = preuve sociale. Ne pas s'attarder, juste planter le contexte.",
-      "script": "Je construis des systèmes. Pas des pages.\n\nJe m'appelle Hamid El Bouhali, fondateur de GetFunnels.\nÇa fait plus de 8 ans qu'on construit des systèmes complets : funnels + CRM + automatisations.\n\nOn a bossé avec des gros acteurs du marché :\nYomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini… et d'autres.\n\nMais le plus important c'est pas les noms.\nLe plus important c'est : on a vu des centaines de cas réels.\n\nEt le pattern est toujours le même :\nles gens pensent que leur problème c'est la pub…\nalors que leur vrai problème c'est l'architecture.\n\nTu peux mettre 10k en pub.\nSi derrière c'est bancal… tu vas juste perdre plus vite.",
+      "script": "Je m'appelle [Votre nom], fondateur de [Votre entreprise].\nÇa fait plus de [X] ans qu'on construit des systèmes complets : funnels + CRM + automatisations.\n\nOn a bossé avec des gros acteurs du marché :\n[Client 1], [Client 2], [Client 3], [Client 4], [Client 5]… et d'autres.\n\nMais le plus important c'est pas les noms.\nLe plus important c'est : on a vu des centaines de cas réels.\n\nEt le pattern est toujours le même :\nles gens pensent que leur problème c'est la pub…\nalors que leur vrai problème c'est l'architecture.\n\nTu peux mettre 10k en pub.\nSi derrière c'est bancal… tu vas juste perdre plus vite.",
+      "cue": {
+        "punchline": "Je construis des systèmes. Pas des pages.",
+        "durationSec": 90,
+        "tag": "AUTORITÉ",
+        "transition": "Je te montre à quoi ressemble une architecture bancale.",
+        "bullets": [
+          "90 sec max — aller vite",
+          "Citer les noms avec assurance",
+          "Finir sur 'l'architecture' — mot clé de toute la prez"
+        ]
+      },
       "content": {
-        "headline": "Hamid El Bouhali",
+        "headline": "[Votre nom]",
         "points": [
           {
-            "title": "Fondateur de GetFunnels",
-            "text": "Depuis 8+ ans, on construit des systèmes de vente complets : funnels + CRM + automatisations pour des entrepreneurs qui font du 6 à 7 chiffres."
+            "title": "Fondateur de [Votre entreprise]",
+            "text": "Depuis [X]+ ans, on construit des systèmes de vente complets : funnels + CRM + automatisations pour des entrepreneurs qui font du [X] chiffres."
           },
           {
-            "title": "8+ ans · +470 funnels créés",
-            "text": "Clients en 6 à 7 chiffres. On a bossé avec : Yomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini."
+            "title": "[X]+ ans · +[X] funnels créés",
+            "text": "Clients en [X] chiffres. On a bossé avec : [Client 1], [Client 2], [Client 3], [Client 4], [Client 5]."
           },
           {
             "title": "Une vérité simple",
             "text": "Le problème n°1 n'est pas \"la pub\". C'est l'architecture."
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "11000000-0000-4000-8000-000000000004",
       "position": 3,
       "type": "problem",
       "notes": "Créer la douleur. Les prospects doivent se reconnaître dans au moins 3 des 6 points.",
-      "script": "Le système fuit.\n\nLa plupart des business font ça :\nils envoient les gens sur une page… qui parle trop tôt.\nLe prospect ne comprend pas. Il n'est pas prêt. Il n'a pas confiance.\n\nEt derrière, c'est la suite logique :\npas de preuve,\npas de cadrage,\npas de WhatsApp,\ncalendrier posé au hasard,\nCRM vide.\n\nRésultat : tu payes → tu cours → tu fais des calls → et tu ne scales pas.\n\nC'est pas que tu bosses pas.\nC'est que tu bosses sur un truc qui fuit.",
+      "script": "La plupart des business font ça :\nils envoient les gens sur une page… qui parle trop tôt.\nLe prospect ne comprend pas. Il n'est pas prêt. Il n'a pas confiance.\n\nEt derrière, c'est la suite logique :\npas de preuve,\npas de cadrage,\npas de WhatsApp,\ncalendrier posé au hasard,\nCRM vide.\n\nRésultat : tu payes → tu cours → tu fais des calls → et tu ne scales pas.\n\nC'est pas que tu bosses pas.\nC'est que tu bosses sur un truc qui fuit.",
+      "cue": {
+        "punchline": "Le système fuit.",
+        "durationSec": 90,
+        "tag": "DOULEUR",
+        "transition": "Ok. Avant de parler VSL, on clarifie un truc simple : c'est quoi un tunnel ?",
+        "bullets": [
+          "Égrener chaque point lentement",
+          "Pause après 'il n'a pas confiance'",
+          "Ton empathique — pas accusateur"
+        ]
+      },
       "content": {
         "headline": "La plupart pensent : \"Il me faut plus de leads.\"",
         "intro": "En réalité : ils ont un système qui fuit — trafic 100% → clics 55% → leads 28% → RDV 12% → close 4% : ~96% perdu en route. Résultat : ça coûte cher, ça fatigue, et ça ne scale pas.",
@@ -91,7 +137,18 @@
       "position": 4,
       "type": "definition",
       "notes": "Définition simple pour ceux qui ne connaissent pas. Ne pas être technique, rester sur le bénéfice.",
-      "script": "Un tunnel, c'est un parcours. Pas une page.\n\nUn tunnel, c'est une suite d'étapes qui transforme un inconnu en client — de façon contrôlée.\n\nUn bon tunnel, en vrai, c'est pas compliqué :\nune promesse claire,\nun chemin sans friction,\ndes relances automatiques,\ndu tracking,\net de l'optimisation.\n\nSans tunnel : tu vends quand tu as de la chance.\nAvec tunnel : tu vends quand le système tourne.\n\nEt ici, le but est précis :\nréchauffer avec la VSL, puis faire booker les bons profils, pas tout le monde.",
+      "script": "Un tunnel, c'est une suite d'étapes qui transforme un inconnu en client — de façon contrôlée.\n\nUn bon tunnel, en vrai, c'est pas compliqué :\nune promesse claire,\nun chemin sans friction,\ndes relances automatiques,\ndu tracking,\net de l'optimisation.\n\nSans tunnel : tu vends quand tu as de la chance.\nAvec tunnel : tu vends quand le système tourne.\n\nEt ici, le but est précis :\nréchauffer avec la VSL, puis faire booker les bons profils, pas tout le monde.",
+      "cue": {
+        "punchline": "Un tunnel, c'est un parcours. Pas une page.",
+        "durationSec": 60,
+        "tag": "CONCEPT",
+        "transition": "Ok. Maintenant, une VSL, c'est quoi exactement ?",
+        "bullets": [
+          "Appuyer sur 'de façon contrôlée'",
+          "Contraste sans / avec = évidence",
+          "Finir sur 'pas tout le monde' = filtre = valeur"
+        ]
+      },
       "content": {
         "headline": "Un tunnel, c'est une suite d'étapes qui transforme un inconnu en client — de façon contrôlée et systématique.",
         "body": "Un bon tunnel, en vrai, c'est pas compliqué : une promesse claire, un chemin sans friction, des relances automatiques, du tracking et de l'optimisation. Étapes : Inconnu → Intéressé → Qualifié → Client. Sans tunnel → vous vendez quand vous avez de la chance. Avec tunnel → vous vendez quand le système tourne."
@@ -101,7 +158,18 @@
       "id": "11000000-0000-4000-8000-000000000006",
       "position": 5,
       "type": "definition",
-      "script": "La VSL fait le boulot avant le call.\n\nUne VSL c'est une vidéo de vente.\nMais pas une vidéo 'blabla'.\n\nElle a 3 jobs :\nelle clarifie : ce que tu fais, pour qui, et pourquoi\nelle prouve : tu montres que tu sais de quoi tu parles\nelle filtre : qui doit avancer, qui doit sortir\n\nSans VSL, tu espères que le prospect comprenne.\nAvec VSL, tu contrôles ton message.\n\nEt surtout : tu arrives au call avec quelqu'un de préparé.",
+      "script": "Une VSL c'est une vidéo de vente.\nMais pas une vidéo 'blabla'.\n\nElle a 3 jobs :\nelle clarifie : ce que tu fais, pour qui, et pourquoi\nelle prouve : tu montres que tu sais de quoi tu parles\nelle filtre : qui doit avancer, qui doit sortir\n\nSans VSL, tu espères que le prospect comprenne.\nAvec VSL, tu contrôles ton message.\n\nEt surtout : tu arrives au call avec quelqu'un de préparé.",
+      "cue": {
+        "punchline": "La VSL fait le boulot avant le call.",
+        "durationSec": 75,
+        "tag": "CONCEPT VSL",
+        "transition": "Donc pourquoi ce modèle VSL → RDV est logique pour toi ?",
+        "bullets": [
+          "Les 3 jobs — marquer une pause entre chaque",
+          "Contraste 'espères / contrôles' = image forte",
+          "Finir sur 'préparé' — mot clé pour la suite"
+        ]
+      },
       "content": {
         "headline": "Une VSL, c'est une vidéo de vente courte qui fait 3 choses.",
         "body": "7–15 min selon votre marché. Pas \"artistique\". Claire. Sans VSL : vous espérez que le prospect comprenne. Avec VSL : vous contrôlez le message.",
@@ -126,7 +194,18 @@
       "position": 6,
       "type": "why",
       "notes": "Cohérence avec diagnostic. Rappeler que c'est basé sur LEURS réponses. Logique > vente.",
-      "script": "La VSL prépare. Le RDV finalise.\n\nOn recommande VSL → RDV quand :\ntu vends une prestation / consulting / accompagnement,\nton prix nécessite confiance,\nton marché est saturé,\net tu veux arrêter de perdre du temps en calls inutiles.\n\nLa VSL, elle sert à faire ce que toi tu fais en 20 minutes au téléphone :\nexpliquer, cadrer, rassurer, filtrer.\n\nComme ça, quand la personne book :\nelle book parce que c'est logique. Pas parce qu'elle était curieuse.",
+      "script": "On recommande VSL → RDV quand :\ntu vends une prestation / consulting / accompagnement,\nton prix nécessite confiance,\nton marché est saturé,\net tu veux arrêter de perdre du temps en calls inutiles.\n\nLa VSL, elle sert à faire ce que toi tu fais en 20 minutes au téléphone :\nexpliquer, cadrer, rassurer, filtrer.\n\nComme ça, quand la personne book :\nelle book parce que c'est logique. Pas parce qu'elle était curieuse.",
+      "cue": {
+        "punchline": "La VSL prépare. Le RDV finalise.",
+        "durationSec": 90,
+        "tag": "LOGIQUE",
+        "transition": "Ok. Objectif : qu'est-ce que ce système doit produire concrètement ?",
+        "bullets": [
+          "Rappeler que c'est basé sur LEUR diagnostic",
+          "'20 minutes au téléphone' = miroir du quotidien",
+          "Finir sur 'logique vs curieuse' — ancrage fort"
+        ]
+      },
       "content": {
         "headline": "On recommande VSL → RDV quand…",
         "reasons": [
@@ -154,7 +233,18 @@
       "position": 7,
       "type": "objectives",
       "notes": "3 objectifs = clarté. Insister sur 'qualité > quantité'. RDV qualifiés >>> leads.",
-      "script": "Le but, c'est de closer plus facilement.\n\nCe système a 3 objectifs :\npré-cadrer le prospect (donc moins d'éducation pendant le call)\ncréer la preuve avant l'appel (donc moins d'objections)\naugmenter ton close rate (donc plus de clients avec le même volume)\n\nEt le KPI ici, c'est pas les vues.\nLes vues, c'est du bruit.\nLe KPI c'est : RDV qualifiés + taux de closing.",
+      "script": "Ce système a 3 objectifs :\npré-cadrer le prospect (donc moins d'éducation pendant le call)\ncréer la preuve avant l'appel (donc moins d'objections)\naugmenter ton close rate (donc plus de clients avec le même volume)\n\nEt le KPI ici, c'est pas les vues.\nLes vues, c'est du bruit.\nLe KPI c'est : RDV qualifiés + taux de closing.",
+      "cue": {
+        "punchline": "Le but, c'est de closer plus facilement.",
+        "durationSec": 60,
+        "tag": "OBJECTIFS",
+        "transition": "Je te montre le flow complet.",
+        "bullets": [
+          "Égrener les 3 avec des pauses marquées",
+          "Insister sur 'les vues c'est du bruit' — casseur de mythe",
+          "KPI final = ancrage pour la suite"
+        ]
+      },
       "content": {
         "headline": "Les 3 objectifs du système — le KPI n'est pas \"les vues\", mais RDV qualifiés + taux de closing.",
         "goals": [
@@ -181,7 +271,18 @@
       "position": 8,
       "type": "flow",
       "notes": "Vue d'ensemble. Montrer que c'est un SYSTÈME, pas des pages isolées. Flow = machine.",
-      "script": "Chaque étape a un rôle.\n\nFlow :\nTrafic → Page VSL → Qualification → Booking → Confirmation → Show-up → Closing → Follow-up.\n\nEt là, retiens une règle :\nsi une étape n'a pas :\nune page,\nun event tracké,\net une automation,\n\n…tu ne pilotes rien. Tu subis.",
+      "script": "Flow :\nTrafic → Page VSL → Qualification → Booking → Confirmation → Show-up → Closing → Follow-up.\n\nEt là, retiens une règle :\nsi une étape n'a pas :\nune page,\nun event tracké,\net une automation,\n\n…tu ne pilotes rien. Tu subis.",
+      "cue": {
+        "punchline": "Chaque étape a un rôle.",
+        "durationSec": 90,
+        "tag": "ARCHITECTURE",
+        "transition": "Ok. Maintenant on détaille les pages.",
+        "bullets": [
+          "Suivre le flow avec le curseur ou la main",
+          "Insister sur 'chaque étape tracke'",
+          "Finir fort : 'tu subis'"
+        ]
+      },
       "content": {
         "headline": "Flow global — vue ultra simple : chaque étape = une page dédiée + un event tracké + une automation associée",
         "steps": [
@@ -228,7 +329,18 @@
       "position": 9,
       "type": "architecture",
       "notes": "Architecture = fondation. Chaque page a un rôle. Mentionner que la page 5 (pré-frame) est optionnelle mais puissante.",
-      "script": "C'est une chaîne, pas une page.\n\nPage VSL : vidéo + preuves + CTA\nPré-qualification : questions + scoring\nBooking : calendrier + règles\nConfirmation : consignes + micro-engagement\nPré-frame : optionnel, mais très fort\n\nPourquoi on fait ça ?\nParce que ton agenda, c'est ton stock.\nEt tu veux pas le remplir avec des touristes.",
+      "script": "Page VSL : vidéo + preuves + CTA\nPré-qualification : questions + scoring\nBooking : calendrier + règles\nConfirmation : consignes + micro-engagement\nPré-frame : optionnel, mais très fort\n\nPourquoi on fait ça ?\nParce que ton agenda, c'est ton stock.\nEt tu veux pas le remplir avec des touristes.",
+      "cue": {
+        "punchline": "C'est une chaîne, pas une page.",
+        "durationSec": 90,
+        "tag": "PAGES",
+        "transition": "Zoom sur la page VSL : qu'est-ce qu'on met dessus ?",
+        "bullets": [
+          "Dérouler les 5 pages une par une",
+          "Appuyer sur l'analogie 'stock'",
+          "Pré-frame = carte bonus, ne pas survendre"
+        ]
+      },
       "content": {
         "headline": "Architecture multi-pages. Un chemin. Chaque page a un rôle précis dans la conversion.",
         "layers": [
@@ -255,50 +367,64 @@
     {
       "id": "11000000-0000-4000-8000-000000000011",
       "position": 10,
-      "type": "flow",
+      "type": "mockup",
       "notes": "Opt-in = efficacité, pas beauté. Répéter le punchline 'direct + efficace'.",
-      "script": "Clair. Pas artistique.\n\nSur cette page, le but n'est pas de faire 'beau'.\nLe but c'est que la personne avance.\n\nDonc :\nheadline simple orientée résultat\nvidéo (7–15 min selon marché)\n3 bullets 'ce que ça change'\npreuves (logos, mini témoignages, screenshots)\nfiltre : à qui c'est / à qui ce n'est pas\nCTA vers qualification / RDV\n\nLa page doit vendre une seule décision :\n'ok je continue'.",
-      "content": {
-        "headline": "Structure de la Page VSL — le prospect arrive qualifié avant de candidater.",
-        "steps": [
-          {
-            "label": "01",
-            "title": "Headline orientée résultat",
-            "text": "Simple, pas \"artistique\""
-          },
-          {
-            "label": "02",
-            "title": "Vidéo (7–15 min)",
-            "text": "Selon ton marché"
-          },
-          {
-            "label": "03",
-            "title": "3 bullets : ce que ça change",
-            "text": "Concret, pas vague"
-          },
-          {
-            "label": "04",
-            "title": "Preuves",
-            "text": "Logos, mini témos, screenshots"
-          },
-          {
-            "label": "05",
-            "title": "\"À qui c'est / à qui ce n'est pas\"",
-            "text": "Filtre explicite"
-          },
-          {
-            "label": "06",
-            "title": "CTA vers candidature — un seul bouton",
-            "text": "Pas de distraction"
-          }
+      "script": "Sur cette page, le but n'est pas de faire 'beau'.\nLe but c'est que la personne avance.\n\nDonc :\nheadline simple orientée résultat\nvidéo (7–15 min selon marché)\n3 bullets 'ce que ça change'\npreuves (logos, mini témoignages, screenshots)\nfiltre : à qui c'est / à qui ce n'est pas\nCTA vers qualification / RDV\n\nLa page doit vendre une seule décision :\n'ok je continue'.",
+      "cue": {
+        "punchline": "Clair. Pas artistique.",
+        "durationSec": 75,
+        "tag": "PAGE VSL",
+        "transition": "Et dans la vidéo, on suit une ossature. Sinon tu perds les gens.",
+        "bullets": [
+          "Répéter 'une seule décision' comme mantra",
+          "Pointer les éléments visuels si dispo",
+          "Beau vs efficace = évidence"
         ]
+      },
+      "content": {
+        "headline": "Structure de la Page VSL",
+        "page": "sales",
+        "blocks": [
+          {
+            "label": "Headline"
+          },
+          {
+            "label": "Vidéo",
+            "detail": "lecteur avec durée 12:34 + barre de progression"
+          },
+          {
+            "label": "3 bullets",
+            "detail": "✦  Ce que ça change pour vous · ✦  Résultat concret attendu · ✦  Pourquoi maintenant"
+          },
+          {
+            "label": "Preuve sociale",
+            "detail": "3 avatars + 5 étoiles"
+          },
+          {
+            "label": "À qui c'est / pas",
+            "detail": "✓ Pour vous si… · ✕ Pas pour vous si…"
+          }
+        ],
+        "cta": "Je candidate maintenant",
+        "aside": "Headline orientée résultat · Vidéo (7–15 min) · 3 bullets : ce que ça change · Preuves · \"À qui c'est / à qui ce n'est pas\" · CTA vers candidature — un seul bouton"
       }
     },
     {
       "id": "11000000-0000-4000-8000-000000000012",
       "position": 11,
       "type": "flow",
-      "script": "Une vidéo structurée convertit.\n\nUne bonne VSL c'est pas 'parler longtemps'.\nC'est parler dans le bon ordre.\n\nDonc :\nle vrai problème\npourquoi les approches classiques échouent\nta solution : le système VSL → RDV\npreuve / cas / exemples\nqui tu es (vite, utile)\nà qui c'est destiné\nCTA : qualification → RDV\n\nSi tu rates l'ordre… tu peux avoir la meilleure offre du monde, ça passe pas.",
+      "script": "Une bonne VSL c'est pas 'parler longtemps'.\nC'est parler dans le bon ordre.\n\nDonc :\nle vrai problème\npourquoi les approches classiques échouent\nta solution : le système VSL → RDV\npreuve / cas / exemples\nqui tu es (vite, utile)\nà qui c'est destiné\nCTA : qualification → RDV\n\nSi tu rates l'ordre… tu peux avoir la meilleure offre du monde, ça passe pas.",
+      "cue": {
+        "punchline": "Une vidéo structurée convertit.",
+        "durationSec": 90,
+        "tag": "OSSATURE VSL",
+        "transition": "Maintenant, la pièce qui change vraiment tout : la pré-qualification.",
+        "bullets": [
+          "Égrener l'ossature comme une checklist",
+          "'Parler dans le bon ordre' = insight clé",
+          "Finir sur 'ça passe pas' — vérité dure mais utile"
+        ]
+      },
       "content": {
         "headline": "Sans script. Juste la structure. Si vous manquez un bloc, le prospect ne candidatera pas.",
         "steps": [
@@ -325,7 +451,7 @@
           {
             "label": "05",
             "title": "Qui je suis + légitimité",
-            "text": "8+ ans, 150+ funnels, marchés 6–7 chiffres."
+            "text": "[X]+ ans, [X]+ funnels, marchés [X] chiffres."
           },
           {
             "label": "06",
@@ -338,14 +464,26 @@
             "text": "Un seul CTA. Une seule action. \"Je candidate\"."
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "11000000-0000-4000-8000-000000000013",
       "position": 12,
       "type": "qualification",
       "notes": "CLÉS DU SYSTÈME. Expliquer que moins de RDV = plus de ventes. Scoring automatique = game changer.",
-      "script": "Moins de RDV. Plus de ventes.\n\nObjectif : filtrer :\ncurieux\nhors cible\npas prêts\nchasseurs de conseils gratuits\n\nFormat : 5 à 8 questions max.\nScoring automatique.\nEt redirection propre :\nqualifié → calendrier\nlimite → nurturing / ressource\nhors cible → message clean\n\nRésultat : moins de volume, mais plus de signatures.\nC'est exactement ce qu'on veut.",
+      "script": "Objectif : filtrer :\ncurieux\nhors cible\npas prêts\nchasseurs de conseils gratuits\n\nFormat : 5 à 8 questions max.\nScoring automatique.\nEt redirection propre :\nqualifié → calendrier\nlimite → nurturing / ressource\nhors cible → message clean\n\nRésultat : moins de volume, mais plus de signatures.\nC'est exactement ce qu'on veut.",
+      "cue": {
+        "punchline": "Moins de RDV. Plus de ventes.",
+        "durationSec": 90,
+        "tag": "CLÉ DU SYSTÈME",
+        "transition": "Ok. Maintenant : même si t'as les bons prospects… si la suite est mal gérée, tu perds tout.",
+        "bullets": [
+          "Paradoxe MOINS = PLUS — laisser le silence faire effet",
+          "Scoring auto = rassurer sur la technique",
+          "Finir sur 'exactement ce qu'on veut' = alignement"
+        ]
+      },
       "content": {
         "headline": "Objectif : filtrer. Pas punir. — Résultat : moins de RDV, mais plus de ventes.",
         "questions": [
@@ -374,7 +512,18 @@
       "id": "11000000-0000-4000-8000-000000000014",
       "position": 13,
       "type": "capture",
-      "script": "C'est ce que voit le prospect juste après la VSL.\n\nVoilà à quoi ressemble la page de candidature.\n\nSimple. Propre. Directe.\n\nPas de fioriture.\nLe prospect lit la question, il répond, il avance.\n\nEt chaque réponse alimente le scoring automatique.\nC'est pas une page. C'est un filtre actif.",
+      "script": "Voilà à quoi ressemble la page de candidature.\n\nSimple. Propre. Directe.\n\nPas de fioriture.\nLe prospect lit la question, il répond, il avance.\n\nEt chaque réponse alimente le scoring automatique.\nC'est pas une page. C'est un filtre actif.",
+      "cue": {
+        "punchline": "C'est ce que voit le prospect juste après la VSL.",
+        "durationSec": 45,
+        "tag": "MOCKUP",
+        "transition": "Maintenant, voyons comment tout ça est automatisé derrière.",
+        "bullets": [
+          "45 sec — montrer, ne pas sur-expliquer",
+          "Pointer les champs de qualification",
+          "Insister sur 'filtre actif' — pas juste un formulaire"
+        ]
+      },
       "content": {
         "headline": "Le filtre qui protège votre agenda. Seuls les profils validés accèdent au calendrier.",
         "fields": [
@@ -407,7 +556,18 @@
       "position": 14,
       "type": "automation",
       "notes": "Ce que personne ne fait. Automations = différence entre système et page. 3 moments clés à expliquer.",
-      "script": "Sans relance, ça fuit.\n\nLà où 90% se plantent, c'est ici.\n\nQuand quelqu'un regarde la VSL :\ntu tag, tu mesures (25/50/80), tu segmentes.\n\nQuand quelqu'un clique mais ne book pas :\ntu relances. Pas agressif. Juste intelligent.\nEmail + WhatsApp si dispo.\n\nQuand quelqu'un book :\nconfirmation immédiate, rappels, pipeline, attribution closer.\n\nAprès :\nno-show → rebooking\nintéressé → next step\npas prêt → nurturing\n\nChaque scénario a sa suite. Sinon tu perds du chiffre.",
+      "script": "Là où 90% se plantent, c'est ici.\n\nQuand quelqu'un regarde la VSL :\ntu tag, tu mesures (25/50/80), tu segmentes.\n\nQuand quelqu'un clique mais ne book pas :\ntu relances. Pas agressif. Juste intelligent.\nEmail + WhatsApp si dispo.\n\nQuand quelqu'un book :\nconfirmation immédiate, rappels, pipeline, attribution closer.\n\nAprès :\nno-show → rebooking\nintéressé → next step\npas prêt → nurturing\n\nChaque scénario a sa suite. Sinon tu perds du chiffre.",
+      "cue": {
+        "punchline": "Sans relance, ça fuit.",
+        "durationSec": 120,
+        "tag": "AUTOMATISATION",
+        "transition": "Et le canal le plus fort pour réduire le ghost… c'est WhatsApp.",
+        "bullets": [
+          "Dérouler les 3 blocs : VSL watch / click / book",
+          "Insister sur no-show prevention",
+          "'Le système travaille pendant que tu dormes'"
+        ]
+      },
       "content": {
         "headline": "Chaque lead est suivi automatiquement — chaque interaction déclenche une réponse automatique, au bon moment.",
         "items": [
@@ -439,14 +599,25 @@
       "position": 15,
       "type": "channel",
       "notes": "WhatsApp = indispensable. Sans ça, no-shows massifs. Micro-engagement = clé.",
-      "script": "WhatsApp = moins de ghost.\n\nSans WhatsApp, tu vas perdre des RDV. C'est mécanique.\n\nWhatsApp sert à créer du micro-engagement :\nla personne répond, donc elle s'engage.\n\nMoments :\nimmédiat : 'OK pour confirmer'\nJ-1 : rappel + bénéfice\nH-3 : 'réponds 1 pour confirmer'\npost-call : récap + prochaine étape\n\nC'est simple. Et ça change ton show-up.",
+      "script": "Sans WhatsApp, tu vas perdre des RDV. C'est mécanique.\n\nWhatsApp sert à créer du micro-engagement :\nla personne répond, donc elle s'engage.\n\nMoments :\nimmédiat : 'OK pour confirmer'\nJ-1 : rappel + bénéfice\nH-3 : 'réponds 1 pour confirmer'\npost-call : récap + prochaine étape\n\nC'est simple. Et ça change ton show-up.",
+      "cue": {
+        "punchline": "WhatsApp = moins de ghost.",
+        "durationSec": 75,
+        "tag": "WHATSAPP",
+        "transition": "Maintenant : sans CRM propre, tu ne pilotes rien.",
+        "bullets": [
+          "Insister sur 'engagement' — pas spam",
+          "Micro-réponse = micro-engagement = show-up",
+          "Ton direct — cette slide doit marquer"
+        ]
+      },
       "content": {
         "headline": "Le canal qui supprime les no-show — tout est automatisé, vous n'avez rien à faire.",
         "channel": "whatsapp",
         "scripts": [
           {
             "moment": "Confirmation booking",
-            "message": "✅ RDV confirmé — Voici les détails de votre appel avec Hamid."
+            "message": "✅ RDV confirmé — Voici les détails de votre appel avec [Votre nom]."
           },
           {
             "moment": "Rappel J-1 — veille RDV",
@@ -457,14 +628,26 @@
             "message": "🎯 Dans 1h : préparez vos 3 questions clés. Bonne session !"
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "11000000-0000-4000-8000-000000000017",
       "position": 16,
       "type": "crm",
       "notes": "CRM = trackability. Si pas tracké, pas optimisable. Phrase clé à répéter.",
-      "script": "Si c'est pas tracké, c'est pas optimisable.\n\nPipeline, tags, progress VSL, opportunités, tasks follow-up.\n\nSinon tu ne sais pas :\nd'où viennent les RDV\noù ça casse\nce qui convertit vraiment\n\nEt si tu ne sais pas ça… tu optimises au feeling.",
+      "script": "Pipeline, tags, progress VSL, opportunités, tasks follow-up.\n\nSinon tu ne sais pas :\nd'où viennent les RDV\noù ça casse\nce qui convertit vraiment\n\nEt si tu ne sais pas ça… tu optimises au feeling.",
+      "cue": {
+        "punchline": "Si c'est pas tracké, c'est pas optimisable.",
+        "durationSec": 60,
+        "tag": "SUIVI",
+        "transition": "Je te montre la vue Funnelytics : la machine entière.",
+        "bullets": [
+          "'Piloter, pas deviner'",
+          "Pipeline = vocabulaire commun avec le prospect",
+          "Transition rapide vers Funnelytics"
+        ]
+      },
       "content": {
         "headline": "Zéro lead perdu. Tout tracké — pipeline visuel, taux par étape, alertes si lead inactif +48h.",
         "pipelines": [
@@ -494,94 +677,133 @@
     {
       "id": "11000000-0000-4000-8000-000000000018",
       "position": 17,
-      "type": "analytics",
+      "type": "embed",
       "notes": "SCHÉMA CLÉ. Montrer comment tout est connecté. 'Machine, pas une page' = punchline à répéter.",
-      "script": "Ici, tout est visible.\n\nOn voit tout :\ntrafic → pages → events → conversions → automations.\n\nDonc tu sais exactement :\noù ça bloque, où ça fuit, quoi corriger en premier.\n\nÇa, c'est un système.\nPas un tunnel 'au hasard'.",
-      "content": {
-        "headline": "Voici la machine — pas une page, le système complet en action.",
-        "metrics": [
-          {
-            "name": "Trafic tracké",
-            "definition": "Meta, Google et autres sources"
-          },
-          {
-            "name": "Pages optimisées",
-            "definition": "VSL → Candidature → Booking → RDV"
-          },
-          {
-            "name": "Automations",
-            "definition": "Email, WhatsApp à chaque étape"
-          },
-          {
-            "name": "Analytics réel",
-            "definition": "Voir chaque conversion, chaque drop"
-          }
+      "script": "On voit tout :\ntrafic → pages → events → conversions → automations.\n\nDonc tu sais exactement :\noù ça bloque, où ça fuit, quoi corriger en premier.\n\nÇa, c'est un système.\nPas un tunnel 'au hasard'.",
+      "cue": {
+        "punchline": "Ici, tout est visible.",
+        "durationSec": 120,
+        "tag": "VUE D'ENSEMBLE",
+        "transition": "Maintenant je te montre du concret : des exemples de pages.",
+        "bullets": [
+          "Pointer les blocs dans l'ordre",
+          "Répéter 'système vs hasard' — image forte",
+          "Finir sur 'corriger en premier' = priorisation"
         ]
-      }
+      },
+      "content": {
+        "headline": "Voici la machine",
+        "title": "Schéma Funnelytics",
+        "caption": "Pas une page. Le système complet en action."
+      },
+      "needsInput": true
     },
     {
       "id": "11000000-0000-4000-8000-000000000019",
       "position": 18,
-      "type": "gallery",
+      "type": "showcase",
       "notes": "Preuve visuelle. 'On ne théorise pas, on construit' = message simple. Transition rapide.",
-      "script": "Du concret.\n\nPage VSL, qualification, confirmation, calendrier.\n\nLe but est simple :\ntu vois à quoi ressemble une vraie structure, pas un concept.",
+      "script": "Page VSL, qualification, confirmation, calendrier.\n\nLe but est simple :\ntu vois à quoi ressemble une vraie structure, pas un concept.",
+      "cue": {
+        "punchline": "Du concret.",
+        "durationSec": 45,
+        "tag": "PREUVE",
+        "transition": "Et maintenant, preuve brute : les résultats.",
+        "bullets": [
+          "45 sec max — ne pas sur-expliquer",
+          "Pointer 1-2 exemples proches du secteur",
+          "Transition fluide vers les preuves"
+        ]
+      },
       "content": {
         "headline": "À quoi ça ressemble",
         "items": [
           {
-            "caption": "Viral Script VSL — www.getfunnels.agency/viral_script_vsl-v3"
+            "title": "[Page client 1]"
           },
           {
-            "caption": "Programme Ambassadeurs — getfunnels.clickfunnels.com/programme-ambassadeurs"
+            "title": "[Page client 2]"
           },
           {
-            "caption": "Arthaud Immobilier — getfunnels.clickfunnels.com/arthaud_immobilier"
+            "title": "[Page client 3]"
           },
           {
-            "caption": "Reborn — by.getfunnels.agency/reborn"
+            "title": "[Page client 4]"
           },
           {
-            "caption": "Go Scale Systems — go-scale.systems/vsl"
+            "title": "[Page client 5]"
           },
           {
-            "caption": "Optin — getfunnels.clickfunnels.com/optin1745946068279"
+            "title": "[Page client 6]"
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "11000000-0000-4000-8000-000000000020",
       "position": 19,
-      "type": "proof",
-      "script": "On mesure.\n\nDashboards ClickFunnels / Systeme.io / GHL, stats, conversions…\n\nJe te dis un truc :\nje ne suis pas là pour te promettre un chiffre.\nJe suis là pour te montrer qu'un système, ça se pilote avec des données.\n\nEt quand tu pilotes… tu progresses.",
+      "type": "screenshots",
+      "script": "Dashboards ClickFunnels / Systeme.io / GHL, stats, conversions…\n\nJe te dis un truc :\nje ne suis pas là pour te promettre un chiffre.\nJe suis là pour te montrer qu'un système, ça se pilote avec des données.\n\nEt quand tu pilotes… tu progresses.",
+      "cue": {
+        "punchline": "On mesure.",
+        "durationSec": 90,
+        "tag": "PREUVES",
+        "transition": "Ok. Maintenant, qu'est-ce que tu gagnes avec ce système ?",
+        "bullets": [
+          "Ton factuel — pas de survente",
+          "Laisser le prospect regarder quelques secondes avant de parler",
+          "Finir sur 'tu progresses' — espoir concret"
+        ]
+      },
       "content": {
         "headline": "Les chiffres parlent d'eux-mêmes.",
         "items": [
           {
-            "name": "Cumulé multi-clients",
-            "result": "+24 M€ générés via nos tunnels"
+            "caption": "[Capture 1]",
+            "result": "[Résultat]"
           },
           {
-            "name": "ClickFunnels — Stats Tunnel",
-            "result": "385 241 $ — Gross Sales"
+            "caption": "[Capture 2]",
+            "result": "[Résultat]"
           },
           {
-            "name": "Systeme.io — Tunnel REBORN",
-            "result": "€3 608 200 — Total des ventes"
+            "caption": "[Capture 3]",
+            "result": "[Résultat]"
           },
           {
-            "name": "ClickFunnels — 49 348 vues",
-            "result": "49 348 pages vues · opt-in 41.4%"
+            "caption": "[Capture 4]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 5]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 6]",
+            "result": "[Résultat]"
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "11000000-0000-4000-8000-000000000021",
       "position": 20,
       "type": "benefits",
       "notes": "Récap des gains concrets. Finir sur 'sortir du je lance et je prie'. Transformation mindset.",
-      "script": "Tu sors du 'je lance et je prie'.\n\nTu gagnes :\nplus de RDV qualifiés (parce que les gens sont chauffés)\nmoins d'appels inutiles\nun message clair qui ne bouge pas\nun close rate qui monte\nun process duplicable\nune croissance pilotée\n\nEn clair : tu reprends le contrôle.",
+      "script": "Tu gagnes :\nplus de RDV qualifiés (parce que les gens sont chauffés)\nmoins d'appels inutiles\nun message clair qui ne bouge pas\nun close rate qui monte\nun process duplicable\nune croissance pilotée\n\nEn clair : tu reprends le contrôle.",
+      "cue": {
+        "punchline": "Tu sors du 'je lance et je prie'.",
+        "durationSec": 75,
+        "tag": "BÉNÉFICES",
+        "transition": "Et comme tout est mesurable, voilà les KPI qu'on suit.",
+        "bullets": [
+          "Égrener lentement",
+          "Finir fort sur 'tu reprends le contrôle'",
+          "Regard direct — cette phrase doit atterrir"
+        ]
+      },
       "content": {
         "headline": "Un système qui délivre — une machine à RDV qualifiés, pas du bricolage.",
         "benefits": [
@@ -617,7 +839,18 @@
       "position": 21,
       "type": "kpi",
       "notes": "Mesurabilité = pro. Chaque KPI dit où corriger. 'Pas au hasard' = phrase clé.",
-      "script": "Chaque chiffre dit où ça casse.\n\nOn suit :\nclic annonce → VSL\nlecture vidéo (25/50/80)\nclic VSL → qualification\nqualification → booking\nshow-up\nclose rate\ncoût par client / ROI\n\nChaque chiffre te dit quoi corriger.\nPas au hasard.\nAu bon endroit.",
+      "script": "On suit :\nclic annonce → VSL\nlecture vidéo (25/50/80)\nclic VSL → qualification\nqualification → booking\nshow-up\nclose rate\ncoût par client / ROI\n\nChaque chiffre te dit quoi corriger.\nPas au hasard.\nAu bon endroit.",
+      "cue": {
+        "punchline": "Chaque chiffre dit où ça casse.",
+        "durationSec": 90,
+        "tag": "MESURABLE",
+        "transition": "Et pour éviter de perdre des semaines, voilà les erreurs classiques.",
+        "bullets": [
+          "Pointer chaque KPI à l'écran",
+          "Ne pas aller trop vite — chaque chiffre compte",
+          "Finir sur 'au bon endroit' = précision chirurgicale"
+        ]
+      },
       "content": {
         "headline": "4 métriques. Tout le reste en découle. Ce qui se mesure s'améliore. Ce qui ne se mesure pas s'effondre.",
         "metrics": [
@@ -645,7 +878,18 @@
       "position": 22,
       "type": "mistakes",
       "notes": "Erreurs fatales. Créer l'urgence. 'On corrige dès le départ' = rassurance.",
-      "script": "Les erreurs qui tuent ce modèle.\n\n1) VSL trop longue / floue : tu perds les gens\n2) Pas de relance multi-canal : tu perds les indécis\n3) Pas de qualification : tu pollues ton agenda\n\nNous, on corrige ça dès le départ. Sinon ça sert à rien de lancer.",
+      "script": "1) VSL trop longue / floue : tu perds les gens\n2) Pas de relance multi-canal : tu perds les indécis\n3) Pas de qualification : tu pollues ton agenda\n\nNous, on corrige ça dès le départ. Sinon ça sert à rien de lancer.",
+      "cue": {
+        "punchline": "Les erreurs qui tuent ce modèle.",
+        "durationSec": 75,
+        "tag": "ERREURS",
+        "transition": "Ok. Maintenant : si tu veux le mettre en place proprement, voilà le plan.",
+        "bullets": [
+          "Égrener les 3 avec gravité — pas de rush",
+          "Identifier laquelle correspond au prospect",
+          "Finir sur 'dès le départ' — rassurer"
+        ]
+      },
       "content": {
         "headline": "Ces erreurs tuent un tunnel VSL — à anticiper et corriger dès la construction, pas après avoir gaspillé un budget pub.",
         "mistakes": [
@@ -677,7 +921,18 @@
       "position": 23,
       "type": "plan",
       "notes": "Plan simple = rassurant. 5 étapes claires. 'Base propre avant accélération' = message.",
-      "script": "Propre d'abord. Scaling après.\n\nÉtape 1 : cadrage + angle VSL\nÉtape 2 : structure pages + tracking\nÉtape 3 : montage + intégration\nÉtape 4 : CRM + automations + WhatsApp\nÉtape 5 : lancement + optimisation\n\nBase propre avant d'accélérer. Toujours.",
+      "script": "Étape 1 : cadrage + angle VSL\nÉtape 2 : structure pages + tracking\nÉtape 3 : montage + intégration\nÉtape 4 : CRM + automations + WhatsApp\nÉtape 5 : lancement + optimisation\n\nBase propre avant d'accélérer. Toujours.",
+      "cue": {
+        "punchline": "Propre d'abord. Scaling après.",
+        "durationSec": 90,
+        "tag": "PLAN",
+        "transition": "Dernier point : si tu veux qu'on le fasse pour toi.",
+        "bullets": [
+          "Dérouler les 5 étapes avec rythme",
+          "Finir sur 'toujours' — conviction ferme",
+          "Donner un délai si demandé"
+        ]
+      },
       "content": {
         "headline": "De zéro à live en 30 jours — livraison garantie en 4 semaines.",
         "phases": [
@@ -725,7 +980,19 @@
       "position": 24,
       "type": "cta",
       "notes": "CLOSE. CTA clair : candidature, pas vente. 3 bullets = clarté. 'On ne prend pas tout le monde' = exclusivité. Laisser respirer 2-3 sec avant Q&A.",
-      "script": "Tu repars avec un plan. Et si c'est un match, on l'installe.\n\nSi tu veux qu'on installe ça proprement, tu candidates.\n\nPourquoi candidature ?\nParce qu'on ne va pas te mettre un système VSL→RDV si ce n'est pas le bon modèle.\nJe préfère te le dire direct, plutôt que de te faire perdre ton temps.\n\nL'appel est court : 10–15 minutes.\nOn check :\nton offre\nton pricing\nton trafic\net si VSL→RDV est vraiment le bon choix\n\nEt dans tous les cas, tu repars avec un plan clair.\nMême si on ne bosse pas ensemble.\n\nSi c'est un match : on installe le système clé en main.",
+      "script": "Si tu veux qu'on installe ça proprement, tu candidates.\n\nPourquoi candidature ?\nParce qu'on ne va pas te mettre un système VSL→RDV si ce n'est pas le bon modèle.\nJe préfère te le dire direct, plutôt que de te faire perdre ton temps.\n\nL'appel est court : 10–15 minutes.\nOn check :\nton offre\nton pricing\nton trafic\net si VSL→RDV est vraiment le bon choix\n\nEt dans tous les cas, tu repars avec un plan clair.\nMême si on ne bosse pas ensemble.\n\nSi c'est un match : on installe le système clé en main.",
+      "cue": {
+        "punchline": "Tu repars avec un plan. Et si c'est un match, on l'installe.",
+        "durationSec": 120,
+        "tag": "CLOSE",
+        "bullets": [
+          "Ton calme — aucune pression",
+          "Insister sur 'même si on ne bosse pas ensemble'",
+          "Pause 2-3 sec avant le bouton",
+          "Laisser respirer le prospect"
+        ],
+        "closing": "Tu peux candidater juste en dessous."
+      },
       "content": {
         "headline": "Vous voulez qu'on vous installe ce système proprement ?",
         "sub": "Vous candidatez pour un appel court (10–15 min), on vérifie si votre offre est éligible (et si VSL→RDV est le bon modèle), vous repartez avec le plan exact à exécuter — même si on ne bosse pas ensemble. On ne prend pas tout le monde.",

@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText } from "../editable";
 
 interface ObjectivesContent {
   headline: string;
@@ -26,18 +28,19 @@ export function ObjectivesSlide({ content, theme }: { content: ObjectivesContent
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -46,17 +49,18 @@ export function ObjectivesSlide({ content, theme }: { content: ObjectivesContent
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {goals.map((goal, index) => (
-          <div
+          <EditableItem path="goals" index={index} length={goals.length}
             key={index}
             style={{
               display: "flex",
               flexDirection: "column",
               gap: "16px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
               position: "relative",
@@ -80,39 +84,43 @@ export function ObjectivesSlide({ content, theme }: { content: ObjectivesContent
                 {index + 1}
               </div>
               <div>
-                <h3
+                <EditableText
+                  as="h3"
+                  path={`goals.${index}.label`}
+                  value={goal.label}
                   style={{
                     fontSize: "22px",
                     fontWeight: 600,
                     fontFamily: theme["--slide-font-display"],
                     margin: "0 0 4px 0",
                   }}
-                >
-                  {goal.label}
-                </h3>
-                <p
+                />
+                <EditableText
+                  as="p"
+                  path={`goals.${index}.target`}
+                  value={goal.target}
                   style={{
                     fontSize: "16px",
                     fontWeight: 500,
-                    color: theme["--slide-primary"],
+                    color: theme["--slide-primary-text"],
                     margin: 0,
                   }}
-                >
-                  {goal.target}
-                </p>
+                />
               </div>
             </div>
-            <p
+            <EditableText
+              as="p"
+              path={`goals.${index}.text`}
+              value={goal.text}
+              multiline
               style={{
                 fontSize: "16px",
                 lineHeight: 1.55,
                 color: theme["--slide-text"],
                 margin: 0,
               }}
-            >
-              {goal.text}
-            </p>
-          </div>
+            />
+          </EditableItem>
         ))}
       </div>
     </div>

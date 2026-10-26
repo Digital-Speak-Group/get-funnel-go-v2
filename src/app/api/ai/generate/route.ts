@@ -15,7 +15,7 @@ const GenerateRequestSchema = z.object({
   script: z.string().min(300).max(30000),
   themeId: z.string().uuid(),
   templateConfig: z.object({
-    id: z.string(),
+    id: z.string().uuid(),
     name: z.string(),
     stages: z.array(z.string()),
   }),

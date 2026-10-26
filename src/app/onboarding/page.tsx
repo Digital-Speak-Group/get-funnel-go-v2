@@ -1,9 +1,20 @@
 import { Suspense } from "react";
+import { LoaderCircle } from "lucide-react";
 import { OnboardingContent } from "./OnboardingContent";
+import { onboardingMessages as m } from "./messages";
+
+function OnboardingFallback() {
+  return (
+    <div role="status" className="flex flex-col items-center gap-3 py-12 text-center">
+      <LoaderCircle className="size-6 animate-spin text-faint" aria-hidden="true" />
+      <p className="text-small text-muted-foreground">{m.loading}</p>
+    </div>
+  );
+}
 
 export default function OnboardingPage() {
   return (
-    <Suspense fallback={<div className="text-center py-12"><div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-violet-600 border-t-transparent" /><p className="text-zinc-400 mt-4">Chargement...</p></div>}>
+    <Suspense fallback={<OnboardingFallback />}>
       <OnboardingContent />
     </Suspense>
   );

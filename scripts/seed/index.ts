@@ -9,6 +9,8 @@ import { eq } from "drizzle-orm";
 import { readFileSync } from "fs";
 import { resolve } from "path";
 import { seedThemes } from "./themes";
+import { seedTemplates } from "./templates";
+import { seedGetFunnelsOrg } from "./getfunnels-org";
 
 const connectionString = process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/getfunnels";
 
@@ -72,19 +74,12 @@ async function seed() {
     }).onConflictDoNothing({ target: [schema.memberships.orgId, schema.memberships.userId] });
   }
 
-  // 4. Templates
-  console.log("Seeding templates...");
-  for (const template of seedData.templates) {
-    await db.insert(schema.templates).values({
-      ...template,
-      orgId: template.org_id,
-      themeId: template.theme_id,
-      slideCount: template.slide_count,
-      isSystem: template.is_system,
-      createdAt: toTimestamp(template.created_at),
-      updatedAt: template.updated_at ? toTimestamp(template.updated_at) : new Date(),
-    }).onConflictDoNothing({ target: schema.templates.id });
-  }
+  // 4. Templates: the ported legacy decks in scripts/seed/templates/*.json (real slides,
+  // notes and scripts). Upserts, so re-running refreshes them; demo decks below reference these ids.
+  await seedTemplates(connectionString);
+
+  // 5. Private GetFunnels org: the full-fidelity agency decks (spec decision 10).
+  await seedGetFunnelsOrg(connectionString);
 
   // 6. Assets
   console.log("Seeding assets...");

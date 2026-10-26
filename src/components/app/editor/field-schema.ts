@@ -45,25 +45,6 @@ export function stringBounds(schema: z.ZodType): { max?: number; min?: number } 
   return bounds;
 }
 
-export function setAtPath(
-  source: Record<string, unknown>,
-  path: string,
-  value: unknown
-): Record<string, unknown> {
-  if (!path) return value as Record<string, unknown>;
-  const [head, ...rest] = path.split(".");
-  return {
-    ...source,
-    [head]: rest.length
-      ? setAtPath(
-          (source[head] ?? {}) as Record<string, unknown>,
-          rest.join("."),
-          value
-        )
-      : value,
-  };
-}
-
 export function normalizeContent(
   schema: z.ZodType,
   value: unknown
@@ -95,6 +76,11 @@ export function normalizeContent(
 }
 
 function describeIssue(issue: z.ZodIssue): string {
+  if (issue.code === "too_small" && issue.origin === "number") return `Minimum ${issue.minimum}.`;
+  if (issue.code === "too_big" && issue.origin === "number") return `Maximum ${issue.maximum}.`;
+  if (issue.code === "invalid_type" && (issue.expected === "number" || issue.expected === "int")) {
+    return "Entrez un nombre entier.";
+  }
   if (issue.code === "too_small" && typeof issue.minimum === "number") {
     return issue.origin === "array"
       ? `Ajoutez au moins ${issue.minimum} élément${issue.minimum > 1 ? "s" : ""}.`

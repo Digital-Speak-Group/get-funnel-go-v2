@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText } from "../editable";
 
 interface ArchitectureContent {
   headline: string;
@@ -25,18 +27,19 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -48,31 +51,32 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
         }}
       >
         {layers.map((layer, layerIndex) => (
-          <div
+          <EditableItem path="layers" index={layerIndex} length={layers.length}
             key={layerIndex}
             style={{
               display: "flex",
               flexDirection: "column",
               gap: "16px",
               padding: "24px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-muted"]}1a`,
             }}
           >
-            <div
+            <EditableText
+              as="div"
+              path={`layers.${layerIndex}.name`}
+              value={layer.name}
               style={{
                 fontSize: "20px",
                 fontWeight: 600,
                 fontFamily: theme["--slide-font-display"],
-                color: theme["--slide-primary"],
+                color: theme["--slide-primary-text"],
                 paddingBottom: "8px",
                 borderBottom: `2px solid ${theme["--slide-primary"]}`,
                 display: "inline-block",
               }}
-            >
-              {layer.name}
-            </div>
+            />
             <div
               style={{
                 display: "flex",
@@ -81,7 +85,11 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
               }}
             >
               {layer.items.map((item, itemIndex) => (
-                <span
+                <EditableItem
+                  as="span"
+                  path={`layers.${layerIndex}.items`}
+                  index={itemIndex}
+                  length={layer.items.length}
                   key={itemIndex}
                   style={{
                     fontSize: "15px",
@@ -92,11 +100,11 @@ export function ArchitectureSlide({ content, theme }: { content: ArchitectureCon
                     fontWeight: 500,
                   }}
                 >
-                  {item}
-                </span>
+                  <EditableText path={`layers.${layerIndex}.items.${itemIndex}`} value={item} />
+                </EditableItem>
               ))}
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

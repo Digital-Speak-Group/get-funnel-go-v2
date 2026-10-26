@@ -1,0 +1,589 @@
+{
+  "template": "pitch-commercial",
+  "deckId": "20000000-0000-4000-8000-000000000107",
+  "slides": [
+    {
+      "position": 0,
+      "content": {
+        "kicker": "GetFunnels",
+        "title": "Transformer votre trafic en argent.",
+        "subtitle": "L'agence francophone dont le seul métier est de transformer votre trafic en argent.",
+        "presenterName": "Hamid El Bouhali"
+      },
+      "script": "On a un seul métier. Et c'est votre trafic.\n\nMerci d'être là.\nAvant de commencer, je vais être très clair sur ce qu'on fait chez GetFunnels.\nOn ne fait pas des sites.\nOn ne fait pas « un peu de tout ».\nNotre seul métier, c'est de transformer votre trafic en argent.\n\nDans les prochaines minutes, je vais vous montrer où votre business perd de l'argent aujourd'hui,\npourquoi ça arrive,\net comment on le règle.\n\nEt ensuite, on parlera de vous. De votre business. De vos chiffres.\n\nOn commence.",
+      "notes": "OUVERTURE · 30 sec. Laisser la slide respirer 3 secondes avant de parler. Visuel d'origine : logo GetFunnels au centre avec halo lumineux rotatif, grand titre « GET FUNNELS », baseline encadrée avec soulignement animé sous « transformer votre trafic en argent », URL getfunnels.agency en bas, particules flottantes et accents d'angle. Logo à rattacher quand les ressources seront migrées. Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 1,
+      "content": {
+        "headline": "3 fuites qui sabotent votre business",
+        "intro": "Même avec du trafic. Même avec un bon produit. GetFunnels colmate ces fuites. Une par une.",
+        "painPoints": [
+          {
+            "icon": "trending-down",
+            "title": "01 · Votre trafic",
+            "text": "Vous payez pour amener des visiteurs. 97% repartent sans laisser de trace."
+          },
+          {
+            "icon": "wallet",
+            "title": "02 · Votre budget",
+            "text": "Vous dépensez en pub, en contenu, en relances… sans système pour maximiser chaque euro investi."
+          },
+          {
+            "icon": "clock",
+            "title": "03 · Votre temps",
+            "text": "Vous travaillez pour votre business au lieu que votre business travaille pour vous."
+          }
+        ]
+      },
+      "script": "Il y a trois fuites. Et vous en avez probablement les trois.\n\nJe vais vous dire un truc que la plupart des gens n'entendent jamais.\nLe problème, ce n'est pas votre produit.\nCe n'est pas non plus le manque de trafic.\n\nLe problème, ce sont trois fuites.\n\nLa première : votre trafic.\nVous payez pour amener des visiteurs… et 97% repartent sans laisser la moindre trace.\n\nLa deuxième : votre budget.\nVous dépensez en pub, en contenu, en relances… mais sans système pour que chaque euro investi travaille vraiment.\n\nLa troisième, et c'est souvent la plus douloureuse : votre temps.\nVous travaillez pour votre business, au lieu que votre business travaille pour vous.\n\nMême avec du trafic. Même avec un bon produit.\nNotre travail, c'est de colmater ces fuites. Une par une.",
+      "notes": "LE PROBLÈME · 1 min. Eyebrow d'origine : « Le problème ». Marquer une pause après chaque fuite et chercher le hochement de tête. Visuel d'origine : sol en grille perspective, faisceau lumineux vertical, 3 cartes numérotées 01 / 02 / 03 qui apparaissent l'une après l'autre. Pied de slide d'origine : « GetFunnels colmate ces fuites. Une par une. » Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 2,
+      "content": {
+        "headline": "La différence entre un site et un système de vente.",
+        "columns": [
+          "Site brochure",
+          "Parcours GetFunnels"
+        ],
+        "rows": [
+          {
+            "label": "Le parcours",
+            "values": [
+              "On arrive → On scrolle → On repart",
+              "On arrive → On comprend → On agit"
+            ]
+          },
+          {
+            "label": "Le visiteur",
+            "values": [
+              "Vous avez payé pour les amener.",
+              "Chaque visiteur entre dans un système."
+            ]
+          },
+          {
+            "label": "Le résultat",
+            "values": [
+              "Vous les regardez partir.",
+              "Chaque système est conçu pour une seule chose : la décision."
+            ]
+          },
+          {
+            "label": "En une phrase",
+            "values": [
+              "L'un accueille.",
+              "L'autre convertit."
+            ]
+          }
+        ]
+      },
+      "script": "Un site, ça accueille. Un système, ça convertit.\n\nRegardez la différence.\n\nÀ gauche, le site brochure.\nOn arrive. On scrolle. On repart.\nVous avez payé pour amener ces gens… et vous les regardez partir.\n\nÀ droite, un vrai parcours.\nOn arrive. On comprend. On agit.\nChaque visiteur entre dans un système.\nEt ce système est conçu pour une seule chose : la décision.\n\nAlors je vous pose la question, honnêtement :\naujourd'hui, vous êtes plutôt à gauche… ou à droite ?",
+      "notes": "LE CONSTAT · 1 min. Eyebrow d'origine : « Le constat » ; sous-titre : « L'un accueille. L'autre convertit. ». Visuel d'origine : deux cartes côte à côte — à gauche « Site brochure » en rouge avec une croix, à droite « Parcours GetFunnels » en violet avec une coche. Laisser le prospect se situer lui-même dans la colonne de gauche. Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 5,
+      "content": {
+        "eyebrow": "Chapitre 01 — La certitude de l'ingénieur",
+        "headline": "J'ai passé 10 ans à penser que le marketing était réservé aux gens qui ne savaient pas compter.",
+        "highlight": "J'avais complètement tort.",
+        "sub": "Et cette conviction m'a coûté des années."
+      },
+      "script": "Je vais vous raconter comment j'en suis arrivé là. Parce que ce n'était pas prévu.\n\nPendant 10 ans, j'ai pensé que le marketing était réservé aux gens qui ne savaient pas compter.\nJ'en étais convaincu.\n\nEt j'avais complètement tort.\n\nCette conviction-là m'a coûté des années.\nEt c'est justement pour ça que je vous la raconte :\nparce que beaucoup d'entrepreneurs ont exactement la même… sans le savoir.",
+      "notes": "HISTOIRE DU FONDATEUR · Chapitre 01 · 45 sec. Structure : une croyance forte → « j'avais complètement tort » → ce que ça m'a coûté. Visuel d'origine : deux sphères en orbite, « Ingénierie » et « Marketing », qui se rapprochent et entrent en collision au centre pour former « Fusion » (éclair) ; sol en grille perspective. Pied de slide : « La certitude de l'ingénieur ». Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 6,
+      "content": {
+        "headline": "Hamid : l'homme qui méprisait le marketing.",
+        "points": [
+          {
+            "icon": "briefcase",
+            "title": "Le terrain d'origine",
+            "text": "Ingénieur · Banking, CRM, assurance, multinationales"
+          },
+          {
+            "icon": "brain",
+            "title": "La conviction",
+            "text": "« Le marketing ? Des gens qui vendent de la fumée avec de beaux mots. Nous on avait les maths. On avait la rigueur. »"
+          },
+          {
+            "icon": "lightbulb",
+            "title": "Le retournement",
+            "text": "Il allait apprendre quelque chose d'embarrassant."
+          }
+        ]
+      },
+      "script": "Le personnage de cette histoire, au départ, il méprisait le marketing.\n\nHamid venait de l'ingénierie.\nBanking, CRM, assurance, multinationales : des environnements sérieux, structurés, rigoureux.\n\nEt pour lui, le marketing, c'était simple :\n« Des gens qui vendent de la fumée avec de beaux mots. »\nNous, on avait les maths. On avait la rigueur.\n\nSauf qu'il allait apprendre quelque chose d'assez embarrassant.",
+      "notes": "HISTOIRE DU FONDATEUR · Chapitre 01 (suite) · 45 sec. Eyebrow d'origine : « Chapitre 01 — La certitude de l'ingénieur ». Raconté à la 3e personne dans la version d'origine — conserver ce recul narratif. Visuel d'origine : radar animé avec balayage, au centre les initiales « HAM », et 4 nœuds qui s'allument un à un (Banking, CRM, Assurance, Multinationales). Pied de slide : « GetFunnels — Histoire ». Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 7,
+      "content": {
+        "headline": "Le déclic : une demi-journée. 600 €. Et un appel qui a tout changé.",
+        "metrics": [
+          {
+            "value": "600 €",
+            "label": "Ce qu'il a facturé · ½ journée de travail"
+          },
+          {
+            "value": "64 000 €",
+            "label": "Généré par le client · en 3 jours",
+            "delta": "×106"
+          }
+        ]
+      },
+      "script": "Et puis il y a eu le déclic.\n\nUne mission toute simple : une demi-journée de travail.\nFacturée 600 €.\n\nQuelques jours plus tard, le téléphone sonne.\nC'est le client. Et il me dit :\n« Grâce à ce que tu m'as construit, j'ai généré 64 000 €. »\nEn 3 jours.\n\n600 € facturés… et 64 000 € générés. 106 fois plus.\n\nLe mépris venait de prendre une claque.\nEt à ce moment-là, une seule question m'obsédait : pourquoi ça a marché ?",
+      "notes": "HISTOIRE DU FONDATEUR · Chapitre 02 — Le déclic · 1 min. Citation d'origine : « Grâce à ce que tu m'as construit — j'ai généré 64 000€. » Phrase de chute : « Le mépris venait de prendre une claque. » Visuel d'origine : carte « Ce qu'il a facturé » avec compteur animé, flèche de conversion (×106), puis carte « Généré par le client — En 3 jours » avec compteur et gerbe d'étincelles. Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 8,
+      "content": {
+        "headline": "Il ne voulait pas devenir marketeur. Il voulait comprendre pourquoi ça marchait.",
+        "body": "Le marketing n'est pas du bullshit. C'est de l'ingénierie appliquée à la psychologie humaine. Et lui — il était ingénieur.",
+        "pillars": [
+          {
+            "icon": "handshake",
+            "title": "Accord conclu",
+            "text": "Son expertise technique contre une formation marketing."
+          },
+          {
+            "icon": "wallet",
+            "title": "Immersion réelle",
+            "text": "6 mois sur de vrais budgets."
+          },
+          {
+            "icon": "lightbulb",
+            "title": "La révélation",
+            "text": "Le marketing, c'est de l'ingénierie appliquée à la psychologie humaine."
+          }
+        ]
+      },
+      "script": "Je ne voulais pas devenir marketeur. Je voulais comprendre.\n\nAlors j'ai fait un deal.\nMon expertise technique, en échange d'une formation marketing.\n\nEt pendant 6 mois, j'ai été en immersion réelle.\nPas de théorie. De vrais budgets. De vrais résultats. De vraies erreurs.\n\nEt là, j'ai eu la révélation.\nLe marketing, ce n'est pas du bullshit.\nC'est de l'ingénierie appliquée à la psychologie humaine.\n\nEt ça, de l'ingénierie… c'était exactement mon terrain.",
+      "notes": "HISTOIRE DU FONDATEUR · Chapitre 03 · 1 min. Échange gagnant-gagnant (expertise technique ↔ formation marketing) pendant 6 mois sur de vrais budgets, en 3 temps : Accord conclu → Immersion réelle → La révélation. Visuel d'origine : schéma d'échange animé (deux blocs reliés par des flèches courbes autour d'un cercle central « 6 mois · vrais budgets »), puis la phrase de révélation qui apparaît mot à mot, avec « il était ingénieur. » en dégradé. Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 9,
+      "content": {
+        "headline": "2020. Hamid arrête tout. Et reconstruit pour les meilleurs.",
+        "milestones": [
+          {
+            "when": "2014",
+            "title": "Ingénieur corporate",
+            "text": "Le point de départ."
+          },
+          {
+            "when": "2018",
+            "title": "600 € → 64 K€ · Le déclic",
+            "text": "Une demi-journée de travail."
+          },
+          {
+            "when": "2019",
+            "title": "Première agence · Trop généraliste"
+          },
+          {
+            "when": "2020",
+            "title": "GetFunnels · Tunnels & automation · Exclusivement",
+            "text": "Il arrête tout. Et reconstruit pour les meilleurs."
+          },
+          {
+            "when": "Aujourd'hui",
+            "title": "24 M€ · 420 clients",
+            "text": "Premiers clients : Alec Henry. Yomi Denzel."
+          }
+        ]
+      },
+      "script": "2020. J'arrête tout. Et je reconstruis.\n\nJe reprends le fil rapidement.\n2014 : ingénieur corporate.\n2018 : le déclic, 600 € qui deviennent 64 000 €.\n2019 : une première agence. Et je comprends vite qu'elle est trop généraliste.\n\nAlors en 2020, je prends une décision radicale : j'arrête tout.\nEt je crée GetFunnels, avec une seule spécialité : les tunnels de vente et l'automation. Exclusivement.\n\nNos premiers clients : Alec Henry, Yomi Denzel.\nEt aujourd'hui : 24 millions d'euros générés, 420 clients.\n\nEt je vais vous dire ce dont je suis le plus fier :\nchaque client est arrivé parce que le précédent a obtenu ce qu'il cherchait.",
+      "notes": "HISTOIRE DU FONDATEUR · Chapitre 04 — La naissance de GetFunnels · 1 min. Frise d'origine en 5 jalons : 2014 Ingénieur corporate → 2018 600€ → 64K€ · Le déclic → 2019 Première agence · Trop généraliste → 2020 GetFunnels · Tunnels & automation · Exclusivement → Aujourd'hui 24M€ · 420 clients. Le dernier jalon est mis en avant (dégradé + point lumineux). Phrase de clôture d'origine : « Chaque client est arrivé parce que le précédent a obtenu ce qu'il cherchait. » Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 10,
+      "content": {
+        "headline": "GetFunnels : le circuit complet",
+        "steps": [
+          {
+            "label": "01",
+            "title": "Acquisition",
+            "text": "Le bon trafic, au bon endroit."
+          },
+          {
+            "label": "02",
+            "title": "Page",
+            "text": "Une page qui fait comprendre et donne envie d'agir."
+          },
+          {
+            "label": "03",
+            "title": "Capture",
+            "text": "Chaque visiteur intéressé laisse une trace."
+          },
+          {
+            "label": "04",
+            "title": "Relance",
+            "text": "Aucun lead ne disparaît dans la nature."
+          },
+          {
+            "label": "05",
+            "title": "RDV/Vente",
+            "text": "La conversion, au moment où le prospect est prêt."
+          },
+          {
+            "label": "06",
+            "title": "Suivi CRM",
+            "text": "Chaque client suivi, chaque chiffre mesuré."
+          }
+        ]
+      },
+      "script": "On ne fait pas une page. On fait le circuit complet.\n\nVoilà ce qu'on construit, de bout en bout.\nL'acquisition : le bon trafic, au bon endroit.\nLa page : celle qui fait comprendre et qui donne envie d'agir.\nLa capture : chaque personne intéressée laisse une trace.\nLa relance : aucun lead ne disparaît.\nLe RDV ou la vente : au moment où le prospect est prêt.\nEt le suivi CRM : chaque client suivi, chaque chiffre mesuré.\n\nUne machine optimisée pour la conversion, à chaque étape.\nParce que si un seul maillon casse… toute la chaîne fuit.",
+      "notes": "LE CIRCUIT · 1 min. Sous-titre d'origine : « Une machine de guerre optimisée pour la conversion à chaque étape. » La slide d'origine n'affichait que les 6 étapes (Acquisition → Page → Capture → Relance → RDV/Vente → Suivi CRM) reliées par des flèches animées ; les courtes descriptions de chaque étape ont été ajoutées lors du portage — à relire. Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 11,
+      "content": {
+        "headline": "Pourquoi GetFunnels ? Et pas une autre agence « full service ».",
+        "reasons": [
+          {
+            "icon": "circle-check",
+            "title": "Expertise unique",
+            "text": "Seulement tunnels de vente et automation."
+          },
+          {
+            "icon": "award",
+            "title": "Focus résultats",
+            "text": "Obsession de la conversion et du ROI."
+          },
+          {
+            "icon": "star",
+            "title": "Précision",
+            "text": "Chaque élément est conçu pour un objectif clair."
+          }
+        ]
+      },
+      "script": "On ne fait qu'une chose. Et c'est pour ça qu'on la fait bien.\n\nVous vous demandez peut-être : pourquoi nous, et pas une agence « full service » qui fait tout ?\n\nTrois raisons.\nUne expertise unique : on fait seulement des tunnels de vente et de l'automation. Rien d'autre.\nUn focus résultats : on est obsédés par la conversion et par votre retour sur investissement.\nEt la précision : chaque élément qu'on construit a un objectif clair.\n\nNotre hyper-spécialisation, c'est votre plus grande force.",
+      "notes": "POURQUOI NOUS · 45 sec. Sous-titre d'origine : « Notre hyper-spécialisation est votre plus grande force. » Visuel d'origine : 3 cartes avec icônes (coche, médaille, gemme). Adapter la ligne « Expertise unique » à votre spécialité réelle. Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 12,
+      "content": {
+        "eyebrow": "Notre impact mesurable",
+        "headline": "24 000 000 €",
+        "highlight": "Générés pour nos clients."
+      },
+      "script": "Un seul chiffre.\n\n24 millions d'euros.\nGénérés pour nos clients.\n\nJe ne vais pas le commenter. Je vous laisse juste le regarder deux secondes.",
+      "notes": "PREUVE · 20 sec. Un seul chiffre plein écran : 24 000 000 € générés pour nos clients. Ne rien ajouter — laisser le chiffre parler, puis enchaîner. Visuel d'origine : halo lumineux pulsé derrière le chiffre et icône étincelles. Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 13,
+      "content": {
+        "headline": "Les chiffres qui parlent d'eux-mêmes",
+        "metrics": [
+          {
+            "value": "+2 000",
+            "label": "Tunnels construits"
+          },
+          {
+            "value": "+420",
+            "label": "Clients accompagnés"
+          },
+          {
+            "value": "+25",
+            "label": "Experts en interne"
+          },
+          {
+            "value": "6 ans",
+            "label": "D'expertise exclusive"
+          }
+        ]
+      },
+      "script": "Et derrière ce chiffre, il y a du volume. Et de la répétition.\n\nPlus de 2 000 tunnels construits.\nPlus de 420 clients accompagnés.\nPlus de 25 experts en interne.\nEt 6 ans d'expertise exclusive.\n\nCe que ça veut dire pour vous ?\nQue votre problème, on l'a très probablement déjà vu. Et déjà réglé.",
+      "notes": "PREUVE · 30 sec. Sous-titre d'origine : « Notre expérience et notre succès en quelques points clés. » Visuel d'origine : 4 cartes chiffrées avec icônes (commit, utilisateur validé, équipe, horloge). Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 14,
+      "content": {
+        "headline": "Avant. Après. En chiffres.",
+        "items": [
+          {
+            "quote": "Avant : landing statique · 0 relance · 0 tracking",
+            "name": "Coach Business",
+            "role": "Offre à 2 000 €",
+            "result": "Taux de conversion ×3,4 · CPL ÷2,8 · en 60 jours"
+          },
+          {
+            "quote": "Avant : 73 % d'abandon à l'étape paiement",
+            "name": "Infopreneur",
+            "role": "Offre à 497 €",
+            "result": "+41 % de revenus · sur le même trafic, sans toucher au budget pub"
+          }
+        ]
+      },
+      "script": "Pas en promesses. En résultats mesurés.\n\nDeux exemples concrets.\n\nUn coach business, une offre à 2 000 €.\nAvant : une landing statique, zéro relance, zéro tracking.\nAprès : un taux de conversion multiplié par 3,4 et un coût par lead divisé par 2,8. En 60 jours.\n\nUn infopreneur, une offre à 497 €.\nAvant : 73 % d'abandon à l'étape paiement.\nAprès : +41 % de revenus.\nSur le même trafic. Sans toucher au budget pub.\n\nC'est ça, la puissance d'un système : on ne rajoute pas de trafic, on arrête de le perdre.",
+      "notes": "ÉTUDES DE CAS · 1 min. Sous-titre d'origine : « Pas en promesses. En résultats mesurés sur des projets réels. » Structure d'origine de chaque carte : profil + prix de l'offre → « Avant : … » → flèche → résultat chiffré → délai. Les cas sont anonymisés dans la version d'origine (profil + prix, sans nom de client). Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 15,
+      "content": {
+        "headline": "Deux cas. Deux marchés. Une constante.",
+        "items": [
+          {
+            "quote": "Avant : 100 % bouche-à-oreille · 0 système",
+            "name": "Agence B2B",
+            "role": "Offre à 5 000-15 000 €",
+            "result": "23 appels qualifiés · 8 signatures · CA ×2,1 en 30 jours"
+          },
+          {
+            "quote": "Avant : webinaire live chaque semaine · épuisement total. Il a repris sa vie. Le système a gardé son CA.",
+            "name": "Expert Immobilier",
+            "role": "Offre à 3 500 €",
+            "result": "Système 100 % autonome · 0 intervention · CA maintenu"
+          }
+        ]
+      },
+      "script": "Deux autres marchés. Et toujours la même constante.\n\nUne agence B2B, des offres entre 5 000 et 15 000 €.\nAvant : 100 % bouche-à-oreille, zéro système.\nAprès : 23 appels qualifiés, 8 signatures, un chiffre d'affaires multiplié par 2,1. En 30 jours.\n\nUn expert immobilier, une offre à 3 500 €.\nAvant : un webinaire live chaque semaine. L'épuisement total.\nAujourd'hui : un système 100 % autonome. Zéro intervention. Le chiffre d'affaires est maintenu.\nIl a repris sa vie. Le système a gardé son CA.\n\nLe bon système change les chiffres. Quel que soit le secteur.",
+      "notes": "ÉTUDES DE CAS · 1 min. Sous-titre d'origine : « Le bon système change les chiffres — quel que soit le secteur. » Cas anonymisés dans la version d'origine : une agence B2B et un expert immobilier épuisé par le live, devenu autonome. Phrase humaine de conclusion : « Il a repris sa vie. Le système a gardé son CA. » Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 16,
+      "content": {
+        "headline": "Les plus exigeants du marché ont un point commun : ils ont tous choisi GetFunnels.",
+        "items": [
+          {
+            "caption": "Yomi Denzel — Millionnaire en moins d'un an"
+          },
+          {
+            "caption": "Max Piccinini — +100 M€ · Meilleur Coach Français"
+          },
+          {
+            "caption": "Jody Cavalie — 7 M€/webinaire · N°1 francophonie"
+          },
+          {
+            "caption": "Taylor Chiche — Référence investissement FR"
+          },
+          {
+            "caption": "Edgar Grospiron — Médaille d'or JO 1992"
+          },
+          {
+            "caption": "Thami Kebbaj — Référence entrepreneuriat FR"
+          },
+          {
+            "caption": "Clément Réau — Fondateur Conseiller Influent"
+          },
+          {
+            "caption": "+ Jean Hollaender · Tata Gamze · Stephen Ridley · Mohamed Boclet · Alec Henry · et +400 autres."
+          }
+        ]
+      },
+      "script": "Les plus exigeants du marché ont un point commun.\n\nIls avaient le choix.\nIls avaient les moyens d'aller ailleurs.\nEt ils ont tous choisi GetFunnels.\n\nDes noms que vous connaissez sûrement : Yomi Denzel, Max Piccinini, Jody Cavalie, Edgar Grospiron…\nEt Alec Henry, notre premier client. Toujours là.\nLes résultats, eux, vous ne les voyez pas. Ils se passent derrière les scènes.\nEt il y en a plus de 400 autres.\n\nCes personnes avaient des options.\nDes équipes. Des budgets. Des alternatives.\nElles ont choisi ça.\n\nJe vous laisse prendre le temps d'y réfléchir.",
+      "notes": "RÉFÉRENCES · 1 min 30. Fusion de 3 slides d'origine découpées pour la mise en page : (1) « Les plus exigeants du marché francophone ont un point commun. Ils avaient le choix. Ils avaient les moyens d'aller ailleurs. ILS ONT TOUS CHOISI GETFUNNELS. » (2) « Les noms que vous connaissez. Les résultats que vous ne voyez pas — sauf derrière les scènes. » — grille de 12 noms : Yomi Denzel (Millionnaire en moins d'un an), Max Piccinini (+100M€ · Meilleur Coach Français), Jody Cavalie (7M€/webinaire · N°1 francophonie), Taylor Chiche (Référence investissement FR), Edgar Grospiron (Médaille d'or JO 1992), Thami Kebbaj (Référence entrepreneuriat FR), Clément Réau (Fondateur Conseiller Influent), Jean Hollaender (Formé par Russell Brunson), Tata Gamze (Fondatrice Woman Business Passion), Stephen Ridley (Artiste & entrepreneur international), Mohamed Boclet (Vice-champion monde · TEDx), Alec Henry (Premier client. Toujours là.) — puis « + James Alley · Mahdi Pegeon · Ducasse · et +400 autres. » (3) « Ces personnes avaient des options. Des équipes. Des budgets. Des alternatives. Elles ont choisi ça. Prenez le temps d'y réfléchir. » Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 17,
+      "content": {
+        "headline": "Nous pourrions vous dire que nous sommes les meilleurs.",
+        "items": [
+          {
+            "quote": "« Les meilleurs — marché francophone et États-Unis. »",
+            "name": "James Alley",
+            "role": "Expert acquisition digitale"
+          },
+          {
+            "quote": "« Je recommande à 1 000 %. L'un des meilleurs partenaires que j'ai jamais eu. »",
+            "name": "Clément Réau",
+            "role": "Fondateur Conseiller Influent"
+          },
+          {
+            "quote": "« Mon entreprise se différencie maintenant de toute la concurrence. »",
+            "name": "Ducasse Goyd"
+          }
+        ]
+      },
+      "script": "On pourrait vous dire qu'on est les meilleurs.\n\nMais vous n'avez pas besoin de nous croire.\nVous pouvez les croire, eux.\n\nJames Alley : « Les meilleurs — marché francophone et États-Unis. »\nClément Réau : « Je recommande à 1 000 %. L'un des meilleurs partenaires que j'ai jamais eu. »\nDucasse Goyd : « Mon entreprise se différencie maintenant de toute la concurrence. »\n\nEt si vous voulez aller plus loin, scannez le QR code : ce sont des témoignages vidéo.\nRegardez leurs yeux. Vous saurez que c'est réel.",
+      "notes": "TÉMOIGNAGES · 1 min. Sous-titre d'origine : « Mais vous n'avez pas besoin de nous croire — vous pouvez les croire, eux. » La slide d'origine affichait 3 citations et un emplacement QR code vers les témoignages vidéo (sans lien renseigné), avec la phrase « → Regardez leurs yeux. Vous saurez que c'est réel. » Ajouter le lien ou QR code des témoignages vidéo. Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 18,
+      "content": {
+        "headline": "+2 000 tunnels. Zéro identique. Zéro template.",
+        "items": [
+          {
+            "caption": "Lead magnet à 0 €"
+          },
+          {
+            "caption": "Lancement orchestré à 7 chiffres"
+          }
+        ]
+      },
+      "script": "Plus de 2 000 tunnels. Et pas deux identiques.\n\nZéro template.\nDu lead magnet à 0 € jusqu'au lancement orchestré à 7 chiffres.\n\nPourquoi aucun n'est identique ?\nParce que chaque tunnel, c'est l'architecture exacte d'une offre précise, pour une audience précise.\nVotre offre n'est pas celle de votre concurrent. Votre tunnel non plus.",
+      "notes": "PORTFOLIO · 45 sec. Sous-titre d'origine : « Du lead magnet à 0€ au lancement orchestré à 7 chiffres. » La slide d'origine prévoyait une mosaïque de captures de tunnels clients (emplacement vide, aucune capture renseignée) ; insérer des captures avec l'accord des clients. Pied de slide : « Chaque tunnel est l'architecture exacte d'une offre précise pour une audience précise. » Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 19,
+      "content": {
+        "headline": "GetFunnels n'est pas pour tout le monde.",
+        "columns": [
+          "C'est pour vous si…",
+          "Ce n'est pas pour vous si…"
+        ],
+        "rows": [
+          {
+            "label": "L'offre",
+            "values": [
+              "Offre prouvée · marge réelle",
+              "Offre pas encore validée"
+            ]
+          },
+          {
+            "label": "L'investissement",
+            "values": [
+              "Prêt à investir sérieusement",
+              "Cherche le moins cher du marché"
+            ]
+          },
+          {
+            "label": "La relation",
+            "values": [
+              "Cherche un partenaire — pas un exécutant",
+              "Ne veut pas s'impliquer dans le process"
+            ]
+          },
+          {
+            "label": "L'objectif",
+            "values": [
+              "Veut un système — pas une jolie page",
+              "Attend des résultats sans donner accès aux données"
+            ]
+          }
+        ]
+      },
+      "script": "On n'est pas pour tout le monde. Et c'est volontaire.\n\nOn préfère refuser que décevoir.\nLa sélectivité, c'est notre garantie de résultats.\n\nC'est pour vous si : votre offre est prouvée et a une vraie marge,\nsi vous êtes prêt à investir sérieusement,\nsi vous cherchez un partenaire — pas un exécutant,\net si vous voulez un système — pas juste une jolie page.\n\nPar contre, ce n'est pas pour vous si votre offre n'est pas encore validée,\nsi vous cherchez le moins cher du marché,\nsi vous ne voulez pas vous impliquer dans le process,\nou si vous attendez des résultats sans donner accès aux données.\n\nJe vous laisse vous situer.",
+      "notes": "FILTRE · 1 min. Sous-titre d'origine : « On préfère refuser que décevoir. La sélectivité est notre garantie de résultats. » Visuel d'origine : deux colonnes — critères acceptés (coches) et critères refusés (croix). Les intitulés de lignes et de colonnes ont été ajoutés lors du portage. Ton calme : on qualifie, on ne supplie pas. Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 20,
+      "content": {
+        "headline": "Trois niveaux d'entrée. Un seul objectif : convertir.",
+        "tiers": [
+          {
+            "name": "LAUNCH",
+            "features": [
+              "Poser les fondations.",
+              "Parcours",
+              "Capture",
+              "Relances essentielles"
+            ]
+          },
+          {
+            "name": "GROWTH",
+            "highlight": true,
+            "features": [
+              "Construire la machine.",
+              "★ Le plus choisi",
+              "Parcours complet",
+              "CRM",
+              "Automations",
+              "Tracking",
+              "Itérations"
+            ]
+          },
+          {
+            "name": "SCALE",
+            "features": [
+              "Dominer le marché.",
+              "Acquisition paid",
+              "Retargeting",
+              "Optimisation continue"
+            ]
+          }
+        ]
+      },
+      "script": "Trois niveaux d'entrée. Un seul objectif : convertir.\n\nLAUNCH, c'est poser les fondations : le parcours, la capture, les relances essentielles.\nGROWTH, c'est construire la machine : le parcours complet, le CRM, les automations, le tracking, et les itérations. C'est le plus choisi.\nEt SCALE, c'est dominer le marché : acquisition payante, retargeting, optimisation continue.\n\nMais je vous arrête tout de suite :\nle pack exact, on ne le choisit pas maintenant.\nIl se définit après votre audit. Parce qu'on ne prescrit pas avant d'avoir diagnostiqué.",
+      "notes": "LES PACKS · 1 min. Sous-titre d'origine : « Un seul objectif : convertir. Le pack exact se définit après votre audit. » La version d'origine n'affichait AUCUN prix — le pack se définit après l'audit. Le pack GROWTH est mis en avant (badge « ★ LE PLUS CHOISI »). Visuel d'origine : icônes fusée, courbe de croissance, éclair. Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 22,
+      "content": {
+        "headline": "Un atelier. Pas une agence fantôme. Les personnes derrière vos résultats.",
+        "members": [
+          {
+            "name": "Hamid",
+            "role": "CEO",
+            "proof": "La vision et la stratégie"
+          },
+          {
+            "name": "El Mahdi",
+            "role": "Directeur Opérationnel",
+            "proof": "L'exécution sans faille"
+          },
+          {
+            "name": "Mariyem",
+            "role": "Product Manager Growth",
+            "proof": "Ce qui fait monter les chiffres"
+          },
+          {
+            "name": "Mouna",
+            "role": "Project & Automation",
+            "proof": "Vos systèmes en ordre de marche"
+          },
+          {
+            "name": "Romuald",
+            "role": "Media Buyer",
+            "proof": "Chaque euro pub justifié"
+          },
+          {
+            "name": "Abderrahim",
+            "role": "Designer",
+            "proof": "Beau ET performant"
+          }
+        ]
+      },
+      "script": "Ici, personne ne disparaît après la signature.\n\nOn est un atelier. Pas une agence fantôme.\nChaque expert travaille en interne. Sur votre projet. Avec son nom dessus.\n\nJe vous présente les personnes derrière vos résultats.\nHamid, CEO : la vision et la stratégie.\nEl Mahdi, directeur opérationnel : l'exécution sans faille.\nMariyem, Product Manager Growth : ce qui fait monter les chiffres.\nMouna, projet et automation : vos systèmes en ordre de marche.\nRomuald, media buyer : chaque euro de pub justifié.\nAbderrahim, designer : beau ET performant.\nEt autour d'eux : Mohammed-Khair et Anas au développement, Rania au marketing, Karim aux RH, Fatima Zahra à la coordination, Imane en assistance.\n\nPlus de 25 experts. Zéro sous-traitance. Un seul interlocuteur.",
+      "notes": "L'ÉQUIPE · 1 min 30. Fusion de 2 slides d'origine découpées pour la mise en page. (1) « Un atelier. Pas une agence fantôme. Chez GetFunnels, personne ne disparaît après la signature. » + emplacement photo d'équipe (vide dans la version d'origine : « Visuel à venir ») + « Chaque expert travaille en interne. Sur votre projet. Avec leur nom dessus. » + « +25 experts. Zéro sous-traitance. Un seul interlocuteur. » (2) « Les personnes derrière vos résultats. Des noms. Des rôles. Des responsabilités réelles. » — grille de 12 membres. Membres non affichés ici (max 6) : Mohammed-Khair, Développeur — Ce qui tourne sans bug ; Anas, Développeur — Technique au service de la performance ; Rania, Marketing Specialist — Le bon message au bon moment ; Karim, RH — L'équipe qui reste ; Fatima Zahra, Coordinatrice — Rien ne tombe entre les mailles ; Imane, Assistante — Le liant qui rend tout fluide. Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 30,
+      "content": {
+        "headline": "Chaque mois sans système est une décision.",
+        "metrics": [
+          {
+            "value": "1 000",
+            "label": "Visiteurs / mois sur votre site"
+          },
+          {
+            "value": "0,8 % → 8",
+            "label": "Sans système : conversion → clients / mois"
+          },
+          {
+            "value": "2,5–4 % → 25–40",
+            "label": "Avec GetFunnels : conversion → clients / mois"
+          },
+          {
+            "value": "+25 500–48 000 €",
+            "label": "Par mois, sur une offre à 1 500 €"
+          }
+        ]
+      },
+      "script": "Ne rien faire, c'est aussi une décision.\n\nFaisons le calcul ensemble.\nPrenons 1 000 visiteurs par mois sur votre site.\n\nSans système, avec 0,8 % de conversion : 8 clients.\nAvec GetFunnels, entre 2,5 et 4 % : 25 à 40 clients.\n\nSur une offre à 1 500 €, ça fait entre 25 500 et 48 000 € de plus. Par mois.\n\nChaque mois sans système, ce n'est pas une pause.\nC'est une décision active de laisser cet argent ailleurs.\n\nEt la bonne nouvelle, c'est que ce potentiel existe déjà dans votre trafic actuel.\nIl attend juste le bon système pour se libérer.",
+      "notes": "LE COÛT DE L'INACTION · 1 min 30. Sous-titre d'origine : « Pas une pause. Une décision active de laisser cet argent ailleurs. » Exemple chiffré d'origine (fixe, pas un blanc) : 1 000 visiteurs/mois · sans système 0,8 % → 8 clients (courbe descendante, en rouge) · avec GetFunnels 2,5 % à 4 % → 25 à 40 clients (courbe montante) · sur une offre à 1 500 € → +25 500 € à +48 000 € par mois. Adapter aux chiffres du prospect si vous les avez. Pied de slide : « Ce potentiel existe déjà dans votre trafic actuel. Il attend juste le bon système pour se libérer. » Script rédigé lors du portage — à relire."
+    },
+    {
+      "position": 31,
+      "content": {
+        "eyebrow": "Vous avez une bonne offre.",
+        "headline": "Votre système est-il à sa hauteur ?",
+        "highlight": "C'est exactement pour ça qu'on est là.",
+        "sub": "Si vous avez hésité avant de répondre oui — la réponse est non. Et non — ce n'est pas un problème."
+      },
+      "script": "Une seule question.\n\nVous avez une bonne offre. Ça, on est d'accord.\nMais votre système… est-il à sa hauteur ?\n\n…\n\nSi vous avez hésité avant de répondre oui, la réponse est non.\nEt non, ce n'est pas un problème.\nC'est exactement pour ça qu'on est là.",
+      "notes": "LE PONT · 45 sec. Poser la question, puis SE TAIRE 3 secondes. La slide d'origine prévoyait une photo de Hamid (emplacement vide « Photo Hamid » dans la version d'origine). Ton bienveillant — on rassure, on ne culpabilise pas. Script rédigé lors du portage — à relire."
+    }
+  ],
+  "keepPlaceholders": [
+    {
+      "position": 34,
+      "reason": "Rempli en direct pendant l'appel (blancs par prospect) — schéma de tunnel personnalisé du prospect"
+    },
+    {
+      "position": 37,
+      "reason": "Captures de tunnels similaires choisies par prospect ; aucune capture dans la version d'origine"
+    }
+  ]
+}

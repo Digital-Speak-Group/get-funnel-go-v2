@@ -140,11 +140,25 @@ describe("cross-template uniqueness", () => {
     expect(new Set(allSlideIds).size).toBe(allSlideIds.length);
   });
 
-  it("all 4 expected templates are present", () => {
+  // Spec decision 10: system templates are visible to every customer, so the agency's own
+  // identity and client data stay out of them (they live in the private GetFunnels org).
+  it("contain no agency identity, client names or links", () => {
+    const forbidden = [/hamid/i, /bouhali/i, /getfunnels/i, /yomi/i, /denzel/i, /piccinini/i,
+      /kabbaj/i, /boclet/i, /cavali/i, /supabase/i, /funnelytics\.io/i, /https?:\/\//i];
+    const hits = templates.flatMap((t) => {
+      const text = JSON.stringify(t);
+      return forbidden.filter((re) => re.test(text)).map((re) => `${t.slug}: ${re.source}`);
+    });
+    expect(hits).toEqual([]);
+  });
+
+  it("all legacy funnel templates are present (7 frameworks + 2 extras)", () => {
     const slugs = templates.map((t) => t.slug);
-    expect(slugs).toContain("rdv-classique");
-    expect(slugs).toContain("vsl-funnel");
-    expect(slugs).toContain("webinaire");
-    expect(slugs).toContain("commercial");
+    expect(slugs).toEqual(
+      expect.arrayContaining([
+        "rdv-classique", "vsl-funnel", "webinaire", "commercial",
+        "lancement-orchestre", "evergreen", "tunnel-pay", "tunnel-webinaire", "pitch-commercial",
+      ])
+    );
   });
 });

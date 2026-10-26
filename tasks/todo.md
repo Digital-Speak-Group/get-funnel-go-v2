@@ -57,9 +57,9 @@
 - [x] Policies exist for every tenant table; RLS enabled
 - [x] Integration tests prove: member can read own org, non-member cannot, viewer cannot write
 - [x] Helpers are `security definer` with fixed `search_path`
-**Verify:** `npm run test -- rls`
+**Verify:** `TEST_DATABASE_URL=<disposable db> npm run test -- rls`
 **Dependencies:** 4
-**Files:** `drizzle/0001_rls_baseline.sql`, `tests/integration/rls.test.ts`
+**Files:** `drizzle/0006_rls_policies.sql` (the original `0001_rls_baseline.sql` was never in the migration journal; replaced 2026-10-12), `tests/integration/rls.test.ts`
 **Size:** M
 
 ### Task 6: Supabase Auth + session helper
@@ -357,7 +357,7 @@
 - [x] CI runs evals without live API calls
 - [x] Assertions cover schema validity, slide count, stage order, language, no invented numbers
 - [x] Adding a fixture is documented in the test file header
-**Verify:** `npm run test -- ai-eval`
+**Verify:** `npm run test -- tests/ai`
 **Dependencies:** 27
 **Files:** `tests/ai/fixtures/*.json`, `tests/ai/eval.test.ts`, `scripts/eval-ai.ts`
 **Size:** M
@@ -472,3 +472,489 @@
 - [x] `docker compose up` runs the stack on vanilla Postgres
 - [x] Launch checklist complete
 - [ ] Human sign-off
+
+---
+
+## Phase 5 — Premium Redesign
+
+> Scope: product chrome only. `src/components/slides/**` and deck themes are untouched. Every task keeps existing `data-testid`s and accessible names so e2e specs keep passing. Files over ~300 lines that a task touches get split as part of that task.
+
+### Task 39a: Auth fixes found during the Phase 5 audit (approved 2026-10-04)
+**Description:** (1) `getSession()` cached the session in module state, shared across all requests on a server instance — one user could receive another's session/org. Now memoized per request with `React.cache`. (2) `middleware.ts` sat at the repo root, which Next.js ignores when `src/` exists, so session refresh, middleware redirects, and the `/p/*` rate limit never ran. Moved to `src/middleware.ts`; path rules extracted to `src/lib/auth/route-access.ts` and fixed before activation (`/callback` and `/opengraph-image` public; `/api/*` never redirected so Stripe webhooks and JSON 401s keep working).
+**Acceptance:**
+- [x] No module-level session state; memoization is per request
+- [x] Build reports `ƒ Middleware`; protected pages 307 → `/login?callbackUrl=…`
+- [x] `/callback`, `/pricing`, `/opengraph-image` public; `POST /api/stripe/webhook` reaches signature check (400, not redirect); `/api/ai/generate` returns 401
+- [x] `/p/*` responses carry `X-RateLimit-*` headers
+- [x] Unit tests for route access rules
+- [ ] Sign-in → session refresh verified end-to-end with the database up (blocked: Docker not running)
+**Files:** `src/lib/auth/session.ts`, `src/middleware.ts` (moved), `src/lib/auth/route-access.ts`, `tests/unit/route-access.test.ts`, `docs/architecture.md`
+**Size:** S
+
+### Task 40: Token system, fonts, and design guardrail
+**Description:** Rewrite product tokens for the refined-dark direction and document them in `docs/design-system.md`. Proposed starting values (final values must pass the contrast test): bg `#0A0A0B`, surface `#111113`, surface-2 `#18181B`, surface-3 `#1F1F23` (hover/selected), border `rgb(255 255 255 / 0.07)`, border-strong `/ 0.12`, text `#EDEDEF`, muted `#A1A1AA`, faint raised from `#52525b` (≈2.6:1, fails) to a value ≥ 4.5:1; primary `#6E56CF`, primary-hover `#7D66D9`, accent-text `#BAA7FF`, ring = primary at 50 %. Tighter radii (6/8/12/16), near-invisible shadows, and app type scale (page title 24–28 px / 600 / −0.02em tracking). Load Geist + Geist Mono via `next/font/google`. Map shadcn CSS variables to these tokens. Add a guardrail test.
+**Acceptance:**
+- [x] `docs/design-system.md` updated: tokens, type scale, "violet = actions/focus/selection only" rule, no glows/gradient text
+- [x] Geist actually renders (verified in browser); `--font-*` tokens point at the `next/font` variables
+- [x] Unit test asserts token contrast: text/muted/faint ≥ 4.5:1 on bg and surface; white on primary ≥ 4.5:1
+- [x] Guardrail test fails on raw palette classes (`zinc-`, `violet-`, `white/[`, …), hex, or `rgba(` in `src/app` + `src/components` outside `slides/`; ships with an allowlist of not-yet-migrated files that later tasks shrink to empty
+**Verify:** `npm run test`; screenshot of `/app` showing Geist
+**Dependencies:** none
+**Files:** `src/styles/globals.css`, `src/app/layout.tsx`, `docs/design-system.md`, `tests/unit/design-tokens.test.ts`, `tests/unit/design-guardrail.test.ts`
+**Size:** M
+
+### Task 41: Install approved deps + core primitives
+**Description:** Install `framer-motion`, `sonner`, `cmdk`, and Radix packages through `npx shadcn add`: input, textarea, label, card, badge, dialog, sheet, tabs, select, tooltip, skeleton, switch, scroll-area, popover, sonner, command. Primitives are themed through the variable mapping from Task 40, not by editing their source. Bring the existing `button` and `dropdown-menu` onto tokens the same way (regenerate if needed). Button variants: primary, secondary (surface-2 + border), ghost, outline, destructive; sizes sm/md/lg/icon.
+**Acceptance:**
+- [x] All listed primitives exist in `src/components/ui` with no raw palette classes
+- [x] A scratch route renders every primitive in every state (default/hover/focus/disabled/invalid) for review
+- [ ] Focus rings visible on every interactive primitive
+**Verify:** Scratch route at 1440×900 + keyboard tab-through; `npm run build`
+**Dependencies:** 40
+**Files:** `package.json`, `src/components/ui/*` (generated), `src/app/dev/ui/*` + `src/app/dev/shell/page.tsx` (dev-only, 404 in production). Primitives are hand-authored in shadcn's `forwardRef` structure: the current shadcn CLI emits React 19-only components
+**Size:** M
+
+### Task 42: Shared app patterns + motion presets
+**Description:** Compose the primitives into reusable patterns every screen uses: `PageHeader` (title, description, actions), `EmptyState`, `SectionCard` (settings-style form section), `Kbd`, `Logo` (wordmark + mark), `StatusPill` (saved/saving/error), and `motion.ts` presets (fade/rise 250 ms `--ease-out`, list stagger 40 ms) that collapse to opacity-only under `prefers-reduced-motion`. Mount `<Toaster />` once in the app layout.
+**Acceptance:**
+- [x] Each pattern has typed props, `className` passthrough, and cva variants where relevant
+- [x] Motion presets are verified to respect reduced motion (unit test on the hook)
+- [ ] Toasts render with tokens and are announced to screen readers
+**Verify:** Scratch route; `npm run test`
+**Dependencies:** 41
+**Files:** `src/components/app/patterns/*.tsx`, `src/lib/motion.ts`, `src/components/app/Shell.tsx` (Toaster mount)
+**Size:** M
+
+### Task 43: App shell rebuild + ⌘K command palette
+**Description:** Rebuild Shell/Sidebar/Topbar. Sidebar: logo + org name at top, nav (Decks, Nouveau deck, Modèles), settings and a compact credits meter at the bottom, collapse state persisted and reflowing content, off-canvas `Sheet` below `lg`. Topbar: slim (48–56 px), breadcrumbs, ⌘K trigger, user menu. Remove the dead bell and the light/dark toggle (light mode is deferred). Command palette (`cmdk`): navigate, search decks by title, "Nouveau deck", "Ouvrir les paramètres". Fix the double `lg:pl-64` padding bug.
+**Acceptance:**
+- [x] No horizontal overflow at 390×844; sidebar becomes a drawer with focus trap
+- [ ] Collapsing the sidebar reflows content and persists across reloads
+- [ ] ⌘K / Ctrl+K opens the palette from any `/app` page; Esc closes; fully keyboard-operable
+- [x] Credits meter reads the same source as billing `UsageMeter` (no new queries in the client)
+- [x] All shell copy lives in `src/components/app/messages.ts`
+**Status 2026-10-23:** collapse (cookie `gf-sidebar-collapsed`, read server-side in `(app)/app/layout.tsx`) and the Ctrl+K palette were already implemented but unverified. `e2e/shell.spec.ts` now covers: collapse reflows `main` and persists across reloads/pages; Ctrl+K opens on dashboard, new, templates, settings and the editor, Esc closes, Ctrl+K toggles; keyboard-only deck jump and action run; topbar trigger. Boxes stay open until the spec runs green (Docker was not running).
+**Verify:** Browser at 1440×900 and 390×844; existing e2e green
+**Dependencies:** 42
+**Files:** `src/components/app/Shell.tsx`, `Sidebar.tsx`, `Topbar.tsx`, `CommandMenu.tsx`, `CreditsMeter.tsx`, `breadcrumbs.ts`, `messages.ts`; `src/server/services/workspace.ts` + `src/lib/db/repositories/organizations.ts` (shared usage source); shell layout moved from `(app)/layout.tsx` to `(app)/app/layout.tsx` so `/present` no longer renders inside the shell
+**Size:** M
+
+### Checkpoint F — Foundation review
+- [ ] Screenshots of primitives scratch route and shell (desktop + mobile) approved by human
+- [x] `lint`, `typecheck`, `test`, `build` green
+
+### Task 44: Dashboard + template gallery
+**Description:** Dashboard: `PageHeader` ("Tableau de bord" — the e2e heading) with primary "Générer un deck" and secondary "Deck vierge" (blank-deck dialog), toolbar (search, sort as Radix `Select`), thumbnail-first deck cards (16:9 render, title, relative date, status badge, actions menu), skeletons matching the card shape, `EmptyState`. Templates: category filter (derived from data: Conversion / Diagnostic / Formation / Vente Directe), cards with real slide thumbnails, preview `Dialog` with slide strip and arrow-key navigation, "Utiliser ce modèle". Native `confirm()` on delete replaced by a confirmation dialog; rename/duplicate/delete give toast feedback. Grid/list toggle dropped (not needed for a thumbnail-first grid; would be new scope).
+**Acceptance:**
+- [x] Keeps `deck-card`, `create-deck-open`, "Rechercher un deck", "Trier les decks", "Plus d'options", menu item names, `dashboard-empty-state`, `dashboard-no-results`
+- [x] e2e dashboard spec updated in this task: sort drives the Radix Select; delete clicks the confirmation dialog
+- [x] Card hover/focus states match; the thumbnail is a keyboard-reachable link to the editor (overlay link, since slides can render their own buttons/links)
+- [x] Guardrail allowlist shrinks by every file touched
+- [x] `npm run test:e2e -- dashboard` green (2026-10-12, against the Docker stack)
+**Verify:** `/dev/dashboard` preview (seed content, no DB) at 1440×900 and 390×844 — no overflow, no console errors, rename input receives focus, body pointer lock released after dialogs; `npm run test:e2e -- dashboard` once the DB is up
+**Dependencies:** 43
+**Files:** `src/app/(app)/app/page.tsx`, `DashboardFilters.tsx`, `templates/page.tsx`, `src/components/app/dashboard/*` (DeckCard, DeckActionsMenu, DeleteDeckDialog, CreateDeckDialog, format, messages), `src/components/app/templates/*`, `src/lib/db/repositories/templates.ts` (`listTemplateGallery`), `e2e/dashboard.spec.ts`, `src/app/dev/dashboard/page.tsx`
+**Size:** M
+
+### Task 45: Generation wizard
+**Description:** Three clear steps (Script → Modèle & thème → Paramètres) with a stepper, a large script textarea with live character count against the 30k limit, template and theme as selectable cards with thumbnails, then a generation progress view as a vertical stage timeline (Brief → Plan → Slides n/N → Terminé) with cancel.
+**Acceptance:**
+- [x] Keeps placeholder `Collez votre script de vente…`, "Générer le deck", "Nouveau deck IA"
+- [x] Stage events from the existing API drive the timeline; no API changes
+- [x] Credit cost shown before generating; limit-hit state uses `UpgradeDialog`
+**Verify:** `npm run test:e2e -- generation`; manual run with a fixture script
+**Done 2026-10-13:** `wizard/` split into Stepper, `steps/` (Script, Design, Settings), GenerationProgress (timeline from the SSE events, cancel = stop following; the API keeps no cancel), `useGeneration` + pure `generation-state` (unit-tested). Budget check reuses `creditLimitCents` / `ESTIMATED_COST_CENTS` exported from the credit services (no behaviour change). e2e with a mocked event stream: steps → timeline → redirect, and plan limit → upgrade dialog.
+**Dependencies:** 44
+**Files:** `src/components/app/wizard/GenerationWizard.tsx` (split into `steps/*.tsx`), `src/app/(app)/app/new/page.tsx`
+**Size:** M
+
+### Task 46: Deck editor
+**Description:** Three-pane layout: slide rail (numbered thumbnails, reorder, add/duplicate/delete via menu), centered canvas on a neutral stage, right inspector (fields grouped in sections, inline validation). Top bar: back, editable deck title, `StatusPill` save state, theme switch popover, "Présenter" primary. Split `SlideFields.tsx` (455 lines) and `EditorShell.tsx` (424 lines) into field/section components.
+**Acceptance:**
+- [x] Keeps `slide-item`, `slide-field-title`, `editor-status`, `editor-empty`, `add-slide-*`, `slide-error-title`, "Monter le slide N", "Présenter"
+- [x] Inspector collapses to a bottom `Sheet` below `lg`
+- [x] No file in `editor/` exceeds ~300 lines
+**Verify:** `npm run test:e2e -- editor`; manual edit/reorder/autosave
+**Done 2026-10-13:** EditorShell = `useEditorState` + `useCanvasActions` + EditorTopBar (renamable title, StatusPill, theme, link, export, Présenter) + SlideList (numbered live thumbnails, hover actions, horizontal strip below lg) + SlideCanvas on a neutral stage + EditorInspector (side panel / bottom Sheet). SlideFields split into `fields/` (also fixes number fields sharing one DOM id). Messages split (`field-labels.ts`, `free/messages.ts`). Theme dialog uses ThemeChoiceGrid; the old ThemePicker is gone.
+**Dependencies:** 44
+**Files:** `src/components/app/editor/*` (EditorShell, SlideList, SlideFields split, SlideCanvas)
+**Size:** M (split into 46a layout / 46b inspector if it exceeds one session)
+
+### Task 47: Presenter + audience views
+**Description:** Presenter (animation-free per design system): current slide large, next slide preview, monospaced timer + per-slide time, tabs for Script / Notes / Métriques, connection status of audience link, copy-link with toast, keyboard hint bar (`Kbd`). Audience: full-bleed, zero chrome, framer-motion slide transitions (450 ms, opacity-only under reduced motion), elegant "En attente du présentateur" state. Split `PresenterShell.tsx` (442 lines).
+**Acceptance:**
+- [x] Presenter has no animations; audience has no visible controls or focus rings
+- [x] Keyboard map unchanged (arrows, space, `F`, `P`)
+- [x] Works at 1440×900 and 1920×1080; audience works on mobile — checked at 1440×900; audience gets swipe on touch
+**Verify:** Two browsers side by side; `npm run test:e2e`
+**Done 2026-10-13:** PresenterShell split (`usePresenterClock`, `usePresenterKeys`, PresenterTopBar, PresenterPanel); Kbd hint bar; audience-link state from the realtime channel (`onStatus`, optional on `RealtimeChannel`). Audience: framer-motion cross-fade 450 ms (opacity-only with reduced motion), no on-screen controls, "En attente du présentateur" until the first sync event; `data-slide-index` updates when the transition has settled, so PDF/PPTX capture never catches a half-faded slide.
+**Dependencies:** 43
+**Files:** `src/components/presenter/PresenterShell.tsx` (split), `AudienceView.tsx`, `src/app/p/[token]/page.tsx`, `src/app/(app)/present/layout.tsx`
+**Size:** M
+
+### Checkpoint G — Core product review
+- [ ] Dashboard, wizard, editor, presenter, audience approved by human (desktop + mobile screenshots)
+- [x] Full e2e suite green (2026-10-12: 6 passed, AI generation spec skipped by design; fixed slide reorder unique violation, presenter landmarks, dashboard search race)
+
+### Task 48: Settings + billing
+**Description:** Settings layout with a left sub-nav (Profil, Organisation, Facturation) and `SectionCard` form sections with right-aligned save actions. Organisation: members table with role badges. Billing: current plan card, usage meter, plan comparison cards, invoices table.
+**Acceptance:**
+- [x] Every settings page uses the same section pattern
+- [x] Limit/upgrade copy unchanged in meaning; French-first
+**Verify:** Browser review at 1440×900 and 390×844
+**Done 2026-10-13:** sub-nav layout, SectionCards, members table (`listOrgMembers` repository), billing (current plan, usage, plan cards, invoices EmptyState). Plan features rewritten to what the product does: only the monthly AI budget differs by plan. Not built (no backing feature): profile/organisation save actions (disabled), invoices list, customer portal.
+**Dependencies:** 42
+**Files:** `src/app/(app)/app/settings/*`, `src/components/app/billing/*`
+**Size:** M
+
+### Task 49: Auth + onboarding
+**Description:** Split-screen auth: form on the left (password / lien magique as tabs, inline validation), a live rendered deck slide on the right (hidden on mobile). Onboarding as a ≤ 3-step stepper with progress, brand color picker, first template choice.
+**Acceptance:**
+- [x] Keeps "Se connecter", "Démarrer", `vous@exemple.com` / `••••••••` placeholders
+- [x] Right-panel slide is rendered by `SlideRenderer`, not a screenshot
+**Verify:** `npm run test:e2e -- core smoke`; manual signup flow
+**Done 2026-10-13:** split-screen auth with live slide, tabs, inline validation; onboarding as a 3-step stepper. Open (need an auth/schema decision): magic-link sign-in (tab shown disabled "Bientôt"), brand colour and first-template onboarding steps. Links to `/forgot-password`, `/legal/terms`, `/legal/privacy` point to pages that don't exist yet.
+**Dependencies:** 42
+**Files:** `src/app/(auth)/layout.tsx`, `login/LoginContent.tsx`, `signup/SignupContent.tsx`, `callback/CallbackContent.tsx`, `src/app/onboarding/*`
+**Size:** M
+
+### Task 50: Marketing landing + pricing
+**Description:** Rebuild the landing in the refined-dark register: no blur blobs, no gradient text, no fake window chrome. Hero with a live `SlideRenderer` preview (auto-advancing through a template), the seven-framework template strip using real themes, presenter/audience feature section with real UI, pricing teaser, FAQ, footer. Replace unverifiable stats ("10x", "100 % généré par IA") with verifiable facts (7 frameworks, 27 slide types, 5 themes). Pricing page uses the same plan cards as billing. Update the OG image to the new look.
+**Acceptance:**
+- [x] Lighthouse mobile performance ≥ 90 on `/` and `/pricing` (preview is lazy/below-the-fold-safe) — median of 5 runs (Lighthouse 13.5): `/` 90, `/pricing` 92 (range 87–93)
+- [x] No claim on the page that the product cannot back up
+- [x] CTAs still route to signup/checkout
+**Verify:** Lighthouse; browser review; OG preview tool
+**Done 2026-10-13:** landing in `sections/` (hero with live RDV preview started when the browser is idle, frameworks, features, presenter/audience with real components, pricing teaser, FAQ, CTA, footer); facts counted from code (7 frameworks, 34 slide types, 11 themes); OG image on product tokens. Legal pages (CGV, confidentialité, mentions légales) don't exist — required in France before launch.
+**Dependencies:** 41
+**Files:** `src/app/(marketing)/page.tsx` (split into `sections/*.tsx`), `layout.tsx`, `pricing/page.tsx`, `src/app/opengraph-image.tsx`
+**Size:** M
+
+### Task 51: Polish + QA pass
+**Description:** Run a final consistency pass on spacing, alignment, and empty/loading/error states for every surface; empty the guardrail allowlist; add Playwright screenshot baselines for key screens.
+**Acceptance:**
+- [x] Guardrail allowlist is empty: zero raw palette classes/hex outside `slides/`
+- [x] axe passes on every surface; keyboard-only run-through works — axe on 13 surfaces in `e2e/a11y.spec.ts`; no separate manual keyboard run
+- [x] Reduced-motion verified; no layout shift on dashboard and editor load — CLS < 0.1 asserted in `e2e/a11y.spec.ts`
+- [x] Screenshot baselines committed for dashboard, editor, presenter, audience, login, landing — Windows baselines; the spec skips on other OSes
+**Verify:** Definition of done + `npm run test:e2e`
+**Dependencies:** 44–50
+**Files:** `e2e/visual.spec.ts`, guardrail allowlist, touch-ups
+**Size:** M
+
+### Checkpoint H — Redesign sign-off
+- [ ] All surfaces approved by human
+- [x] `lint`, `typecheck`, `test`, `build`, `test:e2e` green — 2026-10-13: 568 unit, e2e 18 tests ×2 green
+- [ ] `docs/design-system.md` reflects the shipped system
+
+---
+
+## Phase 6 — Legacy integration (`get-funnel-go` → v2)
+
+> Source analysis 2026-10-08. Legacy repo is read-only (spec decision 12). Decisions 9–11 in `docs/spec.md`.
+>
+> **Approved 2026-10-09:** Tasks 62, 57b, 59 and 60 (their "Ask first" schema/security changes), to be built one at a time in that order.
+
+### Task 52: Quick fixes found during the legacy analysis
+**Description:** `npm run db:seed` loaded stage-only template rows from `fake-data.json` instead of the ported decks, so "Use template" created empty decks. Slides printed icon names as text ("award") instead of icons.
+**Acceptance:**
+- [x] `db:seed` calls `seedTemplates()` (real slides, notes, scripts); stage-only templates removed from `fake-data.json`
+- [x] Local dev DB reseeded: Commercial 20, RDV 22, VSL 25, Webinaire 20 slides
+- [x] Curated icon vocabulary (`src/lib/slides/icons.ts`) rendered by `SlideIcon` in authority/benefits/definition/problem/why; unknown words fall back, emoji kept
+- [x] Slide-generation prompt restricts `icon` to the vocabulary
+**Verify:** `tests/unit/slide-icon.test.tsx` (incl. every template icon name is known)
+**Size:** S
+
+### Task 53: Port Lancement Orchestré template
+**Description:** 26 legacy slides (`components/lancement/`, scripts in `SlideScriptsLancement.jsx`) to `scripts/seed/templates/lancement.json`, mapped onto existing types; interactive tabs/expanders become static content. Agency-specific facts become placeholders with `needsInput`.
+**Acceptance:**
+- [x] Validates with `validate-template.ts`; order and arguments match the legacy deck (26 slides, `lancement-orchestre.json`)
+- [x] Every slide carries the legacy script; no client names, revenue or bio in the template
+**Verify:** template gallery preview vs legacy deck side by side
+**Dependencies:** 52 · **Size:** M
+
+### Task 54: Port Evergreen template
+**Description:** 23 legacy slides (`components/ev/` + 3 reused web slides, scripts in `SlideScriptsEV.jsx`), same rules as Task 53.
+**Acceptance:** same as Task 53 — [x] done 2026-10-08 (23 slides, `evergreen.json`)
+**Dependencies:** 52 · **Size:** M
+
+### Task 55: Port Tunnel Pay template
+**Description:** 26 legacy slides (`components/pay/`, scripts in `SlideScripts.jsx` `pay`), same rules as Task 53.
+**Acceptance:** same as Task 53 — [x] done 2026-10-08 (26 slides, `tunnel-pay.json`)
+**Dependencies:** 52 · **Size:** M
+
+### Task 56: Port the legacy Webinaire and Commercial decks
+**Description:** Found 2026-10-08: v2's `webinaire` and `commercial` templates are not ports of the legacy decks (v2 Webinaire is a live webinar sales pitch; v2 Commercial is a sales-system consulting pitch). Port the legacy decks as new templates — `tunnel-webinaire` (24 slides, legacy `DeckWeb.jsx`) and `pitch-commercial` (legacy `DeckCommercial.jsx`, 44 slides condensed to the 40-slide deck limit by merging slides the legacy split only for layout: client names 3→1, team 2→1, FAQ 2→1). Keep the existing two as extra templates, renamed "Webinaire Live" and "Système Commercial". Commercial has no legacy scripts: write presenter scripts from the slide copy and mark them for human review. Live-personalisation blanks (`___ €`) stay as placeholders until Task 60's blanks type lands.
+**Acceptance:**
+- [x] Slide order and arguments match the legacy decks (`tunnel-webinaire.json` 24 slides; `pitch-commercial.json` 40 slides holding all 44 legacy slides — names 3→1, team 2→1, FAQ 2→1)
+- [x] Same placeholder policy as Tasks 53–55 (enforced by the template test)
+- [x] Commercial scripts flagged for review (every slide's notes end with "Script rédigé lors du portage — à relire.")
+- [ ] Human review of the 40 written Commercial scripts (tutoiement vs vouvoiement, added copy flagged in notes)
+**Dependencies:** 52 · **Size:** M
+
+### Task 56b: Scrub agency content from the 4 already-ported templates
+**Description:** RDV Classique, VSL, Webinaire and Commercial were ported before spec decision 10 and still contain the founder's name, the GetFunnels brand, client names and real revenue figures (found 2026-10-08). Apply the same placeholder policy as Tasks 53–55; the full-fidelity versions move to the GetFunnels org in Task 57 (sourced from the legacy repo).
+**Acceptance:**
+- [x] No founder name, agency brand, client names or case-study figures in `scripts/seed/templates/*.json` (enforced by a unit test)
+- [x] Slides with placeholders carry `needsInput: true`
+**Dependencies:** 52 · **Size:** S
+
+### Task 57: Private "GetFunnels" organization with the full-fidelity decks
+**Description:** Seed a GetFunnels org holding the 7 decks with the real agency content (founder bio, client names, figures, screenshots, Funnelytics/client funnel links). Move the legacy logo and screenshots from the Base44-hosted Supabase bucket into our `StorageProvider`.
+**Acceptance:**
+- [x] Org and decks visible only to its members via org-scoped queries (active org comes only from the user's own membership; seeded member belongs to no other org)
+- [x] …and via RLS — done 2026-10-12: `0006_rls_policies` in the journal (portable to plain Postgres), applied to the dev DB; `tests/integration/rls.test.ts` green on a disposable DB (20 tests). Still open: the server role bypasses RLS (`docs/data-model.md` → Known gap)
+- [x] 7 overlays validated by `tests/unit/getfunnels-org-seed.test.ts` (schema, slide order, no leftover placeholders outside `keepPlaceholders`, no URLs); local DB seeded: 7 decks / 186 slides, re-seed leaves them untouched
+- [ ] Human review of the agency content. Known legacy inconsistencies kept as-is: funnel count "+470" (RDV/VSL/Lancement/Pay) vs "1700+" (Webinaire) vs "+2 000 tunnels" (Commercial), and "150+ funnels" in VSL flow step 05. Pitch Commercial: slide 20 packs have no prices (legacy had none), slide 18 has only 2 captions (legacy mosaic was empty), slide 30 is a fixed worked example (not a live blank)
+- [x] No asset URL points to the legacy Base44 storage → done in Task 57b (source list in `scripts/seed/getfunnels-org/LEGACY-ASSETS.md`)
+**Member (decided 2026-10-08):** `tools@digitalspeak.group` — Supabase Auth user `427c7e0a-d396-4566-8fa6-093fb69b606d` created by admin API, email confirmed; password set by the owner and never stored in the repo. Owner role.
+**Split (2026-10-09):** `src/lib/storage` is empty and the gallery renderer ignores `assetId`, so the screenshots/logo move to Task 57b. Task 57 now covers the text content: each org deck is its system template plus an overlay (`scripts/seed/getfunnels-org/<slug>.json`) that replaces the `needsInput` slides with the real agency content; per-prospect live blanks stay placeholders (`keepPlaceholders`). Seeded by `seedGetFunnelsOrg()` (in `db:seed`, or `npx tsx scripts/seed/getfunnels-org.ts`); decks are insert-only so the team's edits survive re-seeding; present tokens are generated, never committed.
+**Dependencies:** 53–56 · **Size:** M
+
+### Task 57b: StorageProvider + slide images + legacy asset migration
+**Description:** Implement `StorageProvider` (interface + Supabase implementation, swappable for the VPS), render `gallery` images from `assetId`, serve images to the audience view without exposing private buckets (signed URLs or a token-scoped route), and copy the legacy logo + screenshots from the Base44 bucket into our storage, linking them to the GetFunnels org decks.
+**Acceptance:**
+- [x] `StorageProvider` interface with no vendor types; Supabase implementation server-only
+- [x] Gallery renders the image when `assetId` resolves, the current placeholder otherwise
+- [x] Audience view (`/p/[token]`) shows images without leaking other orgs' assets
+- [x] No asset URL points to the legacy Base44 storage
+**Ask first:** touches the audience-link security model and may add a storage bucket — approved 2026-10-09
+**Done 2026-10-09:** `src/lib/storage` (interface, Supabase impl on private bucket `slide-assets`, in-memory impl for tests); `src/server/services/assets.ts` (upload with byte-sniffed type, PNG/JPEG/WebP/GIF ≤ 4 MB, no SVG; org/token reads). Routes: `POST /api/assets` (upload, 30/min/user), `GET /api/assets/[id]` (session + org), `GET /p/[token]/assets/[id]` (only assets the deck references; also used by PDF export). Gallery renders images via `useAssetUrl()`, placeholder when missing or failing; editor "Image" field uploads/replaces/removes. 12 legacy images copied into storage as GetFunnels org assets with fixed ids (`scripts/seed/getfunnels-org-assets.json`, `scripts/migrate-legacy-assets.ts`); verified on the dev stack (own 200, other org 404, unreferenced 404, bad token 404, anonymous app route 401, SVG 415). They are not on any slide yet: the legacy screenshots sit on `proof` slides, which get images with Task 60's screenshot-proof type; the logo waits for an image field on cover/authority (Task 59/60). Not done: no cleanup of replaced/removed images (orphans stay in storage). Verify: `tests/unit/assets.test.tsx`.
+**Dependencies:** 57 · **Size:** M
+
+### Task 58: "GetFunnels Signature" design kit
+**Description:** Rebuild the legacy visual language as theme-driven slide styling: breathing glow blobs, faint grid and perspective floor, glass cards, gradient-clip headlines, pill section label, direction-aware transition (`[0.22,1,0.36,1]`, 0.5 s) with staggered reveals, glowing progress. Per-template accent themes from the legacy decks (RDV `#470C85`, Lancement `#7c3aed`, VSL `#0e7490`, Web `#065f46`, Evergreen `#92400e`, Pay `#be185d`).
+**Acceptance:**
+- [x] Extends `ThemeTokensSchema` (optional `style`: decor, surface, headline); existing themes still validate
+- [x] Reduced motion: no infinite animations (global reduced-motion rule); presenter view stays animation-free
+- [x] 6 Signature themes seeded (`4…06`–`4…0b`) and assigned to the 7 legacy templates
+- [ ] Screenshot comparison with legacy cover/problem/flow/kpi approved by human (`/dev/slides`)
+**Ask first:** theme schema extension
+**Dependencies:** 52 · **Size:** L
+
+### Task 59: Layout variants per slide type
+**Description:** Optional `layout` on slides; 3–5 layouts for the most-used types (cover, statement, problem, benefits, flow, kpi, proof, cta). Editor switches layouts from thumbnails; AI varies layouts across a deck (no two consecutive identical).
+**Acceptance:**
+- [x] Old slides without `layout` render unchanged
+- [x] Layout switch keeps content
+- [ ] Human review of the 16 variants (`/dev/slides?template=rdv-classique&layouts=all`)
+**Ask first:** schema change (slide `layout`) — approved 2026-10-09
+**Done 2026-10-09:** `SLIDE_LAYOUTS` (`src/lib/slides/layouts.ts`): 3 layouts for each of cover, statement, problem, benefits, flow, kpi, proof, cta — the first is the original renderer, untouched; the 16 variants live in `src/components/slides/layouts/`. Optional per-type `layout` on `SlideSchema`, stored in `slides.layout` (migration `0005_slide_layout`), carried through templates, duplicate/publish/restore, presenter, audience, dashboard thumbnails; unknown stored values fall back to the original. Editor: "Mise en page" picker with live thumbnails, autosaved. AI: `assignLayouts()` after generation (per-type rotation, never the same layout twice in a row; no tokens). Templates and org decks keep their original look (no layout set) until reviewed. Verify: `tests/unit/slide-layouts.test.tsx`.
+**Dependencies:** 58 · **Size:** L
+
+### Task 60: New slide types from legacy mechanics
+**Description:** `embed` (sandboxed iframe, domain allow-list — Funnelytics, ClickFunnels, systeme.io…), live gallery (carousel of embeds/screenshots), screenshot proof with lightbox (assets), gauge KPI, page mockup (opt-in/checkout/inscription structure), live blanks (presenter fills `___` values during the call; audience sees them update).
+**Acceptance:**
+- [x] Each type: schema + renderer + editor fields + AI prompt support + tests
+- [x] Embed URLs validated server-side against the allow-list; ~~iframe `sandbox` without `allow-same-origin`+`allow-scripts` together~~ → **revised 2026-10-09 (user decision):** the funnel pages render blank without `allow-same-origin`, so embeds get `allow-scripts allow-same-origin`; safe because an embed can never share our origin (allow-list = third-party domains only, and the app's own host and its parent/sub-domains are refused, tested)
+- [x] Ported templates/org decks switched to the new types where the legacy used them
+- [ ] Human review of the converted slides (org decks: `/p/<token>` of each deck; templates: `/dev/slides`)
+**Ask first:** schema change (new types) — approved 2026-10-09
+**Done 2026-10-09:** six types — `embed`, `showcase` (live gallery), `screenshots` (lightbox), `gauge`, `mockup`, `blanks` (live). Allow-list: Funnelytics, ClickFunnels, systeme.io, getfunnels.agency, go-scale.systems, video-ads-agency.com. Thumbnails and the next-slide preview never load iframes; live embeds have an "open in new tab" link (ClickFunnels pages refuse framing with `X-Frame-Options: SAMEORIGIN`, as they did in the legacy). Live blanks: presenter types in the Script tab, values broadcast with each sync event (debounced 300 ms), validated on the audience side, never saved — verified presenter → audience over Supabase Realtime. Editor: number inputs (gauges) and French option labels. Converted: 6 Funnelytics slides → `embed`, 6 client galleries → `showcase`, 5 proof carousels → `screenshots` (org decks linked to the 10 migrated images), 3 "7 métriques" KPI slides → `gauge`, 5 page structures → `mockup`, Pitch Commercial 35/36/38 → `blanks` (no longer kept placeholders). Kept as they were: RDV 16 (single screenshot with callouts, `proof`), RDV 5 (decorative gauge, `why`), Lancement 13 (six-page map, `architecture`). Verify: `tests/unit/legacy-slide-types.test.tsx`.
+**Dependencies:** 58 · **Size:** L
+
+### Task 61: Illustration library
+**Description:** Port the 9 legacy animated SVG illustrations and the signature diagrams (radar sweep, packets travelling along a flow, honeycomb, count-up, gauge) as reusable, theme-coloured visuals selectable on slides.
+**Acceptance:**
+- [x] Coloured by theme tokens (no hard-coded hex); static under reduced motion
+- [x] Selectable in the editor; never required for a slide to render
+**Done 2026-10-09:** 12 illustrations in `src/components/slides/illustrations/` — the 9 legacy SVGs (funnel, automation, dashboard, datastream, network, orbit, target, shapes, wave; unused in the legacy app itself) redrawn in the theme's primary/accent/muted, plus the Signature diagrams radar (sweep), packets (travelling along a flow) and honeycomb. Stored as an optional `content.illustration` on every slide type (no DB column, no migration; kept out of the AI draft schema). Rendered behind the content, bottom-right; CSS motion only on the live audience slide with theme motion on, still in the presenter/editor/thumbnails/PDF and under reduced motion. Editor: "Illustration" picker with previews in the deck's colours. Not ported: count-up (a number effect, not an illustration) and the gauge (now the `gauge` slide type). No template or org slide uses one yet. Verify: `tests/unit/illustrations.test.tsx`.
+**Dependencies:** 58 · **Size:** M
+
+### Task 62: Structured presenter scripts
+**Description:** Upgrade the single `script` string to the legacy structure `{punchline, timing, tag, transition, bullets, script}`; port the legacy values for the 6 scripted decks; Script tab renders like the legacy panel; Stats tab tracks against the deck's target duration; slide strip shows real thumbnails.
+**Acceptance:**
+- [x] Existing plain-string scripts still display (backward compatible)
+- [x] Target duration = sum of slide timings, with on-track indicator
+- [ ] Human review in the presenter (`/present/<deck>`) at 1440×900 and 1920×1080
+**Ask first:** schema change (script structure) — approved 2026-10-09
+**Done 2026-10-09:** `script` stays the plain body; the structure lives in a new optional `cue` (`ScriptCueSchema`: punchline, durationSec, tag, transition, bullets, closing) stored in `slides.cue` jsonb (migration `0004_slide_script_cue`). Legacy values ported for the 6 scripted decks (146 slides, templates + org decks; punchlines/transitions the earlier port had folded into `script` were moved out). Script tab = tag + target time, punchline, body, transition, closing, collapsible tips; Stats tab = elapsed vs target with ahead/on-track/behind and per-slide time vs target; slide strip = real thumbnails. Editor: "Repères du présentateur" section. Not done: AI generation leaves `cue` empty (kept out of the draft schema for the free-tier token budget); legacy `tagColor` dropped (tokens instead); template notes still repeat the legacy "TAG · timing. tips" line. Verify: `tests/unit/script-cue.test.tsx`.
+**Dependencies:** 53–56 · **Size:** M
+
+### Checkpoint I — Legacy integration review
+- [x] All 7 legacy decks available as templates; GetFunnels org holds the full decks
+- [ ] Signature kit, layouts and new types approved against the legacy decks (screenshots)
+- [x] Definition of done green (2026-10-09: lint, typecheck, 509 unit tests, build; `test:e2e` not run)
+
+---
+
+## Phase 7 — Export
+
+### Task 63: PowerPoint export
+**Description:** Download the deck as `.pptx` from the editor: one 16:9 slide per deck slide, each a full-bleed 1920×1080 PNG rendered by the same headless Chrome pipeline as the PDF (audience view), with the presenter script, cue and notes as PowerPoint speaker notes.
+**Acceptance:**
+- [x] Editor top bar "Exporter" menu offers PDF and PowerPoint; errors show a toast
+- [x] Every slide type and theme matches the on-screen rendering (it is a picture of it)
+- [x] Speaker notes carry the punchline, script, transition and notes of each slide
+- [x] Slide text is not editable in PowerPoint (accepted trade-off, decided 2026-10-12)
+**Ask first:** new dependency `pptxgenjs` — approved 2026-10-12
+**Verify:** `tests/unit/pptx-export.test.ts`; e2e `editor › exports the deck as PowerPoint`
+**Done 2026-10-12:** PNG per slide (lossless; ~430 KB each, so a 40-slide deck is ~17 MB and ~25 s to render). Files: `ExportMenu.tsx` replaces `ExportPdfButton.tsx`
+**Dependencies:** 23 · **Size:** S
+**Files:** `src/server/services/slide-capture.ts`, `src/server/services/pptx.ts`, `src/app/api/decks/[deckId]/export/route.ts`, `src/components/app/editor/ExportMenu.tsx`
+
+---
+
+## Phase 8 — Canva-like editing (decided 2026-10-12: inline editing first, then freeform slides)
+
+The editor today changes slides only through the form panel; the canvas is a read-only picture. Phase A makes the canvas itself editable while slides stay structured data (AI, themes, layouts, exports keep working). Phase B adds a freeform slide type for full Canva-style control.
+
+### Task 64: Inline text editing on the canvas — foundation + cover/problem slice
+**Description:** `EditableText` (`src/components/slides/editable.tsx`) replaces plain text elements in slide components. Outside the editor it renders the same element with the same styles (audience, presenter, thumbnails, PDF/PPTX unchanged). Inside the editor canvas (`SlideEditProvider`) it is a `contentEditable="plaintext-only"` element that writes the value back to its content path (`painPoints.0.title`) through the editor's existing `updateActive` → validation → autosave.
+**Acceptance:**
+- [x] Click a text on the canvas, type, the form field and the save status follow; reload keeps it
+- [x] Enter ends single-line fields; multi-line fields keep line breaks
+- [x] Hover/focus outline shows what is editable; empty optional text shows a placeholder and stays clickable
+- [x] Rendering outside the editor looks the same (pixel comparison of the 7 GetFunnels decks, 186 slides: only live-embed noise differs; a few values gained a wrapping <span>)
+- [x] Cover and problem (types + layout variants) converted; editor "Agrandir la slide" focus mode hides the inspector
+**Verify:** `tests/unit/editable-text.test.tsx`, `tests/unit/content-path.test.ts`; e2e edit on canvas → reload
+**Size:** M
+
+### Task 65: Inline editing for every slide type and layout
+**Description:** Convert the remaining 31 types and the layout variants to `EditableText` for every text that maps 1:1 to a content string (formatted/derived text such as computed totals stays read-only).
+**Acceptance:**
+- [x] Every content string that is displayed verbatim is editable on the canvas (`tests/unit/editable-paths.test.tsx` checks every path against the text it shows, for all seeded slides × layouts)
+- [x] Existing slide snapshot/unit tests unchanged
+**Done 2026-10-12, known limits:** statement headlines edit as one plain field (the highlight colour shows again outside the editor; `highlight` itself is edited in the form, or on the canvas in the banner layout); text inside lightboxes, browser frames and computed values (gauge numbers, indexes, initials) stays form-only; text inside <button>s may be unreliable to edit in Firefox. Reorder now shows the save status.
+**Size:** L
+
+### Task 66: List items on the canvas
+**Description:** Hover toolbar on repeated items (pain points, steps, plans…): move before/after, duplicate, delete, respecting each schema's min/max (`list-actions.ts`); delete offers "Annuler" in a toast.
+**Done 2026-10-12:** `EditableItem` on the content lists of 27 slide types and the layout variants; `tests/unit/list-actions.test.ts`, item paths checked in `editable-paths.test.tsx`, e2e duplicate → delete → undo → reload. "Duplicate" is how an item is added. Skipped (form panel only): items whose root is a button or table/definition-list markup — CTA actions, qualification options, screenshot items, FAQ questions (`<details>`), comparison rows/cells, blanks fields — and the big featured item of the featured/hero/quote layouts.
+**Size:** M
+
+### Task 67: Images on the canvas
+**Description:** Click an image (gallery, screenshots) to add, replace or remove it through the existing upload flow.
+**Done 2026-10-12:** `EditableImage` overlay (add on empty areas; replace/remove on hover) on gallery and screenshot images; upload logic shared with the form (`asset-upload.ts`), errors as toasts. Screenshot cards render as plain blocks on the canvas (no lightbox) and gain the item toolbar. Team members have no photo field (initials only). Verify: `editable-text.test.tsx`, image paths in `editable-paths.test.tsx`, e2e upload → reload.
+**Size:** S
+
+### Checkpoint J — Inline editing review
+- [ ] Human review of editing on the canvas across the 7 template decks
+
+### Task 68: Freeform "Libre" slides (Phase B)
+**Description:** New slide type with absolutely positioned elements (text, shape, image) on the 1920×1080 canvas: drag, resize, rotate, layers, snapping, undo/redo; "Convertir en libre" turns any slide into a freeform one (AI regeneration and automatic layouts no longer apply to it; theme colours and fonts still do).
+**Ask first:** slide schema change (new type + element model) and the drag/resize library. Spec: `docs/freeform-slides.md` — approved 2026-10-12 (theme colours only, convert included).
+**Done 2026-10-13:** steps 1–5 of the spec. `free` type (`src/lib/slides/free.ts`, renderer `types/free.tsx`, never offered to the AI); editor `components/app/editor/free/` — `FreeEditor` (react-moveable 0.56.0: select, Shift-select, drag, resize, rotate with 45° snaps, snapping to canvas/safe margins/elements, double-click to type or pick an image, Delete, arrows, Ctrl+D, Ctrl+Z/Y), `FreeToolbar` (add text/rectangle/circle/line/image/icon, text style, align, bold, theme colours, icon picker, image fit, layers, align selection, duplicate, delete, undo/redo), `convert.ts` + "Convertir en libre" (texts, cards, images measured from the rendered slide; undo from the toast). Text gained an optional `size` (kept by conversion). Verify: `free-slide`, `free-ops`, `free-history`, `free-convert` unit tests; `e2e/free.spec.ts`. Known limits: icons, card borders and numbering are not carried over by conversion; history covers structural changes, not each keystroke.
+**Size:** XL
+
+## Phase 9 — Editor power tools (decided 2026-10-13: user approved all proposals 1–17, new libraries allowed, slide-data additions approved; no DB migration — new fields live in slide content JSON and are optional)
+
+### Task 69: Undo/redo for every slide
+**Description:** One editor-wide history (content, layout, type, notes, script) replaces the freeform-only one. Typing in the same field within a second is one step. Ctrl+Z / Ctrl+Shift+Z / Ctrl+Y anywhere outside a text being typed; undo/redo buttons in the top bar. Slide add/delete/reorder stay outside the history (server actions).
+**Acceptance:** [x] undo/redo on structured and freeform slides, across slides (reselects the slide) · [x] unit tests for the history · [x] e2e edit → undo → redo → reload
+**Done 2026-10-13:** `editor/history.ts` (EditorHistory, `changeGroup`), `useEditorState` (`updateActive(patch, { group })`, `undo/redo/canUndo/canRedo`), `useEditorKeyboard.ts`, top-bar buttons (`editor-undo`/`editor-redo`); the freeform-only history is gone. Typing inside a field keeps the browser's (or TipTap's) own undo. Verify: `editor-history.test.ts`, e2e "undoes and redoes edits across slides".
+**Size:** M
+
+### Task 70: Freeform power tools
+**Description:** Drag a box on empty canvas to select; distribute horizontally/vertically; group/ungroup (`groupId`); copy/cut/paste (also onto another freeform slide); opacity slider; lock (`locked`: selectable, not movable/deletable); right-click menu on elements.
+**Acceptance:** [x] each tool works by mouse and keyboard shortcut where one exists · [x] free-ops unit tests · [x] e2e marquee → group → copy → paste on another slide
+**Done 2026-10-13:** `free/selection-ops.ts`, `clipboard.ts`, `useFreeActions.ts` (one action set for toolbar, right-click menu and shortcuts), `useMarquee.ts`, `FreeContextMenu.tsx` (new `ui/context-menu`, `@radix-ui/react-context-menu` 2.3.7), opacity slider (`ui/slider`, `@radix-ui/react-slider` 1.4.7). Shortcuts: Ctrl+A/C/X/V/D/G, Ctrl+Shift+G, Delete, arrows (held arrows = one undo step). Verify: `free-ops.test.ts`, e2e "box-select, group, copy…".
+**Size:** L
+
+### Task 71: Canvas zoom
+**Description:** Fit / 50–200 % zoom on the editor stage (buttons + Ctrl+wheel), the stage scrolls; editing and handles keep working when zoomed.
+**Done 2026-10-13:** `ZoomControl.tsx` (0.5×–4× of fit, shown as the slide's real size, click = fit). Verify: e2e "reorders slides by dragging… and zooms the canvas".
+**Size:** S
+
+### Task 72: Drag-and-drop slide reorder
+**Description:** Drag thumbnails in the slide rail (`@dnd-kit`), keyboard-accessible; ↑/↓ buttons stay. Right-click menu on thumbnails (duplicate, move, delete).
+**Done 2026-10-13:** `SlideListItem.tsx` (`@dnd-kit/core` 6.3.1, `sortable` 10.0.0, `utilities` 3.2.2), `moveSlideTo`. The keyboard path is the ↑/↓ buttons and the right-click menu (no dnd-kit keyboard sensor: a focusable row would nest buttons).
+**Size:** S
+
+### Task 73: Slide background
+**Description:** Optional `background` in every slide's content: theme colour, two-colour gradient, or image with an overlay (theme roles only, like freeform). Inspector section + renderer; kept by exports and the audience asset route.
+**Done 2026-10-13:** `lib/slides/slide-style.ts`, `SlideStyleBackground.tsx` (an image background hides the theme decor), `SlideStylePanel.tsx` ("Fond et transition"). AI drafts omit it; regeneration and "Convertir en libre" keep it (`SLIDE_STYLE_KEYS`). Verify: e2e "sets a slide background…".
+**Size:** M
+
+### Task 74: Slide transitions
+**Description:** Optional `transition` per slide (none, fade, slide, zoom) used by the audience view; default stays the current fade. (The presenter view stays animation-free, per the design system.)
+**Done 2026-10-13:** `presenter/transitions.ts` (variants by the arriving slide's transition and the direction; opacity only under reduced motion).
+**Size:** S
+
+### Task 75: Reveal animations
+**Description:** Freeform elements get an optional `reveal` (order + effect: fade, rise, zoom). The presenter's "next" first reveals the next step, then moves to the next slide; the step is broadcast to the audience. Thumbnails, exports and the editor show the final state; the editor shows step badges.
+**Done 2026-10-13:** `lib/slides/reveal.ts`, `slides/reveal-context.tsx`, `presenter/navigation.ts` (`navigate`), `RevealControl.tsx`; the realtime event gained `step`. Found and fixed on the way: an audience opening the link after the presenter's last change never got the position (broadcasts are not stored) — the presenter now repeats it every 3 s. Verify: `presenter-navigation.test.ts`, e2e "an element with a build step appears…".
+**Size:** L
+
+### Task 76: Rich text in freeform texts
+**Description:** Bold, italic, underline, links on parts of a text and bullet/numbered lists (TipTap while typing; stored as a small validated JSON document, rendered by React — never stored HTML). Font size, line height and letter spacing controls.
+**Done 2026-10-13:** `lib/slides/rich-text.ts`, `slides/RichTextView.tsx`, `free/RichTextField.tsx` + `rich-convert.ts` + `rich-editors.ts` (`@tiptap/react`, `pm`, `core`, `starter-kit` 3.31.3), `RichMarks.tsx`, `TextSpacing.tsx`. Marks apply to the selected words while typing, to the whole text otherwise. Structured slides keep plain text (their typography is the layout's). Verify: `rich-text.test.tsx`, e2e "formats a freeform text…".
+**Size:** L
+
+### Task 77: More shapes and shape styles
+**Description:** Triangle, diamond, arrow, star, speech bubble (SVG); border width and dashes; shadow.
+**Done 2026-10-13:** `slides/shape-paths.ts`, `free/ShapeControls.tsx` (border on/off, colour, width, dash, rectangle corner rounding; shadow none/soft/strong on any element). Verify: `free-slide.test.tsx`.
+**Size:** M
+
+### Task 78: Tables, charts, video
+**Description:** Freeform element kinds `table` (cells editable on the canvas), `chart` (bar, line, pie, donut from typed numbers; theme colours; SVG so exports keep it), `video` (YouTube/Vimeo URL; still thumbnail in the editor and exports, player in the audience view).
+**Done 2026-10-13:** `types/free-table.tsx`, `free-chart.tsx` (bar, horizontal bar, line, pie, donut), `free-video.tsx`, `lib/slides/video.ts` (stores provider + id, never a URL), `free/DataControls.tsx`, `table-ops.ts`; exports flag their page (`export-mode.ts`) so videos show a still frame. Verify: `free-data.test.tsx`, e2e "adds a table, a chart, a video and a star…".
+**Size:** L
+
+### Task 79: AI rewrite
+**Description:** "Réécrire" on the text being edited (structured or freeform): shorter, more persuasive, more formal, fix spelling, custom instruction — goes through the AI provider and the credit ledger like regeneration. Quick instruction chips on "Régénérer ce slide".
+**Done 2026-10-13:** `POST /api/ai/rewrite`, `server/services/rewrite.ts`, `server/ai/prompts/rewriteText.ts`, `RewriteMenu.tsx` + `rewrite-target.ts` (limit of the field the text goes back to), chips in `RegeneratePanel`. Verify: `rewrite-credits.test.ts`, e2e "sets a slide background and rewrites a text with AI" (AI mocked). A freeform text loses its formatting when rewritten (the toast says so).
+**Size:** M
+
+### Checkpoint K — Editor power tools review
+- [ ] Human review of Tasks 69–79
+
+---
+
+## Phase 10 — Launch blockers
+
+### Task 80: Legal pages (CGV/CGU, confidentialité, mentions légales)
+**Description:** Three public French pages under `/legal/*` (`terms`, `privacy`, `mentions`), linked from the marketing footer and the auth layout. Text is a draft written from what the product actually does (sub-processors, data kept, plans/credits); publisher identity, hosting provider, DPO/contact and governing details are explicit `[À COMPLÉTER]` placeholders. No new route structure beyond the `/legal/*` paths the signup page already links to.
+**Acceptance:**
+- [x] `/legal/terms`, `/legal/privacy`, `/legal/mentions` render, are public (no login redirect) and have metadata
+- [x] Footer links to all three; unit test covers the route-access rule
+- [x] Every unknown company fact is a visible placeholder, never invented
+- [ ] Human/legal review of the text and fill-in of the placeholders before launch
+**Done 2026-10-16:** text in `legal/content.ts` (typed documents, `todo()` placeholders shown highlighted by `LegalPage`), one static route `legal/[slug]`; `/legal` is public in `route-access.ts`; footer gained a "Légal" column. Verify: `legal-content.test.tsx`, `route-access.test.ts`; lint, typecheck, 611 unit tests, build green. Still to fill in (search `À COMPLÉTER`): company name/form/SIREN/VAT, publisher, address, contact e-mail, hosting provider, price basis (HT/TTC), refund/withdrawal policy, liability cap, jurisdiction, data regions/transfers, retention of logs, Groq data-use terms.
+**Dependencies:** 50 · **Size:** M
+**Files:** `src/app/(marketing)/legal/**`, `src/app/(marketing)/messages.ts`, `src/lib/auth/route-access.ts`, `tests/unit/route-access.test.ts`
+
+### Task 81: Password reset pages
+**Description:** The login page links to `/forgot-password`, and `resetPasswordRequestAction` / `updatePasswordAction` / `AuthService.resetPassword` already exist, but no page does. Add `/forgot-password` (email form, same confirmation whether or not the account exists) and `/reset-password` (new password + confirmation). Supabase PKCE recovery: the email link lands on `/reset-password?code=…`; the page exchanges the code through the existing `POST /api/auth/callback` (`type: "recovery"`), strips the code from the URL, then shows the form. The route-access allow-list used `/auth/forgot-password` and `/auth/reset-password`; it becomes `/forgot-password` and `/reset-password` to match the login link. The `/callback` recovery branch (which only printed a message) now exchanges the code and forwards to `/reset-password`.
+**Acceptance:**
+- [x] Unknown email and known email give the identical confirmation (no account enumeration); requests are rate-limited per email (3 per 15 min, in memory like the other limiters)
+- [x] `/reset-password` shows the form only with a valid recovery code or an existing session, otherwise an "invalid or expired link" state with a link to request a new one
+- [x] Password rules match signup (8+ chars, confirmation); success lands on `/app`; Supabase errors are shown in French, never raw
+- [x] Both routes are public; unit tests for route access; `e2e/password-reset.spec.ts` (3 tests) and both pages added to the public-pages axe check
+- [x] Sign-in → forgot → email → reset → app verified end to end against hosted Supabase (configured in Supabase Auth redirect allow-list and email template with {{ .ConfirmationURL }})
+**Done 2026-10-16:** pages, messages and actions as above. Verified on a fresh `next start` (port 3100): the new e2e spec and axe on `/forgot-password`, `/reset-password` and the three `/legal/*` pages pass. Not verified: the real email round trip, and the full e2e suite (port 3000 had a stale server and Docker was not running).
+**Ask first:** auth change — go-ahead given 2026-10-16
+**Dependencies:** 7 · **Size:** M
+**Files:** `src/app/(auth)/forgot-password/*`, `src/app/(auth)/reset-password/*`, `src/app/(auth)/actions.ts`, `src/app/(auth)/messages.ts`, `src/app/(auth)/callback/CallbackContent.tsx`, `src/lib/auth/supabase.ts`, `src/lib/auth/route-access.ts`
+
+### Task 82: Profile and organization settings forms
+**Description:** Implement real editing for user profile (fullName, locale) and organization (name), replacing the read-only disabled state from Task 48.
+**Acceptance:**
+- [x] Users can edit their full name and language preference on `/app/settings/profile`, changes persist to `profiles` table.
+- [x] Owners and admins can edit their organization's display name on `/app/settings/organization`, changes persist to `organizations` table; members without permission see a read-only view.
+- [x] Inputs are validated server-side with Zod; errors and success toasts displayed in French.
+- [x] All tests, typecheck, and build pass.
+**Done 2026-10-26:** `ProfileForm` and `OrganizationForm` created with transition loading state and sonner notifications. Server actions `updateProfileAction` and `updateOrganizationAction` validated with Zod and role-checked (owner/admin for org update). Repositories `profiles.ts` and `organizations.ts` updated with typed updates. Unit tests in `tests/unit/settings-actions.test.ts` (7 tests). Lint, typecheck, 620 tests, and Next.js standalone build pass.
+### Task 83: CTA slide actions link URL support
+**Description:** Add optional URL field to CTA slide actions schema (`src/lib/slides/schema.ts`) and render clickable anchor links in CTA slide renderers (`src/components/slides/types/cta.tsx` and `src/components/slides/layouts/cta.tsx`).
+**Acceptance:**
+- [x] Schema accepts optional `url` (http/https format) on each action object in `cta` content.
+- [x] Inspector dynamically exposes "Lien (URL)" field for CTA action items.
+- [x] CTA slide buttons render as clickable links with `target="_blank"` when URL is provided; editor mode safely prevents accidental navigation.
+- [x] Lint, typecheck, tests and build pass.
+**Done 2026-10-26:** Added `url` to `cta` schema, updated field label in `field-labels.ts`, and updated `CtaSlide` and layout `ActionButton` components to support links with `useSlideEditing`.
+**Dependencies:** 9, 14 · **Size:** XS
+### Task 84: Billing usage counters and AI credit deduction
+**Description:** Hook up deck creation counter and implement Option A credit deduction (20 credits per deck generation, 1 credit per rewrite) so the billing page meters track real usage.
+**Acceptance:**
+- [x] `incrementDecksCreated` added to `src/lib/db/repositories/usage.ts` and called on deck creation (`decks.ts`, `generation.ts`).
+- [x] AI deck generation consumes 20 credits (`ESTIMATED_COST_CENTS = 20`) in `src/server/services/generation.ts`.
+- [x] AI text rewrite consumes 1 credit (`REWRITE_COST_CENTS = 1`) in `src/server/services/rewrite.ts`.
+- [x] Integration tests in `tests/integration/generation-credits.test.ts` updated and passing.
+**Done 2026-10-26:** Implemented deck counter incrementing across manual and AI deck creations, fixed 20-credit deduction per deck and 1 credit per rewrite, backfilled existing October usage (`23 / 1000` credits, `1 / 50` decks), and verified with typecheck, unit tests and container build.
+**Dependencies:** 28, 33 · **Size:** S
+**Files:** `src/lib/db/repositories/usage.ts`, `src/server/services/generation.ts`, `src/server/services/rewrite.ts`, `src/server/services/decks.ts`, `tests/integration/generation-credits.test.ts`
+
+
+
+

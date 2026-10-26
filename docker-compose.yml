@@ -1,34 +1,52 @@
-version: "3.8"
-
 services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: getfunnels
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-getfunnels}
+    restart: unless-stopped
     ports:
-      - "5433:5432"
+      - "127.0.0.1:${POSTGRES_PORT:-5434}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
       interval: 10s
       timeout: 5s
       retries: 5
 
   app:
+    restart: unless-stopped
     build:
       context: .
       dockerfile: Dockerfile
+      # NEXT_PUBLIC_* are baked into the client bundle, so they must be correct at
+      # build time. Compose interpolates these from .env.
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:?set NEXT_PUBLIC_SUPABASE_URL in .env}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY:?set NEXT_PUBLIC_SUPABASE_ANON_KEY in .env}
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+        NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:-pk_test_dummy}
     ports:
-      - "3000:3000"
+      # Port configurable via .env (ex: PORT=3005) pour éviter les conflits sur le VPS
+      - "${PORT:-3000}:3000"
+    # Secrets come from .env (gitignored); only container-specific values are
+    # overridden here. `environment` takes precedence over `env_file`.
+    env_file:
+      - path: .env
+        required: false
     environment:
-      DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/getfunnels?schema=public"
-      NEXT_PUBLIC_APP_URL: "http://localhost:3000"
-      AUTH_SECRET: "dummy-secret-for-testing-123456789"
-      NEXT_PUBLIC_SUPABASE_URL: "http://localhost:54321"
-      NEXT_PUBLIC_SUPABASE_ANON_KEY: "dummy"
+      # Reach postgres over the compose network, not localhost.
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-getfunnels}"
+      # The compose postgres has no TLS; host isn't "localhost" so say so explicitly.
+      DATABASE_SSL: "false"
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+    deploy:
+      resources:
+        limits:
+          cpus: '1.5'
+          memory: 1500M
     depends_on:
       postgres:
         condition: service_healthy

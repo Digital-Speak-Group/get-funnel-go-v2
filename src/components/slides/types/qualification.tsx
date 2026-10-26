@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText } from "../editable";
 
 interface QualificationContent {
   headline: string;
@@ -25,18 +27,19 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -48,16 +51,19 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
         }}
       >
         {questions.map((q, qIndex) => (
-          <div
+          <EditableItem path="questions" index={qIndex} length={questions.length}
             key={qIndex}
             style={{
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-muted"]}1a`,
             }}
           >
-            <p
+            <EditableText
+              as="p"
+              path={`questions.${qIndex}.question`}
+              value={q.question}
               style={{
                 fontSize: "22px",
                 fontWeight: 600,
@@ -65,9 +71,7 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
                 marginBottom: "20px",
                 color: theme["--slide-text"],
               }}
-            >
-              {q.question}
-            </p>
+            />
             <div
               style={{
                 display: "grid",
@@ -93,11 +97,11 @@ export function QualificationSlide({ content, theme }: { content: QualificationC
                     transition: "border-color 200ms ease, background 200ms ease",
                   }}
                 >
-                  {option}
+                  <EditableText path={`questions.${qIndex}.options.${oIndex}`} value={option} />
                 </button>
               ))}
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

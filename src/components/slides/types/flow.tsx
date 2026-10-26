@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText } from "../editable";
 
 interface FlowContent {
   headline: string;
@@ -14,6 +16,7 @@ interface FlowContent {
 
 export function FlowSlide({ content, theme }: { content: FlowContent; theme: Record<string, string> }) {
   const { headline, steps } = content;
+  const twoColumns = steps.length > 4;
 
   return (
     <div
@@ -27,36 +30,41 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
         style={{
           flex: 1,
-          display: "flex",
-          flexDirection: "column",
+          display: "grid",
+          // Long flows (5–7 steps) read top-to-bottom in two columns so they fit the 1080px canvas.
+          gridTemplateRows: `repeat(${twoColumns ? Math.ceil(steps.length / 2) : steps.length}, auto)`,
+          gridAutoFlow: "column",
+          gridAutoColumns: "1fr",
+          alignContent: "center",
           gap: "24px",
         }}
       >
         {steps.map((step, index) => (
-          <div
+          <EditableItem path="steps" index={index} length={steps.length}
             key={index}
             style={{
               display: "flex",
               gap: "24px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
               position: "relative",
@@ -72,65 +80,67 @@ export function FlowSlide({ content, theme }: { content: FlowContent; theme: Rec
                 gap: "8px",
               }}
             >
-              <div
+              <EditableText
+                as="div"
+                path={`steps.${index}.label`}
+                value={step.label}
                 style={{
                   fontSize: "28px",
                   fontWeight: 700,
                   fontFamily: theme["--slide-font-display"],
-                  color: theme["--slide-primary"],
+                  color: theme["--slide-primary-text"],
                 }}
-              >
-                {step.label}
-              </div>
+              />
               <div
                 style={{
                   width: "4px",
-                  height: index < steps.length - 1 ? "60px" : "0",
+                  height: !twoColumns && index < steps.length - 1 ? "60px" : "0",
                   background: theme["--slide-primary"],
                 }}
               />
             </div>
             <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "12px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <h3
+                <EditableText
+                  as="h3"
+                  path={`steps.${index}.title`}
+                  value={step.title}
                   style={{
                     fontSize: "24px",
                     fontWeight: 600,
                     fontFamily: theme["--slide-font-display"],
                     margin: 0,
                   }}
-                >
-                  {step.title}
-                </h3>
-                {step.channel && (
-                  <span
-                    style={{
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.08em",
-                      padding: "4px 12px",
-                      background: theme["--slide-primary"],
-                      color: theme["--slide-primary-fg"],
-                      borderRadius: "9999px",
-                    }}
-                  >
-                    {step.channel}
-                  </span>
-                )}
+                />
+                <EditableText
+                  path={`steps.${index}.channel`}
+                  value={step.channel}
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    padding: "4px 12px",
+                    background: theme["--slide-primary"],
+                    color: theme["--slide-primary-fg"],
+                    borderRadius: "9999px",
+                  }}
+                />
               </div>
-              <p
+              <EditableText
+                as="p"
+                path={`steps.${index}.text`}
+                value={step.text}
+                multiline
                 style={{
                   fontSize: "16px",
                   lineHeight: 1.55,
                   color: theme["--slide-text"],
                   margin: 0,
                 }}
-              >
-                {step.text}
-              </p>
+              />
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

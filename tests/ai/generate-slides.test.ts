@@ -1,6 +1,8 @@
 import { describe, it, expect, vi } from "vitest";
 import { generateSlides } from "@/server/ai/stages/generateSlides";
 import type { AIProvider } from "@/lib/ai/provider";
+import type { SlidePlan } from "@/server/ai/schema";
+import { buildDefaultContent } from "@/lib/slides/defaults";
 
 describe("Stage 3: generateSlides", () => {
   const mockProvider: AIProvider = {
@@ -18,7 +20,7 @@ describe("Stage 3: generateSlides", () => {
     confidence: 1.0,
   } as any;
 
-  const dummyPlan = [
+  const dummyPlan: SlidePlan[] = [
     { type: "cover", headline: "Intro", purpose: "Start" },
     { type: "problem", headline: "Problem", purpose: "Pain" },
     { type: "cta", headline: "CTA", purpose: "End" },
@@ -32,12 +34,7 @@ describe("Stage 3: generateSlides", () => {
 
       return {
         success: true,
-        data: {
-          id: "temp",
-          position: 0,
-          type: planItem.type,
-          content: {}, // minimal mock
-        },
+        data: { type: planItem.type, content: buildDefaultContent(planItem.type) },
         usage: { inputTokens: 10, outputTokens: 10, model: "test", costCents: 1 },
       } as any; // Cast as any because we aren't filling full schema constraints in mock
     });
@@ -54,6 +51,27 @@ describe("Stage 3: generateSlides", () => {
     expect(result.slides[2].position).toBe(2);
   });
 
+  it("strips <SCRIPT> tags and drops a dump of the whole raw script", async () => {
+    const source = Array.from({ length: 12 }, (_, i) => `Section ${i + 1} : le marché de la nicotine évolue vite.`).join("\n");
+    vi.mocked(mockProvider.complete).mockImplementation(async (args) => {
+      const planItem = dummyPlan.find(p => args.input.includes(`Type: ${p.type}`))!;
+      const script = {
+        cover: "<SCRIPT>Bonjour à tous.</SCRIPT>",
+        problem: `<SCRIPT>\n${source}\n</SCRIPT>`,
+        cta: "Réservez votre appel.",
+      }[planItem.type as "cover" | "problem" | "cta"];
+      return {
+        success: true,
+        data: { type: planItem.type, content: buildDefaultContent(planItem.type), script },
+        usage: { inputTokens: 10, outputTokens: 10, model: "test", costCents: 1 },
+      } as any;
+    });
+
+    const { slides } = await generateSlides(mockProvider, source, dummyBrief, dummyPlan);
+
+    expect(slides.map(s => s.script)).toEqual(["Bonjour à tous.", undefined, "Réservez votre appel."]);
+  });
+
   it("survives individual slide failures", async () => {
     vi.mocked(mockProvider.complete).mockImplementation(async (args) => {
       if (args.input.includes(`Type: problem`)) {
@@ -61,7 +79,7 @@ describe("Stage 3: generateSlides", () => {
       }
       return {
         success: true,
-        data: { id: "temp", position: 0, type: "cover", content: {} },
+        data: { type: "cover", content: buildDefaultContent("cover") },
         usage: { inputTokens: 10, outputTokens: 10, model: "test", costCents: 1 },
       } as any;
     });

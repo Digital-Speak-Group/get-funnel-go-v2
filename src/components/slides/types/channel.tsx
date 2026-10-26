@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText } from "../editable";
 
 interface ChannelContent {
   headline: string;
@@ -63,18 +65,19 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
           <span style={{ fontSize: "20px" }}>{icon}</span>
           {channel.toUpperCase()}
         </div>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-text"],
+            ...headlineFill(theme, theme["--slide-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -86,13 +89,13 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
         }}
       >
         {scripts.map((script, index) => (
-          <div
+          <EditableItem path="scripts" index={index} length={scripts.length}
             key={index}
             style={{
               display: "flex",
               gap: "20px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${channelColor}33`,
               position: "relative",
@@ -114,7 +117,10 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
               >
                 {icon}
               </span>
-              <span
+              <EditableText
+                as="span"
+                path={`scripts.${index}.moment`}
+                value={script.moment}
                 style={{
                   fontSize: "13px",
                   fontWeight: 600,
@@ -122,12 +128,14 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
                   letterSpacing: "0.08em",
                   color: channelColor,
                 }}
-              >
-                {script.moment}
-              </span>
+              />
             </div>
             <div style={{ flex: 1 }}>
-              <div
+              <EditableText
+                as="div"
+                path={`scripts.${index}.message`}
+                value={script.message}
+                multiline
                 style={{
                   fontSize: "18px",
                   lineHeight: 1.55,
@@ -139,11 +147,9 @@ export function ChannelSlide({ content, theme }: { content: ChannelContent; them
                   fontFamily: theme["--slide-font-mono"],
                   whiteSpace: "pre-wrap",
                 }}
-              >
-                {script.message}
-              </div>
+              />
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

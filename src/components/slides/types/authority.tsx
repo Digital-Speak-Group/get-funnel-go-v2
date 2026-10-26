@@ -1,6 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { SlideIcon } from "../icons";
+import { EditableItem, EditableText } from "../editable";
 
 interface AuthorityContent {
   headline: string;
@@ -26,17 +29,19 @@ export function AuthoritySlide({ content, theme }: { content: AuthorityContent; 
       }}
     >
       <header style={{ marginBottom: "64px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
+            ...headlineFill(theme, theme["--slide-text"]),
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -45,17 +50,18 @@ export function AuthoritySlide({ content, theme }: { content: AuthorityContent; 
           gridTemplateColumns: "repeat(2, 1fr)",
           gap: "32px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {points.map((point, index) => (
-<div
+<EditableItem path="points" index={index} length={points.length}
               key={index}
               style={{
                 display: "flex",
                 flexDirection: "column",
                 gap: "12px",
                 padding: "24px",
-                background: theme["--slide-surface"],
+                ...cardSurface(theme),
                 borderRadius: theme["--slide-radius"],
                 border: `1px solid ${theme["--slide-muted"]}33`,
               }}
@@ -75,31 +81,34 @@ export function AuthoritySlide({ content, theme }: { content: AuthorityContent; 
                     borderRadius: "12px",
                   }}
                 >
-                  {point.icon}
+                  <SlideIcon name={point.icon} size={24} fallback="✓" />
                 </span>
               )}
-              <h3
+              <EditableText
+                as="h3"
+                path={`points.${index}.title`}
+                value={point.title}
                 style={{
                   fontSize: "22px",
                   fontWeight: 600,
                   fontFamily: theme["--slide-font-display"],
                   margin: 0,
                 }}
-              >
-                {point.title}
-              </h3>
+              />
             </div>
-            <p
+            <EditableText
+              as="p"
+              path={`points.${index}.text`}
+              value={point.text}
+              multiline
               style={{
                 fontSize: "16px",
                 lineHeight: 1.55,
                 color: theme["--slide-muted"],
                 margin: 0,
               }}
-            >
-              {point.text}
-            </p>
-          </div>
+            />
+          </EditableItem>
         ))}
       </div>
     </div>

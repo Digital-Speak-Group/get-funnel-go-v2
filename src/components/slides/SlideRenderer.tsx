@@ -2,7 +2,13 @@
 
 import * as React from "react";
 import { SlideBackground } from "./backgrounds";
+import { SlideDecor } from "./SlideDecor";
 import { getSlideComponent, UnknownSlide } from "./registry";
+import { getLayoutComponent } from "./layouts";
+import { StaticSlideProvider, useLiveBlanks, useStaticSlide } from "./render-context";
+import { SlideIllustration } from "./illustrations/Illustration";
+import { SlideStyleBackground, parseSlideBackground } from "./SlideStyleBackground";
+import { useSlideEditing } from "./editable";
 import { tokensToCssVars, getBackgroundStyles } from "@/lib/slides/theme";
 import { type Slide } from "@/lib/slides/schema";
 import { type ThemeTokens } from "@/lib/slides/theme";
@@ -17,7 +23,13 @@ interface SlideRendererProps {
 export function SlideRenderer({ slide, theme, isActive = false, className }: SlideRendererProps) {
   const cssVars = tokensToCssVars(theme);
   const bgStyles = getBackgroundStyles(theme.background);
-  const Component = getSlideComponent(slide.type) || UnknownSlide;
+  // A layout variant when the slide picks one; otherwise (or for an unknown layout) the original.
+  const Component = getLayoutComponent(slide.type, slide.layout) ?? getSlideComponent(slide.type) ?? UnknownSlide;
+  const liveValues = useLiveBlanks(slide.id);
+  const isStatic = useStaticSlide();
+  // Editable fields cannot live inside role="img" (its children are presentational).
+  const editing = useSlideEditing();
+  const background = parseSlideBackground((slide.content as { background?: unknown }).background);
 
   const style: React.CSSProperties = {
     ...cssVars,
@@ -38,11 +50,26 @@ export function SlideRenderer({ slide, theme, isActive = false, className }: Sli
     <div
       className={className}
       style={style}
-      role="img"
+      role={editing ? "group" : "img"}
       aria-label={`Slide ${slide.type}: ${(slide.content as Record<string, unknown>).headline || (slide.content as Record<string, unknown>).title || "Sans titre"}`}
     >
       <SlideBackground background={theme.background}>
-        <Component content={slide.content} theme={cssVars} notes={slide.notes} script={slide.script} />
+        {background && <SlideStyleBackground background={background} />}
+        {/* A photo background replaces the theme's decorative shapes. */}
+        {background?.kind !== "image" && <SlideDecor theme={theme} animate={isActive} />}
+        <SlideIllustration
+          name={(slide.content as { illustration?: unknown }).illustration}
+          theme={cssVars}
+          animate={isActive && !isStatic && theme.motion !== "none"}
+        />
+        {/* Keyed by slide so the staggered entrance replays on every slide change. */}
+        <div
+          key={slide.id}
+          data-slide-reveal={isActive && theme.motion !== "none" ? "on" : "off"}
+          style={{ height: "100%" }}
+        >
+          <Component content={slide.content} theme={cssVars} notes={slide.notes} script={slide.script} liveValues={liveValues} />
+        </div>
       </SlideBackground>
     </div>
   );
@@ -83,31 +110,69 @@ export function ScaledSlideRenderer({ slide, theme, isActive, scale = 1, classNa
   );
 }
 
-export function AutoScaledSlideRenderer({ slide, theme, isActive, className }: SlideRendererProps) {
-  if (typeof window === "undefined") {
-    return <SlideRenderer slide={slide} theme={theme} isActive={isActive} className={className} />;
-  }
-
-  const [scale, setScale] = React.useState(1);
+/**
+ * Fits the 1920×1080 slide inside its parent, letterboxed and centered. Measures its own box
+ * (several can be on one page, e.g. presenter current + next) and re-measures on any resize,
+ * not just window resizes. `className` styles the 16:9 frame itself, so borders/rounding hug
+ * the slide instead of the letterbox.
+ */
+export function AutoScaledSlideRenderer({
+  slide,
+  theme,
+  isActive,
+  className,
+  staticPreview = false,
+}: SlideRendererProps & { staticPreview?: boolean }) {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [scale, setScale] = React.useState(0);
 
   React.useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
     const updateScale = () => {
-      const container = document.querySelector(".slide-container");
-      if (!container) return;
       const { width, height } = container.getBoundingClientRect();
-      const scaleX = width / 1920;
-      const scaleY = height / 1080;
-      setScale(Math.min(scaleX, scaleY));
+      setScale(Math.min(width / 1920, height / 1080));
     };
-
     updateScale();
-    window.addEventListener("resize", updateScale);
-    return () => window.removeEventListener("resize", updateScale);
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(container);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="slide-container" style={{ width: "100%", height: "100%" }}>
-      <ScaledSlideRenderer slide={slide} theme={theme} isActive={isActive} scale={scale} className={className} />
+    <div
+      ref={containerRef}
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        className={className}
+        style={{
+          width: `${1920 * scale}px`,
+          height: `${1080 * scale}px`,
+          flexShrink: 0,
+          overflow: "hidden",
+          position: "relative",
+          // Hidden until measured, so the unscaled 1920px slide never flashes.
+          visibility: scale > 0 ? "visible" : "hidden",
+        }}
+      >
+        <div style={{ transform: `scale(${scale})`, transformOrigin: "top left", width: "1920px", height: "1080px" }}>
+          {staticPreview ? (
+            <StaticSlideProvider>
+              <SlideRenderer slide={slide} theme={theme} isActive={isActive} />
+            </StaticSlideProvider>
+          ) : (
+            <SlideRenderer slide={slide} theme={theme} isActive={isActive} />
+          )}
+        </div>
+      </div>
     </div>
   );
 }

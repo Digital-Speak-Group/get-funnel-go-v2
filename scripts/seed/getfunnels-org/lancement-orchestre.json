@@ -1,0 +1,147 @@
+{
+  "template": "lancement-orchestre",
+  "deckId": "20000000-0000-4000-8000-000000000102",
+  "slides": [
+    {
+      "position": 0,
+      "content": {
+        "kicker": "Diagnostic Complet",
+        "title": "Tunnel Lancement Orchestré",
+        "subtitle": "Créer un pic de ventes. En contrôle. Pas au hasard.",
+        "presenterName": "Hamid El Bouhali"
+      },
+      "script": "Ok. Tu viens de finir le diagnostic GetFunnels.\nDonc tu n'es pas là pour te faire divertir, tu es là pour comprendre quoi faire.\n\nDans cette vidéo, je vais te montrer :\npourquoi ton système recommandé est un lancement orchestré (et parfois un challenge),\nà quoi ressemble la machine,\net ce que tu dois mettre en place pour que ça convertisse sans improvisation.\n\nPas de théorie. Une architecture.",
+      "notes": "INTRO · 45 sec. 3 secondes de silence avant de commencer. Ton direct — pas de chauffe inutile. Regard caméra / prospect. Pied de slide d'origine : « GetFunnels · Hamid El Bouhali · Confidentiel — Deck Résultat, version Diagnostic »."
+    },
+    {
+      "position": 2,
+      "content": {
+        "headline": "Qui je suis — Hamid El Bouhali",
+        "points": [
+          {
+            "icon": "briefcase",
+            "title": "Fondateur de GetFunnels",
+            "text": "Depuis 8+ ans, on construit des systèmes de vente complets : funnels + CRM + automatisations pour des entrepreneurs qui font du 6 à 7 chiffres."
+          },
+          {
+            "icon": "award",
+            "title": "8+ ans d'expérience · +470 funnels créés",
+            "text": "On a bossé avec : Yomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini."
+          },
+          {
+            "icon": "lightbulb",
+            "title": "Une vérité simple",
+            "text": "Le problème n°1 n'est pas \"la pub\". C'est l'architecture."
+          }
+        ]
+      },
+      "script": "Je m'appelle Hamid El Bouhali, fondateur de GetFunnels.\nDepuis plus de 8 ans, on construit des systèmes complets : funnels, CRM, automatisations.\n\nOn a bossé avec des références :\nYomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini… et d'autres.\n\nEt peu importe le marché, on voit toujours le même pattern :\nles gens pensent que leur problème, c'est la pub…\nalors que leur vrai problème, c'est l'architecture.\n\nParce que même avec plus de trafic…\nsi ton système est bancal, tu scales juste tes pertes.",
+      "notes": "AUTORITÉ · 90 sec max — aller vite. Citer les noms avec assurance. Finir sur « tu scales juste tes pertes » — image forte. Chiffres du deck d'origine : 8+ années · 6-7 chiffres clients · +470 funnels créés."
+    },
+    {
+      "position": 18,
+      "content": {
+        "headline": "Voici la machine. Pas une campagne.",
+        "title": "Funnelytics — vue machine",
+        "url": "https://canvas.funnelytics.io/view/ef6d512b-9332-4b36-91a1-381655f4a1d8"
+      }
+    },
+    {
+      "position": 19,
+      "content": {
+        "headline": "On ne théorise pas. On construit.",
+        "items": [
+          {
+            "title": "Page client — Top Paris",
+            "url": "https://getfunnels.clickfunnels.com/page-client-top-paris-20251752750759796"
+          },
+          {
+            "title": "Inscription Challenge FBA",
+            "url": "https://by.getfunnels.agency/fba-inscription-challenge-6ad547e2"
+          },
+          {
+            "title": "Sales Page — Exemple 3",
+            "url": "https://getfunnels.clickfunnels.com/sales-page-21723544964423"
+          },
+          {
+            "title": "Page de vente — Exemple 4",
+            "url": "https://by.getfunnels.agency/bfb96d50"
+          },
+          {
+            "title": "Opt-in — Exemple 5",
+            "url": "https://getfunnels.clickfunnels.com/optin1745573138721"
+          },
+          {
+            "title": "Opt-in — Exemple 6",
+            "url": "https://getfunnels.clickfunnels.com/optin1725636488541"
+          },
+          {
+            "title": "Page d'inscription — Exemple 7",
+            "url": "https://getfunnels.clickfunnels.com/page-d-inscription"
+          }
+        ]
+      },
+      "notes": "PREUVE · 45 sec max — montrer, ne pas sur-expliquer. Pointer 1-2 exemples proches du secteur du prospect. Transition fluide vers les preuves. Le deck d'origine affichait ces 7 pages clients en aperçu live (carrousel) ; les captures restent à ajouter."
+    },
+    {
+      "position": 20,
+      "content": {
+        "headline": "On ne théorise pas. On mesure.",
+        "items": [
+          {
+            "caption": "ClickFunnels — Stats Tunnel",
+            "result": "385 241 $",
+            "assetId": "60000000-0000-4000-8000-000000000003"
+          },
+          {
+            "caption": "Systeme.io — Statistiques",
+            "result": "€143 181",
+            "assetId": "60000000-0000-4000-8000-000000000004"
+          },
+          {
+            "caption": "ClickFunnels — Tunnel Stats",
+            "result": "380 711 $",
+            "assetId": "60000000-0000-4000-8000-000000000005"
+          },
+          {
+            "caption": "ClickFunnels — Stats détaillées",
+            "result": "572",
+            "assetId": "60000000-0000-4000-8000-000000000006"
+          },
+          {
+            "caption": "Systeme.io — Challenge",
+            "result": "€263 818",
+            "assetId": "60000000-0000-4000-8000-000000000007"
+          },
+          {
+            "caption": "Systeme.io — Opt-in 41%",
+            "result": "41 052",
+            "assetId": "60000000-0000-4000-8000-000000000008"
+          },
+          {
+            "caption": "Systeme.io — Vue globale",
+            "result": "€257 386",
+            "assetId": "60000000-0000-4000-8000-000000000009"
+          },
+          {
+            "caption": "Systeme.io — Tunnel REBORN",
+            "result": "€3 608 200",
+            "assetId": "60000000-0000-4000-8000-00000000000a"
+          },
+          {
+            "caption": "ClickFunnels — 49 348 vues",
+            "result": "49 348",
+            "assetId": "60000000-0000-4000-8000-00000000000b"
+          },
+          {
+            "caption": "Systeme.io — Récap global",
+            "result": "€3 608 200",
+            "assetId": "60000000-0000-4000-8000-00000000000c"
+          }
+        ]
+      },
+      "notes": "PREUVES · 75 sec. Ton factuel — pas de survente. Laisser le prospect regarder quelques secondes. Finir sur « vrais indicateurs » — crédibilité. Captures d'origine (10 dashboards, à ajouter en images) : ClickFunnels — stats tunnel 385 241 $ (ventes brutes) · Systeme.io — statistiques 143 181 € · ClickFunnels — tunnel stats 380 711 $ · ClickFunnels — 572 ventes confirmées · Systeme.io — challenge 263 818 € · Systeme.io — opt-in 41 052 pages vues (41 %) · Systeme.io — vue globale 257 386 € · Systeme.io — tunnel REBORN 3 608 200 € · ClickFunnels — 49 348 pages vues (opt-in 41,4 %) · Systeme.io — récap global 3 608 200 € (panier moyen 406,97 €)."
+    }
+  ],
+  "keepPlaceholders": []
+}

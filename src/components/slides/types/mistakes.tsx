@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText } from "../editable";
 
 interface MistakesContent {
   headline: string;
@@ -25,18 +27,19 @@ export function MistakesSlide({ content, theme }: { content: MistakesContent; th
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-danger"],
+            ...headlineFill(theme, theme["--slide-danger"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -48,14 +51,14 @@ export function MistakesSlide({ content, theme }: { content: MistakesContent; th
         }}
       >
         {mistakes.map((m, index) => (
-          <div
+          <EditableItem path="mistakes" index={index} length={mistakes.length}
             key={index}
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
               gap: "24px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-danger"]}26`,
             }}
@@ -99,7 +102,13 @@ export function MistakesSlide({ content, theme }: { content: MistakesContent; th
                   ERREUR
                 </span>
               </div>
-              <p style={{ fontSize: "16px", lineHeight: 1.55, margin: 0 }}>{m.mistake}</p>
+              <EditableText
+                as="p"
+                path={`mistakes.${index}.mistake`}
+                value={m.mistake}
+                multiline
+                style={{ fontSize: "16px", lineHeight: 1.55, margin: 0 }}
+              />
             </div>
             <div
               style={{
@@ -140,9 +149,15 @@ export function MistakesSlide({ content, theme }: { content: MistakesContent; th
                   CORRECTION
                 </span>
               </div>
-              <p style={{ fontSize: "16px", lineHeight: 1.55, margin: 0 }}>{m.fix}</p>
+              <EditableText
+                as="p"
+                path={`mistakes.${index}.fix`}
+                value={m.fix}
+                multiline
+                style={{ fontSize: "16px", lineHeight: 1.55, margin: 0 }}
+              />
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

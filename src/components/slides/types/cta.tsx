@@ -1,6 +1,10 @@
 "use client";
 
 import * as React from "react";
+import { headlineFill } from "../style";
+import { SlideIcon } from "../icons";
+import { EditableText, useSlideEditing } from "../editable";
+import type { SlideIconName } from "@/lib/slides/icons";
 
 interface CtaContent {
   headline: string;
@@ -8,25 +12,23 @@ interface CtaContent {
   actions: Array<{
     label: string;
     kind: "calendar" | "link" | "whatsapp" | "form";
+    url?: string;
   }>;
 }
 
-const actionIcons: Record<CtaContent["actions"][0]["kind"], string> = {
-  calendar: "📅",
-  link: "🔗",
-  whatsapp: "💬",
-  form: "📝",
+const actionIcons: Record<CtaContent["actions"][0]["kind"], SlideIconName> = {
+  calendar: "calendar-check",
+  link: "mouse-pointer-click",
+  whatsapp: "message-circle",
+  form: "clipboard",
 };
 
-const actionColors: Record<CtaContent["actions"][0]["kind"], string> = {
-  calendar: "#4285F4",
-  link: "#8B5CF6",
-  whatsapp: "#25D366",
-  form: "#F59E0B",
-};
+// Buttons follow the deck theme; WhatsApp keeps its recognisable brand green.
+const WHATSAPP_GREEN = "#25D366";
 
 export function CtaSlide({ content, theme }: { content: CtaContent; theme: Record<string, string> }) {
   const { headline, sub, actions } = content;
+  const isEditing = useSlideEditing();
 
   return (
     <div
@@ -43,29 +45,30 @@ export function CtaSlide({ content, theme }: { content: CtaContent; theme: Recor
       }}
     >
       <header style={{ marginBottom: "48px", maxWidth: "800px" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "56px",
             lineHeight: 1.05,
             fontWeight: 800,
             marginBottom: "24px",
-            color: theme["--slide-text"],
+            ...headlineFill(theme, theme["--slide-text"]),
           }}
-        >
-          {headline}
-        </h1>
-        {sub && (
-          <p
-            style={{
-              fontSize: "22px",
-              lineHeight: 1.4,
-              fontWeight: 400,
-              color: theme["--slide-muted"],
-            }}
-          >
-            {sub}
-          </p>
-        )}
+        />
+        <EditableText
+          as="p"
+          path="sub"
+          value={sub}
+          multiline
+          style={{
+            fontSize: "22px",
+            lineHeight: 1.4,
+            fontWeight: 400,
+            color: theme["--slide-muted"],
+          }}
+        />
       </header>
 
       <div
@@ -77,11 +80,21 @@ export function CtaSlide({ content, theme }: { content: CtaContent; theme: Recor
         }}
       >
         {actions.map((action, index) => {
-          const color = actionColors[action.kind];
+          const color = action.kind === "whatsapp" ? WHATSAPP_GREEN : theme["--slide-primary"];
+          const hasUrl = Boolean(action.url);
+          const Component = hasUrl ? "a" : "button";
+
           return (
-            <button
+            <Component
               key={index}
-              type="button"
+              {...(hasUrl
+                ? {
+                    href: action.url,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    onClick: isEditing ? (e: React.MouseEvent) => e.preventDefault() : undefined,
+                  }
+                : { type: "button" })}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -90,21 +103,23 @@ export function CtaSlide({ content, theme }: { content: CtaContent; theme: Recor
                 fontSize: "18px",
                 fontWeight: 600,
                 fontFamily: theme["--slide-font-display"],
-                color: "#fff",
+                color: theme["--slide-primary-fg"],
                 background: color,
                 border: "none",
                 borderRadius: theme["--slide-radius"],
                 cursor: "pointer",
+                textDecoration: "none",
                 transition: "transform 150ms ease, box-shadow 150ms ease",
                 boxShadow: `0 4px 16px ${color}40`,
               }}
             >
-              <span style={{ fontSize: "24px" }}>{actionIcons[action.kind]}</span>
-              {action.label}
-            </button>
+              <SlideIcon name={actionIcons[action.kind]} size={24} />
+              <EditableText path={`actions.${index}.label`} value={action.label} />
+            </Component>
           );
         })}
       </div>
     </div>
   );
 }
+

@@ -1,10 +1,19 @@
 import "server-only";
 import { db } from "@/lib/db/client";
 import { decks, slides, themes, templates } from "@/lib/db/schema";
-import { eq, and, desc, isNull, count, asc, ilike, inArray } from "drizzle-orm";
+import { eq, and, desc, isNull, count, asc, ilike, inArray, getTableColumns } from "drizzle-orm";
 import { nanoid } from "nanoid";
 
 export type DeckSort = "updated_desc" | "updated_asc" | "title_asc" | "title_desc";
+
+// Every deck column except source_script: it holds the customer's raw script and is only read
+// server-side for AI regeneration, so it must not ride along to deck lists or the public audience view.
+function publicDeckColumns() {
+  const columns: Partial<typeof decks._.columns> = { ...getTableColumns(decks) };
+  delete columns.sourceScript;
+  return columns as Omit<typeof decks._.columns, "sourceScript">;
+}
+const deckColumns = publicDeckColumns();
 
 function escapeLike(value: string): string {
   return value.replace(/[\\%_]/g, (m) => `\\${m}`);
@@ -62,6 +71,7 @@ export interface DeckWithRelations {
     content: unknown;
     notes: string | null;
     script: string | null;
+    layout?: string | null;
     position: number;
   } | null;
 }
@@ -114,7 +124,7 @@ export async function getDeckById(
   ctx: DeckRepositoryContext
 ): Promise<DeckWithRelations | null> {
   const [deck] = await db
-    .select()
+    .select(deckColumns)
     .from(decks)
     .where(and(eq(decks.id, id), eq(decks.orgId, ctx.orgId), isNull(decks.deletedAt)));
 
@@ -147,6 +157,7 @@ export async function getDeckById(
       content: slides.content,
       notes: slides.notes,
       script: slides.script,
+      layout: slides.layout,
       position: slides.position,
     })
     .from(slides)
@@ -169,7 +180,7 @@ export async function getDeckByPresentToken(
   presentToken: string
 ): Promise<DeckWithRelations | null> {
   const [deck] = await db
-    .select()
+    .select(deckColumns)
     .from(decks)
     .where(and(eq(decks.presentToken, presentToken), isNull(decks.deletedAt)));
 
@@ -202,6 +213,7 @@ export async function getDeckByPresentToken(
       content: slides.content,
       notes: slides.notes,
       script: slides.script,
+      layout: slides.layout,
       position: slides.position,
     })
     .from(slides)
@@ -257,7 +269,7 @@ export async function listDecks(
   const total = totalResult[0]?.count ?? 0;
 
   const deckResults = await db
-    .select()
+    .select(deckColumns)
     .from(decks)
     .where(and(...conditions))
     .orderBy(orderBy)
@@ -305,6 +317,7 @@ export async function listDecks(
           content: slides.content,
           notes: slides.notes,
           script: slides.script,
+          layout: slides.layout,
           position: slides.position,
         })
         .from(slides)

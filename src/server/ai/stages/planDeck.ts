@@ -17,12 +17,14 @@ export async function planDeck(
 ): Promise<{ plan: SlidePlan[]; usage: CompletionUsage | undefined }> {
   const input = `
 BRIEF:
+Language: ${brief.language}
 Offer: ${brief.offer}
 Audience: ${brief.audience}
 Pains: ${brief.pains.join("; ")}
 Proof: ${brief.proof.join("; ")}
 CTA: ${brief.cta}
 Tone: ${options.tone ?? brief.tone}
+
 
 TEMPLATE STAGES (Must preserve this order!):
 ${templateConfig.stages.map((s, i) => `${i + 1}. ${s}`).join("\n")}

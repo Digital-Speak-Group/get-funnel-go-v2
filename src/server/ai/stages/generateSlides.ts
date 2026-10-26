@@ -1,7 +1,27 @@
 import type { AIProvider, CompletionUsage } from "@/lib/ai/provider";
 import type { Brief, SlidePlan } from "../schema";
-import { SlideSchema, type Slide } from "@/lib/slides/schema";
+import { SlideSchema, slideDraftSchema, type Slide } from "@/lib/slides/schema";
 import { GENERATE_SLIDE_SYSTEM_PROMPT } from "../prompts/generateSlide";
+
+const normalize = (text: string) => text.replace(/\s+/g, " ").trim();
+
+/**
+ * Presenter text as the model wrote it, minus prompt leakage: the <SCRIPT> wrapper the
+ * raw script is sent in, and a near-verbatim dump of the whole raw script (dropped).
+ */
+export function cleanPresenterText(text: string | undefined, sourceScript: string): string | undefined {
+  if (!text) return undefined;
+  const cleaned = text.replace(/<\/?script>/gi, "").trim();
+  if (!cleaned) return undefined;
+
+  const source = normalize(sourceScript);
+  const flat = normalize(cleaned);
+  const opening = source.slice(0, 200);
+  if (source.length >= 400 && flat.includes(opening) && flat.length >= source.length * 0.6) {
+    return undefined;
+  }
+  return cleaned;
+}
 
 export async function generateSlide(
   provider: AIProvider,
@@ -29,21 +49,27 @@ ${script}
 `;
 
   try {
+    // Only this slide type's schema: the full union is ~10k tokens per request.
     const result = await provider.complete({
       tier: "quality",
       system: GENERATE_SLIDE_SYSTEM_PROMPT,
       input,
-      schema: SlideSchema,
+      schema: slideDraftSchema(planItem.type),
       temperature: 0.7, // Higher temp for copy generation
+      maxTokens: 1500,
     });
 
     if (!result.success) {
       return { slide: null, usage: result.usage ?? null, error: result.error };
     }
 
-    const slide = result.data;
-    slide.id = crypto.randomUUID();
-    slide.position = position;
+    const slide = SlideSchema.parse({
+      ...result.data,
+      script: cleanPresenterText(result.data.script, script),
+      notes: cleanPresenterText(result.data.notes, script),
+      id: crypto.randomUUID(),
+      position,
+    });
 
     return { slide, usage: result.usage };
   } catch (err: unknown) {

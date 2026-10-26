@@ -1,5 +1,6 @@
-import { SlideSchema, slideContentSchemas, type SlideType } from "@/lib/slides/schema";
+import { SlideSchema, slideContentSchemas, type ScriptCue, type SlideType } from "@/lib/slides/schema";
 import { groupIssues, normalizeContent, type FieldErrors } from "./field-schema";
+import { toScriptCue, type EditorCue } from "./cue";
 
 export interface EditorSlide {
   id: string;
@@ -8,6 +9,9 @@ export interface EditorSlide {
   content: Record<string, unknown>;
   notes: string;
   script: string;
+  cue: EditorCue;
+  /** Layout variant (Task 59); undefined = the type's original layout. */
+  layout?: string;
 }
 
 export interface SavePayload {
@@ -16,6 +20,8 @@ export interface SavePayload {
   content: Record<string, unknown>;
   notes: string;
   script: string;
+  cue: ScriptCue | null;
+  layout: string | null;
 }
 
 export function validateEditorSlide(slide: EditorSlide): FieldErrors {
@@ -30,6 +36,8 @@ export function validateEditorSlide(slide: EditorSlide): FieldErrors {
     content,
     notes: slide.notes,
     script: slide.script,
+    cue: toScriptCue(slide.cue) ?? undefined,
+    layout: slide.layout,
   });
   if (result.success) return {};
 
@@ -54,5 +62,7 @@ export function buildSavePayload(slide: EditorSlide): SavePayload {
     ) as Record<string, unknown>,
     notes: slide.notes,
     script: slide.script,
+    cue: toScriptCue(slide.cue),
+    layout: slide.layout ?? null,
   };
 }

@@ -1,0 +1,1118 @@
+{
+  "title": "Tunnel Webinaire",
+  "language": "fr",
+  "id": "60000000-0000-4000-8000-000000000008",
+  "slug": "tunnel-webinaire",
+  "name": "Tunnel Webinaire",
+  "category": "Formation",
+  "description": "Tunnel webinaire complet : page d'inscription, confirmation, rappels email et WhatsApp, webinaire structuré (live ou evergreen), offre avec sortie RDV ou paiement, replay et relances — pour éduquer en profondeur et transformer un prospect froid en décideur.",
+  "themeId": "40000000-0000-4000-8000-000000000009",
+  "slides": [
+    {
+      "id": "17000000-0000-4000-8000-000000000001",
+      "position": 0,
+      "type": "cover",
+      "needsInput": true,
+      "script": "Ok. Si tu vois cette vidéo, c'est que tu viens de terminer le diagnostic [Votre entreprise].\nDans les prochaines minutes, je vais faire un truc très simple :\nje vais te montrer le système qu'on te recommande, et surtout pourquoi c'est celui-là — pas un autre.\n\nL'idée n'est pas de te balancer des conseils vagues.\nJe veux que tu ressortes avec une vision claire :\nà quoi ressemble le tunnel, où ça gagne de l'argent, où ça fuit, et ce qu'il faut installer pour que ça tourne.",
+      "cue": {
+        "punchline": "Tu viens d'avoir ton résultat. Maintenant je t'explique le pourquoi, et le comment.",
+        "durationSec": 45,
+        "tag": "INTRO",
+        "transition": "On commence direct par le verdict.",
+        "bullets": [
+          "3 secondes de silence avant de commencer",
+          "Ton direct — pas de chauffe inutile",
+          "Regard caméra / prospect"
+        ]
+      },
+      "notes": "INTRO · 45 sec. 3 secondes de silence avant de commencer. Ton direct — pas de chauffe inutile. Regard caméra / prospect.\nVisuel legacy : anneaux concentriques + particules, bouton « Voir l'architecture ». Pied de slide legacy : « [Votre entreprise] · [Votre nom] · Deck Résultat — Version Diagnostic · Confidentiel ».\nÀ compléter : votre nom (et le nom de votre entreprise dans le script).",
+      "content": {
+        "kicker": "Deck Résultat — Version Diagnostic • Confidentiel",
+        "title": "Tunnel Webinaire — Architecture Core",
+        "subtitle": "Éduquer → convaincre → convertir. Avec autorité.",
+        "presenterName": "[Votre nom]"
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000002",
+      "position": 1,
+      "type": "statement",
+      "script": "Ton système recommandé : Tunnel Webinaire.\n\nPourquoi ? Parce que dans ton cas, tu ne peux pas vendre correctement juste avec une page ou une pub.\nTon offre demande qu'on explique, qu'on prouve, qu'on rassure… avant que la personne décide.\n\nLe webinaire te donne un avantage énorme :\nau lieu de répéter la même explication 30 fois en call, tu la fais une fois, proprement, et tu la fais à l'échelle.\n\nLe but ici c'est simple :\nattirer → inscrire → faire venir → convaincre → convertir → relancer → optimiser.\n\nJe te montre ça dans l'ordre.",
+      "cue": {
+        "punchline": "Ton système recommandé : Tunnel Webinaire.",
+        "durationSec": 120,
+        "tag": "VERDICT",
+        "transition": "Avant, je te dis vite qui te parle.",
+        "bullets": [
+          "Insister sur 'selon TES réponses' — personnalisation",
+          "Pause après chaque ligne du flow",
+          "Chercher le hochement de tête"
+        ]
+      },
+      "notes": "VERDICT · 2 min. Insister sur « selon TES réponses » — personnalisation. Pause après chaque ligne du flow. Chercher le hochement de tête.\nPromesse du système (legacy) : transformer un prospect froid en décideur — sans forcer. Avec éducation + preuve + autorité + relances automatiques.\nChaîne animée legacy : attirer → inscrire → faire venir → convaincre → convertir → relancer → optimiser.\nVisuel legacy : entonnoir TRAFIC (Pub / Organique) → INSCRIPTION (Opt-in webinaire) → WEBINAIRE (Éduquer + Prouver) → OFFRE (RDV ou Paiement) → CONVERSION (Client confirmé).",
+      "content": {
+        "eyebrow": "Système Recommandé",
+        "headline": "TUNNEL WEBINAIRE",
+        "highlight": "Transformer un prospect froid en décideur",
+        "sub": "Pourquoi ce choix (selon vos réponses) : votre vente demande éducation + confiance + démonstration avant décision. Le webinaire convertit sans forcer : on explique, on prouve, puis on propose."
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000003",
+      "position": 2,
+      "type": "authority",
+      "needsInput": true,
+      "script": "Je m'appelle [Votre nom], fondateur de [Votre entreprise].\nÇa fait plus de [X] ans qu'on construit des systèmes complets : funnels, CRM, automatisations.\n\nOn a bossé avec des gros noms : [Client 1], [Client 2], [Client 3], [Client 4], [Client 5]… et d'autres.\n\nEt le point commun entre tous les marchés :\nles gens pensent que c'est un problème de pub.\nMais en vrai, le problème, c'est le système derrière.\n\nLa pub ne fait pas vendre.\nLa pub fait entrer des gens.\nC'est l'architecture qui les fait avancer.",
+      "cue": {
+        "punchline": "Je construis des systèmes. Pas des pages.",
+        "durationSec": 90,
+        "tag": "AUTORITÉ",
+        "transition": "Et justement, voilà pourquoi beaucoup de business galèrent.",
+        "bullets": [
+          "90 sec max — aller vite",
+          "Citer les noms avec assurance",
+          "Finir sur 'l'architecture' — mot clé de toute la prez"
+        ]
+      },
+      "notes": "AUTORITÉ · 90 sec max — aller vite. Citer les références clients avec assurance. Finir sur « l'architecture » — mot clé de toute la présentation.\nLe legacy affichait 3 chiffres clés (années d'expérience, montant généré via vos systèmes, nombre de funnels construits), le logo de l'entreprise et la signature « Architecture • CRM • Automatisations ».\nÀ compléter : votre nom, votre entreprise, vos années d'expérience, vos chiffres vérifiables et 3 à 5 références clients (avec leur accord).",
+      "content": {
+        "headline": "Je m'appelle [Votre nom], fondateur de [Votre entreprise].",
+        "points": [
+          {
+            "icon": "briefcase",
+            "title": "[X]+ ans à construire des systèmes complets",
+            "text": "Funnels + CRM + automatisations pour des entrepreneurs qui font du [X] chiffres."
+          },
+          {
+            "icon": "trophy",
+            "title": "[X] M€ générés via nos systèmes",
+            "text": "[X]+ funnels construits."
+          },
+          {
+            "icon": "handshake",
+            "title": "On a bossé avec :",
+            "text": "[Client 1], [Client 2], [Client 3], [Client 4], [Client 5] (marché francophone & anglophone)."
+          },
+          {
+            "icon": "lightbulb",
+            "title": "Une vérité simple",
+            "text": "Le problème n°1 n'est pas « la pub ». C'est l'architecture."
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000004",
+      "position": 3,
+      "type": "problem",
+      "script": "La majorité des gens se trompent de combat.\n\nIls disent : « il me faut plus de leads ».\nMais souvent, ils ont déjà assez de trafic… juste ils ne savent pas convertir parce que le système n'explique pas.\n\nEt tu le vois partout :\ndes offres trop complexes à vendre à froid,\ndes prospects pas éduqués,\nune page qui promet mais ne démontre rien,\net après… aucun show-up, aucun replay, aucune relance, pas de CRM.\n\nRésultat : tu as du mouvement, mais zéro conversion.\nC'est comme remplir un seau percé.",
+      "cue": {
+        "punchline": "C'est comme remplir un seau percé.",
+        "durationSec": 90,
+        "tag": "DOULEUR",
+        "transition": "Donc avant de parler webinaire, on met d'accord un truc : c'est quoi un tunnel ?",
+        "bullets": [
+          "Égrener chaque point lentement",
+          "Pause après 'zéro conversion'",
+          "Ton empathique — pas accusateur"
+        ]
+      },
+      "notes": "DOULEUR · 90 sec. Égrener chaque point lentement. Pause après « zéro conversion ». Ton empathique — pas accusateur.\nTag legacy : « Diagnostic ». Liste legacy (6 puces) : « aucun show-up (pas de rappels) » et « aucun suivi (pas de relances replay) » sont fusionnés ici.\nVisuel legacy : entonnoir qui fuit (repères pédagogiques) Trafic 100 % → Inscription 38 % → Show-up 21 % → Offre 9 % → Conversion 2 %.",
+      "content": {
+        "headline": "La plupart pensent : « Il me faut plus de leads. »",
+        "intro": "En réalité : ils ont un système qui n'explique pas. Résultat : trafic → pas de conversion.",
+        "painPoints": [
+          {
+            "icon": "puzzle",
+            "title": "Des offres trop complexes à vendre à froid",
+            "text": "Sans contexte, le prospect ne comprend pas ce qu'il achète."
+          },
+          {
+            "icon": "users",
+            "title": "Des prospects pas prêts / pas éduqués",
+            "text": "Ils arrivent froids, comparent, et repoussent la décision."
+          },
+          {
+            "icon": "eye",
+            "title": "Une page qui promet mais ne démontre pas",
+            "text": "Des promesses, aucune démonstration : le doute reste."
+          },
+          {
+            "icon": "bell",
+            "title": "Aucun show-up, aucun suivi",
+            "text": "Pas de rappels avant le live, pas de relances replay après."
+          },
+          {
+            "icon": "database",
+            "title": "Un CRM inexistant",
+            "text": "Personne ne sait qui est venu, qui a cliqué, qui a acheté."
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000005",
+      "position": 4,
+      "type": "definition",
+      "script": "Un tunnel, c'est une suite d'étapes qui transforme un inconnu en client — de façon contrôlée.\n\nUn bon tunnel, en vrai, c'est pas compliqué :\nune promesse claire,\nun chemin sans friction,\ndes relances automatiques,\ndu tracking,\net de l'optimisation.\n\nSans tunnel : tu vends quand tu as de la chance.\nAvec tunnel : tu vends quand le système tourne.\n\nEt ici, le but du tunnel c'est :\néduquer en profondeur, puis convertir.",
+      "cue": {
+        "punchline": "Un tunnel, c'est un parcours. Pas une page.",
+        "durationSec": 60,
+        "tag": "CONCEPT",
+        "transition": "Ok. Maintenant on parle webinaire : c'est quoi exactement ?",
+        "bullets": [
+          "Appuyer sur 'de façon contrôlée'",
+          "Contraste sans / avec = évidence",
+          "Finir sur 'éduquer puis convertir' — la logique webinaire"
+        ]
+      },
+      "notes": "CONCEPT · 60 sec. Appuyer sur « de façon contrôlée ». Contraste sans / avec = évidence. Finir sur « éduquer puis convertir » — la logique webinaire.\nLe legacy listait 5 éléments : « suivi des conversions » et « optimisation continue » sont fusionnés ici.\nVisuel legacy : entonnoir INCONNU → INSCRIT → PRÉSENT → CLIENT.",
+      "content": {
+        "headline": "Un tunnel, c'est une suite d'étapes qui transforme un inconnu en client — de façon contrôlée.",
+        "body": "Sans tunnel, vous vendez quand vous avez de la chance. Avec tunnel, vous vendez quand le système tourne. Ici, le tunnel a un but : éduquer en profondeur, puis convertir. Étapes : Inconnu → Inscrit → Présent → Client.",
+        "pillars": [
+          {
+            "icon": "target",
+            "title": "Promesse claire",
+            "text": "Le prospect comprend tout de suite ce qu'il va obtenir."
+          },
+          {
+            "icon": "route",
+            "title": "Chemin sans friction",
+            "text": "Chaque étape mène naturellement à la suivante."
+          },
+          {
+            "icon": "repeat",
+            "title": "Relances automatiques",
+            "text": "Ceux qui hésitent ou ne viennent pas sont relancés sans intervention."
+          },
+          {
+            "icon": "bar-chart-2",
+            "title": "Suivi + optimisation continue",
+            "text": "Chaque étape est mesurée, puis optimisée en continu."
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000006",
+      "position": 5,
+      "type": "definition",
+      "script": "Tu sais ce qui fatigue le plus dans un business ?\nC'est de refaire la même explication 20 fois.\n\nLe webinaire, c'est exactement ça : tu prends ton meilleur argumentaire, tu le structures, tu le rends clair… et tu le joues une fois.\n\nRésultat :\ntu arrêtes d'éduquer en one-to-one,\net tu commences à éduquer en one-to-many.\n\nEt quand le prospect arrive à la fin… il est déjà cadré. Donc tu vends beaucoup plus facilement.",
+      "cue": {
+        "punchline": "Tu arrêtes d'éduquer en one-to-one. Tu passes en one-to-many.",
+        "durationSec": 75,
+        "tag": "CONCEPT WEBINAIRE",
+        "transition": "Donc pourquoi je te recommande ça, toi ?",
+        "bullets": [
+          "Les 2 contrastes — marquer une pause entre chaque",
+          "'Tu le joues une fois' = levier de temps fort",
+          "Finir sur 'tu vends plus facilement' — promesse concrète"
+        ]
+      },
+      "notes": "CONCEPT WEBINAIRE · 75 sec. Les 2 contrastes — marquer une pause entre chaque. « Tu le joues une fois » = levier de temps fort. Finir sur « tu vends plus facilement » — promesse concrète.\nTag legacy : « Définition simple ». Visuel legacy : écran avec présentateur, audience qui grandit, mention « × SCALE ».",
+      "content": {
+        "headline": "Un webinaire, c'est une présentation structurée qui fait 3 choses.",
+        "body": "Un webinaire, c'est un call de vente… mais à l'échelle. Vous prenez votre meilleur argumentaire, vous le structurez, et vous le jouez une fois : on passe du one-to-one au one-to-many.",
+        "pillars": [
+          {
+            "icon": "lightbulb",
+            "title": "01 · Éduque",
+            "text": "Le prospect comprend vraiment."
+          },
+          {
+            "icon": "shield-check",
+            "title": "02 · Prouve",
+            "text": "Tu démontres, tu cadres, tu rassures."
+          },
+          {
+            "icon": "handshake",
+            "title": "03 · Convertit",
+            "text": "RDV ou paiement, selon le cas."
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000007",
+      "position": 6,
+      "type": "why",
+      "script": "On recommande webinaire quand :\nton offre demande du contexte, le prospect a besoin d'un déclic, le marché est saturé, et tu veux convertir sans forcer.\n\nParce que le webinaire, il fait un truc puissant :\nil transforme un prospect froid en prospect prêt à décider.\n\nTu ne cherches pas juste à « convaincre ».\nTu cherches à rendre la décision logique.",
+      "cue": {
+        "punchline": "Le webinaire rend la décision logique.",
+        "durationSec": 90,
+        "tag": "LOGIQUE",
+        "transition": "Et la question clé après un webinaire : on envoie vers quoi ?",
+        "bullets": [
+          "Rappeler que c'est basé sur LEUR diagnostic",
+          "'Rendre la décision logique' — ancrage fort",
+          "Pas de vente — juste de la logique"
+        ]
+      },
+      "notes": "LOGIQUE · 90 sec. Rappeler que c'est basé sur LEUR diagnostic. « Rendre la décision logique » — ancrage fort. Pas de vente — juste de la logique.\nTag legacy : « Logique + cohérence diagnostic ».\nVisuel legacy : écran LIVE avec présentateur, audience qui réagit, légende « Tunnel webinaire → déclic → décision » (compteur de participants d'illustration).",
+      "content": {
+        "headline": "On recommande Webinaire quand :",
+        "reasons": [
+          {
+            "icon": "heart",
+            "title": "L'offre demande confiance + contexte",
+            "text": "Le prospect doit comprendre et faire confiance avant de décider."
+          },
+          {
+            "icon": "lightbulb",
+            "title": "Le prospect a besoin d'un « déclic »",
+            "text": "Il doit voir son problème autrement pour passer à l'action."
+          },
+          {
+            "icon": "trending-up",
+            "title": "Le marché est saturé",
+            "text": "Vous devez vous différencier : le webinaire montre votre logique et votre preuve."
+          },
+          {
+            "icon": "cpu",
+            "title": "Vous voulez convertir « en douceur » mais puissamment",
+            "text": "Pas de forcing : vous rendez la décision logique."
+          },
+          {
+            "icon": "target",
+            "title": "Le résultat",
+            "text": "Le webinaire transforme un prospect froid en prospect prêt à décider."
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000008",
+      "position": 7,
+      "type": "comparison",
+      "script": "Là, je veux être clair.\n\nLe diagnostic te recommande webinaire.\nMais la sortie, c'est soit RDV, soit paiement.\n\nRDV : c'est le plus fréquent à froid, surtout si c'est premium, sur-mesure, ou si ça demande un diagnostic.\nPaiement : c'est possible si l'offre est simple, la preuve est forte, le pricing est compatible, et que les objections sont gérables sans call.\n\nDonc on ne choisit pas au hasard.\nOn choisit selon : prix + complexité + maturité.",
+      "cue": {
+        "punchline": "On ne choisit pas la sortie au hasard.",
+        "durationSec": 75,
+        "tag": "SORTIE",
+        "transition": "Ok. Maintenant, ce tunnel doit produire quoi exactement ?",
+        "bullets": [
+          "Marquer la différence RDV vs paiement clairement",
+          "Pas de jugement — les deux modèles fonctionnent",
+          "Finir sur 'prix + complexité + maturité' = grille de lecture"
+        ]
+      },
+      "notes": "SORTIE · 75 sec. Marquer la différence RDV vs paiement clairement. Pas de jugement — les deux modèles fonctionnent. Finir sur « prix + complexité + maturité » = grille de lecture.\nTitre legacy : « Le diagnostic recommande Webinaire. »\nVisuel legacy (arbre de décision) : WEBINAIRE (fin de présentation) → losange « Pricing + complexité ? » → ← HIGH : Sortie RDV (call closing) / LOW → : Sortie Paiement (direct checkout) → CONVERSION, Client ✓.",
+      "content": {
+        "headline": "Sortie du webinaire : RDV ou Paiement ? Ça dépend du pricing + complexité + maturité.",
+        "columns": [
+          "Sortie RDV",
+          "Sortie Paiement"
+        ],
+        "rows": [
+          {
+            "label": "Quand",
+            "values": [
+              "Le plus fréquent à froid / high ticket",
+              "Possible sous conditions"
+            ]
+          },
+          {
+            "label": "Offre",
+            "values": [
+              "Premium / sur-mesure",
+              "Simple et claire"
+            ]
+          },
+          {
+            "label": "Besoin",
+            "values": [
+              "Diagnostic / personnalisation",
+              "Preuve forte"
+            ]
+          },
+          {
+            "label": "Panier",
+            "values": [
+              "Élevé → décision humaine",
+              "Pricing compatible"
+            ]
+          },
+          {
+            "label": "Objections",
+            "values": [
+              "Traitées en call",
+              "Gérables sans call"
+            ]
+          },
+          {
+            "label": "Conversion",
+            "values": [
+              "Call closing",
+              "Direct checkout"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000009",
+      "position": 8,
+      "type": "objectives",
+      "script": "Trois objectifs.\n\nMaximiser le show-up. Sinon tu parles dans le vide.\nMaximiser la conversion. Offre claire, CTA clair.\nMaximiser le replay. Parce que beaucoup achètent après.\n\nEt le KPI important, c'est pas « combien d'inscrits ».\nC'est : combien de présents, combien de conversions, et combien ça te coûte.",
+      "cue": {
+        "punchline": "Le KPI important, c'est pas les inscrits. C'est les conversions.",
+        "durationSec": 60,
+        "tag": "OBJECTIFS",
+        "transition": "Je te montre le flow complet.",
+        "bullets": [
+          "Égrener les 3 avec des pauses marquées",
+          "Insister sur 'pas les inscrits' — casseur de mythe",
+          "KPI final = ancrage pour la suite"
+        ]
+      },
+      "notes": "OBJECTIFS · 60 sec. Égrener les 3 avec des pauses marquées. Insister sur « pas les inscrits » — casseur de mythe. KPI final = ancrage pour la suite.\nTag legacy : « Les 3 objectifs du tunnel Webinaire ». Les baselines / objectifs sont des repères pédagogiques (barres animées dans le legacy).\nVisuel legacy : entonnoir Inscrits 100 % → Présents 55 % → Acheteurs 15 %, avec une flèche « replay » qui reboucle.",
+      "content": {
+        "headline": "Ce qu'on vient optimiser — le KPI n'est pas « inscrits » : présents + conversions + coût par client.",
+        "goals": [
+          {
+            "label": "01 · Maximiser le show-up",
+            "target": "Show-up rate : objectif 55 %",
+            "text": "Sinon tu parles dans le vide. Repère : baseline 20 % → objectif 55 %."
+          },
+          {
+            "label": "02 · Maximiser la conversion",
+            "target": "CVR webinaire : objectif 15 %",
+            "text": "Offre + CTA clair. Repère : baseline 5 % → objectif 15 %."
+          },
+          {
+            "label": "03 · Maximiser le replay",
+            "target": "Replay CVR : objectif 8 %",
+            "text": "Relances multi-canales : beaucoup achètent après. Repère : baseline 2 % → objectif 8 %."
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000010",
+      "position": 9,
+      "type": "flow",
+      "script": "Trafic → Inscription → Confirmation → Rappels → Webinaire → Offre → Conversion → Replay → Follow-up.\n\nEt retiens ça :\nchaque étape doit avoir une page dédiée, un event tracké, et une automation associée.\n\nSinon tu ne pilotes rien.\nTu subis.",
+      "cue": {
+        "punchline": "Chaque étape doit être pilotée. Sinon tu subis.",
+        "durationSec": 90,
+        "tag": "ARCHITECTURE",
+        "transition": "Maintenant on détaille les pages.",
+        "bullets": [
+          "Suivre le flow avec le curseur ou la main",
+          "Insister sur 'chaque étape trackée'",
+          "Finir fort : 'tu subis'"
+        ]
+      },
+      "notes": "ARCHITECTURE · 90 sec. Suivre le flow avec le curseur ou la main. Insister sur « chaque étape trackée ». Finir fort : « tu subis ».\nTag legacy : « Vue globale ultra simple ». Encadré legacy : « Replay = seconde chance de convertir. » Animation legacy : paquets lumineux qui circulent le long du flow.",
+      "content": {
+        "headline": "Le flow complet — chaque étape : une page dédiée, un événement tracké, une automation associée.",
+        "steps": [
+          {
+            "label": "01",
+            "title": "Trafic",
+            "text": "Meta / Google / Organique"
+          },
+          {
+            "label": "02",
+            "title": "Inscription",
+            "text": "Opt-in page"
+          },
+          {
+            "label": "03",
+            "title": "Confirmation",
+            "text": "Agenda + action"
+          },
+          {
+            "label": "04",
+            "title": "Rappels",
+            "text": "J-1 / H-3 / H-1 / H-0"
+          },
+          {
+            "label": "05",
+            "title": "Webinaire",
+            "text": "Live / Evergreen"
+          },
+          {
+            "label": "06",
+            "title": "Offre",
+            "text": "RDV ou Paiement"
+          },
+          {
+            "label": "07",
+            "title": "Replay",
+            "text": "Deadline + relances — la seconde chance de convertir"
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000011",
+      "position": 10,
+      "type": "architecture",
+      "script": "Pense webinaire comme un mini-système.\n\nInscription : tu fais comprendre en 10 secondes pourquoi ça vaut le coup de s'inscrire.\nConfirmation : tu sécurises + tu donnes les règles + tu mets l'agenda + tu fais faire un petit « OK ».\nRoom : c'est l'accès, point.\nOffre : tu proposes soit RDV, soit paiement — mais avec de la preuve et un timing propre.\nReplay : parce que tout le monde ne sera pas là, et que la conversion se fait souvent après.\n\nDonc non : tout ne se joue pas pendant le live.\nLe live est important, mais ce qui fait la différence… c'est ce que tu fais avant et après.",
+      "cue": {
+        "punchline": "Le live est important. Mais ce qui fait la différence, c'est avant et après.",
+        "durationSec": 90,
+        "tag": "PAGES",
+        "transition": "Ok. Zoom sur la page d'inscription.",
+        "bullets": [
+          "Dérouler les 5 pages une par une",
+          "Insister sur 'avant et après' — là où la plupart perdent",
+          "Finir sur 'ce que tu fais avant et après' = le vrai travail"
+        ]
+      },
+      "notes": "PAGES · 90 sec. Dérouler les 5 pages une par une. Insister sur « avant et après » — là où la plupart perdent. Finir sur « ce que tu fais avant et après » = le vrai travail.\nTag legacy : « Le tunnel en pages ».\nEncadrés legacy : « Chaque page est trackée — événements de conversion à chaque étape : vous savez exactement où ça bloque. » et « Mobile-first par design — 80 %+ de votre trafic arrive sur mobile. Chaque page est pensée pour ça. »",
+      "content": {
+        "headline": "Architecture des pages — 5 pages. 1 système. Chaque page a un rôle précis dans la conversion.",
+        "layers": [
+          {
+            "name": "01 · Inscription",
+            "items": [
+              "Promesse",
+              "Bénéfice",
+              "Formulaire"
+            ]
+          },
+          {
+            "name": "02 · Confirmation",
+            "items": [
+              "Récap",
+              "Consignes",
+              "Agenda",
+              "1 action simple"
+            ]
+          },
+          {
+            "name": "03 · Page Live / Room",
+            "items": [
+              "Accès",
+              "Chat",
+              "Structure"
+            ]
+          },
+          {
+            "name": "04 · Offre",
+            "items": [
+              "CTA clair",
+              "Preuves",
+              "Urgence propre"
+            ]
+          },
+          {
+            "name": "05 · Replay",
+            "items": [
+              "Accès",
+              "Deadline",
+              "Relances"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000012",
+      "position": 11,
+      "type": "mockup",
+      "script": "Là, on parle de la page d'inscription.\nEt je te dis un truc : si cette page est moyenne, tout le reste ne sert à rien.\nParce que tu peux avoir le meilleur webinaire du monde… si personne ne s'inscrit, tu parles tout seul.\n\nDonc ici, on ne fait pas du design pour se faire plaisir.\nOn fait du clair. Du direct. Du lisible.\n\nTu veux quoi sur cette page ?\n\nUne headline orientée résultat.\nPas « webinaire gratuit ». On s'en fout.\nLe prospect veut savoir : qu'est-ce que ça va changer pour moi ?\n\nPourquoi maintenant.\nParce que sinon il se dit « je verrai plus tard » et il part.\nTu cadres le problème, tu mets le timing.\n\n3 points max : ce qu'ils vont apprendre.\nPas une liste longue. Trois bénéfices concrets.\nDes trucs qu'ils veulent vraiment comprendre / corriger.\n\nPreuve.\nUn truc simple : logos, captures, mini témoignage, une phrase de résultat.\nJuste de quoi enlever le doute : « ok, c'est sérieux ».\n\nFormulaire simple.\nPrénom + email, point.\nTu ne mets pas 10 champs ici.\nTu veux qu'il s'inscrive vite.\n\nFiltre léger (si nécessaire).\nUne ligne « pour qui / pas pour qui » pour éviter les touristes, sans freiner l'inscription.\n\nEt tu gardes une règle :\n1 page = 1 objectif.\nIci l'objectif c'est : inscription.\nPas décoration. Pas blabla.",
+      "cue": {
+        "punchline": "Cette page n'a pas un job : être belle. Elle a un job : faire s'inscrire.",
+        "durationSec": 120,
+        "tag": "PAGE INSCRIPTION",
+        "transition": "Ok. Maintenant qu'on a les inscrits… le plus important c'est pas le webinaire lui-même. C'est la structure. Parce qu'un webinaire sans ossature, ça ne convertit pas.",
+        "bullets": [
+          "Répéter '1 page = 1 objectif' comme mantra",
+          "Pointer les éléments visuels si dispo",
+          "Beau vs efficace = évidence"
+        ]
+      },
+      "notes": "PAGE INSCRIPTION · 2 min. Répéter « 1 page = 1 objectif » comme mantra. Pointer les éléments visuels si dispo. Beau vs efficace = évidence.\nTag legacy : « Ce qu'il faut dessus ».\nMaquette legacy (navigateur) à reproduire avec une capture de votre propre page : sections 01 Headline · 02 Urgence · 03 Ce que vous apprenez · 04 Preuve sociale (avatars + 5 étoiles) · 05 Formulaire (Prénom, Email, bouton « Je m'inscris → ») · 06 Pour qui (✓ Pour vous si… / ✕ Pas pour vous si…).",
+      "content": {
+        "headline": "Structure de la Page d'inscription.",
+        "page": "registration",
+        "blocks": [
+          {
+            "label": "Headline"
+          },
+          {
+            "label": "Urgence",
+            "detail": "3 lignes"
+          },
+          {
+            "label": "Ce que vous apprenez",
+            "detail": "3 bullets"
+          },
+          {
+            "label": "Preuve sociale",
+            "detail": "4 avatars + 5 étoiles"
+          },
+          {
+            "label": "Formulaire",
+            "detail": "Prénom · Email"
+          },
+          {
+            "label": "Pour qui",
+            "detail": "✓ Pour vous si… · ✕ Pas pour vous si…"
+          }
+        ],
+        "cta": "Je m'inscris",
+        "aside": "Headline orientée résultat · Pourquoi maintenant (douleur + timing) · Ce que vous allez apprendre (3 bullets) · Preuve (logos, témoignages, chiffres) · Formulaire simple + CTA clair · Pour qui / pas pour qui (filtre léger)"
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000013",
+      "position": 12,
+      "type": "flow",
+      "script": "Un webinaire, si c'est pas structuré, tu perds tout.\n\nVoilà la logique, simple :\n\nTu ouvres fort : tu recadres le vrai problème.\nPas « bienvenue tout le monde », direct dans le dur.\n\nTu dis pourquoi t'écouter : en 20 secondes, pas plus.\nPas besoin d'un CV, juste une preuve + une phrase vraie.\n\nTu donnes le contenu : 3 points max.\nSi tu pars dans 9 idées, tu les perds.\n\nTu mets de la preuve : cas, chiffres, écran, résultat.\nPas des promesses. Du concret.\n\nTu fais la bascule : « ok, maintenant, si tu veux que je t'aide… »\nEt là tu annonces l'offre.\n\nTu présentes l'offre + bonus : clair, simple, sans tourner autour.\nTu termines par un CTA net : soit tu book, soit tu sors.\n\nEt après :\nsi c'est live → Q&A,\nsi c'est evergreen → tu traites les objections dans la vidéo / dans la séquence.\n\nC'est pas du cinéma. C'est juste un chemin.",
+      "cue": {
+        "punchline": "C'est pas du cinéma. C'est juste un chemin.",
+        "durationSec": 120,
+        "tag": "OSSATURE",
+        "transition": "Ok. Maintenant, le point que 90% ratent : les automations. Parce que sans ça, ton show-up s'écroule.",
+        "bullets": [
+          "Égrener l'ossature comme une checklist",
+          "'Direct dans le dur' — image forte, laisser résonner",
+          "Finir sur 'un chemin' — simplicité rassurante"
+        ]
+      },
+      "notes": "OSSATURE · 2 min. Égrener l'ossature comme une checklist. « Direct dans le dur » — image forte, laisser résonner. Finir sur « un chemin » — simplicité rassurante.\nTag legacy : « Sans script, juste l'ossature ». Le legacy listait 8 blocs : « CTA (RDV ou paiement) » et « Q&A (live) / objections (evergreen) » sont fusionnés dans l'étape 07.",
+      "content": {
+        "headline": "Structure du webinaire — sans script, juste l'ossature.",
+        "steps": [
+          {
+            "label": "01",
+            "title": "Hook",
+            "text": "Recadrage du vrai problème. Direct dans le dur, pas « bienvenue à tous »."
+          },
+          {
+            "label": "02",
+            "title": "Story / autorité",
+            "text": "Pourquoi écouter : 20 secondes, une preuve + une phrase vraie."
+          },
+          {
+            "label": "03",
+            "title": "Contenu",
+            "text": "3 parties maximum. Au-delà, vous les perdez."
+          },
+          {
+            "label": "04",
+            "title": "Preuve / cas",
+            "text": "Cas, chiffres, écran, résultat. Pas des promesses."
+          },
+          {
+            "label": "05",
+            "title": "Transition offre",
+            "text": "« Ok, maintenant, si tu veux que je t'aide… »"
+          },
+          {
+            "label": "06",
+            "title": "Offre claire + bonus",
+            "text": "Clair, simple, sans tourner autour."
+          },
+          {
+            "label": "07",
+            "title": "CTA → Q&A / objections",
+            "text": "RDV ou paiement. Puis Q&A (live) ou objections traitées (evergreen)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000014",
+      "position": 13,
+      "type": "automation",
+      "script": "Après inscription :\nemail de confirmation immédiat, WhatsApp si dispo, ajout calendrier.\n\nAvant le live :\nrappels J-1, H-3, H-1, H-0.\nAvec lien direct. Et tu veux un micro-engagement : « réponds OK ».\n\nAprès le live :\nprésents mais pas convertis → relances + objections,\nabsents → replay + résumé + deadline,\ncliqués mais pas convertis → séquence dédiée.\n\nTu vois le truc ?\nLe webinaire, c'est une machine de relances.",
+      "cue": {
+        "punchline": "Le webinaire, c'est une machine de relances.",
+        "durationSec": 120,
+        "tag": "AUTOMATISATION",
+        "transition": "Et le canal le plus violent pour le show-up, c'est WhatsApp.",
+        "bullets": [
+          "Dérouler les 3 blocs : après inscription / avant live / après live",
+          "Insister sur no-show prevention",
+          "'Le système travaille pendant que tu dors'"
+        ]
+      },
+      "notes": "AUTOMATISATION · 2 min. Dérouler les 3 blocs : après inscription / avant live / après live. Insister sur la prévention des no-shows. « Le système travaille pendant que tu dors. »\nTag legacy : « Ce que 90% n'installent jamais ».\nVisuel legacy : pipeline USER → Inscription (Email confirmation, WhatsApp, Calendrier) → Live (J-1 / H-3 / H-1, lien direct) → After (relances présents, replay absents, séquence cliqueurs).",
+      "content": {
+        "headline": "Les automations — ce que 90% n'installent jamais. Le webinaire, c'est une machine de relances.",
+        "items": [
+          {
+            "trigger": "Après inscription",
+            "action": "Email de confirmation instantané + WhatsApp de confirmation (si donné) + ajout calendrier / rappel.",
+            "delay": "Immédiat"
+          },
+          {
+            "trigger": "Avant le live",
+            "action": "Rappels avec lien direct + « réponds OK » (micro-engagement).",
+            "delay": "J-1 / H-3 / H-1 / H-0"
+          },
+          {
+            "trigger": "Après le live : présents mais pas convertis",
+            "action": "Relances + traitement des objections.",
+            "delay": "Après le live"
+          },
+          {
+            "trigger": "Après le live : absents",
+            "action": "Replay + résumé + deadline.",
+            "delay": "Après le live"
+          },
+          {
+            "trigger": "Après le live : cliqués mais pas convertis",
+            "action": "Séquence dédiée.",
+            "delay": "Après le live"
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000015",
+      "position": 14,
+      "type": "channel",
+      "script": "Dès qu'ils répondent, même un « OK », c'est bon : ils sont dedans.\n\nTu veux savoir pourquoi les gens ont des no-shows ?\nParce qu'ils bookent… puis ils disparaissent.\n\nEt la plupart pensent que c'est « normal ».\nNon. C'est juste que personne ne relance correctement.\n\nWhatsApp, c'est le canal qui ramène les gens au rendez-vous.\nParce qu'ils le lisent. Et parce qu'ils répondent.\n\nEt dès qu'ils répondent, même un « OK », c'est bon :\nils sont dedans.\n\nDonc tu relances à des moments simples :\nimmédiat, veille, 3h avant, juste avant.\nEt derrière tu reprends la main.",
+      "cue": {
+        "punchline": "Dès qu'ils répondent, même un 'OK', c'est bon : ils sont dedans.",
+        "durationSec": 75,
+        "tag": "WHATSAPP",
+        "transition": "Et tout ça, si ce n'est pas dans un CRM, c'est le chaos.",
+        "bullets": [
+          "Insister sur 'engagement' — pas spam",
+          "Micro-réponse = micro-engagement = show-up",
+          "Ton direct — cette slide doit marquer"
+        ]
+      },
+      "notes": "WHATSAPP · 75 sec. Insister sur « engagement » — pas spam. Micro-réponse = micro-engagement = show-up. Ton direct — cette slide doit marquer.\nTag legacy : « Indispensable ». Le legacy affichait 5 moments (Immédiat · J-1 · H-3 · H-0 · Post-webinaire) : H-3 et H-0 sont regroupés ici (4 messages max).\nVisuel legacy : maquette de téléphone avec la conversation WhatsApp « Webinaire — en ligne » reprenant les 5 moments.",
+      "content": {
+        "headline": "Sans WhatsApp, le show-up chute. But : micro-engagement = présence.",
+        "channel": "whatsapp",
+        "scripts": [
+          {
+            "moment": "Immédiat",
+            "message": "Lien + « réponds OK »."
+          },
+          {
+            "moment": "J-1",
+            "message": "Rappel + bénéfice."
+          },
+          {
+            "moment": "H-3 / H-0",
+            "message": "H-3 : confirmation « réponds 1 ». H-0 : lien direct."
+          },
+          {
+            "moment": "Post-webinaire",
+            "message": "Replay + prochaine étape."
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000016",
+      "position": 15,
+      "type": "crm",
+      "script": "Là où la majorité se plante, c'est ici.\nIls font une page, un webinaire, un calendrier… et derrière, y'a rien.\n\nLe CRM, c'est pas un truc « administratif ».\nC'est ce qui te permet de savoir, noir sur blanc :\nqui est entré,\nqui a regardé,\nqui a cliqué,\nqui a booké,\nqui s'est présenté,\net qui a acheté.\n\nSinon tu fais tout au feeling. Et le feeling, ça coûte cher.\n\nDonc ton tunnel doit alimenter un pipeline simple, lisible.\nPas 50 colonnes, pas un truc compliqué.\nUn truc comme :\nInscrit → a regardé → a cliqué → a booké → s'est présenté → client.\n\nEt autour, tu mets 3 choses :\ndes tags pour savoir d'où il vient et où il en est (source, statut, show-up, clic),\ndes tâches pour les follow-ups (sinon ça tombe dans le vide),\net éventuellement une valeur par opportunité, juste pour savoir ce que tu as dans le pipe.\n\nLa phrase est simple :\nsi c'est pas tracké, c'est pas optimisable.\nEt si c'est pas optimisable… ça ne scale pas.\n\nEt c'est exactement pour ça que je veux te montrer la vue d'ensemble : là tu vois la machine entière, d'un coup.",
+      "cue": {
+        "punchline": "Si tu n'as pas un CRM propre, tu pilotes rien.",
+        "durationSec": 60,
+        "tag": "SUIVI",
+        "transition": "Et c'est exactement pour ça que je veux te montrer la vue Funnelytics : là tu vois la machine entière, d'un coup.",
+        "bullets": [
+          "'Piloter, pas deviner'",
+          "Pipeline = vocabulaire commun avec le prospect",
+          "Transition rapide vers Funnelytics"
+        ]
+      },
+      "notes": "SUIVI · 60 sec. « Piloter, pas deviner ». Pipeline = vocabulaire commun avec le prospect. Transition rapide vers la vue d'ensemble.\nTag legacy : « Sinon c'est pas un système ».\nVisuel legacy : pipeline CRM « temps réel » Inscrit / Présent / Cliqué / Client (leads fictifs) + taux de conversion par étape (illustratifs) : Inscrit 100 % · Show-up 38 % · Cliqué 14 % · Client 6 %. « Tout tracké → tout optimisable ».",
+      "content": {
+        "headline": "Le tunnel doit alimenter le CRM — si ce n'est pas tracké, ce n'est pas optimisable.",
+        "pipelines": [
+          {
+            "stage": "Pipeline",
+            "definition": "Inscrit → présent → cliqué → RDV → client."
+          },
+          {
+            "stage": "Tags",
+            "definition": "Source, statut, show-up, click."
+          },
+          {
+            "stage": "Opportunités",
+            "definition": "Valeur par lead : savoir ce que vous avez dans le pipe."
+          },
+          {
+            "stage": "Tasks",
+            "definition": "Follow-up manuel si besoin — sinon ça tombe dans le vide."
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000017",
+      "position": 16,
+      "type": "embed",
+      "script": "Dans la vue Funnelytics, tu vois :\ntrafic, pages, events, conversions, et automations reliées.\n\nDonc tu sais où ça casse :\nl'inscription ? le show-up ? l'offre ? le replay ?\n\nC'est une radiographie du système.\nEt tu sais quoi corriger en premier.",
+      "cue": {
+        "punchline": "C'est une radiographie du système.",
+        "durationSec": 120,
+        "tag": "VUE D'ENSEMBLE",
+        "transition": "Maintenant je te montre du concret : exemples de pages.",
+        "bullets": [
+          "Pointer les blocs dans l'ordre",
+          "Répéter 'radiographie' — image forte",
+          "Finir sur 'corriger en premier' = priorisation"
+        ]
+      },
+      "notes": "VUE D'ENSEMBLE · 2 min. Pointer les blocs dans l'ordre. Répéter « radiographie » — image forte. Finir sur « corriger en premier » = priorisation.\nTag legacy : « Slide obligatoire ». Le legacy intégrait une carte de funnel live (iframe plein écran, bouton « Voir la carte live ») : montrer ici votre propre carte de funnel (Funnelytics ou équivalent).\nSchéma legacy : sources Meta / Google / Organique → Inscription → Confirmation → Room Live → Offre → Replay, avec un event par page et les automations Email + WA / Rappels J-1 H-0 / Relances replay.",
+      "content": {
+        "headline": "Voici la machine. Pas une présentation.",
+        "title": "Schéma Funnelytics"
+      },
+      "needsInput": true
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000018",
+      "position": 17,
+      "type": "showcase",
+      "needsInput": true,
+      "script": "Ici tu vois des exemples réels : inscription, confirmation, replay, offre.\n\nLe but, c'est que tu te dises :\n« Ok, c'est pas un concept. C'est une vraie machine. »",
+      "cue": {
+        "punchline": "Ok, c'est pas un concept. C'est une vraie machine.",
+        "durationSec": 45,
+        "tag": "PREUVE",
+        "transition": "Et pour renforcer, on peut rajouter la preuve brute.",
+        "bullets": [
+          "45 sec max — ne pas sur-expliquer",
+          "Pointer 1-2 exemples proches du secteur",
+          "Transition fluide vers les preuves"
+        ]
+      },
+      "notes": "PREUVE · 45 sec max — ne pas sur-expliquer. Pointer 1-2 exemples proches du secteur. Transition fluide vers les preuves.\nLe legacy affichait un carrousel de 8 pages d'inscription clients en aperçu live (iframes, vignettes, plein écran). À compléter : ajoutez vos propres captures (inscription, confirmation, offre, replay) et renommez les légendes.",
+      "content": {
+        "headline": "On ne théorise pas. On construit.",
+        "items": [
+          {
+            "title": "[Page client 1]"
+          },
+          {
+            "title": "[Page client 2]"
+          },
+          {
+            "title": "[Page client 3]"
+          },
+          {
+            "title": "[Page client 4]"
+          },
+          {
+            "title": "[Page client 5]"
+          },
+          {
+            "title": "[Page client 6]"
+          },
+          {
+            "title": "[Page client 7]"
+          },
+          {
+            "title": "[Page client 8]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000019",
+      "position": 18,
+      "type": "screenshots",
+      "needsInput": true,
+      "script": "Là, c'est la partie que j'aime : le réel.\nLes stats, les dashboards, les résultats.\n\nJe ne te montre pas ça pour t'hypnotiser avec des chiffres.\nJe te montre ça pour une seule raison :\nnous, on mesure. On corrige. On optimise.\n\nQuand c'est piloté, ça devient prévisible.",
+      "cue": {
+        "punchline": "Quand c'est piloté, ça devient prévisible.",
+        "durationSec": 90,
+        "tag": "PREUVES",
+        "transition": "Ok. Et concrètement, ça te fait gagner quoi au quotidien ?",
+        "bullets": [
+          "Ton factuel — pas de survente",
+          "Laisser le prospect regarder quelques secondes avant de parler",
+          "Finir sur 'prévisible' — le mot que tout le monde veut entendre"
+        ]
+      },
+      "notes": "PREUVES · 90 sec. Ton factuel — pas de survente. Laisser le prospect regarder quelques secondes avant de parler. Finir sur « prévisible » — le mot que tout le monde veut entendre.\nTag legacy : « Résultats réels · Clients [Votre entreprise] ». Le legacy affichait une grille de 10 captures de dashboards (plateformes de tunnels) avec lightbox « Cliquez pour agrandir » et un total cumulé multi-clients. À compléter avec vos propres résultats vérifiables (captures + chiffres).",
+      "content": {
+        "headline": "Les chiffres parlent d'eux-mêmes.",
+        "items": [
+          {
+            "caption": "[Capture 1]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 2]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 3]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 4]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 5]",
+            "result": "[Résultat]"
+          },
+          {
+            "caption": "[Capture 6]",
+            "result": "[Résultat]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000020",
+      "position": 19,
+      "type": "benefits",
+      "script": "Le webinaire ne sert pas à « faire une présentation ». Il sert à rendre la vente facile.\n\nL'intérêt d'un webinaire, c'est pas de faire un live pour faire un live.\nC'est de régler le vrai problème : le prospect arrive trop froid.\nIl ne te connaît pas. Il ne comprend pas ton offre. Il compare. Et il a mille raisons de repousser.\n\nAvec un webinaire bien orchestré, tu changes la situation avant même de parler « vente ».\n\nDéjà, tu récupères des prospects plus éduqués.\nIls arrivent avec le contexte. Ils ont compris le problème, ils ont compris la logique, et ils savent pourquoi ta solution existe.\nDu coup tu passes moins de temps à expliquer des bases… et plus de temps à avancer.\n\nEnsuite, tu as moins d'objections.\nPas parce que tu les « combats ».\nParce que tu les désamorces pendant le webinaire : tu cadres, tu prouves, tu réponds aux doutes au bon moment, au lieu de subir ça en DM ou en call.\n\nTu gagnes aussi de la confiance — de l'autorité.\nEt ça, c'est un truc que beaucoup sous-estiment :\nquand une personne te regarde expliquer clairement, avec structure, avec exemples, avec preuve…\ntu deviens la référence. Même si elle ne t'achète pas ce jour-là.\n\nEt la conversion devient plus douce, mais plus forte.\nParce que tu ne forces pas.\nTu fais juste monter la compréhension, puis la décision.\nEt à la fin, soit elle book, soit elle achète — selon le modèle.\n\nEt surtout, tu crées un système duplicable.\nUn vrai système.\nTu peux le refaire, l'automatiser, l'améliorer, le scaler.\nTu n'es plus dépendant de « l'inspi » du jour ou de l'énergie du moment.\n\nEn clair : tu passes de « je lance et je prie »…\nà « je lance et je pilote ».",
+      "cue": {
+        "punchline": "Le webinaire ne sert pas à 'faire une présentation'. Il sert à rendre la vente facile.",
+        "durationSec": 120,
+        "tag": "BÉNÉFICES",
+        "transition": "Et justement, pour piloter, il faut regarder les bons chiffres. Voilà ceux qu'on suit.",
+        "bullets": [
+          "Égrener lentement",
+          "Finir fort sur 'je lance et je pilote'",
+          "Regard direct — cette phrase doit atterrir"
+        ]
+      },
+      "notes": "BÉNÉFICES · 2 min. Égrener lentement. Finir fort sur « je lance et je pilote ». Regard direct — cette phrase doit atterrir.\nTag legacy : « Bénéfices concrets ». Visuel legacy : roue « GAINS concrets » avec les 6 bénéfices numérotés.",
+      "content": {
+        "headline": "Ce que vous gagnez — ce système vous sort du « je lance et je prie ».",
+        "benefits": [
+          {
+            "icon": "lightbulb",
+            "title": "Des prospects plus éduqués",
+            "text": "Ils arrivent avec le contexte : moins de temps à expliquer les bases, plus de temps à avancer."
+          },
+          {
+            "icon": "shield-check",
+            "title": "Moins d'objections en vente",
+            "text": "Désamorcées pendant le webinaire : on cadre, on prouve, on répond aux doutes au bon moment."
+          },
+          {
+            "icon": "star",
+            "title": "Plus de confiance (autorité)",
+            "text": "Expliquer clairement, avec structure et preuve, fait de vous la référence."
+          },
+          {
+            "icon": "trending-up",
+            "title": "Une conversion plus douce mais plus forte",
+            "text": "On ne force pas : la compréhension monte, puis la décision. RDV ou achat, selon le modèle."
+          },
+          {
+            "icon": "repeat",
+            "title": "Un système duplicable",
+            "text": "À refaire, automatiser, améliorer, scaler — sans dépendre de l'inspi du jour."
+          },
+          {
+            "icon": "bar-chart-2",
+            "title": "Une croissance pilotée",
+            "text": "Vous passez de « je lance et je prie » à « je lance et je pilote »."
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000021",
+      "position": 20,
+      "type": "gauge",
+      "script": "Ok. Maintenant, le point que 90% ignorent : les chiffres.\nPas pour faire « expert ». Pour arrêter de deviner.\n\nUn webinaire, ça se pilote comme une machine.\nEt une machine, tu sais où elle casse avec quelques KPI très simples.\n\n1) CTR annonce → inscription. Si c'est faible, le problème c'est pas ton webinaire : c'est ton angle, ton hook, ta créa, ton message.\n\n2) CVR inscription. Si c'est faible, c'est ta promesse qui ne tient pas, ou ta page qui est floue, ou trop compliquée.\n\n3) Show-up rate. Si ton show-up est bas, tu n'as pas assez de rappels, pas assez de WhatsApp, pas assez de micro-engagement. Tu as des inscrits… mais tu parles dans le vide.\n\n4) Taux de clic vers l'offre. Si personne ne clique, ton webinaire n'a pas créé la décision : trop long, trop mou, pas assez de preuve, pas assez de tension, ou transition offre ratée.\n\n5) Conversion RDV ou paiement. Si ça ne convertit pas, ce n'est pas forcément le webinaire : c'est parfois l'offre, le pricing, le stack, ou la page de vente / checkout.\n\n6) Coût par conversion + ROI. Combien ça te coûte pour obtenir un RDV ou une vente, et est-ce que c'est rentable. C'est le KPI final : soit tu scales, soit tu coupes, soit tu ajustes.\n\n7) Replay watch + conversion replay. Parce que beaucoup de gens achètent après. Si tu n'as pas de relance replay, tu perds une partie énorme des ventes.\n\nEt l'idée au final est simple :\nchaque chiffre te dit exactement quoi corriger.\nDonc tu ne passes plus ta vie à « tester au hasard ».\nTu optimises comme un adulte.",
+      "cue": {
+        "punchline": "On ne pilote pas au feeling. On pilote avec 6–7 chiffres simples.",
+        "durationSec": 120,
+        "tag": "MESURABLE",
+        "transition": "Et justement, pour éviter de perdre des semaines, je te montre les 3 erreurs qui tuent un webinaire.",
+        "bullets": [
+          "Pointer chaque KPI à l'écran",
+          "Ne pas aller trop vite — chaque chiffre compte",
+          "Finir sur 'tu optimises comme un adulte' = ton décalé et fort"
+        ]
+      },
+      "notes": "MESURABLE · 2 min. Pointer chaque KPI à l'écran. Ne pas aller trop vite — chaque chiffre compte. Finir sur « tu optimises comme un adulte » = ton décalé et fort.\nTag legacy : « Cockpit de pilotage ». Le legacy affichait 7 jauges animées « Live » avec des valeurs d'illustration (valeur / objectif) : CTR annonce → inscription 54 % (50 %) · CVR inscription 38 % (35 %) · Show-up rate 42 % (40 %) · Taux click offre 21 % (20 %) · Conversion RDV / paiement 14 % (12 %) · Coût par conversion / ROI 3.1x (3x) · Replay watch + conversion 28 % (25 %). Seules 4 jauges tiennent sur la slide.",
+      "content": {
+        "headline": "7 métriques. Tout le reste en découle.",
+        "gauges": [
+          {
+            "label": "CTR annonce → inscription",
+            "value": 54,
+            "suffix": "%",
+            "note": "Objectif : 50%"
+          },
+          {
+            "label": "CVR inscription",
+            "value": 38,
+            "suffix": "%",
+            "note": "Objectif : 35%"
+          },
+          {
+            "label": "Show-up rate",
+            "value": 42,
+            "suffix": "%",
+            "note": "Objectif : 40%"
+          },
+          {
+            "label": "Taux click offre",
+            "value": 21,
+            "suffix": "%",
+            "note": "Objectif : 20%"
+          },
+          {
+            "label": "Conversion RDV / paiement",
+            "value": 14,
+            "suffix": "%",
+            "note": "Objectif : 12%"
+          },
+          {
+            "label": "Coût par conversion / ROI",
+            "value": 3.1,
+            "max": 5,
+            "suffix": "x",
+            "note": "Objectif : 3x"
+          },
+          {
+            "label": "Replay watch + conversion",
+            "value": 28,
+            "suffix": "%",
+            "note": "Objectif : 25%"
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000022",
+      "position": 21,
+      "type": "mistakes",
+      "script": "Je te dis un truc : un webinaire, ce n'est pas juste « faire une présentation ».\nC'est une machine. Et il y a 3 erreurs qui la détruisent.\n\nUn : les rappels.\nSi tu ne rappelles pas, les gens ne viennent pas. Point.\nTu peux avoir le meilleur contenu du monde, tu parleras… à personne.\n\nDeux : le contenu.\nTrop long, trop flou, trop de blabla = tu perds la confiance.\nLes gens ne veulent pas un cours de 2 heures.\nIls veulent comprendre vite, sentir que c'est sérieux, et voir une logique.\n\nTrois : le replay.\nLa majorité des ventes se fait après.\nDonc si tu n'as pas replay + relances propres, tu jettes de l'argent à la poubelle.\n\nConclusion simple :\nun webinaire, ça se gagne avant, pendant, et surtout après.",
+      "cue": {
+        "punchline": "Un webinaire, ça se gagne avant, pendant, et surtout après.",
+        "durationSec": 75,
+        "tag": "ERREURS",
+        "transition": "Ok. Maintenant le plan.",
+        "bullets": [
+          "Égrener les 3 avec gravité — pas de rush",
+          "Identifier laquelle correspond au prospect",
+          "Finir sur 'avant, pendant, et surtout après' — la structure complète"
+        ]
+      },
+      "notes": "ERREURS · 75 sec. Égrener les 3 avec gravité — pas de rush. Identifier laquelle correspond au prospect. Finir sur « avant, pendant, et surtout après » — la structure complète.\nTag legacy : « Les 3 erreurs qui tuent un webinaire ». Conclusion legacy : « On corrige ça dès le départ. »\nVisuel legacy « Sans système / Avec » (barres d'illustration) : Show-up rate 12 % → 45 % · Confiance live 20 % → 72 % · Replay CVR 0 % → 18 % — « Revenu replay récupéré +€€€ ».",
+      "content": {
+        "headline": "Les 3 erreurs qui tuent un webinaire — ce qu'on corrige dès le départ.",
+        "mistakes": [
+          {
+            "mistake": "Pas de rappels → pas de show-up : le prospect s'inscrit mais n'apparaît jamais. Argent pub perdu.",
+            "fix": "Rappels J-1 / H-3 / H-1 / H-0 avec lien direct + WhatsApp « réponds OK ». Sans rappel, vous parlez à personne."
+          },
+          {
+            "mistake": "Contenu trop long / flou → pas de confiance : le prospect décroche avant l'offre.",
+            "fix": "Une ossature nette : hook, 3 parties max, preuve, offre. Comprendre vite, sentir que c'est sérieux."
+          },
+          {
+            "mistake": "Pas de relance replay → conversion perdue : les absents peuvent encore convertir. Sans replay, c'est 0.",
+            "fix": "Replay + résumé + deadline + relances propres : la majorité des ventes se fait après."
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000023",
+      "position": 22,
+      "type": "plan",
+      "script": "Étape 1 — On cadre (vraiment).\nAngle du webinaire + promesse + offre + sortie (RDV ou paiement).\nObjectif : savoir exactement ce qu'on vend, à qui, et pourquoi ça va convertir.\n\nÉtape 2 — On dessine la machine.\nPages + parcours + events à tracker + règles simples.\nObjectif : que le système soit pilotable, pas « joli ».\n\nÉtape 3 — On construit le webinaire.\nSlides + script + structure (hook → valeur → preuve → offre).\nObjectif : faire un webinaire clair qui tient la route, pas un cours.\n\nÉtape 4 — On branche l'infrastructure.\nCRM + tags + pipeline + automations email/WhatsApp + rappels + relances replay.\nObjectif : augmenter le show-up et récupérer les hésitants.\n\nÉtape 5 — On lance & on optimise.\nOn regarde les chiffres, on corrige là où ça casse :\ninscription → présence → clic → conversion.\nObjectif : faire tourner la machine en continu.\n\nOn ne scale pas un truc bancal. On fixe d'abord, puis on accélère.",
+      "cue": {
+        "punchline": "On ne scale pas un truc bancal. On fixe d'abord, puis on accélère.",
+        "durationSec": 90,
+        "tag": "PLAN",
+        "transition": "Dernier point : si tu veux qu'on le fasse pour toi.",
+        "bullets": [
+          "Dérouler les 5 étapes avec rythme",
+          "Finir sur la phrase choc — laisser résonner",
+          "Donner un délai si demandé"
+        ]
+      },
+      "notes": "PLAN · 90 sec. Dérouler les 5 étapes avec rythme. Finir sur la phrase choc — laisser résonner. Donner un délai si demandé.\nTag legacy : « Simple, rassurant ».",
+      "content": {
+        "headline": "Plan d'implémentation — promesse : base propre avant d'accélérer.",
+        "phases": [
+          {
+            "name": "Cadrage + angle webinaire",
+            "duration": "Étape 01",
+            "deliverables": [
+              "Positionnement",
+              "Angle d'attaque",
+              "Structure offre"
+            ]
+          },
+          {
+            "name": "Structure pages + tracking plan",
+            "duration": "Étape 02",
+            "deliverables": [
+              "Wireframes",
+              "Plan de tracking",
+              "Pixels + events"
+            ]
+          },
+          {
+            "name": "Script + slides + intégration",
+            "duration": "Étape 03",
+            "deliverables": [
+              "Script webinaire",
+              "Slides visuels",
+              "Intégration pages"
+            ]
+          },
+          {
+            "name": "CRM + automations + WhatsApp",
+            "duration": "Étape 04",
+            "deliverables": [
+              "Séquences email",
+              "WhatsApp rappels",
+              "Tags + segments"
+            ]
+          },
+          {
+            "name": "Lancement + optimisation",
+            "duration": "Étape 05",
+            "deliverables": [
+              "Go live",
+              "AB tests",
+              "Optimisation continue"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "17000000-0000-4000-8000-000000000024",
+      "position": 23,
+      "type": "cta",
+      "script": "Si tu veux qu'on installe ça proprement, tu candidates.\n\nPourquoi candidature ?\nParce qu'un webinaire, ça peut être une machine… ou une perte de temps.\nEt je veux pas te mettre dedans si ce n'est pas le bon modèle pour ton offre.\n\nL'appel est court : 10–15 minutes.\nOn va droit au but.\n\nOn check :\nton offre (est-ce qu'elle se vend bien en webinaire),\nton pricing (est-ce que c'est cohérent pour ce format),\nton trafic (d'où viennent tes prospects, et à quel point ils sont froids),\net surtout : est-ce que la sortie doit être RDV ou paiement.\n\nEt dans tous les cas, tu repars avec un plan clair.\nMême si on ne bosse pas ensemble.\n\nSi c'est un match : on installe le système clé en main, propre, tracké, avec les relances qui vont avec.\n\nTu peux candidater juste en dessous.",
+      "cue": {
+        "punchline": "Tu repars avec un plan. Et si c'est un match, on l'installe.",
+        "durationSec": 120,
+        "tag": "CLOSE",
+        "bullets": [
+          "Ton calme — aucune pression",
+          "Insister sur 'même si on ne bosse pas ensemble'",
+          "Pause 2-3 sec avant le bouton",
+          "Laisser respirer le prospect"
+        ],
+        "closing": "Tu peux candidater juste en dessous."
+      },
+      "notes": "CLOSE · 2 min. Ton calme — aucune pression. Insister sur « même si on ne bosse pas ensemble ». Pause 2-3 sec avant le bouton. Laisser respirer le prospect.\nBadge legacy : « On ne prend pas tout le monde. » Encadré : « L'unique option — Setup clés en main : vous candidatez pour qu'on installe le système complet. » Citation : « Si c'est un match, on installe le système clé en main. »\nPhrase de clôture : « Tu peux candidater juste en dessous. »",
+      "content": {
+        "headline": "Vous voulez qu'on vous installe ce système proprement ?",
+        "sub": "Vous candidatez pour un appel court (10–15 min), on vérifie si votre offre est éligible et si le Webinaire est le bon système, vous repartez avec le plan exact à exécuter — même si on ne bosse pas ensemble.",
+        "actions": [
+          {
+            "label": "Candidater pour la mise en place clé en main",
+            "kind": "form"
+          }
+        ]
+      }
+    }
+  ]
+}

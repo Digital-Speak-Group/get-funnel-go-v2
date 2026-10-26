@@ -1,0 +1,93 @@
+/** Dashboard + template gallery copy. French-first; keep i18n-ready. */
+export const dashboardMessages = {
+  title: "Tableau de bord",
+  description: "Vos decks de vente, prêts à présenter.",
+  generate: "Générer un deck",
+  blankDeck: "Deck vierge",
+  search: "Rechercher un deck",
+  searchPlaceholder: "Rechercher un deck…",
+  sort: {
+    label: "Trier les decks",
+    updated_desc: "Plus récents",
+    updated_asc: "Plus anciens",
+    title_asc: "Titre (A–Z)",
+    title_desc: "Titre (Z–A)",
+  },
+  count: (n: number) => (n === 1 ? "1 deck" : `${n} decks`),
+  empty: {
+    title: "Votre tableau de bord est vide",
+    description:
+      "Collez un script et laissez l'IA générer votre premier deck de vente, ou partez d'un cadre éprouvé avec un modèle.",
+    generate: "Générer votre premier deck",
+    template: "Démarrer depuis un modèle",
+  },
+  noResults: {
+    title: "Aucun deck ne correspond à votre recherche",
+    description: "Essayez un autre titre ou effacez la recherche.",
+    clear: "Effacer la recherche",
+  },
+  card: {
+    edit: (title: string) => `Éditer ${title}`,
+    slides: (n: number) => (n === 1 ? "1 slide" : `${n} slides`),
+    status: { draft: "Brouillon", ready: "Prêt", archived: "Archivé" },
+    more: "Plus d'options",
+    open: "Ouvrir l'éditeur",
+    present: "Présenter",
+    rename: "Renommer",
+    renameLabel: "Nouveau titre du deck",
+    renameSubmit: "OK",
+    duplicate: "Dupliquer",
+    duplicating: "Duplication…",
+    delete: "Supprimer",
+    cancel: "Annuler",
+  },
+  toast: {
+    renamed: "Deck renommé",
+    renameFailed: "Le renommage a échoué. Réessayez.",
+    duplicated: "Deck dupliqué",
+    duplicateFailed: "La duplication a échoué. Réessayez.",
+    deleted: "Deck supprimé",
+    deleteFailed: "La suppression a échoué. Réessayez.",
+    created: "Deck créé",
+  },
+  deleteDialog: {
+    title: "Supprimer ce deck ?",
+    description: (title: string) =>
+      `« ${title} » et tous ses slides seront supprimés. Cette action est irréversible.`,
+    confirm: "Supprimer",
+    pending: "Suppression…",
+  },
+  create: {
+    title: "Nouveau deck",
+    description: "Partez d'une page blanche. Vous pourrez tout modifier ensuite.",
+    fromTemplate: "Le deck reprendra la structure, les scripts et les notes du modèle.",
+    titleLabel: "Titre",
+    titlePlaceholder: "Ex : Présentation commerciale — Janvier",
+    themeLabel: "Thème",
+    themeHint: "Aperçu avec votre titre. Vous pourrez changer de thème dans l'éditeur.",
+    previewTitle: "Votre prochain deck de vente",
+    previewSubtitle: "Généré en quelques secondes",
+    submit: "Créer le deck",
+    pending: "Création…",
+    cancel: "Annuler",
+    errorTitle: "Le titre doit contenir entre 1 et 120 caractères.",
+    errorTheme: "Sélectionnez un thème.",
+    errorFailed: "La création a échoué. Réessayez.",
+  },
+  templates: {
+    title: "Modèles",
+    description:
+      "Démarrez depuis un funnel éprouvé. Chaque modèle inclut la structure, les scripts et les notes.",
+    all: "Tous",
+    filterLabel: "Filtrer par catégorie",
+    use: "Utiliser ce modèle",
+    preview: "Aperçu",
+    previewOf: (name: string) => `Aperçu de ${name}`,
+    slideOf: (i: number, n: number) => `Slide ${i} sur ${n}`,
+    emptyTitle: "Aucun modèle disponible",
+    emptyDescription: "Exécutez npm run db:seed pour charger les modèles système.",
+  },
+} as const;
+
+export const DECK_SORTS = ["updated_desc", "updated_asc", "title_asc", "title_desc"] as const;
+export type DeckSort = (typeof DECK_SORTS)[number];

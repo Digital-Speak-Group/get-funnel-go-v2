@@ -1,0 +1,152 @@
+{
+  "template": "evergreen",
+  "deckId": "20000000-0000-4000-8000-000000000105",
+  "slides": [
+    {
+      "position": 0,
+      "content": {
+        "kicker": "Deck Résultat — Version Diagnostic • Confidentiel",
+        "title": "Tunnel Evergreen — 100% Automatisé",
+        "subtitle": "Vendre en continu. Sans lancement. Sans appels.",
+        "presenterName": "Hamid El Bouhali"
+      },
+      "script": "Ok. Tu viens de finir le diagnostic GetFunnels.\nEt là, ton résultat, c'est Evergreen 100% automatisé.\n\nDans cette vidéo, je vais te montrer :\npourquoi c'est le bon système pour toi,\nà quoi ressemble la machine,\net ce que tu dois mettre en place pour que ça vende en continu, sans dépendre d'un lancement ou de ton énergie du moment.\n\nPas de théorie. Une architecture.",
+      "notes": "INTRO · 45 sec. 3 secondes de silence avant de commencer. Ton direct — pas de chauffe inutile. Regard caméra / prospect.\nVisuel legacy : boucle infinie (symbole evergreen) + anneaux en orbite, mention « Architecture Core » en bas de slide. Pied de slide legacy : « GetFunnels · Hamid El Bouhali · Deck Résultat — Version Diagnostic · Confidentiel »."
+    },
+    {
+      "position": 2,
+      "content": {
+        "headline": "Je m'appelle Hamid El Bouhali, fondateur de GetFunnels.",
+        "points": [
+          {
+            "icon": "briefcase",
+            "title": "8+ ans à construire des systèmes complets",
+            "text": "Funnels + CRM + automatisations."
+          },
+          {
+            "icon": "trophy",
+            "title": "6 à 7 chiffres pour nos clients",
+            "text": "Marché francophone & anglophone."
+          },
+          {
+            "icon": "handshake",
+            "title": "On a bossé avec :",
+            "text": "Yomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini."
+          },
+          {
+            "icon": "lightbulb",
+            "title": "Une vérité simple",
+            "text": "Le problème n°1 n'est pas « la pub ». C'est l'architecture."
+          }
+        ]
+      },
+      "script": "Je m'appelle Hamid El Bouhali, fondateur de GetFunnels.\nDepuis plus de 8 ans, on construit des systèmes complets : funnels, CRM, automatisations.\n\nOn a bossé avec des références :\nYomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini… et d'autres.\n\nEt peu importe le marché, on voit le même pattern :\nles gens pensent que leur problème, c'est « plus de pub »…\nalors que leur vrai problème, c'est l'architecture.\n\nParce que si ton système ne convertit pas, plus de trafic = plus de pertes.",
+      "notes": "AUTORITÉ · 90 sec max — aller vite. Citer les références clients avec assurance. Finir sur « plus de trafic = plus de pertes » — image forte."
+    },
+    {
+      "position": 15,
+      "content": {
+        "headline": "Voici la machine. Pas une page.",
+        "title": "Funnelytics — vue machine",
+        "url": "https://canvas.funnelytics.io/view/441a684f-2dc7-4f91-8410-bfe44c255d5f"
+      }
+    },
+    {
+      "position": 16,
+      "content": {
+        "headline": "On ne théorise pas. On construit.",
+        "items": [
+          {
+            "title": "GetFunnels Optin",
+            "url": "https://getfunnels.clickfunnels.com/optin1679655893734"
+          },
+          {
+            "title": "Thami Kabbaj",
+            "url": "https://www.getfunnels.agency/thami-kabbaj-optin-page"
+          },
+          {
+            "title": "Viral Script Optin",
+            "url": "https://www.getfunnels.agency/viral_script_optin-v2"
+          },
+          {
+            "title": "Immersion Video Ads",
+            "url": "https://immersion.video-ads-agency.com/presentation_v2"
+          },
+          {
+            "title": "Closing & Influence",
+            "url": "https://digitalspeak-sarl.systeme.io/closing-influence-op"
+          },
+          {
+            "title": "Amani Invest",
+            "url": "https://digitalspeak-sarl.systeme.io/amani-invest"
+          },
+          {
+            "title": "Horizon Optin",
+            "url": "https://www.getfunnels.agency/horizon-optin"
+          }
+        ]
+      },
+      "notes": "PREUVE · 45 sec max — montrer, ne pas sur-expliquer. Pointer 1-2 exemples proches du secteur. Transition fluide vers les preuves.\nLe legacy affichait ces 7 pages clients en aperçu live (iframes, vignettes, plein écran). Captures à ajouter quand les images seront migrées (Task 57b) ; aperçus live avec le type embed (Task 60)."
+    },
+    {
+      "position": 17,
+      "content": {
+        "headline": "Les chiffres parlent d'eux-mêmes.",
+        "items": [
+          {
+            "caption": "ClickFunnels — Stats Tunnel",
+            "result": "385 241 $",
+            "assetId": "60000000-0000-4000-8000-000000000003"
+          },
+          {
+            "caption": "Systeme.io — Statistiques",
+            "result": "€143 181",
+            "assetId": "60000000-0000-4000-8000-000000000004"
+          },
+          {
+            "caption": "ClickFunnels — Tunnel Stats",
+            "result": "380 711 $",
+            "assetId": "60000000-0000-4000-8000-000000000005"
+          },
+          {
+            "caption": "ClickFunnels — Stats détaillées",
+            "result": "572",
+            "assetId": "60000000-0000-4000-8000-000000000006"
+          },
+          {
+            "caption": "Systeme.io — Challenge Connaissance",
+            "result": "€263 818",
+            "assetId": "60000000-0000-4000-8000-000000000007"
+          },
+          {
+            "caption": "Systeme.io — Opt-in 41%",
+            "result": "41 052",
+            "assetId": "60000000-0000-4000-8000-000000000008"
+          },
+          {
+            "caption": "Systeme.io — Vue globale",
+            "result": "€257 386",
+            "assetId": "60000000-0000-4000-8000-000000000009"
+          },
+          {
+            "caption": "Systeme.io — Tunnel REBORN",
+            "result": "€3 608 200",
+            "assetId": "60000000-0000-4000-8000-00000000000a"
+          },
+          {
+            "caption": "ClickFunnels — 49 348 vues",
+            "result": "49 348",
+            "assetId": "60000000-0000-4000-8000-00000000000b"
+          },
+          {
+            "caption": "Systeme.io — Récap global",
+            "result": "€3 608 200",
+            "assetId": "60000000-0000-4000-8000-00000000000c"
+          }
+        ]
+      },
+      "notes": "PREUVES · 60 sec. Ton factuel — pas de survente. Laisser le prospect regarder quelques secondes. Finir sur « se pilote avec des données » — crédibilité.\nLe legacy affichait 10 captures de dashboards (ClickFunnels & Systeme.io) avec lightbox, dont aussi : Systeme.io 143 181 € · 380 711 $ Sales Value · Challenge Connaissance 263 818 € · opt-in 41 % sur 41 052 vues · vue globale 257 386 € · Tunnel REBORN 3 608 200 € (panier moyen 406,97 €)."
+    }
+  ],
+  "keepPlaceholders": []
+}

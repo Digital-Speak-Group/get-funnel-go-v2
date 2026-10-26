@@ -1,469 +1,253 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from "vitest";
-import { Pool } from "pg";
+import path from "path";
+import { Pool, type PoolClient } from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
-import * as schema from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { migrate } from "drizzle-orm/node-postgres/migrator";
 
-const connectionString = process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/getfunnels_test";
+// Opt-in: point TEST_DATABASE_URL at a disposable database (never the dev DB) — this suite
+// runs the migration chain on it and TRUNCATEs every table before each test.
+const testDatabaseUrl = process.env.TEST_DATABASE_URL;
+const pointsAtDevDb = Boolean(testDatabaseUrl) && testDatabaseUrl === process.env.DATABASE_URL;
 
-let pool: Pool;
-let db: ReturnType<typeof drizzle<typeof schema>>;
+const ORG = "50000000-0000-4000-8000-000000000001";
+const OTHER_ORG = "50000000-0000-4000-8000-000000000002";
+const OWNER = "30000000-0000-4000-8000-000000000001";
+const EDITOR = "30000000-0000-4000-8000-000000000002";
+const VIEWER = "30000000-0000-4000-8000-000000000003";
+const OUTSIDER = "30000000-0000-4000-8000-000000000004";
+const NEW_USER = "30000000-0000-4000-8000-000000000005";
+const THEME = "40000000-0000-4000-8000-000000000001";
+const DECK = "20000000-0000-4000-8000-000000000001";
+const SLIDE = "10000000-0000-4000-8000-000000000001";
 
-async function setupDb() {
-  pool = new Pool({ connectionString });
-  db = drizzle({ client: pool, schema });
-  
-  // Run migrations
-  const fs = await import("fs");
-  const path = await import("path");
-  const migrationsDir = path.resolve(process.cwd(), "drizzle");
-  
-  if (fs.existsSync(migrationsDir)) {
-    const files = fs.readdirSync(migrationsDir)
-      .filter(f => f.endsWith(".sql"))
-      .sort();
-    
-    for (const file of files) {
-      const sql = fs.readFileSync(path.join(migrationsDir, file), "utf-8");
-      await pool.query(sql);
-    }
-  }
-}
+describe.skipIf(!testDatabaseUrl || pointsAtDevDb)("RLS policies", () => {
+  let pool: Pool;
 
-async function teardownDb() {
-  if (pool) {
-    await pool.end();
-  }
-}
-
-async function truncateAll() {
-  const tables = [
-    "assets", "subscriptions", "usage_counters", "ai_generations",
-    "session_events", "sessions", "deck_versions", "slides", "decks",
-    "templates", "themes", "invites", "memberships", "profiles", "organizations"
-  ];
-  
-  for (const table of tables) {
-    await pool.query(`TRUNCATE TABLE ${table} RESTART IDENTITY CASCADE`);
-  }
-}
-
-describe.skip("RLS policies", () => {
   beforeAll(async () => {
-    await setupDb();
+    pool = new Pool({ connectionString: testDatabaseUrl });
+    await migrate(drizzle({ client: pool }), {
+      migrationsFolder: path.resolve(process.cwd(), "drizzle"),
+    });
   });
 
   afterAll(async () => {
-    await teardownDb();
+    await pool?.end();
   });
 
   beforeEach(async () => {
-    await truncateAll();
+    const { rows } = await pool.query<{ tablename: string }>(
+      `SELECT tablename FROM pg_tables WHERE schemaname = 'public'`
+    );
+    await pool.query(`TRUNCATE ${rows.map((r) => `"${r.tablename}"`).join(", ")} CASCADE`);
+    await seed();
   });
 
-  // Helper to run query as a specific user
-  async function queryAs(userId: string, sql: string, params: unknown[] = []) {
-    const client = await pool.connect();
+  /** Runs one statement as `authenticated` with the given user's JWT claims (as Supabase does). */
+  async function queryAs(userId: string | null, sql: string, params: unknown[] = []) {
+    const client: PoolClient = await pool.connect();
     try {
-      await client.query(`SET LOCAL ROLE authenticated`);
-      await client.query(`SET LOCAL request.jwt.claims TO '{"sub": "${userId}"}'`);
+      await client.query("BEGIN");
+      await client.query("SET LOCAL ROLE authenticated");
+      const claims = userId ? { sub: userId, role: "authenticated" } : {};
+      await client.query(`SELECT set_config('request.jwt.claims', $1, true)`, [JSON.stringify(claims)]);
       const result = await client.query(sql, params);
+      await client.query("COMMIT");
       return result;
+    } catch (err) {
+      await client.query("ROLLBACK");
+      throw err;
     } finally {
       client.release();
     }
   }
 
-  // Helper to create org with memberships
-  async function createOrgWithMembers() {
-    const orgId = "50000000-0000-4000-8000-000000000001";
-    const ownerId = "30000000-0000-4000-8000-000000000001";
-    const editorId = "30000000-0000-4000-8000-000000000002";
-    const viewerId = "30000000-0000-4000-8000-000000000003";
-    const outsiderId = "30000000-0000-4000-8000-000000000004";
-
-    // Create org
+  /** Two orgs; ORG has an owner, an editor and a viewer, plus a deck with one slide. */
+  async function seed() {
     await pool.query(
-      `INSERT INTO organizations (id, name, slug, plan) VALUES ($1, $2, $3, $4)`,
-      [orgId, "Test Org", "test-org", "pro"]
+      `INSERT INTO organizations (id, name, slug) VALUES ($1, 'Test Org', 'test-org'), ($2, 'Other Org', 'other-org')`,
+      [ORG, OTHER_ORG]
     );
-
-    // Create profiles
-    for (const [id, email] of [
-      [ownerId, "owner@test.com"],
-      [editorId, "editor@test.com"],
-      [viewerId, "viewer@test.com"],
-      [outsiderId, "outsider@test.com"],
-    ]) {
-      await pool.query(
-        `INSERT INTO profiles (id, email, full_name) VALUES ($1, $2, $3)`,
-        [id, email, email.split("@")[0]]
-      );
+    for (const id of [OWNER, EDITOR, VIEWER, OUTSIDER, NEW_USER]) {
+      await pool.query(`INSERT INTO profiles (id, email) VALUES ($1, $2)`, [id, `${id.slice(-1)}@test.com`]);
     }
-
-    // Create memberships
     await pool.query(
-      `INSERT INTO memberships (org_id, user_id, role) VALUES ($1, $2, $3)`,
-      [orgId, ownerId, "owner"]
+      `INSERT INTO memberships (org_id, user_id, role) VALUES ($1, $2, 'owner'), ($1, $3, 'editor'), ($1, $4, 'viewer'), ($5, $6, 'owner')`,
+      [ORG, OWNER, EDITOR, VIEWER, OTHER_ORG, OUTSIDER]
     );
     await pool.query(
-      `INSERT INTO memberships (org_id, user_id, role) VALUES ($1, $2, $3)`,
-      [orgId, editorId, "editor"]
+      `INSERT INTO themes (id, name, tokens, is_system) VALUES ($1, 'System Theme', '{"id":"test"}', true)`,
+      [THEME]
     );
     await pool.query(
-      `INSERT INTO memberships (org_id, user_id, role) VALUES ($1, $2, $3)`,
-      [orgId, viewerId, "viewer"]
+      `INSERT INTO decks (id, org_id, owner_id, title, theme_id, present_token) VALUES ($1, $2, $3, 'Test Deck', $4, 'token123')`,
+      [DECK, ORG, OWNER, THEME]
     );
-
-    return { orgId, ownerId, editorId, viewerId, outsiderId };
+    await pool.query(
+      `INSERT INTO slides (id, deck_id, position, type, content) VALUES ($1, $2, 0, 'cover', '{"title":"Test"}')`,
+      [SLIDE, DECK]
+    );
   }
 
+  it("enables RLS on every public table", async () => {
+    const { rows } = await pool.query<{ relname: string }>(
+      `SELECT c.relname FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
+       WHERE n.nspname = 'public' AND c.relkind = 'r' AND NOT c.relrowsecurity`
+    );
+    expect(rows.map((r) => r.relname)).toEqual([]);
+  });
+
+  it("the server's own connection role still sees every org (RLS bypassed by owner/superuser)", async () => {
+    const { rows } = await pool.query(`SELECT id FROM organizations`);
+    expect(rows).toHaveLength(2);
+  });
+
+  it("a request without a user sees nothing", async () => {
+    for (const table of ["organizations", "decks", "slides", "themes", "profiles"]) {
+      const { rows } = await queryAs(null, `SELECT * FROM ${table}`);
+      expect(rows, table).toHaveLength(0);
+    }
+  });
+
   describe("organizations", () => {
-    it("member can read own org", async () => {
-      const { orgId, ownerId } = await createOrgWithMembers();
-      
-      const result = await queryAs(ownerId, `SELECT * FROM organizations WHERE id = $1`, [orgId]);
-      expect(result.rows.length).toBe(1);
-      expect(result.rows[0].name).toBe("Test Org");
+    it("members read their org only", async () => {
+      const { rows } = await queryAs(EDITOR, `SELECT id FROM organizations`);
+      expect(rows.map((r) => r.id)).toEqual([ORG]);
     });
 
-    it("non-member cannot read org", async () => {
-      const { orgId, outsiderId } = await createOrgWithMembers();
-      
-      const result = await queryAs(outsiderId, `SELECT * FROM organizations WHERE id = $1`, [orgId]);
-      expect(result.rows.length).toBe(0);
+    it("owner can rename the org; a viewer's update touches no row", async () => {
+      expect((await queryAs(VIEWER, `UPDATE organizations SET name = 'X' WHERE id = $1`, [ORG])).rowCount).toBe(0);
+      expect((await queryAs(OWNER, `UPDATE organizations SET name = 'New' WHERE id = $1`, [ORG])).rowCount).toBe(1);
     });
 
-    it("owner can update org", async () => {
-      const { orgId, ownerId } = await createOrgWithMembers();
-      
-      await queryAs(ownerId, `UPDATE organizations SET name = $1 WHERE id = $2`, ["New Name", orgId]);
-      
-      const result = await queryAs(ownerId, `SELECT name FROM organizations WHERE id = $1`, [orgId]);
-      expect(result.rows[0].name).toBe("New Name");
-    });
-
-    it("viewer cannot update org", async () => {
-      const { orgId, viewerId } = await createOrgWithMembers();
-      
+    it("clients cannot create organizations", async () => {
       await expect(
-        queryAs(viewerId, `UPDATE organizations SET name = $1 WHERE id = $2`, ["New Name", orgId])
-      ).rejects.toThrow();
+        queryAs(OUTSIDER, `INSERT INTO organizations (name, slug) VALUES ('Mine', 'mine')`)
+      ).rejects.toThrow(/row-level security/);
     });
   });
 
   describe("profiles", () => {
-    it("user can read own profile", async () => {
-      const { ownerId } = await createOrgWithMembers();
-      
-      const result = await queryAs(ownerId, `SELECT * FROM profiles WHERE id = $1`, [ownerId]);
-      expect(result.rows.length).toBe(1);
+    it("users read their own and co-members' profiles, not outsiders'", async () => {
+      const { rows } = await queryAs(VIEWER, `SELECT id FROM profiles ORDER BY id`);
+      expect(rows.map((r) => r.id)).toEqual([OWNER, EDITOR, VIEWER]);
     });
 
-    it("user cannot read another user's profile directly", async () => {
-      const { ownerId, editorId } = await createOrgWithMembers();
-      
-      // Direct select should fail for non-owner
-      const result = await queryAs(editorId, `SELECT * FROM profiles WHERE id = $1`, [ownerId]);
-      // This depends on the policy - with our policies, editor can read co-member profiles
-      // But not through direct select without org context
-      expect(result.rows.length).toBeGreaterThanOrEqual(0);
+    it("users can only update their own profile", async () => {
+      expect((await queryAs(VIEWER, `UPDATE profiles SET full_name = 'X' WHERE id = $1`, [OWNER])).rowCount).toBe(0);
+      expect((await queryAs(VIEWER, `UPDATE profiles SET full_name = 'Me' WHERE id = $1`, [VIEWER])).rowCount).toBe(1);
     });
   });
 
   describe("memberships", () => {
-    it("member can read org memberships", async () => {
-      const { orgId, editorId } = await createOrgWithMembers();
-      
-      const result = await queryAs(editorId, `SELECT * FROM memberships WHERE org_id = $1`, [orgId]);
-      expect(result.rows.length).toBe(3); // owner, editor, viewer
+    it("members read their org's memberships", async () => {
+      const { rows } = await queryAs(EDITOR, `SELECT user_id FROM memberships WHERE org_id = $1`, [ORG]);
+      expect(rows).toHaveLength(3);
     });
 
-    it("owner can insert membership", async () => {
-      const { orgId, ownerId } = await createOrgWithMembers();
-      const newUserId = "30000000-0000-4000-8000-000000000005";
-      
-      await pool.query(
-        `INSERT INTO profiles (id, email) VALUES ($1, $2)`,
-        [newUserId, "new@test.com"]
-      );
-      
-      await queryAs(ownerId, 
-        `INSERT INTO memberships (org_id, user_id, role) VALUES ($1, $2, $3)`,
-        [orgId, newUserId, "viewer"]
-      );
-      
-      const result = await queryAs(ownerId, `SELECT * FROM memberships WHERE user_id = $1`, [newUserId]);
-      expect(result.rows.length).toBe(1);
+    it("owner can add a member", async () => {
+      await queryAs(OWNER, `INSERT INTO memberships (org_id, user_id, role) VALUES ($1, $2, 'viewer')`, [ORG, NEW_USER]);
+      const { rows } = await pool.query(`SELECT 1 FROM memberships WHERE user_id = $1`, [NEW_USER]);
+      expect(rows).toHaveLength(1);
     });
 
-    it("viewer cannot insert membership", async () => {
-      const { orgId, viewerId } = await createOrgWithMembers();
-      const newUserId = "30000000-0000-4000-8000-000000000005";
-      
-      await pool.query(
-        `INSERT INTO profiles (id, email) VALUES ($1, $2)`,
-        [newUserId, "new@test.com"]
-      );
-      
+    it("a viewer cannot add members", async () => {
       await expect(
-        queryAs(viewerId, 
-          `INSERT INTO memberships (org_id, user_id, role) VALUES ($1, $2, $3)`,
-          [orgId, newUserId, "viewer"]
-        )
-      ).rejects.toThrow();
-    });
-  });
-
-  describe("decks", () => {
-    it("member can read decks in org", async () => {
-      const { orgId, editorId } = await createOrgWithMembers();
-      const deckId = "20000000-0000-4000-8000-000000000001";
-      const themeId = "40000000-0000-4000-8000-000000000001";
-      
-      // Create theme
-      await pool.query(
-        `INSERT INTO themes (id, name, tokens, is_system) VALUES ($1, $2, $3, $4)`,
-        [themeId, "Test Theme", '{"id":"test"}', true]
-      );
-      
-      // Create deck as owner
-      await pool.query(
-        `INSERT INTO decks (id, org_id, owner_id, title, theme_id, present_token) VALUES ($1, $2, $3, $4, $5, $6)`,
-        [deckId, orgId, "30000000-0000-4000-8000-000000000001", "Test Deck", themeId, "token123"]
-      );
-      
-      const result = await queryAs(editorId, `SELECT * FROM decks WHERE id = $1`, [deckId]);
-      expect(result.rows.length).toBe(1);
+        queryAs(VIEWER, `INSERT INTO memberships (org_id, user_id, role) VALUES ($1, $2, 'viewer')`, [ORG, NEW_USER])
+      ).rejects.toThrow(/row-level security/);
     });
 
-    it("non-member cannot read deck", async () => {
-      const { orgId, outsiderId } = await createOrgWithMembers();
-      const deckId = "20000000-0000-4000-8000-000000000001";
-      const themeId = "40000000-0000-4000-8000-000000000001";
-      
-      await pool.query(
-        `INSERT INTO themes (id, name, tokens, is_system) VALUES ($1, $2, $3, $4)`,
-        [themeId, "Test Theme", '{"id":"test"}', true]
-      );
-      
-      await pool.query(
-        `INSERT INTO decks (id, org_id, owner_id, title, theme_id, present_token) VALUES ($1, $2, $3, $4, $5, $6)`,
-        [deckId, orgId, "30000000-0000-4000-8000-000000000001", "Test Deck", themeId, "token123"]
-      );
-      
-      const result = await queryAs(outsiderId, `SELECT * FROM decks WHERE id = $1`, [deckId]);
-      expect(result.rows.length).toBe(0);
-    });
-
-    it("editor can insert deck", async () => {
-      const { orgId, editorId } = await createOrgWithMembers();
-      const deckId = "20000000-0000-4000-8000-000000000002";
-      const themeId = "40000000-0000-4000-8000-000000000001";
-      
-      await pool.query(
-        `INSERT INTO themes (id, name, tokens, is_system) VALUES ($1, $2, $3, $4)`,
-        [themeId, "Test Theme", '{"id":"test"}', true]
-      );
-      
-      await queryAs(editorId,
-        `INSERT INTO decks (id, org_id, owner_id, title, theme_id, present_token) VALUES ($1, $2, $3, $4, $5, $6)`,
-        [deckId, orgId, editorId, "Editor Deck", themeId, "token456"]
-      );
-      
-      const result = await queryAs(editorId, `SELECT * FROM decks WHERE id = $1`, [deckId]);
-      expect(result.rows.length).toBe(1);
-    });
-
-    it("viewer cannot insert deck", async () => {
-      const { orgId, viewerId } = await createOrgWithMembers();
-      const deckId = "20000000-0000-4000-8000-000000000002";
-      const themeId = "40000000-0000-4000-8000-000000000001";
-      
-      await pool.query(
-        `INSERT INTO themes (id, name, tokens, is_system) VALUES ($1, $2, $3, $4)`,
-        [themeId, "Test Theme", '{"id":"test"}', true]
-      );
-      
+    it("a user cannot join another org by inserting their own membership", async () => {
       await expect(
-        queryAs(viewerId,
-          `INSERT INTO decks (id, org_id, owner_id, title, theme_id, present_token) VALUES ($1, $2, $3, $4, $5, $6)`,
-          [deckId, orgId, viewerId, "Viewer Deck", themeId, "token456"]
+        queryAs(OUTSIDER, `INSERT INTO memberships (org_id, user_id, role) VALUES ($1, $2, 'owner')`, [ORG, OUTSIDER])
+      ).rejects.toThrow(/row-level security/);
+    });
+  });
+
+  describe("decks and slides", () => {
+    it("members read the org's decks and slides; outsiders read neither", async () => {
+      expect((await queryAs(VIEWER, `SELECT id FROM decks`)).rows).toHaveLength(1);
+      expect((await queryAs(VIEWER, `SELECT id FROM slides`)).rows).toHaveLength(1);
+      expect((await queryAs(OUTSIDER, `SELECT id FROM decks`)).rows).toHaveLength(0);
+      expect((await queryAs(OUTSIDER, `SELECT id FROM slides`)).rows).toHaveLength(0);
+    });
+
+    it("soft-deleted decks and their slides are hidden", async () => {
+      await pool.query(`UPDATE decks SET deleted_at = now() WHERE id = $1`, [DECK]);
+      expect((await queryAs(OWNER, `SELECT id FROM decks`)).rows).toHaveLength(0);
+      expect((await queryAs(OWNER, `SELECT id FROM slides`)).rows).toHaveLength(0);
+    });
+
+    it("editors create decks and slides; viewers cannot", async () => {
+      await queryAs(
+        EDITOR,
+        `INSERT INTO decks (org_id, owner_id, title, theme_id, present_token) VALUES ($1, $2, 'Editor Deck', $3, 'token456')`,
+        [ORG, EDITOR, THEME]
+      );
+      await queryAs(
+        EDITOR,
+        `INSERT INTO slides (deck_id, position, type, content) VALUES ($1, 1, 'statement', '{"headline":"x"}')`,
+        [DECK]
+      );
+      await expect(
+        queryAs(
+          VIEWER,
+          `INSERT INTO decks (org_id, owner_id, title, theme_id, present_token) VALUES ($1, $2, 'Viewer Deck', $3, 'token789')`,
+          [ORG, VIEWER, THEME]
         )
-      ).rejects.toThrow();
+      ).rejects.toThrow(/row-level security/);
+    });
+
+    it("outsiders cannot write into another org's deck", async () => {
+      expect((await queryAs(OUTSIDER, `UPDATE slides SET position = 9 WHERE id = $1`, [SLIDE])).rowCount).toBe(0);
+      expect((await queryAs(OUTSIDER, `DELETE FROM decks WHERE id = $1`, [DECK])).rowCount).toBe(0);
+      await expect(
+        queryAs(OUTSIDER, `INSERT INTO slides (deck_id, position, type, content) VALUES ($1, 2, 'cover', '{}')`, [DECK])
+      ).rejects.toThrow(/row-level security/);
     });
   });
 
-  describe("slides", () => {
-    it("member can read slides through deck", async () => {
-      const { orgId, editorId } = await createOrgWithMembers();
-      const deckId = "20000000-0000-4000-8000-000000000001";
-      const slideId = "10000000-0000-4000-8000-000000000001";
-      const themeId = "40000000-0000-4000-8000-000000000001";
-      
+  describe("themes and templates", () => {
+    it("system themes are readable by any signed-in user; org themes only by members", async () => {
       await pool.query(
-        `INSERT INTO themes (id, name, tokens, is_system) VALUES ($1, $2, $3, $4)`,
-        [themeId, "Test Theme", '{"id":"test"}', true]
+        `INSERT INTO themes (id, org_id, name, tokens, is_system) VALUES ('40000000-0000-4000-8000-000000000002', $1, 'Org Theme', '{"id":"org"}', false)`,
+        [ORG]
       );
-      
-      await pool.query(
-        `INSERT INTO decks (id, org_id, owner_id, title, theme_id, present_token) VALUES ($1, $2, $3, $4, $5, $6)`,
-        [deckId, orgId, "30000000-0000-4000-8000-000000000001", "Test Deck", themeId, "token123"]
-      );
-      
-      await pool.query(
-        `INSERT INTO slides (id, deck_id, position, type, content) VALUES ($1, $2, $3, $4, $5)`,
-        [slideId, deckId, 0, "cover", '{"title": "Test"}']
-      );
-      
-      const result = await queryAs(editorId, `SELECT * FROM slides WHERE deck_id = $1`, [deckId]);
-      expect(result.rows.length).toBe(1);
+      expect((await queryAs(OUTSIDER, `SELECT id FROM themes`)).rows.map((r) => r.id)).toEqual([THEME]);
+      expect((await queryAs(VIEWER, `SELECT id FROM themes`)).rows).toHaveLength(2);
     });
 
-    it("editor can insert slide", async () => {
-      const { orgId, editorId } = await createOrgWithMembers();
-      const deckId = "20000000-0000-4000-8000-000000000001";
-      const slideId = "10000000-0000-4000-8000-000000000002";
-      const themeId = "40000000-0000-4000-8000-000000000001";
-      
+    it("system templates are readable by any signed-in user", async () => {
       await pool.query(
-        `INSERT INTO themes (id, name, tokens, is_system) VALUES ($1, $2, $3, $4)`,
-        [themeId, "Test Theme", '{"id":"test"}', true]
+        `INSERT INTO templates (slug, name, category, theme_id, slide_count, config, is_system)
+         VALUES ('test-template', 'Test Template', 'Test', $1, 10, '{}', true)`,
+        [THEME]
       );
-      
-      await pool.query(
-        `INSERT INTO decks (id, org_id, owner_id, title, theme_id, present_token) VALUES ($1, $2, $3, $4, $5, $6)`,
-        [deckId, orgId, "30000000-0000-4000-8000-000000000001", "Test Deck", themeId, "token123"]
-      );
-      
-      await queryAs(editorId,
-        `INSERT INTO slides (id, deck_id, position, type, content) VALUES ($1, $2, $3, $4, $5)`,
-        [slideId, deckId, 1, "statement", '{"headline": "Test"}']
-      );
-      
-      const result = await queryAs(editorId, `SELECT * FROM slides WHERE id = $1`, [slideId]);
-      expect(result.rows.length).toBe(1);
+      expect((await queryAs(OUTSIDER, `SELECT slug FROM templates`)).rows).toHaveLength(1);
     });
   });
 
-  describe("themes", () => {
-    it("authenticated user can read system themes", async () => {
-      const { orgId, ownerId } = await createOrgWithMembers();
-      const themeId = "40000000-0000-4000-8000-000000000001";
-      
+  describe("billing tables", () => {
+    beforeEach(async () => {
       await pool.query(
-        `INSERT INTO themes (id, name, tokens, is_system) VALUES ($1, $2, $3, $4)`,
-        [themeId, "System Theme", '{"id":"system"}', true]
+        `INSERT INTO usage_counters (org_id, period_start, ai_credits_used, decks_created) VALUES ($1, '2026-09-01', 100, 5)`,
+        [ORG]
       );
-      
-      const result = await queryAs(ownerId, `SELECT * FROM themes WHERE id = $1`, [themeId]);
-      expect(result.rows.length).toBe(1);
+      await pool.query(
+        `INSERT INTO subscriptions (org_id, stripe_customer_id, stripe_subscription_id, plan, status, current_period_start, current_period_end)
+         VALUES ($1, 'cus_test', 'sub_test', 'pro', 'active', '2026-09-01', '2026-10-01')`,
+        [ORG]
+      );
     });
 
-    it("member can read org themes", async () => {
-      const { orgId, editorId } = await createOrgWithMembers();
-      const themeId = "40000000-0000-4000-8000-000000000002";
-      
-      await pool.query(
-        `INSERT INTO themes (id, org_id, name, tokens, is_system) VALUES ($1, $2, $3, $4, $5)`,
-        [themeId, orgId, "Org Theme", '{"id":"org"}', false]
-      );
-      
-      const result = await queryAs(editorId, `SELECT * FROM themes WHERE id = $1`, [themeId]);
-      expect(result.rows.length).toBe(1);
+    it("owners read usage and subscription; editors and viewers do not", async () => {
+      expect((await queryAs(OWNER, `SELECT 1 FROM usage_counters`)).rows).toHaveLength(1);
+      expect((await queryAs(OWNER, `SELECT 1 FROM subscriptions`)).rows).toHaveLength(1);
+      expect((await queryAs(EDITOR, `SELECT 1 FROM subscriptions`)).rows).toHaveLength(0);
+      expect((await queryAs(VIEWER, `SELECT 1 FROM usage_counters`)).rows).toHaveLength(0);
     });
 
-    it("non-member cannot read org theme", async () => {
-      const { orgId, outsiderId } = await createOrgWithMembers();
-      const themeId = "40000000-0000-4000-8000-000000000002";
-      
-      await pool.query(
-        `INSERT INTO themes (id, org_id, name, tokens, is_system) VALUES ($1, $2, $3, $4, $5)`,
-        [themeId, orgId, "Org Theme", '{"id":"org"}', false]
-      );
-      
-      const result = await queryAs(outsiderId, `SELECT * FROM themes WHERE id = $1`, [themeId]);
-      expect(result.rows.length).toBe(0);
-    });
-  });
-
-  describe("templates", () => {
-    it("authenticated user can read system templates", async () => {
-      const { orgId, ownerId } = await createOrgWithMembers();
-      const templateId = "60000000-0000-4000-8000-000000000001";
-      const themeId = "40000000-0000-4000-8000-000000000001";
-      
-      await pool.query(
-        `INSERT INTO themes (id, name, tokens, is_system) VALUES ($1, $2, $3, $4)`,
-        [themeId, "Test Theme", '{"id":"test"}', true]
-      );
-      
-      await pool.query(
-        `INSERT INTO templates (id, slug, name, category, theme_id, slide_count, config, is_system) 
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-        [templateId, "test-template", "Test Template", "Test", themeId, 10, '{}', true]
-      );
-      
-      const result = await queryAs(ownerId, `SELECT * FROM templates WHERE id = $1`, [templateId]);
-      expect(result.rows.length).toBe(1);
-    });
-  });
-
-  describe("usage_counters", () => {
-    it("owner can read usage counters", async () => {
-      const { orgId, ownerId } = await createOrgWithMembers();
-      
-      await pool.query(
-        `INSERT INTO usage_counters (org_id, period_start, ai_credits_used, decks_created) 
-         VALUES ($1, $2, $3, $4)`,
-        [orgId, "2026-09-01", 100, 5]
-      );
-      
-      const result = await queryAs(ownerId, `SELECT * FROM usage_counters WHERE org_id = $1`, [orgId]);
-      expect(result.rows.length).toBe(1);
-    });
-
-    it("viewer cannot read usage counters", async () => {
-      const { orgId, viewerId } = await createOrgWithMembers();
-      
-      await pool.query(
-        `INSERT INTO usage_counters (org_id, period_start, ai_credits_used, decks_created) 
-         VALUES ($1, $2, $3, $4)`,
-        [orgId, "2026-09-01", 100, 5]
-      );
-      
-      const result = await queryAs(viewerId, `SELECT * FROM usage_counters WHERE org_id = $1`, [orgId]);
-      expect(result.rows.length).toBe(0);
-    });
-  });
-
-  describe("subscriptions", () => {
-    it("owner can read subscription", async () => {
-      const { orgId, ownerId } = await createOrgWithMembers();
-      const subId = "70000000-0000-4000-8000-000000000001";
-      
-      await pool.query(
-        `INSERT INTO subscriptions (id, org_id, stripe_customer_id, stripe_subscription_id, plan, status, current_period_start, current_period_end) 
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-        [subId, orgId, "cus_test", "sub_test", "pro", "active", "2026-09-01", "2026-10-01"]
-      );
-      
-      const result = await queryAs(ownerId, `SELECT * FROM subscriptions WHERE org_id = $1`, [orgId]);
-      expect(result.rows.length).toBe(1);
-    });
-
-    it("editor cannot read subscription", async () => {
-      const { orgId, editorId } = await createOrgWithMembers();
-      const subId = "70000000-0000-4000-8000-000000000001";
-      
-      await pool.query(
-        `INSERT INTO subscriptions (id, org_id, stripe_customer_id, stripe_subscription_id, plan, status, current_period_start, current_period_end) 
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-        [subId, orgId, "cus_test", "sub_test", "pro", "active", "2026-09-01", "2026-10-01"]
-      );
-      
-      const result = await queryAs(editorId, `SELECT * FROM subscriptions WHERE org_id = $1`, [orgId]);
-      expect(result.rows.length).toBe(0);
+    it("no client can write credits, even an owner", async () => {
+      expect((await queryAs(OWNER, `UPDATE usage_counters SET ai_credits_used = 0`)).rowCount).toBe(0);
     });
   });
 });

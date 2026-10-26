@@ -85,6 +85,8 @@ export const decks = pgTable("decks", {
   status: statusEnum("status").notNull().default("draft"),
   presentToken: text("present_token").notNull().unique(),
   language: text("language").notNull().default("fr"),
+  // The script the deck was generated from; lets slide regeneration pull real facts. Null for manual decks.
+  sourceScript: text("source_script"),
   deletedAt: timestamp("deleted_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
@@ -98,6 +100,10 @@ export const slides = pgTable("slides", {
   content: jsonb("content").notNull(),
   notes: text("notes"),
   script: text("script"),
+  // Structured presenter cue (ScriptCueSchema in src/lib/slides/schema.ts); null for plain scripts.
+  cue: jsonb("cue"),
+  // Layout variant of the slide type (SLIDE_LAYOUTS in src/lib/slides/layouts.ts); null = original layout.
+  layout: text("layout"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 }, (t) => ({

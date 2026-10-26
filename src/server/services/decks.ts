@@ -26,6 +26,7 @@ import {
   reorderSlides as reorderSlidesRepo,
   type SlideWithDeck,
 } from "@/lib/db/repositories/slides";
+import { incrementDecksCreated } from "@/lib/db/repositories/usage";
 
 export interface DeckServiceContext {
   orgId: string;
@@ -44,6 +45,8 @@ export async function createDeck(
   input: CreateDeckInput,
   ctx: DeckServiceContext
 ): Promise<DeckWithRelations> {
+  const currentMonth = new Date().toISOString().substring(0, 7) + "-01";
+  await incrementDecksCreated(ctx, currentMonth, 1);
   return createDeckRepo(input, ctx);
 }
 
@@ -51,6 +54,9 @@ export async function createDeckFromTemplate(
   input: DeckFromTemplateInput,
   ctx: DeckServiceContext
 ): Promise<DeckWithRelations> {
+  const currentMonth = new Date().toISOString().substring(0, 7) + "-01";
+  await incrementDecksCreated(ctx, currentMonth, 1);
+
   // Get template with slides
   const [template] = await db
     .select()
@@ -63,7 +69,7 @@ export async function createDeckFromTemplate(
   }
 
   // Get template slides from config
-  const templateConfig = template.config as { slides?: Array<{ type: string; content: Record<string, unknown>; notes?: string; script?: string }> };
+  const templateConfig = template.config as { slides?: Array<{ type: string; content: Record<string, unknown>; notes?: string; script?: string; cue?: unknown; layout?: string }> };
   const templateSlides = templateConfig.slides ?? [];
 
   // Create deck
@@ -91,6 +97,8 @@ export async function createDeckFromTemplate(
           content: ts.content,
           notes: ts.notes ?? null,
           script: ts.script ?? null,
+          cue: ts.cue ?? null,
+          layout: ts.layout ?? null,
         });
     }
   }
@@ -190,6 +198,8 @@ export async function duplicateDeck(
       content: slide.content,
       notes: slide.notes ?? undefined,
       script: slide.script ?? undefined,
+      cue: slide.cue ?? undefined,
+      layout: slide.layout,
     });
   }
 
@@ -224,6 +234,8 @@ export async function publishDeck(
         content: s.content,
         notes: s.notes ?? undefined,
         script: s.script ?? undefined,
+        cue: s.cue ?? undefined,
+        layout: s.layout ?? undefined,
       })),
     },
     createdBy: ctx.userId,
@@ -247,7 +259,7 @@ export async function restoreVersion(
 
   const snapshot = versionRecord.snapshot as {
     deck: { title: string; description: string | null; themeId: string; language: string };
-    slides: Array<{ position: number; type: string; content: Record<string, unknown>; notes?: string; script?: string }>;
+    slides: Array<{ position: number; type: string; content: Record<string, unknown>; notes?: string; script?: string; cue?: unknown; layout?: string }>;
   };
 
   // Update deck
@@ -273,6 +285,8 @@ export async function restoreVersion(
       content: slide.content,
       notes: slide.notes ?? undefined,
       script: slide.script ?? undefined,
+      cue: slide.cue ?? undefined,
+      layout: slide.layout ?? null,
     });
   }
 

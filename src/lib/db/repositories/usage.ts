@@ -30,6 +30,25 @@ export async function incrementAiCredits(
     });
 }
 
+export async function incrementDecksCreated(
+  ctx: { orgId: string },
+  periodStart: string,
+  amount = 1
+) {
+  await db
+    .insert(usageCounters)
+    .values({
+      orgId: ctx.orgId,
+      periodStart,
+      decksCreated: amount,
+    })
+    .onConflictDoUpdate({
+      target: [usageCounters.orgId, usageCounters.periodStart],
+      set: { decksCreated: sql`${usageCounters.decksCreated} + ${amount}` },
+    });
+}
+
+
 export async function logGeneration(
   ctx: { orgId: string; userId: string },
   data: {

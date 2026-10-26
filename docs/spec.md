@@ -132,7 +132,7 @@ Testable conditions for V1 launch:
 - [ ] A user can regenerate a single slide without regenerating the deck.
 - [ ] Every AI call is logged with tokens and cost; credits are deducted and refunded on failure.
 - [ ] Stripe checkout upgrades a plan; webhook updates `subscriptions`; plan limits are enforced server-side.
-- [ ] PDF export of a deck matches the on-screen rendering.
+- [ ] PDF and PowerPoint exports of a deck match the on-screen rendering (PowerPoint: one picture per slide, presenter script as speaker notes, not editable — decided 2026-10-12).
 - [ ] E2E happy path passes in CI on every PR.
 - [ ] `docker compose up` with plain Postgres runs migrations + app (V2 rehearsal) — documented gaps only.
 
@@ -147,4 +147,8 @@ Testable conditions for V1 launch:
 | 5 | Custom domain for audience links? | V1 uses `/p/[token]` on the main app domain. |
 | 6 | Max slides per generation? | 40 (configured in template definitions). |
 | 7 | Do audience viewers need lead capture (email gate before viewing)? | Deferred to V1.5 — schema leaves room for this. |
-| 8 | Which legacy decks must be ported as templates first? | RDV Classique, VSL, Webinaire, Commercial ported. |
+| 8 | Which legacy decks must be ported as templates first? | All 7 legacy frameworks ship as templates (2026-10-08): RDV Classique, Lancement Orchestré, VSL Funnel, Tunnel Webinaire, Evergreen, Tunnel Pay, Pitch Commercial — plus "Webinaire Live" and "Système Commercial" (earlier v2-authored decks, kept). |
+| 9 | How are the legacy (`get-funnel-go`) slide designs integrated? | Rebuilt inside the data-driven slide system — editable, themeable, AI-fillable. No legacy component is copied as-is. (2026-10-08) |
+| 10 | Agency-specific content in the legacy decks (founder bio, client names, revenue figures, screenshots, client funnel links)? | System templates keep the structure and selling arguments with placeholders (`needsInput`). The full-fidelity GetFunnels decks are seeded into a private "GetFunnels" organization only its team can access. (2026-10-08) |
+| 11 | Embedding third-party pages (Funnelytics maps, live client funnels)? | Allowed through a dedicated embed slide type: sandboxed iframe restricted to an allow-list of domains. (2026-10-08) |
+| 12 | Role of the legacy codebase | Read-only source for content and design. It is never modified, and v2 has no runtime dependency on it (no Base44). (2026-10-08) |

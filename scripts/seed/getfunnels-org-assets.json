@@ -1,0 +1,17 @@
+{
+  "note": "Legacy GetFunnels images copied off the Base44 bucket by scripts/migrate-legacy-assets.ts (Task 57b). Ids are fixed so org decks can reference them; files live in our private storage.",
+  "assets": [
+    { "id": "60000000-0000-4000-8000-000000000001", "kind": "logo", "file": "be947c9b0_Plandetravail1gf.png", "label": "Logo GetFunnels" },
+    { "id": "60000000-0000-4000-8000-000000000002", "kind": "image", "file": "e47239d24_Screenshot2024-01-15at174956.png", "label": "ClickFunnels — tableau de bord" },
+    { "id": "60000000-0000-4000-8000-000000000003", "kind": "image", "file": "dde7e058d_screencapture-contact98a72c-app-clickfunnels-funnels-11694789-stats-2023-06-21-12_23_54-2pdf.png", "label": "ClickFunnels — stats tunnel · 385 241 $" },
+    { "id": "60000000-0000-4000-8000-000000000004", "kind": "image", "file": "15ee943fe_e5938f54-bab8-4327-ac9e-396900d6f65c.png", "label": "Systeme.io — statistiques · 143 181 €" },
+    { "id": "60000000-0000-4000-8000-000000000005", "kind": "image", "file": "40c6f6393_Designsanstitre-5.png", "label": "ClickFunnels · 380 711 $" },
+    { "id": "60000000-0000-4000-8000-000000000006", "kind": "image", "file": "9cc9ad52c_Designsanstitre.png", "label": "Stats détaillées · 572 ventes" },
+    { "id": "60000000-0000-4000-8000-000000000007", "kind": "image", "file": "dad9a0640_Designsanstitre-3.png", "label": "Challenge Connaissance · 263 818 €" },
+    { "id": "60000000-0000-4000-8000-000000000008", "kind": "image", "file": "2f1cb70a0_Designsanstitre-10.png", "label": "Opt-in · 41 052 vues" },
+    { "id": "60000000-0000-4000-8000-000000000009", "kind": "image", "file": "fe5ecd7a1_FireShotCapture005-Systemeio-systemeiopdf-2.png", "label": "Vue globale · 257 386 €" },
+    { "id": "60000000-0000-4000-8000-00000000000a", "kind": "image", "file": "34e3beb60_Designsanstitre-9.png", "label": "Tunnel REBORN · 3 608 200 €" },
+    { "id": "60000000-0000-4000-8000-00000000000b", "kind": "image", "file": "f472c6fdc_Designsanstitre-7.png", "label": "49 348 vues · opt-in 41,4 %" },
+    { "id": "60000000-0000-4000-8000-00000000000c", "kind": "image", "file": "89f3885f6_Designsanstitre-8.png", "label": "Récap global (panier moyen 406,97 €)" }
+  ]
+}

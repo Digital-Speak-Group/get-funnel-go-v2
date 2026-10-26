@@ -1,57 +1,453 @@
 @import "tailwindcss";
 
+/*
+ * Product chrome tokens — see docs/design-system.md.
+ * Raw values live on :root so a future [data-theme="light"] block can override them.
+ * Slide components never read these; they read --slide-* from the deck theme.
+ */
+:root {
+  /* Surfaces — depth comes from stepping these, not from glows */
+  --bg: #0a0a0b;
+  --surface: #111113;
+  --surface-2: #18181b;
+  --surface-3: #1f1f23;
+
+  /* Lines */
+  --border: rgb(255 255 255 / 0.07);
+  --border-strong: rgb(255 255 255 / 0.12);
+  --input: rgb(255 255 255 / 0.1);
+
+  /* Text */
+  --fg: #ededef;
+  --fg-muted: #a1a1aa;
+  --fg-faint: #85858e;
+
+  /* Brand — violet is reserved for primary actions, focus, and selection */
+  --primary: #6e56cf;
+  --primary-hover: #765dd3;
+  --primary-fg: #ffffff;
+  --brand: #baa7ff;
+  --ring: #7d66d9;
+
+  /* Status */
+  --success: #3dd68c;
+  --warning: #ffc53d;
+  --danger: #ff6369;
+  --destructive: #ce2c31;
+  --destructive-fg: #ffffff;
+}
+
+@theme inline {
+  /* Fonts — variables are set on <html> by next/font in src/app/layout.tsx */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-muted: var(--surface-2);
+  --color-muted-foreground: var(--fg-muted);
+  --color-faint: var(--fg-faint);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-fg);
+  --color-brand: var(--brand);
+
+  /* shadcn/ui semantic aliases — primitives are themed through these, never edited */
+  --color-card: var(--surface);
+  --color-card-foreground: var(--fg);
+  --color-popover: var(--surface-2);
+  --color-popover-foreground: var(--fg);
+  --color-secondary: var(--surface-2);
+  --color-secondary-foreground: var(--fg);
+  --color-accent: var(--surface-3);
+  --color-accent-foreground: var(--fg);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-fg);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  /* Legacy aliases still read by src/lib/slides/theme.ts (gradient background) */
+  --color-bg: var(--bg);
+}
+
 @theme {
-  --color-bg: #09090b;
-  --color-surface: #111118;
-  --color-surface-2: #17171f;
-  --color-border: rgb(255 255 255 / 0.08);
-  --color-text: #fafafa;
-  --color-text-muted: #a1a1aa;
-  --color-text-faint: #52525b;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
 
-  --color-primary: #470c85;
-  --color-primary-hover: #5b16a3;
-  --color-primary-fg: #ffffff;
-  --color-accent: #8b5cf6;
-  --color-success: #34d399;
-  --color-warning: #fbbf24;
-  --color-danger: #f87171;
+  /* Type scale — app chrome. Display is marketing-only. */
+  --text-display: 3.5rem;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.035em;
+  --text-display--font-weight: 600;
+  --text-h1: 1.5rem;
+  --text-h1--line-height: 1.25;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h1--font-weight: 600;
+  --text-h2: 1.125rem;
+  --text-h2--line-height: 1.35;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h2--font-weight: 600;
+  --text-h3: 0.9375rem;
+  --text-h3--line-height: 1.4;
+  --text-h3--font-weight: 500;
+  --text-body: 0.875rem;
+  --text-body--line-height: 1.55;
+  --text-small: 0.8125rem;
+  --text-small--line-height: 1.5;
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1.4;
+  --text-label--letter-spacing: 0.08em;
+  --text-label--font-weight: 600;
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-
-  --font-display: "Inter", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
-
-  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.35);
-  --shadow-pop: 0 0 60px rgb(139 92 246 / 0.15), 0 30px 80px rgb(0 0 0 / 0.6);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-pop: 0 0 0 1px rgb(255 255 255 / 0.06), 0 16px 48px -12px rgb(0 0 0 / 0.7);
+  --shadow-highlight: inset 0 1px 0 rgb(255 255 255 / 0.08);
 
   --duration-fast: 150ms;
   --duration-base: 250ms;
   --duration-slow: 450ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Enter/exit animations for Radix primitives (data-[state=open|closed]) */
+  --animate-pop-in: pop-in 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-pop-out: pop-out 100ms ease-in forwards;
+  --animate-fade-in: fade-in 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-fade-out: fade-out 150ms ease-in forwards;
+  --animate-sheet-in-left: sheet-in-left 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-sheet-out-left: sheet-out-left 200ms ease-in forwards;
+  --animate-sheet-in-right: sheet-in-right 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-sheet-out-right: sheet-out-right 200ms ease-in forwards;
+  --animate-sheet-in-bottom: sheet-in-bottom 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-sheet-out-bottom: sheet-out-bottom 200ms ease-in forwards;
+
+  @keyframes pop-in {
+    from { opacity: 0; transform: scale(0.97); }
+  }
+  @keyframes pop-out {
+    to { opacity: 0; transform: scale(0.97); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+  }
+  @keyframes fade-out {
+    to { opacity: 0; }
+  }
+  @keyframes sheet-in-left {
+    from { transform: translateX(-100%); }
+  }
+  @keyframes sheet-out-left {
+    to { transform: translateX(-100%); }
+  }
+  @keyframes sheet-in-right {
+    from { transform: translateX(100%); }
+  }
+  @keyframes sheet-out-right {
+    to { transform: translateX(100%); }
+  }
+  @keyframes sheet-in-bottom {
+    from { transform: translateY(100%); }
+  }
+  @keyframes sheet-out-bottom {
+    to { transform: translateY(100%); }
+  }
 }
 
-html,
-body {
-  height: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
-  font-family: var(--font-body);
-  background-color: var(--color-bg);
-  color: var(--color-text);
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   html {
     color-scheme: dark;
   }
+
+  /* `clip` (not `hidden`) so body never becomes its own scroll container. */
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: clip;
+  }
+
+  body {
+    min-height: 100dvh;
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.55;
+    background-color: var(--bg);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background-color: rgb(110 86 207 / 0.4);
+    color: var(--fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface-3) transparent;
+  }
+}
+
+@utility text-label-caps {
+  font-size: var(--text-label);
+  line-height: var(--text-label--line-height);
+  letter-spacing: var(--text-label--letter-spacing);
+  font-weight: var(--text-label--font-weight);
+  text-transform: uppercase;
+}
+
+/* Slide motion (Signature kit, Phase 6). Live slides only: SlideRenderer sets
+   data-slide-reveal="on" when isActive and the theme's motion isn't "none".
+   Wrapper > component root > blocks (header, grid…) > items (cards…). */
+@keyframes gf-slide-breathe {
+  from { transform: scale(1); opacity: 0.75; }
+  to { transform: scale(1.08); opacity: 1; }
+}
+@keyframes gf-slide-reveal {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+.gf-slide-breathe {
+  animation: gf-slide-breathe 12s ease-in-out infinite alternate;
+}
+[data-slide-reveal="on"] > * > *,
+[data-slide-reveal="on"] > * > * > * {
+  animation: gf-slide-reveal 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+[data-slide-reveal="on"] > * > *:nth-child(2) { animation-delay: 120ms; }
+[data-slide-reveal="on"] > * > *:nth-child(n + 3) { animation-delay: 220ms; }
+[data-slide-reveal="on"] > * > * > *:nth-child(1) { animation-delay: 160ms; }
+[data-slide-reveal="on"] > * > * > *:nth-child(2) { animation-delay: 240ms; }
+[data-slide-reveal="on"] > * > * > *:nth-child(3) { animation-delay: 320ms; }
+[data-slide-reveal="on"] > * > * > *:nth-child(4) { animation-delay: 400ms; }
+[data-slide-reveal="on"] > * > * > *:nth-child(n + 5) { animation-delay: 480ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Inline editing on the editor canvas (src/components/slides/editable.tsx). Sizes are in the
+   1920×1080 slide space, which the canvas scales down to roughly half. */
+[data-edit-path] {
+  outline: 3px dashed transparent;
+  outline-offset: 6px;
+  border-radius: 4px;
+  transition: outline-color 120ms ease;
+}
+[data-edit-path]:hover {
+  outline-color: color-mix(in srgb, var(--primary) 55%, transparent);
+}
+[data-edit-path]:focus {
+  outline: 3px solid var(--primary);
+}
+[data-edit-path]:empty {
+  min-width: 2em;
+  min-height: 1em;
+}
+[data-edit-path]:empty::before {
+  content: attr(data-placeholder);
+  opacity: 0.45;
+  font-style: italic;
+  -webkit-text-fill-color: currentColor;
+}
+
+/* Item toolbar on repeated slide parts (EditableItem), in 1920×1080 slide space. */
+[data-edit-item] > [data-item-toolbar] {
+  position: absolute;
+  top: -22px;
+  right: 12px;
+  z-index: 5;
+  display: none;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--surface-3);
+  border: 2px solid var(--border-strong);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+}
+[data-edit-item]:hover > [data-item-toolbar],
+[data-edit-item]:focus-within > [data-item-toolbar] {
+  display: flex;
+}
+[data-edit-item]:hover {
+  outline: 3px solid color-mix(in srgb, var(--primary) 30%, transparent);
+  outline-offset: 4px;
+}
+[data-item-toolbar] button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  color: var(--fg);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+[data-item-toolbar] button:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+[data-item-toolbar] button[data-item-action="remove"]:hover:not(:disabled) {
+  color: var(--danger);
+}
+[data-item-toolbar] button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+[data-item-toolbar] button:focus-visible {
+  outline: 3px solid var(--primary);
+}
+[data-item-toolbar] svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* Image controls over slide images (EditableImage), in slide space. Empty areas always show
+   the "add" button; filled ones show replace/remove on hover. */
+[data-edit-image] {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: inherit;
+  outline: 3px dashed color-mix(in srgb, var(--primary) 45%, transparent);
+  outline-offset: -6px;
+}
+[data-edit-image][data-has-image] {
+  opacity: 0;
+  outline: 0;
+  background: rgb(0 0 0 / 0.45);
+  transition: opacity 120ms ease;
+}
+[data-edit-image][data-has-image]:hover,
+[data-edit-image][data-has-image]:focus-within {
+  opacity: 1;
+}
+[data-edit-image] button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 22px;
+  border-radius: 12px;
+  border: 2px solid var(--border-strong);
+  background: var(--surface-3);
+  color: var(--fg);
+  font: 600 22px/1 var(--font-sans, system-ui), system-ui, sans-serif;
+  cursor: pointer;
+}
+[data-edit-image] button:hover {
+  background: var(--surface-2);
+}
+[data-edit-image] button:focus-visible {
+  outline: 3px solid var(--primary);
+}
+[data-edit-image] svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* Freeform editor (FreeEditor): a click selects the whole element; its inside (text, image)
+   only takes the pointer while a text is being typed in (double-click). Slide space units. */
+[data-free-editor] [data-free-id] {
+  cursor: move;
+}
+[data-free-editor] [data-free-id] > * {
+  pointer-events: none;
+}
+[data-free-editor] [data-free-id][data-free-editing] > *,
+[data-free-editor] [data-free-id][data-free-editing] [contenteditable] {
+  pointer-events: auto;
+  cursor: text;
+}
+[data-free-editor] [data-free-id]:hover {
+  outline: 3px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  outline-offset: 2px;
+}
+/* Locked elements (Task 70): no move cursor, and a dashed outline instead of handles. */
+[data-free-editor] [data-free-id][data-free-locked] {
+  cursor: default;
+}
+[data-free-editor] [data-free-id][data-free-locked][data-free-selected] {
+  outline: 3px dashed var(--primary);
+  outline-offset: 2px;
+}
+/* The text's own inline-editing outline would double the selection box. */
+[data-free-editor] [data-free-id] [data-edit-path] {
+  outline: 0;
+}
+
+/* Rich text of freeform texts in the editor (Task 76): same look as RichTextView renders it. */
+[data-free-rich] .ProseMirror {
+  outline: none;
+  white-space: pre-wrap;
+}
+[data-free-rich] p {
+  margin: 0;
+}
+[data-free-rich] ul,
+[data-free-rich] ol {
+  margin: 0;
+  padding-left: 1.2em;
+}
+[data-free-rich] ul {
+  list-style-type: disc;
+}
+[data-free-rich] ol {
+  list-style-type: decimal;
+}
+[data-free-rich] strong {
+  font-weight: 800;
+}
+[data-free-rich] a {
+  color: inherit;
+  text-decoration: underline;
+}
+[data-free-rich][data-empty]::before {
+  content: attr(data-placeholder);
+  position: absolute;
+  opacity: 0.45;
+  pointer-events: none;
 }

@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText } from "../editable";
 
 interface AutomationContent {
   headline: string;
@@ -26,18 +28,19 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -49,14 +52,14 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
         }}
       >
         {items.map((item, index) => (
-          <div
+          <EditableItem path="items" index={index} length={items.length}
             key={index}
             style={{
               display: "flex",
               alignItems: "center",
               gap: "24px",
               padding: "24px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
             }}
@@ -79,32 +82,32 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
                 >
                   ⚡
                 </span>
-                <h3
+                <EditableText
+                  as="h3"
+                  path={`items.${index}.trigger`}
+                  value={item.trigger}
                   style={{
                     fontSize: "20px",
                     fontWeight: 600,
                     fontFamily: theme["--slide-font-display"],
                     margin: 0,
                   }}
-                >
-                  {item.trigger}
-                </h3>
-                {item.delay && (
-                  <span
-                    style={{
-                      fontSize: "13px",
-                      fontWeight: 600,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.08em",
-                      padding: "2px 8px",
-                      background: theme["--slide-warning"],
-                      color: "#000",
-                      borderRadius: "9999px",
-                    }}
-                  >
-                    {item.delay}
-                  </span>
-                )}
+                />
+                <EditableText
+                  as="span"
+                  path={`items.${index}.delay`}
+                  value={item.delay}
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    padding: "2px 8px",
+                    background: theme["--slide-warning"],
+                    color: "#000",
+                    borderRadius: "9999px",
+                  }}
+                />
               </div>
               <div
                 style={{
@@ -113,7 +116,7 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
                   color: theme["--slide-muted"],
                 }}
               >
-                → {item.action}
+                → <EditableText path={`items.${index}.action`} value={item.action} multiline />
               </div>
             </div>
             <div
@@ -124,13 +127,13 @@ export function AutomationSlide({ content, theme }: { content: AutomationContent
                 alignItems: "center",
                 justifyContent: "center",
                 fontSize: "24px",
-                color: theme["--slide-primary"],
+                color: theme["--slide-primary-text"],
                 flexShrink: 0,
               }}
             >
               →
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

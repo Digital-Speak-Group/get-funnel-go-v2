@@ -1,31 +1,16 @@
+/// <reference types="react/canary" />
+import "server-only";
+import * as React from "react";
 import { supabaseAuthService } from "@/lib/auth/supabase";
 import type { Session } from "@/lib/auth/types";
 
-let cachedSession: Session | null = null;
-let sessionPromise: Promise<Session | null> | null = null;
+// Memoize per request only. A module-level cache would be shared by every request the
+// server handles, leaking one user's session (and org) to another.
+// React.cache exists in the React build Next.js uses for server rendering; outside it
+// (e.g. unit tests on stock React 18) fall back to no memoization.
+const perRequest: <T extends (...args: never[]) => unknown>(fn: T) => T =
+  typeof React.cache === "function" ? React.cache : (fn) => fn;
 
-export async function getSession(): Promise<Session | null> {
-  if (cachedSession) {
-    return cachedSession;
-  }
-
-  if (sessionPromise) {
-    return sessionPromise;
-  }
-
-  sessionPromise = (async () => {
-    const session = await supabaseAuthService.getSession();
-    cachedSession = session;
-    return session;
-  })();
-
-  try {
-    return await sessionPromise;
-  } finally {
-    sessionPromise = null;
-  }
-}
-
-export function clearSessionCache() {
-  cachedSession = null;
-}
+export const getSession: () => Promise<Session | null> = perRequest(() =>
+  supabaseAuthService.getSession()
+);

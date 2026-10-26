@@ -1,6 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { SlideIcon } from "../icons";
+import { EditableItem, EditableText } from "../editable";
 
 interface ProblemContent {
   headline: string;
@@ -27,31 +30,32 @@ export function ProblemSlide({ content, theme }: { content: ProblemContent; them
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-danger"],
+            ...headlineFill(theme, theme["--slide-danger"]),
           }}
-        >
-          {headline}
-        </h1>
-        {intro && (
-          <p
-            style={{
-              fontSize: "20px",
-              lineHeight: 1.55,
-              color: theme["--slide-muted"],
-              maxWidth: "800px",
-              margin: "0 auto",
-            }}
-          >
-            {intro}
-          </p>
-        )}
+        />
+        <EditableText
+          as="p"
+          path="intro"
+          value={intro}
+          multiline
+          style={{
+            fontSize: "20px",
+            lineHeight: 1.55,
+            color: theme["--slide-muted"],
+            maxWidth: "800px",
+            margin: "0 auto",
+          }}
+        />
       </header>
 
       <div
@@ -60,17 +64,18 @@ export function ProblemSlide({ content, theme }: { content: ProblemContent; them
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {painPoints.map((pain, index) => (
-          <div
+          <EditableItem path="painPoints" index={index} length={painPoints.length}
             key={index}
             style={{
               display: "flex",
               flexDirection: "column",
               gap: "12px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
 border: `2px solid ${theme["--slide-danger"]}33`,
               position: "relative",
@@ -91,10 +96,13 @@ border: `2px solid ${theme["--slide-danger"]}33`,
                   flexShrink: 0,
                 }}
               >
-                {pain.icon || "⚠"}
+                <SlideIcon name={pain.icon} size={28} fallback="⚠" />
               </div>
               <div style={{ flex: 1 }}>
-                <h3
+                <EditableText
+                  as="h3"
+                  path={`painPoints.${index}.title`}
+                  value={pain.title}
                   style={{
                     fontSize: "22px",
                     fontWeight: 600,
@@ -102,22 +110,22 @@ border: `2px solid ${theme["--slide-danger"]}33`,
                     margin: "0 0 8px 0",
                     color: theme["--slide-danger"],
                   }}
-                >
-                  {pain.title}
-                </h3>
-                <p
+                />
+                <EditableText
+                  as="p"
+                  path={`painPoints.${index}.text`}
+                  value={pain.text}
+                  multiline
                   style={{
                     fontSize: "16px",
                     lineHeight: 1.55,
                     color: theme["--slide-text"],
                     margin: 0,
                   }}
-                >
-                  {pain.text}
-                </p>
+                />
               </div>
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

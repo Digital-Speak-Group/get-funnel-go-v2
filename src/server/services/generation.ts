@@ -6,11 +6,14 @@ import { planDeck, type TemplateConfig } from "../ai/stages/planDeck";
 import { generateSlides } from "../ai/stages/generateSlides";
 import type { Brief, SlidePlan } from "../ai/schema";
 import type { Slide } from "@/lib/slides/schema";
-import { logGeneration } from "@/lib/db/repositories/usage";
+import { assignLayouts } from "@/lib/slides/layouts";
+import { logGeneration, incrementDecksCreated } from "@/lib/db/repositories/usage";
 import { db } from "@/lib/db/client";
 import { decks, slides } from "@/lib/db/schema";
 
-const ESTIMATED_COST_CENTS = 5; // Reserve 5 cents upfront
+/** Standard cost for one AI deck generation (20 credits, matching 50 decks/month on Pro). */
+export const ESTIMATED_COST_CENTS = 20;
+
 
 export async function generateDeckFromScript(
   ctx: { orgId: string; userId: string },
@@ -31,6 +34,8 @@ export async function generateDeckFromScript(
   }
 
   const startTime = Date.now();
+  // What the org currently has on its usage counter for this run; refunded in full on failure.
+  let charged = ESTIMATED_COST_CENTS;
   let accumulatedCost = 0;
   let briefData: Brief | null = null;
   let planData: SlidePlan[] | null = null;
@@ -80,16 +85,19 @@ export async function generateDeckFromScript(
         onProgress(JSON.stringify({ status: "GENERATING_SLIDES", progress: prog.completed, total: prog.total }));
       }
     });
-    slidesData = slidesRes.slides;
+    // Vary layouts in code, not in the prompt: no extra tokens, never two identical in a row.
+    slidesData = assignLayouts(slidesRes.slides);
     accumulatedCost += slidesRes.usage.costCents;
     logger.debug("Slides generated", { orgId: ctx.orgId, slideCount: slidesData.length });
     
-    // Refund difference if we spent less than reserved
-    if (accumulatedCost < ESTIMATED_COST_CENTS) {
-      await refundCredits(ctx, ESTIMATED_COST_CENTS - accumulatedCost);
-    } else if (accumulatedCost > ESTIMATED_COST_CENTS) {
-      // Charge the difference (naive approach)
-      await reserveCredits(ctx, accumulatedCost - ESTIMATED_COST_CENTS);
+    // Charge standard 20 credits (or higher if actual API cost exceeded it)
+    const costToCharge = Math.max(accumulatedCost, ESTIMATED_COST_CENTS);
+    if (costToCharge > ESTIMATED_COST_CENTS) {
+      if (await reserveCredits(ctx, costToCharge - ESTIMATED_COST_CENTS)) {
+        charged = costToCharge;
+      }
+    } else {
+      charged = ESTIMATED_COST_CENTS;
     }
 
     if (onProgress) onProgress(JSON.stringify({ status: "SAVING_DECK" }));
@@ -112,6 +120,7 @@ export async function generateDeckFromScript(
         status: "draft",
         presentToken: crypto.randomUUID(),
         language: briefData!.language,
+        sourceScript: script,
       });
 
       if (slidesData && slidesData.length > 0) {
@@ -124,10 +133,15 @@ export async function generateDeckFromScript(
             content: s.content,
             notes: s.notes,
             script: s.script,
+            layout: s.layout ?? null,
           }))
         );
       }
     });
+
+    const currentMonth = new Date().toISOString().substring(0, 7) + "-01";
+    await incrementDecksCreated(ctx, currentMonth, 1);
+
     
     await logGeneration(ctx, {
       deckId,
@@ -147,8 +161,9 @@ export async function generateDeckFromScript(
   } catch (err: unknown) {
     logger.error("Deck generation failed", err, { orgId: ctx.orgId });
     if (onProgress) onProgress(JSON.stringify({ status: "ERROR", error: err instanceof Error ? err.message : String(err) }));
-    // Refund all reserved if failed early
-    await refundCredits(ctx, ESTIMATED_COST_CENTS);
+    // Failed generations are free: undo whatever is still charged (not always the full estimate,
+    // since the post-slides settlement may already have refunded part of it).
+    if (charged > 0) await refundCredits(ctx, charged);
     await logGeneration(ctx, {
       kind: "slides",
       model: "unknown",

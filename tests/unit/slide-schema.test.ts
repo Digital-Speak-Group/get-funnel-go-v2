@@ -6,6 +6,7 @@ import {
   type Slide,
   type Deck,
 } from "@/lib/slides/schema";
+import { buildDefaultContent } from "@/lib/slides/defaults";
 
 function uuid() {
   return "00000000-0000-4000-8000-000000000001";
@@ -409,11 +410,19 @@ describe("SlideSchema — 27 types", () => {
       headline: "Agir maintenant",
       sub: "Sous-titre",
       actions: [
-        { label: "Réserver", kind: "calendar" },
-        { label: "Contact", kind: "whatsapp" },
+        { label: "Réserver", kind: "calendar", url: "https://calendly.com/demo" },
+        { label: "Contact", kind: "whatsapp", url: "https://wa.me/123456789" },
       ],
     });
     expect(() => SlideSchema.parse(slide)).not.toThrow();
+  });
+
+  it("cta — rejects invalid url protocol", () => {
+    const slide = baseSlide("cta", {
+      headline: "Test",
+      actions: [{ label: "Action", kind: "link", url: "javascript:alert(1)" }],
+    });
+    expect(() => SlideSchema.parse(slide)).toThrow();
   });
 
   it("cta — rejects more than 2 actions", () => {
@@ -427,6 +436,7 @@ describe("SlideSchema — 27 types", () => {
     });
     expect(() => SlideSchema.parse(slide)).toThrow();
   });
+
 
   it("rejects unknown type", () => {
     const slide = { ...baseSlide("cover", { title: "Test" }), type: "unknown" };
@@ -645,10 +655,12 @@ describe("DeckSchema", () => {
               headline: `Slide ${index}`,
               members: [{ name: "N1", role: "R1" }],
             }
-          : {
+          : type === "cta"
+          ? {
               headline: `Slide ${index}`,
               actions: [{ label: "Act", kind: "link" }],
-            },
+            }
+          : (buildDefaultContent(type) as never),
     };
   }
 

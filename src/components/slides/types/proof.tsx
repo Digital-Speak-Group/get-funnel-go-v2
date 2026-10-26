@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText, useSlideEditing } from "../editable";
 
 interface ProofContent {
   headline: string;
@@ -14,6 +16,7 @@ interface ProofContent {
 
 export function ProofSlide({ content, theme }: { content: ProofContent; theme: Record<string, string> }) {
   const { headline, items } = content;
+  const editing = useSlideEditing();
 
   return (
     <div
@@ -27,18 +30,19 @@ export function ProofSlide({ content, theme }: { content: ProofContent; theme: R
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -47,22 +51,23 @@ export function ProofSlide({ content, theme }: { content: ProofContent; theme: R
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {items.map((item, index) => (
-          <div
+          <EditableItem path="items" index={index} length={items.length}
             key={index}
             style={{
               display: "flex",
               flexDirection: "column",
               gap: "16px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-success"]}26`,
             }}
           >
-            {item.quote && (
+            {(item.quote || editing) && (
               <blockquote
                 style={{
                   fontSize: "17px",
@@ -74,7 +79,7 @@ export function ProofSlide({ content, theme }: { content: ProofContent; theme: R
                   borderLeft: `3px solid ${theme["--slide-success"]}`,
                 }}
               >
-                "{item.quote}"
+                "<EditableText path={`items.${index}.quote`} value={item.quote} multiline />"
               </blockquote>
             )}
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
@@ -96,36 +101,37 @@ export function ProofSlide({ content, theme }: { content: ProofContent; theme: R
                 {item.name.charAt(0).toUpperCase()}
               </div>
               <div>
-                <p
+                <EditableText
+                  as="p"
+                  path={`items.${index}.name`}
+                  value={item.name}
                   style={{
                     fontSize: "17px",
                     fontWeight: 600,
                     fontFamily: theme["--slide-font-display"],
                     margin: "0 0 4px 0",
                   }}
-                >
-                  {item.name}
-                </p>
-                {item.role && (
-                  <p style={{ fontSize: "14px", color: theme["--slide-muted"], margin: 0 }}>
-                    {item.role}
-                  </p>
-                )}
-                {item.result && (
-                  <p
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: 600,
-                      color: theme["--slide-success"],
-                      margin: "4px 0 0 0",
-                    }}
-                  >
-                    {item.result}
-                  </p>
-                )}
+                />
+                <EditableText
+                  as="p"
+                  path={`items.${index}.role`}
+                  value={item.role}
+                  style={{ fontSize: "14px", color: theme["--slide-muted"], margin: 0 }}
+                />
+                <EditableText
+                  as="p"
+                  path={`items.${index}.result`}
+                  value={item.result}
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    color: theme["--slide-success"],
+                    margin: "4px 0 0 0",
+                  }}
+                />
               </div>
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

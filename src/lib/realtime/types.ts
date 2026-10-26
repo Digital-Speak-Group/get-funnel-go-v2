@@ -9,6 +9,16 @@ export interface SlideEvent {
   slideIndex: number;
   /** Server timestamp (ms) for drift detection */
   ts: number;
+  /**
+   * Build steps revealed on the current slide (Task 75): 0 = none yet. Absent from older
+   * presenters, which means everything is shown. Untrusted: audiences validate it.
+   */
+  step?: number;
+  /**
+   * Values typed by the presenter into the current `blanks` slide (Task 60). Untrusted on
+   * the receiving side: anyone holding the token can publish, so audiences validate it.
+   */
+  blanks?: { slideId: string; values: string[] };
 }
 
 export interface RealtimeChannel {
@@ -18,7 +28,14 @@ export interface RealtimeChannel {
   subscribe(handler: (event: SlideEvent) => void): void;
   /** Clean up the channel */
   destroy(): void;
+  /**
+   * Optional: connection state changes ("live" once joined, "offline" on error/timeout/close),
+   * so the presenter can show whether the audience link is reachable. Returns an unsubscribe.
+   */
+  onStatus?(handler: (status: ChannelStatus) => void): () => void;
 }
+
+export type ChannelStatus = "connecting" | "live" | "offline";
 
 export interface RealtimeProvider {
   /**

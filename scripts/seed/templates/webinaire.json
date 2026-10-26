@@ -1,9 +1,9 @@
 {
-  "title": "Webinaire",
+  "title": "Webinaire Live",
   "language": "fr",
   "id": "60000000-0000-4000-8000-000000000003",
   "slug": "webinaire",
-  "name": "Webinaire",
+  "name": "Webinaire Live",
   "category": "Formation",
   "description": "Funnel webinaire : inscription, contenu de valeur, offre live, replay limité, upsell.",
   "themeId": "40000000-0000-4000-8000-000000000004",
@@ -12,14 +12,15 @@
       "id": "12000000-0000-4000-8000-000000000001",
       "position": 0,
       "type": "cover",
-      "script": "Bienvenue. Avant de commencer, je veux juste te dire une chose.\n\nTu n'es pas là par hasard.\nTu t'es inscrit à ce webinaire parce que tu cherches quelque chose de précis.\nEt dans les prochaines minutes, je vais te montrer exactement comment on fait — pas en théorie, mais avec un système qui tourne.\n\nJe m'appelle Hamid El Bouhali. Fondateur de GetFunnels.\nEt ce soir, on attaque directement.",
+      "script": "Bienvenue. Avant de commencer, je veux juste te dire une chose.\n\nTu n'es pas là par hasard.\nTu t'es inscrit à ce webinaire parce que tu cherches quelque chose de précis.\nEt dans les prochaines minutes, je vais te montrer exactement comment on fait — pas en théorie, mais avec un système qui tourne.\n\nJe m'appelle [Votre nom]. Fondateur de [Votre entreprise].\nEt ce soir, on attaque directement.",
       "notes": "Démarrer avec énergie et conviction. Regarder la caméra. Ton chaud, direct.",
       "content": {
-        "kicker": "Webinaire en direct — GetFunnels",
+        "kicker": "Webinaire en direct — [Votre entreprise]",
         "title": "Le Système Webinaire Complet",
         "subtitle": "De l'inscription à la vente — sans improvisation.",
-        "presenterName": "Hamid El Bouhali"
-      }
+        "presenterName": "[Votre nom]"
+      },
+      "needsInput": true
     },
     {
       "id": "12000000-0000-4000-8000-000000000002",
@@ -38,25 +39,26 @@
       "id": "12000000-0000-4000-8000-000000000003",
       "position": 2,
       "type": "authority",
-      "script": "Pourquoi est-ce que tu devrais m'écouter ?\n\nJe m'appelle Hamid El Bouhali.\nDepuis plus de 8 ans, on construit des systèmes webinaire pour des entrepreneurs et des formateurs.\nOn a vu ce qui marche, ce qui ne marche pas, et pourquoi.\n\nEt les gens avec qui on a bossé — Yomi Denzel, Thami Kabbaj, Mohamed Boclet — utilisent tous le même principe de base.\nPas la même forme. Pas le même marché. Mais le même principe.",
+      "script": "Pourquoi est-ce que tu devrais m'écouter ?\n\nJe m'appelle [Votre nom].\nDepuis plus de [X] ans, on construit des systèmes webinaire pour des entrepreneurs et des formateurs.\nOn a vu ce qui marche, ce qui ne marche pas, et pourquoi.\n\nEt les gens avec qui on a bossé — [Client 1], [Client 2], [Client 3] — utilisent tous le même principe de base.\nPas la même forme. Pas le même marché. Mais le même principe.",
       "notes": "Crédibilité rapide. L'objectif n'est pas de se vanter, c'est d'établir le contexte.",
       "content": {
-        "headline": "Hamid El Bouhali — GetFunnels",
+        "headline": "[Votre nom] — [Votre entreprise]",
         "points": [
           {
-            "title": "8+ ans sur le marché",
-            "text": "Plus de 470 systèmes webinaire et funnels de vente construits sur le marché francophone et anglophone."
+            "title": "[X]+ ans sur le marché",
+            "text": "Plus de [X] systèmes webinaire et funnels de vente construits sur le marché francophone et anglophone."
           },
           {
-            "title": "Clients en 6 à 7 chiffres",
-            "text": "Yomi Denzel, Thami Kabbaj, Mohamed Boclet, Jody Cavalié, Max Piccinini — et des dizaines d'autres."
+            "title": "Clients en [X] chiffres",
+            "text": "[Client 1], [Client 2], [Client 3], [Client 4], [Client 5] — et des dizaines d'autres."
           },
           {
             "title": "Un seul objectif ce soir",
             "text": "Te donner une architecture claire et actionnable — pas de la théorie, du concret."
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "12000000-0000-4000-8000-000000000004",
@@ -286,31 +288,32 @@
       "id": "12000000-0000-4000-8000-000000000011",
       "position": 10,
       "type": "proof",
-      "script": "Voilà ce que nos clients obtiennent avec ce système.\n\nJe vais pas te balancer des screenshots de Stripe que tu ne peux pas vérifier.\nJe vais te donner des exemples précis avec des chiffres réels.\n\nLe premier : un coach en développement personnel. 347 inscrits, 198 présents, 23 ventes à 1 500 €. Soit 34 500 € en un soir.\nLe deuxième : une formatrice en nutrition. 189 inscrits, 127 présents, 18 ventes à 2 200 €. 39 600 €.\n\nDes résultats différents parce que les marchés sont différents. Mais la même architecture.",
+      "script": "Voilà ce que nos clients obtiennent avec ce système.\n\nJe vais pas te balancer des screenshots de Stripe que tu ne peux pas vérifier.\nJe vais te donner des exemples précis avec des chiffres réels.\n\nLe premier : [Client 1] — [résultat chiffré].\nLe deuxième : [Client 2] — [résultat chiffré].\n\nDes résultats différents parce que les marchés sont différents. Mais la même architecture.",
       "notes": "Être très spécifique. Les chiffres vagues ne convainquent personne. Préférer des exemples précis.",
       "content": {
         "headline": "Résultats Réels — Ce que le Système Produit",
         "items": [
           {
-            "quote": "347 inscrits → 198 présents → 23 ventes à 1 500 € = 34 500 € en un soir. Le système a tout automatisé, je n'ai fait que parler.",
-            "name": "Coach développement personnel",
+            "quote": "[Témoignage client avec le résultat obtenu]",
+            "name": "[Client 1]",
             "role": "Formateur indépendant",
-            "result": "34 500 € en 1 webinaire"
+            "result": "[Résultat chiffré]"
           },
           {
-            "quote": "Avant je faisais des lives Instagram sans vendre. Après la restructuration complète avec GetFunnels, premier webinaire : 39 600 €.",
-            "name": "Formatrice en nutrition",
+            "quote": "[Témoignage client avec le résultat obtenu]",
+            "name": "[Client 2]",
             "role": "Expert santé",
-            "result": "39 600 € premier webinaire"
+            "result": "[Résultat chiffré]"
           },
           {
-            "quote": "On a multiplié par 4 notre taux de conversion en changeant uniquement la séquence post-webinaire.",
-            "name": "Consultant en marketing digital",
+            "quote": "[Témoignage client avec le résultat obtenu]",
+            "name": "[Client 3]",
             "role": "Agence",
-            "result": "×4 taux de conversion"
+            "result": "[Résultat chiffré]"
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "12000000-0000-4000-8000-000000000012",
@@ -323,7 +326,7 @@
         "tiers": [
           {
             "name": "Système Webinaire",
-            "price": "997 €",
+            "price": "[Votre prix]",
             "features": [
               "Architecture complète clé en main",
               "Templates : pages, emails, scripts",
@@ -335,7 +338,7 @@
           },
           {
             "name": "Système Webinaire + Coaching",
-            "price": "1 997 €",
+            "price": "[Votre prix]",
             "features": [
               "Tout le Système Webinaire",
               "4 semaines d'accompagnement individuel",
@@ -346,7 +349,8 @@
             "highlight": true
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "12000000-0000-4000-8000-000000000013",
@@ -496,26 +500,47 @@
       "notes": "La comparaison ne doit jamais dénigrer le prospect. Juste montrer les options de façon objective.",
       "content": {
         "headline": "Tes Options — Une Comparaison Honnête",
-        "columns": ["Sans système", "Seul", "Avec GetFunnels"],
+        "columns": [
+          "Sans système",
+          "Seul",
+          "Avec [Votre entreprise]"
+        ],
         "rows": [
           {
             "label": "Délai de déploiement",
-            "values": ["Indéfini", "3-6 mois", "30 jours"]
+            "values": [
+              "Indéfini",
+              "3-6 mois",
+              "30 jours"
+            ]
           },
           {
             "label": "Taux de conversion",
-            "values": ["3-5%", "Variable", "10-20%"]
+            "values": [
+              "3-5%",
+              "Variable",
+              "10-20%"
+            ]
           },
           {
             "label": "Erreurs évitées",
-            "values": ["Non", "Non", "Oui"]
+            "values": [
+              "Non",
+              "Non",
+              "Oui"
+            ]
           },
           {
             "label": "Système scalable",
-            "values": ["Non", "Possible", "Oui"]
+            "values": [
+              "Non",
+              "Possible",
+              "Oui"
+            ]
           }
         ]
-      }
+      },
+      "needsInput": true
     },
     {
       "id": "12000000-0000-4000-8000-000000000019",

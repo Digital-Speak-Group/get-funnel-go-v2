@@ -1,6 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { SlideIcon } from "../icons";
+import { EditableItem, EditableText } from "../editable";
 
 interface BenefitsContent {
   headline: string;
@@ -26,18 +29,19 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-success"],
+            ...headlineFill(theme, theme["--slide-success"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -46,17 +50,18 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {benefits.map((benefit, index) => (
-          <div
+          <EditableItem path="benefits" index={index} length={benefits.length}
             key={index}
             style={{
               display: "flex",
               flexDirection: "column",
               gap: "12px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-success"]}26`,
             }}
@@ -76,10 +81,13 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
                   flexShrink: 0,
                 }}
               >
-                {benefit.icon || "✓"}
+                <SlideIcon name={benefit.icon} size={24} fallback="✓" />
               </div>
               <div style={{ flex: 1 }}>
-                <h3
+                <EditableText
+                  as="h3"
+                  path={`benefits.${index}.title`}
+                  value={benefit.title}
                   style={{
                     fontSize: "22px",
                     fontWeight: 600,
@@ -87,22 +95,22 @@ export function BenefitsSlide({ content, theme }: { content: BenefitsContent; th
                     margin: "0 0 8px 0",
                     color: theme["--slide-success"],
                   }}
-                >
-                  {benefit.title}
-                </h3>
-                <p
+                />
+                <EditableText
+                  as="p"
+                  path={`benefits.${index}.text`}
+                  value={benefit.text}
+                  multiline
                   style={{
                     fontSize: "16px",
                     lineHeight: 1.55,
                     color: theme["--slide-text"],
                     margin: 0,
                   }}
-                >
-                  {benefit.text}
-                </p>
+                />
               </div>
             </div>
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

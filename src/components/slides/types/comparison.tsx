@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { headlineFill } from "../style";
+import { EditableText } from "../editable";
 
 interface ComparisonContent {
   headline: string;
@@ -26,18 +28,19 @@ export function ComparisonSlide({ content, theme }: { content: ComparisonContent
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -81,7 +84,7 @@ export function ComparisonSlide({ content, theme }: { content: ComparisonContent
                     fontFamily: theme["--slide-font-display"],
                   }}
                 >
-                  {col}
+                  <EditableText path={`columns.${cIndex}`} value={col} />
                 </th>
               ))}
             </tr>
@@ -102,7 +105,7 @@ export function ComparisonSlide({ content, theme }: { content: ComparisonContent
                     fontFamily: theme["--slide-font-display"],
                   }}
                 >
-                  {row.label}
+                  <EditableText path={`rows.${rIndex}.label`} value={row.label} />
                 </td>
                 {row.values.map((val, vIndex) => (
                   <td
@@ -112,7 +115,7 @@ export function ComparisonSlide({ content, theme }: { content: ComparisonContent
                       textAlign: "center",
                     }}
                   >
-                    {val}
+                    <EditableText path={`rows.${rIndex}.values.${vIndex}`} value={val} />
                   </td>
                 ))}
               </tr>

@@ -1,0 +1,49 @@
+/**
+ * Dotted paths into slide content (`painPoints.0.title`), used by inline editing on the
+ * canvas to write one string back into the slide's JSON.
+ */
+
+/** Returns a copy of `content` with `value` at `path`; containers on the way are copied, not mutated. */
+export function setContentPath(content: Record<string, unknown>, path: string, value: unknown): Record<string, unknown> {
+  const [head, ...rest] = path.split(".");
+  if (!head) return content;
+  // Arrays of arrays (table rows, Task 78) stay arrays when a cell is written.
+  if (Array.isArray(content)) {
+    const list = [...content];
+    const index = Number(head);
+    list[index] = rest.length === 0 ? value : setContentPath(list[index] ?? {}, rest.join("."), value);
+    return list as unknown as Record<string, unknown>;
+  }
+  if (rest.length === 0) return { ...content, [head]: value };
+
+  const child = content[head];
+  const [next] = rest;
+  const childIsArray = /^\d+$/.test(next);
+
+  if (childIsArray) {
+    const list = Array.isArray(child) ? [...child] : [];
+    const index = Number(next);
+    if (rest.length === 1) {
+      list[index] = value;
+    } else {
+      const item = list[index];
+      list[index] = setContentPath(
+        item && typeof item === "object" ? (item as Record<string, unknown>) : {},
+        rest.slice(1).join("."),
+        value
+      );
+    }
+    return { ...content, [head]: list };
+  }
+
+  const nested = child && typeof child === "object" && !Array.isArray(child) ? (child as Record<string, unknown>) : {};
+  return { ...content, [head]: setContentPath(nested, rest.join("."), value) };
+}
+
+/** The value at `path` in `content`, or undefined. */
+export function getContentPath(content: unknown, path: string): unknown {
+  return path.split(".").reduce<unknown>(
+    (node, key) => (node && typeof node === "object" ? (node as Record<string, unknown>)[key] : undefined),
+    content
+  );
+}

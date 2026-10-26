@@ -28,12 +28,21 @@ import { ComparisonSlide } from "./types/comparison";
 import { TimelineSlide } from "./types/timeline";
 import { TeamSlide } from "./types/team";
 import { CtaSlide } from "./types/cta";
+import { EmbedSlide } from "./types/embed";
+import { ShowcaseSlide } from "./types/showcase";
+import { ScreenshotsSlide } from "./types/screenshots";
+import { GaugeSlide } from "./types/gauge";
+import { MockupSlide } from "./types/mockup";
+import { BlanksSlide } from "./types/blanks";
+import { FreeSlide } from "./types/free";
 
 export type SlideComponentProps = {
   content: Record<string, unknown>;
   theme: Record<string, string>;
   notes?: string;
   script?: string;
+  /** Live values of a `blanks` slide (presenter input, broadcast to the audience). */
+  liveValues?: string[];
 };
 
 export type SlideComponent = FC<SlideComponentProps>;
@@ -72,6 +81,15 @@ registerSlideComponent("comparison", ComparisonSlide as unknown as SlideComponen
 registerSlideComponent("timeline", TimelineSlide as unknown as SlideComponent);
 registerSlideComponent("team", TeamSlide as unknown as SlideComponent);
 registerSlideComponent("cta", CtaSlide as unknown as SlideComponent);
+
+// Task 60: legacy mechanics
+registerSlideComponent("embed", EmbedSlide as unknown as SlideComponent);
+registerSlideComponent("showcase", ShowcaseSlide as unknown as SlideComponent);
+registerSlideComponent("screenshots", ScreenshotsSlide as unknown as SlideComponent);
+registerSlideComponent("gauge", GaugeSlide as unknown as SlideComponent);
+registerSlideComponent("mockup", MockupSlide as unknown as SlideComponent);
+registerSlideComponent("blanks", BlanksSlide as unknown as SlideComponent);
+registerSlideComponent("free", FreeSlide as unknown as SlideComponent);
 
 export function registerSlideComponent(type: SlideType, component: SlideComponent) {
   registry.set(type, component);

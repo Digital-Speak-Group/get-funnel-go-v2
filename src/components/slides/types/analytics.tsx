@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText, useSlideEditing } from "../editable";
 
 interface AnalyticsContent {
   headline: string;
@@ -13,6 +15,7 @@ interface AnalyticsContent {
 
 export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; theme: Record<string, string> }) {
   const { headline, metrics } = content;
+  const editing = useSlideEditing();
 
   return (
     <div
@@ -26,18 +29,19 @@ export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; 
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -46,33 +50,35 @@ export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; 
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {metrics.map((metric, index) => (
-          <div
+          <EditableItem path="metrics" index={index} length={metrics.length}
             key={index}
             style={{
               display: "flex",
               flexDirection: "column",
               gap: "12px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
             }}
           >
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <h3
+              <EditableText
+                as="h3"
+                path={`metrics.${index}.name`}
+                value={metric.name}
                 style={{
                   fontSize: "20px",
                   fontWeight: 600,
                   fontFamily: theme["--slide-font-display"],
                   margin: 0,
                 }}
-              >
-                {metric.name}
-              </h3>
-              {metric.target && (
+              />
+              {(metric.target || editing) && (
                 <span
                   style={{
                     fontSize: "13px",
@@ -85,21 +91,23 @@ export function AnalyticsSlide({ content, theme }: { content: AnalyticsContent; 
                     borderRadius: "9999px",
                   }}
                 >
-                  Cible: {metric.target}
+                  Cible: <EditableText path={`metrics.${index}.target`} value={metric.target} />
                 </span>
               )}
             </div>
-            <p
+            <EditableText
+              as="p"
+              path={`metrics.${index}.definition`}
+              value={metric.definition}
+              multiline
               style={{
                 fontSize: "15px",
                 lineHeight: 1.55,
                 color: theme["--slide-muted"],
                 margin: 0,
               }}
-            >
-              {metric.definition}
-            </p>
-          </div>
+            />
+          </EditableItem>
         ))}
       </div>
     </div>

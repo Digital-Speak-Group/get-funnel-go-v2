@@ -5,15 +5,17 @@ import { eq } from "drizzle-orm";
 
 import { PLANS } from "./billing";
 
+/** Monthly AI budget of a plan, in credit cents. PLANS[plan].credits is a number of decks, ~20 cents each. */
+export function creditLimitCents(plan: string | null | undefined): number {
+  return plan && plan in PLANS ? PLANS[plan as keyof typeof PLANS].credits * 20 : 0;
+}
+
 export async function reserveCredits(ctx: { orgId: string }, amountCents: number): Promise<boolean> {
   const currentMonth = new Date().toISOString().substring(0, 7) + "-01";
 
   // Check org limit
   const orgResult = await db.select({ plan: organizations.plan }).from(organizations).where(eq(organizations.id, ctx.orgId)).limit(1);
-  const plan = orgResult[0]?.plan as keyof typeof PLANS | undefined;
-  
-  // PLANS[plan].credits is the number of decks. If we assume ~20 cents per deck:
-  const maxLimit = plan && PLANS[plan] ? PLANS[plan].credits * 20 : 0;
+  const maxLimit = creditLimitCents(orgResult[0]?.plan);
 
   const usage = await getUsageCounter(ctx, currentMonth);
   const used = usage?.aiCreditsUsed || 0;

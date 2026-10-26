@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { SlideRenderer } from "./SlideRenderer";
+import { StaticSlideProvider } from "./render-context";
 import { type Slide } from "@/lib/slides/schema";
 import { type ThemeTokens } from "@/lib/slides/theme";
 import { cn } from "@/lib/utils";
@@ -51,7 +52,9 @@ export function SlideThumbnail({ slide, theme, className }: SlideThumbnailProps)
           left: 0,
         }}
       >
-        <SlideRenderer slide={slide} theme={theme} />
+        <StaticSlideProvider>
+          <SlideRenderer slide={slide} theme={theme} />
+        </StaticSlideProvider>
       </div>
     </div>
   );

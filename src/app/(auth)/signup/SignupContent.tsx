@@ -3,7 +3,18 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { ArrowRight, LoaderCircle } from "lucide-react";
 import { signUpAction } from "@/app/(auth)/actions";
+import { Button } from "@/components/ui/button";
+import { AuthField } from "../_components/AuthField";
+import { FormAlert } from "../_components/FormAlert";
+import { MIN_PASSWORD, confirmError, emailError, newPasswordError } from "../_components/validation";
+import { authMessages } from "../messages";
+
+const m = authMessages.signup;
+const f = authMessages.fields;
+
+type FieldErrors = { email?: string; password?: string; confirmPassword?: string };
 
 export function SignupContent() {
   const router = useRouter();
@@ -12,22 +23,30 @@ export function SignupContent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  function revalidate(next: Partial<Record<keyof FieldErrors, string>>) {
+    const values = { email, password, confirmPassword, ...next };
+    setFieldErrors((prev) => ({
+      email: prev.email ? emailError(values.email) : undefined,
+      password: prev.password ? newPasswordError(values.password) : undefined,
+      confirmPassword: prev.confirmPassword ? confirmError(values.password, values.confirmPassword) : undefined,
+    }));
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
 
-    if (password !== confirmPassword) {
-      setError("Les mots de passe ne correspondent pas");
-      return;
-    }
-
-    if (password.length < 8) {
-      setError("Le mot de passe doit contenir au moins 8 caractères");
-      return;
-    }
+    const errors: FieldErrors = {
+      email: emailError(email),
+      password: newPasswordError(password),
+      confirmPassword: confirmError(password, confirmPassword),
+    };
+    setFieldErrors(errors);
+    if (errors.email || errors.password || errors.confirmPassword) return;
 
     setLoading(true);
 
@@ -39,94 +58,99 @@ export function SignupContent() {
       return;
     }
 
-    router.push(`/callback?message=${encodeURIComponent("Vérifiez votre email pour confirmer votre inscription")}&callbackUrl=${encodeURIComponent(callbackUrl)}`);
+    router.push(`/callback?message=${encodeURIComponent(m.checkEmail)}&callbackUrl=${encodeURIComponent(callbackUrl)}`);
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="text-center mb-2">
-        <h2 className="text-2xl font-semibold text-white">Créer un compte</h2>
-        <p className="text-zinc-400 mt-1">
-          Commencez à générer vos decks de vente en quelques minutes.
-        </p>
+    <div className="space-y-6">
+      <div className="space-y-1.5">
+        <h1 className="text-h1 text-foreground">{m.title}</h1>
+        <p className="text-body text-muted-foreground">{m.description}</p>
       </div>
 
-      {error && (
-        <div className="bg-red-900/30 border border-red-800 text-red-300 px-4 py-3 rounded-lg text-sm">
-          {error}
-        </div>
-      )}
+      <form onSubmit={handleSubmit} noValidate className="space-y-5">
+        {error && <FormAlert>{error}</FormAlert>}
 
-      <div className="space-y-4">
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-zinc-300 mb-1">
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-            placeholder="vous@exemple.com"
-            disabled={loading}
-          />
-        </div>
+        <AuthField
+          id="email"
+          label={f.email}
+          type="email"
+          autoComplete="email"
+          required
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            revalidate({ email: e.target.value });
+          }}
+          onBlur={() => email && setFieldErrors((prev) => ({ ...prev, email: emailError(email) }))}
+          placeholder={f.emailPlaceholder}
+          disabled={loading}
+          error={fieldErrors.email}
+        />
 
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium text-zinc-300 mb-1">
-            Mot de passe
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="new-password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-            placeholder="Au moins 8 caractères"
-            disabled={loading}
-          />
-        </div>
+        <AuthField
+          id="password"
+          label={f.password}
+          type="password"
+          autoComplete="new-password"
+          required
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            revalidate({ password: e.target.value });
+          }}
+          onBlur={() => password && setFieldErrors((prev) => ({ ...prev, password: newPasswordError(password) }))}
+          placeholder={f.newPasswordPlaceholder}
+          disabled={loading}
+          error={fieldErrors.password}
+          hint={f.passwordHint}
+          hintMet={password.length >= MIN_PASSWORD}
+        />
 
-        <div>
-          <label htmlFor="confirmPassword" className="block text-sm font-medium text-zinc-300 mb-1">
-            Confirmer le mot de passe
-          </label>
-          <input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            autoComplete="new-password"
-            required
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-            placeholder="••••••••"
-            disabled={loading}
-          />
-        </div>
-      </div>
+        <AuthField
+          id="confirmPassword"
+          label={f.confirmPassword}
+          type="password"
+          autoComplete="new-password"
+          required
+          value={confirmPassword}
+          onChange={(e) => {
+            setConfirmPassword(e.target.value);
+            revalidate({ confirmPassword: e.target.value });
+          }}
+          onBlur={() =>
+            confirmPassword &&
+            setFieldErrors((prev) => ({ ...prev, confirmPassword: confirmError(password, confirmPassword) }))
+          }
+          placeholder={f.passwordPlaceholder}
+          disabled={loading}
+          error={fieldErrors.confirmPassword}
+        />
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full py-3 px-4 bg-violet-600 hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-medium text-white transition-colors"
-      >
-        {loading ? "Inscription..." : "Créer mon compte"}
-      </button>
+        <Button type="submit" size="lg" className="w-full" disabled={loading}>
+          {loading ? (
+            <>
+              <LoaderCircle className="animate-spin" aria-hidden="true" />
+              {m.pending}
+            </>
+          ) : (
+            <>
+              {m.submit}
+              <ArrowRight aria-hidden="true" />
+            </>
+          )}
+        </Button>
+      </form>
 
-      <p className="text-center text-zinc-400 text-sm">
-        Déjà un compte ?{" "}
-        <Link href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`} className="text-violet-400 hover:underline font-medium">
-          Se connecter
+      <p className="text-center text-small text-muted-foreground">
+        {m.hasAccount}{" "}
+        <Link
+          href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}
+          className="font-medium text-brand underline-offset-4 hover:underline"
+        >
+          {m.login}
         </Link>
       </p>
-    </form>
+    </div>
   );
 }

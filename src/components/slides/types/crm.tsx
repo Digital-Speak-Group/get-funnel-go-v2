@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText } from "../editable";
 
 interface CrmContent {
   headline: string;
@@ -25,18 +27,19 @@ export function CrmSlide({ content, theme }: { content: CrmContent; theme: Recor
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -48,19 +51,22 @@ export function CrmSlide({ content, theme }: { content: CrmContent; theme: Recor
         }}
       >
         {pipelines.map((pipe, index) => (
-          <div
+          <EditableItem path="pipelines" index={index} length={pipelines.length}
             key={index}
             style={{
               display: "flex",
               alignItems: "center",
               gap: "24px",
               padding: "24px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-primary"]}26`,
             }}
           >
-            <div
+            <EditableText
+              as="div"
+              path={`pipelines.${index}.stage`}
+              value={pipe.stage}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -76,9 +82,7 @@ export function CrmSlide({ content, theme }: { content: CrmContent; theme: Recor
                 flexShrink: 0,
                 textAlign: "center",
               }}
-            >
-              {pipe.stage}
-            </div>
+            />
             <div
               style={{
                 flex: 1,
@@ -88,7 +92,13 @@ export function CrmSlide({ content, theme }: { content: CrmContent; theme: Recor
                 border: `1px solid ${theme["--slide-muted"]}1a`,
               }}
             >
-              <p style={{ margin: 0, lineHeight: 1.55, fontSize: "16px" }}>{pipe.definition}</p>
+              <EditableText
+                as="p"
+                path={`pipelines.${index}.definition`}
+                value={pipe.definition}
+                multiline
+                style={{ margin: 0, lineHeight: 1.55, fontSize: "16px" }}
+              />
             </div>
             {index < pipelines.length - 1 && (
               <div
@@ -101,7 +111,7 @@ export function CrmSlide({ content, theme }: { content: CrmContent; theme: Recor
                 }}
               />
             )}
-          </div>
+          </EditableItem>
         ))}
       </div>
     </div>

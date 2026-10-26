@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { cardSurface, headlineFill } from "../style";
+import { EditableItem, EditableText } from "../editable";
 
 interface TeamContent {
   headline: string;
@@ -26,18 +28,19 @@ export function TeamSlide({ content, theme }: { content: TeamContent; theme: Rec
       }}
     >
       <header style={{ marginBottom: "48px", textAlign: "center" }}>
-        <h1
+        <EditableText
+          as="h1"
+          path="headline"
+          value={headline}
           style={{
             fontSize: "48px",
             lineHeight: 1.15,
             fontWeight: 700,
             fontFamily: theme["--slide-font-display"],
             marginBottom: "16px",
-            color: theme["--slide-primary"],
+            ...headlineFill(theme, theme["--slide-primary-text"]),
           }}
-        >
-          {headline}
-        </h1>
+        />
       </header>
 
       <div
@@ -46,10 +49,11 @@ export function TeamSlide({ content, theme }: { content: TeamContent; theme: Rec
           gridTemplateColumns: `repeat(auto-fit, minmax(280px, 1fr))`,
           gap: "24px",
           flex: 1,
+          alignContent: "center",
         }}
       >
         {members.map((member, index) => (
-          <div
+          <EditableItem path="members" index={index} length={members.length}
             key={index}
             style={{
               display: "flex",
@@ -58,7 +62,7 @@ export function TeamSlide({ content, theme }: { content: TeamContent; theme: Rec
               textAlign: "center",
               gap: "16px",
               padding: "28px",
-              background: theme["--slide-surface"],
+              ...cardSurface(theme),
               borderRadius: theme["--slide-radius"],
               border: `1px solid ${theme["--slide-muted"]}1a`,
             }}
@@ -81,41 +85,43 @@ export function TeamSlide({ content, theme }: { content: TeamContent; theme: Rec
               {member.name.charAt(0).toUpperCase()}
             </div>
             <div>
-              <h3
+              <EditableText
+                as="h3"
+                path={`members.${index}.name`}
+                value={member.name}
                 style={{
                   fontSize: "22px",
                   fontWeight: 600,
                   fontFamily: theme["--slide-font-display"],
                   margin: "0 0 4px 0",
                 }}
-              >
-                {member.name}
-              </h3>
-              <p
+              />
+              <EditableText
+                as="p"
+                path={`members.${index}.role`}
+                value={member.role}
                 style={{
                   fontSize: "15px",
                   fontWeight: 500,
-                  color: theme["--slide-primary"],
+                  color: theme["--slide-primary-text"],
                   margin: 0,
                 }}
-              >
-                {member.role}
-              </p>
+              />
             </div>
-            {member.proof && (
-              <p
-                style={{
-                  fontSize: "14px",
-                  lineHeight: 1.5,
-                  color: theme["--slide-muted"],
-                  margin: 0,
-                  maxWidth: "240px",
-                }}
-              >
-                {member.proof}
-              </p>
-            )}
-          </div>
+            <EditableText
+              as="p"
+              path={`members.${index}.proof`}
+              value={member.proof}
+              multiline
+              style={{
+                fontSize: "14px",
+                lineHeight: 1.5,
+                color: theme["--slide-muted"],
+                margin: 0,
+                maxWidth: "240px",
+              }}
+            />
+          </EditableItem>
         ))}
       </div>
     </div>

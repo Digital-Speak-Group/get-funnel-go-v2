@@ -3,6 +3,7 @@ import { db } from "@/lib/db/client";
 import { decks, slides, themes } from "@/lib/db/schema";
 import { eq, and, isNull, asc } from "drizzle-orm";
 import { SlideSchema, type Slide } from "@/lib/slides/schema";
+import { validLayout } from "@/lib/slides/layouts";
 import { ThemeTokensSchema, type ThemeTokens } from "@/lib/slides/theme";
 
 /**
@@ -56,6 +57,7 @@ export async function getAudiencePayload(
       position: slides.position,
       type: slides.type,
       content: slides.content,
+      layout: slides.layout,
     })
     .from(slides)
     .where(eq(slides.deckId, deck.id))
@@ -67,6 +69,7 @@ export async function getAudiencePayload(
       position: s.position,
       type: s.type,
       content: s.content,
+      layout: validLayout(s.type, s.layout),
       // notes and script are intentionally omitted from the audience payload
     });
     return result.success ? [result.data] : [];
