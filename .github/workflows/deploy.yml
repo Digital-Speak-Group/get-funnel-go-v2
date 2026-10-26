@@ -1,0 +1,30 @@
+name: Deploy to VPS (Digital Speak)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: self-hosted
+
+    steps:
+      - name: 📥 Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: 🗄️ Appliquer les migrations de base de données
+        run: |
+          docker compose run --rm app npm run db:migrate || true
+
+      - name: 🚀 Lancer les conteneurs Docker
+        run: |
+          docker compose up -d --build
+          # Nettoyer les images inutilisées pour préserver l'espace disque du VPS
+          docker image prune -f
+
+      - name: 🩺 Vérifier la santé des conteneurs
+        run: |
+          sleep 5
+          docker compose ps
