@@ -22,7 +22,7 @@ jobs:
         run: |
           docker compose run --rm app npm run db:migrate || true
 
-      - name: 🚀 Lancer les conteneurs Docker
+      - name:  Lancer les conteneurs Docker
         run: |
           docker compose up -d --build
           # Nettoyer les images inutilisées pour préserver l'espace disque du VPS
