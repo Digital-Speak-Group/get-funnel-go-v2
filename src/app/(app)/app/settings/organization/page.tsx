@@ -2,13 +2,12 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth/session";
 import { getOrganization } from "@/lib/db/repositories/organizations";
 import { listOrgMembers } from "@/lib/db/repositories/memberships";
-import { Building2, CreditCard, Link2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { SectionCard } from "@/components/app/patterns/SectionCard";
 import { PLANS, type PlanType } from "@/server/services/billing";
-import { FieldList, FieldRow } from "../_components/FieldList";
 import { MembersTable } from "../_components/MembersTable";
 import { settingsMessages } from "../messages";
+import { OrganizationForm } from "./OrganizationForm";
+
 
 const m = settingsMessages.organization;
 
@@ -25,31 +24,19 @@ export default async function OrganizationSettingsPage() {
   ]);
 
   const planName = org ? (PLANS[org.plan as PlanType]?.name ?? org.plan) : settingsMessages.empty;
+  const canEdit = session.role === "owner" || session.role === "admin";
 
   return (
     <div className="space-y-6">
-      <SectionCard
-        title={m.title}
-        description={m.description}
-        footerNote={m.comingSoon}
-        footer={
-          <Button size="sm" disabled>
-            {settingsMessages.save}
-          </Button>
-        }
-      >
-        <FieldList>
-          <FieldRow icon={Building2} label={m.name}>
-            {org?.name ?? settingsMessages.empty}
-          </FieldRow>
-          <FieldRow icon={Link2} label={m.slug} mono>
-            {org?.slug ?? settingsMessages.empty}
-          </FieldRow>
-          <FieldRow icon={CreditCard} label={m.plan}>
-            {planName}
-          </FieldRow>
-        </FieldList>
-      </SectionCard>
+      <OrganizationForm
+        initialOrg={{
+          name: org?.name ?? "",
+          slug: org?.slug ?? "",
+          planName,
+        }}
+        canEdit={canEdit}
+      />
+
 
       <SectionCard
         title={settingsMessages.members.title}

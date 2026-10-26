@@ -16,7 +16,10 @@ ${AI_SLIDE_TYPES.map((t) => `- ${t}`).join("\n")}
    - gauge: rates or percentages shown against a maximum (conversion, show-up, open rates).
    - mockup: the structure of one funnel page (opt-in, sales, checkout, registration, thank-you).
    - blanks: figures that depend on the prospect and are filled in live during the call (current revenue, budget, target).
+5. STRICT LANGUAGE: You MUST write the \`headline\` and \`purpose\` of every single planned slide entirely in the language specified in the brief (e.g. if Language is "fr", write all headlines and purposes 100% in French). NEVER output English headlines or purposes when the brief language is French ("fr").
+
 
 Provide a cohesive, logical flow for a high-converting sales presentation.
 Call the record_output tool with an object whose \`plan\` field is the ordered list of slides; each slide has \`type\`, \`headline\` and \`purpose\`.
+
 `;

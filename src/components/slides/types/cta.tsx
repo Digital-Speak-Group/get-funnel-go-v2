@@ -3,7 +3,7 @@
 import * as React from "react";
 import { headlineFill } from "../style";
 import { SlideIcon } from "../icons";
-import { EditableText } from "../editable";
+import { EditableText, useSlideEditing } from "../editable";
 import type { SlideIconName } from "@/lib/slides/icons";
 
 interface CtaContent {
@@ -12,6 +12,7 @@ interface CtaContent {
   actions: Array<{
     label: string;
     kind: "calendar" | "link" | "whatsapp" | "form";
+    url?: string;
   }>;
 }
 
@@ -27,6 +28,7 @@ const WHATSAPP_GREEN = "#25D366";
 
 export function CtaSlide({ content, theme }: { content: CtaContent; theme: Record<string, string> }) {
   const { headline, sub, actions } = content;
+  const isEditing = useSlideEditing();
 
   return (
     <div
@@ -79,10 +81,20 @@ export function CtaSlide({ content, theme }: { content: CtaContent; theme: Recor
       >
         {actions.map((action, index) => {
           const color = action.kind === "whatsapp" ? WHATSAPP_GREEN : theme["--slide-primary"];
+          const hasUrl = Boolean(action.url);
+          const Component = hasUrl ? "a" : "button";
+
           return (
-            <button
+            <Component
               key={index}
-              type="button"
+              {...(hasUrl
+                ? {
+                    href: action.url,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    onClick: isEditing ? (e: React.MouseEvent) => e.preventDefault() : undefined,
+                  }
+                : { type: "button" })}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -96,16 +108,18 @@ export function CtaSlide({ content, theme }: { content: CtaContent; theme: Recor
                 border: "none",
                 borderRadius: theme["--slide-radius"],
                 cursor: "pointer",
+                textDecoration: "none",
                 transition: "transform 150ms ease, box-shadow 150ms ease",
                 boxShadow: `0 4px 16px ${color}40`,
               }}
             >
               <SlideIcon name={actionIcons[action.kind]} size={24} />
               <EditableText path={`actions.${index}.label`} value={action.label} />
-            </button>
+            </Component>
           );
         })}
       </div>
     </div>
   );
 }
+

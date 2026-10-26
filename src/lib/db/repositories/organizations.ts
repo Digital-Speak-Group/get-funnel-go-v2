@@ -11,3 +11,19 @@ export async function getOrganization(ctx: { orgId: string }) {
     .limit(1);
   return org ?? null;
 }
+
+export async function updateOrganization(
+  ctx: { orgId: string },
+  data: { name: string }
+) {
+  const [org] = await db
+    .update(organizations)
+    .set({
+      name: data.name,
+      updatedAt: new Date(),
+    })
+    .where(eq(organizations.id, ctx.orgId))
+    .returning();
+  return org ?? null;
+}
+

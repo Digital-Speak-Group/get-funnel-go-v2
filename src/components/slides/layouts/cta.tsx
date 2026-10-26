@@ -3,14 +3,14 @@
 import * as React from "react";
 import { cardSurface } from "../style";
 import { SlideIcon } from "../icons";
-import { EditableText } from "../editable";
+import { EditableText, useSlideEditing } from "../editable";
 import type { SlideIconName } from "@/lib/slides/icons";
 import { Frame, Lead, Title, type LayoutProps } from "./parts";
 
 interface CtaContent {
   headline: string;
   sub?: string;
-  actions: Array<{ label: string; kind: "calendar" | "link" | "whatsapp" | "form" }>;
+  actions: Array<{ label: string; kind: "calendar" | "link" | "whatsapp" | "form"; url?: string }>;
 }
 
 const actionIcons: Record<CtaContent["actions"][0]["kind"], SlideIconName> = {
@@ -34,10 +34,21 @@ function ActionButton({
   theme: Record<string, string>;
   inverted?: boolean;
 }) {
+  const isEditing = useSlideEditing();
   const color = action.kind === "whatsapp" ? WHATSAPP_GREEN : theme["--slide-primary"];
+  const hasUrl = Boolean(action.url);
+  const Component = hasUrl ? "a" : "button";
+
   return (
-    <button
-      type="button"
+    <Component
+      {...(hasUrl
+        ? {
+            href: action.url,
+            target: "_blank",
+            rel: "noopener noreferrer",
+            onClick: isEditing ? (e: React.MouseEvent) => e.preventDefault() : undefined,
+          }
+        : { type: "button" })}
       style={{
         display: "inline-flex",
         alignItems: "center",
@@ -52,14 +63,16 @@ function ActionButton({
         border: "none",
         borderRadius: theme["--slide-radius"],
         cursor: "pointer",
+        textDecoration: "none",
         boxShadow: `0 8px 24px ${inverted ? "#00000033" : `${color}40`}`,
       }}
     >
       <SlideIcon name={actionIcons[action.kind]} size={26} />
       <EditableText path={`actions.${index}.label`} value={action.label} />
-    </button>
+    </Component>
   );
 }
+
 
 /** Pitch on the left, the actions in a card on the right. */
 export function CtaSplit({ content, theme }: LayoutProps<CtaContent>) {

@@ -14,6 +14,8 @@ describe("requiresLogin", () => {
     "/login",
     "/signup",
     "/pricing",
+    "/forgot-password",
+    "/reset-password",
     "/legal/terms",
     "/legal/privacy",
     "/legal/mentions",

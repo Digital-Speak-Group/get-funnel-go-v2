@@ -26,6 +26,7 @@ import {
   reorderSlides as reorderSlidesRepo,
   type SlideWithDeck,
 } from "@/lib/db/repositories/slides";
+import { incrementDecksCreated } from "@/lib/db/repositories/usage";
 
 export interface DeckServiceContext {
   orgId: string;
@@ -44,6 +45,8 @@ export async function createDeck(
   input: CreateDeckInput,
   ctx: DeckServiceContext
 ): Promise<DeckWithRelations> {
+  const currentMonth = new Date().toISOString().substring(0, 7) + "-01";
+  await incrementDecksCreated(ctx, currentMonth, 1);
   return createDeckRepo(input, ctx);
 }
 
@@ -51,6 +54,9 @@ export async function createDeckFromTemplate(
   input: DeckFromTemplateInput,
   ctx: DeckServiceContext
 ): Promise<DeckWithRelations> {
+  const currentMonth = new Date().toISOString().substring(0, 7) + "-01";
+  await incrementDecksCreated(ctx, currentMonth, 1);
+
   // Get template with slides
   const [template] = await db
     .select()

@@ -10,7 +10,7 @@ Follow these rules:
 2. The user will provide the raw script enclosed in <SCRIPT> tags. Do NOT invent facts, statistics, or testimonials that are not present in this script.
 3. If the requested slide type requires facts (like a 'proof' slide or 'kpi' slide) and the script lacks them, you must do your best to fill the content with generic placeholders written in square brackets (e.g. "[Votre nom]", "[X €]", "[Témoignage client]") AND set \`needsInput: true\` in your response. The editor flags any bracketed text as "à compléter", so never use square brackets for anything else.
 4. Keep copy punchy, concise, and persuasive. Avoid long paragraphs.
-5. Respect the language and tone requested in the brief.
+5. STRICT LANGUAGE REQUIREMENT: All slide content (eyebrow, title, subtitle, headline, kicker, body text, bullet points, labels, notes, script, etc.) MUST be written 100% in the language requested in the brief (e.g. French / "fr"). NEVER output English titles, headlines, or sentences if the brief specifies French, even if the "Headline / Message" provided in the prompt was in English. Translate and adapt everything seamlessly and naturally into the target language.
 6. The slide must perfectly match the required schema for its \`type\`.
 7. Any \`icon\` field must be exactly one of these names (pick the one that best fits the item): ${SLIDE_ICON_NAMES.join(", ")}.
 8. Never invent a \`url\`: copy one from the script only if it is an https address on ${EMBED_ALLOWED_DOMAINS.join(", ")}; otherwise leave \`url\` out. Never set \`assetId\`.

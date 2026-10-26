@@ -68,8 +68,9 @@ const FIELD_LABELS: Record<string, string> = {
   question: "Question",
   type: "Type",
   assetId: "Ressource",
-  url: "Adresse de la page (https)",
+  url: "Lien (URL)",
   gauges: "Jauges",
+
   max: "Maximum",
   suffix: "Suffixe",
   prefix: "Préfixe",

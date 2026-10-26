@@ -4,6 +4,9 @@ import { z } from "zod";
 import { supabaseAuthService } from "@/lib/auth/supabase";
 import { createSupabaseServerClient } from "@/lib/auth/supabase";
 import { redirect } from "next/navigation";
+import { logger } from "@/lib/logger";
+import { rateLimit } from "@/lib/rate-limit";
+import { authMessages } from "./messages";
 
 const EmailSchema = z.string().email("Email invalide");
 const PasswordSchema = z.string().min(8, "Le mot de passe doit contenir au moins 8 caractères");
@@ -75,17 +78,31 @@ export async function confirmEmailAction(raw: unknown) {
   return { success: true };
 }
 
+const resetRequestLimiter = rateLimit({ interval: 15 * 60_000, limit: 3 });
+
+/**
+ * Sends the reset email. The answer never says whether the account exists: validation, rate
+ * limit and delivery failures are reported, an unknown address looks like a success.
+ */
 export async function resetPasswordRequestAction(raw: unknown) {
   const schema = z.object({ email: EmailSchema });
   const parsed = schema.safeParse(raw);
   if (!parsed.success) {
-    return { error: "Email invalide" };
+    return { error: authMessages.validation.emailInvalid };
   }
 
-  const result = await supabaseAuthService.resetPassword(parsed.data.email);
+  const email = parsed.data.email.trim().toLowerCase();
+  const limit = await resetRequestLimiter.check(email);
+  if (!limit.success) {
+    return { error: authMessages.forgot.rateLimited };
+  }
+
+  const result = await supabaseAuthService.resetPassword(email);
 
   if (result.error) {
-    return { error: result.error };
+    // Supabase's own text is English and may reveal internals; log it, show a generic line.
+    logger.warn("Password reset email failed", { errorMessage: result.error });
+    return { error: authMessages.forgot.error };
   }
 
   return { success: true };
@@ -101,7 +118,11 @@ export async function updatePasswordAction(raw: unknown) {
   const result = await supabaseAuthService.updatePassword(parsed.data.password);
 
   if (result.error) {
-    return { error: result.error };
+    if (/different from the old/i.test(result.error)) {
+      return { error: authMessages.reset.samePassword };
+    }
+    logger.warn("Password update failed", { errorMessage: result.error });
+    return { error: authMessages.reset.error };
   }
 
   return { success: true };

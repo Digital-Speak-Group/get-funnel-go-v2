@@ -7,12 +7,13 @@ import { generateSlides } from "../ai/stages/generateSlides";
 import type { Brief, SlidePlan } from "../ai/schema";
 import type { Slide } from "@/lib/slides/schema";
 import { assignLayouts } from "@/lib/slides/layouts";
-import { logGeneration } from "@/lib/db/repositories/usage";
+import { logGeneration, incrementDecksCreated } from "@/lib/db/repositories/usage";
 import { db } from "@/lib/db/client";
 import { decks, slides } from "@/lib/db/schema";
 
-/** Reserved upfront for one deck generation (refunded down to the real cost). */
-export const ESTIMATED_COST_CENTS = 5;
+/** Standard cost for one AI deck generation (20 credits, matching 50 decks/month on Pro). */
+export const ESTIMATED_COST_CENTS = 20;
+
 
 export async function generateDeckFromScript(
   ctx: { orgId: string; userId: string },
@@ -89,15 +90,14 @@ export async function generateDeckFromScript(
     accumulatedCost += slidesRes.usage.costCents;
     logger.debug("Slides generated", { orgId: ctx.orgId, slideCount: slidesData.length });
     
-    // Refund difference if we spent less than reserved
-    if (accumulatedCost < ESTIMATED_COST_CENTS) {
-      await refundCredits(ctx, ESTIMATED_COST_CENTS - accumulatedCost);
-      charged = accumulatedCost;
-    } else if (accumulatedCost > ESTIMATED_COST_CENTS) {
-      // Charge the difference (naive approach)
-      if (await reserveCredits(ctx, accumulatedCost - ESTIMATED_COST_CENTS)) {
-        charged = accumulatedCost;
+    // Charge standard 20 credits (or higher if actual API cost exceeded it)
+    const costToCharge = Math.max(accumulatedCost, ESTIMATED_COST_CENTS);
+    if (costToCharge > ESTIMATED_COST_CENTS) {
+      if (await reserveCredits(ctx, costToCharge - ESTIMATED_COST_CENTS)) {
+        charged = costToCharge;
       }
+    } else {
+      charged = ESTIMATED_COST_CENTS;
     }
 
     if (onProgress) onProgress(JSON.stringify({ status: "SAVING_DECK" }));
@@ -138,6 +138,10 @@ export async function generateDeckFromScript(
         );
       }
     });
+
+    const currentMonth = new Date().toISOString().substring(0, 7) + "-01";
+    await incrementDecksCreated(ctx, currentMonth, 1);
+
     
     await logGeneration(ctx, {
       deckId,

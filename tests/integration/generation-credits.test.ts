@@ -14,7 +14,10 @@ vi.mock("@/server/services/credits", () => ({
   }),
 }));
 
-vi.mock("@/lib/db/repositories/usage", () => ({ logGeneration: vi.fn().mockResolvedValue({}) }));
+vi.mock("@/lib/db/repositories/usage", () => ({
+  logGeneration: vi.fn().mockResolvedValue({}),
+  incrementDecksCreated: vi.fn().mockResolvedValue({}),
+}));
 
 const transaction = vi.fn();
 vi.mock("@/lib/db/client", () => ({ db: { transaction: (cb: unknown) => transaction(cb) } }));
@@ -49,26 +52,25 @@ describe("Service: generation credits", () => {
     transaction.mockReset();
   });
 
-  it("charges the actual cost on success", async () => {
+  it("charges 20 credits on success", async () => {
     slideCost.value = 2;
     transaction.mockResolvedValue(undefined);
 
     await run();
 
-    expect(balance).toBe(2);
+    expect(balance).toBe(20);
   });
 
-  it("nets to zero when saving fails after the cost was settled below the estimate", async () => {
-    transaction.mockRejectedValue(new Error("insert failed"));
+  it("charges higher cost if actual cost exceeds 20 credits", async () => {
+    slideCost.value = 25;
+    transaction.mockResolvedValue(undefined);
 
-    await expect(run()).rejects.toThrow("insert failed");
+    await run();
 
-    // Previously the post-slides refund and the failure refund both fired: balance -5.
-    expect(balance).toBe(0);
+    expect(balance).toBe(25);
   });
 
-  it("nets to zero when saving fails after an over-estimate charge", async () => {
-    slideCost.value = 8;
+  it("nets to zero when saving fails", async () => {
     transaction.mockRejectedValue(new Error("insert failed"));
 
     await expect(run()).rejects.toThrow("insert failed");
@@ -76,3 +78,4 @@ describe("Service: generation credits", () => {
     expect(balance).toBe(0);
   });
 });
+

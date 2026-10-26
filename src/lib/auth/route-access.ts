@@ -5,8 +5,8 @@ const PUBLIC_PATHS = [
   "/login",
   "/signup",
   "/callback", // email confirmation landing — the user has no session yet
-  "/auth/forgot-password",
-  "/auth/reset-password",
+  "/forgot-password",
+  "/reset-password",
   "/pricing",
   "/legal", // terms, privacy, mentions
   "/opengraph-image", // fetched by link-preview crawlers

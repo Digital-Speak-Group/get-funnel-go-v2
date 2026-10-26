@@ -410,11 +410,19 @@ describe("SlideSchema — 27 types", () => {
       headline: "Agir maintenant",
       sub: "Sous-titre",
       actions: [
-        { label: "Réserver", kind: "calendar" },
-        { label: "Contact", kind: "whatsapp" },
+        { label: "Réserver", kind: "calendar", url: "https://calendly.com/demo" },
+        { label: "Contact", kind: "whatsapp", url: "https://wa.me/123456789" },
       ],
     });
     expect(() => SlideSchema.parse(slide)).not.toThrow();
+  });
+
+  it("cta — rejects invalid url protocol", () => {
+    const slide = baseSlide("cta", {
+      headline: "Test",
+      actions: [{ label: "Action", kind: "link", url: "javascript:alert(1)" }],
+    });
+    expect(() => SlideSchema.parse(slide)).toThrow();
   });
 
   it("cta — rejects more than 2 actions", () => {
@@ -428,6 +436,7 @@ describe("SlideSchema — 27 types", () => {
     });
     expect(() => SlideSchema.parse(slide)).toThrow();
   });
+
 
   it("rejects unknown type", () => {
     const slide = { ...baseSlide("cover", { title: "Test" }), type: "unknown" };

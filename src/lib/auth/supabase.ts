@@ -77,7 +77,7 @@ export const supabaseAuthService: AuthService = {
       email,
       password,
       options: {
-        emailRedirectTo: `${env.NEXT_PUBLIC_APP_URL}/callback`,
+        emailRedirectTo: `${env.NEXT_PUBLIC_APP_URL}/callback?type=signup`,
       },
     });
     return { error: error?.message };
@@ -91,7 +91,7 @@ export const supabaseAuthService: AuthService = {
   async resetPassword(email: string) {
     const supabase = await createSupabaseServerClient();
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${env.NEXT_PUBLIC_APP_URL}/auth/reset-password`,
+      redirectTo: `${env.NEXT_PUBLIC_APP_URL}/reset-password`,
     });
     return { error: error?.message };
   },

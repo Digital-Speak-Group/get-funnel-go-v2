@@ -21,12 +21,14 @@ export function CallbackContent() {
 
   useEffect(() => {
     const code = searchParams.get("code");
+    const token_hash = searchParams.get("token_hash");
     const type = searchParams.get("type");
     const msg = searchParams.get("message");
     const err = searchParams.get("error");
+    const errDesc = searchParams.get("error_description");
 
-    if (err) {
-      setError(err);
+    if (err || errDesc) {
+      setError(errDesc || err || m.genericError);
       setLoading(false);
       return;
     }
@@ -37,12 +39,22 @@ export function CallbackContent() {
       return;
     }
 
-    if (code && type === "signup") {
-      // Exchange code for session using PKCE flow
+    if (code && type === "recovery") {
+      // The reset page exchanges the code itself; forward it there instead of a dead-end message.
+      router.replace(`/reset-password?code=${encodeURIComponent(code)}`);
+      return;
+    }
+
+    if (code || token_hash) {
+      // Exchange code or token_hash for session
       fetch(`/api/auth/callback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code, type: "signup" }),
+        body: JSON.stringify({
+          code: code || undefined,
+          token_hash: token_hash || undefined,
+          type: type || "signup",
+        }),
       })
         .then((res) => res.json())
         .then((result) => {
@@ -55,17 +67,18 @@ export function CallbackContent() {
             }, 1500);
           }
         })
+        .catch(() => {
+          setError(m.invalidLink);
+        })
         .finally(() => {
           setLoading(false);
         });
-    } else if (code && type === "recovery") {
-      setMessage(m.recovery);
-      setLoading(false);
-    } else {
-      // An unusable link is an error state, not a success message.
-      setError(m.invalidLink);
-      setLoading(false);
+      return;
     }
+
+    // An unusable link is an error state, not a success message.
+    setError(m.invalidLink);
+    setLoading(false);
   }, [router, searchParams, callbackUrl]);
 
   if (loading) return <AuthFallback label={m.processing} />;

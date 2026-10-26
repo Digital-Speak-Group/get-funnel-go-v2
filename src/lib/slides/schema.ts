@@ -287,11 +287,20 @@ const content = {
         z.object({
           label: Text(60),
           kind: z.enum(["calendar", "link", "whatsapp", "form"]),
+          url: z
+            .string()
+            .trim()
+            .max(500)
+            .refine((v) => !v || /^https?:\/\//i.test(v), {
+              message: "L'URL doit commencer par http:// ou https://",
+            })
+            .optional(),
         })
       )
       .min(1)
       .max(2),
   }),
+
   /** One live page (Funnelytics map, client funnel) in a sandboxed iframe. */
   embed: withIllustration({
     headline: Text(120),

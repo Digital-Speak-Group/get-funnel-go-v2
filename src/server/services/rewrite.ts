@@ -47,13 +47,13 @@ export async function rewriteText(
     });
     if (!result.success) throw new Error(result.error);
 
-    const cost = result.usage.costCents;
-    if (cost < REWRITE_COST_CENTS) {
-      await refundCredits(ctx, REWRITE_COST_CENTS - cost);
+    const cost = Math.max(result.usage.costCents, REWRITE_COST_CENTS);
+    if (cost > REWRITE_COST_CENTS && (await reserveCredits(ctx, cost - REWRITE_COST_CENTS))) {
       charged = cost;
-    } else if (cost > REWRITE_COST_CENTS && (await reserveCredits(ctx, cost - REWRITE_COST_CENTS))) {
-      charged = cost;
+    } else {
+      charged = REWRITE_COST_CENTS;
     }
+
     await logGeneration(ctx, {
       deckId: input.deck.id,
       // The usage log has no "rewrite" kind; a rewrite is a slide edit.

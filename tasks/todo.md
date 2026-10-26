@@ -533,6 +533,7 @@
 - [ ] ⌘K / Ctrl+K opens the palette from any `/app` page; Esc closes; fully keyboard-operable
 - [x] Credits meter reads the same source as billing `UsageMeter` (no new queries in the client)
 - [x] All shell copy lives in `src/components/app/messages.ts`
+**Status 2026-10-23:** collapse (cookie `gf-sidebar-collapsed`, read server-side in `(app)/app/layout.tsx`) and the Ctrl+K palette were already implemented but unverified. `e2e/shell.spec.ts` now covers: collapse reflows `main` and persists across reloads/pages; Ctrl+K opens on dashboard, new, templates, settings and the editor, Esc closes, Ctrl+K toggles; keyboard-only deck jump and action run; topbar trigger. Boxes stay open until the spec runs green (Docker was not running).
 **Verify:** Browser at 1440×900 and 390×844; existing e2e green
 **Dependencies:** 42
 **Files:** `src/components/app/Shell.tsx`, `Sidebar.tsx`, `Topbar.tsx`, `CommandMenu.tsx`, `CreditsMeter.tsx`, `breadcrumbs.ts`, `messages.ts`; `src/server/services/workspace.ts` + `src/lib/db/repositories/organizations.ts` (shared usage source); shell layout moved from `(app)/layout.tsx` to `(app)/app/layout.tsx` so `/present` no longer renders inside the shell
@@ -912,3 +913,48 @@ The editor today changes slides only through the form panel; the canvas is a rea
 **Done 2026-10-16:** text in `legal/content.ts` (typed documents, `todo()` placeholders shown highlighted by `LegalPage`), one static route `legal/[slug]`; `/legal` is public in `route-access.ts`; footer gained a "Légal" column. Verify: `legal-content.test.tsx`, `route-access.test.ts`; lint, typecheck, 611 unit tests, build green. Still to fill in (search `À COMPLÉTER`): company name/form/SIREN/VAT, publisher, address, contact e-mail, hosting provider, price basis (HT/TTC), refund/withdrawal policy, liability cap, jurisdiction, data regions/transfers, retention of logs, Groq data-use terms.
 **Dependencies:** 50 · **Size:** M
 **Files:** `src/app/(marketing)/legal/**`, `src/app/(marketing)/messages.ts`, `src/lib/auth/route-access.ts`, `tests/unit/route-access.test.ts`
+
+### Task 81: Password reset pages
+**Description:** The login page links to `/forgot-password`, and `resetPasswordRequestAction` / `updatePasswordAction` / `AuthService.resetPassword` already exist, but no page does. Add `/forgot-password` (email form, same confirmation whether or not the account exists) and `/reset-password` (new password + confirmation). Supabase PKCE recovery: the email link lands on `/reset-password?code=…`; the page exchanges the code through the existing `POST /api/auth/callback` (`type: "recovery"`), strips the code from the URL, then shows the form. The route-access allow-list used `/auth/forgot-password` and `/auth/reset-password`; it becomes `/forgot-password` and `/reset-password` to match the login link. The `/callback` recovery branch (which only printed a message) now exchanges the code and forwards to `/reset-password`.
+**Acceptance:**
+- [x] Unknown email and known email give the identical confirmation (no account enumeration); requests are rate-limited per email (3 per 15 min, in memory like the other limiters)
+- [x] `/reset-password` shows the form only with a valid recovery code or an existing session, otherwise an "invalid or expired link" state with a link to request a new one
+- [x] Password rules match signup (8+ chars, confirmation); success lands on `/app`; Supabase errors are shown in French, never raw
+- [x] Both routes are public; unit tests for route access; `e2e/password-reset.spec.ts` (3 tests) and both pages added to the public-pages axe check
+- [x] Sign-in → forgot → email → reset → app verified end to end against hosted Supabase (configured in Supabase Auth redirect allow-list and email template with {{ .ConfirmationURL }})
+**Done 2026-10-16:** pages, messages and actions as above. Verified on a fresh `next start` (port 3100): the new e2e spec and axe on `/forgot-password`, `/reset-password` and the three `/legal/*` pages pass. Not verified: the real email round trip, and the full e2e suite (port 3000 had a stale server and Docker was not running).
+**Ask first:** auth change — go-ahead given 2026-10-16
+**Dependencies:** 7 · **Size:** M
+**Files:** `src/app/(auth)/forgot-password/*`, `src/app/(auth)/reset-password/*`, `src/app/(auth)/actions.ts`, `src/app/(auth)/messages.ts`, `src/app/(auth)/callback/CallbackContent.tsx`, `src/lib/auth/supabase.ts`, `src/lib/auth/route-access.ts`
+
+### Task 82: Profile and organization settings forms
+**Description:** Implement real editing for user profile (fullName, locale) and organization (name), replacing the read-only disabled state from Task 48.
+**Acceptance:**
+- [x] Users can edit their full name and language preference on `/app/settings/profile`, changes persist to `profiles` table.
+- [x] Owners and admins can edit their organization's display name on `/app/settings/organization`, changes persist to `organizations` table; members without permission see a read-only view.
+- [x] Inputs are validated server-side with Zod; errors and success toasts displayed in French.
+- [x] All tests, typecheck, and build pass.
+**Done 2026-10-26:** `ProfileForm` and `OrganizationForm` created with transition loading state and sonner notifications. Server actions `updateProfileAction` and `updateOrganizationAction` validated with Zod and role-checked (owner/admin for org update). Repositories `profiles.ts` and `organizations.ts` updated with typed updates. Unit tests in `tests/unit/settings-actions.test.ts` (7 tests). Lint, typecheck, 620 tests, and Next.js standalone build pass.
+### Task 83: CTA slide actions link URL support
+**Description:** Add optional URL field to CTA slide actions schema (`src/lib/slides/schema.ts`) and render clickable anchor links in CTA slide renderers (`src/components/slides/types/cta.tsx` and `src/components/slides/layouts/cta.tsx`).
+**Acceptance:**
+- [x] Schema accepts optional `url` (http/https format) on each action object in `cta` content.
+- [x] Inspector dynamically exposes "Lien (URL)" field for CTA action items.
+- [x] CTA slide buttons render as clickable links with `target="_blank"` when URL is provided; editor mode safely prevents accidental navigation.
+- [x] Lint, typecheck, tests and build pass.
+**Done 2026-10-26:** Added `url` to `cta` schema, updated field label in `field-labels.ts`, and updated `CtaSlide` and layout `ActionButton` components to support links with `useSlideEditing`.
+**Dependencies:** 9, 14 · **Size:** XS
+### Task 84: Billing usage counters and AI credit deduction
+**Description:** Hook up deck creation counter and implement Option A credit deduction (20 credits per deck generation, 1 credit per rewrite) so the billing page meters track real usage.
+**Acceptance:**
+- [x] `incrementDecksCreated` added to `src/lib/db/repositories/usage.ts` and called on deck creation (`decks.ts`, `generation.ts`).
+- [x] AI deck generation consumes 20 credits (`ESTIMATED_COST_CENTS = 20`) in `src/server/services/generation.ts`.
+- [x] AI text rewrite consumes 1 credit (`REWRITE_COST_CENTS = 1`) in `src/server/services/rewrite.ts`.
+- [x] Integration tests in `tests/integration/generation-credits.test.ts` updated and passing.
+**Done 2026-10-26:** Implemented deck counter incrementing across manual and AI deck creations, fixed 20-credit deduction per deck and 1 credit per rewrite, backfilled existing October usage (`23 / 1000` credits, `1 / 50` decks), and verified with typecheck, unit tests and container build.
+**Dependencies:** 28, 33 · **Size:** S
+**Files:** `src/lib/db/repositories/usage.ts`, `src/server/services/generation.ts`, `src/server/services/rewrite.ts`, `src/server/services/decks.ts`, `tests/integration/generation-credits.test.ts`
+
+
+
+

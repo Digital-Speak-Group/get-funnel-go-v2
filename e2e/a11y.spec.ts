@@ -34,7 +34,7 @@ async function layoutShift(page: Page): Promise<number> {
 
 test.describe("accessibility", () => {
   test("public pages", async ({ page }) => {
-    for (const path of ["/", "/pricing", "/login", "/signup"]) {
+    for (const path of ["/", "/pricing", "/login", "/signup", "/forgot-password", "/reset-password", "/legal/terms", "/legal/privacy", "/legal/mentions"]) {
       // Not "networkidle": the landing's live preview keeps loading as it advances.
       await page.goto(path, { waitUntil: "load" });
       await page.waitForTimeout(1500);
