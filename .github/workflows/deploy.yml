@@ -21,9 +21,25 @@ jobs:
       - name: 📥 Récupérer le code
         uses: actions/checkout@v4
       
-      - name: 🔐 Créer le fichier .env 
+      - name: 🔐 Créer le fichier .env (depuis le Secret GitHub si défini)
+        if: ${{ secrets.ENV_FILE != '' }}
+        env:
+          ENV_CONTENT: ${{ secrets.ENV_FILE }}
         run: |
-         echo "${{ secrets.ENV_FILE }}" > .env
+          # Utiliser printf avec variable d'environnement pour préserver les retours à la ligne
+          # et éviter que bash n'interprète les caractères spéciaux comme '$'
+          printf '%s\n' "$ENV_CONTENT" > .env
+
+      - name: 🔍 Vérifier la présence du fichier .env
+        run: |
+          if [ ! -s .env ]; then
+            echo "::error::Le fichier .env est introuvable ou vide sur le runner !"
+            echo "Assurez-vous d'avoir configuré le secret 'ENV_FILE' dans GitHub (Settings > Secrets and variables > Actions > Repository secrets)"
+            echo "OU d'avoir créé le fichier .env directement sur le VPS dans le dossier du runner."
+            exit 1
+          fi
+          echo "Variables détectées dans .env (noms uniquement pour la sécurité) :"
+          grep -E '^[A-Za-z0-9_]+=' .env | cut -d= -f1
 
       - name: 🔌 Vérifier que les ports hôtes sont libres
         run: |
