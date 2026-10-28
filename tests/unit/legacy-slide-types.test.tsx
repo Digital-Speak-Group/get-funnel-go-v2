@@ -63,12 +63,18 @@ describe("embed allow-list", () => {
       expect(isAllowedEmbedUrl("https://getfunnels.agency/page")).toBe(false);
       expect(isAllowedEmbedUrl(FUNNELYTICS)).toBe(true);
     } finally {
-      process.env.NEXT_PUBLIC_APP_URL = previous;
+      if (previous === undefined) {
+        delete process.env.NEXT_PUBLIC_APP_URL;
+      } else {
+        process.env.NEXT_PUBLIC_APP_URL = previous;
+      }
     }
   });
 
   it("allow-lists third-party domains only, never the app's configured host", () => {
-    const own = new URL(process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").hostname;
+    const rawUrl = process.env.NEXT_PUBLIC_APP_URL;
+    const appUrl = rawUrl && rawUrl !== "undefined" ? rawUrl : "http://localhost:3000";
+    const own = new URL(appUrl).hostname;
     expect(isAllowedEmbedUrl(`https://${own}/`)).toBe(false);
   });
 });

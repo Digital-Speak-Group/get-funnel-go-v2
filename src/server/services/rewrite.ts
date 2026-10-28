@@ -47,11 +47,14 @@ export async function rewriteText(
     });
     if (!result.success) throw new Error(result.error);
 
-    const cost = Math.max(result.usage.costCents, REWRITE_COST_CENTS);
-    if (cost > REWRITE_COST_CENTS && (await reserveCredits(ctx, cost - REWRITE_COST_CENTS))) {
-      charged = cost;
-    } else {
-      charged = REWRITE_COST_CENTS;
+    const realCost = result.usage.costCents;
+    if (realCost > REWRITE_COST_CENTS) {
+      if (await reserveCredits(ctx, realCost - REWRITE_COST_CENTS)) {
+        charged = realCost;
+      }
+    } else if (realCost < REWRITE_COST_CENTS) {
+      await refundCredits(ctx, REWRITE_COST_CENTS - realCost);
+      charged = realCost;
     }
 
     await logGeneration(ctx, {
@@ -61,7 +64,7 @@ export async function rewriteText(
       model: result.usage.model,
       inputTokens: result.usage.inputTokens,
       outputTokens: result.usage.outputTokens,
-      costCents: cost,
+      costCents: realCost,
       status: "succeeded",
       durationMs: Date.now() - started,
     });
