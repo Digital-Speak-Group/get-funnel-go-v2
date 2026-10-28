@@ -38,19 +38,24 @@ export async function signInAction(raw: unknown) {
 }
 
 export async function signUpAction(raw: unknown) {
-  const parsed = SignUpInput.safeParse(raw);
-  if (!parsed.success) {
-    return { error: parsed.error.flatten().fieldErrors.email?.[0] || "Données invalides" };
+  try {
+    const parsed = SignUpInput.safeParse(raw);
+    if (!parsed.success) {
+      return { error: parsed.error.flatten().fieldErrors.email?.[0] || "Données invalides" };
+    }
+
+    const { email, password } = parsed.data;
+    const result = await supabaseAuthService.signUp(email, password);
+
+    if (result.error) {
+      return { error: result.error };
+    }
+
+    return { success: true };
+  } catch (err) {
+    logger.error("signUpAction failed", err);
+    return { error: err instanceof Error ? err.message : "Erreur inattendue lors de l'inscription" };
   }
-
-  const { email, password } = parsed.data;
-  const result = await supabaseAuthService.signUp(email, password);
-
-  if (result.error) {
-    return { error: result.error };
-  }
-
-  return { success: true };
 }
 
 export async function signOutAction() {

@@ -50,15 +50,20 @@ export function SignupContent() {
 
     setLoading(true);
 
-    const result = await signUpAction({ email, password });
+    try {
+      const result = await signUpAction({ email, password });
 
-    if (result.error) {
-      setError(result.error);
+      if (result.error) {
+        setError(result.error);
+        setLoading(false);
+        return;
+      }
+
+      router.push(`/callback?message=${encodeURIComponent(m.checkEmail)}&callbackUrl=${encodeURIComponent(callbackUrl)}`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Une erreur est survenue lors de l'inscription.");
       setLoading(false);
-      return;
     }
-
-    router.push(`/callback?message=${encodeURIComponent(m.checkEmail)}&callbackUrl=${encodeURIComponent(callbackUrl)}`);
   }
 
   return (
