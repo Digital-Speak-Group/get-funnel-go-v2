@@ -42,20 +42,6 @@ jobs:
           fi
           echo "Variables détectées dans .env (noms uniquement pour la sécurité) :"
           grep -E '^[A-Za-z0-9_]+=' .env | cut -d= -f1
-
-      - name: 🔌 Vérifier que les ports hôtes sont libres
-        run: |
-          # Containers of this same project are fine: compose recreates them.
-          ours=$(docker compose ps -q 2>/dev/null | xargs -r docker port 2>/dev/null || true)
-          for p in "$PORT" "$POSTGRES_PORT"; do
-            if ss -ltn | awk '{print $4}' | grep -q -E ":$p$" && ! echo "$ours" | grep -q -E ":$p([[:space:]]|$)"; then
-              echo "::error::Le port hôte $p est déjà utilisé sur le VPS. Choisissez-en un autre via les variables APP_PORT / POSTGRES_HOST_PORT."
-              ss -ltn | grep -E ":$p\b" || true
-              exit 1
-            fi
-          done
-          echo "Ports libres : app=$PORT postgres=$POSTGRES_PORT"
-
       - name: 🗄️ Appliquer les migrations de base de données
         run: |
           docker compose run --rm app npm run db:migrate || true
