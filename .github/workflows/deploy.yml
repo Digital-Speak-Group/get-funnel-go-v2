@@ -9,14 +9,50 @@ jobs:
   deploy:
     name: Build & Deploy
     runs-on: self-hosted 
+    # Host ports for this stack. On the VPS, 5434 (native PostgreSQL) and 3000
+    # (another Next.js app) are already taken. Shell env overrides .env during
+    # compose interpolation, so these win over anything in ENV_FILE.
+    # Override per-environment with repository variables APP_PORT / POSTGRES_HOST_PORT.
+    env:
+      PORT: ${{ vars.APP_PORT || '3005' }}
+      POSTGRES_PORT: ${{ vars.POSTGRES_HOST_PORT || '5435' }}
 
     steps:
       - name: 📥 Récupérer le code
         uses: actions/checkout@v4
       
-      - name: 🔐 Créer le fichier .env 
+      - name: 🔐 Créer le fichier .env (depuis le Secret GitHub si défini)
+        if: ${{ secrets.ENV_FILE != '' }}
+        env:
+          ENV_CONTENT: ${{ secrets.ENV_FILE }}
         run: |
-         echo "${{ secrets.ENV_FILE }}" > .env
+          # Utiliser printf avec variable d'environnement pour préserver les retours à la ligne
+          # et éviter que bash n'interprète les caractères spéciaux comme '$'
+          printf '%s\n' "$ENV_CONTENT" > .env
+
+      - name: 🔍 Vérifier la présence du fichier .env
+        run: |
+          if [ ! -s .env ]; then
+            echo "::error::Le fichier .env est introuvable ou vide sur le runner !"
+            echo "Assurez-vous d'avoir configuré le secret 'ENV_FILE' dans GitHub (Settings > Secrets and variables > Actions > Repository secrets)"
+            echo "OU d'avoir créé le fichier .env directement sur le VPS dans le dossier du runner."
+            exit 1
+          fi
+          echo "Variables détectées dans .env (noms uniquement pour la sécurité) :"
+          grep -E '^[A-Za-z0-9_]+=' .env | cut -d= -f1
+
+      - name: 🔌 Vérifier que les ports hôtes sont libres
+        run: |
+          # Containers of this same project are fine: compose recreates them.
+          ours=$(docker compose ps -q 2>/dev/null | xargs -r docker port 2>/dev/null || true)
+          for p in "$PORT" "$POSTGRES_PORT"; do
+            if ss -ltn | awk '{print $4}' | grep -q -E ":$p$" && ! echo "$ours" | grep -q -E ":$p([[:space:]]|$)"; then
+              echo "::error::Le port hôte $p est déjà utilisé sur le VPS. Choisissez-en un autre via les variables APP_PORT / POSTGRES_HOST_PORT."
+              ss -ltn | grep -E ":$p\b" || true
+              exit 1
+            fi
+          done
+          echo "Ports libres : app=$PORT postgres=$POSTGRES_PORT"
 
       - name: 🗄️ Appliquer les migrations de base de données
         run: |

@@ -7,7 +7,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-getfunnels}
     restart: unless-stopped
     ports:
-      - "127.0.0.1:${POSTGRES_PORT:-5434}:5432"
+      - "127.0.0.1:${POSTGRES_PORT:-5435}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -26,11 +26,11 @@ services:
       args:
         NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:?set NEXT_PUBLIC_SUPABASE_URL in .env}
         NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY:?set NEXT_PUBLIC_SUPABASE_ANON_KEY in .env}
-        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3005}
         NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:-pk_test_dummy}
     ports:
       # Port configurable via .env (ex: PORT=3005) pour éviter les conflits sur le VPS
-      - "${PORT:-3000}:3000"
+      - "${PORT:-3005}:3000"
     # Secrets come from .env (gitignored); only container-specific values are
     # overridden here. `environment` takes precedence over `env_file`.
     env_file:
@@ -41,7 +41,7 @@ services:
       DATABASE_URL: "postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-getfunnels}"
       # The compose postgres has no TLS; host isn't "localhost" so say so explicitly.
       DATABASE_SSL: "false"
-      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3005}
     deploy:
       resources:
         limits:
